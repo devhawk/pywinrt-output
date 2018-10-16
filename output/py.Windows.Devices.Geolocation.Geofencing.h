@@ -3,6 +3,9 @@
 #pragma once
 
 #include "pybase.h"
+#if __has_include("py.Windows.Devices.Geolocation.h")
+#include "py.Windows.Devices.Geolocation.h"
+#endif
 #if __has_include("py.Windows.Foundation.h")
 #include "py.Windows.Foundation.h"
 #endif
@@ -10,16 +13,10 @@
 #include "py.Windows.Foundation.Collections.h"
 #endif
 
-#include <winrt/Windows.Devices.Geolocation.h>
+#include <winrt/Windows.Devices.Geolocation.Geofencing.h>
 
-int initialize_Windows_Devices_Geolocation(PyObject* module);
+int initialize_Windows_Devices_Geolocation_Geofencing(PyObject* module);
 
 namespace py
 {
-    template<>
-    struct converter<winrt::Windows::Devices::Geolocation::BasicGeoposition>
-    {
-        static winrt::Windows::Devices::Geolocation::BasicGeoposition convert_to(PyObject* obj);
-    };
-    
 }

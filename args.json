@@ -11,13 +11,11 @@
         "Windows.Foundation"
     ],
     "excluded_namespaces": [
-        "Windows.Devices.Geolocation.Geofencing",
         "Windows.Foundation.Deferral",
         "Windows.Foundation.Diagnostics",
         "Windows.Foundation.IPropertyValue",
         "Windows.Foundation.IRef",
         "Windows.Foundation.Metadata",
-        "Windows.Foundation.Numerics",
         "Windows.Foundation.PropertyValue"
     ]
 }

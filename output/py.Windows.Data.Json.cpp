@@ -11,7 +11,7 @@ PyObject* JsonArray_new(PyTypeObject* type, PyObject* args, PyObject* kwds)
 {
     if (kwds != nullptr)
     {
-        PyErr_SetString(PyExc_RuntimeError, "keyword arguments not supported");
+        PyErr_SetString(PyExc_TypeError, "keyword arguments not supported");
         return nullptr;
     }
 
@@ -850,8 +850,8 @@ static PyGetSetDef JsonArray_getset[] = {
 static PyType_Slot JsonArray_Type_slots[] = 
 {
     { Py_tp_base, nullptr }, // filled out in module init
-    { Py_tp_new, JsonArray_new },
     { Py_tp_dealloc, JsonArray_dealloc },
+    { Py_tp_new, JsonArray_new },
     { Py_tp_methods, JsonArray_methods },
     { Py_tp_getset, JsonArray_getset },
     { 0, nullptr },
@@ -871,7 +871,7 @@ PyTypeObject* py::winrt_type<winrt::Windows::Data::Json::JsonError>::python_type
 
 PyObject* JsonError_new(PyTypeObject* type, PyObject* args, PyObject* kwds)
 {
-    PyErr_SetString(PyExc_RuntimeError, "JsonError is not activatable");
+    PyErr_SetString(PyExc_TypeError, "JsonError is not activatable");
     return nullptr;
 }
 
@@ -910,7 +910,6 @@ static PyMethodDef JsonError_methods[] = {
 
 static PyType_Slot JsonError_Type_slots[] = 
 {
-    { Py_tp_base, nullptr }, // filled out in module init
     { Py_tp_new, JsonError_new },
     { Py_tp_methods, JsonError_methods },
     { 0, nullptr },
@@ -932,7 +931,7 @@ PyObject* JsonObject_new(PyTypeObject* type, PyObject* args, PyObject* kwds)
 {
     if (kwds != nullptr)
     {
-        PyErr_SetString(PyExc_RuntimeError, "keyword arguments not supported");
+        PyErr_SetString(PyExc_TypeError, "keyword arguments not supported");
         return nullptr;
     }
 
@@ -1760,8 +1759,8 @@ static PyGetSetDef JsonObject_getset[] = {
 static PyType_Slot JsonObject_Type_slots[] = 
 {
     { Py_tp_base, nullptr }, // filled out in module init
-    { Py_tp_new, JsonObject_new },
     { Py_tp_dealloc, JsonObject_dealloc },
+    { Py_tp_new, JsonObject_new },
     { Py_tp_methods, JsonObject_methods },
     { Py_tp_getset, JsonObject_getset },
     { 0, nullptr },
@@ -1781,7 +1780,7 @@ PyTypeObject* py::winrt_type<winrt::Windows::Data::Json::JsonValue>::python_type
 
 PyObject* JsonValue_new(PyTypeObject* type, PyObject* args, PyObject* kwds)
 {
-    PyErr_SetString(PyExc_RuntimeError, "JsonValue is not activatable");
+    PyErr_SetString(PyExc_TypeError, "JsonValue is not activatable");
     return nullptr;
 }
 
@@ -2191,8 +2190,8 @@ static PyGetSetDef JsonValue_getset[] = {
 static PyType_Slot JsonValue_Type_slots[] = 
 {
     { Py_tp_base, nullptr }, // filled out in module init
-    { Py_tp_new, JsonValue_new },
     { Py_tp_dealloc, JsonValue_dealloc },
+    { Py_tp_new, JsonValue_new },
     { Py_tp_methods, JsonValue_methods },
     { Py_tp_getset, JsonValue_getset },
     { 0, nullptr },
@@ -2435,8 +2434,8 @@ static PyGetSetDef IJsonValue_getset[] = {
 static PyType_Slot IJsonValue_Type_slots[] = 
 {
     { Py_tp_base, nullptr }, // filled out in module init
-    { Py_tp_new, IJsonValue_new },
     { Py_tp_dealloc, IJsonValue_dealloc },
+    { Py_tp_new, IJsonValue_new },
     { Py_tp_methods, IJsonValue_methods },
     { Py_tp_getset, IJsonValue_getset },
     { 0, nullptr },
@@ -2457,6 +2456,7 @@ int initialize_Windows_Data_Json(PyObject* module)
 {
     PyObject* type_object{ nullptr };
 
+
     JsonArray_Type_slots[0].pfunc = py::winrt_type<py::winrt_base>::python_type;
     type_object = PyType_FromSpec(&JsonArray_Type_spec);
     if (type_object == nullptr)
@@ -2469,7 +2469,6 @@ int initialize_Windows_Data_Json(PyObject* module)
     }
     py::winrt_type<winrt::Windows::Data::Json::JsonArray>::python_type = reinterpret_cast<PyTypeObject*>(type_object);
 
-    JsonError_Type_slots[0].pfunc = py::winrt_type<py::winrt_base>::python_type;
     type_object = PyType_FromSpec(&JsonError_Type_spec);
     if (type_object == nullptr)
     {
@@ -2516,6 +2515,6 @@ int initialize_Windows_Data_Json(PyObject* module)
         return -1;
     }
     py::winrt_type<winrt::Windows::Data::Json::IJsonValue>::python_type = reinterpret_cast<PyTypeObject*>(type_object);
-
+    
     return 0;
 }

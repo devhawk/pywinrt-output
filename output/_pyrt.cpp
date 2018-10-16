@@ -2,8 +2,10 @@
 
 #include "py.Windows.Data.Json.h"
 #include "py.Windows.Devices.Geolocation.h"
+#include "py.Windows.Devices.Geolocation.Geofencing.h"
 #include "py.Windows.Foundation.h"
 #include "py.Windows.Foundation.Collections.h"
+#include "py.Windows.Foundation.Numerics.h"
 
 PyTypeObject* py::winrt_type<py::winrt_base>::python_type;
 
@@ -28,6 +30,8 @@ std::unordered_map<std::size_t, PyObject*> instance_map{};
 
 void py::wrapped_instance(std::size_t key, PyObject* obj)
 {
+    // TODO: re-enable instance wrapper caching 
+
     // if obj is null, remove from instance_map
     //if (obj)
     //{
@@ -98,12 +102,22 @@ static int module_exec(PyObject* module)
         return -1;
     }
 
+    if (initialize_Windows_Devices_Geolocation_Geofencing(module) != 0)
+    {
+        return -1;
+    }
+
     if (initialize_Windows_Foundation(module) != 0)
     {
         return -1;
     }
 
     if (initialize_Windows_Foundation_Collections(module) != 0)
+    {
+        return -1;
+    }
+
+    if (initialize_Windows_Foundation_Numerics(module) != 0)
     {
         return -1;
     }

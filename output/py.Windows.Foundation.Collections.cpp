@@ -11,7 +11,7 @@ PyObject* PropertySet_new(PyTypeObject* type, PyObject* args, PyObject* kwds)
 {
     if (kwds != nullptr)
     {
-        PyErr_SetString(PyExc_RuntimeError, "keyword arguments not supported");
+        PyErr_SetString(PyExc_TypeError, "keyword arguments not supported");
         return nullptr;
     }
 
@@ -266,8 +266,8 @@ static PyGetSetDef PropertySet_getset[] = {
 static PyType_Slot PropertySet_Type_slots[] = 
 {
     { Py_tp_base, nullptr }, // filled out in module init
-    { Py_tp_new, PropertySet_new },
     { Py_tp_dealloc, PropertySet_dealloc },
+    { Py_tp_new, PropertySet_new },
     { Py_tp_methods, PropertySet_methods },
     { Py_tp_getset, PropertySet_getset },
     { 0, nullptr },
@@ -289,7 +289,7 @@ PyObject* StringMap_new(PyTypeObject* type, PyObject* args, PyObject* kwds)
 {
     if (kwds != nullptr)
     {
-        PyErr_SetString(PyExc_RuntimeError, "keyword arguments not supported");
+        PyErr_SetString(PyExc_TypeError, "keyword arguments not supported");
         return nullptr;
     }
 
@@ -544,8 +544,8 @@ static PyGetSetDef StringMap_getset[] = {
 static PyType_Slot StringMap_Type_slots[] = 
 {
     { Py_tp_base, nullptr }, // filled out in module init
-    { Py_tp_new, StringMap_new },
     { Py_tp_dealloc, StringMap_dealloc },
+    { Py_tp_new, StringMap_new },
     { Py_tp_methods, StringMap_methods },
     { Py_tp_getset, StringMap_getset },
     { 0, nullptr },
@@ -567,7 +567,7 @@ PyObject* ValueSet_new(PyTypeObject* type, PyObject* args, PyObject* kwds)
 {
     if (kwds != nullptr)
     {
-        PyErr_SetString(PyExc_RuntimeError, "keyword arguments not supported");
+        PyErr_SetString(PyExc_TypeError, "keyword arguments not supported");
         return nullptr;
     }
 
@@ -822,8 +822,8 @@ static PyGetSetDef ValueSet_getset[] = {
 static PyType_Slot ValueSet_Type_slots[] = 
 {
     { Py_tp_base, nullptr }, // filled out in module init
-    { Py_tp_new, ValueSet_new },
     { Py_tp_dealloc, ValueSet_dealloc },
+    { Py_tp_new, ValueSet_new },
     { Py_tp_methods, ValueSet_methods },
     { Py_tp_getset, ValueSet_getset },
     { 0, nullptr },
@@ -867,8 +867,8 @@ static PyMethodDef IIterable_methods[] = {
 static PyType_Slot IIterable_Type_slots[] = 
 {
     { Py_tp_base, nullptr }, // filled out in module init
-    { Py_tp_new, IIterable_new },
     { Py_tp_dealloc, IIterable_dealloc },
+    { Py_tp_new, IIterable_new },
     { Py_tp_methods, IIterable_methods },
     { 0, nullptr },
 };
@@ -933,8 +933,8 @@ static PyGetSetDef IIterator_getset[] = {
 static PyType_Slot IIterator_Type_slots[] = 
 {
     { Py_tp_base, nullptr }, // filled out in module init
-    { Py_tp_new, IIterator_new },
     { Py_tp_dealloc, IIterator_dealloc },
+    { Py_tp_new, IIterator_new },
     { Py_tp_methods, IIterator_methods },
     { Py_tp_getset, IIterator_getset },
     { 0, nullptr },
@@ -984,8 +984,8 @@ static PyGetSetDef IKeyValuePair_getset[] = {
 static PyType_Slot IKeyValuePair_Type_slots[] = 
 {
     { Py_tp_base, nullptr }, // filled out in module init
-    { Py_tp_new, IKeyValuePair_new },
     { Py_tp_dealloc, IKeyValuePair_dealloc },
+    { Py_tp_new, IKeyValuePair_new },
     { Py_tp_getset, IKeyValuePair_getset },
     { 0, nullptr },
 };
@@ -1034,8 +1034,8 @@ static PyGetSetDef IMapChangedEventArgs_getset[] = {
 static PyType_Slot IMapChangedEventArgs_Type_slots[] = 
 {
     { Py_tp_base, nullptr }, // filled out in module init
-    { Py_tp_new, IMapChangedEventArgs_new },
     { Py_tp_dealloc, IMapChangedEventArgs_dealloc },
+    { Py_tp_new, IMapChangedEventArgs_new },
     { Py_tp_getset, IMapChangedEventArgs_getset },
     { 0, nullptr },
 };
@@ -1100,8 +1100,8 @@ static PyGetSetDef IMapView_getset[] = {
 static PyType_Slot IMapView_Type_slots[] = 
 {
     { Py_tp_base, nullptr }, // filled out in module init
-    { Py_tp_new, IMapView_new },
     { Py_tp_dealloc, IMapView_dealloc },
+    { Py_tp_new, IMapView_new },
     { Py_tp_methods, IMapView_methods },
     { Py_tp_getset, IMapView_getset },
     { 0, nullptr },
@@ -1185,8 +1185,8 @@ static PyGetSetDef IMap_getset[] = {
 static PyType_Slot IMap_Type_slots[] = 
 {
     { Py_tp_base, nullptr }, // filled out in module init
-    { Py_tp_new, IMap_new },
     { Py_tp_dealloc, IMap_dealloc },
+    { Py_tp_new, IMap_new },
     { Py_tp_methods, IMap_methods },
     { Py_tp_getset, IMap_getset },
     { 0, nullptr },
@@ -1224,8 +1224,8 @@ static PyGetSetDef IObservableMap_getset[] = {
 static PyType_Slot IObservableMap_Type_slots[] = 
 {
     { Py_tp_base, nullptr }, // filled out in module init
-    { Py_tp_new, IObservableMap_new },
     { Py_tp_dealloc, IObservableMap_dealloc },
+    { Py_tp_new, IObservableMap_new },
     { Py_tp_getset, IObservableMap_getset },
     { 0, nullptr },
 };
@@ -1262,8 +1262,8 @@ static PyGetSetDef IObservableVector_getset[] = {
 static PyType_Slot IObservableVector_Type_slots[] = 
 {
     { Py_tp_base, nullptr }, // filled out in module init
-    { Py_tp_new, IObservableVector_new },
     { Py_tp_dealloc, IObservableVector_dealloc },
+    { Py_tp_new, IObservableVector_new },
     { Py_tp_getset, IObservableVector_getset },
     { 0, nullptr },
 };
@@ -1321,8 +1321,8 @@ static void IPropertySet_dealloc(py::winrt_wrapper<winrt::Windows::Foundation::C
 static PyType_Slot IPropertySet_Type_slots[] = 
 {
     { Py_tp_base, nullptr }, // filled out in module init
-    { Py_tp_new, IPropertySet_new },
     { Py_tp_dealloc, IPropertySet_dealloc },
+    { Py_tp_new, IPropertySet_new },
     { 0, nullptr },
 };
 
@@ -1411,8 +1411,8 @@ static PyGetSetDef IVectorChangedEventArgs_getset[] = {
 static PyType_Slot IVectorChangedEventArgs_Type_slots[] = 
 {
     { Py_tp_base, nullptr }, // filled out in module init
-    { Py_tp_new, IVectorChangedEventArgs_new },
     { Py_tp_dealloc, IVectorChangedEventArgs_dealloc },
+    { Py_tp_new, IVectorChangedEventArgs_new },
     { Py_tp_getset, IVectorChangedEventArgs_getset },
     { 0, nullptr },
 };
@@ -1477,8 +1477,8 @@ static PyGetSetDef IVectorView_getset[] = {
 static PyType_Slot IVectorView_Type_slots[] = 
 {
     { Py_tp_base, nullptr }, // filled out in module init
-    { Py_tp_new, IVectorView_new },
     { Py_tp_dealloc, IVectorView_dealloc },
+    { Py_tp_new, IVectorView_new },
     { Py_tp_methods, IVectorView_methods },
     { Py_tp_getset, IVectorView_getset },
     { 0, nullptr },
@@ -1592,8 +1592,8 @@ static PyGetSetDef IVector_getset[] = {
 static PyType_Slot IVector_Type_slots[] = 
 {
     { Py_tp_base, nullptr }, // filled out in module init
-    { Py_tp_new, IVector_new },
     { Py_tp_dealloc, IVector_dealloc },
+    { Py_tp_new, IVector_new },
     { Py_tp_methods, IVector_methods },
     { Py_tp_getset, IVector_getset },
     { 0, nullptr },
@@ -1613,6 +1613,7 @@ static PyType_Spec IVector_Type_spec =
 int initialize_Windows_Foundation_Collections(PyObject* module)
 {
     PyObject* type_object{ nullptr };
+
 
     PropertySet_Type_slots[0].pfunc = py::winrt_type<py::winrt_base>::python_type;
     type_object = PyType_FromSpec(&PropertySet_Type_spec);
@@ -1793,6 +1794,6 @@ int initialize_Windows_Foundation_Collections(PyObject* module)
         return -1;
     }
     py::winrt_type<pyIVector>::python_type = reinterpret_cast<PyTypeObject*>(type_object);
-
+    
     return 0;
 }

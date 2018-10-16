@@ -9,7 +9,7 @@ PyTypeObject* py::winrt_type<winrt::Windows::Devices::Geolocation::CivicAddress>
 
 PyObject* CivicAddress_new(PyTypeObject* type, PyObject* args, PyObject* kwds)
 {
-    PyErr_SetString(PyExc_RuntimeError, "CivicAddress is not activatable");
+    PyErr_SetString(PyExc_TypeError, "CivicAddress is not activatable");
     return nullptr;
 }
 
@@ -97,8 +97,8 @@ static PyGetSetDef CivicAddress_getset[] = {
 static PyType_Slot CivicAddress_Type_slots[] = 
 {
     { Py_tp_base, nullptr }, // filled out in module init
-    { Py_tp_new, CivicAddress_new },
     { Py_tp_dealloc, CivicAddress_dealloc },
+    { Py_tp_new, CivicAddress_new },
     { Py_tp_getset, CivicAddress_getset },
     { 0, nullptr },
 };
@@ -119,7 +119,7 @@ PyObject* GeoboundingBox_new(PyTypeObject* type, PyObject* args, PyObject* kwds)
 {
     if (kwds != nullptr)
     {
-        PyErr_SetString(PyExc_RuntimeError, "keyword arguments not supported");
+        PyErr_SetString(PyExc_TypeError, "keyword arguments not supported");
         return nullptr;
     }
 
@@ -371,8 +371,8 @@ static PyGetSetDef GeoboundingBox_getset[] = {
 static PyType_Slot GeoboundingBox_Type_slots[] = 
 {
     { Py_tp_base, nullptr }, // filled out in module init
-    { Py_tp_new, GeoboundingBox_new },
     { Py_tp_dealloc, GeoboundingBox_dealloc },
+    { Py_tp_new, GeoboundingBox_new },
     { Py_tp_methods, GeoboundingBox_methods },
     { Py_tp_getset, GeoboundingBox_getset },
     { 0, nullptr },
@@ -394,7 +394,7 @@ PyObject* Geocircle_new(PyTypeObject* type, PyObject* args, PyObject* kwds)
 {
     if (kwds != nullptr)
     {
-        PyErr_SetString(PyExc_RuntimeError, "keyword arguments not supported");
+        PyErr_SetString(PyExc_TypeError, "keyword arguments not supported");
         return nullptr;
     }
 
@@ -538,8 +538,8 @@ static PyGetSetDef Geocircle_getset[] = {
 static PyType_Slot Geocircle_Type_slots[] = 
 {
     { Py_tp_base, nullptr }, // filled out in module init
-    { Py_tp_new, Geocircle_new },
     { Py_tp_dealloc, Geocircle_dealloc },
+    { Py_tp_new, Geocircle_new },
     { Py_tp_getset, Geocircle_getset },
     { 0, nullptr },
 };
@@ -558,7 +558,7 @@ PyTypeObject* py::winrt_type<winrt::Windows::Devices::Geolocation::Geocoordinate
 
 PyObject* Geocoordinate_new(PyTypeObject* type, PyObject* args, PyObject* kwds)
 {
-    PyErr_SetString(PyExc_RuntimeError, "Geocoordinate is not activatable");
+    PyErr_SetString(PyExc_TypeError, "Geocoordinate is not activatable");
     return nullptr;
 }
 
@@ -744,8 +744,8 @@ static PyGetSetDef Geocoordinate_getset[] = {
 static PyType_Slot Geocoordinate_Type_slots[] = 
 {
     { Py_tp_base, nullptr }, // filled out in module init
-    { Py_tp_new, Geocoordinate_new },
     { Py_tp_dealloc, Geocoordinate_dealloc },
+    { Py_tp_new, Geocoordinate_new },
     { Py_tp_getset, Geocoordinate_getset },
     { 0, nullptr },
 };
@@ -764,7 +764,7 @@ PyTypeObject* py::winrt_type<winrt::Windows::Devices::Geolocation::Geocoordinate
 
 PyObject* GeocoordinateSatelliteData_new(PyTypeObject* type, PyObject* args, PyObject* kwds)
 {
-    PyErr_SetString(PyExc_RuntimeError, "GeocoordinateSatelliteData is not activatable");
+    PyErr_SetString(PyExc_TypeError, "GeocoordinateSatelliteData is not activatable");
     return nullptr;
 }
 
@@ -824,8 +824,8 @@ static PyGetSetDef GeocoordinateSatelliteData_getset[] = {
 static PyType_Slot GeocoordinateSatelliteData_Type_slots[] = 
 {
     { Py_tp_base, nullptr }, // filled out in module init
-    { Py_tp_new, GeocoordinateSatelliteData_new },
     { Py_tp_dealloc, GeocoordinateSatelliteData_dealloc },
+    { Py_tp_new, GeocoordinateSatelliteData_new },
     { Py_tp_getset, GeocoordinateSatelliteData_getset },
     { 0, nullptr },
 };
@@ -846,7 +846,7 @@ PyObject* Geolocator_new(PyTypeObject* type, PyObject* args, PyObject* kwds)
 {
     if (kwds != nullptr)
     {
-        PyErr_SetString(PyExc_RuntimeError, "keyword arguments not supported");
+        PyErr_SetString(PyExc_TypeError, "keyword arguments not supported");
         return nullptr;
     }
 
@@ -1250,8 +1250,8 @@ static PyGetSetDef Geolocator_getset[] = {
 static PyType_Slot Geolocator_Type_slots[] = 
 {
     { Py_tp_base, nullptr }, // filled out in module init
-    { Py_tp_new, Geolocator_new },
     { Py_tp_dealloc, Geolocator_dealloc },
+    { Py_tp_new, Geolocator_new },
     { Py_tp_methods, Geolocator_methods },
     { Py_tp_getset, Geolocator_getset },
     { 0, nullptr },
@@ -1273,7 +1273,7 @@ PyObject* Geopath_new(PyTypeObject* type, PyObject* args, PyObject* kwds)
 {
     if (kwds != nullptr)
     {
-        PyErr_SetString(PyExc_RuntimeError, "keyword arguments not supported");
+        PyErr_SetString(PyExc_TypeError, "keyword arguments not supported");
         return nullptr;
     }
 
@@ -1400,8 +1400,8 @@ static PyGetSetDef Geopath_getset[] = {
 static PyType_Slot Geopath_Type_slots[] = 
 {
     { Py_tp_base, nullptr }, // filled out in module init
-    { Py_tp_new, Geopath_new },
     { Py_tp_dealloc, Geopath_dealloc },
+    { Py_tp_new, Geopath_new },
     { Py_tp_getset, Geopath_getset },
     { 0, nullptr },
 };
@@ -1422,7 +1422,7 @@ PyObject* Geopoint_new(PyTypeObject* type, PyObject* args, PyObject* kwds)
 {
     if (kwds != nullptr)
     {
-        PyErr_SetString(PyExc_RuntimeError, "keyword arguments not supported");
+        PyErr_SetString(PyExc_TypeError, "keyword arguments not supported");
         return nullptr;
     }
 
@@ -1549,8 +1549,8 @@ static PyGetSetDef Geopoint_getset[] = {
 static PyType_Slot Geopoint_Type_slots[] = 
 {
     { Py_tp_base, nullptr }, // filled out in module init
-    { Py_tp_new, Geopoint_new },
     { Py_tp_dealloc, Geopoint_dealloc },
+    { Py_tp_new, Geopoint_new },
     { Py_tp_getset, Geopoint_getset },
     { 0, nullptr },
 };
@@ -1569,7 +1569,7 @@ PyTypeObject* py::winrt_type<winrt::Windows::Devices::Geolocation::Geoposition>:
 
 PyObject* Geoposition_new(PyTypeObject* type, PyObject* args, PyObject* kwds)
 {
-    PyErr_SetString(PyExc_RuntimeError, "Geoposition is not activatable");
+    PyErr_SetString(PyExc_TypeError, "Geoposition is not activatable");
     return nullptr;
 }
 
@@ -1629,8 +1629,8 @@ static PyGetSetDef Geoposition_getset[] = {
 static PyType_Slot Geoposition_Type_slots[] = 
 {
     { Py_tp_base, nullptr }, // filled out in module init
-    { Py_tp_new, Geoposition_new },
     { Py_tp_dealloc, Geoposition_dealloc },
+    { Py_tp_new, Geoposition_new },
     { Py_tp_getset, Geoposition_getset },
     { 0, nullptr },
 };
@@ -1649,7 +1649,7 @@ PyTypeObject* py::winrt_type<winrt::Windows::Devices::Geolocation::Geovisit>::py
 
 PyObject* Geovisit_new(PyTypeObject* type, PyObject* args, PyObject* kwds)
 {
-    PyErr_SetString(PyExc_RuntimeError, "Geovisit is not activatable");
+    PyErr_SetString(PyExc_TypeError, "Geovisit is not activatable");
     return nullptr;
 }
 
@@ -1709,8 +1709,8 @@ static PyGetSetDef Geovisit_getset[] = {
 static PyType_Slot Geovisit_Type_slots[] = 
 {
     { Py_tp_base, nullptr }, // filled out in module init
-    { Py_tp_new, Geovisit_new },
     { Py_tp_dealloc, Geovisit_dealloc },
+    { Py_tp_new, Geovisit_new },
     { Py_tp_getset, Geovisit_getset },
     { 0, nullptr },
 };
@@ -1731,7 +1731,7 @@ PyObject* GeovisitMonitor_new(PyTypeObject* type, PyObject* args, PyObject* kwds
 {
     if (kwds != nullptr)
     {
-        PyErr_SetString(PyExc_RuntimeError, "keyword arguments not supported");
+        PyErr_SetString(PyExc_TypeError, "keyword arguments not supported");
         return nullptr;
     }
 
@@ -1871,8 +1871,8 @@ static PyGetSetDef GeovisitMonitor_getset[] = {
 static PyType_Slot GeovisitMonitor_Type_slots[] = 
 {
     { Py_tp_base, nullptr }, // filled out in module init
-    { Py_tp_new, GeovisitMonitor_new },
     { Py_tp_dealloc, GeovisitMonitor_dealloc },
+    { Py_tp_new, GeovisitMonitor_new },
     { Py_tp_methods, GeovisitMonitor_methods },
     { Py_tp_getset, GeovisitMonitor_getset },
     { 0, nullptr },
@@ -1892,7 +1892,7 @@ PyTypeObject* py::winrt_type<winrt::Windows::Devices::Geolocation::GeovisitState
 
 PyObject* GeovisitStateChangedEventArgs_new(PyTypeObject* type, PyObject* args, PyObject* kwds)
 {
-    PyErr_SetString(PyExc_RuntimeError, "GeovisitStateChangedEventArgs is not activatable");
+    PyErr_SetString(PyExc_TypeError, "GeovisitStateChangedEventArgs is not activatable");
     return nullptr;
 }
 
@@ -1924,8 +1924,8 @@ static PyGetSetDef GeovisitStateChangedEventArgs_getset[] = {
 static PyType_Slot GeovisitStateChangedEventArgs_Type_slots[] = 
 {
     { Py_tp_base, nullptr }, // filled out in module init
-    { Py_tp_new, GeovisitStateChangedEventArgs_new },
     { Py_tp_dealloc, GeovisitStateChangedEventArgs_dealloc },
+    { Py_tp_new, GeovisitStateChangedEventArgs_new },
     { Py_tp_getset, GeovisitStateChangedEventArgs_getset },
     { 0, nullptr },
 };
@@ -1944,7 +1944,7 @@ PyTypeObject* py::winrt_type<winrt::Windows::Devices::Geolocation::GeovisitTrigg
 
 PyObject* GeovisitTriggerDetails_new(PyTypeObject* type, PyObject* args, PyObject* kwds)
 {
-    PyErr_SetString(PyExc_RuntimeError, "GeovisitTriggerDetails is not activatable");
+    PyErr_SetString(PyExc_TypeError, "GeovisitTriggerDetails is not activatable");
     return nullptr;
 }
 
@@ -1989,8 +1989,8 @@ static PyMethodDef GeovisitTriggerDetails_methods[] = {
 static PyType_Slot GeovisitTriggerDetails_Type_slots[] = 
 {
     { Py_tp_base, nullptr }, // filled out in module init
-    { Py_tp_new, GeovisitTriggerDetails_new },
     { Py_tp_dealloc, GeovisitTriggerDetails_dealloc },
+    { Py_tp_new, GeovisitTriggerDetails_new },
     { Py_tp_methods, GeovisitTriggerDetails_methods },
     { 0, nullptr },
 };
@@ -2009,7 +2009,7 @@ PyTypeObject* py::winrt_type<winrt::Windows::Devices::Geolocation::PositionChang
 
 PyObject* PositionChangedEventArgs_new(PyTypeObject* type, PyObject* args, PyObject* kwds)
 {
-    PyErr_SetString(PyExc_RuntimeError, "PositionChangedEventArgs is not activatable");
+    PyErr_SetString(PyExc_TypeError, "PositionChangedEventArgs is not activatable");
     return nullptr;
 }
 
@@ -2041,8 +2041,8 @@ static PyGetSetDef PositionChangedEventArgs_getset[] = {
 static PyType_Slot PositionChangedEventArgs_Type_slots[] = 
 {
     { Py_tp_base, nullptr }, // filled out in module init
-    { Py_tp_new, PositionChangedEventArgs_new },
     { Py_tp_dealloc, PositionChangedEventArgs_dealloc },
+    { Py_tp_new, PositionChangedEventArgs_new },
     { Py_tp_getset, PositionChangedEventArgs_getset },
     { 0, nullptr },
 };
@@ -2061,7 +2061,7 @@ PyTypeObject* py::winrt_type<winrt::Windows::Devices::Geolocation::StatusChanged
 
 PyObject* StatusChangedEventArgs_new(PyTypeObject* type, PyObject* args, PyObject* kwds)
 {
-    PyErr_SetString(PyExc_RuntimeError, "StatusChangedEventArgs is not activatable");
+    PyErr_SetString(PyExc_TypeError, "StatusChangedEventArgs is not activatable");
     return nullptr;
 }
 
@@ -2093,8 +2093,8 @@ static PyGetSetDef StatusChangedEventArgs_getset[] = {
 static PyType_Slot StatusChangedEventArgs_Type_slots[] = 
 {
     { Py_tp_base, nullptr }, // filled out in module init
-    { Py_tp_new, StatusChangedEventArgs_new },
     { Py_tp_dealloc, StatusChangedEventArgs_dealloc },
+    { Py_tp_new, StatusChangedEventArgs_new },
     { Py_tp_getset, StatusChangedEventArgs_getset },
     { 0, nullptr },
 };
@@ -2113,7 +2113,7 @@ PyTypeObject* py::winrt_type<winrt::Windows::Devices::Geolocation::VenueData>::p
 
 PyObject* VenueData_new(PyTypeObject* type, PyObject* args, PyObject* kwds)
 {
-    PyErr_SetString(PyExc_RuntimeError, "VenueData is not activatable");
+    PyErr_SetString(PyExc_TypeError, "VenueData is not activatable");
     return nullptr;
 }
 
@@ -2159,8 +2159,8 @@ static PyGetSetDef VenueData_getset[] = {
 static PyType_Slot VenueData_Type_slots[] = 
 {
     { Py_tp_base, nullptr }, // filled out in module init
-    { Py_tp_new, VenueData_new },
     { Py_tp_dealloc, VenueData_dealloc },
+    { Py_tp_new, VenueData_new },
     { Py_tp_getset, VenueData_getset },
     { 0, nullptr },
 };
@@ -2264,8 +2264,8 @@ static PyGetSetDef IGeoshape_getset[] = {
 static PyType_Slot IGeoshape_Type_slots[] = 
 {
     { Py_tp_base, nullptr }, // filled out in module init
-    { Py_tp_new, IGeoshape_new },
     { Py_tp_dealloc, IGeoshape_dealloc },
+    { Py_tp_new, IGeoshape_new },
     { Py_tp_getset, IGeoshape_getset },
     { 0, nullptr },
 };
@@ -2279,11 +2279,202 @@ static PyType_Spec IGeoshape_Type_spec =
     IGeoshape_Type_slots
 };
 
+// ----- BasicGeoposition struct --------------------
+PyTypeObject* py::winrt_type<winrt::Windows::Devices::Geolocation::BasicGeoposition>::python_type;
+
+winrt::Windows::Devices::Geolocation::BasicGeoposition py::converter<winrt::Windows::Devices::Geolocation::BasicGeoposition>::convert_to(PyObject* obj)
+{
+    if (!PyDict_Check(obj)) { throw winrt::hresult_invalid_argument(); }
+    
+    winrt::Windows::Devices::Geolocation::BasicGeoposition new_value{};
+    PyObject* pyLatitude = PyDict_GetItemString(obj, "Latitude");
+    if (!pyLatitude) { throw winrt::hresult_invalid_argument(); }
+    new_value.Latitude = converter<double>::convert_to(pyLatitude);
+    PyObject* pyLongitude = PyDict_GetItemString(obj, "Longitude");
+    if (!pyLongitude) { throw winrt::hresult_invalid_argument(); }
+    new_value.Longitude = converter<double>::convert_to(pyLongitude);
+    PyObject* pyAltitude = PyDict_GetItemString(obj, "Altitude");
+    if (!pyAltitude) { throw winrt::hresult_invalid_argument(); }
+    new_value.Altitude = converter<double>::convert_to(pyAltitude);
+    return new_value;
+}
+
+PyObject* BasicGeoposition_new(PyTypeObject* type, PyObject* args, PyObject* kwds)
+{
+    auto tuple_size = PyTuple_Size(args);
+    if ((tuple_size == 0) && (kwds == nullptr))
+    {
+        try
+        {
+            winrt::Windows::Devices::Geolocation::BasicGeoposition instance{};
+            return py::wrap_struct(instance, type);
+        }
+        catch (...)
+        {
+            return py::to_PyErr();
+        }
+    }
+    
+    if ((tuple_size == 1) && (kwds == nullptr))
+    {
+        auto arg = PyTuple_GetItem(args, 0);
+        if (PyDict_Check(arg))
+        {
+            try
+            {
+                auto instance = py::converter<winrt::Windows::Devices::Geolocation::BasicGeoposition>::convert_to(arg); 
+                return py::wrap_struct(instance, type);
+            }
+            catch (...)
+            {
+                return py::to_PyErr();
+            }
+        }
+    }
+    
+    double _Latitude{};
+    double _Longitude{};
+    double _Altitude{};
+    static char* kwlist[] = {"Latitude", "Longitude", "Altitude", nullptr};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwds, "ddd", kwlist, &_Latitude, &_Longitude, &_Altitude))
+    {
+        return nullptr;
+    }
+    
+    try
+    {
+        winrt::Windows::Devices::Geolocation::BasicGeoposition instance{ _Latitude, _Longitude, _Altitude };
+        return py::wrap_struct(instance, type);
+    }
+    catch (...)
+    {
+        return py::to_PyErr();
+    }
+}
+
+static PyObject* BasicGeoposition_get_Latitude(py::winrt_struct_wrapper<winrt::Windows::Devices::Geolocation::BasicGeoposition>* self, void* /*unused*/)
+{
+    try
+    {
+        return py::convert(self->obj.Latitude);
+    }
+    catch (...)
+    {
+        return py::to_PyErr();
+    }
+}
+
+static int BasicGeoposition_set_Latitude(py::winrt_struct_wrapper<winrt::Windows::Devices::Geolocation::BasicGeoposition>* self, PyObject* value, void* /*unused*/)
+{
+    if (value == nullptr)
+    {
+        PyErr_SetString(PyExc_RuntimeError, "property delete not supported");
+        return -1;
+    }
+    
+    try
+    {
+        self->obj.Latitude = py::convert_to<double>(value);
+        return 0;
+    }
+    catch (...)
+    {
+        return -1;
+    }
+}
+
+static PyObject* BasicGeoposition_get_Longitude(py::winrt_struct_wrapper<winrt::Windows::Devices::Geolocation::BasicGeoposition>* self, void* /*unused*/)
+{
+    try
+    {
+        return py::convert(self->obj.Longitude);
+    }
+    catch (...)
+    {
+        return py::to_PyErr();
+    }
+}
+
+static int BasicGeoposition_set_Longitude(py::winrt_struct_wrapper<winrt::Windows::Devices::Geolocation::BasicGeoposition>* self, PyObject* value, void* /*unused*/)
+{
+    if (value == nullptr)
+    {
+        PyErr_SetString(PyExc_RuntimeError, "property delete not supported");
+        return -1;
+    }
+    
+    try
+    {
+        self->obj.Longitude = py::convert_to<double>(value);
+        return 0;
+    }
+    catch (...)
+    {
+        return -1;
+    }
+}
+
+static PyObject* BasicGeoposition_get_Altitude(py::winrt_struct_wrapper<winrt::Windows::Devices::Geolocation::BasicGeoposition>* self, void* /*unused*/)
+{
+    try
+    {
+        return py::convert(self->obj.Altitude);
+    }
+    catch (...)
+    {
+        return py::to_PyErr();
+    }
+}
+
+static int BasicGeoposition_set_Altitude(py::winrt_struct_wrapper<winrt::Windows::Devices::Geolocation::BasicGeoposition>* self, PyObject* value, void* /*unused*/)
+{
+    if (value == nullptr)
+    {
+        PyErr_SetString(PyExc_RuntimeError, "property delete not supported");
+        return -1;
+    }
+    
+    try
+    {
+        self->obj.Altitude = py::convert_to<double>(value);
+        return 0;
+    }
+    catch (...)
+    {
+        return -1;
+    }
+}
+
+static PyGetSetDef BasicGeoposition_getset[] = {
+    { const_cast<char*>("Latitude"), (getter)BasicGeoposition_get_Latitude, (setter)BasicGeoposition_set_Latitude, nullptr, nullptr },
+    { const_cast<char*>("Longitude"), (getter)BasicGeoposition_get_Longitude, (setter)BasicGeoposition_set_Longitude, nullptr, nullptr },
+    { const_cast<char*>("Altitude"), (getter)BasicGeoposition_get_Altitude, (setter)BasicGeoposition_set_Altitude, nullptr, nullptr },
+    { nullptr }
+};
+
+static PyType_Slot BasicGeoposition_Type_slots[] = 
+{
+    { Py_tp_new, BasicGeoposition_new },
+    { Py_tp_getset, BasicGeoposition_getset },
+    { 0, nullptr },
+};
+
+static PyType_Spec BasicGeoposition_Type_spec =
+{
+    "BasicGeoposition",
+    sizeof(py::winrt_struct_wrapper<winrt::Windows::Devices::Geolocation::BasicGeoposition>),
+    0,
+    Py_TPFLAGS_DEFAULT,
+    BasicGeoposition_Type_slots
+};
+
 // ----- Windows.Devices.Geolocation Initialization --------------------
 
 int initialize_Windows_Devices_Geolocation(PyObject* module)
 {
     PyObject* type_object{ nullptr };
+
 
     CivicAddress_Type_slots[0].pfunc = py::winrt_type<py::winrt_base>::python_type;
     type_object = PyType_FromSpec(&CivicAddress_Type_spec);
@@ -2489,5 +2680,16 @@ int initialize_Windows_Devices_Geolocation(PyObject* module)
     }
     py::winrt_type<winrt::Windows::Devices::Geolocation::IGeoshape>::python_type = reinterpret_cast<PyTypeObject*>(type_object);
 
+    type_object = PyType_FromSpec(&BasicGeoposition_Type_spec);
+    if (type_object == nullptr)
+    {
+        return -1;
+    }
+    if (PyModule_AddObject(module, "BasicGeoposition", type_object) != 0)
+    {
+        return -1;
+    }
+    py::winrt_type<winrt::Windows::Devices::Geolocation::BasicGeoposition>::python_type = reinterpret_cast<PyTypeObject*>(type_object);
+    
     return 0;
 }

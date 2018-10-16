@@ -9,7 +9,7 @@ PyTypeObject* py::winrt_type<winrt::Windows::Foundation::GuidHelper>::python_typ
 
 PyObject* GuidHelper_new(PyTypeObject* type, PyObject* args, PyObject* kwds)
 {
-    PyErr_SetString(PyExc_RuntimeError, "GuidHelper is not activatable");
+    PyErr_SetString(PyExc_TypeError, "GuidHelper is not activatable");
     return nullptr;
 }
 
@@ -103,7 +103,6 @@ static PyMethodDef GuidHelper_methods[] = {
 
 static PyType_Slot GuidHelper_Type_slots[] = 
 {
-    { Py_tp_base, nullptr }, // filled out in module init
     { Py_tp_new, GuidHelper_new },
     { Py_tp_methods, GuidHelper_methods },
     { 0, nullptr },
@@ -125,7 +124,7 @@ PyObject* MemoryBuffer_new(PyTypeObject* type, PyObject* args, PyObject* kwds)
 {
     if (kwds != nullptr)
     {
-        PyErr_SetString(PyExc_RuntimeError, "keyword arguments not supported");
+        PyErr_SetString(PyExc_TypeError, "keyword arguments not supported");
         return nullptr;
     }
 
@@ -220,8 +219,8 @@ static PyMethodDef MemoryBuffer_methods[] = {
 static PyType_Slot MemoryBuffer_Type_slots[] = 
 {
     { Py_tp_base, nullptr }, // filled out in module init
-    { Py_tp_new, MemoryBuffer_new },
     { Py_tp_dealloc, MemoryBuffer_dealloc },
+    { Py_tp_new, MemoryBuffer_new },
     { Py_tp_methods, MemoryBuffer_methods },
     { 0, nullptr },
 };
@@ -242,7 +241,7 @@ PyObject* Uri_new(PyTypeObject* type, PyObject* args, PyObject* kwds)
 {
     if (kwds != nullptr)
     {
-        PyErr_SetString(PyExc_RuntimeError, "keyword arguments not supported");
+        PyErr_SetString(PyExc_TypeError, "keyword arguments not supported");
         return nullptr;
     }
 
@@ -683,8 +682,8 @@ static PyGetSetDef Uri_getset[] = {
 static PyType_Slot Uri_Type_slots[] = 
 {
     { Py_tp_base, nullptr }, // filled out in module init
-    { Py_tp_new, Uri_new },
     { Py_tp_dealloc, Uri_dealloc },
+    { Py_tp_new, Uri_new },
     { Py_tp_methods, Uri_methods },
     { Py_tp_getset, Uri_getset },
     { 0, nullptr },
@@ -706,7 +705,7 @@ PyObject* WwwFormUrlDecoder_new(PyTypeObject* type, PyObject* args, PyObject* kw
 {
     if (kwds != nullptr)
     {
-        PyErr_SetString(PyExc_RuntimeError, "keyword arguments not supported");
+        PyErr_SetString(PyExc_TypeError, "keyword arguments not supported");
         return nullptr;
     }
 
@@ -935,8 +934,8 @@ static PyGetSetDef WwwFormUrlDecoder_getset[] = {
 static PyType_Slot WwwFormUrlDecoder_Type_slots[] = 
 {
     { Py_tp_base, nullptr }, // filled out in module init
-    { Py_tp_new, WwwFormUrlDecoder_new },
     { Py_tp_dealloc, WwwFormUrlDecoder_dealloc },
+    { Py_tp_new, WwwFormUrlDecoder_new },
     { Py_tp_methods, WwwFormUrlDecoder_methods },
     { Py_tp_getset, WwwFormUrlDecoder_getset },
     { 0, nullptr },
@@ -956,7 +955,7 @@ PyTypeObject* py::winrt_type<winrt::Windows::Foundation::WwwFormUrlDecoderEntry>
 
 PyObject* WwwFormUrlDecoderEntry_new(PyTypeObject* type, PyObject* args, PyObject* kwds)
 {
-    PyErr_SetString(PyExc_RuntimeError, "WwwFormUrlDecoderEntry is not activatable");
+    PyErr_SetString(PyExc_TypeError, "WwwFormUrlDecoderEntry is not activatable");
     return nullptr;
 }
 
@@ -1002,8 +1001,8 @@ static PyGetSetDef WwwFormUrlDecoderEntry_getset[] = {
 static PyType_Slot WwwFormUrlDecoderEntry_Type_slots[] = 
 {
     { Py_tp_base, nullptr }, // filled out in module init
-    { Py_tp_new, WwwFormUrlDecoderEntry_new },
     { Py_tp_dealloc, WwwFormUrlDecoderEntry_dealloc },
+    { Py_tp_new, WwwFormUrlDecoderEntry_new },
     { Py_tp_getset, WwwFormUrlDecoderEntry_getset },
     { 0, nullptr },
 };
@@ -1129,8 +1128,8 @@ static PyGetSetDef IAsyncAction_getset[] = {
 static PyType_Slot IAsyncAction_Type_slots[] = 
 {
     { Py_tp_base, nullptr }, // filled out in module init
-    { Py_tp_new, IAsyncAction_new },
     { Py_tp_dealloc, IAsyncAction_dealloc },
+    { Py_tp_new, IAsyncAction_new },
     { Py_tp_methods, IAsyncAction_methods },
     { Py_tp_getset, IAsyncAction_getset },
     { 0, nullptr },
@@ -1200,8 +1199,8 @@ static PyGetSetDef IAsyncActionWithProgress_getset[] = {
 static PyType_Slot IAsyncActionWithProgress_Type_slots[] = 
 {
     { Py_tp_base, nullptr }, // filled out in module init
-    { Py_tp_new, IAsyncActionWithProgress_new },
     { Py_tp_dealloc, IAsyncActionWithProgress_dealloc },
+    { Py_tp_new, IAsyncActionWithProgress_new },
     { Py_tp_methods, IAsyncActionWithProgress_methods },
     { Py_tp_getset, IAsyncActionWithProgress_getset },
     { 0, nullptr },
@@ -1362,8 +1361,8 @@ static PyGetSetDef IAsyncInfo_getset[] = {
 static PyType_Slot IAsyncInfo_Type_slots[] = 
 {
     { Py_tp_base, nullptr }, // filled out in module init
-    { Py_tp_new, IAsyncInfo_new },
     { Py_tp_dealloc, IAsyncInfo_dealloc },
+    { Py_tp_new, IAsyncInfo_new },
     { Py_tp_methods, IAsyncInfo_methods },
     { Py_tp_getset, IAsyncInfo_getset },
     { 0, nullptr },
@@ -1433,8 +1432,8 @@ static PyGetSetDef IAsyncOperationWithProgress_getset[] = {
 static PyType_Slot IAsyncOperationWithProgress_Type_slots[] = 
 {
     { Py_tp_base, nullptr }, // filled out in module init
-    { Py_tp_new, IAsyncOperationWithProgress_new },
     { Py_tp_dealloc, IAsyncOperationWithProgress_dealloc },
+    { Py_tp_new, IAsyncOperationWithProgress_new },
     { Py_tp_methods, IAsyncOperationWithProgress_methods },
     { Py_tp_getset, IAsyncOperationWithProgress_getset },
     { 0, nullptr },
@@ -1493,8 +1492,8 @@ static PyGetSetDef IAsyncOperation_getset[] = {
 static PyType_Slot IAsyncOperation_Type_slots[] = 
 {
     { Py_tp_base, nullptr }, // filled out in module init
-    { Py_tp_new, IAsyncOperation_new },
     { Py_tp_dealloc, IAsyncOperation_dealloc },
+    { Py_tp_new, IAsyncOperation_new },
     { Py_tp_methods, IAsyncOperation_methods },
     { Py_tp_getset, IAsyncOperation_getset },
     { 0, nullptr },
@@ -1583,8 +1582,8 @@ static PyMethodDef IClosable_methods[] = {
 static PyType_Slot IClosable_Type_slots[] = 
 {
     { Py_tp_base, nullptr }, // filled out in module init
-    { Py_tp_new, IClosable_new },
     { Py_tp_dealloc, IClosable_dealloc },
+    { Py_tp_new, IClosable_new },
     { Py_tp_methods, IClosable_methods },
     { 0, nullptr },
 };
@@ -1675,8 +1674,8 @@ static PyMethodDef IGetActivationFactory_methods[] = {
 static PyType_Slot IGetActivationFactory_Type_slots[] = 
 {
     { Py_tp_base, nullptr }, // filled out in module init
-    { Py_tp_new, IGetActivationFactory_new },
     { Py_tp_dealloc, IGetActivationFactory_dealloc },
+    { Py_tp_new, IGetActivationFactory_new },
     { Py_tp_methods, IGetActivationFactory_methods },
     { 0, nullptr },
 };
@@ -1765,8 +1764,8 @@ static PyMethodDef IMemoryBuffer_methods[] = {
 static PyType_Slot IMemoryBuffer_Type_slots[] = 
 {
     { Py_tp_base, nullptr }, // filled out in module init
-    { Py_tp_new, IMemoryBuffer_new },
     { Py_tp_dealloc, IMemoryBuffer_dealloc },
+    { Py_tp_new, IMemoryBuffer_new },
     { Py_tp_methods, IMemoryBuffer_methods },
     { 0, nullptr },
 };
@@ -1842,8 +1841,8 @@ static PyGetSetDef IMemoryBufferReference_getset[] = {
 static PyType_Slot IMemoryBufferReference_Type_slots[] = 
 {
     { Py_tp_base, nullptr }, // filled out in module init
-    { Py_tp_new, IMemoryBufferReference_new },
     { Py_tp_dealloc, IMemoryBufferReference_dealloc },
+    { Py_tp_new, IMemoryBufferReference_new },
     { Py_tp_getset, IMemoryBufferReference_getset },
     { 0, nullptr },
 };
@@ -1932,8 +1931,8 @@ static PyMethodDef IStringable_methods[] = {
 static PyType_Slot IStringable_Type_slots[] = 
 {
     { Py_tp_base, nullptr }, // filled out in module init
-    { Py_tp_new, IStringable_new },
     { Py_tp_dealloc, IStringable_dealloc },
+    { Py_tp_new, IStringable_new },
     { Py_tp_methods, IStringable_methods },
     { 0, nullptr },
 };
@@ -2023,8 +2022,8 @@ static PyGetSetDef IWwwFormUrlDecoderEntry_getset[] = {
 static PyType_Slot IWwwFormUrlDecoderEntry_Type_slots[] = 
 {
     { Py_tp_base, nullptr }, // filled out in module init
-    { Py_tp_new, IWwwFormUrlDecoderEntry_new },
     { Py_tp_dealloc, IWwwFormUrlDecoderEntry_dealloc },
+    { Py_tp_new, IWwwFormUrlDecoderEntry_new },
     { Py_tp_getset, IWwwFormUrlDecoderEntry_getset },
     { 0, nullptr },
 };
@@ -2038,13 +2037,1019 @@ static PyType_Spec IWwwFormUrlDecoderEntry_Type_spec =
     IWwwFormUrlDecoderEntry_Type_slots
 };
 
+// ----- DateTime struct --------------------
+PyTypeObject* py::winrt_type<winrt::Windows::Foundation::DateTime>::python_type;
+
+winrt::Windows::Foundation::DateTime py::converter<winrt::Windows::Foundation::DateTime>::convert_to(PyObject* obj)
+{
+    if (!PyDict_Check(obj)) { throw winrt::hresult_invalid_argument(); }
+    
+    winrt::Windows::Foundation::DateTime new_value{};
+    PyObject* pyUniversalTime = PyDict_GetItemString(obj, "UniversalTime");
+    if (!pyUniversalTime) { throw winrt::hresult_invalid_argument(); }
+    new_value = winrt::Windows::Foundation::DateTime{ winrt::Windows::Foundation::TimeSpan { converter<int64_t>::convert_to(pyUniversalTime) } };
+    return new_value;
+}
+
+PyObject* DateTime_new(PyTypeObject* type, PyObject* args, PyObject* kwds)
+{
+    auto tuple_size = PyTuple_Size(args);
+    if ((tuple_size == 0) && (kwds == nullptr))
+    {
+        try
+        {
+            winrt::Windows::Foundation::DateTime instance{};
+            return py::wrap_struct(instance, type);
+        }
+        catch (...)
+        {
+            return py::to_PyErr();
+        }
+    }
+    
+    if ((tuple_size == 1) && (kwds == nullptr))
+    {
+        auto arg = PyTuple_GetItem(args, 0);
+        if (PyDict_Check(arg))
+        {
+            try
+            {
+                auto instance = py::converter<winrt::Windows::Foundation::DateTime>::convert_to(arg); 
+                return py::wrap_struct(instance, type);
+            }
+            catch (...)
+            {
+                return py::to_PyErr();
+            }
+        }
+    }
+    
+    int64_t _UniversalTime{};
+    static char* kwlist[] = {"UniversalTime", nullptr};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwds, "L", kwlist, &_UniversalTime))
+    {
+        return nullptr;
+    }
+    
+    try
+    {
+        winrt::Windows::Foundation::DateTime instance{ winrt::Windows::Foundation::TimeSpan{ _UniversalTime } };
+        return py::wrap_struct(instance, type);
+    }
+    catch (...)
+    {
+        return py::to_PyErr();
+    }
+}
+
+static PyObject* DateTime_get_UniversalTime(py::winrt_struct_wrapper<winrt::Windows::Foundation::DateTime>* self, void* /*unused*/)
+{
+    try
+    {
+        return py::convert(self->obj.time_since_epoch().count());
+    }
+    catch (...)
+    {
+        return py::to_PyErr();
+    }
+}
+
+static int DateTime_set_UniversalTime(py::winrt_struct_wrapper<winrt::Windows::Foundation::DateTime>* self, PyObject* value, void* /*unused*/)
+{
+    if (value == nullptr)
+    {
+        PyErr_SetString(PyExc_RuntimeError, "property delete not supported");
+        return -1;
+    }
+    
+    try
+    {
+        self->obj = winrt::Windows::Foundation::DateTime{ winrt::Windows::Foundation::TimeSpan{ py::convert_to<int64_t>(value) } };
+        return 0;
+    }
+    catch (...)
+    {
+        return -1;
+    }
+}
+
+static PyGetSetDef DateTime_getset[] = {
+    { const_cast<char*>("UniversalTime"), (getter)DateTime_get_UniversalTime, (setter)DateTime_set_UniversalTime, nullptr, nullptr },
+    { nullptr }
+};
+
+static PyType_Slot DateTime_Type_slots[] = 
+{
+    { Py_tp_new, DateTime_new },
+    { Py_tp_getset, DateTime_getset },
+    { 0, nullptr },
+};
+
+static PyType_Spec DateTime_Type_spec =
+{
+    "DateTime",
+    sizeof(py::winrt_struct_wrapper<winrt::Windows::Foundation::DateTime>),
+    0,
+    Py_TPFLAGS_DEFAULT,
+    DateTime_Type_slots
+};
+
+// ----- EventRegistrationToken struct --------------------
+PyTypeObject* py::winrt_type<winrt::event_token>::python_type;
+
+winrt::event_token py::converter<winrt::event_token>::convert_to(PyObject* obj)
+{
+    if (!PyDict_Check(obj)) { throw winrt::hresult_invalid_argument(); }
+    
+    winrt::event_token new_value{};
+    PyObject* pyValue = PyDict_GetItemString(obj, "Value");
+    if (!pyValue) { throw winrt::hresult_invalid_argument(); }
+    new_value.value = converter<int64_t>::convert_to(pyValue);
+    return new_value;
+}
+
+PyObject* EventRegistrationToken_new(PyTypeObject* type, PyObject* args, PyObject* kwds)
+{
+    auto tuple_size = PyTuple_Size(args);
+    if ((tuple_size == 0) && (kwds == nullptr))
+    {
+        try
+        {
+            winrt::event_token instance{};
+            return py::wrap_struct(instance, type);
+        }
+        catch (...)
+        {
+            return py::to_PyErr();
+        }
+    }
+    
+    if ((tuple_size == 1) && (kwds == nullptr))
+    {
+        auto arg = PyTuple_GetItem(args, 0);
+        if (PyDict_Check(arg))
+        {
+            try
+            {
+                auto instance = py::converter<winrt::event_token>::convert_to(arg); 
+                return py::wrap_struct(instance, type);
+            }
+            catch (...)
+            {
+                return py::to_PyErr();
+            }
+        }
+    }
+    
+    int64_t _Value{};
+    static char* kwlist[] = {"Value", nullptr};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwds, "L", kwlist, &_Value))
+    {
+        return nullptr;
+    }
+    
+    try
+    {
+        winrt::event_token instance{ _Value };
+        return py::wrap_struct(instance, type);
+    }
+    catch (...)
+    {
+        return py::to_PyErr();
+    }
+}
+
+static PyObject* EventRegistrationToken_get_Value(py::winrt_struct_wrapper<winrt::event_token>* self, void* /*unused*/)
+{
+    try
+    {
+        return py::convert(self->obj.value);
+    }
+    catch (...)
+    {
+        return py::to_PyErr();
+    }
+}
+
+static int EventRegistrationToken_set_Value(py::winrt_struct_wrapper<winrt::event_token>* self, PyObject* value, void* /*unused*/)
+{
+    if (value == nullptr)
+    {
+        PyErr_SetString(PyExc_RuntimeError, "property delete not supported");
+        return -1;
+    }
+    
+    try
+    {
+        self->obj.value = py::convert_to<int64_t>(value);
+        return 0;
+    }
+    catch (...)
+    {
+        return -1;
+    }
+}
+
+static PyGetSetDef EventRegistrationToken_getset[] = {
+    { const_cast<char*>("Value"), (getter)EventRegistrationToken_get_Value, (setter)EventRegistrationToken_set_Value, nullptr, nullptr },
+    { nullptr }
+};
+
+static PyType_Slot EventRegistrationToken_Type_slots[] = 
+{
+    { Py_tp_new, EventRegistrationToken_new },
+    { Py_tp_getset, EventRegistrationToken_getset },
+    { 0, nullptr },
+};
+
+static PyType_Spec EventRegistrationToken_Type_spec =
+{
+    "EventRegistrationToken",
+    sizeof(py::winrt_struct_wrapper<winrt::event_token>),
+    0,
+    Py_TPFLAGS_DEFAULT,
+    EventRegistrationToken_Type_slots
+};
+
+// ----- HResult struct --------------------
+PyTypeObject* py::winrt_type<winrt::hresult>::python_type;
+
+winrt::hresult py::converter<winrt::hresult>::convert_to(PyObject* obj)
+{
+    if (!PyDict_Check(obj)) { throw winrt::hresult_invalid_argument(); }
+    
+    winrt::hresult new_value{};
+    PyObject* pyValue = PyDict_GetItemString(obj, "Value");
+    if (!pyValue) { throw winrt::hresult_invalid_argument(); }
+    new_value = converter<int32_t>::convert_to(pyValue);
+    return new_value;
+}
+
+PyObject* HResult_new(PyTypeObject* type, PyObject* args, PyObject* kwds)
+{
+    auto tuple_size = PyTuple_Size(args);
+    if ((tuple_size == 0) && (kwds == nullptr))
+    {
+        try
+        {
+            winrt::hresult instance{};
+            return py::wrap_struct(instance, type);
+        }
+        catch (...)
+        {
+            return py::to_PyErr();
+        }
+    }
+    
+    if ((tuple_size == 1) && (kwds == nullptr))
+    {
+        auto arg = PyTuple_GetItem(args, 0);
+        if (PyDict_Check(arg))
+        {
+            try
+            {
+                auto instance = py::converter<winrt::hresult>::convert_to(arg); 
+                return py::wrap_struct(instance, type);
+            }
+            catch (...)
+            {
+                return py::to_PyErr();
+            }
+        }
+    }
+    
+    int32_t _Value{};
+    static char* kwlist[] = {"Value", nullptr};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwds, "i", kwlist, &_Value))
+    {
+        return nullptr;
+    }
+    
+    try
+    {
+        winrt::hresult instance{ _Value };
+        return py::wrap_struct(instance, type);
+    }
+    catch (...)
+    {
+        return py::to_PyErr();
+    }
+}
+
+static PyObject* HResult_get_Value(py::winrt_struct_wrapper<winrt::hresult>* self, void* /*unused*/)
+{
+    try
+    {
+        return py::convert(self->obj);
+    }
+    catch (...)
+    {
+        return py::to_PyErr();
+    }
+}
+
+static int HResult_set_Value(py::winrt_struct_wrapper<winrt::hresult>* self, PyObject* value, void* /*unused*/)
+{
+    if (value == nullptr)
+    {
+        PyErr_SetString(PyExc_RuntimeError, "property delete not supported");
+        return -1;
+    }
+    
+    try
+    {
+        self->obj = py::convert_to<int32_t>(value);
+        return 0;
+    }
+    catch (...)
+    {
+        return -1;
+    }
+}
+
+static PyGetSetDef HResult_getset[] = {
+    { const_cast<char*>("Value"), (getter)HResult_get_Value, (setter)HResult_set_Value, nullptr, nullptr },
+    { nullptr }
+};
+
+static PyType_Slot HResult_Type_slots[] = 
+{
+    { Py_tp_new, HResult_new },
+    { Py_tp_getset, HResult_getset },
+    { 0, nullptr },
+};
+
+static PyType_Spec HResult_Type_spec =
+{
+    "HResult",
+    sizeof(py::winrt_struct_wrapper<winrt::hresult>),
+    0,
+    Py_TPFLAGS_DEFAULT,
+    HResult_Type_slots
+};
+
+// ----- Point struct --------------------
+PyTypeObject* py::winrt_type<winrt::Windows::Foundation::Point>::python_type;
+
+winrt::Windows::Foundation::Point py::converter<winrt::Windows::Foundation::Point>::convert_to(PyObject* obj)
+{
+    if (!PyDict_Check(obj)) { throw winrt::hresult_invalid_argument(); }
+    
+    winrt::Windows::Foundation::Point new_value{};
+    PyObject* pyX = PyDict_GetItemString(obj, "X");
+    if (!pyX) { throw winrt::hresult_invalid_argument(); }
+    new_value.X = converter<float>::convert_to(pyX);
+    PyObject* pyY = PyDict_GetItemString(obj, "Y");
+    if (!pyY) { throw winrt::hresult_invalid_argument(); }
+    new_value.Y = converter<float>::convert_to(pyY);
+    return new_value;
+}
+
+PyObject* Point_new(PyTypeObject* type, PyObject* args, PyObject* kwds)
+{
+    auto tuple_size = PyTuple_Size(args);
+    if ((tuple_size == 0) && (kwds == nullptr))
+    {
+        try
+        {
+            winrt::Windows::Foundation::Point instance{};
+            return py::wrap_struct(instance, type);
+        }
+        catch (...)
+        {
+            return py::to_PyErr();
+        }
+    }
+    
+    if ((tuple_size == 1) && (kwds == nullptr))
+    {
+        auto arg = PyTuple_GetItem(args, 0);
+        if (PyDict_Check(arg))
+        {
+            try
+            {
+                auto instance = py::converter<winrt::Windows::Foundation::Point>::convert_to(arg); 
+                return py::wrap_struct(instance, type);
+            }
+            catch (...)
+            {
+                return py::to_PyErr();
+            }
+        }
+    }
+    
+    float _X{};
+    float _Y{};
+    static char* kwlist[] = {"X", "Y", nullptr};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwds, "ff", kwlist, &_X, &_Y))
+    {
+        return nullptr;
+    }
+    
+    try
+    {
+        winrt::Windows::Foundation::Point instance{ _X, _Y };
+        return py::wrap_struct(instance, type);
+    }
+    catch (...)
+    {
+        return py::to_PyErr();
+    }
+}
+
+static PyObject* Point_get_X(py::winrt_struct_wrapper<winrt::Windows::Foundation::Point>* self, void* /*unused*/)
+{
+    try
+    {
+        return py::convert(self->obj.X);
+    }
+    catch (...)
+    {
+        return py::to_PyErr();
+    }
+}
+
+static int Point_set_X(py::winrt_struct_wrapper<winrt::Windows::Foundation::Point>* self, PyObject* value, void* /*unused*/)
+{
+    if (value == nullptr)
+    {
+        PyErr_SetString(PyExc_RuntimeError, "property delete not supported");
+        return -1;
+    }
+    
+    try
+    {
+        self->obj.X = py::convert_to<float>(value);
+        return 0;
+    }
+    catch (...)
+    {
+        return -1;
+    }
+}
+
+static PyObject* Point_get_Y(py::winrt_struct_wrapper<winrt::Windows::Foundation::Point>* self, void* /*unused*/)
+{
+    try
+    {
+        return py::convert(self->obj.Y);
+    }
+    catch (...)
+    {
+        return py::to_PyErr();
+    }
+}
+
+static int Point_set_Y(py::winrt_struct_wrapper<winrt::Windows::Foundation::Point>* self, PyObject* value, void* /*unused*/)
+{
+    if (value == nullptr)
+    {
+        PyErr_SetString(PyExc_RuntimeError, "property delete not supported");
+        return -1;
+    }
+    
+    try
+    {
+        self->obj.Y = py::convert_to<float>(value);
+        return 0;
+    }
+    catch (...)
+    {
+        return -1;
+    }
+}
+
+static PyGetSetDef Point_getset[] = {
+    { const_cast<char*>("X"), (getter)Point_get_X, (setter)Point_set_X, nullptr, nullptr },
+    { const_cast<char*>("Y"), (getter)Point_get_Y, (setter)Point_set_Y, nullptr, nullptr },
+    { nullptr }
+};
+
+static PyType_Slot Point_Type_slots[] = 
+{
+    { Py_tp_new, Point_new },
+    { Py_tp_getset, Point_getset },
+    { 0, nullptr },
+};
+
+static PyType_Spec Point_Type_spec =
+{
+    "Point",
+    sizeof(py::winrt_struct_wrapper<winrt::Windows::Foundation::Point>),
+    0,
+    Py_TPFLAGS_DEFAULT,
+    Point_Type_slots
+};
+
+// ----- Rect struct --------------------
+PyTypeObject* py::winrt_type<winrt::Windows::Foundation::Rect>::python_type;
+
+winrt::Windows::Foundation::Rect py::converter<winrt::Windows::Foundation::Rect>::convert_to(PyObject* obj)
+{
+    if (!PyDict_Check(obj)) { throw winrt::hresult_invalid_argument(); }
+    
+    winrt::Windows::Foundation::Rect new_value{};
+    PyObject* pyX = PyDict_GetItemString(obj, "X");
+    if (!pyX) { throw winrt::hresult_invalid_argument(); }
+    new_value.X = converter<float>::convert_to(pyX);
+    PyObject* pyY = PyDict_GetItemString(obj, "Y");
+    if (!pyY) { throw winrt::hresult_invalid_argument(); }
+    new_value.Y = converter<float>::convert_to(pyY);
+    PyObject* pyWidth = PyDict_GetItemString(obj, "Width");
+    if (!pyWidth) { throw winrt::hresult_invalid_argument(); }
+    new_value.Width = converter<float>::convert_to(pyWidth);
+    PyObject* pyHeight = PyDict_GetItemString(obj, "Height");
+    if (!pyHeight) { throw winrt::hresult_invalid_argument(); }
+    new_value.Height = converter<float>::convert_to(pyHeight);
+    return new_value;
+}
+
+PyObject* Rect_new(PyTypeObject* type, PyObject* args, PyObject* kwds)
+{
+    auto tuple_size = PyTuple_Size(args);
+    if ((tuple_size == 0) && (kwds == nullptr))
+    {
+        try
+        {
+            winrt::Windows::Foundation::Rect instance{};
+            return py::wrap_struct(instance, type);
+        }
+        catch (...)
+        {
+            return py::to_PyErr();
+        }
+    }
+    
+    if ((tuple_size == 1) && (kwds == nullptr))
+    {
+        auto arg = PyTuple_GetItem(args, 0);
+        if (PyDict_Check(arg))
+        {
+            try
+            {
+                auto instance = py::converter<winrt::Windows::Foundation::Rect>::convert_to(arg); 
+                return py::wrap_struct(instance, type);
+            }
+            catch (...)
+            {
+                return py::to_PyErr();
+            }
+        }
+    }
+    
+    float _X{};
+    float _Y{};
+    float _Width{};
+    float _Height{};
+    static char* kwlist[] = {"X", "Y", "Width", "Height", nullptr};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwds, "ffff", kwlist, &_X, &_Y, &_Width, &_Height))
+    {
+        return nullptr;
+    }
+    
+    try
+    {
+        winrt::Windows::Foundation::Rect instance{ _X, _Y, _Width, _Height };
+        return py::wrap_struct(instance, type);
+    }
+    catch (...)
+    {
+        return py::to_PyErr();
+    }
+}
+
+static PyObject* Rect_get_X(py::winrt_struct_wrapper<winrt::Windows::Foundation::Rect>* self, void* /*unused*/)
+{
+    try
+    {
+        return py::convert(self->obj.X);
+    }
+    catch (...)
+    {
+        return py::to_PyErr();
+    }
+}
+
+static int Rect_set_X(py::winrt_struct_wrapper<winrt::Windows::Foundation::Rect>* self, PyObject* value, void* /*unused*/)
+{
+    if (value == nullptr)
+    {
+        PyErr_SetString(PyExc_RuntimeError, "property delete not supported");
+        return -1;
+    }
+    
+    try
+    {
+        self->obj.X = py::convert_to<float>(value);
+        return 0;
+    }
+    catch (...)
+    {
+        return -1;
+    }
+}
+
+static PyObject* Rect_get_Y(py::winrt_struct_wrapper<winrt::Windows::Foundation::Rect>* self, void* /*unused*/)
+{
+    try
+    {
+        return py::convert(self->obj.Y);
+    }
+    catch (...)
+    {
+        return py::to_PyErr();
+    }
+}
+
+static int Rect_set_Y(py::winrt_struct_wrapper<winrt::Windows::Foundation::Rect>* self, PyObject* value, void* /*unused*/)
+{
+    if (value == nullptr)
+    {
+        PyErr_SetString(PyExc_RuntimeError, "property delete not supported");
+        return -1;
+    }
+    
+    try
+    {
+        self->obj.Y = py::convert_to<float>(value);
+        return 0;
+    }
+    catch (...)
+    {
+        return -1;
+    }
+}
+
+static PyObject* Rect_get_Width(py::winrt_struct_wrapper<winrt::Windows::Foundation::Rect>* self, void* /*unused*/)
+{
+    try
+    {
+        return py::convert(self->obj.Width);
+    }
+    catch (...)
+    {
+        return py::to_PyErr();
+    }
+}
+
+static int Rect_set_Width(py::winrt_struct_wrapper<winrt::Windows::Foundation::Rect>* self, PyObject* value, void* /*unused*/)
+{
+    if (value == nullptr)
+    {
+        PyErr_SetString(PyExc_RuntimeError, "property delete not supported");
+        return -1;
+    }
+    
+    try
+    {
+        self->obj.Width = py::convert_to<float>(value);
+        return 0;
+    }
+    catch (...)
+    {
+        return -1;
+    }
+}
+
+static PyObject* Rect_get_Height(py::winrt_struct_wrapper<winrt::Windows::Foundation::Rect>* self, void* /*unused*/)
+{
+    try
+    {
+        return py::convert(self->obj.Height);
+    }
+    catch (...)
+    {
+        return py::to_PyErr();
+    }
+}
+
+static int Rect_set_Height(py::winrt_struct_wrapper<winrt::Windows::Foundation::Rect>* self, PyObject* value, void* /*unused*/)
+{
+    if (value == nullptr)
+    {
+        PyErr_SetString(PyExc_RuntimeError, "property delete not supported");
+        return -1;
+    }
+    
+    try
+    {
+        self->obj.Height = py::convert_to<float>(value);
+        return 0;
+    }
+    catch (...)
+    {
+        return -1;
+    }
+}
+
+static PyGetSetDef Rect_getset[] = {
+    { const_cast<char*>("X"), (getter)Rect_get_X, (setter)Rect_set_X, nullptr, nullptr },
+    { const_cast<char*>("Y"), (getter)Rect_get_Y, (setter)Rect_set_Y, nullptr, nullptr },
+    { const_cast<char*>("Width"), (getter)Rect_get_Width, (setter)Rect_set_Width, nullptr, nullptr },
+    { const_cast<char*>("Height"), (getter)Rect_get_Height, (setter)Rect_set_Height, nullptr, nullptr },
+    { nullptr }
+};
+
+static PyType_Slot Rect_Type_slots[] = 
+{
+    { Py_tp_new, Rect_new },
+    { Py_tp_getset, Rect_getset },
+    { 0, nullptr },
+};
+
+static PyType_Spec Rect_Type_spec =
+{
+    "Rect",
+    sizeof(py::winrt_struct_wrapper<winrt::Windows::Foundation::Rect>),
+    0,
+    Py_TPFLAGS_DEFAULT,
+    Rect_Type_slots
+};
+
+// ----- Size struct --------------------
+PyTypeObject* py::winrt_type<winrt::Windows::Foundation::Size>::python_type;
+
+winrt::Windows::Foundation::Size py::converter<winrt::Windows::Foundation::Size>::convert_to(PyObject* obj)
+{
+    if (!PyDict_Check(obj)) { throw winrt::hresult_invalid_argument(); }
+    
+    winrt::Windows::Foundation::Size new_value{};
+    PyObject* pyWidth = PyDict_GetItemString(obj, "Width");
+    if (!pyWidth) { throw winrt::hresult_invalid_argument(); }
+    new_value.Width = converter<float>::convert_to(pyWidth);
+    PyObject* pyHeight = PyDict_GetItemString(obj, "Height");
+    if (!pyHeight) { throw winrt::hresult_invalid_argument(); }
+    new_value.Height = converter<float>::convert_to(pyHeight);
+    return new_value;
+}
+
+PyObject* Size_new(PyTypeObject* type, PyObject* args, PyObject* kwds)
+{
+    auto tuple_size = PyTuple_Size(args);
+    if ((tuple_size == 0) && (kwds == nullptr))
+    {
+        try
+        {
+            winrt::Windows::Foundation::Size instance{};
+            return py::wrap_struct(instance, type);
+        }
+        catch (...)
+        {
+            return py::to_PyErr();
+        }
+    }
+    
+    if ((tuple_size == 1) && (kwds == nullptr))
+    {
+        auto arg = PyTuple_GetItem(args, 0);
+        if (PyDict_Check(arg))
+        {
+            try
+            {
+                auto instance = py::converter<winrt::Windows::Foundation::Size>::convert_to(arg); 
+                return py::wrap_struct(instance, type);
+            }
+            catch (...)
+            {
+                return py::to_PyErr();
+            }
+        }
+    }
+    
+    float _Width{};
+    float _Height{};
+    static char* kwlist[] = {"Width", "Height", nullptr};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwds, "ff", kwlist, &_Width, &_Height))
+    {
+        return nullptr;
+    }
+    
+    try
+    {
+        winrt::Windows::Foundation::Size instance{ _Width, _Height };
+        return py::wrap_struct(instance, type);
+    }
+    catch (...)
+    {
+        return py::to_PyErr();
+    }
+}
+
+static PyObject* Size_get_Width(py::winrt_struct_wrapper<winrt::Windows::Foundation::Size>* self, void* /*unused*/)
+{
+    try
+    {
+        return py::convert(self->obj.Width);
+    }
+    catch (...)
+    {
+        return py::to_PyErr();
+    }
+}
+
+static int Size_set_Width(py::winrt_struct_wrapper<winrt::Windows::Foundation::Size>* self, PyObject* value, void* /*unused*/)
+{
+    if (value == nullptr)
+    {
+        PyErr_SetString(PyExc_RuntimeError, "property delete not supported");
+        return -1;
+    }
+    
+    try
+    {
+        self->obj.Width = py::convert_to<float>(value);
+        return 0;
+    }
+    catch (...)
+    {
+        return -1;
+    }
+}
+
+static PyObject* Size_get_Height(py::winrt_struct_wrapper<winrt::Windows::Foundation::Size>* self, void* /*unused*/)
+{
+    try
+    {
+        return py::convert(self->obj.Height);
+    }
+    catch (...)
+    {
+        return py::to_PyErr();
+    }
+}
+
+static int Size_set_Height(py::winrt_struct_wrapper<winrt::Windows::Foundation::Size>* self, PyObject* value, void* /*unused*/)
+{
+    if (value == nullptr)
+    {
+        PyErr_SetString(PyExc_RuntimeError, "property delete not supported");
+        return -1;
+    }
+    
+    try
+    {
+        self->obj.Height = py::convert_to<float>(value);
+        return 0;
+    }
+    catch (...)
+    {
+        return -1;
+    }
+}
+
+static PyGetSetDef Size_getset[] = {
+    { const_cast<char*>("Width"), (getter)Size_get_Width, (setter)Size_set_Width, nullptr, nullptr },
+    { const_cast<char*>("Height"), (getter)Size_get_Height, (setter)Size_set_Height, nullptr, nullptr },
+    { nullptr }
+};
+
+static PyType_Slot Size_Type_slots[] = 
+{
+    { Py_tp_new, Size_new },
+    { Py_tp_getset, Size_getset },
+    { 0, nullptr },
+};
+
+static PyType_Spec Size_Type_spec =
+{
+    "Size",
+    sizeof(py::winrt_struct_wrapper<winrt::Windows::Foundation::Size>),
+    0,
+    Py_TPFLAGS_DEFAULT,
+    Size_Type_slots
+};
+
+// ----- TimeSpan struct --------------------
+PyTypeObject* py::winrt_type<winrt::Windows::Foundation::TimeSpan>::python_type;
+
+winrt::Windows::Foundation::TimeSpan py::converter<winrt::Windows::Foundation::TimeSpan>::convert_to(PyObject* obj)
+{
+    if (!PyDict_Check(obj)) { throw winrt::hresult_invalid_argument(); }
+    
+    winrt::Windows::Foundation::TimeSpan new_value{};
+    PyObject* pyDuration = PyDict_GetItemString(obj, "Duration");
+    if (!pyDuration) { throw winrt::hresult_invalid_argument(); }
+    new_value = winrt::Windows::Foundation::TimeSpan { converter<int64_t>::convert_to(pyDuration) };
+    return new_value;
+}
+
+PyObject* TimeSpan_new(PyTypeObject* type, PyObject* args, PyObject* kwds)
+{
+    auto tuple_size = PyTuple_Size(args);
+    if ((tuple_size == 0) && (kwds == nullptr))
+    {
+        try
+        {
+            winrt::Windows::Foundation::TimeSpan instance{};
+            return py::wrap_struct(instance, type);
+        }
+        catch (...)
+        {
+            return py::to_PyErr();
+        }
+    }
+    
+    if ((tuple_size == 1) && (kwds == nullptr))
+    {
+        auto arg = PyTuple_GetItem(args, 0);
+        if (PyDict_Check(arg))
+        {
+            try
+            {
+                auto instance = py::converter<winrt::Windows::Foundation::TimeSpan>::convert_to(arg); 
+                return py::wrap_struct(instance, type);
+            }
+            catch (...)
+            {
+                return py::to_PyErr();
+            }
+        }
+    }
+    
+    int64_t _Duration{};
+    static char* kwlist[] = {"Duration", nullptr};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwds, "L", kwlist, &_Duration))
+    {
+        return nullptr;
+    }
+    
+    try
+    {
+        winrt::Windows::Foundation::TimeSpan instance{ _Duration };
+        return py::wrap_struct(instance, type);
+    }
+    catch (...)
+    {
+        return py::to_PyErr();
+    }
+}
+
+static PyObject* TimeSpan_get_Duration(py::winrt_struct_wrapper<winrt::Windows::Foundation::TimeSpan>* self, void* /*unused*/)
+{
+    try
+    {
+        return py::convert(self->obj.count());
+    }
+    catch (...)
+    {
+        return py::to_PyErr();
+    }
+}
+
+static int TimeSpan_set_Duration(py::winrt_struct_wrapper<winrt::Windows::Foundation::TimeSpan>* self, PyObject* value, void* /*unused*/)
+{
+    if (value == nullptr)
+    {
+        PyErr_SetString(PyExc_RuntimeError, "property delete not supported");
+        return -1;
+    }
+    
+    try
+    {
+        self->obj = winrt::Windows::Foundation::TimeSpan{ py::convert_to<int64_t>(value) };
+        return 0;
+    }
+    catch (...)
+    {
+        return -1;
+    }
+}
+
+static PyGetSetDef TimeSpan_getset[] = {
+    { const_cast<char*>("Duration"), (getter)TimeSpan_get_Duration, (setter)TimeSpan_set_Duration, nullptr, nullptr },
+    { nullptr }
+};
+
+static PyType_Slot TimeSpan_Type_slots[] = 
+{
+    { Py_tp_new, TimeSpan_new },
+    { Py_tp_getset, TimeSpan_getset },
+    { 0, nullptr },
+};
+
+static PyType_Spec TimeSpan_Type_spec =
+{
+    "TimeSpan",
+    sizeof(py::winrt_struct_wrapper<winrt::Windows::Foundation::TimeSpan>),
+    0,
+    Py_TPFLAGS_DEFAULT,
+    TimeSpan_Type_slots
+};
+
 // ----- Windows.Foundation Initialization --------------------
 
 int initialize_Windows_Foundation(PyObject* module)
 {
     PyObject* type_object{ nullptr };
 
-    GuidHelper_Type_slots[0].pfunc = py::winrt_type<py::winrt_base>::python_type;
+
     type_object = PyType_FromSpec(&GuidHelper_Type_spec);
     if (type_object == nullptr)
     {
@@ -2236,5 +3241,82 @@ int initialize_Windows_Foundation(PyObject* module)
     }
     py::winrt_type<winrt::Windows::Foundation::IWwwFormUrlDecoderEntry>::python_type = reinterpret_cast<PyTypeObject*>(type_object);
 
+    type_object = PyType_FromSpec(&DateTime_Type_spec);
+    if (type_object == nullptr)
+    {
+        return -1;
+    }
+    if (PyModule_AddObject(module, "DateTime", type_object) != 0)
+    {
+        return -1;
+    }
+    py::winrt_type<winrt::Windows::Foundation::DateTime>::python_type = reinterpret_cast<PyTypeObject*>(type_object);
+
+    type_object = PyType_FromSpec(&EventRegistrationToken_Type_spec);
+    if (type_object == nullptr)
+    {
+        return -1;
+    }
+    if (PyModule_AddObject(module, "EventRegistrationToken", type_object) != 0)
+    {
+        return -1;
+    }
+    py::winrt_type<winrt::event_token>::python_type = reinterpret_cast<PyTypeObject*>(type_object);
+
+    type_object = PyType_FromSpec(&HResult_Type_spec);
+    if (type_object == nullptr)
+    {
+        return -1;
+    }
+    if (PyModule_AddObject(module, "HResult", type_object) != 0)
+    {
+        return -1;
+    }
+    py::winrt_type<winrt::hresult>::python_type = reinterpret_cast<PyTypeObject*>(type_object);
+
+    type_object = PyType_FromSpec(&Point_Type_spec);
+    if (type_object == nullptr)
+    {
+        return -1;
+    }
+    if (PyModule_AddObject(module, "Point", type_object) != 0)
+    {
+        return -1;
+    }
+    py::winrt_type<winrt::Windows::Foundation::Point>::python_type = reinterpret_cast<PyTypeObject*>(type_object);
+
+    type_object = PyType_FromSpec(&Rect_Type_spec);
+    if (type_object == nullptr)
+    {
+        return -1;
+    }
+    if (PyModule_AddObject(module, "Rect", type_object) != 0)
+    {
+        return -1;
+    }
+    py::winrt_type<winrt::Windows::Foundation::Rect>::python_type = reinterpret_cast<PyTypeObject*>(type_object);
+
+    type_object = PyType_FromSpec(&Size_Type_spec);
+    if (type_object == nullptr)
+    {
+        return -1;
+    }
+    if (PyModule_AddObject(module, "Size", type_object) != 0)
+    {
+        return -1;
+    }
+    py::winrt_type<winrt::Windows::Foundation::Size>::python_type = reinterpret_cast<PyTypeObject*>(type_object);
+
+    type_object = PyType_FromSpec(&TimeSpan_Type_spec);
+    if (type_object == nullptr)
+    {
+        return -1;
+    }
+    if (PyModule_AddObject(module, "TimeSpan", type_object) != 0)
+    {
+        return -1;
+    }
+    py::winrt_type<winrt::Windows::Foundation::TimeSpan>::python_type = reinterpret_cast<PyTypeObject*>(type_object);
+    
     return 0;
 }

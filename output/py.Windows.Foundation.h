@@ -537,6 +537,48 @@ int put_Completed(PyObject* value) override
 
 namespace py
 {
+    template<>
+    struct converter<winrt::Windows::Foundation::DateTime>
+    {
+        static winrt::Windows::Foundation::DateTime convert_to(PyObject* obj);
+    };
+    
+    template<>
+    struct converter<winrt::event_token>
+    {
+        static winrt::event_token convert_to(PyObject* obj);
+    };
+    
+    template<>
+    struct converter<winrt::hresult>
+    {
+        static winrt::hresult convert_to(PyObject* obj);
+    };
+    
+    template<>
+    struct converter<winrt::Windows::Foundation::Point>
+    {
+        static winrt::Windows::Foundation::Point convert_to(PyObject* obj);
+    };
+    
+    template<>
+    struct converter<winrt::Windows::Foundation::Rect>
+    {
+        static winrt::Windows::Foundation::Rect convert_to(PyObject* obj);
+    };
+    
+    template<>
+    struct converter<winrt::Windows::Foundation::Size>
+    {
+        static winrt::Windows::Foundation::Size convert_to(PyObject* obj);
+    };
+    
+    template<>
+    struct converter<winrt::Windows::Foundation::TimeSpan>
+    {
+        static winrt::Windows::Foundation::TimeSpan convert_to(PyObject* obj);
+    };
+    
     template <typename TProgress>
     struct pinterface_python_type<winrt::Windows::Foundation::IAsyncActionWithProgress<TProgress>>
     {
