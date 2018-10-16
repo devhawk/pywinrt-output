@@ -8,7 +8,8 @@
     "included_namespaces": [
         "Windows.Data.Json",
         "Windows.Devices.Geolocation",
-        "Windows.Foundation"
+        "Windows.Foundation",
+        "Windows.Graphics.DirectX"
     ],
     "excluded_namespaces": [
         "Windows.Foundation.Deferral",

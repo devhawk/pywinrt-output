@@ -88,7 +88,7 @@ PyObject* Geofence_new(PyTypeObject* type, PyObject* args, PyObject* kwds)
         return nullptr; 
     }
 
-    PyErr_SetString(PyExc_RuntimeError, "Invalid parameter count");
+    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
     return nullptr;
 }
 
@@ -99,105 +99,147 @@ static void Geofence_dealloc(py::winrt_wrapper<winrt::Windows::Devices::Geolocat
     self->obj = nullptr;
 }
 
-static PyObject* Geofence_get_Duration(py::winrt_wrapper<winrt::Windows::Devices::Geolocation::Geofencing::Geofence>* self, void* /*unused*/)
-{
-    try
+static PyObject* Geofence_get_Duration(py::winrt_wrapper<winrt::Windows::Devices::Geolocation::Geofencing::Geofence>* self, PyObject* args)
+{ 
+    if (args != nullptr)
     {
-        auto return_value = self->obj.Duration();
-        return py::convert(return_value);
+        PyErr_SetString(PyExc_TypeError, "arguments not supported for get methods");
+        return nullptr;
     }
-    catch (...)
-    {
-        return py::to_PyErr();
-    }
+        try
+        {
+            winrt::Windows::Foundation::TimeSpan return_value = self->obj.Duration();
+
+            return py::convert(return_value);
+        }
+        catch (...)
+        {
+            return py::to_PyErr();
+        }
 }
 
-static PyObject* Geofence_get_DwellTime(py::winrt_wrapper<winrt::Windows::Devices::Geolocation::Geofencing::Geofence>* self, void* /*unused*/)
-{
-    try
+static PyObject* Geofence_get_DwellTime(py::winrt_wrapper<winrt::Windows::Devices::Geolocation::Geofencing::Geofence>* self, PyObject* args)
+{ 
+    if (args != nullptr)
     {
-        auto return_value = self->obj.DwellTime();
-        return py::convert(return_value);
+        PyErr_SetString(PyExc_TypeError, "arguments not supported for get methods");
+        return nullptr;
     }
-    catch (...)
-    {
-        return py::to_PyErr();
-    }
+        try
+        {
+            winrt::Windows::Foundation::TimeSpan return_value = self->obj.DwellTime();
+
+            return py::convert(return_value);
+        }
+        catch (...)
+        {
+            return py::to_PyErr();
+        }
 }
 
-static PyObject* Geofence_get_Geoshape(py::winrt_wrapper<winrt::Windows::Devices::Geolocation::Geofencing::Geofence>* self, void* /*unused*/)
-{
-    try
+static PyObject* Geofence_get_Geoshape(py::winrt_wrapper<winrt::Windows::Devices::Geolocation::Geofencing::Geofence>* self, PyObject* args)
+{ 
+    if (args != nullptr)
     {
-        auto return_value = self->obj.Geoshape();
-        return py::convert(return_value);
+        PyErr_SetString(PyExc_TypeError, "arguments not supported for get methods");
+        return nullptr;
     }
-    catch (...)
-    {
-        return py::to_PyErr();
-    }
+        try
+        {
+            winrt::Windows::Devices::Geolocation::IGeoshape return_value = self->obj.Geoshape();
+
+            return py::convert(return_value);
+        }
+        catch (...)
+        {
+            return py::to_PyErr();
+        }
 }
 
-static PyObject* Geofence_get_Id(py::winrt_wrapper<winrt::Windows::Devices::Geolocation::Geofencing::Geofence>* self, void* /*unused*/)
-{
-    try
+static PyObject* Geofence_get_Id(py::winrt_wrapper<winrt::Windows::Devices::Geolocation::Geofencing::Geofence>* self, PyObject* args)
+{ 
+    if (args != nullptr)
     {
-        auto return_value = self->obj.Id();
-        return py::convert(return_value);
+        PyErr_SetString(PyExc_TypeError, "arguments not supported for get methods");
+        return nullptr;
     }
-    catch (...)
-    {
-        return py::to_PyErr();
-    }
+        try
+        {
+            winrt::hstring return_value = self->obj.Id();
+
+            return py::convert(return_value);
+        }
+        catch (...)
+        {
+            return py::to_PyErr();
+        }
 }
 
-static PyObject* Geofence_get_MonitoredStates(py::winrt_wrapper<winrt::Windows::Devices::Geolocation::Geofencing::Geofence>* self, void* /*unused*/)
-{
-    try
+static PyObject* Geofence_get_MonitoredStates(py::winrt_wrapper<winrt::Windows::Devices::Geolocation::Geofencing::Geofence>* self, PyObject* args)
+{ 
+    if (args != nullptr)
     {
-        auto return_value = self->obj.MonitoredStates();
-        return py::convert(return_value);
+        PyErr_SetString(PyExc_TypeError, "arguments not supported for get methods");
+        return nullptr;
     }
-    catch (...)
-    {
-        return py::to_PyErr();
-    }
+        try
+        {
+            winrt::Windows::Devices::Geolocation::Geofencing::MonitoredGeofenceStates return_value = self->obj.MonitoredStates();
+
+            return py::convert(return_value);
+        }
+        catch (...)
+        {
+            return py::to_PyErr();
+        }
 }
 
-static PyObject* Geofence_get_SingleUse(py::winrt_wrapper<winrt::Windows::Devices::Geolocation::Geofencing::Geofence>* self, void* /*unused*/)
-{
-    try
+static PyObject* Geofence_get_SingleUse(py::winrt_wrapper<winrt::Windows::Devices::Geolocation::Geofencing::Geofence>* self, PyObject* args)
+{ 
+    if (args != nullptr)
     {
-        auto return_value = self->obj.SingleUse();
-        return py::convert(return_value);
+        PyErr_SetString(PyExc_TypeError, "arguments not supported for get methods");
+        return nullptr;
     }
-    catch (...)
-    {
-        return py::to_PyErr();
-    }
+        try
+        {
+            bool return_value = self->obj.SingleUse();
+
+            return py::convert(return_value);
+        }
+        catch (...)
+        {
+            return py::to_PyErr();
+        }
 }
 
-static PyObject* Geofence_get_StartTime(py::winrt_wrapper<winrt::Windows::Devices::Geolocation::Geofencing::Geofence>* self, void* /*unused*/)
-{
-    try
+static PyObject* Geofence_get_StartTime(py::winrt_wrapper<winrt::Windows::Devices::Geolocation::Geofencing::Geofence>* self, PyObject* args)
+{ 
+    if (args != nullptr)
     {
-        auto return_value = self->obj.StartTime();
-        return py::convert(return_value);
+        PyErr_SetString(PyExc_TypeError, "arguments not supported for get methods");
+        return nullptr;
     }
-    catch (...)
-    {
-        return py::to_PyErr();
-    }
+        try
+        {
+            winrt::Windows::Foundation::DateTime return_value = self->obj.StartTime();
+
+            return py::convert(return_value);
+        }
+        catch (...)
+        {
+            return py::to_PyErr();
+        }
 }
 
-static PyGetSetDef Geofence_getset[] = {
-    { const_cast<char*>("Duration"), (getter)Geofence_get_Duration, nullptr, nullptr, nullptr },
-    { const_cast<char*>("DwellTime"), (getter)Geofence_get_DwellTime, nullptr, nullptr, nullptr },
-    { const_cast<char*>("Geoshape"), (getter)Geofence_get_Geoshape, nullptr, nullptr, nullptr },
-    { const_cast<char*>("Id"), (getter)Geofence_get_Id, nullptr, nullptr, nullptr },
-    { const_cast<char*>("MonitoredStates"), (getter)Geofence_get_MonitoredStates, nullptr, nullptr, nullptr },
-    { const_cast<char*>("SingleUse"), (getter)Geofence_get_SingleUse, nullptr, nullptr, nullptr },
-    { const_cast<char*>("StartTime"), (getter)Geofence_get_StartTime, nullptr, nullptr, nullptr },
+static PyMethodDef Geofence_methods[] = {
+    { "get_Duration", (PyCFunction)Geofence_get_Duration, METH_NOARGS, nullptr },
+    { "get_DwellTime", (PyCFunction)Geofence_get_DwellTime, METH_NOARGS, nullptr },
+    { "get_Geoshape", (PyCFunction)Geofence_get_Geoshape, METH_NOARGS, nullptr },
+    { "get_Id", (PyCFunction)Geofence_get_Id, METH_NOARGS, nullptr },
+    { "get_MonitoredStates", (PyCFunction)Geofence_get_MonitoredStates, METH_NOARGS, nullptr },
+    { "get_SingleUse", (PyCFunction)Geofence_get_SingleUse, METH_NOARGS, nullptr },
+    { "get_StartTime", (PyCFunction)Geofence_get_StartTime, METH_NOARGS, nullptr },
     { nullptr }
 };
 
@@ -206,7 +248,7 @@ static PyType_Slot Geofence_Type_slots[] =
     { Py_tp_base, nullptr }, // filled out in module init
     { Py_tp_dealloc, Geofence_dealloc },
     { Py_tp_new, Geofence_new },
-    { Py_tp_getset, Geofence_getset },
+    { Py_tp_methods, Geofence_methods },
     { 0, nullptr },
 };
 
@@ -257,16 +299,49 @@ static PyObject* GeofenceMonitor_ReadReports(py::winrt_wrapper<winrt::Windows::D
         return nullptr; 
     }
 
-    PyErr_SetString(PyExc_RuntimeError, "Invalid parameter count");
+    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
     return nullptr;
 }
 
-static PyObject* GeofenceMonitor_Current(PyObject* /*unused*/, PyObject* args)
+static PyObject* GeofenceMonitor_add_GeofenceStateChanged(py::winrt_wrapper<winrt::Windows::Devices::Geolocation::Geofencing::GeofenceMonitor>* self, PyObject* args)
 { 
-    Py_ssize_t arg_count = PyTuple_Size(args);
+        try
+        {
+            auto param0 = py::convert_to<winrt::Windows::Foundation::TypedEventHandler<winrt::Windows::Devices::Geolocation::Geofencing::GeofenceMonitor, winrt::Windows::Foundation::IInspectable>>(args);
 
-    if (arg_count == 0)
+            winrt::event_token return_value = self->obj.GeofenceStateChanged(param0);
+
+            return py::convert(return_value);
+        }
+        catch (...)
+        {
+            return py::to_PyErr();
+        }
+}
+
+static PyObject* GeofenceMonitor_add_StatusChanged(py::winrt_wrapper<winrt::Windows::Devices::Geolocation::Geofencing::GeofenceMonitor>* self, PyObject* args)
+{ 
+        try
+        {
+            auto param0 = py::convert_to<winrt::Windows::Foundation::TypedEventHandler<winrt::Windows::Devices::Geolocation::Geofencing::GeofenceMonitor, winrt::Windows::Foundation::IInspectable>>(args);
+
+            winrt::event_token return_value = self->obj.StatusChanged(param0);
+
+            return py::convert(return_value);
+        }
+        catch (...)
+        {
+            return py::to_PyErr();
+        }
+}
+
+static PyObject* GeofenceMonitor_get_Current(PyObject* /*unused*/, PyObject* args)
+{ 
+    if (args != nullptr)
     {
+        PyErr_SetString(PyExc_TypeError, "arguments not supported for get methods");
+        return nullptr;
+    }
         try
         {
             winrt::Windows::Devices::Geolocation::Geofencing::GeofenceMonitor return_value = winrt::Windows::Devices::Geolocation::Geofencing::GeofenceMonitor::Current();
@@ -277,65 +352,105 @@ static PyObject* GeofenceMonitor_Current(PyObject* /*unused*/, PyObject* args)
         {
             return py::to_PyErr();
         }
-    }
-    else if (arg_count == -1)
-    {
-        return nullptr; 
-    }
-
-    PyErr_SetString(PyExc_RuntimeError, "Invalid parameter count");
-    return nullptr;
 }
 
-static PyObject* GeofenceMonitor_get_Geofences(py::winrt_wrapper<winrt::Windows::Devices::Geolocation::Geofencing::GeofenceMonitor>* self, void* /*unused*/)
-{
-    try
+static PyObject* GeofenceMonitor_get_Geofences(py::winrt_wrapper<winrt::Windows::Devices::Geolocation::Geofencing::GeofenceMonitor>* self, PyObject* args)
+{ 
+    if (args != nullptr)
     {
-        auto return_value = self->obj.Geofences();
-        return py::convert(return_value);
+        PyErr_SetString(PyExc_TypeError, "arguments not supported for get methods");
+        return nullptr;
     }
-    catch (...)
-    {
-        return py::to_PyErr();
-    }
+        try
+        {
+            winrt::Windows::Foundation::Collections::IVector<winrt::Windows::Devices::Geolocation::Geofencing::Geofence> return_value = self->obj.Geofences();
+
+            return py::convert(return_value);
+        }
+        catch (...)
+        {
+            return py::to_PyErr();
+        }
 }
 
-static PyObject* GeofenceMonitor_get_LastKnownGeoposition(py::winrt_wrapper<winrt::Windows::Devices::Geolocation::Geofencing::GeofenceMonitor>* self, void* /*unused*/)
-{
-    try
+static PyObject* GeofenceMonitor_get_LastKnownGeoposition(py::winrt_wrapper<winrt::Windows::Devices::Geolocation::Geofencing::GeofenceMonitor>* self, PyObject* args)
+{ 
+    if (args != nullptr)
     {
-        auto return_value = self->obj.LastKnownGeoposition();
-        return py::convert(return_value);
+        PyErr_SetString(PyExc_TypeError, "arguments not supported for get methods");
+        return nullptr;
     }
-    catch (...)
-    {
-        return py::to_PyErr();
-    }
+        try
+        {
+            winrt::Windows::Devices::Geolocation::Geoposition return_value = self->obj.LastKnownGeoposition();
+
+            return py::convert(return_value);
+        }
+        catch (...)
+        {
+            return py::to_PyErr();
+        }
 }
 
-static PyObject* GeofenceMonitor_get_Status(py::winrt_wrapper<winrt::Windows::Devices::Geolocation::Geofencing::GeofenceMonitor>* self, void* /*unused*/)
-{
-    try
+static PyObject* GeofenceMonitor_get_Status(py::winrt_wrapper<winrt::Windows::Devices::Geolocation::Geofencing::GeofenceMonitor>* self, PyObject* args)
+{ 
+    if (args != nullptr)
     {
-        auto return_value = self->obj.Status();
-        return py::convert(return_value);
+        PyErr_SetString(PyExc_TypeError, "arguments not supported for get methods");
+        return nullptr;
     }
-    catch (...)
-    {
-        return py::to_PyErr();
-    }
+        try
+        {
+            winrt::Windows::Devices::Geolocation::Geofencing::GeofenceMonitorStatus return_value = self->obj.Status();
+
+            return py::convert(return_value);
+        }
+        catch (...)
+        {
+            return py::to_PyErr();
+        }
+}
+
+static PyObject* GeofenceMonitor_remove_GeofenceStateChanged(py::winrt_wrapper<winrt::Windows::Devices::Geolocation::Geofencing::GeofenceMonitor>* self, PyObject* args)
+{ 
+        try
+        {
+            auto param0 = py::convert_to<winrt::event_token>(args);
+
+            self->obj.GeofenceStateChanged(param0);
+            Py_RETURN_NONE;
+        }
+        catch (...)
+        {
+            return py::to_PyErr();
+        }
+}
+
+static PyObject* GeofenceMonitor_remove_StatusChanged(py::winrt_wrapper<winrt::Windows::Devices::Geolocation::Geofencing::GeofenceMonitor>* self, PyObject* args)
+{ 
+        try
+        {
+            auto param0 = py::convert_to<winrt::event_token>(args);
+
+            self->obj.StatusChanged(param0);
+            Py_RETURN_NONE;
+        }
+        catch (...)
+        {
+            return py::to_PyErr();
+        }
 }
 
 static PyMethodDef GeofenceMonitor_methods[] = {
     { "ReadReports", (PyCFunction)GeofenceMonitor_ReadReports, METH_VARARGS, nullptr },
-    { "Current", (PyCFunction)GeofenceMonitor_Current, METH_VARARGS | METH_STATIC, nullptr },
-    { nullptr }
-};
-
-static PyGetSetDef GeofenceMonitor_getset[] = {
-    { const_cast<char*>("Geofences"), (getter)GeofenceMonitor_get_Geofences, nullptr, nullptr, nullptr },
-    { const_cast<char*>("LastKnownGeoposition"), (getter)GeofenceMonitor_get_LastKnownGeoposition, nullptr, nullptr, nullptr },
-    { const_cast<char*>("Status"), (getter)GeofenceMonitor_get_Status, nullptr, nullptr, nullptr },
+    { "add_GeofenceStateChanged", (PyCFunction)GeofenceMonitor_add_GeofenceStateChanged, METH_O, nullptr },
+    { "add_StatusChanged", (PyCFunction)GeofenceMonitor_add_StatusChanged, METH_O, nullptr },
+    { "get_Current", (PyCFunction)GeofenceMonitor_get_Current, METH_NOARGS | METH_STATIC, nullptr },
+    { "get_Geofences", (PyCFunction)GeofenceMonitor_get_Geofences, METH_NOARGS, nullptr },
+    { "get_LastKnownGeoposition", (PyCFunction)GeofenceMonitor_get_LastKnownGeoposition, METH_NOARGS, nullptr },
+    { "get_Status", (PyCFunction)GeofenceMonitor_get_Status, METH_NOARGS, nullptr },
+    { "remove_GeofenceStateChanged", (PyCFunction)GeofenceMonitor_remove_GeofenceStateChanged, METH_O, nullptr },
+    { "remove_StatusChanged", (PyCFunction)GeofenceMonitor_remove_StatusChanged, METH_O, nullptr },
     { nullptr }
 };
 
@@ -345,7 +460,6 @@ static PyType_Slot GeofenceMonitor_Type_slots[] =
     { Py_tp_dealloc, GeofenceMonitor_dealloc },
     { Py_tp_new, GeofenceMonitor_new },
     { Py_tp_methods, GeofenceMonitor_methods },
-    { Py_tp_getset, GeofenceMonitor_getset },
     { 0, nullptr },
 };
 
@@ -374,63 +488,87 @@ static void GeofenceStateChangeReport_dealloc(py::winrt_wrapper<winrt::Windows::
     self->obj = nullptr;
 }
 
-static PyObject* GeofenceStateChangeReport_get_Geofence(py::winrt_wrapper<winrt::Windows::Devices::Geolocation::Geofencing::GeofenceStateChangeReport>* self, void* /*unused*/)
-{
-    try
+static PyObject* GeofenceStateChangeReport_get_Geofence(py::winrt_wrapper<winrt::Windows::Devices::Geolocation::Geofencing::GeofenceStateChangeReport>* self, PyObject* args)
+{ 
+    if (args != nullptr)
     {
-        auto return_value = self->obj.Geofence();
-        return py::convert(return_value);
+        PyErr_SetString(PyExc_TypeError, "arguments not supported for get methods");
+        return nullptr;
     }
-    catch (...)
-    {
-        return py::to_PyErr();
-    }
+        try
+        {
+            winrt::Windows::Devices::Geolocation::Geofencing::Geofence return_value = self->obj.Geofence();
+
+            return py::convert(return_value);
+        }
+        catch (...)
+        {
+            return py::to_PyErr();
+        }
 }
 
-static PyObject* GeofenceStateChangeReport_get_Geoposition(py::winrt_wrapper<winrt::Windows::Devices::Geolocation::Geofencing::GeofenceStateChangeReport>* self, void* /*unused*/)
-{
-    try
+static PyObject* GeofenceStateChangeReport_get_Geoposition(py::winrt_wrapper<winrt::Windows::Devices::Geolocation::Geofencing::GeofenceStateChangeReport>* self, PyObject* args)
+{ 
+    if (args != nullptr)
     {
-        auto return_value = self->obj.Geoposition();
-        return py::convert(return_value);
+        PyErr_SetString(PyExc_TypeError, "arguments not supported for get methods");
+        return nullptr;
     }
-    catch (...)
-    {
-        return py::to_PyErr();
-    }
+        try
+        {
+            winrt::Windows::Devices::Geolocation::Geoposition return_value = self->obj.Geoposition();
+
+            return py::convert(return_value);
+        }
+        catch (...)
+        {
+            return py::to_PyErr();
+        }
 }
 
-static PyObject* GeofenceStateChangeReport_get_NewState(py::winrt_wrapper<winrt::Windows::Devices::Geolocation::Geofencing::GeofenceStateChangeReport>* self, void* /*unused*/)
-{
-    try
+static PyObject* GeofenceStateChangeReport_get_NewState(py::winrt_wrapper<winrt::Windows::Devices::Geolocation::Geofencing::GeofenceStateChangeReport>* self, PyObject* args)
+{ 
+    if (args != nullptr)
     {
-        auto return_value = self->obj.NewState();
-        return py::convert(return_value);
+        PyErr_SetString(PyExc_TypeError, "arguments not supported for get methods");
+        return nullptr;
     }
-    catch (...)
-    {
-        return py::to_PyErr();
-    }
+        try
+        {
+            winrt::Windows::Devices::Geolocation::Geofencing::GeofenceState return_value = self->obj.NewState();
+
+            return py::convert(return_value);
+        }
+        catch (...)
+        {
+            return py::to_PyErr();
+        }
 }
 
-static PyObject* GeofenceStateChangeReport_get_RemovalReason(py::winrt_wrapper<winrt::Windows::Devices::Geolocation::Geofencing::GeofenceStateChangeReport>* self, void* /*unused*/)
-{
-    try
+static PyObject* GeofenceStateChangeReport_get_RemovalReason(py::winrt_wrapper<winrt::Windows::Devices::Geolocation::Geofencing::GeofenceStateChangeReport>* self, PyObject* args)
+{ 
+    if (args != nullptr)
     {
-        auto return_value = self->obj.RemovalReason();
-        return py::convert(return_value);
+        PyErr_SetString(PyExc_TypeError, "arguments not supported for get methods");
+        return nullptr;
     }
-    catch (...)
-    {
-        return py::to_PyErr();
-    }
+        try
+        {
+            winrt::Windows::Devices::Geolocation::Geofencing::GeofenceRemovalReason return_value = self->obj.RemovalReason();
+
+            return py::convert(return_value);
+        }
+        catch (...)
+        {
+            return py::to_PyErr();
+        }
 }
 
-static PyGetSetDef GeofenceStateChangeReport_getset[] = {
-    { const_cast<char*>("Geofence"), (getter)GeofenceStateChangeReport_get_Geofence, nullptr, nullptr, nullptr },
-    { const_cast<char*>("Geoposition"), (getter)GeofenceStateChangeReport_get_Geoposition, nullptr, nullptr, nullptr },
-    { const_cast<char*>("NewState"), (getter)GeofenceStateChangeReport_get_NewState, nullptr, nullptr, nullptr },
-    { const_cast<char*>("RemovalReason"), (getter)GeofenceStateChangeReport_get_RemovalReason, nullptr, nullptr, nullptr },
+static PyMethodDef GeofenceStateChangeReport_methods[] = {
+    { "get_Geofence", (PyCFunction)GeofenceStateChangeReport_get_Geofence, METH_NOARGS, nullptr },
+    { "get_Geoposition", (PyCFunction)GeofenceStateChangeReport_get_Geoposition, METH_NOARGS, nullptr },
+    { "get_NewState", (PyCFunction)GeofenceStateChangeReport_get_NewState, METH_NOARGS, nullptr },
+    { "get_RemovalReason", (PyCFunction)GeofenceStateChangeReport_get_RemovalReason, METH_NOARGS, nullptr },
     { nullptr }
 };
 
@@ -439,7 +577,7 @@ static PyType_Slot GeofenceStateChangeReport_Type_slots[] =
     { Py_tp_base, nullptr }, // filled out in module init
     { Py_tp_dealloc, GeofenceStateChangeReport_dealloc },
     { Py_tp_new, GeofenceStateChangeReport_new },
-    { Py_tp_getset, GeofenceStateChangeReport_getset },
+    { Py_tp_methods, GeofenceStateChangeReport_methods },
     { 0, nullptr },
 };
 

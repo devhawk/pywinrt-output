@@ -106,7 +106,7 @@ static int Matrix3x2_set_M11(py::winrt_struct_wrapper<winrt::Windows::Foundation
 {
     if (value == nullptr)
     {
-        PyErr_SetString(PyExc_RuntimeError, "property delete not supported");
+        PyErr_SetString(PyExc_TypeError, "property delete not supported");
         return -1;
     }
     
@@ -137,7 +137,7 @@ static int Matrix3x2_set_M12(py::winrt_struct_wrapper<winrt::Windows::Foundation
 {
     if (value == nullptr)
     {
-        PyErr_SetString(PyExc_RuntimeError, "property delete not supported");
+        PyErr_SetString(PyExc_TypeError, "property delete not supported");
         return -1;
     }
     
@@ -168,7 +168,7 @@ static int Matrix3x2_set_M21(py::winrt_struct_wrapper<winrt::Windows::Foundation
 {
     if (value == nullptr)
     {
-        PyErr_SetString(PyExc_RuntimeError, "property delete not supported");
+        PyErr_SetString(PyExc_TypeError, "property delete not supported");
         return -1;
     }
     
@@ -199,7 +199,7 @@ static int Matrix3x2_set_M22(py::winrt_struct_wrapper<winrt::Windows::Foundation
 {
     if (value == nullptr)
     {
-        PyErr_SetString(PyExc_RuntimeError, "property delete not supported");
+        PyErr_SetString(PyExc_TypeError, "property delete not supported");
         return -1;
     }
     
@@ -230,7 +230,7 @@ static int Matrix3x2_set_M31(py::winrt_struct_wrapper<winrt::Windows::Foundation
 {
     if (value == nullptr)
     {
-        PyErr_SetString(PyExc_RuntimeError, "property delete not supported");
+        PyErr_SetString(PyExc_TypeError, "property delete not supported");
         return -1;
     }
     
@@ -261,7 +261,7 @@ static int Matrix3x2_set_M32(py::winrt_struct_wrapper<winrt::Windows::Foundation
 {
     if (value == nullptr)
     {
-        PyErr_SetString(PyExc_RuntimeError, "property delete not supported");
+        PyErr_SetString(PyExc_TypeError, "property delete not supported");
         return -1;
     }
     
@@ -444,7 +444,7 @@ static int Matrix4x4_set_M11(py::winrt_struct_wrapper<winrt::Windows::Foundation
 {
     if (value == nullptr)
     {
-        PyErr_SetString(PyExc_RuntimeError, "property delete not supported");
+        PyErr_SetString(PyExc_TypeError, "property delete not supported");
         return -1;
     }
     
@@ -475,7 +475,7 @@ static int Matrix4x4_set_M12(py::winrt_struct_wrapper<winrt::Windows::Foundation
 {
     if (value == nullptr)
     {
-        PyErr_SetString(PyExc_RuntimeError, "property delete not supported");
+        PyErr_SetString(PyExc_TypeError, "property delete not supported");
         return -1;
     }
     
@@ -506,7 +506,7 @@ static int Matrix4x4_set_M13(py::winrt_struct_wrapper<winrt::Windows::Foundation
 {
     if (value == nullptr)
     {
-        PyErr_SetString(PyExc_RuntimeError, "property delete not supported");
+        PyErr_SetString(PyExc_TypeError, "property delete not supported");
         return -1;
     }
     
@@ -537,7 +537,7 @@ static int Matrix4x4_set_M14(py::winrt_struct_wrapper<winrt::Windows::Foundation
 {
     if (value == nullptr)
     {
-        PyErr_SetString(PyExc_RuntimeError, "property delete not supported");
+        PyErr_SetString(PyExc_TypeError, "property delete not supported");
         return -1;
     }
     
@@ -568,7 +568,7 @@ static int Matrix4x4_set_M21(py::winrt_struct_wrapper<winrt::Windows::Foundation
 {
     if (value == nullptr)
     {
-        PyErr_SetString(PyExc_RuntimeError, "property delete not supported");
+        PyErr_SetString(PyExc_TypeError, "property delete not supported");
         return -1;
     }
     
@@ -599,7 +599,7 @@ static int Matrix4x4_set_M22(py::winrt_struct_wrapper<winrt::Windows::Foundation
 {
     if (value == nullptr)
     {
-        PyErr_SetString(PyExc_RuntimeError, "property delete not supported");
+        PyErr_SetString(PyExc_TypeError, "property delete not supported");
         return -1;
     }
     
@@ -630,7 +630,7 @@ static int Matrix4x4_set_M23(py::winrt_struct_wrapper<winrt::Windows::Foundation
 {
     if (value == nullptr)
     {
-        PyErr_SetString(PyExc_RuntimeError, "property delete not supported");
+        PyErr_SetString(PyExc_TypeError, "property delete not supported");
         return -1;
     }
     
@@ -661,7 +661,7 @@ static int Matrix4x4_set_M24(py::winrt_struct_wrapper<winrt::Windows::Foundation
 {
     if (value == nullptr)
     {
-        PyErr_SetString(PyExc_RuntimeError, "property delete not supported");
+        PyErr_SetString(PyExc_TypeError, "property delete not supported");
         return -1;
     }
     
@@ -692,7 +692,7 @@ static int Matrix4x4_set_M31(py::winrt_struct_wrapper<winrt::Windows::Foundation
 {
     if (value == nullptr)
     {
-        PyErr_SetString(PyExc_RuntimeError, "property delete not supported");
+        PyErr_SetString(PyExc_TypeError, "property delete not supported");
         return -1;
     }
     
@@ -723,7 +723,7 @@ static int Matrix4x4_set_M32(py::winrt_struct_wrapper<winrt::Windows::Foundation
 {
     if (value == nullptr)
     {
-        PyErr_SetString(PyExc_RuntimeError, "property delete not supported");
+        PyErr_SetString(PyExc_TypeError, "property delete not supported");
         return -1;
     }
     
@@ -754,7 +754,7 @@ static int Matrix4x4_set_M33(py::winrt_struct_wrapper<winrt::Windows::Foundation
 {
     if (value == nullptr)
     {
-        PyErr_SetString(PyExc_RuntimeError, "property delete not supported");
+        PyErr_SetString(PyExc_TypeError, "property delete not supported");
         return -1;
     }
     
@@ -785,7 +785,7 @@ static int Matrix4x4_set_M34(py::winrt_struct_wrapper<winrt::Windows::Foundation
 {
     if (value == nullptr)
     {
-        PyErr_SetString(PyExc_RuntimeError, "property delete not supported");
+        PyErr_SetString(PyExc_TypeError, "property delete not supported");
         return -1;
     }
     
@@ -816,7 +816,7 @@ static int Matrix4x4_set_M41(py::winrt_struct_wrapper<winrt::Windows::Foundation
 {
     if (value == nullptr)
     {
-        PyErr_SetString(PyExc_RuntimeError, "property delete not supported");
+        PyErr_SetString(PyExc_TypeError, "property delete not supported");
         return -1;
     }
     
@@ -847,7 +847,7 @@ static int Matrix4x4_set_M42(py::winrt_struct_wrapper<winrt::Windows::Foundation
 {
     if (value == nullptr)
     {
-        PyErr_SetString(PyExc_RuntimeError, "property delete not supported");
+        PyErr_SetString(PyExc_TypeError, "property delete not supported");
         return -1;
     }
     
@@ -878,7 +878,7 @@ static int Matrix4x4_set_M43(py::winrt_struct_wrapper<winrt::Windows::Foundation
 {
     if (value == nullptr)
     {
-        PyErr_SetString(PyExc_RuntimeError, "property delete not supported");
+        PyErr_SetString(PyExc_TypeError, "property delete not supported");
         return -1;
     }
     
@@ -909,7 +909,7 @@ static int Matrix4x4_set_M44(py::winrt_struct_wrapper<winrt::Windows::Foundation
 {
     if (value == nullptr)
     {
-        PyErr_SetString(PyExc_RuntimeError, "property delete not supported");
+        PyErr_SetString(PyExc_TypeError, "property delete not supported");
         return -1;
     }
     
@@ -1046,7 +1046,7 @@ static int Plane_set_Normal(py::winrt_struct_wrapper<winrt::Windows::Foundation:
 {
     if (value == nullptr)
     {
-        PyErr_SetString(PyExc_RuntimeError, "property delete not supported");
+        PyErr_SetString(PyExc_TypeError, "property delete not supported");
         return -1;
     }
     
@@ -1077,7 +1077,7 @@ static int Plane_set_D(py::winrt_struct_wrapper<winrt::Windows::Foundation::Nume
 {
     if (value == nullptr)
     {
-        PyErr_SetString(PyExc_RuntimeError, "property delete not supported");
+        PyErr_SetString(PyExc_TypeError, "property delete not supported");
         return -1;
     }
     
@@ -1208,7 +1208,7 @@ static int Quaternion_set_X(py::winrt_struct_wrapper<winrt::Windows::Foundation:
 {
     if (value == nullptr)
     {
-        PyErr_SetString(PyExc_RuntimeError, "property delete not supported");
+        PyErr_SetString(PyExc_TypeError, "property delete not supported");
         return -1;
     }
     
@@ -1239,7 +1239,7 @@ static int Quaternion_set_Y(py::winrt_struct_wrapper<winrt::Windows::Foundation:
 {
     if (value == nullptr)
     {
-        PyErr_SetString(PyExc_RuntimeError, "property delete not supported");
+        PyErr_SetString(PyExc_TypeError, "property delete not supported");
         return -1;
     }
     
@@ -1270,7 +1270,7 @@ static int Quaternion_set_Z(py::winrt_struct_wrapper<winrt::Windows::Foundation:
 {
     if (value == nullptr)
     {
-        PyErr_SetString(PyExc_RuntimeError, "property delete not supported");
+        PyErr_SetString(PyExc_TypeError, "property delete not supported");
         return -1;
     }
     
@@ -1301,7 +1301,7 @@ static int Quaternion_set_W(py::winrt_struct_wrapper<winrt::Windows::Foundation:
 {
     if (value == nullptr)
     {
-        PyErr_SetString(PyExc_RuntimeError, "property delete not supported");
+        PyErr_SetString(PyExc_TypeError, "property delete not supported");
         return -1;
     }
     
@@ -1426,7 +1426,7 @@ static int Rational_set_Numerator(py::winrt_struct_wrapper<winrt::Windows::Found
 {
     if (value == nullptr)
     {
-        PyErr_SetString(PyExc_RuntimeError, "property delete not supported");
+        PyErr_SetString(PyExc_TypeError, "property delete not supported");
         return -1;
     }
     
@@ -1457,7 +1457,7 @@ static int Rational_set_Denominator(py::winrt_struct_wrapper<winrt::Windows::Fou
 {
     if (value == nullptr)
     {
-        PyErr_SetString(PyExc_RuntimeError, "property delete not supported");
+        PyErr_SetString(PyExc_TypeError, "property delete not supported");
         return -1;
     }
     
@@ -1580,7 +1580,7 @@ static int Vector2_set_X(py::winrt_struct_wrapper<winrt::Windows::Foundation::Nu
 {
     if (value == nullptr)
     {
-        PyErr_SetString(PyExc_RuntimeError, "property delete not supported");
+        PyErr_SetString(PyExc_TypeError, "property delete not supported");
         return -1;
     }
     
@@ -1611,7 +1611,7 @@ static int Vector2_set_Y(py::winrt_struct_wrapper<winrt::Windows::Foundation::Nu
 {
     if (value == nullptr)
     {
-        PyErr_SetString(PyExc_RuntimeError, "property delete not supported");
+        PyErr_SetString(PyExc_TypeError, "property delete not supported");
         return -1;
     }
     
@@ -1738,7 +1738,7 @@ static int Vector3_set_X(py::winrt_struct_wrapper<winrt::Windows::Foundation::Nu
 {
     if (value == nullptr)
     {
-        PyErr_SetString(PyExc_RuntimeError, "property delete not supported");
+        PyErr_SetString(PyExc_TypeError, "property delete not supported");
         return -1;
     }
     
@@ -1769,7 +1769,7 @@ static int Vector3_set_Y(py::winrt_struct_wrapper<winrt::Windows::Foundation::Nu
 {
     if (value == nullptr)
     {
-        PyErr_SetString(PyExc_RuntimeError, "property delete not supported");
+        PyErr_SetString(PyExc_TypeError, "property delete not supported");
         return -1;
     }
     
@@ -1800,7 +1800,7 @@ static int Vector3_set_Z(py::winrt_struct_wrapper<winrt::Windows::Foundation::Nu
 {
     if (value == nullptr)
     {
-        PyErr_SetString(PyExc_RuntimeError, "property delete not supported");
+        PyErr_SetString(PyExc_TypeError, "property delete not supported");
         return -1;
     }
     
@@ -1932,7 +1932,7 @@ static int Vector4_set_X(py::winrt_struct_wrapper<winrt::Windows::Foundation::Nu
 {
     if (value == nullptr)
     {
-        PyErr_SetString(PyExc_RuntimeError, "property delete not supported");
+        PyErr_SetString(PyExc_TypeError, "property delete not supported");
         return -1;
     }
     
@@ -1963,7 +1963,7 @@ static int Vector4_set_Y(py::winrt_struct_wrapper<winrt::Windows::Foundation::Nu
 {
     if (value == nullptr)
     {
-        PyErr_SetString(PyExc_RuntimeError, "property delete not supported");
+        PyErr_SetString(PyExc_TypeError, "property delete not supported");
         return -1;
     }
     
@@ -1994,7 +1994,7 @@ static int Vector4_set_Z(py::winrt_struct_wrapper<winrt::Windows::Foundation::Nu
 {
     if (value == nullptr)
     {
-        PyErr_SetString(PyExc_RuntimeError, "property delete not supported");
+        PyErr_SetString(PyExc_TypeError, "property delete not supported");
         return -1;
     }
     
@@ -2025,7 +2025,7 @@ static int Vector4_set_W(py::winrt_struct_wrapper<winrt::Windows::Foundation::Nu
 {
     if (value == nullptr)
     {
-        PyErr_SetString(PyExc_RuntimeError, "property delete not supported");
+        PyErr_SetString(PyExc_TypeError, "property delete not supported");
         return -1;
     }
     

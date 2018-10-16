@@ -35,7 +35,7 @@ static PyObject* GuidHelper_CreateNewGuid(PyObject* /*unused*/, PyObject* args)
         return nullptr; 
     }
 
-    PyErr_SetString(PyExc_RuntimeError, "Invalid parameter count");
+    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
     return nullptr;
 }
 
@@ -64,16 +64,17 @@ static PyObject* GuidHelper_Equals(PyObject* /*unused*/, PyObject* args)
         return nullptr; 
     }
 
-    PyErr_SetString(PyExc_RuntimeError, "Invalid parameter count");
+    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
     return nullptr;
 }
 
-static PyObject* GuidHelper_Empty(PyObject* /*unused*/, PyObject* args)
+static PyObject* GuidHelper_get_Empty(PyObject* /*unused*/, PyObject* args)
 { 
-    Py_ssize_t arg_count = PyTuple_Size(args);
-
-    if (arg_count == 0)
+    if (args != nullptr)
     {
+        PyErr_SetString(PyExc_TypeError, "arguments not supported for get methods");
+        return nullptr;
+    }
         try
         {
             winrt::guid return_value = winrt::Windows::Foundation::GuidHelper::Empty();
@@ -84,20 +85,12 @@ static PyObject* GuidHelper_Empty(PyObject* /*unused*/, PyObject* args)
         {
             return py::to_PyErr();
         }
-    }
-    else if (arg_count == -1)
-    {
-        return nullptr; 
-    }
-
-    PyErr_SetString(PyExc_RuntimeError, "Invalid parameter count");
-    return nullptr;
 }
 
 static PyMethodDef GuidHelper_methods[] = {
     { "CreateNewGuid", (PyCFunction)GuidHelper_CreateNewGuid, METH_VARARGS | METH_STATIC, nullptr },
     { "Equals", (PyCFunction)GuidHelper_Equals, METH_VARARGS | METH_STATIC, nullptr },
-    { "Empty", (PyCFunction)GuidHelper_Empty, METH_VARARGS | METH_STATIC, nullptr },
+    { "get_Empty", (PyCFunction)GuidHelper_get_Empty, METH_NOARGS | METH_STATIC, nullptr },
     { nullptr }
 };
 
@@ -148,7 +141,7 @@ PyObject* MemoryBuffer_new(PyTypeObject* type, PyObject* args, PyObject* kwds)
         return nullptr; 
     }
 
-    PyErr_SetString(PyExc_RuntimeError, "Invalid parameter count");
+    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
     return nullptr;
 }
 
@@ -157,6 +150,31 @@ static void MemoryBuffer_dealloc(py::winrt_wrapper<winrt::Windows::Foundation::M
     auto hash_value = std::hash<winrt::Windows::Foundation::IInspectable>{}(self->obj);
     py::wrapped_instance(hash_value, nullptr);
     self->obj = nullptr;
+}
+
+static PyObject* MemoryBuffer_Close(py::winrt_wrapper<winrt::Windows::Foundation::MemoryBuffer>* self, PyObject* args)
+{ 
+    Py_ssize_t arg_count = PyTuple_Size(args);
+
+    if (arg_count == 0)
+    {
+        try
+        {
+            self->obj.Close();
+            Py_RETURN_NONE;
+        }
+        catch (...)
+        {
+            return py::to_PyErr();
+        }
+    }
+    else if (arg_count == -1)
+    {
+        return nullptr; 
+    }
+
+    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+    return nullptr;
 }
 
 static PyObject* MemoryBuffer_CreateReference(py::winrt_wrapper<winrt::Windows::Foundation::MemoryBuffer>* self, PyObject* args)
@@ -181,38 +199,13 @@ static PyObject* MemoryBuffer_CreateReference(py::winrt_wrapper<winrt::Windows::
         return nullptr; 
     }
 
-    PyErr_SetString(PyExc_RuntimeError, "Invalid parameter count");
-    return nullptr;
-}
-
-static PyObject* MemoryBuffer_Close(py::winrt_wrapper<winrt::Windows::Foundation::MemoryBuffer>* self, PyObject* args)
-{ 
-    Py_ssize_t arg_count = PyTuple_Size(args);
-
-    if (arg_count == 0)
-    {
-        try
-        {
-            self->obj.Close();
-            Py_RETURN_NONE;
-        }
-        catch (...)
-        {
-            return py::to_PyErr();
-        }
-    }
-    else if (arg_count == -1)
-    {
-        return nullptr; 
-    }
-
-    PyErr_SetString(PyExc_RuntimeError, "Invalid parameter count");
+    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
     return nullptr;
 }
 
 static PyMethodDef MemoryBuffer_methods[] = {
-    { "CreateReference", (PyCFunction)MemoryBuffer_CreateReference, METH_VARARGS, nullptr },
     { "Close", (PyCFunction)MemoryBuffer_Close, METH_VARARGS, nullptr },
+    { "CreateReference", (PyCFunction)MemoryBuffer_CreateReference, METH_VARARGS, nullptr },
     { nullptr }
 };
 
@@ -279,7 +272,7 @@ PyObject* Uri_new(PyTypeObject* type, PyObject* args, PyObject* kwds)
         return nullptr; 
     }
 
-    PyErr_SetString(PyExc_RuntimeError, "Invalid parameter count");
+    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
     return nullptr;
 }
 
@@ -288,34 +281,6 @@ static void Uri_dealloc(py::winrt_wrapper<winrt::Windows::Foundation::Uri>* self
     auto hash_value = std::hash<winrt::Windows::Foundation::IInspectable>{}(self->obj);
     py::wrapped_instance(hash_value, nullptr);
     self->obj = nullptr;
-}
-
-static PyObject* Uri_Equals(py::winrt_wrapper<winrt::Windows::Foundation::Uri>* self, PyObject* args)
-{ 
-    Py_ssize_t arg_count = PyTuple_Size(args);
-
-    if (arg_count == 1)
-    {
-        try
-        {
-            auto param0 = py::convert_to<winrt::Windows::Foundation::Uri>(args, 0);
-
-            bool return_value = self->obj.Equals(param0);
-
-            return py::convert(return_value);
-        }
-        catch (...)
-        {
-            return py::to_PyErr();
-        }
-    }
-    else if (arg_count == -1)
-    {
-        return nullptr; 
-    }
-
-    PyErr_SetString(PyExc_RuntimeError, "Invalid parameter count");
-    return nullptr;
 }
 
 static PyObject* Uri_CombineUri(py::winrt_wrapper<winrt::Windows::Foundation::Uri>* self, PyObject* args)
@@ -342,37 +307,11 @@ static PyObject* Uri_CombineUri(py::winrt_wrapper<winrt::Windows::Foundation::Ur
         return nullptr; 
     }
 
-    PyErr_SetString(PyExc_RuntimeError, "Invalid parameter count");
+    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
     return nullptr;
 }
 
-static PyObject* Uri_ToString(py::winrt_wrapper<winrt::Windows::Foundation::Uri>* self, PyObject* args)
-{ 
-    Py_ssize_t arg_count = PyTuple_Size(args);
-
-    if (arg_count == 0)
-    {
-        try
-        {
-            winrt::hstring return_value = self->obj.ToString();
-
-            return py::convert(return_value);
-        }
-        catch (...)
-        {
-            return py::to_PyErr();
-        }
-    }
-    else if (arg_count == -1)
-    {
-        return nullptr; 
-    }
-
-    PyErr_SetString(PyExc_RuntimeError, "Invalid parameter count");
-    return nullptr;
-}
-
-static PyObject* Uri_UnescapeComponent(PyObject* /*unused*/, PyObject* args)
+static PyObject* Uri_Equals(py::winrt_wrapper<winrt::Windows::Foundation::Uri>* self, PyObject* args)
 { 
     Py_ssize_t arg_count = PyTuple_Size(args);
 
@@ -380,9 +319,9 @@ static PyObject* Uri_UnescapeComponent(PyObject* /*unused*/, PyObject* args)
     {
         try
         {
-            auto param0 = py::convert_to<winrt::hstring>(args, 0);
+            auto param0 = py::convert_to<winrt::Windows::Foundation::Uri>(args, 0);
 
-            winrt::hstring return_value = winrt::Windows::Foundation::Uri::UnescapeComponent(param0);
+            bool return_value = self->obj.Equals(param0);
 
             return py::convert(return_value);
         }
@@ -396,7 +335,7 @@ static PyObject* Uri_UnescapeComponent(PyObject* /*unused*/, PyObject* args)
         return nullptr; 
     }
 
-    PyErr_SetString(PyExc_RuntimeError, "Invalid parameter count");
+    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
     return nullptr;
 }
 
@@ -424,258 +363,410 @@ static PyObject* Uri_EscapeComponent(PyObject* /*unused*/, PyObject* args)
         return nullptr; 
     }
 
-    PyErr_SetString(PyExc_RuntimeError, "Invalid parameter count");
+    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
     return nullptr;
 }
 
-static PyObject* Uri_get_AbsoluteUri(py::winrt_wrapper<winrt::Windows::Foundation::Uri>* self, void* /*unused*/)
-{
-    try
+static PyObject* Uri_ToString(py::winrt_wrapper<winrt::Windows::Foundation::Uri>* self, PyObject* args)
+{ 
+    Py_ssize_t arg_count = PyTuple_Size(args);
+
+    if (arg_count == 0)
     {
-        auto return_value = self->obj.AbsoluteUri();
-        return py::convert(return_value);
+        try
+        {
+            winrt::hstring return_value = self->obj.ToString();
+
+            return py::convert(return_value);
+        }
+        catch (...)
+        {
+            return py::to_PyErr();
+        }
     }
-    catch (...)
+    else if (arg_count == -1)
     {
-        return py::to_PyErr();
+        return nullptr; 
     }
+
+    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+    return nullptr;
 }
 
-static PyObject* Uri_get_DisplayUri(py::winrt_wrapper<winrt::Windows::Foundation::Uri>* self, void* /*unused*/)
-{
-    try
+static PyObject* Uri_UnescapeComponent(PyObject* /*unused*/, PyObject* args)
+{ 
+    Py_ssize_t arg_count = PyTuple_Size(args);
+
+    if (arg_count == 1)
     {
-        auto return_value = self->obj.DisplayUri();
-        return py::convert(return_value);
+        try
+        {
+            auto param0 = py::convert_to<winrt::hstring>(args, 0);
+
+            winrt::hstring return_value = winrt::Windows::Foundation::Uri::UnescapeComponent(param0);
+
+            return py::convert(return_value);
+        }
+        catch (...)
+        {
+            return py::to_PyErr();
+        }
     }
-    catch (...)
+    else if (arg_count == -1)
     {
-        return py::to_PyErr();
+        return nullptr; 
     }
+
+    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+    return nullptr;
 }
 
-static PyObject* Uri_get_Domain(py::winrt_wrapper<winrt::Windows::Foundation::Uri>* self, void* /*unused*/)
-{
-    try
+static PyObject* Uri_get_AbsoluteCanonicalUri(py::winrt_wrapper<winrt::Windows::Foundation::Uri>* self, PyObject* args)
+{ 
+    if (args != nullptr)
     {
-        auto return_value = self->obj.Domain();
-        return py::convert(return_value);
+        PyErr_SetString(PyExc_TypeError, "arguments not supported for get methods");
+        return nullptr;
     }
-    catch (...)
-    {
-        return py::to_PyErr();
-    }
+        try
+        {
+            winrt::hstring return_value = self->obj.AbsoluteCanonicalUri();
+
+            return py::convert(return_value);
+        }
+        catch (...)
+        {
+            return py::to_PyErr();
+        }
 }
 
-static PyObject* Uri_get_Extension(py::winrt_wrapper<winrt::Windows::Foundation::Uri>* self, void* /*unused*/)
-{
-    try
+static PyObject* Uri_get_AbsoluteUri(py::winrt_wrapper<winrt::Windows::Foundation::Uri>* self, PyObject* args)
+{ 
+    if (args != nullptr)
     {
-        auto return_value = self->obj.Extension();
-        return py::convert(return_value);
+        PyErr_SetString(PyExc_TypeError, "arguments not supported for get methods");
+        return nullptr;
     }
-    catch (...)
-    {
-        return py::to_PyErr();
-    }
+        try
+        {
+            winrt::hstring return_value = self->obj.AbsoluteUri();
+
+            return py::convert(return_value);
+        }
+        catch (...)
+        {
+            return py::to_PyErr();
+        }
 }
 
-static PyObject* Uri_get_Fragment(py::winrt_wrapper<winrt::Windows::Foundation::Uri>* self, void* /*unused*/)
-{
-    try
+static PyObject* Uri_get_DisplayIri(py::winrt_wrapper<winrt::Windows::Foundation::Uri>* self, PyObject* args)
+{ 
+    if (args != nullptr)
     {
-        auto return_value = self->obj.Fragment();
-        return py::convert(return_value);
+        PyErr_SetString(PyExc_TypeError, "arguments not supported for get methods");
+        return nullptr;
     }
-    catch (...)
-    {
-        return py::to_PyErr();
-    }
+        try
+        {
+            winrt::hstring return_value = self->obj.DisplayIri();
+
+            return py::convert(return_value);
+        }
+        catch (...)
+        {
+            return py::to_PyErr();
+        }
 }
 
-static PyObject* Uri_get_Host(py::winrt_wrapper<winrt::Windows::Foundation::Uri>* self, void* /*unused*/)
-{
-    try
+static PyObject* Uri_get_DisplayUri(py::winrt_wrapper<winrt::Windows::Foundation::Uri>* self, PyObject* args)
+{ 
+    if (args != nullptr)
     {
-        auto return_value = self->obj.Host();
-        return py::convert(return_value);
+        PyErr_SetString(PyExc_TypeError, "arguments not supported for get methods");
+        return nullptr;
     }
-    catch (...)
-    {
-        return py::to_PyErr();
-    }
+        try
+        {
+            winrt::hstring return_value = self->obj.DisplayUri();
+
+            return py::convert(return_value);
+        }
+        catch (...)
+        {
+            return py::to_PyErr();
+        }
 }
 
-static PyObject* Uri_get_Password(py::winrt_wrapper<winrt::Windows::Foundation::Uri>* self, void* /*unused*/)
-{
-    try
+static PyObject* Uri_get_Domain(py::winrt_wrapper<winrt::Windows::Foundation::Uri>* self, PyObject* args)
+{ 
+    if (args != nullptr)
     {
-        auto return_value = self->obj.Password();
-        return py::convert(return_value);
+        PyErr_SetString(PyExc_TypeError, "arguments not supported for get methods");
+        return nullptr;
     }
-    catch (...)
-    {
-        return py::to_PyErr();
-    }
+        try
+        {
+            winrt::hstring return_value = self->obj.Domain();
+
+            return py::convert(return_value);
+        }
+        catch (...)
+        {
+            return py::to_PyErr();
+        }
 }
 
-static PyObject* Uri_get_Path(py::winrt_wrapper<winrt::Windows::Foundation::Uri>* self, void* /*unused*/)
-{
-    try
+static PyObject* Uri_get_Extension(py::winrt_wrapper<winrt::Windows::Foundation::Uri>* self, PyObject* args)
+{ 
+    if (args != nullptr)
     {
-        auto return_value = self->obj.Path();
-        return py::convert(return_value);
+        PyErr_SetString(PyExc_TypeError, "arguments not supported for get methods");
+        return nullptr;
     }
-    catch (...)
-    {
-        return py::to_PyErr();
-    }
+        try
+        {
+            winrt::hstring return_value = self->obj.Extension();
+
+            return py::convert(return_value);
+        }
+        catch (...)
+        {
+            return py::to_PyErr();
+        }
 }
 
-static PyObject* Uri_get_Port(py::winrt_wrapper<winrt::Windows::Foundation::Uri>* self, void* /*unused*/)
-{
-    try
+static PyObject* Uri_get_Fragment(py::winrt_wrapper<winrt::Windows::Foundation::Uri>* self, PyObject* args)
+{ 
+    if (args != nullptr)
     {
-        auto return_value = self->obj.Port();
-        return py::convert(return_value);
+        PyErr_SetString(PyExc_TypeError, "arguments not supported for get methods");
+        return nullptr;
     }
-    catch (...)
-    {
-        return py::to_PyErr();
-    }
+        try
+        {
+            winrt::hstring return_value = self->obj.Fragment();
+
+            return py::convert(return_value);
+        }
+        catch (...)
+        {
+            return py::to_PyErr();
+        }
 }
 
-static PyObject* Uri_get_Query(py::winrt_wrapper<winrt::Windows::Foundation::Uri>* self, void* /*unused*/)
-{
-    try
+static PyObject* Uri_get_Host(py::winrt_wrapper<winrt::Windows::Foundation::Uri>* self, PyObject* args)
+{ 
+    if (args != nullptr)
     {
-        auto return_value = self->obj.Query();
-        return py::convert(return_value);
+        PyErr_SetString(PyExc_TypeError, "arguments not supported for get methods");
+        return nullptr;
     }
-    catch (...)
-    {
-        return py::to_PyErr();
-    }
+        try
+        {
+            winrt::hstring return_value = self->obj.Host();
+
+            return py::convert(return_value);
+        }
+        catch (...)
+        {
+            return py::to_PyErr();
+        }
 }
 
-static PyObject* Uri_get_QueryParsed(py::winrt_wrapper<winrt::Windows::Foundation::Uri>* self, void* /*unused*/)
-{
-    try
+static PyObject* Uri_get_Password(py::winrt_wrapper<winrt::Windows::Foundation::Uri>* self, PyObject* args)
+{ 
+    if (args != nullptr)
     {
-        auto return_value = self->obj.QueryParsed();
-        return py::convert(return_value);
+        PyErr_SetString(PyExc_TypeError, "arguments not supported for get methods");
+        return nullptr;
     }
-    catch (...)
-    {
-        return py::to_PyErr();
-    }
+        try
+        {
+            winrt::hstring return_value = self->obj.Password();
+
+            return py::convert(return_value);
+        }
+        catch (...)
+        {
+            return py::to_PyErr();
+        }
 }
 
-static PyObject* Uri_get_RawUri(py::winrt_wrapper<winrt::Windows::Foundation::Uri>* self, void* /*unused*/)
-{
-    try
+static PyObject* Uri_get_Path(py::winrt_wrapper<winrt::Windows::Foundation::Uri>* self, PyObject* args)
+{ 
+    if (args != nullptr)
     {
-        auto return_value = self->obj.RawUri();
-        return py::convert(return_value);
+        PyErr_SetString(PyExc_TypeError, "arguments not supported for get methods");
+        return nullptr;
     }
-    catch (...)
-    {
-        return py::to_PyErr();
-    }
+        try
+        {
+            winrt::hstring return_value = self->obj.Path();
+
+            return py::convert(return_value);
+        }
+        catch (...)
+        {
+            return py::to_PyErr();
+        }
 }
 
-static PyObject* Uri_get_SchemeName(py::winrt_wrapper<winrt::Windows::Foundation::Uri>* self, void* /*unused*/)
-{
-    try
+static PyObject* Uri_get_Port(py::winrt_wrapper<winrt::Windows::Foundation::Uri>* self, PyObject* args)
+{ 
+    if (args != nullptr)
     {
-        auto return_value = self->obj.SchemeName();
-        return py::convert(return_value);
+        PyErr_SetString(PyExc_TypeError, "arguments not supported for get methods");
+        return nullptr;
     }
-    catch (...)
-    {
-        return py::to_PyErr();
-    }
+        try
+        {
+            int32_t return_value = self->obj.Port();
+
+            return py::convert(return_value);
+        }
+        catch (...)
+        {
+            return py::to_PyErr();
+        }
 }
 
-static PyObject* Uri_get_Suspicious(py::winrt_wrapper<winrt::Windows::Foundation::Uri>* self, void* /*unused*/)
-{
-    try
+static PyObject* Uri_get_Query(py::winrt_wrapper<winrt::Windows::Foundation::Uri>* self, PyObject* args)
+{ 
+    if (args != nullptr)
     {
-        auto return_value = self->obj.Suspicious();
-        return py::convert(return_value);
+        PyErr_SetString(PyExc_TypeError, "arguments not supported for get methods");
+        return nullptr;
     }
-    catch (...)
-    {
-        return py::to_PyErr();
-    }
+        try
+        {
+            winrt::hstring return_value = self->obj.Query();
+
+            return py::convert(return_value);
+        }
+        catch (...)
+        {
+            return py::to_PyErr();
+        }
 }
 
-static PyObject* Uri_get_UserName(py::winrt_wrapper<winrt::Windows::Foundation::Uri>* self, void* /*unused*/)
-{
-    try
+static PyObject* Uri_get_QueryParsed(py::winrt_wrapper<winrt::Windows::Foundation::Uri>* self, PyObject* args)
+{ 
+    if (args != nullptr)
     {
-        auto return_value = self->obj.UserName();
-        return py::convert(return_value);
+        PyErr_SetString(PyExc_TypeError, "arguments not supported for get methods");
+        return nullptr;
     }
-    catch (...)
-    {
-        return py::to_PyErr();
-    }
+        try
+        {
+            winrt::Windows::Foundation::WwwFormUrlDecoder return_value = self->obj.QueryParsed();
+
+            return py::convert(return_value);
+        }
+        catch (...)
+        {
+            return py::to_PyErr();
+        }
 }
 
-static PyObject* Uri_get_AbsoluteCanonicalUri(py::winrt_wrapper<winrt::Windows::Foundation::Uri>* self, void* /*unused*/)
-{
-    try
+static PyObject* Uri_get_RawUri(py::winrt_wrapper<winrt::Windows::Foundation::Uri>* self, PyObject* args)
+{ 
+    if (args != nullptr)
     {
-        auto return_value = self->obj.AbsoluteCanonicalUri();
-        return py::convert(return_value);
+        PyErr_SetString(PyExc_TypeError, "arguments not supported for get methods");
+        return nullptr;
     }
-    catch (...)
-    {
-        return py::to_PyErr();
-    }
+        try
+        {
+            winrt::hstring return_value = self->obj.RawUri();
+
+            return py::convert(return_value);
+        }
+        catch (...)
+        {
+            return py::to_PyErr();
+        }
 }
 
-static PyObject* Uri_get_DisplayIri(py::winrt_wrapper<winrt::Windows::Foundation::Uri>* self, void* /*unused*/)
-{
-    try
+static PyObject* Uri_get_SchemeName(py::winrt_wrapper<winrt::Windows::Foundation::Uri>* self, PyObject* args)
+{ 
+    if (args != nullptr)
     {
-        auto return_value = self->obj.DisplayIri();
-        return py::convert(return_value);
+        PyErr_SetString(PyExc_TypeError, "arguments not supported for get methods");
+        return nullptr;
     }
-    catch (...)
+        try
+        {
+            winrt::hstring return_value = self->obj.SchemeName();
+
+            return py::convert(return_value);
+        }
+        catch (...)
+        {
+            return py::to_PyErr();
+        }
+}
+
+static PyObject* Uri_get_Suspicious(py::winrt_wrapper<winrt::Windows::Foundation::Uri>* self, PyObject* args)
+{ 
+    if (args != nullptr)
     {
-        return py::to_PyErr();
+        PyErr_SetString(PyExc_TypeError, "arguments not supported for get methods");
+        return nullptr;
     }
+        try
+        {
+            bool return_value = self->obj.Suspicious();
+
+            return py::convert(return_value);
+        }
+        catch (...)
+        {
+            return py::to_PyErr();
+        }
+}
+
+static PyObject* Uri_get_UserName(py::winrt_wrapper<winrt::Windows::Foundation::Uri>* self, PyObject* args)
+{ 
+    if (args != nullptr)
+    {
+        PyErr_SetString(PyExc_TypeError, "arguments not supported for get methods");
+        return nullptr;
+    }
+        try
+        {
+            winrt::hstring return_value = self->obj.UserName();
+
+            return py::convert(return_value);
+        }
+        catch (...)
+        {
+            return py::to_PyErr();
+        }
 }
 
 static PyMethodDef Uri_methods[] = {
-    { "Equals", (PyCFunction)Uri_Equals, METH_VARARGS, nullptr },
     { "CombineUri", (PyCFunction)Uri_CombineUri, METH_VARARGS, nullptr },
+    { "Equals", (PyCFunction)Uri_Equals, METH_VARARGS, nullptr },
+    { "EscapeComponent", (PyCFunction)Uri_EscapeComponent, METH_VARARGS | METH_STATIC, nullptr },
     { "ToString", (PyCFunction)Uri_ToString, METH_VARARGS, nullptr },
     { "UnescapeComponent", (PyCFunction)Uri_UnescapeComponent, METH_VARARGS | METH_STATIC, nullptr },
-    { "EscapeComponent", (PyCFunction)Uri_EscapeComponent, METH_VARARGS | METH_STATIC, nullptr },
-    { nullptr }
-};
-
-static PyGetSetDef Uri_getset[] = {
-    { const_cast<char*>("AbsoluteUri"), (getter)Uri_get_AbsoluteUri, nullptr, nullptr, nullptr },
-    { const_cast<char*>("DisplayUri"), (getter)Uri_get_DisplayUri, nullptr, nullptr, nullptr },
-    { const_cast<char*>("Domain"), (getter)Uri_get_Domain, nullptr, nullptr, nullptr },
-    { const_cast<char*>("Extension"), (getter)Uri_get_Extension, nullptr, nullptr, nullptr },
-    { const_cast<char*>("Fragment"), (getter)Uri_get_Fragment, nullptr, nullptr, nullptr },
-    { const_cast<char*>("Host"), (getter)Uri_get_Host, nullptr, nullptr, nullptr },
-    { const_cast<char*>("Password"), (getter)Uri_get_Password, nullptr, nullptr, nullptr },
-    { const_cast<char*>("Path"), (getter)Uri_get_Path, nullptr, nullptr, nullptr },
-    { const_cast<char*>("Port"), (getter)Uri_get_Port, nullptr, nullptr, nullptr },
-    { const_cast<char*>("Query"), (getter)Uri_get_Query, nullptr, nullptr, nullptr },
-    { const_cast<char*>("QueryParsed"), (getter)Uri_get_QueryParsed, nullptr, nullptr, nullptr },
-    { const_cast<char*>("RawUri"), (getter)Uri_get_RawUri, nullptr, nullptr, nullptr },
-    { const_cast<char*>("SchemeName"), (getter)Uri_get_SchemeName, nullptr, nullptr, nullptr },
-    { const_cast<char*>("Suspicious"), (getter)Uri_get_Suspicious, nullptr, nullptr, nullptr },
-    { const_cast<char*>("UserName"), (getter)Uri_get_UserName, nullptr, nullptr, nullptr },
-    { const_cast<char*>("AbsoluteCanonicalUri"), (getter)Uri_get_AbsoluteCanonicalUri, nullptr, nullptr, nullptr },
-    { const_cast<char*>("DisplayIri"), (getter)Uri_get_DisplayIri, nullptr, nullptr, nullptr },
+    { "get_AbsoluteCanonicalUri", (PyCFunction)Uri_get_AbsoluteCanonicalUri, METH_NOARGS, nullptr },
+    { "get_AbsoluteUri", (PyCFunction)Uri_get_AbsoluteUri, METH_NOARGS, nullptr },
+    { "get_DisplayIri", (PyCFunction)Uri_get_DisplayIri, METH_NOARGS, nullptr },
+    { "get_DisplayUri", (PyCFunction)Uri_get_DisplayUri, METH_NOARGS, nullptr },
+    { "get_Domain", (PyCFunction)Uri_get_Domain, METH_NOARGS, nullptr },
+    { "get_Extension", (PyCFunction)Uri_get_Extension, METH_NOARGS, nullptr },
+    { "get_Fragment", (PyCFunction)Uri_get_Fragment, METH_NOARGS, nullptr },
+    { "get_Host", (PyCFunction)Uri_get_Host, METH_NOARGS, nullptr },
+    { "get_Password", (PyCFunction)Uri_get_Password, METH_NOARGS, nullptr },
+    { "get_Path", (PyCFunction)Uri_get_Path, METH_NOARGS, nullptr },
+    { "get_Port", (PyCFunction)Uri_get_Port, METH_NOARGS, nullptr },
+    { "get_Query", (PyCFunction)Uri_get_Query, METH_NOARGS, nullptr },
+    { "get_QueryParsed", (PyCFunction)Uri_get_QueryParsed, METH_NOARGS, nullptr },
+    { "get_RawUri", (PyCFunction)Uri_get_RawUri, METH_NOARGS, nullptr },
+    { "get_SchemeName", (PyCFunction)Uri_get_SchemeName, METH_NOARGS, nullptr },
+    { "get_Suspicious", (PyCFunction)Uri_get_Suspicious, METH_NOARGS, nullptr },
+    { "get_UserName", (PyCFunction)Uri_get_UserName, METH_NOARGS, nullptr },
     { nullptr }
 };
 
@@ -685,7 +776,6 @@ static PyType_Slot Uri_Type_slots[] =
     { Py_tp_dealloc, Uri_dealloc },
     { Py_tp_new, Uri_new },
     { Py_tp_methods, Uri_methods },
-    { Py_tp_getset, Uri_getset },
     { 0, nullptr },
 };
 
@@ -729,7 +819,7 @@ PyObject* WwwFormUrlDecoder_new(PyTypeObject* type, PyObject* args, PyObject* kw
         return nullptr; 
     }
 
-    PyErr_SetString(PyExc_RuntimeError, "Invalid parameter count");
+    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
     return nullptr;
 }
 
@@ -738,34 +828,6 @@ static void WwwFormUrlDecoder_dealloc(py::winrt_wrapper<winrt::Windows::Foundati
     auto hash_value = std::hash<winrt::Windows::Foundation::IInspectable>{}(self->obj);
     py::wrapped_instance(hash_value, nullptr);
     self->obj = nullptr;
-}
-
-static PyObject* WwwFormUrlDecoder_GetFirstValueByName(py::winrt_wrapper<winrt::Windows::Foundation::WwwFormUrlDecoder>* self, PyObject* args)
-{ 
-    Py_ssize_t arg_count = PyTuple_Size(args);
-
-    if (arg_count == 1)
-    {
-        try
-        {
-            auto param0 = py::convert_to<winrt::hstring>(args, 0);
-
-            winrt::hstring return_value = self->obj.GetFirstValueByName(param0);
-
-            return py::convert(return_value);
-        }
-        catch (...)
-        {
-            return py::to_PyErr();
-        }
-    }
-    else if (arg_count == -1)
-    {
-        return nullptr; 
-    }
-
-    PyErr_SetString(PyExc_RuntimeError, "Invalid parameter count");
-    return nullptr;
 }
 
 static PyObject* WwwFormUrlDecoder_First(py::winrt_wrapper<winrt::Windows::Foundation::WwwFormUrlDecoder>* self, PyObject* args)
@@ -790,7 +852,7 @@ static PyObject* WwwFormUrlDecoder_First(py::winrt_wrapper<winrt::Windows::Found
         return nullptr; 
     }
 
-    PyErr_SetString(PyExc_RuntimeError, "Invalid parameter count");
+    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
     return nullptr;
 }
 
@@ -818,11 +880,11 @@ static PyObject* WwwFormUrlDecoder_GetAt(py::winrt_wrapper<winrt::Windows::Found
         return nullptr; 
     }
 
-    PyErr_SetString(PyExc_RuntimeError, "Invalid parameter count");
+    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
     return nullptr;
 }
 
-static PyObject* WwwFormUrlDecoder_IndexOf(py::winrt_wrapper<winrt::Windows::Foundation::WwwFormUrlDecoder>* self, PyObject* args)
+static PyObject* WwwFormUrlDecoder_GetFirstValueByName(py::winrt_wrapper<winrt::Windows::Foundation::WwwFormUrlDecoder>* self, PyObject* args)
 { 
     Py_ssize_t arg_count = PyTuple_Size(args);
 
@@ -830,24 +892,11 @@ static PyObject* WwwFormUrlDecoder_IndexOf(py::winrt_wrapper<winrt::Windows::Fou
     {
         try
         {
-            auto param0 = py::convert_to<winrt::Windows::Foundation::IWwwFormUrlDecoderEntry>(args, 0);
-            uint32_t param1 {  };
+            auto param0 = py::convert_to<winrt::hstring>(args, 0);
 
-            bool return_value = self->obj.IndexOf(param0, param1);
+            winrt::hstring return_value = self->obj.GetFirstValueByName(param0);
 
-            PyObject* out_return_value = py::convert(return_value);
-            if (!out_return_value) 
-            { 
-                return nullptr;
-            };
-
-            PyObject* out1 = py::convert(param1);
-            if (!out1) 
-            {
-                return nullptr;
-            }
-
-            return PyTuple_Pack(2, out_return_value, out1);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -859,7 +908,7 @@ static PyObject* WwwFormUrlDecoder_IndexOf(py::winrt_wrapper<winrt::Windows::Fou
         return nullptr; 
     }
 
-    PyErr_SetString(PyExc_RuntimeError, "Invalid parameter count");
+    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
     return nullptr;
 }
 
@@ -900,34 +949,77 @@ static PyObject* WwwFormUrlDecoder_GetMany(py::winrt_wrapper<winrt::Windows::Fou
         return nullptr; 
     }
 
-    PyErr_SetString(PyExc_RuntimeError, "Invalid parameter count");
+    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
     return nullptr;
 }
 
-static PyObject* WwwFormUrlDecoder_get_Size(py::winrt_wrapper<winrt::Windows::Foundation::WwwFormUrlDecoder>* self, void* /*unused*/)
-{
-    try
+static PyObject* WwwFormUrlDecoder_IndexOf(py::winrt_wrapper<winrt::Windows::Foundation::WwwFormUrlDecoder>* self, PyObject* args)
+{ 
+    Py_ssize_t arg_count = PyTuple_Size(args);
+
+    if (arg_count == 1)
     {
-        auto return_value = self->obj.Size();
-        return py::convert(return_value);
+        try
+        {
+            auto param0 = py::convert_to<winrt::Windows::Foundation::IWwwFormUrlDecoderEntry>(args, 0);
+            uint32_t param1 {  };
+
+            bool return_value = self->obj.IndexOf(param0, param1);
+
+            PyObject* out_return_value = py::convert(return_value);
+            if (!out_return_value) 
+            { 
+                return nullptr;
+            };
+
+            PyObject* out1 = py::convert(param1);
+            if (!out1) 
+            {
+                return nullptr;
+            }
+
+            return PyTuple_Pack(2, out_return_value, out1);
+        }
+        catch (...)
+        {
+            return py::to_PyErr();
+        }
     }
-    catch (...)
+    else if (arg_count == -1)
     {
-        return py::to_PyErr();
+        return nullptr; 
     }
+
+    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+    return nullptr;
+}
+
+static PyObject* WwwFormUrlDecoder_get_Size(py::winrt_wrapper<winrt::Windows::Foundation::WwwFormUrlDecoder>* self, PyObject* args)
+{ 
+    if (args != nullptr)
+    {
+        PyErr_SetString(PyExc_TypeError, "arguments not supported for get methods");
+        return nullptr;
+    }
+        try
+        {
+            uint32_t return_value = self->obj.Size();
+
+            return py::convert(return_value);
+        }
+        catch (...)
+        {
+            return py::to_PyErr();
+        }
 }
 
 static PyMethodDef WwwFormUrlDecoder_methods[] = {
-    { "GetFirstValueByName", (PyCFunction)WwwFormUrlDecoder_GetFirstValueByName, METH_VARARGS, nullptr },
     { "First", (PyCFunction)WwwFormUrlDecoder_First, METH_VARARGS, nullptr },
     { "GetAt", (PyCFunction)WwwFormUrlDecoder_GetAt, METH_VARARGS, nullptr },
-    { "IndexOf", (PyCFunction)WwwFormUrlDecoder_IndexOf, METH_VARARGS, nullptr },
+    { "GetFirstValueByName", (PyCFunction)WwwFormUrlDecoder_GetFirstValueByName, METH_VARARGS, nullptr },
     { "GetMany", (PyCFunction)WwwFormUrlDecoder_GetMany, METH_VARARGS, nullptr },
-    { nullptr }
-};
-
-static PyGetSetDef WwwFormUrlDecoder_getset[] = {
-    { const_cast<char*>("Size"), (getter)WwwFormUrlDecoder_get_Size, nullptr, nullptr, nullptr },
+    { "IndexOf", (PyCFunction)WwwFormUrlDecoder_IndexOf, METH_VARARGS, nullptr },
+    { "get_Size", (PyCFunction)WwwFormUrlDecoder_get_Size, METH_NOARGS, nullptr },
     { nullptr }
 };
 
@@ -937,7 +1029,6 @@ static PyType_Slot WwwFormUrlDecoder_Type_slots[] =
     { Py_tp_dealloc, WwwFormUrlDecoder_dealloc },
     { Py_tp_new, WwwFormUrlDecoder_new },
     { Py_tp_methods, WwwFormUrlDecoder_methods },
-    { Py_tp_getset, WwwFormUrlDecoder_getset },
     { 0, nullptr },
 };
 
@@ -966,35 +1057,47 @@ static void WwwFormUrlDecoderEntry_dealloc(py::winrt_wrapper<winrt::Windows::Fou
     self->obj = nullptr;
 }
 
-static PyObject* WwwFormUrlDecoderEntry_get_Name(py::winrt_wrapper<winrt::Windows::Foundation::WwwFormUrlDecoderEntry>* self, void* /*unused*/)
-{
-    try
+static PyObject* WwwFormUrlDecoderEntry_get_Name(py::winrt_wrapper<winrt::Windows::Foundation::WwwFormUrlDecoderEntry>* self, PyObject* args)
+{ 
+    if (args != nullptr)
     {
-        auto return_value = self->obj.Name();
-        return py::convert(return_value);
+        PyErr_SetString(PyExc_TypeError, "arguments not supported for get methods");
+        return nullptr;
     }
-    catch (...)
-    {
-        return py::to_PyErr();
-    }
+        try
+        {
+            winrt::hstring return_value = self->obj.Name();
+
+            return py::convert(return_value);
+        }
+        catch (...)
+        {
+            return py::to_PyErr();
+        }
 }
 
-static PyObject* WwwFormUrlDecoderEntry_get_Value(py::winrt_wrapper<winrt::Windows::Foundation::WwwFormUrlDecoderEntry>* self, void* /*unused*/)
-{
-    try
+static PyObject* WwwFormUrlDecoderEntry_get_Value(py::winrt_wrapper<winrt::Windows::Foundation::WwwFormUrlDecoderEntry>* self, PyObject* args)
+{ 
+    if (args != nullptr)
     {
-        auto return_value = self->obj.Value();
-        return py::convert(return_value);
+        PyErr_SetString(PyExc_TypeError, "arguments not supported for get methods");
+        return nullptr;
     }
-    catch (...)
-    {
-        return py::to_PyErr();
-    }
+        try
+        {
+            winrt::hstring return_value = self->obj.Value();
+
+            return py::convert(return_value);
+        }
+        catch (...)
+        {
+            return py::to_PyErr();
+        }
 }
 
-static PyGetSetDef WwwFormUrlDecoderEntry_getset[] = {
-    { const_cast<char*>("Name"), (getter)WwwFormUrlDecoderEntry_get_Name, nullptr, nullptr, nullptr },
-    { const_cast<char*>("Value"), (getter)WwwFormUrlDecoderEntry_get_Value, nullptr, nullptr, nullptr },
+static PyMethodDef WwwFormUrlDecoderEntry_methods[] = {
+    { "get_Name", (PyCFunction)WwwFormUrlDecoderEntry_get_Name, METH_NOARGS, nullptr },
+    { "get_Value", (PyCFunction)WwwFormUrlDecoderEntry_get_Value, METH_NOARGS, nullptr },
     { nullptr }
 };
 
@@ -1003,7 +1106,7 @@ static PyType_Slot WwwFormUrlDecoderEntry_Type_slots[] =
     { Py_tp_base, nullptr }, // filled out in module init
     { Py_tp_dealloc, WwwFormUrlDecoderEntry_dealloc },
     { Py_tp_new, WwwFormUrlDecoderEntry_new },
-    { Py_tp_getset, WwwFormUrlDecoderEntry_getset },
+    { Py_tp_methods, WwwFormUrlDecoderEntry_methods },
     { 0, nullptr },
 };
 
@@ -1023,7 +1126,7 @@ PyObject* IAsyncAction_new(PyTypeObject* type, PyObject* args, PyObject* kwds)
 {
     if (kwds != nullptr)
     {
-        PyErr_SetString(PyExc_RuntimeError, "keyword arguments not supported");
+        PyErr_SetString(PyExc_TypeError, "keyword arguments not supported");
         return nullptr;
     }
 
@@ -1046,7 +1149,7 @@ PyObject* IAsyncAction_new(PyTypeObject* type, PyObject* args, PyObject* kwds)
         return nullptr; 
     }
 
-    PyErr_SetString(PyExc_RuntimeError, "Invalid parameter count");
+    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
     return nullptr;
 }
 
@@ -1055,6 +1158,56 @@ static void IAsyncAction_dealloc(py::winrt_wrapper<winrt::Windows::Foundation::I
     auto hash_value = std::hash<winrt::Windows::Foundation::IInspectable>{}(self->obj);
     py::wrapped_instance(hash_value, nullptr);
     self->obj = nullptr;
+}
+
+static PyObject* IAsyncAction_Cancel(py::winrt_wrapper<winrt::Windows::Foundation::IAsyncAction>* self, PyObject* args)
+{ 
+    Py_ssize_t arg_count = PyTuple_Size(args);
+
+    if (arg_count == 0)
+    {
+        try
+        {
+            self->obj.Cancel();
+            Py_RETURN_NONE;
+        }
+        catch (...)
+        {
+            return py::to_PyErr();
+        }
+    }
+    else if (arg_count == -1)
+    {
+        return nullptr; 
+    }
+
+    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+    return nullptr;
+}
+
+static PyObject* IAsyncAction_Close(py::winrt_wrapper<winrt::Windows::Foundation::IAsyncAction>* self, PyObject* args)
+{ 
+    Py_ssize_t arg_count = PyTuple_Size(args);
+
+    if (arg_count == 0)
+    {
+        try
+        {
+            self->obj.Close();
+            Py_RETURN_NONE;
+        }
+        catch (...)
+        {
+            return py::to_PyErr();
+        }
+    }
+    else if (arg_count == -1)
+    {
+        return nullptr; 
+    }
+
+    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+    return nullptr;
 }
 
 static PyObject* IAsyncAction_GetResults(py::winrt_wrapper<winrt::Windows::Foundation::IAsyncAction>* self, PyObject* args)
@@ -1078,50 +1231,110 @@ static PyObject* IAsyncAction_GetResults(py::winrt_wrapper<winrt::Windows::Found
         return nullptr; 
     }
 
-    PyErr_SetString(PyExc_RuntimeError, "Invalid parameter count");
+    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
     return nullptr;
 }
 
-static PyObject* IAsyncAction_get_Completed(py::winrt_wrapper<winrt::Windows::Foundation::IAsyncAction>* self, void* /*unused*/)
-{
-    try
+static PyObject* IAsyncAction_get_Completed(py::winrt_wrapper<winrt::Windows::Foundation::IAsyncAction>* self, PyObject* args)
+{ 
+    if (args != nullptr)
     {
-        auto return_value = self->obj.Completed();
-        return py::convert(return_value);
+        PyErr_SetString(PyExc_TypeError, "arguments not supported for get methods");
+        return nullptr;
     }
-    catch (...)
-    {
-        return py::to_PyErr();
-    }
+        try
+        {
+            winrt::Windows::Foundation::AsyncActionCompletedHandler return_value = self->obj.Completed();
+
+            return py::convert(return_value);
+        }
+        catch (...)
+        {
+            return py::to_PyErr();
+        }
 }
 
-static int IAsyncAction_put_Completed(py::winrt_wrapper<winrt::Windows::Foundation::IAsyncAction>* self, PyObject* value, void* /*unused*/)
-{
-    if (value == nullptr)
+static PyObject* IAsyncAction_get_ErrorCode(py::winrt_wrapper<winrt::Windows::Foundation::IAsyncAction>* self, PyObject* args)
+{ 
+    if (args != nullptr)
     {
-        PyErr_SetString(PyExc_RuntimeError, "property delete not supported");
-        return -1;
+        PyErr_SetString(PyExc_TypeError, "arguments not supported for get methods");
+        return nullptr;
     }
-    
-    try
+        try
+        {
+            winrt::hresult return_value = self->obj.ErrorCode();
+
+            return py::convert(return_value);
+        }
+        catch (...)
+        {
+            return py::to_PyErr();
+        }
+}
+
+static PyObject* IAsyncAction_get_Id(py::winrt_wrapper<winrt::Windows::Foundation::IAsyncAction>* self, PyObject* args)
+{ 
+    if (args != nullptr)
     {
-        auto param0 = py::convert_to<winrt::Windows::Foundation::AsyncActionCompletedHandler>(value);
-        self->obj.Completed(param0);
-        return 0;
+        PyErr_SetString(PyExc_TypeError, "arguments not supported for get methods");
+        return nullptr;
     }
-    catch (...)
+        try
+        {
+            uint32_t return_value = self->obj.Id();
+
+            return py::convert(return_value);
+        }
+        catch (...)
+        {
+            return py::to_PyErr();
+        }
+}
+
+static PyObject* IAsyncAction_get_Status(py::winrt_wrapper<winrt::Windows::Foundation::IAsyncAction>* self, PyObject* args)
+{ 
+    if (args != nullptr)
     {
-        return -1;
+        PyErr_SetString(PyExc_TypeError, "arguments not supported for get methods");
+        return nullptr;
     }
+        try
+        {
+            winrt::Windows::Foundation::AsyncStatus return_value = self->obj.Status();
+
+            return py::convert(return_value);
+        }
+        catch (...)
+        {
+            return py::to_PyErr();
+        }
+}
+
+static PyObject* IAsyncAction_put_Completed(py::winrt_wrapper<winrt::Windows::Foundation::IAsyncAction>* self, PyObject* args)
+{ 
+        try
+        {
+            auto param0 = py::convert_to<winrt::Windows::Foundation::AsyncActionCompletedHandler>(args);
+
+            self->obj.Completed(param0);
+            Py_RETURN_NONE;
+        }
+        catch (...)
+        {
+            return py::to_PyErr();
+        }
 }
 
 static PyMethodDef IAsyncAction_methods[] = {
+    { "Cancel", (PyCFunction)IAsyncAction_Cancel, METH_VARARGS, nullptr },
+    { "Close", (PyCFunction)IAsyncAction_Close, METH_VARARGS, nullptr },
     { "GetResults", (PyCFunction)IAsyncAction_GetResults, METH_VARARGS, nullptr },
-    { nullptr }
-};
-
-static PyGetSetDef IAsyncAction_getset[] = {
-    { const_cast<char*>("Completed"), (getter)IAsyncAction_get_Completed, (setter)IAsyncAction_put_Completed, nullptr, nullptr },
+    { "get_Completed", (PyCFunction)IAsyncAction_get_Completed, METH_NOARGS, nullptr },
+    { "get_ErrorCode", (PyCFunction)IAsyncAction_get_ErrorCode, METH_NOARGS, nullptr },
+    { "get_Id", (PyCFunction)IAsyncAction_get_Id, METH_NOARGS, nullptr },
+    { "get_Status", (PyCFunction)IAsyncAction_get_Status, METH_NOARGS, nullptr },
+    { "put_Completed", (PyCFunction)IAsyncAction_put_Completed, METH_O, nullptr },
     { nullptr }
 };
 
@@ -1131,7 +1344,6 @@ static PyType_Slot IAsyncAction_Type_slots[] =
     { Py_tp_dealloc, IAsyncAction_dealloc },
     { Py_tp_new, IAsyncAction_new },
     { Py_tp_methods, IAsyncAction_methods },
-    { Py_tp_getset, IAsyncAction_getset },
     { 0, nullptr },
 };
 
@@ -1144,55 +1356,83 @@ static PyType_Spec IAsyncAction_Type_spec =
     IAsyncAction_Type_slots
 };
 
-// ----- IAsyncActionWithProgress parameterized interface --------------------
+// ----- IAsyncActionWithProgress interface --------------------
 PyTypeObject* py::winrt_type<pyIAsyncActionWithProgress>::python_type;
 
 PyObject* IAsyncActionWithProgress_new(PyTypeObject* type, PyObject* args, PyObject* kwds)
 {
-    // TODO implement QI in this pinterface constructor
-    PyErr_SetString(PyExc_RuntimeError, "IAsyncActionWithProgress is not activatable");
+    PyErr_SetString(PyExc_TypeError, "parameterized interface IAsyncActionWithProgress is not activatable");
     return nullptr;
 }
 
 static void IAsyncActionWithProgress_dealloc(py::winrt_pinterface_wrapper<pyIAsyncActionWithProgress>* self)
 {
-    py::wrapped_instance(self->obj->hash(), nullptr);
+    auto hash_value = self->obj->hash();
+    py::wrapped_instance(hash_value, nullptr);
     self->obj.release();
 }
 
+static PyObject* IAsyncActionWithProgress_Cancel(py::winrt_pinterface_wrapper<pyIAsyncActionWithProgress>* self, PyObject* args)
+{ 
+    return self->obj->Cancel(args);
+}
+
+static PyObject* IAsyncActionWithProgress_Close(py::winrt_pinterface_wrapper<pyIAsyncActionWithProgress>* self, PyObject* args)
+{ 
+    return self->obj->Close(args);
+}
+
 static PyObject* IAsyncActionWithProgress_GetResults(py::winrt_pinterface_wrapper<pyIAsyncActionWithProgress>* self, PyObject* args)
-{
+{ 
     return self->obj->GetResults(args);
 }
 
-static PyObject* IAsyncActionWithProgress_get_Progress(py::winrt_pinterface_wrapper<pyIAsyncActionWithProgress>* self, void* /*unused*/)
-{
-    return self->obj->get_Progress();
+static PyObject* IAsyncActionWithProgress_get_Completed(py::winrt_pinterface_wrapper<pyIAsyncActionWithProgress>* self, PyObject* args)
+{ 
+    return self->obj->get_Completed(args);
 }
 
-static int IAsyncActionWithProgress_put_Progress(py::winrt_pinterface_wrapper<pyIAsyncActionWithProgress>* self, PyObject* value, void* /*unused*/)
-{
-    return self->obj->put_Progress(value);
+static PyObject* IAsyncActionWithProgress_get_ErrorCode(py::winrt_pinterface_wrapper<pyIAsyncActionWithProgress>* self, PyObject* args)
+{ 
+    return self->obj->get_ErrorCode(args);
 }
 
-static PyObject* IAsyncActionWithProgress_get_Completed(py::winrt_pinterface_wrapper<pyIAsyncActionWithProgress>* self, void* /*unused*/)
-{
-    return self->obj->get_Completed();
+static PyObject* IAsyncActionWithProgress_get_Id(py::winrt_pinterface_wrapper<pyIAsyncActionWithProgress>* self, PyObject* args)
+{ 
+    return self->obj->get_Id(args);
 }
 
-static int IAsyncActionWithProgress_put_Completed(py::winrt_pinterface_wrapper<pyIAsyncActionWithProgress>* self, PyObject* value, void* /*unused*/)
-{
-    return self->obj->put_Completed(value);
+static PyObject* IAsyncActionWithProgress_get_Progress(py::winrt_pinterface_wrapper<pyIAsyncActionWithProgress>* self, PyObject* args)
+{ 
+    return self->obj->get_Progress(args);
+}
+
+static PyObject* IAsyncActionWithProgress_get_Status(py::winrt_pinterface_wrapper<pyIAsyncActionWithProgress>* self, PyObject* args)
+{ 
+    return self->obj->get_Status(args);
+}
+
+static PyObject* IAsyncActionWithProgress_put_Completed(py::winrt_pinterface_wrapper<pyIAsyncActionWithProgress>* self, PyObject* args)
+{ 
+    return self->obj->put_Completed(args);
+}
+
+static PyObject* IAsyncActionWithProgress_put_Progress(py::winrt_pinterface_wrapper<pyIAsyncActionWithProgress>* self, PyObject* args)
+{ 
+    return self->obj->put_Progress(args);
 }
 
 static PyMethodDef IAsyncActionWithProgress_methods[] = {
+    { "Cancel", (PyCFunction)IAsyncActionWithProgress_Cancel, METH_VARARGS, nullptr },
+    { "Close", (PyCFunction)IAsyncActionWithProgress_Close, METH_VARARGS, nullptr },
     { "GetResults", (PyCFunction)IAsyncActionWithProgress_GetResults, METH_VARARGS, nullptr },
-    { nullptr }
-};
-
-static PyGetSetDef IAsyncActionWithProgress_getset[] = {
-    { const_cast<char*>("Progress"), (getter)IAsyncActionWithProgress_get_Progress, (setter)IAsyncActionWithProgress_put_Progress, nullptr, nullptr },
-    { const_cast<char*>("Completed"), (getter)IAsyncActionWithProgress_get_Completed, (setter)IAsyncActionWithProgress_put_Completed, nullptr, nullptr },
+    { "get_Completed", (PyCFunction)IAsyncActionWithProgress_get_Completed, METH_NOARGS, nullptr },
+    { "get_ErrorCode", (PyCFunction)IAsyncActionWithProgress_get_ErrorCode, METH_NOARGS, nullptr },
+    { "get_Id", (PyCFunction)IAsyncActionWithProgress_get_Id, METH_NOARGS, nullptr },
+    { "get_Progress", (PyCFunction)IAsyncActionWithProgress_get_Progress, METH_NOARGS, nullptr },
+    { "get_Status", (PyCFunction)IAsyncActionWithProgress_get_Status, METH_NOARGS, nullptr },
+    { "put_Completed", (PyCFunction)IAsyncActionWithProgress_put_Completed, METH_O, nullptr },
+    { "put_Progress", (PyCFunction)IAsyncActionWithProgress_put_Progress, METH_O, nullptr },
     { nullptr }
 };
 
@@ -1202,7 +1442,6 @@ static PyType_Slot IAsyncActionWithProgress_Type_slots[] =
     { Py_tp_dealloc, IAsyncActionWithProgress_dealloc },
     { Py_tp_new, IAsyncActionWithProgress_new },
     { Py_tp_methods, IAsyncActionWithProgress_methods },
-    { Py_tp_getset, IAsyncActionWithProgress_getset },
     { 0, nullptr },
 };
 
@@ -1222,7 +1461,7 @@ PyObject* IAsyncInfo_new(PyTypeObject* type, PyObject* args, PyObject* kwds)
 {
     if (kwds != nullptr)
     {
-        PyErr_SetString(PyExc_RuntimeError, "keyword arguments not supported");
+        PyErr_SetString(PyExc_TypeError, "keyword arguments not supported");
         return nullptr;
     }
 
@@ -1245,7 +1484,7 @@ PyObject* IAsyncInfo_new(PyTypeObject* type, PyObject* args, PyObject* kwds)
         return nullptr; 
     }
 
-    PyErr_SetString(PyExc_RuntimeError, "Invalid parameter count");
+    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
     return nullptr;
 }
 
@@ -1277,7 +1516,7 @@ static PyObject* IAsyncInfo_Cancel(py::winrt_wrapper<winrt::Windows::Foundation:
         return nullptr; 
     }
 
-    PyErr_SetString(PyExc_RuntimeError, "Invalid parameter count");
+    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
     return nullptr;
 }
 
@@ -1302,59 +1541,73 @@ static PyObject* IAsyncInfo_Close(py::winrt_wrapper<winrt::Windows::Foundation::
         return nullptr; 
     }
 
-    PyErr_SetString(PyExc_RuntimeError, "Invalid parameter count");
+    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
     return nullptr;
 }
 
-static PyObject* IAsyncInfo_get_ErrorCode(py::winrt_wrapper<winrt::Windows::Foundation::IAsyncInfo>* self, void* /*unused*/)
-{
-    try
+static PyObject* IAsyncInfo_get_ErrorCode(py::winrt_wrapper<winrt::Windows::Foundation::IAsyncInfo>* self, PyObject* args)
+{ 
+    if (args != nullptr)
     {
-        auto return_value = self->obj.ErrorCode();
-        return py::convert(return_value);
+        PyErr_SetString(PyExc_TypeError, "arguments not supported for get methods");
+        return nullptr;
     }
-    catch (...)
-    {
-        return py::to_PyErr();
-    }
+        try
+        {
+            winrt::hresult return_value = self->obj.ErrorCode();
+
+            return py::convert(return_value);
+        }
+        catch (...)
+        {
+            return py::to_PyErr();
+        }
 }
 
-static PyObject* IAsyncInfo_get_Id(py::winrt_wrapper<winrt::Windows::Foundation::IAsyncInfo>* self, void* /*unused*/)
-{
-    try
+static PyObject* IAsyncInfo_get_Id(py::winrt_wrapper<winrt::Windows::Foundation::IAsyncInfo>* self, PyObject* args)
+{ 
+    if (args != nullptr)
     {
-        auto return_value = self->obj.Id();
-        return py::convert(return_value);
+        PyErr_SetString(PyExc_TypeError, "arguments not supported for get methods");
+        return nullptr;
     }
-    catch (...)
-    {
-        return py::to_PyErr();
-    }
+        try
+        {
+            uint32_t return_value = self->obj.Id();
+
+            return py::convert(return_value);
+        }
+        catch (...)
+        {
+            return py::to_PyErr();
+        }
 }
 
-static PyObject* IAsyncInfo_get_Status(py::winrt_wrapper<winrt::Windows::Foundation::IAsyncInfo>* self, void* /*unused*/)
-{
-    try
+static PyObject* IAsyncInfo_get_Status(py::winrt_wrapper<winrt::Windows::Foundation::IAsyncInfo>* self, PyObject* args)
+{ 
+    if (args != nullptr)
     {
-        auto return_value = self->obj.Status();
-        return py::convert(return_value);
+        PyErr_SetString(PyExc_TypeError, "arguments not supported for get methods");
+        return nullptr;
     }
-    catch (...)
-    {
-        return py::to_PyErr();
-    }
+        try
+        {
+            winrt::Windows::Foundation::AsyncStatus return_value = self->obj.Status();
+
+            return py::convert(return_value);
+        }
+        catch (...)
+        {
+            return py::to_PyErr();
+        }
 }
 
 static PyMethodDef IAsyncInfo_methods[] = {
     { "Cancel", (PyCFunction)IAsyncInfo_Cancel, METH_VARARGS, nullptr },
     { "Close", (PyCFunction)IAsyncInfo_Close, METH_VARARGS, nullptr },
-    { nullptr }
-};
-
-static PyGetSetDef IAsyncInfo_getset[] = {
-    { const_cast<char*>("ErrorCode"), (getter)IAsyncInfo_get_ErrorCode, nullptr, nullptr, nullptr },
-    { const_cast<char*>("Id"), (getter)IAsyncInfo_get_Id, nullptr, nullptr, nullptr },
-    { const_cast<char*>("Status"), (getter)IAsyncInfo_get_Status, nullptr, nullptr, nullptr },
+    { "get_ErrorCode", (PyCFunction)IAsyncInfo_get_ErrorCode, METH_NOARGS, nullptr },
+    { "get_Id", (PyCFunction)IAsyncInfo_get_Id, METH_NOARGS, nullptr },
+    { "get_Status", (PyCFunction)IAsyncInfo_get_Status, METH_NOARGS, nullptr },
     { nullptr }
 };
 
@@ -1364,7 +1617,6 @@ static PyType_Slot IAsyncInfo_Type_slots[] =
     { Py_tp_dealloc, IAsyncInfo_dealloc },
     { Py_tp_new, IAsyncInfo_new },
     { Py_tp_methods, IAsyncInfo_methods },
-    { Py_tp_getset, IAsyncInfo_getset },
     { 0, nullptr },
 };
 
@@ -1377,55 +1629,83 @@ static PyType_Spec IAsyncInfo_Type_spec =
     IAsyncInfo_Type_slots
 };
 
-// ----- IAsyncOperationWithProgress parameterized interface --------------------
+// ----- IAsyncOperationWithProgress interface --------------------
 PyTypeObject* py::winrt_type<pyIAsyncOperationWithProgress>::python_type;
 
 PyObject* IAsyncOperationWithProgress_new(PyTypeObject* type, PyObject* args, PyObject* kwds)
 {
-    // TODO implement QI in this pinterface constructor
-    PyErr_SetString(PyExc_RuntimeError, "IAsyncOperationWithProgress is not activatable");
+    PyErr_SetString(PyExc_TypeError, "parameterized interface IAsyncOperationWithProgress is not activatable");
     return nullptr;
 }
 
 static void IAsyncOperationWithProgress_dealloc(py::winrt_pinterface_wrapper<pyIAsyncOperationWithProgress>* self)
 {
-    py::wrapped_instance(self->obj->hash(), nullptr);
+    auto hash_value = self->obj->hash();
+    py::wrapped_instance(hash_value, nullptr);
     self->obj.release();
 }
 
+static PyObject* IAsyncOperationWithProgress_Cancel(py::winrt_pinterface_wrapper<pyIAsyncOperationWithProgress>* self, PyObject* args)
+{ 
+    return self->obj->Cancel(args);
+}
+
+static PyObject* IAsyncOperationWithProgress_Close(py::winrt_pinterface_wrapper<pyIAsyncOperationWithProgress>* self, PyObject* args)
+{ 
+    return self->obj->Close(args);
+}
+
 static PyObject* IAsyncOperationWithProgress_GetResults(py::winrt_pinterface_wrapper<pyIAsyncOperationWithProgress>* self, PyObject* args)
-{
+{ 
     return self->obj->GetResults(args);
 }
 
-static PyObject* IAsyncOperationWithProgress_get_Progress(py::winrt_pinterface_wrapper<pyIAsyncOperationWithProgress>* self, void* /*unused*/)
-{
-    return self->obj->get_Progress();
+static PyObject* IAsyncOperationWithProgress_get_Completed(py::winrt_pinterface_wrapper<pyIAsyncOperationWithProgress>* self, PyObject* args)
+{ 
+    return self->obj->get_Completed(args);
 }
 
-static int IAsyncOperationWithProgress_put_Progress(py::winrt_pinterface_wrapper<pyIAsyncOperationWithProgress>* self, PyObject* value, void* /*unused*/)
-{
-    return self->obj->put_Progress(value);
+static PyObject* IAsyncOperationWithProgress_get_ErrorCode(py::winrt_pinterface_wrapper<pyIAsyncOperationWithProgress>* self, PyObject* args)
+{ 
+    return self->obj->get_ErrorCode(args);
 }
 
-static PyObject* IAsyncOperationWithProgress_get_Completed(py::winrt_pinterface_wrapper<pyIAsyncOperationWithProgress>* self, void* /*unused*/)
-{
-    return self->obj->get_Completed();
+static PyObject* IAsyncOperationWithProgress_get_Id(py::winrt_pinterface_wrapper<pyIAsyncOperationWithProgress>* self, PyObject* args)
+{ 
+    return self->obj->get_Id(args);
 }
 
-static int IAsyncOperationWithProgress_put_Completed(py::winrt_pinterface_wrapper<pyIAsyncOperationWithProgress>* self, PyObject* value, void* /*unused*/)
-{
-    return self->obj->put_Completed(value);
+static PyObject* IAsyncOperationWithProgress_get_Progress(py::winrt_pinterface_wrapper<pyIAsyncOperationWithProgress>* self, PyObject* args)
+{ 
+    return self->obj->get_Progress(args);
+}
+
+static PyObject* IAsyncOperationWithProgress_get_Status(py::winrt_pinterface_wrapper<pyIAsyncOperationWithProgress>* self, PyObject* args)
+{ 
+    return self->obj->get_Status(args);
+}
+
+static PyObject* IAsyncOperationWithProgress_put_Completed(py::winrt_pinterface_wrapper<pyIAsyncOperationWithProgress>* self, PyObject* args)
+{ 
+    return self->obj->put_Completed(args);
+}
+
+static PyObject* IAsyncOperationWithProgress_put_Progress(py::winrt_pinterface_wrapper<pyIAsyncOperationWithProgress>* self, PyObject* args)
+{ 
+    return self->obj->put_Progress(args);
 }
 
 static PyMethodDef IAsyncOperationWithProgress_methods[] = {
+    { "Cancel", (PyCFunction)IAsyncOperationWithProgress_Cancel, METH_VARARGS, nullptr },
+    { "Close", (PyCFunction)IAsyncOperationWithProgress_Close, METH_VARARGS, nullptr },
     { "GetResults", (PyCFunction)IAsyncOperationWithProgress_GetResults, METH_VARARGS, nullptr },
-    { nullptr }
-};
-
-static PyGetSetDef IAsyncOperationWithProgress_getset[] = {
-    { const_cast<char*>("Progress"), (getter)IAsyncOperationWithProgress_get_Progress, (setter)IAsyncOperationWithProgress_put_Progress, nullptr, nullptr },
-    { const_cast<char*>("Completed"), (getter)IAsyncOperationWithProgress_get_Completed, (setter)IAsyncOperationWithProgress_put_Completed, nullptr, nullptr },
+    { "get_Completed", (PyCFunction)IAsyncOperationWithProgress_get_Completed, METH_NOARGS, nullptr },
+    { "get_ErrorCode", (PyCFunction)IAsyncOperationWithProgress_get_ErrorCode, METH_NOARGS, nullptr },
+    { "get_Id", (PyCFunction)IAsyncOperationWithProgress_get_Id, METH_NOARGS, nullptr },
+    { "get_Progress", (PyCFunction)IAsyncOperationWithProgress_get_Progress, METH_NOARGS, nullptr },
+    { "get_Status", (PyCFunction)IAsyncOperationWithProgress_get_Status, METH_NOARGS, nullptr },
+    { "put_Completed", (PyCFunction)IAsyncOperationWithProgress_put_Completed, METH_O, nullptr },
+    { "put_Progress", (PyCFunction)IAsyncOperationWithProgress_put_Progress, METH_O, nullptr },
     { nullptr }
 };
 
@@ -1435,7 +1715,6 @@ static PyType_Slot IAsyncOperationWithProgress_Type_slots[] =
     { Py_tp_dealloc, IAsyncOperationWithProgress_dealloc },
     { Py_tp_new, IAsyncOperationWithProgress_new },
     { Py_tp_methods, IAsyncOperationWithProgress_methods },
-    { Py_tp_getset, IAsyncOperationWithProgress_getset },
     { 0, nullptr },
 };
 
@@ -1448,44 +1727,71 @@ static PyType_Spec IAsyncOperationWithProgress_Type_spec =
     IAsyncOperationWithProgress_Type_slots
 };
 
-// ----- IAsyncOperation parameterized interface --------------------
+// ----- IAsyncOperation interface --------------------
 PyTypeObject* py::winrt_type<pyIAsyncOperation>::python_type;
 
 PyObject* IAsyncOperation_new(PyTypeObject* type, PyObject* args, PyObject* kwds)
 {
-    // TODO implement QI in this pinterface constructor
-    PyErr_SetString(PyExc_RuntimeError, "IAsyncOperation is not activatable");
+    PyErr_SetString(PyExc_TypeError, "parameterized interface IAsyncOperation is not activatable");
     return nullptr;
 }
 
 static void IAsyncOperation_dealloc(py::winrt_pinterface_wrapper<pyIAsyncOperation>* self)
 {
-    py::wrapped_instance(self->obj->hash(), nullptr);
+    auto hash_value = self->obj->hash();
+    py::wrapped_instance(hash_value, nullptr);
     self->obj.release();
 }
 
+static PyObject* IAsyncOperation_Cancel(py::winrt_pinterface_wrapper<pyIAsyncOperation>* self, PyObject* args)
+{ 
+    return self->obj->Cancel(args);
+}
+
+static PyObject* IAsyncOperation_Close(py::winrt_pinterface_wrapper<pyIAsyncOperation>* self, PyObject* args)
+{ 
+    return self->obj->Close(args);
+}
+
 static PyObject* IAsyncOperation_GetResults(py::winrt_pinterface_wrapper<pyIAsyncOperation>* self, PyObject* args)
-{
+{ 
     return self->obj->GetResults(args);
 }
 
-static PyObject* IAsyncOperation_get_Completed(py::winrt_pinterface_wrapper<pyIAsyncOperation>* self, void* /*unused*/)
-{
-    return self->obj->get_Completed();
+static PyObject* IAsyncOperation_get_Completed(py::winrt_pinterface_wrapper<pyIAsyncOperation>* self, PyObject* args)
+{ 
+    return self->obj->get_Completed(args);
 }
 
-static int IAsyncOperation_put_Completed(py::winrt_pinterface_wrapper<pyIAsyncOperation>* self, PyObject* value, void* /*unused*/)
-{
-    return self->obj->put_Completed(value);
+static PyObject* IAsyncOperation_get_ErrorCode(py::winrt_pinterface_wrapper<pyIAsyncOperation>* self, PyObject* args)
+{ 
+    return self->obj->get_ErrorCode(args);
+}
+
+static PyObject* IAsyncOperation_get_Id(py::winrt_pinterface_wrapper<pyIAsyncOperation>* self, PyObject* args)
+{ 
+    return self->obj->get_Id(args);
+}
+
+static PyObject* IAsyncOperation_get_Status(py::winrt_pinterface_wrapper<pyIAsyncOperation>* self, PyObject* args)
+{ 
+    return self->obj->get_Status(args);
+}
+
+static PyObject* IAsyncOperation_put_Completed(py::winrt_pinterface_wrapper<pyIAsyncOperation>* self, PyObject* args)
+{ 
+    return self->obj->put_Completed(args);
 }
 
 static PyMethodDef IAsyncOperation_methods[] = {
+    { "Cancel", (PyCFunction)IAsyncOperation_Cancel, METH_VARARGS, nullptr },
+    { "Close", (PyCFunction)IAsyncOperation_Close, METH_VARARGS, nullptr },
     { "GetResults", (PyCFunction)IAsyncOperation_GetResults, METH_VARARGS, nullptr },
-    { nullptr }
-};
-
-static PyGetSetDef IAsyncOperation_getset[] = {
-    { const_cast<char*>("Completed"), (getter)IAsyncOperation_get_Completed, (setter)IAsyncOperation_put_Completed, nullptr, nullptr },
+    { "get_Completed", (PyCFunction)IAsyncOperation_get_Completed, METH_NOARGS, nullptr },
+    { "get_ErrorCode", (PyCFunction)IAsyncOperation_get_ErrorCode, METH_NOARGS, nullptr },
+    { "get_Id", (PyCFunction)IAsyncOperation_get_Id, METH_NOARGS, nullptr },
+    { "get_Status", (PyCFunction)IAsyncOperation_get_Status, METH_NOARGS, nullptr },
+    { "put_Completed", (PyCFunction)IAsyncOperation_put_Completed, METH_O, nullptr },
     { nullptr }
 };
 
@@ -1495,7 +1801,6 @@ static PyType_Slot IAsyncOperation_Type_slots[] =
     { Py_tp_dealloc, IAsyncOperation_dealloc },
     { Py_tp_new, IAsyncOperation_new },
     { Py_tp_methods, IAsyncOperation_methods },
-    { Py_tp_getset, IAsyncOperation_getset },
     { 0, nullptr },
 };
 
@@ -1515,7 +1820,7 @@ PyObject* IClosable_new(PyTypeObject* type, PyObject* args, PyObject* kwds)
 {
     if (kwds != nullptr)
     {
-        PyErr_SetString(PyExc_RuntimeError, "keyword arguments not supported");
+        PyErr_SetString(PyExc_TypeError, "keyword arguments not supported");
         return nullptr;
     }
 
@@ -1538,7 +1843,7 @@ PyObject* IClosable_new(PyTypeObject* type, PyObject* args, PyObject* kwds)
         return nullptr; 
     }
 
-    PyErr_SetString(PyExc_RuntimeError, "Invalid parameter count");
+    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
     return nullptr;
 }
 
@@ -1570,7 +1875,7 @@ static PyObject* IClosable_Close(py::winrt_wrapper<winrt::Windows::Foundation::I
         return nullptr; 
     }
 
-    PyErr_SetString(PyExc_RuntimeError, "Invalid parameter count");
+    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
     return nullptr;
 }
 
@@ -1604,7 +1909,7 @@ PyObject* IGetActivationFactory_new(PyTypeObject* type, PyObject* args, PyObject
 {
     if (kwds != nullptr)
     {
-        PyErr_SetString(PyExc_RuntimeError, "keyword arguments not supported");
+        PyErr_SetString(PyExc_TypeError, "keyword arguments not supported");
         return nullptr;
     }
 
@@ -1627,7 +1932,7 @@ PyObject* IGetActivationFactory_new(PyTypeObject* type, PyObject* args, PyObject
         return nullptr; 
     }
 
-    PyErr_SetString(PyExc_RuntimeError, "Invalid parameter count");
+    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
     return nullptr;
 }
 
@@ -1662,7 +1967,7 @@ static PyObject* IGetActivationFactory_GetActivationFactory(py::winrt_wrapper<wi
         return nullptr; 
     }
 
-    PyErr_SetString(PyExc_RuntimeError, "Invalid parameter count");
+    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
     return nullptr;
 }
 
@@ -1696,7 +2001,7 @@ PyObject* IMemoryBuffer_new(PyTypeObject* type, PyObject* args, PyObject* kwds)
 {
     if (kwds != nullptr)
     {
-        PyErr_SetString(PyExc_RuntimeError, "keyword arguments not supported");
+        PyErr_SetString(PyExc_TypeError, "keyword arguments not supported");
         return nullptr;
     }
 
@@ -1719,7 +2024,7 @@ PyObject* IMemoryBuffer_new(PyTypeObject* type, PyObject* args, PyObject* kwds)
         return nullptr; 
     }
 
-    PyErr_SetString(PyExc_RuntimeError, "Invalid parameter count");
+    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
     return nullptr;
 }
 
@@ -1728,6 +2033,31 @@ static void IMemoryBuffer_dealloc(py::winrt_wrapper<winrt::Windows::Foundation::
     auto hash_value = std::hash<winrt::Windows::Foundation::IInspectable>{}(self->obj);
     py::wrapped_instance(hash_value, nullptr);
     self->obj = nullptr;
+}
+
+static PyObject* IMemoryBuffer_Close(py::winrt_wrapper<winrt::Windows::Foundation::IMemoryBuffer>* self, PyObject* args)
+{ 
+    Py_ssize_t arg_count = PyTuple_Size(args);
+
+    if (arg_count == 0)
+    {
+        try
+        {
+            self->obj.Close();
+            Py_RETURN_NONE;
+        }
+        catch (...)
+        {
+            return py::to_PyErr();
+        }
+    }
+    else if (arg_count == -1)
+    {
+        return nullptr; 
+    }
+
+    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+    return nullptr;
 }
 
 static PyObject* IMemoryBuffer_CreateReference(py::winrt_wrapper<winrt::Windows::Foundation::IMemoryBuffer>* self, PyObject* args)
@@ -1752,11 +2082,12 @@ static PyObject* IMemoryBuffer_CreateReference(py::winrt_wrapper<winrt::Windows:
         return nullptr; 
     }
 
-    PyErr_SetString(PyExc_RuntimeError, "Invalid parameter count");
+    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
     return nullptr;
 }
 
 static PyMethodDef IMemoryBuffer_methods[] = {
+    { "Close", (PyCFunction)IMemoryBuffer_Close, METH_VARARGS, nullptr },
     { "CreateReference", (PyCFunction)IMemoryBuffer_CreateReference, METH_VARARGS, nullptr },
     { nullptr }
 };
@@ -1786,7 +2117,7 @@ PyObject* IMemoryBufferReference_new(PyTypeObject* type, PyObject* args, PyObjec
 {
     if (kwds != nullptr)
     {
-        PyErr_SetString(PyExc_RuntimeError, "keyword arguments not supported");
+        PyErr_SetString(PyExc_TypeError, "keyword arguments not supported");
         return nullptr;
     }
 
@@ -1809,7 +2140,7 @@ PyObject* IMemoryBufferReference_new(PyTypeObject* type, PyObject* args, PyObjec
         return nullptr; 
     }
 
-    PyErr_SetString(PyExc_RuntimeError, "Invalid parameter count");
+    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
     return nullptr;
 }
 
@@ -1820,21 +2151,86 @@ static void IMemoryBufferReference_dealloc(py::winrt_wrapper<winrt::Windows::Fou
     self->obj = nullptr;
 }
 
-static PyObject* IMemoryBufferReference_get_Capacity(py::winrt_wrapper<winrt::Windows::Foundation::IMemoryBufferReference>* self, void* /*unused*/)
-{
-    try
+static PyObject* IMemoryBufferReference_Close(py::winrt_wrapper<winrt::Windows::Foundation::IMemoryBufferReference>* self, PyObject* args)
+{ 
+    Py_ssize_t arg_count = PyTuple_Size(args);
+
+    if (arg_count == 0)
     {
-        auto return_value = self->obj.Capacity();
-        return py::convert(return_value);
+        try
+        {
+            self->obj.Close();
+            Py_RETURN_NONE;
+        }
+        catch (...)
+        {
+            return py::to_PyErr();
+        }
     }
-    catch (...)
+    else if (arg_count == -1)
     {
-        return py::to_PyErr();
+        return nullptr; 
     }
+
+    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+    return nullptr;
 }
 
-static PyGetSetDef IMemoryBufferReference_getset[] = {
-    { const_cast<char*>("Capacity"), (getter)IMemoryBufferReference_get_Capacity, nullptr, nullptr, nullptr },
+static PyObject* IMemoryBufferReference_add_Closed(py::winrt_wrapper<winrt::Windows::Foundation::IMemoryBufferReference>* self, PyObject* args)
+{ 
+        try
+        {
+            auto param0 = py::convert_to<winrt::Windows::Foundation::TypedEventHandler<winrt::Windows::Foundation::IMemoryBufferReference, winrt::Windows::Foundation::IInspectable>>(args);
+
+            winrt::event_token return_value = self->obj.Closed(param0);
+
+            return py::convert(return_value);
+        }
+        catch (...)
+        {
+            return py::to_PyErr();
+        }
+}
+
+static PyObject* IMemoryBufferReference_get_Capacity(py::winrt_wrapper<winrt::Windows::Foundation::IMemoryBufferReference>* self, PyObject* args)
+{ 
+    if (args != nullptr)
+    {
+        PyErr_SetString(PyExc_TypeError, "arguments not supported for get methods");
+        return nullptr;
+    }
+        try
+        {
+            uint32_t return_value = self->obj.Capacity();
+
+            return py::convert(return_value);
+        }
+        catch (...)
+        {
+            return py::to_PyErr();
+        }
+}
+
+static PyObject* IMemoryBufferReference_remove_Closed(py::winrt_wrapper<winrt::Windows::Foundation::IMemoryBufferReference>* self, PyObject* args)
+{ 
+        try
+        {
+            auto param0 = py::convert_to<winrt::event_token>(args);
+
+            self->obj.Closed(param0);
+            Py_RETURN_NONE;
+        }
+        catch (...)
+        {
+            return py::to_PyErr();
+        }
+}
+
+static PyMethodDef IMemoryBufferReference_methods[] = {
+    { "Close", (PyCFunction)IMemoryBufferReference_Close, METH_VARARGS, nullptr },
+    { "add_Closed", (PyCFunction)IMemoryBufferReference_add_Closed, METH_O, nullptr },
+    { "get_Capacity", (PyCFunction)IMemoryBufferReference_get_Capacity, METH_NOARGS, nullptr },
+    { "remove_Closed", (PyCFunction)IMemoryBufferReference_remove_Closed, METH_O, nullptr },
     { nullptr }
 };
 
@@ -1843,7 +2239,7 @@ static PyType_Slot IMemoryBufferReference_Type_slots[] =
     { Py_tp_base, nullptr }, // filled out in module init
     { Py_tp_dealloc, IMemoryBufferReference_dealloc },
     { Py_tp_new, IMemoryBufferReference_new },
-    { Py_tp_getset, IMemoryBufferReference_getset },
+    { Py_tp_methods, IMemoryBufferReference_methods },
     { 0, nullptr },
 };
 
@@ -1863,7 +2259,7 @@ PyObject* IStringable_new(PyTypeObject* type, PyObject* args, PyObject* kwds)
 {
     if (kwds != nullptr)
     {
-        PyErr_SetString(PyExc_RuntimeError, "keyword arguments not supported");
+        PyErr_SetString(PyExc_TypeError, "keyword arguments not supported");
         return nullptr;
     }
 
@@ -1886,7 +2282,7 @@ PyObject* IStringable_new(PyTypeObject* type, PyObject* args, PyObject* kwds)
         return nullptr; 
     }
 
-    PyErr_SetString(PyExc_RuntimeError, "Invalid parameter count");
+    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
     return nullptr;
 }
 
@@ -1919,7 +2315,7 @@ static PyObject* IStringable_ToString(py::winrt_wrapper<winrt::Windows::Foundati
         return nullptr; 
     }
 
-    PyErr_SetString(PyExc_RuntimeError, "Invalid parameter count");
+    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
     return nullptr;
 }
 
@@ -1953,7 +2349,7 @@ PyObject* IWwwFormUrlDecoderEntry_new(PyTypeObject* type, PyObject* args, PyObje
 {
     if (kwds != nullptr)
     {
-        PyErr_SetString(PyExc_RuntimeError, "keyword arguments not supported");
+        PyErr_SetString(PyExc_TypeError, "keyword arguments not supported");
         return nullptr;
     }
 
@@ -1976,7 +2372,7 @@ PyObject* IWwwFormUrlDecoderEntry_new(PyTypeObject* type, PyObject* args, PyObje
         return nullptr; 
     }
 
-    PyErr_SetString(PyExc_RuntimeError, "Invalid parameter count");
+    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
     return nullptr;
 }
 
@@ -1987,35 +2383,47 @@ static void IWwwFormUrlDecoderEntry_dealloc(py::winrt_wrapper<winrt::Windows::Fo
     self->obj = nullptr;
 }
 
-static PyObject* IWwwFormUrlDecoderEntry_get_Name(py::winrt_wrapper<winrt::Windows::Foundation::IWwwFormUrlDecoderEntry>* self, void* /*unused*/)
-{
-    try
+static PyObject* IWwwFormUrlDecoderEntry_get_Name(py::winrt_wrapper<winrt::Windows::Foundation::IWwwFormUrlDecoderEntry>* self, PyObject* args)
+{ 
+    if (args != nullptr)
     {
-        auto return_value = self->obj.Name();
-        return py::convert(return_value);
+        PyErr_SetString(PyExc_TypeError, "arguments not supported for get methods");
+        return nullptr;
     }
-    catch (...)
-    {
-        return py::to_PyErr();
-    }
+        try
+        {
+            winrt::hstring return_value = self->obj.Name();
+
+            return py::convert(return_value);
+        }
+        catch (...)
+        {
+            return py::to_PyErr();
+        }
 }
 
-static PyObject* IWwwFormUrlDecoderEntry_get_Value(py::winrt_wrapper<winrt::Windows::Foundation::IWwwFormUrlDecoderEntry>* self, void* /*unused*/)
-{
-    try
+static PyObject* IWwwFormUrlDecoderEntry_get_Value(py::winrt_wrapper<winrt::Windows::Foundation::IWwwFormUrlDecoderEntry>* self, PyObject* args)
+{ 
+    if (args != nullptr)
     {
-        auto return_value = self->obj.Value();
-        return py::convert(return_value);
+        PyErr_SetString(PyExc_TypeError, "arguments not supported for get methods");
+        return nullptr;
     }
-    catch (...)
-    {
-        return py::to_PyErr();
-    }
+        try
+        {
+            winrt::hstring return_value = self->obj.Value();
+
+            return py::convert(return_value);
+        }
+        catch (...)
+        {
+            return py::to_PyErr();
+        }
 }
 
-static PyGetSetDef IWwwFormUrlDecoderEntry_getset[] = {
-    { const_cast<char*>("Name"), (getter)IWwwFormUrlDecoderEntry_get_Name, nullptr, nullptr, nullptr },
-    { const_cast<char*>("Value"), (getter)IWwwFormUrlDecoderEntry_get_Value, nullptr, nullptr, nullptr },
+static PyMethodDef IWwwFormUrlDecoderEntry_methods[] = {
+    { "get_Name", (PyCFunction)IWwwFormUrlDecoderEntry_get_Name, METH_NOARGS, nullptr },
+    { "get_Value", (PyCFunction)IWwwFormUrlDecoderEntry_get_Value, METH_NOARGS, nullptr },
     { nullptr }
 };
 
@@ -2024,7 +2432,7 @@ static PyType_Slot IWwwFormUrlDecoderEntry_Type_slots[] =
     { Py_tp_base, nullptr }, // filled out in module init
     { Py_tp_dealloc, IWwwFormUrlDecoderEntry_dealloc },
     { Py_tp_new, IWwwFormUrlDecoderEntry_new },
-    { Py_tp_getset, IWwwFormUrlDecoderEntry_getset },
+    { Py_tp_methods, IWwwFormUrlDecoderEntry_methods },
     { 0, nullptr },
 };
 
@@ -2119,7 +2527,7 @@ static int DateTime_set_UniversalTime(py::winrt_struct_wrapper<winrt::Windows::F
 {
     if (value == nullptr)
     {
-        PyErr_SetString(PyExc_RuntimeError, "property delete not supported");
+        PyErr_SetString(PyExc_TypeError, "property delete not supported");
         return -1;
     }
     
@@ -2237,7 +2645,7 @@ static int EventRegistrationToken_set_Value(py::winrt_struct_wrapper<winrt::even
 {
     if (value == nullptr)
     {
-        PyErr_SetString(PyExc_RuntimeError, "property delete not supported");
+        PyErr_SetString(PyExc_TypeError, "property delete not supported");
         return -1;
     }
     
@@ -2355,7 +2763,7 @@ static int HResult_set_Value(py::winrt_struct_wrapper<winrt::hresult>* self, PyO
 {
     if (value == nullptr)
     {
-        PyErr_SetString(PyExc_RuntimeError, "property delete not supported");
+        PyErr_SetString(PyExc_TypeError, "property delete not supported");
         return -1;
     }
     
@@ -2477,7 +2885,7 @@ static int Point_set_X(py::winrt_struct_wrapper<winrt::Windows::Foundation::Poin
 {
     if (value == nullptr)
     {
-        PyErr_SetString(PyExc_RuntimeError, "property delete not supported");
+        PyErr_SetString(PyExc_TypeError, "property delete not supported");
         return -1;
     }
     
@@ -2508,7 +2916,7 @@ static int Point_set_Y(py::winrt_struct_wrapper<winrt::Windows::Foundation::Poin
 {
     if (value == nullptr)
     {
-        PyErr_SetString(PyExc_RuntimeError, "property delete not supported");
+        PyErr_SetString(PyExc_TypeError, "property delete not supported");
         return -1;
     }
     
@@ -2639,7 +3047,7 @@ static int Rect_set_X(py::winrt_struct_wrapper<winrt::Windows::Foundation::Rect>
 {
     if (value == nullptr)
     {
-        PyErr_SetString(PyExc_RuntimeError, "property delete not supported");
+        PyErr_SetString(PyExc_TypeError, "property delete not supported");
         return -1;
     }
     
@@ -2670,7 +3078,7 @@ static int Rect_set_Y(py::winrt_struct_wrapper<winrt::Windows::Foundation::Rect>
 {
     if (value == nullptr)
     {
-        PyErr_SetString(PyExc_RuntimeError, "property delete not supported");
+        PyErr_SetString(PyExc_TypeError, "property delete not supported");
         return -1;
     }
     
@@ -2701,7 +3109,7 @@ static int Rect_set_Width(py::winrt_struct_wrapper<winrt::Windows::Foundation::R
 {
     if (value == nullptr)
     {
-        PyErr_SetString(PyExc_RuntimeError, "property delete not supported");
+        PyErr_SetString(PyExc_TypeError, "property delete not supported");
         return -1;
     }
     
@@ -2732,7 +3140,7 @@ static int Rect_set_Height(py::winrt_struct_wrapper<winrt::Windows::Foundation::
 {
     if (value == nullptr)
     {
-        PyErr_SetString(PyExc_RuntimeError, "property delete not supported");
+        PyErr_SetString(PyExc_TypeError, "property delete not supported");
         return -1;
     }
     
@@ -2857,7 +3265,7 @@ static int Size_set_Width(py::winrt_struct_wrapper<winrt::Windows::Foundation::S
 {
     if (value == nullptr)
     {
-        PyErr_SetString(PyExc_RuntimeError, "property delete not supported");
+        PyErr_SetString(PyExc_TypeError, "property delete not supported");
         return -1;
     }
     
@@ -2888,7 +3296,7 @@ static int Size_set_Height(py::winrt_struct_wrapper<winrt::Windows::Foundation::
 {
     if (value == nullptr)
     {
-        PyErr_SetString(PyExc_RuntimeError, "property delete not supported");
+        PyErr_SetString(PyExc_TypeError, "property delete not supported");
         return -1;
     }
     
@@ -3007,7 +3415,7 @@ static int TimeSpan_set_Duration(py::winrt_struct_wrapper<winrt::Windows::Founda
 {
     if (value == nullptr)
     {
-        PyErr_SetString(PyExc_RuntimeError, "property delete not supported");
+        PyErr_SetString(PyExc_TypeError, "property delete not supported");
         return -1;
     }
     

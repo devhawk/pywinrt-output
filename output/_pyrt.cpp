@@ -6,6 +6,8 @@
 #include "py.Windows.Foundation.h"
 #include "py.Windows.Foundation.Collections.h"
 #include "py.Windows.Foundation.Numerics.h"
+#include "py.Windows.Graphics.DirectX.h"
+#include "py.Windows.Graphics.DirectX.Direct3D11.h"
 
 PyTypeObject* py::winrt_type<py::winrt_base>::python_type;
 
@@ -118,6 +120,16 @@ static int module_exec(PyObject* module)
     }
 
     if (initialize_Windows_Foundation_Numerics(module) != 0)
+    {
+        return -1;
+    }
+
+    if (initialize_Windows_Graphics_DirectX(module) != 0)
+    {
+        return -1;
+    }
+
+    if (initialize_Windows_Graphics_DirectX_Direct3D11(module) != 0)
     {
         return -1;
     }

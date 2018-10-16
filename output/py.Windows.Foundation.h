@@ -232,11 +232,16 @@ struct pyIAsyncActionWithProgress
     virtual winrt::Windows::Foundation::IUnknown const& get_unknown() = 0;
     virtual std::size_t hash() = 0;
 
+    virtual PyObject* Cancel(PyObject* args) = 0;
+    virtual PyObject* Close(PyObject* args) = 0;
     virtual PyObject* GetResults(PyObject* args) = 0;
-    virtual PyObject* get_Progress() = 0;
-    virtual int put_Progress(PyObject* arg) = 0;
-    virtual PyObject* get_Completed() = 0;
-    virtual int put_Completed(PyObject* arg) = 0;
+    virtual PyObject* get_Completed(PyObject* args) = 0;
+    virtual PyObject* get_ErrorCode(PyObject* args) = 0;
+    virtual PyObject* get_Id(PyObject* args) = 0;
+    virtual PyObject* get_Progress(PyObject* args) = 0;
+    virtual PyObject* get_Status(PyObject* args) = 0;
+    virtual PyObject* put_Completed(PyObject* args) = 0;
+    virtual PyObject* put_Progress(PyObject* args) = 0;
 };
 
 struct pyIAsyncOperationWithProgress
@@ -245,11 +250,16 @@ struct pyIAsyncOperationWithProgress
     virtual winrt::Windows::Foundation::IUnknown const& get_unknown() = 0;
     virtual std::size_t hash() = 0;
 
+    virtual PyObject* Cancel(PyObject* args) = 0;
+    virtual PyObject* Close(PyObject* args) = 0;
     virtual PyObject* GetResults(PyObject* args) = 0;
-    virtual PyObject* get_Progress() = 0;
-    virtual int put_Progress(PyObject* arg) = 0;
-    virtual PyObject* get_Completed() = 0;
-    virtual int put_Completed(PyObject* arg) = 0;
+    virtual PyObject* get_Completed(PyObject* args) = 0;
+    virtual PyObject* get_ErrorCode(PyObject* args) = 0;
+    virtual PyObject* get_Id(PyObject* args) = 0;
+    virtual PyObject* get_Progress(PyObject* args) = 0;
+    virtual PyObject* get_Status(PyObject* args) = 0;
+    virtual PyObject* put_Completed(PyObject* args) = 0;
+    virtual PyObject* put_Progress(PyObject* args) = 0;
 };
 
 struct pyIAsyncOperation
@@ -258,9 +268,14 @@ struct pyIAsyncOperation
     virtual winrt::Windows::Foundation::IUnknown const& get_unknown() = 0;
     virtual std::size_t hash() = 0;
 
+    virtual PyObject* Cancel(PyObject* args) = 0;
+    virtual PyObject* Close(PyObject* args) = 0;
     virtual PyObject* GetResults(PyObject* args) = 0;
-    virtual PyObject* get_Completed() = 0;
-    virtual int put_Completed(PyObject* arg) = 0;
+    virtual PyObject* get_Completed(PyObject* args) = 0;
+    virtual PyObject* get_ErrorCode(PyObject* args) = 0;
+    virtual PyObject* get_Id(PyObject* args) = 0;
+    virtual PyObject* get_Status(PyObject* args) = 0;
+    virtual PyObject* put_Completed(PyObject* args) = 0;
 };
 
 template<typename TProgress>
@@ -269,6 +284,56 @@ struct pyIAsyncActionWithProgressImpl : public pyIAsyncActionWithProgress
 pyIAsyncActionWithProgressImpl(winrt::Windows::Foundation::IAsyncActionWithProgress<TProgress> o) : obj(o) {}
 winrt::Windows::Foundation::IUnknown const& get_unknown() override { return obj; }
 std::size_t hash() override { return py::get_instance_hash(obj); }
+
+PyObject* Cancel(PyObject* args) override
+{
+    Py_ssize_t arg_count = PyTuple_Size(args);
+
+    if (arg_count == 0)
+    {
+        try
+        {
+            obj.Cancel();
+            Py_RETURN_NONE;
+        }
+        catch (...)
+        {
+            return py::to_PyErr();
+        }
+    }
+    else if (arg_count == -1)
+    {
+        return nullptr; 
+    }
+
+    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+    return nullptr;
+}
+
+PyObject* Close(PyObject* args) override
+{
+    Py_ssize_t arg_count = PyTuple_Size(args);
+
+    if (arg_count == 0)
+    {
+        try
+        {
+            obj.Close();
+            Py_RETURN_NONE;
+        }
+        catch (...)
+        {
+            return py::to_PyErr();
+        }
+    }
+    else if (arg_count == -1)
+    {
+        return nullptr; 
+    }
+
+    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+    return nullptr;
+}
 
 PyObject* GetResults(PyObject* args) override
 {
@@ -291,74 +356,133 @@ PyObject* GetResults(PyObject* args) override
         return nullptr; 
     }
 
-    PyErr_SetString(PyExc_RuntimeError, "Invalid parameter count");
+    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
     return nullptr;
 }
 
-PyObject* get_Progress() override
+PyObject* get_Completed(PyObject* args) override
 {
-    try
+    if (args != nullptr)
     {
-        auto return_value = obj.Progress();
-        return py::convert(return_value);
+        PyErr_SetString(PyExc_TypeError, "arguments not supported for get methods");
+        return nullptr;
     }
-    catch (...)
-    {
-        return py::to_PyErr();
-    }
+        try
+        {
+            winrt::Windows::Foundation::AsyncActionWithProgressCompletedHandler<TProgress> return_value = obj.Completed();
+
+            return py::convert(return_value);
+        }
+        catch (...)
+        {
+            return py::to_PyErr();
+        }
 }
 
-int put_Progress(PyObject* value) override
+PyObject* get_ErrorCode(PyObject* args) override
 {
-    if (value == nullptr)
+    if (args != nullptr)
     {
-        PyErr_SetString(PyExc_RuntimeError, "property delete not supported");
-        return -1;
+        PyErr_SetString(PyExc_TypeError, "arguments not supported for get methods");
+        return nullptr;
     }
-    
-    try
-    {
-        auto param0 = py::convert_to<winrt::Windows::Foundation::AsyncActionProgressHandler<TProgress>>(value);
-        obj.Progress(param0);
-        return 0;
-    }
-    catch (...)
-    {
-        return -1;
-    }
+        try
+        {
+            winrt::hresult return_value = obj.ErrorCode();
+
+            return py::convert(return_value);
+        }
+        catch (...)
+        {
+            return py::to_PyErr();
+        }
 }
 
-PyObject* get_Completed() override
+PyObject* get_Id(PyObject* args) override
 {
-    try
+    if (args != nullptr)
     {
-        auto return_value = obj.Completed();
-        return py::convert(return_value);
+        PyErr_SetString(PyExc_TypeError, "arguments not supported for get methods");
+        return nullptr;
     }
-    catch (...)
-    {
-        return py::to_PyErr();
-    }
+        try
+        {
+            uint32_t return_value = obj.Id();
+
+            return py::convert(return_value);
+        }
+        catch (...)
+        {
+            return py::to_PyErr();
+        }
 }
 
-int put_Completed(PyObject* value) override
+PyObject* get_Progress(PyObject* args) override
 {
-    if (value == nullptr)
+    if (args != nullptr)
     {
-        PyErr_SetString(PyExc_RuntimeError, "property delete not supported");
-        return -1;
+        PyErr_SetString(PyExc_TypeError, "arguments not supported for get methods");
+        return nullptr;
     }
-    
-    try
+        try
+        {
+            winrt::Windows::Foundation::AsyncActionProgressHandler<TProgress> return_value = obj.Progress();
+
+            return py::convert(return_value);
+        }
+        catch (...)
+        {
+            return py::to_PyErr();
+        }
+}
+
+PyObject* get_Status(PyObject* args) override
+{
+    if (args != nullptr)
     {
-        auto param0 = py::convert_to<winrt::Windows::Foundation::AsyncActionWithProgressCompletedHandler<TProgress>>(value);
-        obj.Completed(param0);
-        return 0;
+        PyErr_SetString(PyExc_TypeError, "arguments not supported for get methods");
+        return nullptr;
     }
-    catch (...)
-    {
-        return -1;
-    }
+        try
+        {
+            winrt::Windows::Foundation::AsyncStatus return_value = obj.Status();
+
+            return py::convert(return_value);
+        }
+        catch (...)
+        {
+            return py::to_PyErr();
+        }
+}
+
+PyObject* put_Completed(PyObject* args) override
+{
+        try
+        {
+            auto param0 = py::convert_to<winrt::Windows::Foundation::AsyncActionWithProgressCompletedHandler<TProgress>>(args);
+
+            obj.Completed(param0);
+            Py_RETURN_NONE;
+        }
+        catch (...)
+        {
+            return py::to_PyErr();
+        }
+}
+
+PyObject* put_Progress(PyObject* args) override
+{
+        try
+        {
+            auto param0 = py::convert_to<winrt::Windows::Foundation::AsyncActionProgressHandler<TProgress>>(args);
+
+            obj.Progress(param0);
+            Py_RETURN_NONE;
+        }
+        catch (...)
+        {
+            return py::to_PyErr();
+        }
 }
 
     winrt::Windows::Foundation::IAsyncActionWithProgress<TProgress> obj{ nullptr };
@@ -371,6 +495,56 @@ pyIAsyncOperationWithProgressImpl(winrt::Windows::Foundation::IAsyncOperationWit
 winrt::Windows::Foundation::IUnknown const& get_unknown() override { return obj; }
 std::size_t hash() override { return py::get_instance_hash(obj); }
 
+PyObject* Cancel(PyObject* args) override
+{
+    Py_ssize_t arg_count = PyTuple_Size(args);
+
+    if (arg_count == 0)
+    {
+        try
+        {
+            obj.Cancel();
+            Py_RETURN_NONE;
+        }
+        catch (...)
+        {
+            return py::to_PyErr();
+        }
+    }
+    else if (arg_count == -1)
+    {
+        return nullptr; 
+    }
+
+    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+    return nullptr;
+}
+
+PyObject* Close(PyObject* args) override
+{
+    Py_ssize_t arg_count = PyTuple_Size(args);
+
+    if (arg_count == 0)
+    {
+        try
+        {
+            obj.Close();
+            Py_RETURN_NONE;
+        }
+        catch (...)
+        {
+            return py::to_PyErr();
+        }
+    }
+    else if (arg_count == -1)
+    {
+        return nullptr; 
+    }
+
+    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+    return nullptr;
+}
+
 PyObject* GetResults(PyObject* args) override
 {
     Py_ssize_t arg_count = PyTuple_Size(args);
@@ -393,74 +567,133 @@ PyObject* GetResults(PyObject* args) override
         return nullptr; 
     }
 
-    PyErr_SetString(PyExc_RuntimeError, "Invalid parameter count");
+    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
     return nullptr;
 }
 
-PyObject* get_Progress() override
+PyObject* get_Completed(PyObject* args) override
 {
-    try
+    if (args != nullptr)
     {
-        auto return_value = obj.Progress();
-        return py::convert(return_value);
+        PyErr_SetString(PyExc_TypeError, "arguments not supported for get methods");
+        return nullptr;
     }
-    catch (...)
-    {
-        return py::to_PyErr();
-    }
+        try
+        {
+            winrt::Windows::Foundation::AsyncOperationWithProgressCompletedHandler<TResult, TProgress> return_value = obj.Completed();
+
+            return py::convert(return_value);
+        }
+        catch (...)
+        {
+            return py::to_PyErr();
+        }
 }
 
-int put_Progress(PyObject* value) override
+PyObject* get_ErrorCode(PyObject* args) override
 {
-    if (value == nullptr)
+    if (args != nullptr)
     {
-        PyErr_SetString(PyExc_RuntimeError, "property delete not supported");
-        return -1;
+        PyErr_SetString(PyExc_TypeError, "arguments not supported for get methods");
+        return nullptr;
     }
-    
-    try
-    {
-        auto param0 = py::convert_to<winrt::Windows::Foundation::AsyncOperationProgressHandler<TResult, TProgress>>(value);
-        obj.Progress(param0);
-        return 0;
-    }
-    catch (...)
-    {
-        return -1;
-    }
+        try
+        {
+            winrt::hresult return_value = obj.ErrorCode();
+
+            return py::convert(return_value);
+        }
+        catch (...)
+        {
+            return py::to_PyErr();
+        }
 }
 
-PyObject* get_Completed() override
+PyObject* get_Id(PyObject* args) override
 {
-    try
+    if (args != nullptr)
     {
-        auto return_value = obj.Completed();
-        return py::convert(return_value);
+        PyErr_SetString(PyExc_TypeError, "arguments not supported for get methods");
+        return nullptr;
     }
-    catch (...)
-    {
-        return py::to_PyErr();
-    }
+        try
+        {
+            uint32_t return_value = obj.Id();
+
+            return py::convert(return_value);
+        }
+        catch (...)
+        {
+            return py::to_PyErr();
+        }
 }
 
-int put_Completed(PyObject* value) override
+PyObject* get_Progress(PyObject* args) override
 {
-    if (value == nullptr)
+    if (args != nullptr)
     {
-        PyErr_SetString(PyExc_RuntimeError, "property delete not supported");
-        return -1;
+        PyErr_SetString(PyExc_TypeError, "arguments not supported for get methods");
+        return nullptr;
     }
-    
-    try
+        try
+        {
+            winrt::Windows::Foundation::AsyncOperationProgressHandler<TResult, TProgress> return_value = obj.Progress();
+
+            return py::convert(return_value);
+        }
+        catch (...)
+        {
+            return py::to_PyErr();
+        }
+}
+
+PyObject* get_Status(PyObject* args) override
+{
+    if (args != nullptr)
     {
-        auto param0 = py::convert_to<winrt::Windows::Foundation::AsyncOperationWithProgressCompletedHandler<TResult, TProgress>>(value);
-        obj.Completed(param0);
-        return 0;
+        PyErr_SetString(PyExc_TypeError, "arguments not supported for get methods");
+        return nullptr;
     }
-    catch (...)
-    {
-        return -1;
-    }
+        try
+        {
+            winrt::Windows::Foundation::AsyncStatus return_value = obj.Status();
+
+            return py::convert(return_value);
+        }
+        catch (...)
+        {
+            return py::to_PyErr();
+        }
+}
+
+PyObject* put_Completed(PyObject* args) override
+{
+        try
+        {
+            auto param0 = py::convert_to<winrt::Windows::Foundation::AsyncOperationWithProgressCompletedHandler<TResult, TProgress>>(args);
+
+            obj.Completed(param0);
+            Py_RETURN_NONE;
+        }
+        catch (...)
+        {
+            return py::to_PyErr();
+        }
+}
+
+PyObject* put_Progress(PyObject* args) override
+{
+        try
+        {
+            auto param0 = py::convert_to<winrt::Windows::Foundation::AsyncOperationProgressHandler<TResult, TProgress>>(args);
+
+            obj.Progress(param0);
+            Py_RETURN_NONE;
+        }
+        catch (...)
+        {
+            return py::to_PyErr();
+        }
 }
 
     winrt::Windows::Foundation::IAsyncOperationWithProgress<TResult, TProgress> obj{ nullptr };
@@ -473,6 +706,56 @@ pyIAsyncOperationImpl(winrt::Windows::Foundation::IAsyncOperation<TResult> o) : 
 winrt::Windows::Foundation::IUnknown const& get_unknown() override { return obj; }
 std::size_t hash() override { return py::get_instance_hash(obj); }
 
+PyObject* Cancel(PyObject* args) override
+{
+    Py_ssize_t arg_count = PyTuple_Size(args);
+
+    if (arg_count == 0)
+    {
+        try
+        {
+            obj.Cancel();
+            Py_RETURN_NONE;
+        }
+        catch (...)
+        {
+            return py::to_PyErr();
+        }
+    }
+    else if (arg_count == -1)
+    {
+        return nullptr; 
+    }
+
+    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+    return nullptr;
+}
+
+PyObject* Close(PyObject* args) override
+{
+    Py_ssize_t arg_count = PyTuple_Size(args);
+
+    if (arg_count == 0)
+    {
+        try
+        {
+            obj.Close();
+            Py_RETURN_NONE;
+        }
+        catch (...)
+        {
+            return py::to_PyErr();
+        }
+    }
+    else if (arg_count == -1)
+    {
+        return nullptr; 
+    }
+
+    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+    return nullptr;
+}
+
 PyObject* GetResults(PyObject* args) override
 {
     Py_ssize_t arg_count = PyTuple_Size(args);
@@ -495,41 +778,99 @@ PyObject* GetResults(PyObject* args) override
         return nullptr; 
     }
 
-    PyErr_SetString(PyExc_RuntimeError, "Invalid parameter count");
+    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
     return nullptr;
 }
 
-PyObject* get_Completed() override
+PyObject* get_Completed(PyObject* args) override
 {
-    try
+    if (args != nullptr)
     {
-        auto return_value = obj.Completed();
-        return py::convert(return_value);
+        PyErr_SetString(PyExc_TypeError, "arguments not supported for get methods");
+        return nullptr;
     }
-    catch (...)
-    {
-        return py::to_PyErr();
-    }
+        try
+        {
+            winrt::Windows::Foundation::AsyncOperationCompletedHandler<TResult> return_value = obj.Completed();
+
+            return py::convert(return_value);
+        }
+        catch (...)
+        {
+            return py::to_PyErr();
+        }
 }
 
-int put_Completed(PyObject* value) override
+PyObject* get_ErrorCode(PyObject* args) override
 {
-    if (value == nullptr)
+    if (args != nullptr)
     {
-        PyErr_SetString(PyExc_RuntimeError, "property delete not supported");
-        return -1;
+        PyErr_SetString(PyExc_TypeError, "arguments not supported for get methods");
+        return nullptr;
     }
-    
-    try
+        try
+        {
+            winrt::hresult return_value = obj.ErrorCode();
+
+            return py::convert(return_value);
+        }
+        catch (...)
+        {
+            return py::to_PyErr();
+        }
+}
+
+PyObject* get_Id(PyObject* args) override
+{
+    if (args != nullptr)
     {
-        auto param0 = py::convert_to<winrt::Windows::Foundation::AsyncOperationCompletedHandler<TResult>>(value);
-        obj.Completed(param0);
-        return 0;
+        PyErr_SetString(PyExc_TypeError, "arguments not supported for get methods");
+        return nullptr;
     }
-    catch (...)
+        try
+        {
+            uint32_t return_value = obj.Id();
+
+            return py::convert(return_value);
+        }
+        catch (...)
+        {
+            return py::to_PyErr();
+        }
+}
+
+PyObject* get_Status(PyObject* args) override
+{
+    if (args != nullptr)
     {
-        return -1;
+        PyErr_SetString(PyExc_TypeError, "arguments not supported for get methods");
+        return nullptr;
     }
+        try
+        {
+            winrt::Windows::Foundation::AsyncStatus return_value = obj.Status();
+
+            return py::convert(return_value);
+        }
+        catch (...)
+        {
+            return py::to_PyErr();
+        }
+}
+
+PyObject* put_Completed(PyObject* args) override
+{
+        try
+        {
+            auto param0 = py::convert_to<winrt::Windows::Foundation::AsyncOperationCompletedHandler<TResult>>(args);
+
+            obj.Completed(param0);
+            Py_RETURN_NONE;
+        }
+        catch (...)
+        {
+            return py::to_PyErr();
+        }
 }
 
     winrt::Windows::Foundation::IAsyncOperation<TResult> obj{ nullptr };

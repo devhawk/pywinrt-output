@@ -8,7 +8,7 @@ setuptools.setup(
     name = "pyrt",
     version = "0.1",
     ext_modules = [ setuptools.Extension('_pyrt', 
-        sources = ['py.Windows.Data.Json.cpp', 'py.Windows.Devices.Geolocation.cpp', 'py.Windows.Devices.Geolocation.Geofencing.cpp', 'py.Windows.Foundation.cpp', 'py.Windows.Foundation.Collections.cpp', 'py.Windows.Foundation.Numerics.cpp', '_pyrt.cpp'],
+        sources = ['py.Windows.Data.Json.cpp', 'py.Windows.Devices.Geolocation.cpp', 'py.Windows.Devices.Geolocation.Geofencing.cpp', 'py.Windows.Foundation.cpp', 'py.Windows.Foundation.Collections.cpp', 'py.Windows.Foundation.Numerics.cpp', 'py.Windows.Graphics.DirectX.cpp', 'py.Windows.Graphics.DirectX.Direct3D11.cpp', '_pyrt.cpp'],
         extra_compile_args = ["/std:c++17", "/await", "/Zi", "/Od"],
         include_dirs = ['.'],
         extra_link_args=['/DEBUG'],
