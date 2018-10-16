@@ -1,0 +1,23 @@
+{
+    "winmd_files": [
+        "Windows.AI.MachineLearning.MachineLearningContract",
+        "Windows.Devices.DevicesLowLevelContract",
+        "Windows.Foundation.FoundationContract",
+        "Windows.Foundation.UniversalApiContract"
+    ],
+    "included_namespaces": [
+        "Windows.Data.Json",
+        "Windows.Devices.Geolocation",
+        "Windows.Foundation"
+    ],
+    "excluded_namespaces": [
+        "Windows.Devices.Geolocation.Geofencing",
+        "Windows.Foundation.Deferral",
+        "Windows.Foundation.Diagnostics",
+        "Windows.Foundation.IPropertyValue",
+        "Windows.Foundation.IRef",
+        "Windows.Foundation.Metadata",
+        "Windows.Foundation.Numerics",
+        "Windows.Foundation.PropertyValue"
+    ]
+}
