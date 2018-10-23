@@ -1,7 +1,5 @@
 {
     "winmd_files": [
-        "Windows.AI.MachineLearning.MachineLearningContract",
-        "Windows.Devices.DevicesLowLevelContract",
         "Windows.Foundation.FoundationContract",
         "Windows.Foundation.UniversalApiContract"
     ],
@@ -12,11 +10,7 @@
         "Windows.Graphics.DirectX"
     ],
     "excluded_namespaces": [
-        "Windows.Foundation.Deferral",
         "Windows.Foundation.Diagnostics",
-        "Windows.Foundation.IPropertyValue",
-        "Windows.Foundation.IRef",
         "Windows.Foundation.Metadata",
-        "Windows.Foundation.PropertyValue"
     ]
 }

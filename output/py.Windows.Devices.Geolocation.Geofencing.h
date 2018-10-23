@@ -19,4 +19,92 @@ int initialize_Windows_Devices_Geolocation_Geofencing(PyObject* module);
 
 namespace py
 {
+    template<>
+    struct winrt_type<winrt::Windows::Devices::Geolocation::Geofencing::Geofence>
+    {
+        static PyTypeObject* python_type;
+
+        static PyTypeObject* get_python_type()
+        {
+            return python_type;
+        }
+    };
+
+    template<>
+    struct winrt_type<winrt::Windows::Devices::Geolocation::Geofencing::GeofenceMonitor>
+    {
+        static PyTypeObject* python_type;
+
+        static PyTypeObject* get_python_type()
+        {
+            return python_type;
+        }
+    };
+
+    template<>
+    struct winrt_type<winrt::Windows::Devices::Geolocation::Geofencing::GeofenceStateChangeReport>
+    {
+        static PyTypeObject* python_type;
+
+        static PyTypeObject* get_python_type()
+        {
+            return python_type;
+        }
+    };
+
+    template<>
+    struct winrt_type<winrt::Windows::Devices::Geolocation::Geofencing::IGeofence>
+    {
+        static PyTypeObject* python_type;
+
+        static PyTypeObject* get_python_type()
+        {
+            return python_type;
+        }
+    };
+
+    template<>
+    struct winrt_type<winrt::Windows::Devices::Geolocation::Geofencing::IGeofenceFactory>
+    {
+        static PyTypeObject* python_type;
+
+        static PyTypeObject* get_python_type()
+        {
+            return python_type;
+        }
+    };
+
+    template<>
+    struct winrt_type<winrt::Windows::Devices::Geolocation::Geofencing::IGeofenceMonitor>
+    {
+        static PyTypeObject* python_type;
+
+        static PyTypeObject* get_python_type()
+        {
+            return python_type;
+        }
+    };
+
+    template<>
+    struct winrt_type<winrt::Windows::Devices::Geolocation::Geofencing::IGeofenceMonitorStatics>
+    {
+        static PyTypeObject* python_type;
+
+        static PyTypeObject* get_python_type()
+        {
+            return python_type;
+        }
+    };
+
+    template<>
+    struct winrt_type<winrt::Windows::Devices::Geolocation::Geofencing::IGeofenceStateChangeReport>
+    {
+        static PyTypeObject* python_type;
+
+        static PyTypeObject* get_python_type()
+        {
+            return python_type;
+        }
+    };
+
 }

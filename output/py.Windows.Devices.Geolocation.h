@@ -17,8 +17,537 @@ int initialize_Windows_Devices_Geolocation(PyObject* module);
 namespace py
 {
     template<>
+    struct winrt_type<winrt::Windows::Devices::Geolocation::CivicAddress>
+    {
+        static PyTypeObject* python_type;
+
+        static PyTypeObject* get_python_type()
+        {
+            return python_type;
+        }
+    };
+
+    template<>
+    struct winrt_type<winrt::Windows::Devices::Geolocation::GeoboundingBox>
+    {
+        static PyTypeObject* python_type;
+
+        static PyTypeObject* get_python_type()
+        {
+            return python_type;
+        }
+    };
+
+    template<>
+    struct winrt_type<winrt::Windows::Devices::Geolocation::Geocircle>
+    {
+        static PyTypeObject* python_type;
+
+        static PyTypeObject* get_python_type()
+        {
+            return python_type;
+        }
+    };
+
+    template<>
+    struct winrt_type<winrt::Windows::Devices::Geolocation::Geocoordinate>
+    {
+        static PyTypeObject* python_type;
+
+        static PyTypeObject* get_python_type()
+        {
+            return python_type;
+        }
+    };
+
+    template<>
+    struct winrt_type<winrt::Windows::Devices::Geolocation::GeocoordinateSatelliteData>
+    {
+        static PyTypeObject* python_type;
+
+        static PyTypeObject* get_python_type()
+        {
+            return python_type;
+        }
+    };
+
+    template<>
+    struct winrt_type<winrt::Windows::Devices::Geolocation::Geolocator>
+    {
+        static PyTypeObject* python_type;
+
+        static PyTypeObject* get_python_type()
+        {
+            return python_type;
+        }
+    };
+
+    template<>
+    struct winrt_type<winrt::Windows::Devices::Geolocation::Geopath>
+    {
+        static PyTypeObject* python_type;
+
+        static PyTypeObject* get_python_type()
+        {
+            return python_type;
+        }
+    };
+
+    template<>
+    struct winrt_type<winrt::Windows::Devices::Geolocation::Geopoint>
+    {
+        static PyTypeObject* python_type;
+
+        static PyTypeObject* get_python_type()
+        {
+            return python_type;
+        }
+    };
+
+    template<>
+    struct winrt_type<winrt::Windows::Devices::Geolocation::Geoposition>
+    {
+        static PyTypeObject* python_type;
+
+        static PyTypeObject* get_python_type()
+        {
+            return python_type;
+        }
+    };
+
+    template<>
+    struct winrt_type<winrt::Windows::Devices::Geolocation::Geovisit>
+    {
+        static PyTypeObject* python_type;
+
+        static PyTypeObject* get_python_type()
+        {
+            return python_type;
+        }
+    };
+
+    template<>
+    struct winrt_type<winrt::Windows::Devices::Geolocation::GeovisitMonitor>
+    {
+        static PyTypeObject* python_type;
+
+        static PyTypeObject* get_python_type()
+        {
+            return python_type;
+        }
+    };
+
+    template<>
+    struct winrt_type<winrt::Windows::Devices::Geolocation::GeovisitStateChangedEventArgs>
+    {
+        static PyTypeObject* python_type;
+
+        static PyTypeObject* get_python_type()
+        {
+            return python_type;
+        }
+    };
+
+    template<>
+    struct winrt_type<winrt::Windows::Devices::Geolocation::GeovisitTriggerDetails>
+    {
+        static PyTypeObject* python_type;
+
+        static PyTypeObject* get_python_type()
+        {
+            return python_type;
+        }
+    };
+
+    template<>
+    struct winrt_type<winrt::Windows::Devices::Geolocation::PositionChangedEventArgs>
+    {
+        static PyTypeObject* python_type;
+
+        static PyTypeObject* get_python_type()
+        {
+            return python_type;
+        }
+    };
+
+    template<>
+    struct winrt_type<winrt::Windows::Devices::Geolocation::StatusChangedEventArgs>
+    {
+        static PyTypeObject* python_type;
+
+        static PyTypeObject* get_python_type()
+        {
+            return python_type;
+        }
+    };
+
+    template<>
+    struct winrt_type<winrt::Windows::Devices::Geolocation::VenueData>
+    {
+        static PyTypeObject* python_type;
+
+        static PyTypeObject* get_python_type()
+        {
+            return python_type;
+        }
+    };
+
+    template<>
+    struct winrt_type<winrt::Windows::Devices::Geolocation::ICivicAddress>
+    {
+        static PyTypeObject* python_type;
+
+        static PyTypeObject* get_python_type()
+        {
+            return python_type;
+        }
+    };
+
+    template<>
+    struct winrt_type<winrt::Windows::Devices::Geolocation::IGeoboundingBox>
+    {
+        static PyTypeObject* python_type;
+
+        static PyTypeObject* get_python_type()
+        {
+            return python_type;
+        }
+    };
+
+    template<>
+    struct winrt_type<winrt::Windows::Devices::Geolocation::IGeoboundingBoxFactory>
+    {
+        static PyTypeObject* python_type;
+
+        static PyTypeObject* get_python_type()
+        {
+            return python_type;
+        }
+    };
+
+    template<>
+    struct winrt_type<winrt::Windows::Devices::Geolocation::IGeoboundingBoxStatics>
+    {
+        static PyTypeObject* python_type;
+
+        static PyTypeObject* get_python_type()
+        {
+            return python_type;
+        }
+    };
+
+    template<>
+    struct winrt_type<winrt::Windows::Devices::Geolocation::IGeocircle>
+    {
+        static PyTypeObject* python_type;
+
+        static PyTypeObject* get_python_type()
+        {
+            return python_type;
+        }
+    };
+
+    template<>
+    struct winrt_type<winrt::Windows::Devices::Geolocation::IGeocircleFactory>
+    {
+        static PyTypeObject* python_type;
+
+        static PyTypeObject* get_python_type()
+        {
+            return python_type;
+        }
+    };
+
+    template<>
+    struct winrt_type<winrt::Windows::Devices::Geolocation::IGeocoordinate>
+    {
+        static PyTypeObject* python_type;
+
+        static PyTypeObject* get_python_type()
+        {
+            return python_type;
+        }
+    };
+
+    template<>
+    struct winrt_type<winrt::Windows::Devices::Geolocation::IGeocoordinateSatelliteData>
+    {
+        static PyTypeObject* python_type;
+
+        static PyTypeObject* get_python_type()
+        {
+            return python_type;
+        }
+    };
+
+    template<>
+    struct winrt_type<winrt::Windows::Devices::Geolocation::IGeocoordinateWithPoint>
+    {
+        static PyTypeObject* python_type;
+
+        static PyTypeObject* get_python_type()
+        {
+            return python_type;
+        }
+    };
+
+    template<>
+    struct winrt_type<winrt::Windows::Devices::Geolocation::IGeocoordinateWithPositionData>
+    {
+        static PyTypeObject* python_type;
+
+        static PyTypeObject* get_python_type()
+        {
+            return python_type;
+        }
+    };
+
+    template<>
+    struct winrt_type<winrt::Windows::Devices::Geolocation::IGeocoordinateWithPositionSourceTimestamp>
+    {
+        static PyTypeObject* python_type;
+
+        static PyTypeObject* get_python_type()
+        {
+            return python_type;
+        }
+    };
+
+    template<>
+    struct winrt_type<winrt::Windows::Devices::Geolocation::IGeolocator>
+    {
+        static PyTypeObject* python_type;
+
+        static PyTypeObject* get_python_type()
+        {
+            return python_type;
+        }
+    };
+
+    template<>
+    struct winrt_type<winrt::Windows::Devices::Geolocation::IGeolocator2>
+    {
+        static PyTypeObject* python_type;
+
+        static PyTypeObject* get_python_type()
+        {
+            return python_type;
+        }
+    };
+
+    template<>
+    struct winrt_type<winrt::Windows::Devices::Geolocation::IGeolocatorStatics>
+    {
+        static PyTypeObject* python_type;
+
+        static PyTypeObject* get_python_type()
+        {
+            return python_type;
+        }
+    };
+
+    template<>
+    struct winrt_type<winrt::Windows::Devices::Geolocation::IGeolocatorStatics2>
+    {
+        static PyTypeObject* python_type;
+
+        static PyTypeObject* get_python_type()
+        {
+            return python_type;
+        }
+    };
+
+    template<>
+    struct winrt_type<winrt::Windows::Devices::Geolocation::IGeolocatorWithScalarAccuracy>
+    {
+        static PyTypeObject* python_type;
+
+        static PyTypeObject* get_python_type()
+        {
+            return python_type;
+        }
+    };
+
+    template<>
+    struct winrt_type<winrt::Windows::Devices::Geolocation::IGeopath>
+    {
+        static PyTypeObject* python_type;
+
+        static PyTypeObject* get_python_type()
+        {
+            return python_type;
+        }
+    };
+
+    template<>
+    struct winrt_type<winrt::Windows::Devices::Geolocation::IGeopathFactory>
+    {
+        static PyTypeObject* python_type;
+
+        static PyTypeObject* get_python_type()
+        {
+            return python_type;
+        }
+    };
+
+    template<>
+    struct winrt_type<winrt::Windows::Devices::Geolocation::IGeopoint>
+    {
+        static PyTypeObject* python_type;
+
+        static PyTypeObject* get_python_type()
+        {
+            return python_type;
+        }
+    };
+
+    template<>
+    struct winrt_type<winrt::Windows::Devices::Geolocation::IGeopointFactory>
+    {
+        static PyTypeObject* python_type;
+
+        static PyTypeObject* get_python_type()
+        {
+            return python_type;
+        }
+    };
+
+    template<>
+    struct winrt_type<winrt::Windows::Devices::Geolocation::IGeoposition>
+    {
+        static PyTypeObject* python_type;
+
+        static PyTypeObject* get_python_type()
+        {
+            return python_type;
+        }
+    };
+
+    template<>
+    struct winrt_type<winrt::Windows::Devices::Geolocation::IGeoposition2>
+    {
+        static PyTypeObject* python_type;
+
+        static PyTypeObject* get_python_type()
+        {
+            return python_type;
+        }
+    };
+
+    template<>
+    struct winrt_type<winrt::Windows::Devices::Geolocation::IGeoshape>
+    {
+        static PyTypeObject* python_type;
+
+        static PyTypeObject* get_python_type()
+        {
+            return python_type;
+        }
+    };
+
+    template<>
+    struct winrt_type<winrt::Windows::Devices::Geolocation::IGeovisit>
+    {
+        static PyTypeObject* python_type;
+
+        static PyTypeObject* get_python_type()
+        {
+            return python_type;
+        }
+    };
+
+    template<>
+    struct winrt_type<winrt::Windows::Devices::Geolocation::IGeovisitMonitor>
+    {
+        static PyTypeObject* python_type;
+
+        static PyTypeObject* get_python_type()
+        {
+            return python_type;
+        }
+    };
+
+    template<>
+    struct winrt_type<winrt::Windows::Devices::Geolocation::IGeovisitMonitorStatics>
+    {
+        static PyTypeObject* python_type;
+
+        static PyTypeObject* get_python_type()
+        {
+            return python_type;
+        }
+    };
+
+    template<>
+    struct winrt_type<winrt::Windows::Devices::Geolocation::IGeovisitStateChangedEventArgs>
+    {
+        static PyTypeObject* python_type;
+
+        static PyTypeObject* get_python_type()
+        {
+            return python_type;
+        }
+    };
+
+    template<>
+    struct winrt_type<winrt::Windows::Devices::Geolocation::IGeovisitTriggerDetails>
+    {
+        static PyTypeObject* python_type;
+
+        static PyTypeObject* get_python_type()
+        {
+            return python_type;
+        }
+    };
+
+    template<>
+    struct winrt_type<winrt::Windows::Devices::Geolocation::IPositionChangedEventArgs>
+    {
+        static PyTypeObject* python_type;
+
+        static PyTypeObject* get_python_type()
+        {
+            return python_type;
+        }
+    };
+
+    template<>
+    struct winrt_type<winrt::Windows::Devices::Geolocation::IStatusChangedEventArgs>
+    {
+        static PyTypeObject* python_type;
+
+        static PyTypeObject* get_python_type()
+        {
+            return python_type;
+        }
+    };
+
+    template<>
+    struct winrt_type<winrt::Windows::Devices::Geolocation::IVenueData>
+    {
+        static PyTypeObject* python_type;
+
+        static PyTypeObject* get_python_type()
+        {
+            return python_type;
+        }
+    };
+
+    template<>
+    struct winrt_type<winrt::Windows::Devices::Geolocation::BasicGeoposition>
+    {
+        static PyTypeObject* python_type;
+
+        static PyTypeObject* get_python_type()
+        {
+            return python_type;
+        }
+    };
+
+    template<>
     struct converter<winrt::Windows::Devices::Geolocation::BasicGeoposition>
     {
+        static PyObject* convert(winrt::Windows::Devices::Geolocation::BasicGeoposition instance) noexcept;
         static winrt::Windows::Devices::Geolocation::BasicGeoposition convert_to(PyObject* obj);
     };
     

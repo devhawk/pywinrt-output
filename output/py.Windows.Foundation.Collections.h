@@ -24,8 +24,8 @@ struct pyMapChangedEventHandler
         // TODO: How do I manage callable lifetime here?
         return [callable](auto param1, auto param2)
         {
-            PyObject* pyObj1 = py::convert(param1);
-            PyObject* pyObj2 = py::convert(param2);
+            PyObject* pyObj1 = py::converter<decltype(param1)>::convert(param1);
+            PyObject* pyObj2 = py::converter<decltype(param2)>::convert(param2);
 
             PyObject* args = PyTuple_Pack(2, pyObj1, pyObj2);
 
@@ -51,8 +51,8 @@ struct pyVectorChangedEventHandler
         // TODO: How do I manage callable lifetime here?
         return [callable](auto param1, auto param2)
         {
-            PyObject* pyObj1 = py::convert(param1);
-            PyObject* pyObj2 = py::convert(param2);
+            PyObject* pyObj1 = py::converter<decltype(param1)>::convert(param1);
+            PyObject* pyObj2 = py::converter<decltype(param2)>::convert(param2);
 
             PyObject* args = PyTuple_Pack(2, pyObj1, pyObj2);
 
@@ -227,7 +227,7 @@ PyObject* First(PyObject* args) override
         {
             winrt::Windows::Foundation::Collections::IIterator<T> return_value = obj.First();
 
-            return py::convert(return_value);
+            return py::converter<decltype(return_value)>::convert(return_value);
         }
         catch (...)
         {
@@ -257,27 +257,15 @@ PyObject* GetMany(PyObject* args) override
 {
     Py_ssize_t arg_count = PyTuple_Size(args);
 
-    if (arg_count == 0)
+    if (arg_count == 1)
     {
         try
         {
-            /*r*/ winrt::array_view<T> param0 { };
+            /*f*/ winrt::array_view<T> param0 { }; // TODO: Convert incoming python parameter
 
             uint32_t return_value = obj.GetMany(param0);
 
-            PyObject* out_return_value = py::convert(return_value);
-            if (!out_return_value) 
-            { 
-                return nullptr;
-            };
-
-            PyObject* out0 = py::convert(param0);
-            if (!out0) 
-            {
-                return nullptr;
-            }
-
-            return PyTuple_Pack(2, out_return_value, out0);
+            return py::converter<decltype(return_value)>::convert(return_value);
         }
         catch (...)
         {
@@ -303,7 +291,7 @@ PyObject* MoveNext(PyObject* args) override
         {
             bool return_value = obj.MoveNext();
 
-            return py::convert(return_value);
+            return py::converter<decltype(return_value)>::convert(return_value);
         }
         catch (...)
         {
@@ -330,7 +318,7 @@ PyObject* get_Current(PyObject* args) override
         {
             T return_value = obj.Current();
 
-            return py::convert(return_value);
+            return py::converter<decltype(return_value)>::convert(return_value);
         }
         catch (...)
         {
@@ -349,7 +337,7 @@ PyObject* get_HasCurrent(PyObject* args) override
         {
             bool return_value = obj.HasCurrent();
 
-            return py::convert(return_value);
+            return py::converter<decltype(return_value)>::convert(return_value);
         }
         catch (...)
         {
@@ -378,7 +366,7 @@ PyObject* get_Key(PyObject* args) override
         {
             K return_value = obj.Key();
 
-            return py::convert(return_value);
+            return py::converter<decltype(return_value)>::convert(return_value);
         }
         catch (...)
         {
@@ -397,7 +385,7 @@ PyObject* get_Value(PyObject* args) override
         {
             V return_value = obj.Value();
 
-            return py::convert(return_value);
+            return py::converter<decltype(return_value)>::convert(return_value);
         }
         catch (...)
         {
@@ -426,7 +414,7 @@ PyObject* get_CollectionChange(PyObject* args) override
         {
             winrt::Windows::Foundation::Collections::CollectionChange return_value = obj.CollectionChange();
 
-            return py::convert(return_value);
+            return py::converter<decltype(return_value)>::convert(return_value);
         }
         catch (...)
         {
@@ -445,7 +433,7 @@ PyObject* get_Key(PyObject* args) override
         {
             K return_value = obj.Key();
 
-            return py::convert(return_value);
+            return py::converter<decltype(return_value)>::convert(return_value);
         }
         catch (...)
         {
@@ -473,7 +461,7 @@ PyObject* First(PyObject* args) override
         {
             winrt::Windows::Foundation::Collections::IIterator<winrt::Windows::Foundation::Collections::IKeyValuePair<K, V>> return_value = obj.First();
 
-            return py::convert(return_value);
+            return py::converter<decltype(return_value)>::convert(return_value);
         }
         catch (...)
         {
@@ -501,7 +489,7 @@ PyObject* HasKey(PyObject* args) override
 
             bool return_value = obj.HasKey(param0);
 
-            return py::convert(return_value);
+            return py::converter<decltype(return_value)>::convert(return_value);
         }
         catch (...)
         {
@@ -529,7 +517,7 @@ PyObject* Lookup(PyObject* args) override
 
             V return_value = obj.Lookup(param0);
 
-            return py::convert(return_value);
+            return py::converter<decltype(return_value)>::convert(return_value);
         }
         catch (...)
         {
@@ -584,7 +572,7 @@ PyObject* get_Size(PyObject* args) override
         {
             uint32_t return_value = obj.Size();
 
-            return py::convert(return_value);
+            return py::converter<decltype(return_value)>::convert(return_value);
         }
         catch (...)
         {
@@ -637,7 +625,7 @@ PyObject* First(PyObject* args) override
         {
             winrt::Windows::Foundation::Collections::IIterator<winrt::Windows::Foundation::Collections::IKeyValuePair<K, V>> return_value = obj.First();
 
-            return py::convert(return_value);
+            return py::converter<decltype(return_value)>::convert(return_value);
         }
         catch (...)
         {
@@ -663,7 +651,7 @@ PyObject* GetView(PyObject* args) override
         {
             winrt::Windows::Foundation::Collections::IMapView<K, V> return_value = obj.GetView();
 
-            return py::convert(return_value);
+            return py::converter<decltype(return_value)>::convert(return_value);
         }
         catch (...)
         {
@@ -691,7 +679,7 @@ PyObject* HasKey(PyObject* args) override
 
             bool return_value = obj.HasKey(param0);
 
-            return py::convert(return_value);
+            return py::converter<decltype(return_value)>::convert(return_value);
         }
         catch (...)
         {
@@ -720,7 +708,7 @@ PyObject* Insert(PyObject* args) override
 
             bool return_value = obj.Insert(param0, param1);
 
-            return py::convert(return_value);
+            return py::converter<decltype(return_value)>::convert(return_value);
         }
         catch (...)
         {
@@ -748,7 +736,7 @@ PyObject* Lookup(PyObject* args) override
 
             V return_value = obj.Lookup(param0);
 
-            return py::convert(return_value);
+            return py::converter<decltype(return_value)>::convert(return_value);
         }
         catch (...)
         {
@@ -802,7 +790,7 @@ PyObject* get_Size(PyObject* args) override
         {
             uint32_t return_value = obj.Size();
 
-            return py::convert(return_value);
+            return py::converter<decltype(return_value)>::convert(return_value);
         }
         catch (...)
         {
@@ -855,7 +843,7 @@ PyObject* First(PyObject* args) override
         {
             winrt::Windows::Foundation::Collections::IIterator<winrt::Windows::Foundation::Collections::IKeyValuePair<K, V>> return_value = obj.First();
 
-            return py::convert(return_value);
+            return py::converter<decltype(return_value)>::convert(return_value);
         }
         catch (...)
         {
@@ -881,7 +869,7 @@ PyObject* GetView(PyObject* args) override
         {
             winrt::Windows::Foundation::Collections::IMapView<K, V> return_value = obj.GetView();
 
-            return py::convert(return_value);
+            return py::converter<decltype(return_value)>::convert(return_value);
         }
         catch (...)
         {
@@ -909,7 +897,7 @@ PyObject* HasKey(PyObject* args) override
 
             bool return_value = obj.HasKey(param0);
 
-            return py::convert(return_value);
+            return py::converter<decltype(return_value)>::convert(return_value);
         }
         catch (...)
         {
@@ -938,7 +926,7 @@ PyObject* Insert(PyObject* args) override
 
             bool return_value = obj.Insert(param0, param1);
 
-            return py::convert(return_value);
+            return py::converter<decltype(return_value)>::convert(return_value);
         }
         catch (...)
         {
@@ -966,7 +954,7 @@ PyObject* Lookup(PyObject* args) override
 
             V return_value = obj.Lookup(param0);
 
-            return py::convert(return_value);
+            return py::converter<decltype(return_value)>::convert(return_value);
         }
         catch (...)
         {
@@ -1013,11 +1001,11 @@ PyObject* add_MapChanged(PyObject* args) override
 {
         try
         {
-            auto param0 = py::convert_to<winrt::Windows::Foundation::Collections::MapChangedEventHandler<K, V>>(args);
+            auto param0 = py::converter<winrt::Windows::Foundation::Collections::MapChangedEventHandler<K, V>>::convert_to(args);
 
             winrt::event_token return_value = obj.MapChanged(param0);
 
-            return py::convert(return_value);
+            return py::converter<decltype(return_value)>::convert(return_value);
         }
         catch (...)
         {
@@ -1036,7 +1024,7 @@ PyObject* get_Size(PyObject* args) override
         {
             uint32_t return_value = obj.Size();
 
-            return py::convert(return_value);
+            return py::converter<decltype(return_value)>::convert(return_value);
         }
         catch (...)
         {
@@ -1048,7 +1036,7 @@ PyObject* remove_MapChanged(PyObject* args) override
 {
         try
         {
-            auto param0 = py::convert_to<winrt::event_token>(args);
+            auto param0 = py::converter<winrt::event_token>::convert_to(args);
 
             obj.MapChanged(param0);
             Py_RETURN_NONE;
@@ -1131,7 +1119,7 @@ PyObject* First(PyObject* args) override
         {
             winrt::Windows::Foundation::Collections::IIterator<T> return_value = obj.First();
 
-            return py::convert(return_value);
+            return py::converter<decltype(return_value)>::convert(return_value);
         }
         catch (...)
         {
@@ -1159,7 +1147,7 @@ PyObject* GetAt(PyObject* args) override
 
             T return_value = obj.GetAt(param0);
 
-            return py::convert(return_value);
+            return py::converter<decltype(return_value)>::convert(return_value);
         }
         catch (...)
         {
@@ -1179,28 +1167,16 @@ PyObject* GetMany(PyObject* args) override
 {
     Py_ssize_t arg_count = PyTuple_Size(args);
 
-    if (arg_count == 1)
+    if (arg_count == 2)
     {
         try
         {
             auto param0 = py::convert_to<uint32_t>(args, 0);
-            /*r*/ winrt::array_view<T> param1 { };
+            /*f*/ winrt::array_view<T> param1 { }; // TODO: Convert incoming python parameter
 
             uint32_t return_value = obj.GetMany(param0, param1);
 
-            PyObject* out_return_value = py::convert(return_value);
-            if (!out_return_value) 
-            { 
-                return nullptr;
-            };
-
-            PyObject* out1 = py::convert(param1);
-            if (!out1) 
-            {
-                return nullptr;
-            }
-
-            return PyTuple_Pack(2, out_return_value, out1);
+            return py::converter<decltype(return_value)>::convert(return_value);
         }
         catch (...)
         {
@@ -1226,7 +1202,7 @@ PyObject* GetView(PyObject* args) override
         {
             winrt::Windows::Foundation::Collections::IVectorView<T> return_value = obj.GetView();
 
-            return py::convert(return_value);
+            return py::converter<decltype(return_value)>::convert(return_value);
         }
         catch (...)
         {
@@ -1255,13 +1231,13 @@ PyObject* IndexOf(PyObject* args) override
 
             bool return_value = obj.IndexOf(param0, param1);
 
-            PyObject* out_return_value = py::convert(return_value);
+            PyObject* out_return_value = py::converter<decltype(return_value)>::convert(return_value);
             if (!out_return_value) 
             { 
                 return nullptr;
             };
 
-            PyObject* out1 = py::convert(param1);
+            PyObject* out1 = py::converter<decltype(param1)>::convert(param1);
             if (!out1) 
             {
                 return nullptr;
@@ -1371,7 +1347,7 @@ PyObject* ReplaceAll(PyObject* args) override
     {
         try
         {
-            /*p*/ winrt::array_view<T const> param0 {}; //= py::convert_to<winrt::array_view<T const>>(args, 0);
+            /*p*/ winrt::array_view<T const> param0 { }; // TODO: Convert incoming python parameter
 
             obj.ReplaceAll(param0);
             Py_RETURN_NONE;
@@ -1422,11 +1398,11 @@ PyObject* add_VectorChanged(PyObject* args) override
 {
         try
         {
-            auto param0 = py::convert_to<winrt::Windows::Foundation::Collections::VectorChangedEventHandler<T>>(args);
+            auto param0 = py::converter<winrt::Windows::Foundation::Collections::VectorChangedEventHandler<T>>::convert_to(args);
 
             winrt::event_token return_value = obj.VectorChanged(param0);
 
-            return py::convert(return_value);
+            return py::converter<decltype(return_value)>::convert(return_value);
         }
         catch (...)
         {
@@ -1445,7 +1421,7 @@ PyObject* get_Size(PyObject* args) override
         {
             uint32_t return_value = obj.Size();
 
-            return py::convert(return_value);
+            return py::converter<decltype(return_value)>::convert(return_value);
         }
         catch (...)
         {
@@ -1457,7 +1433,7 @@ PyObject* remove_VectorChanged(PyObject* args) override
 {
         try
         {
-            auto param0 = py::convert_to<winrt::event_token>(args);
+            auto param0 = py::converter<winrt::event_token>::convert_to(args);
 
             obj.VectorChanged(param0);
             Py_RETURN_NONE;
@@ -1488,7 +1464,7 @@ PyObject* First(PyObject* args) override
         {
             winrt::Windows::Foundation::Collections::IIterator<T> return_value = obj.First();
 
-            return py::convert(return_value);
+            return py::converter<decltype(return_value)>::convert(return_value);
         }
         catch (...)
         {
@@ -1516,7 +1492,7 @@ PyObject* GetAt(PyObject* args) override
 
             T return_value = obj.GetAt(param0);
 
-            return py::convert(return_value);
+            return py::converter<decltype(return_value)>::convert(return_value);
         }
         catch (...)
         {
@@ -1536,28 +1512,16 @@ PyObject* GetMany(PyObject* args) override
 {
     Py_ssize_t arg_count = PyTuple_Size(args);
 
-    if (arg_count == 1)
+    if (arg_count == 2)
     {
         try
         {
             auto param0 = py::convert_to<uint32_t>(args, 0);
-            /*r*/ winrt::array_view<T> param1 { };
+            /*f*/ winrt::array_view<T> param1 { }; // TODO: Convert incoming python parameter
 
             uint32_t return_value = obj.GetMany(param0, param1);
 
-            PyObject* out_return_value = py::convert(return_value);
-            if (!out_return_value) 
-            { 
-                return nullptr;
-            };
-
-            PyObject* out1 = py::convert(param1);
-            if (!out1) 
-            {
-                return nullptr;
-            }
-
-            return PyTuple_Pack(2, out_return_value, out1);
+            return py::converter<decltype(return_value)>::convert(return_value);
         }
         catch (...)
         {
@@ -1586,13 +1550,13 @@ PyObject* IndexOf(PyObject* args) override
 
             bool return_value = obj.IndexOf(param0, param1);
 
-            PyObject* out_return_value = py::convert(return_value);
+            PyObject* out_return_value = py::converter<decltype(return_value)>::convert(return_value);
             if (!out_return_value) 
             { 
                 return nullptr;
             };
 
-            PyObject* out1 = py::convert(param1);
+            PyObject* out1 = py::converter<decltype(param1)>::convert(param1);
             if (!out1) 
             {
                 return nullptr;
@@ -1625,7 +1589,7 @@ PyObject* get_Size(PyObject* args) override
         {
             uint32_t return_value = obj.Size();
 
-            return py::convert(return_value);
+            return py::converter<decltype(return_value)>::convert(return_value);
         }
         catch (...)
         {
@@ -1705,7 +1669,7 @@ PyObject* First(PyObject* args) override
         {
             winrt::Windows::Foundation::Collections::IIterator<T> return_value = obj.First();
 
-            return py::convert(return_value);
+            return py::converter<decltype(return_value)>::convert(return_value);
         }
         catch (...)
         {
@@ -1733,7 +1697,7 @@ PyObject* GetAt(PyObject* args) override
 
             T return_value = obj.GetAt(param0);
 
-            return py::convert(return_value);
+            return py::converter<decltype(return_value)>::convert(return_value);
         }
         catch (...)
         {
@@ -1753,28 +1717,16 @@ PyObject* GetMany(PyObject* args) override
 {
     Py_ssize_t arg_count = PyTuple_Size(args);
 
-    if (arg_count == 1)
+    if (arg_count == 2)
     {
         try
         {
             auto param0 = py::convert_to<uint32_t>(args, 0);
-            /*r*/ winrt::array_view<T> param1 { };
+            /*f*/ winrt::array_view<T> param1 { }; // TODO: Convert incoming python parameter
 
             uint32_t return_value = obj.GetMany(param0, param1);
 
-            PyObject* out_return_value = py::convert(return_value);
-            if (!out_return_value) 
-            { 
-                return nullptr;
-            };
-
-            PyObject* out1 = py::convert(param1);
-            if (!out1) 
-            {
-                return nullptr;
-            }
-
-            return PyTuple_Pack(2, out_return_value, out1);
+            return py::converter<decltype(return_value)>::convert(return_value);
         }
         catch (...)
         {
@@ -1800,7 +1752,7 @@ PyObject* GetView(PyObject* args) override
         {
             winrt::Windows::Foundation::Collections::IVectorView<T> return_value = obj.GetView();
 
-            return py::convert(return_value);
+            return py::converter<decltype(return_value)>::convert(return_value);
         }
         catch (...)
         {
@@ -1829,13 +1781,13 @@ PyObject* IndexOf(PyObject* args) override
 
             bool return_value = obj.IndexOf(param0, param1);
 
-            PyObject* out_return_value = py::convert(return_value);
+            PyObject* out_return_value = py::converter<decltype(return_value)>::convert(return_value);
             if (!out_return_value) 
             { 
                 return nullptr;
             };
 
-            PyObject* out1 = py::convert(param1);
+            PyObject* out1 = py::converter<decltype(param1)>::convert(param1);
             if (!out1) 
             {
                 return nullptr;
@@ -1945,7 +1897,7 @@ PyObject* ReplaceAll(PyObject* args) override
     {
         try
         {
-            /*p*/ winrt::array_view<T const> param0 {}; //= py::convert_to<winrt::array_view<T const>>(args, 0);
+            /*p*/ winrt::array_view<T const> param0 { }; // TODO: Convert incoming python parameter
 
             obj.ReplaceAll(param0);
             Py_RETURN_NONE;
@@ -2003,7 +1955,7 @@ PyObject* get_Size(PyObject* args) override
         {
             uint32_t return_value = obj.Size();
 
-            return py::convert(return_value);
+            return py::converter<decltype(return_value)>::convert(return_value);
         }
         catch (...)
         {
@@ -2016,6 +1968,171 @@ PyObject* get_Size(PyObject* args) override
 
 namespace py
 {
+    template<>
+    struct winrt_type<winrt::Windows::Foundation::Collections::PropertySet>
+    {
+        static PyTypeObject* python_type;
+
+        static PyTypeObject* get_python_type()
+        {
+            return python_type;
+        }
+    };
+
+    template<>
+    struct winrt_type<winrt::Windows::Foundation::Collections::StringMap>
+    {
+        static PyTypeObject* python_type;
+
+        static PyTypeObject* get_python_type()
+        {
+            return python_type;
+        }
+    };
+
+    template<>
+    struct winrt_type<winrt::Windows::Foundation::Collections::ValueSet>
+    {
+        static PyTypeObject* python_type;
+
+        static PyTypeObject* get_python_type()
+        {
+            return python_type;
+        }
+    };
+
+    template<>
+    struct winrt_type<pyIIterable>
+    {
+        static PyTypeObject* python_type;
+
+        static PyTypeObject* get_python_type()
+        {
+            return python_type;
+        }
+    };
+
+    template<>
+    struct winrt_type<pyIIterator>
+    {
+        static PyTypeObject* python_type;
+
+        static PyTypeObject* get_python_type()
+        {
+            return python_type;
+        }
+    };
+
+    template<>
+    struct winrt_type<pyIKeyValuePair>
+    {
+        static PyTypeObject* python_type;
+
+        static PyTypeObject* get_python_type()
+        {
+            return python_type;
+        }
+    };
+
+    template<>
+    struct winrt_type<pyIMapChangedEventArgs>
+    {
+        static PyTypeObject* python_type;
+
+        static PyTypeObject* get_python_type()
+        {
+            return python_type;
+        }
+    };
+
+    template<>
+    struct winrt_type<pyIMapView>
+    {
+        static PyTypeObject* python_type;
+
+        static PyTypeObject* get_python_type()
+        {
+            return python_type;
+        }
+    };
+
+    template<>
+    struct winrt_type<pyIMap>
+    {
+        static PyTypeObject* python_type;
+
+        static PyTypeObject* get_python_type()
+        {
+            return python_type;
+        }
+    };
+
+    template<>
+    struct winrt_type<pyIObservableMap>
+    {
+        static PyTypeObject* python_type;
+
+        static PyTypeObject* get_python_type()
+        {
+            return python_type;
+        }
+    };
+
+    template<>
+    struct winrt_type<pyIObservableVector>
+    {
+        static PyTypeObject* python_type;
+
+        static PyTypeObject* get_python_type()
+        {
+            return python_type;
+        }
+    };
+
+    template<>
+    struct winrt_type<winrt::Windows::Foundation::Collections::IPropertySet>
+    {
+        static PyTypeObject* python_type;
+
+        static PyTypeObject* get_python_type()
+        {
+            return python_type;
+        }
+    };
+
+    template<>
+    struct winrt_type<winrt::Windows::Foundation::Collections::IVectorChangedEventArgs>
+    {
+        static PyTypeObject* python_type;
+
+        static PyTypeObject* get_python_type()
+        {
+            return python_type;
+        }
+    };
+
+    template<>
+    struct winrt_type<pyIVectorView>
+    {
+        static PyTypeObject* python_type;
+
+        static PyTypeObject* get_python_type()
+        {
+            return python_type;
+        }
+    };
+
+    template<>
+    struct winrt_type<pyIVector>
+    {
+        static PyTypeObject* python_type;
+
+        static PyTypeObject* get_python_type()
+        {
+            return python_type;
+        }
+    };
+
     template <typename T>
     struct pinterface_python_type<winrt::Windows::Foundation::Collections::IIterable<T>>
     {
