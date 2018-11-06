@@ -5,8 +5,7 @@
 // ----- JsonArray class --------------------
 PyTypeObject* py::winrt_type<winrt::Windows::Data::Json::JsonArray>::python_type;
 
-
-PyObject* JsonArray_new(PyTypeObject* type, PyObject* args, PyObject* kwds)
+static PyObject* JsonArray_new(PyTypeObject* type, PyObject* args, PyObject* kwds)
 {
     if (kwds != nullptr)
     {
@@ -49,7 +48,7 @@ static PyObject* JsonArray__from(PyObject* /*unused*/, PyObject* arg)
     try
     {
         auto instance = py::converter<winrt::Windows::Foundation::IInspectable>::convert_to(arg);
-        return py::converter<winrt::Windows::Data::Json::JsonArray>::convert(instance.as<winrt::Windows::Data::Json::JsonArray>());
+        return py::convert(instance.as<winrt::Windows::Data::Json::JsonArray>());
     }
     catch (...)
     {
@@ -119,7 +118,7 @@ static PyObject* JsonArray_First(py::winrt_wrapper<winrt::Windows::Data::Json::J
         {
             winrt::Windows::Foundation::Collections::IIterator<winrt::Windows::Data::Json::IJsonValue> return_value = self->obj.First();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -145,7 +144,7 @@ static PyObject* JsonArray_GetArray(py::winrt_wrapper<winrt::Windows::Data::Json
         {
             winrt::Windows::Data::Json::JsonArray return_value = self->obj.GetArray();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -173,7 +172,7 @@ static PyObject* JsonArray_GetArrayAt(py::winrt_wrapper<winrt::Windows::Data::Js
 
             winrt::Windows::Data::Json::JsonArray return_value = self->obj.GetArrayAt(param0);
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -201,7 +200,7 @@ static PyObject* JsonArray_GetAt(py::winrt_wrapper<winrt::Windows::Data::Json::J
 
             winrt::Windows::Data::Json::IJsonValue return_value = self->obj.GetAt(param0);
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -227,7 +226,7 @@ static PyObject* JsonArray_GetBoolean(py::winrt_wrapper<winrt::Windows::Data::Js
         {
             bool return_value = self->obj.GetBoolean();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -255,7 +254,7 @@ static PyObject* JsonArray_GetBooleanAt(py::winrt_wrapper<winrt::Windows::Data::
 
             bool return_value = self->obj.GetBooleanAt(param0);
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -284,7 +283,7 @@ static PyObject* JsonArray_GetMany(py::winrt_wrapper<winrt::Windows::Data::Json:
 
             uint32_t return_value = self->obj.GetMany(param0, param1);
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -310,7 +309,7 @@ static PyObject* JsonArray_GetNumber(py::winrt_wrapper<winrt::Windows::Data::Jso
         {
             double return_value = self->obj.GetNumber();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -338,7 +337,7 @@ static PyObject* JsonArray_GetNumberAt(py::winrt_wrapper<winrt::Windows::Data::J
 
             double return_value = self->obj.GetNumberAt(param0);
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -364,7 +363,7 @@ static PyObject* JsonArray_GetObject(py::winrt_wrapper<winrt::Windows::Data::Jso
         {
             winrt::Windows::Data::Json::JsonObject return_value = self->obj.GetObject();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -392,7 +391,7 @@ static PyObject* JsonArray_GetObjectAt(py::winrt_wrapper<winrt::Windows::Data::J
 
             winrt::Windows::Data::Json::JsonObject return_value = self->obj.GetObjectAt(param0);
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -418,7 +417,7 @@ static PyObject* JsonArray_GetString(py::winrt_wrapper<winrt::Windows::Data::Jso
         {
             winrt::hstring return_value = self->obj.GetString();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -446,7 +445,7 @@ static PyObject* JsonArray_GetStringAt(py::winrt_wrapper<winrt::Windows::Data::J
 
             winrt::hstring return_value = self->obj.GetStringAt(param0);
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -472,7 +471,7 @@ static PyObject* JsonArray_GetView(py::winrt_wrapper<winrt::Windows::Data::Json:
         {
             winrt::Windows::Foundation::Collections::IVectorView<winrt::Windows::Data::Json::IJsonValue> return_value = self->obj.GetView();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -501,13 +500,13 @@ static PyObject* JsonArray_IndexOf(py::winrt_wrapper<winrt::Windows::Data::Json:
 
             bool return_value = self->obj.IndexOf(param0, param1);
 
-            PyObject* out_return_value = py::converter<decltype(return_value)>::convert(return_value);
+            PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
             { 
                 return nullptr;
             };
 
-            PyObject* out1 = py::converter<decltype(param1)>::convert(param1);
+            PyObject* out1 = py::convert(param1);
             if (!out1) 
             {
                 return nullptr;
@@ -569,7 +568,7 @@ static PyObject* JsonArray_Parse(PyObject* /*unused*/, PyObject* args)
 
             winrt::Windows::Data::Json::JsonArray return_value = winrt::Windows::Data::Json::JsonArray::Parse(param0);
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -702,7 +701,7 @@ static PyObject* JsonArray_Stringify(py::winrt_wrapper<winrt::Windows::Data::Jso
         {
             winrt::hstring return_value = self->obj.Stringify();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -728,7 +727,7 @@ static PyObject* JsonArray_ToString(py::winrt_wrapper<winrt::Windows::Data::Json
         {
             winrt::hstring return_value = self->obj.ToString();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -757,13 +756,13 @@ static PyObject* JsonArray_TryParse(PyObject* /*unused*/, PyObject* args)
 
             bool return_value = winrt::Windows::Data::Json::JsonArray::TryParse(param0, param1);
 
-            PyObject* out_return_value = py::converter<decltype(return_value)>::convert(return_value);
+            PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
             { 
                 return nullptr;
             };
 
-            PyObject* out1 = py::converter<decltype(param1)>::convert(param1);
+            PyObject* out1 = py::convert(param1);
             if (!out1) 
             {
                 return nullptr;
@@ -796,7 +795,7 @@ static PyObject* JsonArray_get_Size(py::winrt_wrapper<winrt::Windows::Data::Json
         {
             uint32_t return_value = self->obj.Size();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -815,7 +814,7 @@ static PyObject* JsonArray_get_ValueType(py::winrt_wrapper<winrt::Windows::Data:
         {
             winrt::Windows::Data::Json::JsonValueType return_value = self->obj.ValueType();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -858,7 +857,6 @@ static PyMethodDef JsonArray_methods[] = {
 
 static PyType_Slot JsonArray_Type_slots[] = 
 {
-    { Py_tp_base, nullptr }, // filled out in module init
     { Py_tp_dealloc, JsonArray_dealloc },
     { Py_tp_new, JsonArray_new },
     { Py_tp_methods, JsonArray_methods },
@@ -877,8 +875,7 @@ static PyType_Spec JsonArray_Type_spec =
 // ----- JsonError class --------------------
 PyTypeObject* py::winrt_type<winrt::Windows::Data::Json::JsonError>::python_type;
 
-
-PyObject* JsonError_new(PyTypeObject* type, PyObject* args, PyObject* kwds)
+static PyObject* JsonError_new(PyTypeObject* type, PyObject* args, PyObject* kwds)
 {
     PyErr_SetString(PyExc_TypeError, "JsonError is not activatable");
     return nullptr;
@@ -896,7 +893,7 @@ static PyObject* JsonError_GetJsonStatus(PyObject* /*unused*/, PyObject* args)
 
             winrt::Windows::Data::Json::JsonErrorStatus return_value = winrt::Windows::Data::Json::JsonError::GetJsonStatus(param0);
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -936,8 +933,7 @@ static PyType_Spec JsonError_Type_spec =
 // ----- JsonObject class --------------------
 PyTypeObject* py::winrt_type<winrt::Windows::Data::Json::JsonObject>::python_type;
 
-
-PyObject* JsonObject_new(PyTypeObject* type, PyObject* args, PyObject* kwds)
+static PyObject* JsonObject_new(PyTypeObject* type, PyObject* args, PyObject* kwds)
 {
     if (kwds != nullptr)
     {
@@ -980,7 +976,7 @@ static PyObject* JsonObject__from(PyObject* /*unused*/, PyObject* arg)
     try
     {
         auto instance = py::converter<winrt::Windows::Foundation::IInspectable>::convert_to(arg);
-        return py::converter<winrt::Windows::Data::Json::JsonObject>::convert(instance.as<winrt::Windows::Data::Json::JsonObject>());
+        return py::convert(instance.as<winrt::Windows::Data::Json::JsonObject>());
     }
     catch (...)
     {
@@ -1023,7 +1019,7 @@ static PyObject* JsonObject_First(py::winrt_wrapper<winrt::Windows::Data::Json::
         {
             winrt::Windows::Foundation::Collections::IIterator<winrt::Windows::Foundation::Collections::IKeyValuePair<winrt::hstring, winrt::Windows::Data::Json::IJsonValue>> return_value = self->obj.First();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -1049,7 +1045,7 @@ static PyObject* JsonObject_GetArray(py::winrt_wrapper<winrt::Windows::Data::Jso
         {
             winrt::Windows::Data::Json::JsonArray return_value = self->obj.GetArray();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -1075,7 +1071,7 @@ static PyObject* JsonObject_GetBoolean(py::winrt_wrapper<winrt::Windows::Data::J
         {
             bool return_value = self->obj.GetBoolean();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -1103,7 +1099,7 @@ static PyObject* JsonObject_GetNamedArray(py::winrt_wrapper<winrt::Windows::Data
 
             winrt::Windows::Data::Json::JsonArray return_value = self->obj.GetNamedArray(param0);
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -1119,7 +1115,7 @@ static PyObject* JsonObject_GetNamedArray(py::winrt_wrapper<winrt::Windows::Data
 
             winrt::Windows::Data::Json::JsonArray return_value = self->obj.GetNamedArray(param0, param1);
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -1147,7 +1143,7 @@ static PyObject* JsonObject_GetNamedBoolean(py::winrt_wrapper<winrt::Windows::Da
 
             bool return_value = self->obj.GetNamedBoolean(param0);
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -1163,7 +1159,7 @@ static PyObject* JsonObject_GetNamedBoolean(py::winrt_wrapper<winrt::Windows::Da
 
             bool return_value = self->obj.GetNamedBoolean(param0, param1);
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -1191,7 +1187,7 @@ static PyObject* JsonObject_GetNamedNumber(py::winrt_wrapper<winrt::Windows::Dat
 
             double return_value = self->obj.GetNamedNumber(param0);
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -1207,7 +1203,7 @@ static PyObject* JsonObject_GetNamedNumber(py::winrt_wrapper<winrt::Windows::Dat
 
             double return_value = self->obj.GetNamedNumber(param0, param1);
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -1235,7 +1231,7 @@ static PyObject* JsonObject_GetNamedObject(py::winrt_wrapper<winrt::Windows::Dat
 
             winrt::Windows::Data::Json::JsonObject return_value = self->obj.GetNamedObject(param0);
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -1251,7 +1247,7 @@ static PyObject* JsonObject_GetNamedObject(py::winrt_wrapper<winrt::Windows::Dat
 
             winrt::Windows::Data::Json::JsonObject return_value = self->obj.GetNamedObject(param0, param1);
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -1279,7 +1275,7 @@ static PyObject* JsonObject_GetNamedString(py::winrt_wrapper<winrt::Windows::Dat
 
             winrt::hstring return_value = self->obj.GetNamedString(param0);
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -1295,7 +1291,7 @@ static PyObject* JsonObject_GetNamedString(py::winrt_wrapper<winrt::Windows::Dat
 
             winrt::hstring return_value = self->obj.GetNamedString(param0, param1);
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -1323,7 +1319,7 @@ static PyObject* JsonObject_GetNamedValue(py::winrt_wrapper<winrt::Windows::Data
 
             winrt::Windows::Data::Json::JsonValue return_value = self->obj.GetNamedValue(param0);
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -1339,7 +1335,7 @@ static PyObject* JsonObject_GetNamedValue(py::winrt_wrapper<winrt::Windows::Data
 
             winrt::Windows::Data::Json::JsonValue return_value = self->obj.GetNamedValue(param0, param1);
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -1365,7 +1361,7 @@ static PyObject* JsonObject_GetNumber(py::winrt_wrapper<winrt::Windows::Data::Js
         {
             double return_value = self->obj.GetNumber();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -1391,7 +1387,7 @@ static PyObject* JsonObject_GetObject(py::winrt_wrapper<winrt::Windows::Data::Js
         {
             winrt::Windows::Data::Json::JsonObject return_value = self->obj.GetObject();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -1417,7 +1413,7 @@ static PyObject* JsonObject_GetString(py::winrt_wrapper<winrt::Windows::Data::Js
         {
             winrt::hstring return_value = self->obj.GetString();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -1443,7 +1439,7 @@ static PyObject* JsonObject_GetView(py::winrt_wrapper<winrt::Windows::Data::Json
         {
             winrt::Windows::Foundation::Collections::IMapView<winrt::hstring, winrt::Windows::Data::Json::IJsonValue> return_value = self->obj.GetView();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -1471,7 +1467,7 @@ static PyObject* JsonObject_HasKey(py::winrt_wrapper<winrt::Windows::Data::Json:
 
             bool return_value = self->obj.HasKey(param0);
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -1500,7 +1496,7 @@ static PyObject* JsonObject_Insert(py::winrt_wrapper<winrt::Windows::Data::Json:
 
             bool return_value = self->obj.Insert(param0, param1);
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -1528,7 +1524,7 @@ static PyObject* JsonObject_Lookup(py::winrt_wrapper<winrt::Windows::Data::Json:
 
             winrt::Windows::Data::Json::IJsonValue return_value = self->obj.Lookup(param0);
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -1556,7 +1552,7 @@ static PyObject* JsonObject_Parse(PyObject* /*unused*/, PyObject* args)
 
             winrt::Windows::Data::Json::JsonObject return_value = winrt::Windows::Data::Json::JsonObject::Parse(param0);
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -1637,7 +1633,7 @@ static PyObject* JsonObject_Stringify(py::winrt_wrapper<winrt::Windows::Data::Js
         {
             winrt::hstring return_value = self->obj.Stringify();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -1663,7 +1659,7 @@ static PyObject* JsonObject_ToString(py::winrt_wrapper<winrt::Windows::Data::Jso
         {
             winrt::hstring return_value = self->obj.ToString();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -1692,13 +1688,13 @@ static PyObject* JsonObject_TryParse(PyObject* /*unused*/, PyObject* args)
 
             bool return_value = winrt::Windows::Data::Json::JsonObject::TryParse(param0, param1);
 
-            PyObject* out_return_value = py::converter<decltype(return_value)>::convert(return_value);
+            PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
             { 
                 return nullptr;
             };
 
-            PyObject* out1 = py::converter<decltype(param1)>::convert(param1);
+            PyObject* out1 = py::convert(param1);
             if (!out1) 
             {
                 return nullptr;
@@ -1731,7 +1727,7 @@ static PyObject* JsonObject_get_Size(py::winrt_wrapper<winrt::Windows::Data::Jso
         {
             uint32_t return_value = self->obj.Size();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -1750,7 +1746,7 @@ static PyObject* JsonObject_get_ValueType(py::winrt_wrapper<winrt::Windows::Data
         {
             winrt::Windows::Data::Json::JsonValueType return_value = self->obj.ValueType();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -1790,7 +1786,6 @@ static PyMethodDef JsonObject_methods[] = {
 
 static PyType_Slot JsonObject_Type_slots[] = 
 {
-    { Py_tp_base, nullptr }, // filled out in module init
     { Py_tp_dealloc, JsonObject_dealloc },
     { Py_tp_new, JsonObject_new },
     { Py_tp_methods, JsonObject_methods },
@@ -1809,8 +1804,7 @@ static PyType_Spec JsonObject_Type_spec =
 // ----- JsonValue class --------------------
 PyTypeObject* py::winrt_type<winrt::Windows::Data::Json::JsonValue>::python_type;
 
-
-PyObject* JsonValue_new(PyTypeObject* type, PyObject* args, PyObject* kwds)
+static PyObject* JsonValue_new(PyTypeObject* type, PyObject* args, PyObject* kwds)
 {
     PyErr_SetString(PyExc_TypeError, "JsonValue is not activatable");
     return nullptr;
@@ -1828,7 +1822,7 @@ static PyObject* JsonValue__from(PyObject* /*unused*/, PyObject* arg)
     try
     {
         auto instance = py::converter<winrt::Windows::Foundation::IInspectable>::convert_to(arg);
-        return py::converter<winrt::Windows::Data::Json::JsonValue>::convert(instance.as<winrt::Windows::Data::Json::JsonValue>());
+        return py::convert(instance.as<winrt::Windows::Data::Json::JsonValue>());
     }
     catch (...)
     {
@@ -1848,7 +1842,7 @@ static PyObject* JsonValue_CreateBooleanValue(PyObject* /*unused*/, PyObject* ar
 
             winrt::Windows::Data::Json::JsonValue return_value = winrt::Windows::Data::Json::JsonValue::CreateBooleanValue(param0);
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -1874,7 +1868,7 @@ static PyObject* JsonValue_CreateNullValue(PyObject* /*unused*/, PyObject* args)
         {
             winrt::Windows::Data::Json::JsonValue return_value = winrt::Windows::Data::Json::JsonValue::CreateNullValue();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -1902,7 +1896,7 @@ static PyObject* JsonValue_CreateNumberValue(PyObject* /*unused*/, PyObject* arg
 
             winrt::Windows::Data::Json::JsonValue return_value = winrt::Windows::Data::Json::JsonValue::CreateNumberValue(param0);
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -1930,7 +1924,7 @@ static PyObject* JsonValue_CreateStringValue(PyObject* /*unused*/, PyObject* arg
 
             winrt::Windows::Data::Json::JsonValue return_value = winrt::Windows::Data::Json::JsonValue::CreateStringValue(param0);
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -1956,7 +1950,7 @@ static PyObject* JsonValue_GetArray(py::winrt_wrapper<winrt::Windows::Data::Json
         {
             winrt::Windows::Data::Json::JsonArray return_value = self->obj.GetArray();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -1982,7 +1976,7 @@ static PyObject* JsonValue_GetBoolean(py::winrt_wrapper<winrt::Windows::Data::Js
         {
             bool return_value = self->obj.GetBoolean();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -2008,7 +2002,7 @@ static PyObject* JsonValue_GetNumber(py::winrt_wrapper<winrt::Windows::Data::Jso
         {
             double return_value = self->obj.GetNumber();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -2034,7 +2028,7 @@ static PyObject* JsonValue_GetObject(py::winrt_wrapper<winrt::Windows::Data::Jso
         {
             winrt::Windows::Data::Json::JsonObject return_value = self->obj.GetObject();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -2060,7 +2054,7 @@ static PyObject* JsonValue_GetString(py::winrt_wrapper<winrt::Windows::Data::Jso
         {
             winrt::hstring return_value = self->obj.GetString();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -2088,7 +2082,7 @@ static PyObject* JsonValue_Parse(PyObject* /*unused*/, PyObject* args)
 
             winrt::Windows::Data::Json::JsonValue return_value = winrt::Windows::Data::Json::JsonValue::Parse(param0);
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -2114,7 +2108,7 @@ static PyObject* JsonValue_Stringify(py::winrt_wrapper<winrt::Windows::Data::Jso
         {
             winrt::hstring return_value = self->obj.Stringify();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -2140,7 +2134,7 @@ static PyObject* JsonValue_ToString(py::winrt_wrapper<winrt::Windows::Data::Json
         {
             winrt::hstring return_value = self->obj.ToString();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -2169,13 +2163,13 @@ static PyObject* JsonValue_TryParse(PyObject* /*unused*/, PyObject* args)
 
             bool return_value = winrt::Windows::Data::Json::JsonValue::TryParse(param0, param1);
 
-            PyObject* out_return_value = py::converter<decltype(return_value)>::convert(return_value);
+            PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
             { 
                 return nullptr;
             };
 
-            PyObject* out1 = py::converter<decltype(param1)>::convert(param1);
+            PyObject* out1 = py::convert(param1);
             if (!out1) 
             {
                 return nullptr;
@@ -2208,7 +2202,7 @@ static PyObject* JsonValue_get_ValueType(py::winrt_wrapper<winrt::Windows::Data:
         {
             winrt::Windows::Data::Json::JsonValueType return_value = self->obj.ValueType();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -2237,7 +2231,6 @@ static PyMethodDef JsonValue_methods[] = {
 
 static PyType_Slot JsonValue_Type_slots[] = 
 {
-    { Py_tp_base, nullptr }, // filled out in module init
     { Py_tp_dealloc, JsonValue_dealloc },
     { Py_tp_new, JsonValue_new },
     { Py_tp_methods, JsonValue_methods },
@@ -2255,7 +2248,6 @@ static PyType_Spec JsonValue_Type_spec =
 
 // ----- IJsonValue interface --------------------
 PyTypeObject* py::winrt_type<winrt::Windows::Data::Json::IJsonValue>::python_type;
-
 
 PyObject* IJsonValue_new(PyTypeObject* type, PyObject* args, PyObject* kwds)
 {
@@ -2275,7 +2267,7 @@ static PyObject* IJsonValue__from(PyObject* /*unused*/, PyObject* arg)
     try
     {
         auto instance = py::converter<winrt::Windows::Foundation::IInspectable>::convert_to(arg);
-        return py::converter<winrt::Windows::Data::Json::IJsonValue>::convert(instance.as<winrt::Windows::Data::Json::IJsonValue>());
+        return py::convert(instance.as<winrt::Windows::Data::Json::IJsonValue>());
     }
     catch (...)
     {
@@ -2293,7 +2285,7 @@ static PyObject* IJsonValue_GetArray(py::winrt_wrapper<winrt::Windows::Data::Jso
         {
             winrt::Windows::Data::Json::JsonArray return_value = self->obj.GetArray();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -2319,7 +2311,7 @@ static PyObject* IJsonValue_GetBoolean(py::winrt_wrapper<winrt::Windows::Data::J
         {
             bool return_value = self->obj.GetBoolean();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -2345,7 +2337,7 @@ static PyObject* IJsonValue_GetNumber(py::winrt_wrapper<winrt::Windows::Data::Js
         {
             double return_value = self->obj.GetNumber();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -2371,7 +2363,7 @@ static PyObject* IJsonValue_GetObject(py::winrt_wrapper<winrt::Windows::Data::Js
         {
             winrt::Windows::Data::Json::JsonObject return_value = self->obj.GetObject();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -2397,7 +2389,7 @@ static PyObject* IJsonValue_GetString(py::winrt_wrapper<winrt::Windows::Data::Js
         {
             winrt::hstring return_value = self->obj.GetString();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -2423,7 +2415,7 @@ static PyObject* IJsonValue_Stringify(py::winrt_wrapper<winrt::Windows::Data::Js
         {
             winrt::hstring return_value = self->obj.Stringify();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -2450,7 +2442,7 @@ static PyObject* IJsonValue_get_ValueType(py::winrt_wrapper<winrt::Windows::Data
         {
             winrt::Windows::Data::Json::JsonValueType return_value = self->obj.ValueType();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -2472,7 +2464,6 @@ static PyMethodDef IJsonValue_methods[] = {
 
 static PyType_Slot IJsonValue_Type_slots[] = 
 {
-    { Py_tp_base, nullptr }, // filled out in module init
     { Py_tp_dealloc, IJsonValue_dealloc },
     { Py_tp_new, IJsonValue_new },
     { Py_tp_methods, IJsonValue_methods },
@@ -2493,20 +2484,21 @@ static PyType_Spec IJsonValue_Type_spec =
 int initialize_Windows_Data_Json(PyObject* module)
 {
     PyObject* type_object{ nullptr };
-
-
-    JsonArray_Type_slots[0].pfunc = py::winrt_type<py::winrt_base>::python_type;
-    type_object = PyType_FromSpec(&JsonArray_Type_spec);
+    PyObject* bases = PyTuple_Pack(1, py::winrt_type<py::winrt_base>::python_type);
+    
+    type_object = PyType_FromSpecWithBases(&JsonArray_Type_spec, bases);
     if (type_object == nullptr)
     {
         return -1;
     }
     if (PyModule_AddObject(module, "JsonArray", type_object) != 0)
     {
+        Py_DECREF(type_object);
         return -1;
     }
     py::winrt_type<winrt::Windows::Data::Json::JsonArray>::python_type = reinterpret_cast<PyTypeObject*>(type_object);
-
+    type_object = nullptr;
+    
     type_object = PyType_FromSpec(&JsonError_Type_spec);
     if (type_object == nullptr)
     {
@@ -2514,45 +2506,76 @@ int initialize_Windows_Data_Json(PyObject* module)
     }
     if (PyModule_AddObject(module, "JsonError", type_object) != 0)
     {
+        Py_DECREF(type_object);
         return -1;
     }
     py::winrt_type<winrt::Windows::Data::Json::JsonError>::python_type = reinterpret_cast<PyTypeObject*>(type_object);
-
-    JsonObject_Type_slots[0].pfunc = py::winrt_type<py::winrt_base>::python_type;
-    type_object = PyType_FromSpec(&JsonObject_Type_spec);
+    type_object = nullptr;
+    
+    type_object = PyType_FromSpecWithBases(&JsonObject_Type_spec, bases);
     if (type_object == nullptr)
     {
         return -1;
     }
     if (PyModule_AddObject(module, "JsonObject", type_object) != 0)
     {
+        Py_DECREF(type_object);
         return -1;
     }
     py::winrt_type<winrt::Windows::Data::Json::JsonObject>::python_type = reinterpret_cast<PyTypeObject*>(type_object);
-
-    JsonValue_Type_slots[0].pfunc = py::winrt_type<py::winrt_base>::python_type;
-    type_object = PyType_FromSpec(&JsonValue_Type_spec);
+    type_object = nullptr;
+    
+    type_object = PyType_FromSpecWithBases(&JsonValue_Type_spec, bases);
     if (type_object == nullptr)
     {
         return -1;
     }
     if (PyModule_AddObject(module, "JsonValue", type_object) != 0)
     {
+        Py_DECREF(type_object);
         return -1;
     }
     py::winrt_type<winrt::Windows::Data::Json::JsonValue>::python_type = reinterpret_cast<PyTypeObject*>(type_object);
-
-    IJsonValue_Type_slots[0].pfunc = py::winrt_type<py::winrt_base>::python_type;
-    type_object = PyType_FromSpec(&IJsonValue_Type_spec);
+    type_object = nullptr;
+    
+    type_object = PyType_FromSpecWithBases(&IJsonValue_Type_spec, bases);
     if (type_object == nullptr)
     {
         return -1;
     }
     if (PyModule_AddObject(module, "IJsonValue", type_object) != 0)
     {
+        Py_DECREF(type_object);
         return -1;
     }
     py::winrt_type<winrt::Windows::Data::Json::IJsonValue>::python_type = reinterpret_cast<PyTypeObject*>(type_object);
+    type_object = nullptr;
     
+    Py_DECREF(bases);
     return 0;
+}
+
+static PyModuleDef_Slot module_slots[] = {
+    {Py_mod_exec, initialize_Windows_Data_Json},
+    {0, nullptr}
+};
+
+PyDoc_STRVAR(module_doc, "Langworthy projection module.\n");
+
+static struct PyModuleDef module_def = {
+    PyModuleDef_HEAD_INIT,
+    "_pyrt_Windows_Data_Json",
+    module_doc,
+    0,
+    nullptr,
+    module_slots,
+    nullptr,
+    nullptr,
+    nullptr
+};
+
+PyMODINIT_FUNC
+PyInit__pyrt_Windows_Data_Json(void)
+{
+    return PyModuleDef_Init(&module_def);
 }

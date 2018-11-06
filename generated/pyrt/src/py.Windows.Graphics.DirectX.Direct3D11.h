@@ -9,7 +9,6 @@
 
 #include <winrt/Windows.Graphics.DirectX.Direct3D11.h>
 
-int initialize_Windows_Graphics_DirectX_Direct3D11(PyObject* module);
 
 namespace py
 {

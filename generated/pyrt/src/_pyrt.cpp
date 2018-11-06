@@ -82,57 +82,18 @@ static PyMethodDef module_methods[]{
 
 static int module_exec(PyObject* module)
 {
-    PyObject* type_object{ nullptr };
-    type_object = PyType_FromSpec(&winrt_base_Type_spec);
+    PyObject* type_object = PyType_FromSpec(&winrt_base_Type_spec);
     if (type_object == nullptr)
     {
         return -1;
     }
     if (PyModule_AddObject(module, "_winrt_base", type_object) != 0)
     {
+        Py_DECREF(type_object);
         return -1;
     }
     py::winrt_type<py::winrt_base>::python_type = reinterpret_cast<PyTypeObject*>(type_object);
-
-    if (initialize_Windows_Data_Json(module) != 0)
-    {
-        return -1;
-    }
-
-    if (initialize_Windows_Devices_Geolocation(module) != 0)
-    {
-        return -1;
-    }
-
-    if (initialize_Windows_Devices_Geolocation_Geofencing(module) != 0)
-    {
-        return -1;
-    }
-
-    if (initialize_Windows_Foundation(module) != 0)
-    {
-        return -1;
-    }
-
-    if (initialize_Windows_Foundation_Collections(module) != 0)
-    {
-        return -1;
-    }
-
-    if (initialize_Windows_Foundation_Numerics(module) != 0)
-    {
-        return -1;
-    }
-
-    if (initialize_Windows_Graphics_DirectX(module) != 0)
-    {
-        return -1;
-    }
-
-    if (initialize_Windows_Graphics_DirectX_Direct3D11(module) != 0)
-    {
-        return -1;
-    }
+    type_object = nullptr;
 
     return 0;
 }

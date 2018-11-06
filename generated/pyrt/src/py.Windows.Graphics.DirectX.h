@@ -6,7 +6,6 @@
 
 #include <winrt/Windows.Graphics.DirectX.h>
 
-int initialize_Windows_Graphics_DirectX(PyObject* module);
 
 namespace py
 {

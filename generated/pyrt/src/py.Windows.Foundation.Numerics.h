@@ -6,7 +6,6 @@
 
 #include <winrt/Windows.Foundation.Numerics.h>
 
-int initialize_Windows_Foundation_Numerics(PyObject* module);
 
 namespace py
 {

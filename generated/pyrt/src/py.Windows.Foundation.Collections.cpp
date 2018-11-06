@@ -5,8 +5,7 @@
 // ----- PropertySet class --------------------
 PyTypeObject* py::winrt_type<winrt::Windows::Foundation::Collections::PropertySet>::python_type;
 
-
-PyObject* PropertySet_new(PyTypeObject* type, PyObject* args, PyObject* kwds)
+static PyObject* PropertySet_new(PyTypeObject* type, PyObject* args, PyObject* kwds)
 {
     if (kwds != nullptr)
     {
@@ -49,7 +48,7 @@ static PyObject* PropertySet__from(PyObject* /*unused*/, PyObject* arg)
     try
     {
         auto instance = py::converter<winrt::Windows::Foundation::IInspectable>::convert_to(arg);
-        return py::converter<winrt::Windows::Foundation::Collections::PropertySet>::convert(instance.as<winrt::Windows::Foundation::Collections::PropertySet>());
+        return py::convert(instance.as<winrt::Windows::Foundation::Collections::PropertySet>());
     }
     catch (...)
     {
@@ -92,7 +91,7 @@ static PyObject* PropertySet_First(py::winrt_wrapper<winrt::Windows::Foundation:
         {
             winrt::Windows::Foundation::Collections::IIterator<winrt::Windows::Foundation::Collections::IKeyValuePair<winrt::hstring, winrt::Windows::Foundation::IInspectable>> return_value = self->obj.First();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -118,7 +117,7 @@ static PyObject* PropertySet_GetView(py::winrt_wrapper<winrt::Windows::Foundatio
         {
             winrt::Windows::Foundation::Collections::IMapView<winrt::hstring, winrt::Windows::Foundation::IInspectable> return_value = self->obj.GetView();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -146,7 +145,7 @@ static PyObject* PropertySet_HasKey(py::winrt_wrapper<winrt::Windows::Foundation
 
             bool return_value = self->obj.HasKey(param0);
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -175,7 +174,7 @@ static PyObject* PropertySet_Insert(py::winrt_wrapper<winrt::Windows::Foundation
 
             bool return_value = self->obj.Insert(param0, param1);
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -203,7 +202,7 @@ static PyObject* PropertySet_Lookup(py::winrt_wrapper<winrt::Windows::Foundation
 
             winrt::Windows::Foundation::IInspectable return_value = self->obj.Lookup(param0);
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -254,7 +253,7 @@ static PyObject* PropertySet_add_MapChanged(py::winrt_wrapper<winrt::Windows::Fo
 
             winrt::event_token return_value = self->obj.MapChanged(param0);
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -273,7 +272,7 @@ static PyObject* PropertySet_get_Size(py::winrt_wrapper<winrt::Windows::Foundati
         {
             uint32_t return_value = self->obj.Size();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -313,7 +312,6 @@ static PyMethodDef PropertySet_methods[] = {
 
 static PyType_Slot PropertySet_Type_slots[] = 
 {
-    { Py_tp_base, nullptr }, // filled out in module init
     { Py_tp_dealloc, PropertySet_dealloc },
     { Py_tp_new, PropertySet_new },
     { Py_tp_methods, PropertySet_methods },
@@ -332,8 +330,7 @@ static PyType_Spec PropertySet_Type_spec =
 // ----- StringMap class --------------------
 PyTypeObject* py::winrt_type<winrt::Windows::Foundation::Collections::StringMap>::python_type;
 
-
-PyObject* StringMap_new(PyTypeObject* type, PyObject* args, PyObject* kwds)
+static PyObject* StringMap_new(PyTypeObject* type, PyObject* args, PyObject* kwds)
 {
     if (kwds != nullptr)
     {
@@ -376,7 +373,7 @@ static PyObject* StringMap__from(PyObject* /*unused*/, PyObject* arg)
     try
     {
         auto instance = py::converter<winrt::Windows::Foundation::IInspectable>::convert_to(arg);
-        return py::converter<winrt::Windows::Foundation::Collections::StringMap>::convert(instance.as<winrt::Windows::Foundation::Collections::StringMap>());
+        return py::convert(instance.as<winrt::Windows::Foundation::Collections::StringMap>());
     }
     catch (...)
     {
@@ -419,7 +416,7 @@ static PyObject* StringMap_First(py::winrt_wrapper<winrt::Windows::Foundation::C
         {
             winrt::Windows::Foundation::Collections::IIterator<winrt::Windows::Foundation::Collections::IKeyValuePair<winrt::hstring, winrt::hstring>> return_value = self->obj.First();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -445,7 +442,7 @@ static PyObject* StringMap_GetView(py::winrt_wrapper<winrt::Windows::Foundation:
         {
             winrt::Windows::Foundation::Collections::IMapView<winrt::hstring, winrt::hstring> return_value = self->obj.GetView();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -473,7 +470,7 @@ static PyObject* StringMap_HasKey(py::winrt_wrapper<winrt::Windows::Foundation::
 
             bool return_value = self->obj.HasKey(param0);
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -502,7 +499,7 @@ static PyObject* StringMap_Insert(py::winrt_wrapper<winrt::Windows::Foundation::
 
             bool return_value = self->obj.Insert(param0, param1);
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -530,7 +527,7 @@ static PyObject* StringMap_Lookup(py::winrt_wrapper<winrt::Windows::Foundation::
 
             winrt::hstring return_value = self->obj.Lookup(param0);
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -581,7 +578,7 @@ static PyObject* StringMap_add_MapChanged(py::winrt_wrapper<winrt::Windows::Foun
 
             winrt::event_token return_value = self->obj.MapChanged(param0);
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -600,7 +597,7 @@ static PyObject* StringMap_get_Size(py::winrt_wrapper<winrt::Windows::Foundation
         {
             uint32_t return_value = self->obj.Size();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -640,7 +637,6 @@ static PyMethodDef StringMap_methods[] = {
 
 static PyType_Slot StringMap_Type_slots[] = 
 {
-    { Py_tp_base, nullptr }, // filled out in module init
     { Py_tp_dealloc, StringMap_dealloc },
     { Py_tp_new, StringMap_new },
     { Py_tp_methods, StringMap_methods },
@@ -659,8 +655,7 @@ static PyType_Spec StringMap_Type_spec =
 // ----- ValueSet class --------------------
 PyTypeObject* py::winrt_type<winrt::Windows::Foundation::Collections::ValueSet>::python_type;
 
-
-PyObject* ValueSet_new(PyTypeObject* type, PyObject* args, PyObject* kwds)
+static PyObject* ValueSet_new(PyTypeObject* type, PyObject* args, PyObject* kwds)
 {
     if (kwds != nullptr)
     {
@@ -703,7 +698,7 @@ static PyObject* ValueSet__from(PyObject* /*unused*/, PyObject* arg)
     try
     {
         auto instance = py::converter<winrt::Windows::Foundation::IInspectable>::convert_to(arg);
-        return py::converter<winrt::Windows::Foundation::Collections::ValueSet>::convert(instance.as<winrt::Windows::Foundation::Collections::ValueSet>());
+        return py::convert(instance.as<winrt::Windows::Foundation::Collections::ValueSet>());
     }
     catch (...)
     {
@@ -746,7 +741,7 @@ static PyObject* ValueSet_First(py::winrt_wrapper<winrt::Windows::Foundation::Co
         {
             winrt::Windows::Foundation::Collections::IIterator<winrt::Windows::Foundation::Collections::IKeyValuePair<winrt::hstring, winrt::Windows::Foundation::IInspectable>> return_value = self->obj.First();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -772,7 +767,7 @@ static PyObject* ValueSet_GetView(py::winrt_wrapper<winrt::Windows::Foundation::
         {
             winrt::Windows::Foundation::Collections::IMapView<winrt::hstring, winrt::Windows::Foundation::IInspectable> return_value = self->obj.GetView();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -800,7 +795,7 @@ static PyObject* ValueSet_HasKey(py::winrt_wrapper<winrt::Windows::Foundation::C
 
             bool return_value = self->obj.HasKey(param0);
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -829,7 +824,7 @@ static PyObject* ValueSet_Insert(py::winrt_wrapper<winrt::Windows::Foundation::C
 
             bool return_value = self->obj.Insert(param0, param1);
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -857,7 +852,7 @@ static PyObject* ValueSet_Lookup(py::winrt_wrapper<winrt::Windows::Foundation::C
 
             winrt::Windows::Foundation::IInspectable return_value = self->obj.Lookup(param0);
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -908,7 +903,7 @@ static PyObject* ValueSet_add_MapChanged(py::winrt_wrapper<winrt::Windows::Found
 
             winrt::event_token return_value = self->obj.MapChanged(param0);
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -927,7 +922,7 @@ static PyObject* ValueSet_get_Size(py::winrt_wrapper<winrt::Windows::Foundation:
         {
             uint32_t return_value = self->obj.Size();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -967,7 +962,6 @@ static PyMethodDef ValueSet_methods[] = {
 
 static PyType_Slot ValueSet_Type_slots[] = 
 {
-    { Py_tp_base, nullptr }, // filled out in module init
     { Py_tp_dealloc, ValueSet_dealloc },
     { Py_tp_new, ValueSet_new },
     { Py_tp_methods, ValueSet_methods },
@@ -985,7 +979,6 @@ static PyType_Spec ValueSet_Type_spec =
 
 // ----- IIterable interface --------------------
 PyTypeObject* py::winrt_type<pyIIterable>::python_type;
-
 
 PyObject* IIterable_new(PyTypeObject* type, PyObject* args, PyObject* kwds)
 {
@@ -1012,7 +1005,6 @@ static PyMethodDef IIterable_methods[] = {
 
 static PyType_Slot IIterable_Type_slots[] = 
 {
-    { Py_tp_base, nullptr }, // filled out in module init
     { Py_tp_dealloc, IIterable_dealloc },
     { Py_tp_new, IIterable_new },
     { Py_tp_methods, IIterable_methods },
@@ -1030,7 +1022,6 @@ static PyType_Spec IIterable_Type_spec =
 
 // ----- IIterator interface --------------------
 PyTypeObject* py::winrt_type<pyIIterator>::python_type;
-
 
 PyObject* IIterator_new(PyTypeObject* type, PyObject* args, PyObject* kwds)
 {
@@ -1075,7 +1066,6 @@ static PyMethodDef IIterator_methods[] = {
 
 static PyType_Slot IIterator_Type_slots[] = 
 {
-    { Py_tp_base, nullptr }, // filled out in module init
     { Py_tp_dealloc, IIterator_dealloc },
     { Py_tp_new, IIterator_new },
     { Py_tp_methods, IIterator_methods },
@@ -1093,7 +1083,6 @@ static PyType_Spec IIterator_Type_spec =
 
 // ----- IKeyValuePair interface --------------------
 PyTypeObject* py::winrt_type<pyIKeyValuePair>::python_type;
-
 
 PyObject* IKeyValuePair_new(PyTypeObject* type, PyObject* args, PyObject* kwds)
 {
@@ -1126,7 +1115,6 @@ static PyMethodDef IKeyValuePair_methods[] = {
 
 static PyType_Slot IKeyValuePair_Type_slots[] = 
 {
-    { Py_tp_base, nullptr }, // filled out in module init
     { Py_tp_dealloc, IKeyValuePair_dealloc },
     { Py_tp_new, IKeyValuePair_new },
     { Py_tp_methods, IKeyValuePair_methods },
@@ -1144,7 +1132,6 @@ static PyType_Spec IKeyValuePair_Type_spec =
 
 // ----- IMapChangedEventArgs interface --------------------
 PyTypeObject* py::winrt_type<pyIMapChangedEventArgs>::python_type;
-
 
 PyObject* IMapChangedEventArgs_new(PyTypeObject* type, PyObject* args, PyObject* kwds)
 {
@@ -1177,7 +1164,6 @@ static PyMethodDef IMapChangedEventArgs_methods[] = {
 
 static PyType_Slot IMapChangedEventArgs_Type_slots[] = 
 {
-    { Py_tp_base, nullptr }, // filled out in module init
     { Py_tp_dealloc, IMapChangedEventArgs_dealloc },
     { Py_tp_new, IMapChangedEventArgs_new },
     { Py_tp_methods, IMapChangedEventArgs_methods },
@@ -1195,7 +1181,6 @@ static PyType_Spec IMapChangedEventArgs_Type_spec =
 
 // ----- IMapView interface --------------------
 PyTypeObject* py::winrt_type<pyIMapView>::python_type;
-
 
 PyObject* IMapView_new(PyTypeObject* type, PyObject* args, PyObject* kwds)
 {
@@ -1246,7 +1231,6 @@ static PyMethodDef IMapView_methods[] = {
 
 static PyType_Slot IMapView_Type_slots[] = 
 {
-    { Py_tp_base, nullptr }, // filled out in module init
     { Py_tp_dealloc, IMapView_dealloc },
     { Py_tp_new, IMapView_new },
     { Py_tp_methods, IMapView_methods },
@@ -1264,7 +1248,6 @@ static PyType_Spec IMapView_Type_spec =
 
 // ----- IMap interface --------------------
 PyTypeObject* py::winrt_type<pyIMap>::python_type;
-
 
 PyObject* IMap_new(PyTypeObject* type, PyObject* args, PyObject* kwds)
 {
@@ -1333,7 +1316,6 @@ static PyMethodDef IMap_methods[] = {
 
 static PyType_Slot IMap_Type_slots[] = 
 {
-    { Py_tp_base, nullptr }, // filled out in module init
     { Py_tp_dealloc, IMap_dealloc },
     { Py_tp_new, IMap_new },
     { Py_tp_methods, IMap_methods },
@@ -1351,7 +1333,6 @@ static PyType_Spec IMap_Type_spec =
 
 // ----- IObservableMap interface --------------------
 PyTypeObject* py::winrt_type<pyIObservableMap>::python_type;
-
 
 PyObject* IObservableMap_new(PyTypeObject* type, PyObject* args, PyObject* kwds)
 {
@@ -1432,7 +1413,6 @@ static PyMethodDef IObservableMap_methods[] = {
 
 static PyType_Slot IObservableMap_Type_slots[] = 
 {
-    { Py_tp_base, nullptr }, // filled out in module init
     { Py_tp_dealloc, IObservableMap_dealloc },
     { Py_tp_new, IObservableMap_new },
     { Py_tp_methods, IObservableMap_methods },
@@ -1450,7 +1430,6 @@ static PyType_Spec IObservableMap_Type_spec =
 
 // ----- IObservableVector interface --------------------
 PyTypeObject* py::winrt_type<pyIObservableVector>::python_type;
-
 
 PyObject* IObservableVector_new(PyTypeObject* type, PyObject* args, PyObject* kwds)
 {
@@ -1561,7 +1540,6 @@ static PyMethodDef IObservableVector_methods[] = {
 
 static PyType_Slot IObservableVector_Type_slots[] = 
 {
-    { Py_tp_base, nullptr }, // filled out in module init
     { Py_tp_dealloc, IObservableVector_dealloc },
     { Py_tp_new, IObservableVector_new },
     { Py_tp_methods, IObservableVector_methods },
@@ -1579,7 +1557,6 @@ static PyType_Spec IObservableVector_Type_spec =
 
 // ----- IPropertySet interface --------------------
 PyTypeObject* py::winrt_type<winrt::Windows::Foundation::Collections::IPropertySet>::python_type;
-
 
 PyObject* IPropertySet_new(PyTypeObject* type, PyObject* args, PyObject* kwds)
 {
@@ -1599,7 +1576,7 @@ static PyObject* IPropertySet__from(PyObject* /*unused*/, PyObject* arg)
     try
     {
         auto instance = py::converter<winrt::Windows::Foundation::IInspectable>::convert_to(arg);
-        return py::converter<winrt::Windows::Foundation::Collections::IPropertySet>::convert(instance.as<winrt::Windows::Foundation::Collections::IPropertySet>());
+        return py::convert(instance.as<winrt::Windows::Foundation::Collections::IPropertySet>());
     }
     catch (...)
     {
@@ -1642,7 +1619,7 @@ static PyObject* IPropertySet_First(py::winrt_wrapper<winrt::Windows::Foundation
         {
             winrt::Windows::Foundation::Collections::IIterator<winrt::Windows::Foundation::Collections::IKeyValuePair<winrt::hstring, winrt::Windows::Foundation::IInspectable>> return_value = self->obj.First();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -1668,7 +1645,7 @@ static PyObject* IPropertySet_GetView(py::winrt_wrapper<winrt::Windows::Foundati
         {
             winrt::Windows::Foundation::Collections::IMapView<winrt::hstring, winrt::Windows::Foundation::IInspectable> return_value = self->obj.GetView();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -1696,7 +1673,7 @@ static PyObject* IPropertySet_HasKey(py::winrt_wrapper<winrt::Windows::Foundatio
 
             bool return_value = self->obj.HasKey(param0);
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -1725,7 +1702,7 @@ static PyObject* IPropertySet_Insert(py::winrt_wrapper<winrt::Windows::Foundatio
 
             bool return_value = self->obj.Insert(param0, param1);
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -1753,7 +1730,7 @@ static PyObject* IPropertySet_Lookup(py::winrt_wrapper<winrt::Windows::Foundatio
 
             winrt::Windows::Foundation::IInspectable return_value = self->obj.Lookup(param0);
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -1804,7 +1781,7 @@ static PyObject* IPropertySet_add_MapChanged(py::winrt_wrapper<winrt::Windows::F
 
             winrt::event_token return_value = self->obj.MapChanged(param0);
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -1823,7 +1800,7 @@ static PyObject* IPropertySet_get_Size(py::winrt_wrapper<winrt::Windows::Foundat
         {
             uint32_t return_value = self->obj.Size();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -1863,7 +1840,6 @@ static PyMethodDef IPropertySet_methods[] = {
 
 static PyType_Slot IPropertySet_Type_slots[] = 
 {
-    { Py_tp_base, nullptr }, // filled out in module init
     { Py_tp_dealloc, IPropertySet_dealloc },
     { Py_tp_new, IPropertySet_new },
     { Py_tp_methods, IPropertySet_methods },
@@ -1881,7 +1857,6 @@ static PyType_Spec IPropertySet_Type_spec =
 
 // ----- IVectorChangedEventArgs interface --------------------
 PyTypeObject* py::winrt_type<winrt::Windows::Foundation::Collections::IVectorChangedEventArgs>::python_type;
-
 
 PyObject* IVectorChangedEventArgs_new(PyTypeObject* type, PyObject* args, PyObject* kwds)
 {
@@ -1901,7 +1876,7 @@ static PyObject* IVectorChangedEventArgs__from(PyObject* /*unused*/, PyObject* a
     try
     {
         auto instance = py::converter<winrt::Windows::Foundation::IInspectable>::convert_to(arg);
-        return py::converter<winrt::Windows::Foundation::Collections::IVectorChangedEventArgs>::convert(instance.as<winrt::Windows::Foundation::Collections::IVectorChangedEventArgs>());
+        return py::convert(instance.as<winrt::Windows::Foundation::Collections::IVectorChangedEventArgs>());
     }
     catch (...)
     {
@@ -1920,7 +1895,7 @@ static PyObject* IVectorChangedEventArgs_get_CollectionChange(py::winrt_wrapper<
         {
             winrt::Windows::Foundation::Collections::CollectionChange return_value = self->obj.CollectionChange();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -1939,7 +1914,7 @@ static PyObject* IVectorChangedEventArgs_get_Index(py::winrt_wrapper<winrt::Wind
         {
             uint32_t return_value = self->obj.Index();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -1956,7 +1931,6 @@ static PyMethodDef IVectorChangedEventArgs_methods[] = {
 
 static PyType_Slot IVectorChangedEventArgs_Type_slots[] = 
 {
-    { Py_tp_base, nullptr }, // filled out in module init
     { Py_tp_dealloc, IVectorChangedEventArgs_dealloc },
     { Py_tp_new, IVectorChangedEventArgs_new },
     { Py_tp_methods, IVectorChangedEventArgs_methods },
@@ -1974,7 +1948,6 @@ static PyType_Spec IVectorChangedEventArgs_Type_spec =
 
 // ----- IVectorView interface --------------------
 PyTypeObject* py::winrt_type<pyIVectorView>::python_type;
-
 
 PyObject* IVectorView_new(PyTypeObject* type, PyObject* args, PyObject* kwds)
 {
@@ -2025,7 +1998,6 @@ static PyMethodDef IVectorView_methods[] = {
 
 static PyType_Slot IVectorView_Type_slots[] = 
 {
-    { Py_tp_base, nullptr }, // filled out in module init
     { Py_tp_dealloc, IVectorView_dealloc },
     { Py_tp_new, IVectorView_new },
     { Py_tp_methods, IVectorView_methods },
@@ -2043,7 +2015,6 @@ static PyType_Spec IVectorView_Type_spec =
 
 // ----- IVector interface --------------------
 PyTypeObject* py::winrt_type<pyIVector>::python_type;
-
 
 PyObject* IVector_new(PyTypeObject* type, PyObject* args, PyObject* kwds)
 {
@@ -2142,7 +2113,6 @@ static PyMethodDef IVector_methods[] = {
 
 static PyType_Slot IVector_Type_slots[] = 
 {
-    { Py_tp_base, nullptr }, // filled out in module init
     { Py_tp_dealloc, IVector_dealloc },
     { Py_tp_new, IVector_new },
     { Py_tp_methods, IVector_methods },
@@ -2163,187 +2133,228 @@ static PyType_Spec IVector_Type_spec =
 int initialize_Windows_Foundation_Collections(PyObject* module)
 {
     PyObject* type_object{ nullptr };
-
-
-    PropertySet_Type_slots[0].pfunc = py::winrt_type<py::winrt_base>::python_type;
-    type_object = PyType_FromSpec(&PropertySet_Type_spec);
+    PyObject* bases = PyTuple_Pack(1, py::winrt_type<py::winrt_base>::python_type);
+    
+    type_object = PyType_FromSpecWithBases(&PropertySet_Type_spec, bases);
     if (type_object == nullptr)
     {
         return -1;
     }
     if (PyModule_AddObject(module, "PropertySet", type_object) != 0)
     {
+        Py_DECREF(type_object);
         return -1;
     }
     py::winrt_type<winrt::Windows::Foundation::Collections::PropertySet>::python_type = reinterpret_cast<PyTypeObject*>(type_object);
-
-    StringMap_Type_slots[0].pfunc = py::winrt_type<py::winrt_base>::python_type;
-    type_object = PyType_FromSpec(&StringMap_Type_spec);
+    type_object = nullptr;
+    
+    type_object = PyType_FromSpecWithBases(&StringMap_Type_spec, bases);
     if (type_object == nullptr)
     {
         return -1;
     }
     if (PyModule_AddObject(module, "StringMap", type_object) != 0)
     {
+        Py_DECREF(type_object);
         return -1;
     }
     py::winrt_type<winrt::Windows::Foundation::Collections::StringMap>::python_type = reinterpret_cast<PyTypeObject*>(type_object);
-
-    ValueSet_Type_slots[0].pfunc = py::winrt_type<py::winrt_base>::python_type;
-    type_object = PyType_FromSpec(&ValueSet_Type_spec);
+    type_object = nullptr;
+    
+    type_object = PyType_FromSpecWithBases(&ValueSet_Type_spec, bases);
     if (type_object == nullptr)
     {
         return -1;
     }
     if (PyModule_AddObject(module, "ValueSet", type_object) != 0)
     {
+        Py_DECREF(type_object);
         return -1;
     }
     py::winrt_type<winrt::Windows::Foundation::Collections::ValueSet>::python_type = reinterpret_cast<PyTypeObject*>(type_object);
-
-    IIterable_Type_slots[0].pfunc = py::winrt_type<py::winrt_base>::python_type;
-    type_object = PyType_FromSpec(&IIterable_Type_spec);
+    type_object = nullptr;
+    
+    type_object = PyType_FromSpecWithBases(&IIterable_Type_spec, bases);
     if (type_object == nullptr)
     {
         return -1;
     }
     if (PyModule_AddObject(module, "IIterable", type_object) != 0)
     {
+        Py_DECREF(type_object);
         return -1;
     }
     py::winrt_type<pyIIterable>::python_type = reinterpret_cast<PyTypeObject*>(type_object);
-
-    IIterator_Type_slots[0].pfunc = py::winrt_type<py::winrt_base>::python_type;
-    type_object = PyType_FromSpec(&IIterator_Type_spec);
+    type_object = nullptr;
+    
+    type_object = PyType_FromSpecWithBases(&IIterator_Type_spec, bases);
     if (type_object == nullptr)
     {
         return -1;
     }
     if (PyModule_AddObject(module, "IIterator", type_object) != 0)
     {
+        Py_DECREF(type_object);
         return -1;
     }
     py::winrt_type<pyIIterator>::python_type = reinterpret_cast<PyTypeObject*>(type_object);
-
-    IKeyValuePair_Type_slots[0].pfunc = py::winrt_type<py::winrt_base>::python_type;
-    type_object = PyType_FromSpec(&IKeyValuePair_Type_spec);
+    type_object = nullptr;
+    
+    type_object = PyType_FromSpecWithBases(&IKeyValuePair_Type_spec, bases);
     if (type_object == nullptr)
     {
         return -1;
     }
     if (PyModule_AddObject(module, "IKeyValuePair", type_object) != 0)
     {
+        Py_DECREF(type_object);
         return -1;
     }
     py::winrt_type<pyIKeyValuePair>::python_type = reinterpret_cast<PyTypeObject*>(type_object);
-
-    IMapChangedEventArgs_Type_slots[0].pfunc = py::winrt_type<py::winrt_base>::python_type;
-    type_object = PyType_FromSpec(&IMapChangedEventArgs_Type_spec);
+    type_object = nullptr;
+    
+    type_object = PyType_FromSpecWithBases(&IMapChangedEventArgs_Type_spec, bases);
     if (type_object == nullptr)
     {
         return -1;
     }
     if (PyModule_AddObject(module, "IMapChangedEventArgs", type_object) != 0)
     {
+        Py_DECREF(type_object);
         return -1;
     }
     py::winrt_type<pyIMapChangedEventArgs>::python_type = reinterpret_cast<PyTypeObject*>(type_object);
-
-    IMapView_Type_slots[0].pfunc = py::winrt_type<py::winrt_base>::python_type;
-    type_object = PyType_FromSpec(&IMapView_Type_spec);
+    type_object = nullptr;
+    
+    type_object = PyType_FromSpecWithBases(&IMapView_Type_spec, bases);
     if (type_object == nullptr)
     {
         return -1;
     }
     if (PyModule_AddObject(module, "IMapView", type_object) != 0)
     {
+        Py_DECREF(type_object);
         return -1;
     }
     py::winrt_type<pyIMapView>::python_type = reinterpret_cast<PyTypeObject*>(type_object);
-
-    IMap_Type_slots[0].pfunc = py::winrt_type<py::winrt_base>::python_type;
-    type_object = PyType_FromSpec(&IMap_Type_spec);
+    type_object = nullptr;
+    
+    type_object = PyType_FromSpecWithBases(&IMap_Type_spec, bases);
     if (type_object == nullptr)
     {
         return -1;
     }
     if (PyModule_AddObject(module, "IMap", type_object) != 0)
     {
+        Py_DECREF(type_object);
         return -1;
     }
     py::winrt_type<pyIMap>::python_type = reinterpret_cast<PyTypeObject*>(type_object);
-
-    IObservableMap_Type_slots[0].pfunc = py::winrt_type<py::winrt_base>::python_type;
-    type_object = PyType_FromSpec(&IObservableMap_Type_spec);
+    type_object = nullptr;
+    
+    type_object = PyType_FromSpecWithBases(&IObservableMap_Type_spec, bases);
     if (type_object == nullptr)
     {
         return -1;
     }
     if (PyModule_AddObject(module, "IObservableMap", type_object) != 0)
     {
+        Py_DECREF(type_object);
         return -1;
     }
     py::winrt_type<pyIObservableMap>::python_type = reinterpret_cast<PyTypeObject*>(type_object);
-
-    IObservableVector_Type_slots[0].pfunc = py::winrt_type<py::winrt_base>::python_type;
-    type_object = PyType_FromSpec(&IObservableVector_Type_spec);
+    type_object = nullptr;
+    
+    type_object = PyType_FromSpecWithBases(&IObservableVector_Type_spec, bases);
     if (type_object == nullptr)
     {
         return -1;
     }
     if (PyModule_AddObject(module, "IObservableVector", type_object) != 0)
     {
+        Py_DECREF(type_object);
         return -1;
     }
     py::winrt_type<pyIObservableVector>::python_type = reinterpret_cast<PyTypeObject*>(type_object);
-
-    IPropertySet_Type_slots[0].pfunc = py::winrt_type<py::winrt_base>::python_type;
-    type_object = PyType_FromSpec(&IPropertySet_Type_spec);
+    type_object = nullptr;
+    
+    type_object = PyType_FromSpecWithBases(&IPropertySet_Type_spec, bases);
     if (type_object == nullptr)
     {
         return -1;
     }
     if (PyModule_AddObject(module, "IPropertySet", type_object) != 0)
     {
+        Py_DECREF(type_object);
         return -1;
     }
     py::winrt_type<winrt::Windows::Foundation::Collections::IPropertySet>::python_type = reinterpret_cast<PyTypeObject*>(type_object);
-
-    IVectorChangedEventArgs_Type_slots[0].pfunc = py::winrt_type<py::winrt_base>::python_type;
-    type_object = PyType_FromSpec(&IVectorChangedEventArgs_Type_spec);
+    type_object = nullptr;
+    
+    type_object = PyType_FromSpecWithBases(&IVectorChangedEventArgs_Type_spec, bases);
     if (type_object == nullptr)
     {
         return -1;
     }
     if (PyModule_AddObject(module, "IVectorChangedEventArgs", type_object) != 0)
     {
+        Py_DECREF(type_object);
         return -1;
     }
     py::winrt_type<winrt::Windows::Foundation::Collections::IVectorChangedEventArgs>::python_type = reinterpret_cast<PyTypeObject*>(type_object);
-
-    IVectorView_Type_slots[0].pfunc = py::winrt_type<py::winrt_base>::python_type;
-    type_object = PyType_FromSpec(&IVectorView_Type_spec);
+    type_object = nullptr;
+    
+    type_object = PyType_FromSpecWithBases(&IVectorView_Type_spec, bases);
     if (type_object == nullptr)
     {
         return -1;
     }
     if (PyModule_AddObject(module, "IVectorView", type_object) != 0)
     {
+        Py_DECREF(type_object);
         return -1;
     }
     py::winrt_type<pyIVectorView>::python_type = reinterpret_cast<PyTypeObject*>(type_object);
-
-    IVector_Type_slots[0].pfunc = py::winrt_type<py::winrt_base>::python_type;
-    type_object = PyType_FromSpec(&IVector_Type_spec);
+    type_object = nullptr;
+    
+    type_object = PyType_FromSpecWithBases(&IVector_Type_spec, bases);
     if (type_object == nullptr)
     {
         return -1;
     }
     if (PyModule_AddObject(module, "IVector", type_object) != 0)
     {
+        Py_DECREF(type_object);
         return -1;
     }
     py::winrt_type<pyIVector>::python_type = reinterpret_cast<PyTypeObject*>(type_object);
+    type_object = nullptr;
     
+    Py_DECREF(bases);
     return 0;
+}
+
+static PyModuleDef_Slot module_slots[] = {
+    {Py_mod_exec, initialize_Windows_Foundation_Collections},
+    {0, nullptr}
+};
+
+PyDoc_STRVAR(module_doc, "Langworthy projection module.\n");
+
+static struct PyModuleDef module_def = {
+    PyModuleDef_HEAD_INIT,
+    "_pyrt_Windows_Foundation_Collections",
+    module_doc,
+    0,
+    nullptr,
+    module_slots,
+    nullptr,
+    nullptr,
+    nullptr
+};
+
+PyMODINIT_FUNC
+PyInit__pyrt_Windows_Foundation_Collections(void)
+{
+    return PyModuleDef_Init(&module_def);
 }

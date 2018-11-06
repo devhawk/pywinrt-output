@@ -5,8 +5,7 @@
 // ----- Deferral class --------------------
 PyTypeObject* py::winrt_type<winrt::Windows::Foundation::Deferral>::python_type;
 
-
-PyObject* Deferral_new(PyTypeObject* type, PyObject* args, PyObject* kwds)
+static PyObject* Deferral_new(PyTypeObject* type, PyObject* args, PyObject* kwds)
 {
     if (kwds != nullptr)
     {
@@ -50,7 +49,7 @@ static PyObject* Deferral__from(PyObject* /*unused*/, PyObject* arg)
     try
     {
         auto instance = py::converter<winrt::Windows::Foundation::IInspectable>::convert_to(arg);
-        return py::converter<winrt::Windows::Foundation::Deferral>::convert(instance.as<winrt::Windows::Foundation::Deferral>());
+        return py::convert(instance.as<winrt::Windows::Foundation::Deferral>());
     }
     catch (...)
     {
@@ -117,7 +116,6 @@ static PyMethodDef Deferral_methods[] = {
 
 static PyType_Slot Deferral_Type_slots[] = 
 {
-    { Py_tp_base, nullptr }, // filled out in module init
     { Py_tp_dealloc, Deferral_dealloc },
     { Py_tp_new, Deferral_new },
     { Py_tp_methods, Deferral_methods },
@@ -136,8 +134,7 @@ static PyType_Spec Deferral_Type_spec =
 // ----- GuidHelper class --------------------
 PyTypeObject* py::winrt_type<winrt::Windows::Foundation::GuidHelper>::python_type;
 
-
-PyObject* GuidHelper_new(PyTypeObject* type, PyObject* args, PyObject* kwds)
+static PyObject* GuidHelper_new(PyTypeObject* type, PyObject* args, PyObject* kwds)
 {
     PyErr_SetString(PyExc_TypeError, "GuidHelper is not activatable");
     return nullptr;
@@ -153,7 +150,7 @@ static PyObject* GuidHelper_CreateNewGuid(PyObject* /*unused*/, PyObject* args)
         {
             winrt::guid return_value = winrt::Windows::Foundation::GuidHelper::CreateNewGuid();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -182,7 +179,7 @@ static PyObject* GuidHelper_Equals(PyObject* /*unused*/, PyObject* args)
 
             bool return_value = winrt::Windows::Foundation::GuidHelper::Equals(param0, param1);
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -209,7 +206,7 @@ static PyObject* GuidHelper_get_Empty(PyObject* /*unused*/, PyObject* args)
         {
             winrt::guid return_value = winrt::Windows::Foundation::GuidHelper::Empty();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -243,8 +240,7 @@ static PyType_Spec GuidHelper_Type_spec =
 // ----- MemoryBuffer class --------------------
 PyTypeObject* py::winrt_type<winrt::Windows::Foundation::MemoryBuffer>::python_type;
 
-
-PyObject* MemoryBuffer_new(PyTypeObject* type, PyObject* args, PyObject* kwds)
+static PyObject* MemoryBuffer_new(PyTypeObject* type, PyObject* args, PyObject* kwds)
 {
     if (kwds != nullptr)
     {
@@ -288,7 +284,7 @@ static PyObject* MemoryBuffer__from(PyObject* /*unused*/, PyObject* arg)
     try
     {
         auto instance = py::converter<winrt::Windows::Foundation::IInspectable>::convert_to(arg);
-        return py::converter<winrt::Windows::Foundation::MemoryBuffer>::convert(instance.as<winrt::Windows::Foundation::MemoryBuffer>());
+        return py::convert(instance.as<winrt::Windows::Foundation::MemoryBuffer>());
     }
     catch (...)
     {
@@ -331,7 +327,7 @@ static PyObject* MemoryBuffer_CreateReference(py::winrt_wrapper<winrt::Windows::
         {
             winrt::Windows::Foundation::IMemoryBufferReference return_value = self->obj.CreateReference();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -356,7 +352,6 @@ static PyMethodDef MemoryBuffer_methods[] = {
 
 static PyType_Slot MemoryBuffer_Type_slots[] = 
 {
-    { Py_tp_base, nullptr }, // filled out in module init
     { Py_tp_dealloc, MemoryBuffer_dealloc },
     { Py_tp_new, MemoryBuffer_new },
     { Py_tp_methods, MemoryBuffer_methods },
@@ -375,8 +370,7 @@ static PyType_Spec MemoryBuffer_Type_spec =
 // ----- PropertyValue class --------------------
 PyTypeObject* py::winrt_type<winrt::Windows::Foundation::PropertyValue>::python_type;
 
-
-PyObject* PropertyValue_new(PyTypeObject* type, PyObject* args, PyObject* kwds)
+static PyObject* PropertyValue_new(PyTypeObject* type, PyObject* args, PyObject* kwds)
 {
     PyErr_SetString(PyExc_TypeError, "PropertyValue is not activatable");
     return nullptr;
@@ -394,7 +388,7 @@ static PyObject* PropertyValue_CreateBoolean(PyObject* /*unused*/, PyObject* arg
 
             winrt::Windows::Foundation::IInspectable return_value = winrt::Windows::Foundation::PropertyValue::CreateBoolean(param0);
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -422,7 +416,7 @@ static PyObject* PropertyValue_CreateBooleanArray(PyObject* /*unused*/, PyObject
 
             winrt::Windows::Foundation::IInspectable return_value = winrt::Windows::Foundation::PropertyValue::CreateBooleanArray(param0);
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -450,7 +444,7 @@ static PyObject* PropertyValue_CreateChar16(PyObject* /*unused*/, PyObject* args
 
             winrt::Windows::Foundation::IInspectable return_value = winrt::Windows::Foundation::PropertyValue::CreateChar16(param0);
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -478,7 +472,7 @@ static PyObject* PropertyValue_CreateChar16Array(PyObject* /*unused*/, PyObject*
 
             winrt::Windows::Foundation::IInspectable return_value = winrt::Windows::Foundation::PropertyValue::CreateChar16Array(param0);
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -506,7 +500,7 @@ static PyObject* PropertyValue_CreateDateTime(PyObject* /*unused*/, PyObject* ar
 
             winrt::Windows::Foundation::IInspectable return_value = winrt::Windows::Foundation::PropertyValue::CreateDateTime(param0);
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -534,7 +528,7 @@ static PyObject* PropertyValue_CreateDateTimeArray(PyObject* /*unused*/, PyObjec
 
             winrt::Windows::Foundation::IInspectable return_value = winrt::Windows::Foundation::PropertyValue::CreateDateTimeArray(param0);
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -562,7 +556,7 @@ static PyObject* PropertyValue_CreateDouble(PyObject* /*unused*/, PyObject* args
 
             winrt::Windows::Foundation::IInspectable return_value = winrt::Windows::Foundation::PropertyValue::CreateDouble(param0);
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -590,7 +584,7 @@ static PyObject* PropertyValue_CreateDoubleArray(PyObject* /*unused*/, PyObject*
 
             winrt::Windows::Foundation::IInspectable return_value = winrt::Windows::Foundation::PropertyValue::CreateDoubleArray(param0);
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -616,7 +610,7 @@ static PyObject* PropertyValue_CreateEmpty(PyObject* /*unused*/, PyObject* args)
         {
             winrt::Windows::Foundation::IInspectable return_value = winrt::Windows::Foundation::PropertyValue::CreateEmpty();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -644,7 +638,7 @@ static PyObject* PropertyValue_CreateGuid(PyObject* /*unused*/, PyObject* args)
 
             winrt::Windows::Foundation::IInspectable return_value = winrt::Windows::Foundation::PropertyValue::CreateGuid(param0);
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -672,7 +666,7 @@ static PyObject* PropertyValue_CreateGuidArray(PyObject* /*unused*/, PyObject* a
 
             winrt::Windows::Foundation::IInspectable return_value = winrt::Windows::Foundation::PropertyValue::CreateGuidArray(param0);
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -700,7 +694,7 @@ static PyObject* PropertyValue_CreateInspectable(PyObject* /*unused*/, PyObject*
 
             winrt::Windows::Foundation::IInspectable return_value = winrt::Windows::Foundation::PropertyValue::CreateInspectable(param0);
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -728,7 +722,7 @@ static PyObject* PropertyValue_CreateInspectableArray(PyObject* /*unused*/, PyOb
 
             winrt::Windows::Foundation::IInspectable return_value = winrt::Windows::Foundation::PropertyValue::CreateInspectableArray(param0);
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -756,7 +750,7 @@ static PyObject* PropertyValue_CreateInt16(PyObject* /*unused*/, PyObject* args)
 
             winrt::Windows::Foundation::IInspectable return_value = winrt::Windows::Foundation::PropertyValue::CreateInt16(param0);
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -784,7 +778,7 @@ static PyObject* PropertyValue_CreateInt16Array(PyObject* /*unused*/, PyObject* 
 
             winrt::Windows::Foundation::IInspectable return_value = winrt::Windows::Foundation::PropertyValue::CreateInt16Array(param0);
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -812,7 +806,7 @@ static PyObject* PropertyValue_CreateInt32(PyObject* /*unused*/, PyObject* args)
 
             winrt::Windows::Foundation::IInspectable return_value = winrt::Windows::Foundation::PropertyValue::CreateInt32(param0);
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -840,7 +834,7 @@ static PyObject* PropertyValue_CreateInt32Array(PyObject* /*unused*/, PyObject* 
 
             winrt::Windows::Foundation::IInspectable return_value = winrt::Windows::Foundation::PropertyValue::CreateInt32Array(param0);
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -868,7 +862,7 @@ static PyObject* PropertyValue_CreateInt64(PyObject* /*unused*/, PyObject* args)
 
             winrt::Windows::Foundation::IInspectable return_value = winrt::Windows::Foundation::PropertyValue::CreateInt64(param0);
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -896,7 +890,7 @@ static PyObject* PropertyValue_CreateInt64Array(PyObject* /*unused*/, PyObject* 
 
             winrt::Windows::Foundation::IInspectable return_value = winrt::Windows::Foundation::PropertyValue::CreateInt64Array(param0);
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -924,7 +918,7 @@ static PyObject* PropertyValue_CreatePoint(PyObject* /*unused*/, PyObject* args)
 
             winrt::Windows::Foundation::IInspectable return_value = winrt::Windows::Foundation::PropertyValue::CreatePoint(param0);
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -952,7 +946,7 @@ static PyObject* PropertyValue_CreatePointArray(PyObject* /*unused*/, PyObject* 
 
             winrt::Windows::Foundation::IInspectable return_value = winrt::Windows::Foundation::PropertyValue::CreatePointArray(param0);
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -980,7 +974,7 @@ static PyObject* PropertyValue_CreateRect(PyObject* /*unused*/, PyObject* args)
 
             winrt::Windows::Foundation::IInspectable return_value = winrt::Windows::Foundation::PropertyValue::CreateRect(param0);
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -1008,7 +1002,7 @@ static PyObject* PropertyValue_CreateRectArray(PyObject* /*unused*/, PyObject* a
 
             winrt::Windows::Foundation::IInspectable return_value = winrt::Windows::Foundation::PropertyValue::CreateRectArray(param0);
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -1036,7 +1030,7 @@ static PyObject* PropertyValue_CreateSingle(PyObject* /*unused*/, PyObject* args
 
             winrt::Windows::Foundation::IInspectable return_value = winrt::Windows::Foundation::PropertyValue::CreateSingle(param0);
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -1064,7 +1058,7 @@ static PyObject* PropertyValue_CreateSingleArray(PyObject* /*unused*/, PyObject*
 
             winrt::Windows::Foundation::IInspectable return_value = winrt::Windows::Foundation::PropertyValue::CreateSingleArray(param0);
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -1092,7 +1086,7 @@ static PyObject* PropertyValue_CreateSize(PyObject* /*unused*/, PyObject* args)
 
             winrt::Windows::Foundation::IInspectable return_value = winrt::Windows::Foundation::PropertyValue::CreateSize(param0);
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -1120,7 +1114,7 @@ static PyObject* PropertyValue_CreateSizeArray(PyObject* /*unused*/, PyObject* a
 
             winrt::Windows::Foundation::IInspectable return_value = winrt::Windows::Foundation::PropertyValue::CreateSizeArray(param0);
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -1148,7 +1142,7 @@ static PyObject* PropertyValue_CreateString(PyObject* /*unused*/, PyObject* args
 
             winrt::Windows::Foundation::IInspectable return_value = winrt::Windows::Foundation::PropertyValue::CreateString(param0);
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -1176,7 +1170,7 @@ static PyObject* PropertyValue_CreateStringArray(PyObject* /*unused*/, PyObject*
 
             winrt::Windows::Foundation::IInspectable return_value = winrt::Windows::Foundation::PropertyValue::CreateStringArray(param0);
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -1204,7 +1198,7 @@ static PyObject* PropertyValue_CreateTimeSpan(PyObject* /*unused*/, PyObject* ar
 
             winrt::Windows::Foundation::IInspectable return_value = winrt::Windows::Foundation::PropertyValue::CreateTimeSpan(param0);
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -1232,7 +1226,7 @@ static PyObject* PropertyValue_CreateTimeSpanArray(PyObject* /*unused*/, PyObjec
 
             winrt::Windows::Foundation::IInspectable return_value = winrt::Windows::Foundation::PropertyValue::CreateTimeSpanArray(param0);
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -1260,7 +1254,7 @@ static PyObject* PropertyValue_CreateUInt16(PyObject* /*unused*/, PyObject* args
 
             winrt::Windows::Foundation::IInspectable return_value = winrt::Windows::Foundation::PropertyValue::CreateUInt16(param0);
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -1288,7 +1282,7 @@ static PyObject* PropertyValue_CreateUInt16Array(PyObject* /*unused*/, PyObject*
 
             winrt::Windows::Foundation::IInspectable return_value = winrt::Windows::Foundation::PropertyValue::CreateUInt16Array(param0);
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -1316,7 +1310,7 @@ static PyObject* PropertyValue_CreateUInt32(PyObject* /*unused*/, PyObject* args
 
             winrt::Windows::Foundation::IInspectable return_value = winrt::Windows::Foundation::PropertyValue::CreateUInt32(param0);
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -1344,7 +1338,7 @@ static PyObject* PropertyValue_CreateUInt32Array(PyObject* /*unused*/, PyObject*
 
             winrt::Windows::Foundation::IInspectable return_value = winrt::Windows::Foundation::PropertyValue::CreateUInt32Array(param0);
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -1372,7 +1366,7 @@ static PyObject* PropertyValue_CreateUInt64(PyObject* /*unused*/, PyObject* args
 
             winrt::Windows::Foundation::IInspectable return_value = winrt::Windows::Foundation::PropertyValue::CreateUInt64(param0);
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -1400,7 +1394,7 @@ static PyObject* PropertyValue_CreateUInt64Array(PyObject* /*unused*/, PyObject*
 
             winrt::Windows::Foundation::IInspectable return_value = winrt::Windows::Foundation::PropertyValue::CreateUInt64Array(param0);
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -1428,7 +1422,7 @@ static PyObject* PropertyValue_CreateUInt8(PyObject* /*unused*/, PyObject* args)
 
             winrt::Windows::Foundation::IInspectable return_value = winrt::Windows::Foundation::PropertyValue::CreateUInt8(param0);
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -1456,7 +1450,7 @@ static PyObject* PropertyValue_CreateUInt8Array(PyObject* /*unused*/, PyObject* 
 
             winrt::Windows::Foundation::IInspectable return_value = winrt::Windows::Foundation::PropertyValue::CreateUInt8Array(param0);
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -1534,8 +1528,7 @@ static PyType_Spec PropertyValue_Type_spec =
 // ----- Uri class --------------------
 PyTypeObject* py::winrt_type<winrt::Windows::Foundation::Uri>::python_type;
 
-
-PyObject* Uri_new(PyTypeObject* type, PyObject* args, PyObject* kwds)
+static PyObject* Uri_new(PyTypeObject* type, PyObject* args, PyObject* kwds)
 {
     if (kwds != nullptr)
     {
@@ -1593,7 +1586,7 @@ static PyObject* Uri__from(PyObject* /*unused*/, PyObject* arg)
     try
     {
         auto instance = py::converter<winrt::Windows::Foundation::IInspectable>::convert_to(arg);
-        return py::converter<winrt::Windows::Foundation::Uri>::convert(instance.as<winrt::Windows::Foundation::Uri>());
+        return py::convert(instance.as<winrt::Windows::Foundation::Uri>());
     }
     catch (...)
     {
@@ -1613,7 +1606,7 @@ static PyObject* Uri_CombineUri(py::winrt_wrapper<winrt::Windows::Foundation::Ur
 
             winrt::Windows::Foundation::Uri return_value = self->obj.CombineUri(param0);
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -1641,7 +1634,7 @@ static PyObject* Uri_Equals(py::winrt_wrapper<winrt::Windows::Foundation::Uri>* 
 
             bool return_value = self->obj.Equals(param0);
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -1669,7 +1662,7 @@ static PyObject* Uri_EscapeComponent(PyObject* /*unused*/, PyObject* args)
 
             winrt::hstring return_value = winrt::Windows::Foundation::Uri::EscapeComponent(param0);
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -1695,7 +1688,7 @@ static PyObject* Uri_ToString(py::winrt_wrapper<winrt::Windows::Foundation::Uri>
         {
             winrt::hstring return_value = self->obj.ToString();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -1723,7 +1716,7 @@ static PyObject* Uri_UnescapeComponent(PyObject* /*unused*/, PyObject* args)
 
             winrt::hstring return_value = winrt::Windows::Foundation::Uri::UnescapeComponent(param0);
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -1750,7 +1743,7 @@ static PyObject* Uri_get_AbsoluteCanonicalUri(py::winrt_wrapper<winrt::Windows::
         {
             winrt::hstring return_value = self->obj.AbsoluteCanonicalUri();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -1769,7 +1762,7 @@ static PyObject* Uri_get_AbsoluteUri(py::winrt_wrapper<winrt::Windows::Foundatio
         {
             winrt::hstring return_value = self->obj.AbsoluteUri();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -1788,7 +1781,7 @@ static PyObject* Uri_get_DisplayIri(py::winrt_wrapper<winrt::Windows::Foundation
         {
             winrt::hstring return_value = self->obj.DisplayIri();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -1807,7 +1800,7 @@ static PyObject* Uri_get_DisplayUri(py::winrt_wrapper<winrt::Windows::Foundation
         {
             winrt::hstring return_value = self->obj.DisplayUri();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -1826,7 +1819,7 @@ static PyObject* Uri_get_Domain(py::winrt_wrapper<winrt::Windows::Foundation::Ur
         {
             winrt::hstring return_value = self->obj.Domain();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -1845,7 +1838,7 @@ static PyObject* Uri_get_Extension(py::winrt_wrapper<winrt::Windows::Foundation:
         {
             winrt::hstring return_value = self->obj.Extension();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -1864,7 +1857,7 @@ static PyObject* Uri_get_Fragment(py::winrt_wrapper<winrt::Windows::Foundation::
         {
             winrt::hstring return_value = self->obj.Fragment();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -1883,7 +1876,7 @@ static PyObject* Uri_get_Host(py::winrt_wrapper<winrt::Windows::Foundation::Uri>
         {
             winrt::hstring return_value = self->obj.Host();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -1902,7 +1895,7 @@ static PyObject* Uri_get_Password(py::winrt_wrapper<winrt::Windows::Foundation::
         {
             winrt::hstring return_value = self->obj.Password();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -1921,7 +1914,7 @@ static PyObject* Uri_get_Path(py::winrt_wrapper<winrt::Windows::Foundation::Uri>
         {
             winrt::hstring return_value = self->obj.Path();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -1940,7 +1933,7 @@ static PyObject* Uri_get_Port(py::winrt_wrapper<winrt::Windows::Foundation::Uri>
         {
             int32_t return_value = self->obj.Port();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -1959,7 +1952,7 @@ static PyObject* Uri_get_Query(py::winrt_wrapper<winrt::Windows::Foundation::Uri
         {
             winrt::hstring return_value = self->obj.Query();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -1978,7 +1971,7 @@ static PyObject* Uri_get_QueryParsed(py::winrt_wrapper<winrt::Windows::Foundatio
         {
             winrt::Windows::Foundation::WwwFormUrlDecoder return_value = self->obj.QueryParsed();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -1997,7 +1990,7 @@ static PyObject* Uri_get_RawUri(py::winrt_wrapper<winrt::Windows::Foundation::Ur
         {
             winrt::hstring return_value = self->obj.RawUri();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -2016,7 +2009,7 @@ static PyObject* Uri_get_SchemeName(py::winrt_wrapper<winrt::Windows::Foundation
         {
             winrt::hstring return_value = self->obj.SchemeName();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -2035,7 +2028,7 @@ static PyObject* Uri_get_Suspicious(py::winrt_wrapper<winrt::Windows::Foundation
         {
             bool return_value = self->obj.Suspicious();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -2054,7 +2047,7 @@ static PyObject* Uri_get_UserName(py::winrt_wrapper<winrt::Windows::Foundation::
         {
             winrt::hstring return_value = self->obj.UserName();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -2091,7 +2084,6 @@ static PyMethodDef Uri_methods[] = {
 
 static PyType_Slot Uri_Type_slots[] = 
 {
-    { Py_tp_base, nullptr }, // filled out in module init
     { Py_tp_dealloc, Uri_dealloc },
     { Py_tp_new, Uri_new },
     { Py_tp_methods, Uri_methods },
@@ -2110,8 +2102,7 @@ static PyType_Spec Uri_Type_spec =
 // ----- WwwFormUrlDecoder class --------------------
 PyTypeObject* py::winrt_type<winrt::Windows::Foundation::WwwFormUrlDecoder>::python_type;
 
-
-PyObject* WwwFormUrlDecoder_new(PyTypeObject* type, PyObject* args, PyObject* kwds)
+static PyObject* WwwFormUrlDecoder_new(PyTypeObject* type, PyObject* args, PyObject* kwds)
 {
     if (kwds != nullptr)
     {
@@ -2155,7 +2146,7 @@ static PyObject* WwwFormUrlDecoder__from(PyObject* /*unused*/, PyObject* arg)
     try
     {
         auto instance = py::converter<winrt::Windows::Foundation::IInspectable>::convert_to(arg);
-        return py::converter<winrt::Windows::Foundation::WwwFormUrlDecoder>::convert(instance.as<winrt::Windows::Foundation::WwwFormUrlDecoder>());
+        return py::convert(instance.as<winrt::Windows::Foundation::WwwFormUrlDecoder>());
     }
     catch (...)
     {
@@ -2173,7 +2164,7 @@ static PyObject* WwwFormUrlDecoder_First(py::winrt_wrapper<winrt::Windows::Found
         {
             winrt::Windows::Foundation::Collections::IIterator<winrt::Windows::Foundation::IWwwFormUrlDecoderEntry> return_value = self->obj.First();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -2201,7 +2192,7 @@ static PyObject* WwwFormUrlDecoder_GetAt(py::winrt_wrapper<winrt::Windows::Found
 
             winrt::Windows::Foundation::IWwwFormUrlDecoderEntry return_value = self->obj.GetAt(param0);
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -2229,7 +2220,7 @@ static PyObject* WwwFormUrlDecoder_GetFirstValueByName(py::winrt_wrapper<winrt::
 
             winrt::hstring return_value = self->obj.GetFirstValueByName(param0);
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -2258,7 +2249,7 @@ static PyObject* WwwFormUrlDecoder_GetMany(py::winrt_wrapper<winrt::Windows::Fou
 
             uint32_t return_value = self->obj.GetMany(param0, param1);
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -2287,13 +2278,13 @@ static PyObject* WwwFormUrlDecoder_IndexOf(py::winrt_wrapper<winrt::Windows::Fou
 
             bool return_value = self->obj.IndexOf(param0, param1);
 
-            PyObject* out_return_value = py::converter<decltype(return_value)>::convert(return_value);
+            PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
             { 
                 return nullptr;
             };
 
-            PyObject* out1 = py::converter<decltype(param1)>::convert(param1);
+            PyObject* out1 = py::convert(param1);
             if (!out1) 
             {
                 return nullptr;
@@ -2326,7 +2317,7 @@ static PyObject* WwwFormUrlDecoder_get_Size(py::winrt_wrapper<winrt::Windows::Fo
         {
             uint32_t return_value = self->obj.Size();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -2347,7 +2338,6 @@ static PyMethodDef WwwFormUrlDecoder_methods[] = {
 
 static PyType_Slot WwwFormUrlDecoder_Type_slots[] = 
 {
-    { Py_tp_base, nullptr }, // filled out in module init
     { Py_tp_dealloc, WwwFormUrlDecoder_dealloc },
     { Py_tp_new, WwwFormUrlDecoder_new },
     { Py_tp_methods, WwwFormUrlDecoder_methods },
@@ -2366,8 +2356,7 @@ static PyType_Spec WwwFormUrlDecoder_Type_spec =
 // ----- WwwFormUrlDecoderEntry class --------------------
 PyTypeObject* py::winrt_type<winrt::Windows::Foundation::WwwFormUrlDecoderEntry>::python_type;
 
-
-PyObject* WwwFormUrlDecoderEntry_new(PyTypeObject* type, PyObject* args, PyObject* kwds)
+static PyObject* WwwFormUrlDecoderEntry_new(PyTypeObject* type, PyObject* args, PyObject* kwds)
 {
     PyErr_SetString(PyExc_TypeError, "WwwFormUrlDecoderEntry is not activatable");
     return nullptr;
@@ -2385,7 +2374,7 @@ static PyObject* WwwFormUrlDecoderEntry__from(PyObject* /*unused*/, PyObject* ar
     try
     {
         auto instance = py::converter<winrt::Windows::Foundation::IInspectable>::convert_to(arg);
-        return py::converter<winrt::Windows::Foundation::WwwFormUrlDecoderEntry>::convert(instance.as<winrt::Windows::Foundation::WwwFormUrlDecoderEntry>());
+        return py::convert(instance.as<winrt::Windows::Foundation::WwwFormUrlDecoderEntry>());
     }
     catch (...)
     {
@@ -2404,7 +2393,7 @@ static PyObject* WwwFormUrlDecoderEntry_get_Name(py::winrt_wrapper<winrt::Window
         {
             winrt::hstring return_value = self->obj.Name();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -2423,7 +2412,7 @@ static PyObject* WwwFormUrlDecoderEntry_get_Value(py::winrt_wrapper<winrt::Windo
         {
             winrt::hstring return_value = self->obj.Value();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -2440,7 +2429,6 @@ static PyMethodDef WwwFormUrlDecoderEntry_methods[] = {
 
 static PyType_Slot WwwFormUrlDecoderEntry_Type_slots[] = 
 {
-    { Py_tp_base, nullptr }, // filled out in module init
     { Py_tp_dealloc, WwwFormUrlDecoderEntry_dealloc },
     { Py_tp_new, WwwFormUrlDecoderEntry_new },
     { Py_tp_methods, WwwFormUrlDecoderEntry_methods },
@@ -2458,7 +2446,6 @@ static PyType_Spec WwwFormUrlDecoderEntry_Type_spec =
 
 // ----- IAsyncAction interface --------------------
 PyTypeObject* py::winrt_type<winrt::Windows::Foundation::IAsyncAction>::python_type;
-
 
 PyObject* IAsyncAction_new(PyTypeObject* type, PyObject* args, PyObject* kwds)
 {
@@ -2478,7 +2465,7 @@ static PyObject* IAsyncAction__from(PyObject* /*unused*/, PyObject* arg)
     try
     {
         auto instance = py::converter<winrt::Windows::Foundation::IInspectable>::convert_to(arg);
-        return py::converter<winrt::Windows::Foundation::IAsyncAction>::convert(instance.as<winrt::Windows::Foundation::IAsyncAction>());
+        return py::convert(instance.as<winrt::Windows::Foundation::IAsyncAction>());
     }
     catch (...)
     {
@@ -2572,7 +2559,7 @@ static PyObject* IAsyncAction_get_Completed(py::winrt_wrapper<winrt::Windows::Fo
         {
             winrt::Windows::Foundation::AsyncActionCompletedHandler return_value = self->obj.Completed();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -2591,7 +2578,7 @@ static PyObject* IAsyncAction_get_ErrorCode(py::winrt_wrapper<winrt::Windows::Fo
         {
             winrt::hresult return_value = self->obj.ErrorCode();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -2610,7 +2597,7 @@ static PyObject* IAsyncAction_get_Id(py::winrt_wrapper<winrt::Windows::Foundatio
         {
             uint32_t return_value = self->obj.Id();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -2629,7 +2616,7 @@ static PyObject* IAsyncAction_get_Status(py::winrt_wrapper<winrt::Windows::Found
         {
             winrt::Windows::Foundation::AsyncStatus return_value = self->obj.Status();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -2667,7 +2654,6 @@ static PyMethodDef IAsyncAction_methods[] = {
 
 static PyType_Slot IAsyncAction_Type_slots[] = 
 {
-    { Py_tp_base, nullptr }, // filled out in module init
     { Py_tp_dealloc, IAsyncAction_dealloc },
     { Py_tp_new, IAsyncAction_new },
     { Py_tp_methods, IAsyncAction_methods },
@@ -2685,7 +2671,6 @@ static PyType_Spec IAsyncAction_Type_spec =
 
 // ----- IAsyncActionWithProgress interface --------------------
 PyTypeObject* py::winrt_type<pyIAsyncActionWithProgress>::python_type;
-
 
 PyObject* IAsyncActionWithProgress_new(PyTypeObject* type, PyObject* args, PyObject* kwds)
 {
@@ -2766,7 +2751,6 @@ static PyMethodDef IAsyncActionWithProgress_methods[] = {
 
 static PyType_Slot IAsyncActionWithProgress_Type_slots[] = 
 {
-    { Py_tp_base, nullptr }, // filled out in module init
     { Py_tp_dealloc, IAsyncActionWithProgress_dealloc },
     { Py_tp_new, IAsyncActionWithProgress_new },
     { Py_tp_methods, IAsyncActionWithProgress_methods },
@@ -2784,7 +2768,6 @@ static PyType_Spec IAsyncActionWithProgress_Type_spec =
 
 // ----- IAsyncInfo interface --------------------
 PyTypeObject* py::winrt_type<winrt::Windows::Foundation::IAsyncInfo>::python_type;
-
 
 PyObject* IAsyncInfo_new(PyTypeObject* type, PyObject* args, PyObject* kwds)
 {
@@ -2804,7 +2787,7 @@ static PyObject* IAsyncInfo__from(PyObject* /*unused*/, PyObject* arg)
     try
     {
         auto instance = py::converter<winrt::Windows::Foundation::IInspectable>::convert_to(arg);
-        return py::converter<winrt::Windows::Foundation::IAsyncInfo>::convert(instance.as<winrt::Windows::Foundation::IAsyncInfo>());
+        return py::convert(instance.as<winrt::Windows::Foundation::IAsyncInfo>());
     }
     catch (...)
     {
@@ -2873,7 +2856,7 @@ static PyObject* IAsyncInfo_get_ErrorCode(py::winrt_wrapper<winrt::Windows::Foun
         {
             winrt::hresult return_value = self->obj.ErrorCode();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -2892,7 +2875,7 @@ static PyObject* IAsyncInfo_get_Id(py::winrt_wrapper<winrt::Windows::Foundation:
         {
             uint32_t return_value = self->obj.Id();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -2911,7 +2894,7 @@ static PyObject* IAsyncInfo_get_Status(py::winrt_wrapper<winrt::Windows::Foundat
         {
             winrt::Windows::Foundation::AsyncStatus return_value = self->obj.Status();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -2931,7 +2914,6 @@ static PyMethodDef IAsyncInfo_methods[] = {
 
 static PyType_Slot IAsyncInfo_Type_slots[] = 
 {
-    { Py_tp_base, nullptr }, // filled out in module init
     { Py_tp_dealloc, IAsyncInfo_dealloc },
     { Py_tp_new, IAsyncInfo_new },
     { Py_tp_methods, IAsyncInfo_methods },
@@ -2949,7 +2931,6 @@ static PyType_Spec IAsyncInfo_Type_spec =
 
 // ----- IAsyncOperationWithProgress interface --------------------
 PyTypeObject* py::winrt_type<pyIAsyncOperationWithProgress>::python_type;
-
 
 PyObject* IAsyncOperationWithProgress_new(PyTypeObject* type, PyObject* args, PyObject* kwds)
 {
@@ -3030,7 +3011,6 @@ static PyMethodDef IAsyncOperationWithProgress_methods[] = {
 
 static PyType_Slot IAsyncOperationWithProgress_Type_slots[] = 
 {
-    { Py_tp_base, nullptr }, // filled out in module init
     { Py_tp_dealloc, IAsyncOperationWithProgress_dealloc },
     { Py_tp_new, IAsyncOperationWithProgress_new },
     { Py_tp_methods, IAsyncOperationWithProgress_methods },
@@ -3048,7 +3028,6 @@ static PyType_Spec IAsyncOperationWithProgress_Type_spec =
 
 // ----- IAsyncOperation interface --------------------
 PyTypeObject* py::winrt_type<pyIAsyncOperation>::python_type;
-
 
 PyObject* IAsyncOperation_new(PyTypeObject* type, PyObject* args, PyObject* kwds)
 {
@@ -3117,7 +3096,6 @@ static PyMethodDef IAsyncOperation_methods[] = {
 
 static PyType_Slot IAsyncOperation_Type_slots[] = 
 {
-    { Py_tp_base, nullptr }, // filled out in module init
     { Py_tp_dealloc, IAsyncOperation_dealloc },
     { Py_tp_new, IAsyncOperation_new },
     { Py_tp_methods, IAsyncOperation_methods },
@@ -3135,7 +3113,6 @@ static PyType_Spec IAsyncOperation_Type_spec =
 
 // ----- IClosable interface --------------------
 PyTypeObject* py::winrt_type<winrt::Windows::Foundation::IClosable>::python_type;
-
 
 PyObject* IClosable_new(PyTypeObject* type, PyObject* args, PyObject* kwds)
 {
@@ -3155,7 +3132,7 @@ static PyObject* IClosable__from(PyObject* /*unused*/, PyObject* arg)
     try
     {
         auto instance = py::converter<winrt::Windows::Foundation::IInspectable>::convert_to(arg);
-        return py::converter<winrt::Windows::Foundation::IClosable>::convert(instance.as<winrt::Windows::Foundation::IClosable>());
+        return py::convert(instance.as<winrt::Windows::Foundation::IClosable>());
     }
     catch (...)
     {
@@ -3196,7 +3173,6 @@ static PyMethodDef IClosable_methods[] = {
 
 static PyType_Slot IClosable_Type_slots[] = 
 {
-    { Py_tp_base, nullptr }, // filled out in module init
     { Py_tp_dealloc, IClosable_dealloc },
     { Py_tp_new, IClosable_new },
     { Py_tp_methods, IClosable_methods },
@@ -3214,7 +3190,6 @@ static PyType_Spec IClosable_Type_spec =
 
 // ----- IGetActivationFactory interface --------------------
 PyTypeObject* py::winrt_type<winrt::Windows::Foundation::IGetActivationFactory>::python_type;
-
 
 PyObject* IGetActivationFactory_new(PyTypeObject* type, PyObject* args, PyObject* kwds)
 {
@@ -3234,7 +3209,7 @@ static PyObject* IGetActivationFactory__from(PyObject* /*unused*/, PyObject* arg
     try
     {
         auto instance = py::converter<winrt::Windows::Foundation::IInspectable>::convert_to(arg);
-        return py::converter<winrt::Windows::Foundation::IGetActivationFactory>::convert(instance.as<winrt::Windows::Foundation::IGetActivationFactory>());
+        return py::convert(instance.as<winrt::Windows::Foundation::IGetActivationFactory>());
     }
     catch (...)
     {
@@ -3254,7 +3229,7 @@ static PyObject* IGetActivationFactory_GetActivationFactory(py::winrt_wrapper<wi
 
             winrt::Windows::Foundation::IInspectable return_value = self->obj.GetActivationFactory(param0);
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -3278,7 +3253,6 @@ static PyMethodDef IGetActivationFactory_methods[] = {
 
 static PyType_Slot IGetActivationFactory_Type_slots[] = 
 {
-    { Py_tp_base, nullptr }, // filled out in module init
     { Py_tp_dealloc, IGetActivationFactory_dealloc },
     { Py_tp_new, IGetActivationFactory_new },
     { Py_tp_methods, IGetActivationFactory_methods },
@@ -3296,7 +3270,6 @@ static PyType_Spec IGetActivationFactory_Type_spec =
 
 // ----- IMemoryBuffer interface --------------------
 PyTypeObject* py::winrt_type<winrt::Windows::Foundation::IMemoryBuffer>::python_type;
-
 
 PyObject* IMemoryBuffer_new(PyTypeObject* type, PyObject* args, PyObject* kwds)
 {
@@ -3316,7 +3289,7 @@ static PyObject* IMemoryBuffer__from(PyObject* /*unused*/, PyObject* arg)
     try
     {
         auto instance = py::converter<winrt::Windows::Foundation::IInspectable>::convert_to(arg);
-        return py::converter<winrt::Windows::Foundation::IMemoryBuffer>::convert(instance.as<winrt::Windows::Foundation::IMemoryBuffer>());
+        return py::convert(instance.as<winrt::Windows::Foundation::IMemoryBuffer>());
     }
     catch (...)
     {
@@ -3359,7 +3332,7 @@ static PyObject* IMemoryBuffer_CreateReference(py::winrt_wrapper<winrt::Windows:
         {
             winrt::Windows::Foundation::IMemoryBufferReference return_value = self->obj.CreateReference();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -3384,7 +3357,6 @@ static PyMethodDef IMemoryBuffer_methods[] = {
 
 static PyType_Slot IMemoryBuffer_Type_slots[] = 
 {
-    { Py_tp_base, nullptr }, // filled out in module init
     { Py_tp_dealloc, IMemoryBuffer_dealloc },
     { Py_tp_new, IMemoryBuffer_new },
     { Py_tp_methods, IMemoryBuffer_methods },
@@ -3402,7 +3374,6 @@ static PyType_Spec IMemoryBuffer_Type_spec =
 
 // ----- IMemoryBufferReference interface --------------------
 PyTypeObject* py::winrt_type<winrt::Windows::Foundation::IMemoryBufferReference>::python_type;
-
 
 PyObject* IMemoryBufferReference_new(PyTypeObject* type, PyObject* args, PyObject* kwds)
 {
@@ -3422,7 +3393,7 @@ static PyObject* IMemoryBufferReference__from(PyObject* /*unused*/, PyObject* ar
     try
     {
         auto instance = py::converter<winrt::Windows::Foundation::IInspectable>::convert_to(arg);
-        return py::converter<winrt::Windows::Foundation::IMemoryBufferReference>::convert(instance.as<winrt::Windows::Foundation::IMemoryBufferReference>());
+        return py::convert(instance.as<winrt::Windows::Foundation::IMemoryBufferReference>());
     }
     catch (...)
     {
@@ -3463,7 +3434,7 @@ static PyObject* IMemoryBufferReference_add_Closed(py::winrt_wrapper<winrt::Wind
 
             winrt::event_token return_value = self->obj.Closed(param0);
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -3482,7 +3453,7 @@ static PyObject* IMemoryBufferReference_get_Capacity(py::winrt_wrapper<winrt::Wi
         {
             uint32_t return_value = self->obj.Capacity();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -3516,7 +3487,6 @@ static PyMethodDef IMemoryBufferReference_methods[] = {
 
 static PyType_Slot IMemoryBufferReference_Type_slots[] = 
 {
-    { Py_tp_base, nullptr }, // filled out in module init
     { Py_tp_dealloc, IMemoryBufferReference_dealloc },
     { Py_tp_new, IMemoryBufferReference_new },
     { Py_tp_methods, IMemoryBufferReference_methods },
@@ -3534,7 +3504,6 @@ static PyType_Spec IMemoryBufferReference_Type_spec =
 
 // ----- IPropertyValue interface --------------------
 PyTypeObject* py::winrt_type<winrt::Windows::Foundation::IPropertyValue>::python_type;
-
 
 PyObject* IPropertyValue_new(PyTypeObject* type, PyObject* args, PyObject* kwds)
 {
@@ -3554,7 +3523,7 @@ static PyObject* IPropertyValue__from(PyObject* /*unused*/, PyObject* arg)
     try
     {
         auto instance = py::converter<winrt::Windows::Foundation::IInspectable>::convert_to(arg);
-        return py::converter<winrt::Windows::Foundation::IPropertyValue>::convert(instance.as<winrt::Windows::Foundation::IPropertyValue>());
+        return py::convert(instance.as<winrt::Windows::Foundation::IPropertyValue>());
     }
     catch (...)
     {
@@ -3572,7 +3541,7 @@ static PyObject* IPropertyValue_GetBoolean(py::winrt_wrapper<winrt::Windows::Fou
         {
             bool return_value = self->obj.GetBoolean();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -3625,7 +3594,7 @@ static PyObject* IPropertyValue_GetChar16(py::winrt_wrapper<winrt::Windows::Foun
         {
             char16_t return_value = self->obj.GetChar16();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -3678,7 +3647,7 @@ static PyObject* IPropertyValue_GetDateTime(py::winrt_wrapper<winrt::Windows::Fo
         {
             winrt::Windows::Foundation::DateTime return_value = self->obj.GetDateTime();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -3731,7 +3700,7 @@ static PyObject* IPropertyValue_GetDouble(py::winrt_wrapper<winrt::Windows::Foun
         {
             double return_value = self->obj.GetDouble();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -3784,7 +3753,7 @@ static PyObject* IPropertyValue_GetGuid(py::winrt_wrapper<winrt::Windows::Founda
         {
             winrt::guid return_value = self->obj.GetGuid();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -3864,7 +3833,7 @@ static PyObject* IPropertyValue_GetInt16(py::winrt_wrapper<winrt::Windows::Found
         {
             int16_t return_value = self->obj.GetInt16();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -3917,7 +3886,7 @@ static PyObject* IPropertyValue_GetInt32(py::winrt_wrapper<winrt::Windows::Found
         {
             int32_t return_value = self->obj.GetInt32();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -3970,7 +3939,7 @@ static PyObject* IPropertyValue_GetInt64(py::winrt_wrapper<winrt::Windows::Found
         {
             int64_t return_value = self->obj.GetInt64();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -4023,7 +3992,7 @@ static PyObject* IPropertyValue_GetPoint(py::winrt_wrapper<winrt::Windows::Found
         {
             winrt::Windows::Foundation::Point return_value = self->obj.GetPoint();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -4076,7 +4045,7 @@ static PyObject* IPropertyValue_GetRect(py::winrt_wrapper<winrt::Windows::Founda
         {
             winrt::Windows::Foundation::Rect return_value = self->obj.GetRect();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -4129,7 +4098,7 @@ static PyObject* IPropertyValue_GetSingle(py::winrt_wrapper<winrt::Windows::Foun
         {
             float return_value = self->obj.GetSingle();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -4182,7 +4151,7 @@ static PyObject* IPropertyValue_GetSize(py::winrt_wrapper<winrt::Windows::Founda
         {
             winrt::Windows::Foundation::Size return_value = self->obj.GetSize();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -4235,7 +4204,7 @@ static PyObject* IPropertyValue_GetString(py::winrt_wrapper<winrt::Windows::Foun
         {
             winrt::hstring return_value = self->obj.GetString();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -4288,7 +4257,7 @@ static PyObject* IPropertyValue_GetTimeSpan(py::winrt_wrapper<winrt::Windows::Fo
         {
             winrt::Windows::Foundation::TimeSpan return_value = self->obj.GetTimeSpan();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -4341,7 +4310,7 @@ static PyObject* IPropertyValue_GetUInt16(py::winrt_wrapper<winrt::Windows::Foun
         {
             uint16_t return_value = self->obj.GetUInt16();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -4394,7 +4363,7 @@ static PyObject* IPropertyValue_GetUInt32(py::winrt_wrapper<winrt::Windows::Foun
         {
             uint32_t return_value = self->obj.GetUInt32();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -4447,7 +4416,7 @@ static PyObject* IPropertyValue_GetUInt64(py::winrt_wrapper<winrt::Windows::Foun
         {
             uint64_t return_value = self->obj.GetUInt64();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -4500,7 +4469,7 @@ static PyObject* IPropertyValue_GetUInt8(py::winrt_wrapper<winrt::Windows::Found
         {
             uint8_t return_value = self->obj.GetUInt8();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -4554,7 +4523,7 @@ static PyObject* IPropertyValue_get_IsNumericScalar(py::winrt_wrapper<winrt::Win
         {
             bool return_value = self->obj.IsNumericScalar();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -4573,7 +4542,7 @@ static PyObject* IPropertyValue_get_Type(py::winrt_wrapper<winrt::Windows::Found
         {
             winrt::Windows::Foundation::PropertyType return_value = self->obj.Type();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -4627,7 +4596,6 @@ static PyMethodDef IPropertyValue_methods[] = {
 
 static PyType_Slot IPropertyValue_Type_slots[] = 
 {
-    { Py_tp_base, nullptr }, // filled out in module init
     { Py_tp_dealloc, IPropertyValue_dealloc },
     { Py_tp_new, IPropertyValue_new },
     { Py_tp_methods, IPropertyValue_methods },
@@ -4645,7 +4613,6 @@ static PyType_Spec IPropertyValue_Type_spec =
 
 // ----- IReferenceArray interface --------------------
 PyTypeObject* py::winrt_type<pyIReferenceArray>::python_type;
-
 
 PyObject* IReferenceArray_new(PyTypeObject* type, PyObject* args, PyObject* kwds)
 {
@@ -4906,7 +4873,6 @@ static PyMethodDef IReferenceArray_methods[] = {
 
 static PyType_Slot IReferenceArray_Type_slots[] = 
 {
-    { Py_tp_base, nullptr }, // filled out in module init
     { Py_tp_dealloc, IReferenceArray_dealloc },
     { Py_tp_new, IReferenceArray_new },
     { Py_tp_methods, IReferenceArray_methods },
@@ -4924,7 +4890,6 @@ static PyType_Spec IReferenceArray_Type_spec =
 
 // ----- IReference interface --------------------
 PyTypeObject* py::winrt_type<pyIReference>::python_type;
-
 
 PyObject* IReference_new(PyTypeObject* type, PyObject* args, PyObject* kwds)
 {
@@ -5185,7 +5150,6 @@ static PyMethodDef IReference_methods[] = {
 
 static PyType_Slot IReference_Type_slots[] = 
 {
-    { Py_tp_base, nullptr }, // filled out in module init
     { Py_tp_dealloc, IReference_dealloc },
     { Py_tp_new, IReference_new },
     { Py_tp_methods, IReference_methods },
@@ -5203,7 +5167,6 @@ static PyType_Spec IReference_Type_spec =
 
 // ----- IStringable interface --------------------
 PyTypeObject* py::winrt_type<winrt::Windows::Foundation::IStringable>::python_type;
-
 
 PyObject* IStringable_new(PyTypeObject* type, PyObject* args, PyObject* kwds)
 {
@@ -5223,7 +5186,7 @@ static PyObject* IStringable__from(PyObject* /*unused*/, PyObject* arg)
     try
     {
         auto instance = py::converter<winrt::Windows::Foundation::IInspectable>::convert_to(arg);
-        return py::converter<winrt::Windows::Foundation::IStringable>::convert(instance.as<winrt::Windows::Foundation::IStringable>());
+        return py::convert(instance.as<winrt::Windows::Foundation::IStringable>());
     }
     catch (...)
     {
@@ -5241,7 +5204,7 @@ static PyObject* IStringable_ToString(py::winrt_wrapper<winrt::Windows::Foundati
         {
             winrt::hstring return_value = self->obj.ToString();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -5265,7 +5228,6 @@ static PyMethodDef IStringable_methods[] = {
 
 static PyType_Slot IStringable_Type_slots[] = 
 {
-    { Py_tp_base, nullptr }, // filled out in module init
     { Py_tp_dealloc, IStringable_dealloc },
     { Py_tp_new, IStringable_new },
     { Py_tp_methods, IStringable_methods },
@@ -5283,7 +5245,6 @@ static PyType_Spec IStringable_Type_spec =
 
 // ----- IWwwFormUrlDecoderEntry interface --------------------
 PyTypeObject* py::winrt_type<winrt::Windows::Foundation::IWwwFormUrlDecoderEntry>::python_type;
-
 
 PyObject* IWwwFormUrlDecoderEntry_new(PyTypeObject* type, PyObject* args, PyObject* kwds)
 {
@@ -5303,7 +5264,7 @@ static PyObject* IWwwFormUrlDecoderEntry__from(PyObject* /*unused*/, PyObject* a
     try
     {
         auto instance = py::converter<winrt::Windows::Foundation::IInspectable>::convert_to(arg);
-        return py::converter<winrt::Windows::Foundation::IWwwFormUrlDecoderEntry>::convert(instance.as<winrt::Windows::Foundation::IWwwFormUrlDecoderEntry>());
+        return py::convert(instance.as<winrt::Windows::Foundation::IWwwFormUrlDecoderEntry>());
     }
     catch (...)
     {
@@ -5322,7 +5283,7 @@ static PyObject* IWwwFormUrlDecoderEntry_get_Name(py::winrt_wrapper<winrt::Windo
         {
             winrt::hstring return_value = self->obj.Name();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -5341,7 +5302,7 @@ static PyObject* IWwwFormUrlDecoderEntry_get_Value(py::winrt_wrapper<winrt::Wind
         {
             winrt::hstring return_value = self->obj.Value();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -5358,7 +5319,6 @@ static PyMethodDef IWwwFormUrlDecoderEntry_methods[] = {
 
 static PyType_Slot IWwwFormUrlDecoderEntry_Type_slots[] = 
 {
-    { Py_tp_base, nullptr }, // filled out in module init
     { Py_tp_dealloc, IWwwFormUrlDecoderEntry_dealloc },
     { Py_tp_new, IWwwFormUrlDecoderEntry_new },
     { Py_tp_methods, IWwwFormUrlDecoderEntry_methods },
@@ -5458,7 +5418,7 @@ static PyObject* DateTime_get_UniversalTime(py::winrt_struct_wrapper<winrt::Wind
 {
     try
     {
-        return py::converter<decltype(self->obj.time_since_epoch().count())>::convert(self->obj.time_since_epoch().count());
+        return py::convert(self->obj.time_since_epoch().count());
     }
     catch (...)
     {
@@ -5590,7 +5550,7 @@ static PyObject* EventRegistrationToken_get_Value(py::winrt_struct_wrapper<winrt
 {
     try
     {
-        return py::converter<decltype(self->obj.value)>::convert(self->obj.value);
+        return py::convert(self->obj.value);
     }
     catch (...)
     {
@@ -5722,7 +5682,7 @@ static PyObject* HResult_get_Value(py::winrt_struct_wrapper<winrt::hresult>* sel
 {
     try
     {
-        return py::converter<decltype(self->obj)>::convert(self->obj);
+        return py::convert(self->obj);
     }
     catch (...)
     {
@@ -5858,7 +5818,7 @@ static PyObject* Point_get_X(py::winrt_struct_wrapper<winrt::Windows::Foundation
 {
     try
     {
-        return py::converter<decltype(self->obj.X)>::convert(self->obj.X);
+        return py::convert(self->obj.X);
     }
     catch (...)
     {
@@ -5889,7 +5849,7 @@ static PyObject* Point_get_Y(py::winrt_struct_wrapper<winrt::Windows::Foundation
 {
     try
     {
-        return py::converter<decltype(self->obj.Y)>::convert(self->obj.Y);
+        return py::convert(self->obj.Y);
     }
     catch (...)
     {
@@ -6034,7 +5994,7 @@ static PyObject* Rect_get_X(py::winrt_struct_wrapper<winrt::Windows::Foundation:
 {
     try
     {
-        return py::converter<decltype(self->obj.X)>::convert(self->obj.X);
+        return py::convert(self->obj.X);
     }
     catch (...)
     {
@@ -6065,7 +6025,7 @@ static PyObject* Rect_get_Y(py::winrt_struct_wrapper<winrt::Windows::Foundation:
 {
     try
     {
-        return py::converter<decltype(self->obj.Y)>::convert(self->obj.Y);
+        return py::convert(self->obj.Y);
     }
     catch (...)
     {
@@ -6096,7 +6056,7 @@ static PyObject* Rect_get_Width(py::winrt_struct_wrapper<winrt::Windows::Foundat
 {
     try
     {
-        return py::converter<decltype(self->obj.Width)>::convert(self->obj.Width);
+        return py::convert(self->obj.Width);
     }
     catch (...)
     {
@@ -6127,7 +6087,7 @@ static PyObject* Rect_get_Height(py::winrt_struct_wrapper<winrt::Windows::Founda
 {
     try
     {
-        return py::converter<decltype(self->obj.Height)>::convert(self->obj.Height);
+        return py::convert(self->obj.Height);
     }
     catch (...)
     {
@@ -6266,7 +6226,7 @@ static PyObject* Size_get_Width(py::winrt_struct_wrapper<winrt::Windows::Foundat
 {
     try
     {
-        return py::converter<decltype(self->obj.Width)>::convert(self->obj.Width);
+        return py::convert(self->obj.Width);
     }
     catch (...)
     {
@@ -6297,7 +6257,7 @@ static PyObject* Size_get_Height(py::winrt_struct_wrapper<winrt::Windows::Founda
 {
     try
     {
-        return py::converter<decltype(self->obj.Height)>::convert(self->obj.Height);
+        return py::convert(self->obj.Height);
     }
     catch (...)
     {
@@ -6430,7 +6390,7 @@ static PyObject* TimeSpan_get_Duration(py::winrt_struct_wrapper<winrt::Windows::
 {
     try
     {
-        return py::converter<decltype(self->obj.count())>::convert(self->obj.count());
+        return py::convert(self->obj.count());
     }
     catch (...)
     {
@@ -6483,20 +6443,21 @@ static PyType_Spec TimeSpan_Type_spec =
 int initialize_Windows_Foundation(PyObject* module)
 {
     PyObject* type_object{ nullptr };
-
-
-    Deferral_Type_slots[0].pfunc = py::winrt_type<py::winrt_base>::python_type;
-    type_object = PyType_FromSpec(&Deferral_Type_spec);
+    PyObject* bases = PyTuple_Pack(1, py::winrt_type<py::winrt_base>::python_type);
+    
+    type_object = PyType_FromSpecWithBases(&Deferral_Type_spec, bases);
     if (type_object == nullptr)
     {
         return -1;
     }
     if (PyModule_AddObject(module, "Deferral", type_object) != 0)
     {
+        Py_DECREF(type_object);
         return -1;
     }
     py::winrt_type<winrt::Windows::Foundation::Deferral>::python_type = reinterpret_cast<PyTypeObject*>(type_object);
-
+    type_object = nullptr;
+    
     type_object = PyType_FromSpec(&GuidHelper_Type_spec);
     if (type_object == nullptr)
     {
@@ -6504,22 +6465,25 @@ int initialize_Windows_Foundation(PyObject* module)
     }
     if (PyModule_AddObject(module, "GuidHelper", type_object) != 0)
     {
+        Py_DECREF(type_object);
         return -1;
     }
     py::winrt_type<winrt::Windows::Foundation::GuidHelper>::python_type = reinterpret_cast<PyTypeObject*>(type_object);
-
-    MemoryBuffer_Type_slots[0].pfunc = py::winrt_type<py::winrt_base>::python_type;
-    type_object = PyType_FromSpec(&MemoryBuffer_Type_spec);
+    type_object = nullptr;
+    
+    type_object = PyType_FromSpecWithBases(&MemoryBuffer_Type_spec, bases);
     if (type_object == nullptr)
     {
         return -1;
     }
     if (PyModule_AddObject(module, "MemoryBuffer", type_object) != 0)
     {
+        Py_DECREF(type_object);
         return -1;
     }
     py::winrt_type<winrt::Windows::Foundation::MemoryBuffer>::python_type = reinterpret_cast<PyTypeObject*>(type_object);
-
+    type_object = nullptr;
+    
     type_object = PyType_FromSpec(&PropertyValue_Type_spec);
     if (type_object == nullptr)
     {
@@ -6527,214 +6491,233 @@ int initialize_Windows_Foundation(PyObject* module)
     }
     if (PyModule_AddObject(module, "PropertyValue", type_object) != 0)
     {
+        Py_DECREF(type_object);
         return -1;
     }
     py::winrt_type<winrt::Windows::Foundation::PropertyValue>::python_type = reinterpret_cast<PyTypeObject*>(type_object);
-
-    Uri_Type_slots[0].pfunc = py::winrt_type<py::winrt_base>::python_type;
-    type_object = PyType_FromSpec(&Uri_Type_spec);
+    type_object = nullptr;
+    
+    type_object = PyType_FromSpecWithBases(&Uri_Type_spec, bases);
     if (type_object == nullptr)
     {
         return -1;
     }
     if (PyModule_AddObject(module, "Uri", type_object) != 0)
     {
+        Py_DECREF(type_object);
         return -1;
     }
     py::winrt_type<winrt::Windows::Foundation::Uri>::python_type = reinterpret_cast<PyTypeObject*>(type_object);
-
-    WwwFormUrlDecoder_Type_slots[0].pfunc = py::winrt_type<py::winrt_base>::python_type;
-    type_object = PyType_FromSpec(&WwwFormUrlDecoder_Type_spec);
+    type_object = nullptr;
+    
+    type_object = PyType_FromSpecWithBases(&WwwFormUrlDecoder_Type_spec, bases);
     if (type_object == nullptr)
     {
         return -1;
     }
     if (PyModule_AddObject(module, "WwwFormUrlDecoder", type_object) != 0)
     {
+        Py_DECREF(type_object);
         return -1;
     }
     py::winrt_type<winrt::Windows::Foundation::WwwFormUrlDecoder>::python_type = reinterpret_cast<PyTypeObject*>(type_object);
-
-    WwwFormUrlDecoderEntry_Type_slots[0].pfunc = py::winrt_type<py::winrt_base>::python_type;
-    type_object = PyType_FromSpec(&WwwFormUrlDecoderEntry_Type_spec);
+    type_object = nullptr;
+    
+    type_object = PyType_FromSpecWithBases(&WwwFormUrlDecoderEntry_Type_spec, bases);
     if (type_object == nullptr)
     {
         return -1;
     }
     if (PyModule_AddObject(module, "WwwFormUrlDecoderEntry", type_object) != 0)
     {
+        Py_DECREF(type_object);
         return -1;
     }
     py::winrt_type<winrt::Windows::Foundation::WwwFormUrlDecoderEntry>::python_type = reinterpret_cast<PyTypeObject*>(type_object);
-
-    IAsyncAction_Type_slots[0].pfunc = py::winrt_type<py::winrt_base>::python_type;
-    type_object = PyType_FromSpec(&IAsyncAction_Type_spec);
+    type_object = nullptr;
+    
+    type_object = PyType_FromSpecWithBases(&IAsyncAction_Type_spec, bases);
     if (type_object == nullptr)
     {
         return -1;
     }
     if (PyModule_AddObject(module, "IAsyncAction", type_object) != 0)
     {
+        Py_DECREF(type_object);
         return -1;
     }
     py::winrt_type<winrt::Windows::Foundation::IAsyncAction>::python_type = reinterpret_cast<PyTypeObject*>(type_object);
-
-    IAsyncActionWithProgress_Type_slots[0].pfunc = py::winrt_type<py::winrt_base>::python_type;
-    type_object = PyType_FromSpec(&IAsyncActionWithProgress_Type_spec);
+    type_object = nullptr;
+    
+    type_object = PyType_FromSpecWithBases(&IAsyncActionWithProgress_Type_spec, bases);
     if (type_object == nullptr)
     {
         return -1;
     }
     if (PyModule_AddObject(module, "IAsyncActionWithProgress", type_object) != 0)
     {
+        Py_DECREF(type_object);
         return -1;
     }
     py::winrt_type<pyIAsyncActionWithProgress>::python_type = reinterpret_cast<PyTypeObject*>(type_object);
-
-    IAsyncInfo_Type_slots[0].pfunc = py::winrt_type<py::winrt_base>::python_type;
-    type_object = PyType_FromSpec(&IAsyncInfo_Type_spec);
+    type_object = nullptr;
+    
+    type_object = PyType_FromSpecWithBases(&IAsyncInfo_Type_spec, bases);
     if (type_object == nullptr)
     {
         return -1;
     }
     if (PyModule_AddObject(module, "IAsyncInfo", type_object) != 0)
     {
+        Py_DECREF(type_object);
         return -1;
     }
     py::winrt_type<winrt::Windows::Foundation::IAsyncInfo>::python_type = reinterpret_cast<PyTypeObject*>(type_object);
-
-    IAsyncOperationWithProgress_Type_slots[0].pfunc = py::winrt_type<py::winrt_base>::python_type;
-    type_object = PyType_FromSpec(&IAsyncOperationWithProgress_Type_spec);
+    type_object = nullptr;
+    
+    type_object = PyType_FromSpecWithBases(&IAsyncOperationWithProgress_Type_spec, bases);
     if (type_object == nullptr)
     {
         return -1;
     }
     if (PyModule_AddObject(module, "IAsyncOperationWithProgress", type_object) != 0)
     {
+        Py_DECREF(type_object);
         return -1;
     }
     py::winrt_type<pyIAsyncOperationWithProgress>::python_type = reinterpret_cast<PyTypeObject*>(type_object);
-
-    IAsyncOperation_Type_slots[0].pfunc = py::winrt_type<py::winrt_base>::python_type;
-    type_object = PyType_FromSpec(&IAsyncOperation_Type_spec);
+    type_object = nullptr;
+    
+    type_object = PyType_FromSpecWithBases(&IAsyncOperation_Type_spec, bases);
     if (type_object == nullptr)
     {
         return -1;
     }
     if (PyModule_AddObject(module, "IAsyncOperation", type_object) != 0)
     {
+        Py_DECREF(type_object);
         return -1;
     }
     py::winrt_type<pyIAsyncOperation>::python_type = reinterpret_cast<PyTypeObject*>(type_object);
-
-    IClosable_Type_slots[0].pfunc = py::winrt_type<py::winrt_base>::python_type;
-    type_object = PyType_FromSpec(&IClosable_Type_spec);
+    type_object = nullptr;
+    
+    type_object = PyType_FromSpecWithBases(&IClosable_Type_spec, bases);
     if (type_object == nullptr)
     {
         return -1;
     }
     if (PyModule_AddObject(module, "IClosable", type_object) != 0)
     {
+        Py_DECREF(type_object);
         return -1;
     }
     py::winrt_type<winrt::Windows::Foundation::IClosable>::python_type = reinterpret_cast<PyTypeObject*>(type_object);
-
-    IGetActivationFactory_Type_slots[0].pfunc = py::winrt_type<py::winrt_base>::python_type;
-    type_object = PyType_FromSpec(&IGetActivationFactory_Type_spec);
+    type_object = nullptr;
+    
+    type_object = PyType_FromSpecWithBases(&IGetActivationFactory_Type_spec, bases);
     if (type_object == nullptr)
     {
         return -1;
     }
     if (PyModule_AddObject(module, "IGetActivationFactory", type_object) != 0)
     {
+        Py_DECREF(type_object);
         return -1;
     }
     py::winrt_type<winrt::Windows::Foundation::IGetActivationFactory>::python_type = reinterpret_cast<PyTypeObject*>(type_object);
-
-    IMemoryBuffer_Type_slots[0].pfunc = py::winrt_type<py::winrt_base>::python_type;
-    type_object = PyType_FromSpec(&IMemoryBuffer_Type_spec);
+    type_object = nullptr;
+    
+    type_object = PyType_FromSpecWithBases(&IMemoryBuffer_Type_spec, bases);
     if (type_object == nullptr)
     {
         return -1;
     }
     if (PyModule_AddObject(module, "IMemoryBuffer", type_object) != 0)
     {
+        Py_DECREF(type_object);
         return -1;
     }
     py::winrt_type<winrt::Windows::Foundation::IMemoryBuffer>::python_type = reinterpret_cast<PyTypeObject*>(type_object);
-
-    IMemoryBufferReference_Type_slots[0].pfunc = py::winrt_type<py::winrt_base>::python_type;
-    type_object = PyType_FromSpec(&IMemoryBufferReference_Type_spec);
+    type_object = nullptr;
+    
+    type_object = PyType_FromSpecWithBases(&IMemoryBufferReference_Type_spec, bases);
     if (type_object == nullptr)
     {
         return -1;
     }
     if (PyModule_AddObject(module, "IMemoryBufferReference", type_object) != 0)
     {
+        Py_DECREF(type_object);
         return -1;
     }
     py::winrt_type<winrt::Windows::Foundation::IMemoryBufferReference>::python_type = reinterpret_cast<PyTypeObject*>(type_object);
-
-    IPropertyValue_Type_slots[0].pfunc = py::winrt_type<py::winrt_base>::python_type;
-    type_object = PyType_FromSpec(&IPropertyValue_Type_spec);
+    type_object = nullptr;
+    
+    type_object = PyType_FromSpecWithBases(&IPropertyValue_Type_spec, bases);
     if (type_object == nullptr)
     {
         return -1;
     }
     if (PyModule_AddObject(module, "IPropertyValue", type_object) != 0)
     {
+        Py_DECREF(type_object);
         return -1;
     }
     py::winrt_type<winrt::Windows::Foundation::IPropertyValue>::python_type = reinterpret_cast<PyTypeObject*>(type_object);
-
-    IReferenceArray_Type_slots[0].pfunc = py::winrt_type<py::winrt_base>::python_type;
-    type_object = PyType_FromSpec(&IReferenceArray_Type_spec);
+    type_object = nullptr;
+    
+    type_object = PyType_FromSpecWithBases(&IReferenceArray_Type_spec, bases);
     if (type_object == nullptr)
     {
         return -1;
     }
     if (PyModule_AddObject(module, "IReferenceArray", type_object) != 0)
     {
+        Py_DECREF(type_object);
         return -1;
     }
     py::winrt_type<pyIReferenceArray>::python_type = reinterpret_cast<PyTypeObject*>(type_object);
-
-    IReference_Type_slots[0].pfunc = py::winrt_type<py::winrt_base>::python_type;
-    type_object = PyType_FromSpec(&IReference_Type_spec);
+    type_object = nullptr;
+    
+    type_object = PyType_FromSpecWithBases(&IReference_Type_spec, bases);
     if (type_object == nullptr)
     {
         return -1;
     }
     if (PyModule_AddObject(module, "IReference", type_object) != 0)
     {
+        Py_DECREF(type_object);
         return -1;
     }
     py::winrt_type<pyIReference>::python_type = reinterpret_cast<PyTypeObject*>(type_object);
-
-    IStringable_Type_slots[0].pfunc = py::winrt_type<py::winrt_base>::python_type;
-    type_object = PyType_FromSpec(&IStringable_Type_spec);
+    type_object = nullptr;
+    
+    type_object = PyType_FromSpecWithBases(&IStringable_Type_spec, bases);
     if (type_object == nullptr)
     {
         return -1;
     }
     if (PyModule_AddObject(module, "IStringable", type_object) != 0)
     {
+        Py_DECREF(type_object);
         return -1;
     }
     py::winrt_type<winrt::Windows::Foundation::IStringable>::python_type = reinterpret_cast<PyTypeObject*>(type_object);
-
-    IWwwFormUrlDecoderEntry_Type_slots[0].pfunc = py::winrt_type<py::winrt_base>::python_type;
-    type_object = PyType_FromSpec(&IWwwFormUrlDecoderEntry_Type_spec);
+    type_object = nullptr;
+    
+    type_object = PyType_FromSpecWithBases(&IWwwFormUrlDecoderEntry_Type_spec, bases);
     if (type_object == nullptr)
     {
         return -1;
     }
     if (PyModule_AddObject(module, "IWwwFormUrlDecoderEntry", type_object) != 0)
     {
+        Py_DECREF(type_object);
         return -1;
     }
     py::winrt_type<winrt::Windows::Foundation::IWwwFormUrlDecoderEntry>::python_type = reinterpret_cast<PyTypeObject*>(type_object);
-
+    type_object = nullptr;
+    
     type_object = PyType_FromSpec(&DateTime_Type_spec);
     if (type_object == nullptr)
     {
@@ -6742,10 +6725,12 @@ int initialize_Windows_Foundation(PyObject* module)
     }
     if (PyModule_AddObject(module, "DateTime", type_object) != 0)
     {
+        Py_DECREF(type_object);
         return -1;
     }
     py::winrt_type<winrt::Windows::Foundation::DateTime>::python_type = reinterpret_cast<PyTypeObject*>(type_object);
-
+    type_object = nullptr;
+    
     type_object = PyType_FromSpec(&EventRegistrationToken_Type_spec);
     if (type_object == nullptr)
     {
@@ -6753,10 +6738,12 @@ int initialize_Windows_Foundation(PyObject* module)
     }
     if (PyModule_AddObject(module, "EventRegistrationToken", type_object) != 0)
     {
+        Py_DECREF(type_object);
         return -1;
     }
     py::winrt_type<winrt::event_token>::python_type = reinterpret_cast<PyTypeObject*>(type_object);
-
+    type_object = nullptr;
+    
     type_object = PyType_FromSpec(&HResult_Type_spec);
     if (type_object == nullptr)
     {
@@ -6764,10 +6751,12 @@ int initialize_Windows_Foundation(PyObject* module)
     }
     if (PyModule_AddObject(module, "HResult", type_object) != 0)
     {
+        Py_DECREF(type_object);
         return -1;
     }
     py::winrt_type<winrt::hresult>::python_type = reinterpret_cast<PyTypeObject*>(type_object);
-
+    type_object = nullptr;
+    
     type_object = PyType_FromSpec(&Point_Type_spec);
     if (type_object == nullptr)
     {
@@ -6775,10 +6764,12 @@ int initialize_Windows_Foundation(PyObject* module)
     }
     if (PyModule_AddObject(module, "Point", type_object) != 0)
     {
+        Py_DECREF(type_object);
         return -1;
     }
     py::winrt_type<winrt::Windows::Foundation::Point>::python_type = reinterpret_cast<PyTypeObject*>(type_object);
-
+    type_object = nullptr;
+    
     type_object = PyType_FromSpec(&Rect_Type_spec);
     if (type_object == nullptr)
     {
@@ -6786,10 +6777,12 @@ int initialize_Windows_Foundation(PyObject* module)
     }
     if (PyModule_AddObject(module, "Rect", type_object) != 0)
     {
+        Py_DECREF(type_object);
         return -1;
     }
     py::winrt_type<winrt::Windows::Foundation::Rect>::python_type = reinterpret_cast<PyTypeObject*>(type_object);
-
+    type_object = nullptr;
+    
     type_object = PyType_FromSpec(&Size_Type_spec);
     if (type_object == nullptr)
     {
@@ -6797,10 +6790,12 @@ int initialize_Windows_Foundation(PyObject* module)
     }
     if (PyModule_AddObject(module, "Size", type_object) != 0)
     {
+        Py_DECREF(type_object);
         return -1;
     }
     py::winrt_type<winrt::Windows::Foundation::Size>::python_type = reinterpret_cast<PyTypeObject*>(type_object);
-
+    type_object = nullptr;
+    
     type_object = PyType_FromSpec(&TimeSpan_Type_spec);
     if (type_object == nullptr)
     {
@@ -6808,9 +6803,37 @@ int initialize_Windows_Foundation(PyObject* module)
     }
     if (PyModule_AddObject(module, "TimeSpan", type_object) != 0)
     {
+        Py_DECREF(type_object);
         return -1;
     }
     py::winrt_type<winrt::Windows::Foundation::TimeSpan>::python_type = reinterpret_cast<PyTypeObject*>(type_object);
+    type_object = nullptr;
     
+    Py_DECREF(bases);
     return 0;
+}
+
+static PyModuleDef_Slot module_slots[] = {
+    {Py_mod_exec, initialize_Windows_Foundation},
+    {0, nullptr}
+};
+
+PyDoc_STRVAR(module_doc, "Langworthy projection module.\n");
+
+static struct PyModuleDef module_def = {
+    PyModuleDef_HEAD_INIT,
+    "_pyrt_Windows_Foundation",
+    module_doc,
+    0,
+    nullptr,
+    module_slots,
+    nullptr,
+    nullptr,
+    nullptr
+};
+
+PyMODINIT_FUNC
+PyInit__pyrt_Windows_Foundation(void)
+{
+    return PyModuleDef_Init(&module_def);
 }

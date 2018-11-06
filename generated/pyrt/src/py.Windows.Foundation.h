@@ -9,7 +9,6 @@
 
 #include <winrt/Windows.Foundation.h>
 
-int initialize_Windows_Foundation(PyObject* module);
 
 struct pyAsyncActionCompletedHandler
 {
@@ -23,8 +22,8 @@ struct pyAsyncActionCompletedHandler
         // TODO: How do I manage callable lifetime here?
         return [callable](auto param1, auto param2)
         {
-            PyObject* pyObj1 = py::converter<decltype(param1)>::convert(param1);
-            PyObject* pyObj2 = py::converter<decltype(param2)>::convert(param2);
+            PyObject* pyObj1 = py::convert(param1);
+            PyObject* pyObj2 = py::convert(param2);
 
             PyObject* args = PyTuple_Pack(2, pyObj1, pyObj2);
 
@@ -50,8 +49,8 @@ struct pyAsyncActionProgressHandler
         // TODO: How do I manage callable lifetime here?
         return [callable](auto param1, auto param2)
         {
-            PyObject* pyObj1 = py::converter<decltype(param1)>::convert(param1);
-            PyObject* pyObj2 = py::converter<decltype(param2)>::convert(param2);
+            PyObject* pyObj1 = py::convert(param1);
+            PyObject* pyObj2 = py::convert(param2);
 
             PyObject* args = PyTuple_Pack(2, pyObj1, pyObj2);
 
@@ -77,8 +76,8 @@ struct pyAsyncActionWithProgressCompletedHandler
         // TODO: How do I manage callable lifetime here?
         return [callable](auto param1, auto param2)
         {
-            PyObject* pyObj1 = py::converter<decltype(param1)>::convert(param1);
-            PyObject* pyObj2 = py::converter<decltype(param2)>::convert(param2);
+            PyObject* pyObj1 = py::convert(param1);
+            PyObject* pyObj2 = py::convert(param2);
 
             PyObject* args = PyTuple_Pack(2, pyObj1, pyObj2);
 
@@ -104,8 +103,8 @@ struct pyAsyncOperationCompletedHandler
         // TODO: How do I manage callable lifetime here?
         return [callable](auto param1, auto param2)
         {
-            PyObject* pyObj1 = py::converter<decltype(param1)>::convert(param1);
-            PyObject* pyObj2 = py::converter<decltype(param2)>::convert(param2);
+            PyObject* pyObj1 = py::convert(param1);
+            PyObject* pyObj2 = py::convert(param2);
 
             PyObject* args = PyTuple_Pack(2, pyObj1, pyObj2);
 
@@ -131,8 +130,8 @@ struct pyAsyncOperationProgressHandler
         // TODO: How do I manage callable lifetime here?
         return [callable](auto param1, auto param2)
         {
-            PyObject* pyObj1 = py::converter<decltype(param1)>::convert(param1);
-            PyObject* pyObj2 = py::converter<decltype(param2)>::convert(param2);
+            PyObject* pyObj1 = py::convert(param1);
+            PyObject* pyObj2 = py::convert(param2);
 
             PyObject* args = PyTuple_Pack(2, pyObj1, pyObj2);
 
@@ -158,8 +157,8 @@ struct pyAsyncOperationWithProgressCompletedHandler
         // TODO: How do I manage callable lifetime here?
         return [callable](auto param1, auto param2)
         {
-            PyObject* pyObj1 = py::converter<decltype(param1)>::convert(param1);
-            PyObject* pyObj2 = py::converter<decltype(param2)>::convert(param2);
+            PyObject* pyObj1 = py::convert(param1);
+            PyObject* pyObj2 = py::convert(param2);
 
             PyObject* args = PyTuple_Pack(2, pyObj1, pyObj2);
 
@@ -209,8 +208,8 @@ struct pyEventHandler
         // TODO: How do I manage callable lifetime here?
         return [callable](auto param1, auto param2)
         {
-            PyObject* pyObj1 = py::converter<decltype(param1)>::convert(param1);
-            PyObject* pyObj2 = py::converter<decltype(param2)>::convert(param2);
+            PyObject* pyObj1 = py::convert(param1);
+            PyObject* pyObj2 = py::convert(param2);
 
             PyObject* args = PyTuple_Pack(2, pyObj1, pyObj2);
 
@@ -236,8 +235,8 @@ struct pyTypedEventHandler
         // TODO: How do I manage callable lifetime here?
         return [callable](auto param1, auto param2)
         {
-            PyObject* pyObj1 = py::converter<decltype(param1)>::convert(param1);
-            PyObject* pyObj2 = py::converter<decltype(param2)>::convert(param2);
+            PyObject* pyObj1 = py::convert(param1);
+            PyObject* pyObj2 = py::convert(param2);
 
             PyObject* args = PyTuple_Pack(2, pyObj1, pyObj2);
 
@@ -491,7 +490,7 @@ PyObject* get_Completed(PyObject* args) override
         {
             winrt::Windows::Foundation::AsyncActionWithProgressCompletedHandler<TProgress> return_value = obj.Completed();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -510,7 +509,7 @@ PyObject* get_ErrorCode(PyObject* args) override
         {
             winrt::hresult return_value = obj.ErrorCode();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -529,7 +528,7 @@ PyObject* get_Id(PyObject* args) override
         {
             uint32_t return_value = obj.Id();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -548,7 +547,7 @@ PyObject* get_Progress(PyObject* args) override
         {
             winrt::Windows::Foundation::AsyncActionProgressHandler<TProgress> return_value = obj.Progress();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -567,7 +566,7 @@ PyObject* get_Status(PyObject* args) override
         {
             winrt::Windows::Foundation::AsyncStatus return_value = obj.Status();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -675,7 +674,7 @@ PyObject* GetResults(PyObject* args) override
         {
             TResult return_value = obj.GetResults();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -702,7 +701,7 @@ PyObject* get_Completed(PyObject* args) override
         {
             winrt::Windows::Foundation::AsyncOperationWithProgressCompletedHandler<TResult, TProgress> return_value = obj.Completed();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -721,7 +720,7 @@ PyObject* get_ErrorCode(PyObject* args) override
         {
             winrt::hresult return_value = obj.ErrorCode();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -740,7 +739,7 @@ PyObject* get_Id(PyObject* args) override
         {
             uint32_t return_value = obj.Id();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -759,7 +758,7 @@ PyObject* get_Progress(PyObject* args) override
         {
             winrt::Windows::Foundation::AsyncOperationProgressHandler<TResult, TProgress> return_value = obj.Progress();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -778,7 +777,7 @@ PyObject* get_Status(PyObject* args) override
         {
             winrt::Windows::Foundation::AsyncStatus return_value = obj.Status();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -886,7 +885,7 @@ PyObject* GetResults(PyObject* args) override
         {
             TResult return_value = obj.GetResults();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -913,7 +912,7 @@ PyObject* get_Completed(PyObject* args) override
         {
             winrt::Windows::Foundation::AsyncOperationCompletedHandler<TResult> return_value = obj.Completed();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -932,7 +931,7 @@ PyObject* get_ErrorCode(PyObject* args) override
         {
             winrt::hresult return_value = obj.ErrorCode();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -951,7 +950,7 @@ PyObject* get_Id(PyObject* args) override
         {
             uint32_t return_value = obj.Id();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -970,7 +969,7 @@ PyObject* get_Status(PyObject* args) override
         {
             winrt::Windows::Foundation::AsyncStatus return_value = obj.Status();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -1013,7 +1012,7 @@ PyObject* GetBoolean(PyObject* args) override
         {
             bool return_value = obj.GetBoolean();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -1066,7 +1065,7 @@ PyObject* GetChar16(PyObject* args) override
         {
             char16_t return_value = obj.GetChar16();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -1119,7 +1118,7 @@ PyObject* GetDateTime(PyObject* args) override
         {
             winrt::Windows::Foundation::DateTime return_value = obj.GetDateTime();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -1172,7 +1171,7 @@ PyObject* GetDouble(PyObject* args) override
         {
             double return_value = obj.GetDouble();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -1225,7 +1224,7 @@ PyObject* GetGuid(PyObject* args) override
         {
             winrt::guid return_value = obj.GetGuid();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -1305,7 +1304,7 @@ PyObject* GetInt16(PyObject* args) override
         {
             int16_t return_value = obj.GetInt16();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -1358,7 +1357,7 @@ PyObject* GetInt32(PyObject* args) override
         {
             int32_t return_value = obj.GetInt32();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -1411,7 +1410,7 @@ PyObject* GetInt64(PyObject* args) override
         {
             int64_t return_value = obj.GetInt64();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -1464,7 +1463,7 @@ PyObject* GetPoint(PyObject* args) override
         {
             winrt::Windows::Foundation::Point return_value = obj.GetPoint();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -1517,7 +1516,7 @@ PyObject* GetRect(PyObject* args) override
         {
             winrt::Windows::Foundation::Rect return_value = obj.GetRect();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -1570,7 +1569,7 @@ PyObject* GetSingle(PyObject* args) override
         {
             float return_value = obj.GetSingle();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -1623,7 +1622,7 @@ PyObject* GetSize(PyObject* args) override
         {
             winrt::Windows::Foundation::Size return_value = obj.GetSize();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -1676,7 +1675,7 @@ PyObject* GetString(PyObject* args) override
         {
             winrt::hstring return_value = obj.GetString();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -1729,7 +1728,7 @@ PyObject* GetTimeSpan(PyObject* args) override
         {
             winrt::Windows::Foundation::TimeSpan return_value = obj.GetTimeSpan();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -1782,7 +1781,7 @@ PyObject* GetUInt16(PyObject* args) override
         {
             uint16_t return_value = obj.GetUInt16();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -1835,7 +1834,7 @@ PyObject* GetUInt32(PyObject* args) override
         {
             uint32_t return_value = obj.GetUInt32();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -1888,7 +1887,7 @@ PyObject* GetUInt64(PyObject* args) override
         {
             uint64_t return_value = obj.GetUInt64();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -1941,7 +1940,7 @@ PyObject* GetUInt8(PyObject* args) override
         {
             uint8_t return_value = obj.GetUInt8();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -1995,7 +1994,7 @@ PyObject* get_IsNumericScalar(PyObject* args) override
         {
             bool return_value = obj.IsNumericScalar();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -2014,7 +2013,7 @@ PyObject* get_Type(PyObject* args) override
         {
             winrt::Windows::Foundation::PropertyType return_value = obj.Type();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -2053,7 +2052,7 @@ PyObject* GetBoolean(PyObject* args) override
         {
             bool return_value = obj.GetBoolean();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -2106,7 +2105,7 @@ PyObject* GetChar16(PyObject* args) override
         {
             char16_t return_value = obj.GetChar16();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -2159,7 +2158,7 @@ PyObject* GetDateTime(PyObject* args) override
         {
             winrt::Windows::Foundation::DateTime return_value = obj.GetDateTime();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -2212,7 +2211,7 @@ PyObject* GetDouble(PyObject* args) override
         {
             double return_value = obj.GetDouble();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -2265,7 +2264,7 @@ PyObject* GetGuid(PyObject* args) override
         {
             winrt::guid return_value = obj.GetGuid();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -2345,7 +2344,7 @@ PyObject* GetInt16(PyObject* args) override
         {
             int16_t return_value = obj.GetInt16();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -2398,7 +2397,7 @@ PyObject* GetInt32(PyObject* args) override
         {
             int32_t return_value = obj.GetInt32();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -2451,7 +2450,7 @@ PyObject* GetInt64(PyObject* args) override
         {
             int64_t return_value = obj.GetInt64();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -2504,7 +2503,7 @@ PyObject* GetPoint(PyObject* args) override
         {
             winrt::Windows::Foundation::Point return_value = obj.GetPoint();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -2557,7 +2556,7 @@ PyObject* GetRect(PyObject* args) override
         {
             winrt::Windows::Foundation::Rect return_value = obj.GetRect();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -2610,7 +2609,7 @@ PyObject* GetSingle(PyObject* args) override
         {
             float return_value = obj.GetSingle();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -2663,7 +2662,7 @@ PyObject* GetSize(PyObject* args) override
         {
             winrt::Windows::Foundation::Size return_value = obj.GetSize();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -2716,7 +2715,7 @@ PyObject* GetString(PyObject* args) override
         {
             winrt::hstring return_value = obj.GetString();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -2769,7 +2768,7 @@ PyObject* GetTimeSpan(PyObject* args) override
         {
             winrt::Windows::Foundation::TimeSpan return_value = obj.GetTimeSpan();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -2822,7 +2821,7 @@ PyObject* GetUInt16(PyObject* args) override
         {
             uint16_t return_value = obj.GetUInt16();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -2875,7 +2874,7 @@ PyObject* GetUInt32(PyObject* args) override
         {
             uint32_t return_value = obj.GetUInt32();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -2928,7 +2927,7 @@ PyObject* GetUInt64(PyObject* args) override
         {
             uint64_t return_value = obj.GetUInt64();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -2981,7 +2980,7 @@ PyObject* GetUInt8(PyObject* args) override
         {
             uint8_t return_value = obj.GetUInt8();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -3035,7 +3034,7 @@ PyObject* get_IsNumericScalar(PyObject* args) override
         {
             bool return_value = obj.IsNumericScalar();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -3054,7 +3053,7 @@ PyObject* get_Type(PyObject* args) override
         {
             winrt::Windows::Foundation::PropertyType return_value = obj.Type();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -3073,7 +3072,7 @@ PyObject* get_Value(PyObject* args) override
         {
             T return_value = obj.Value();
 
-            return py::converter<decltype(return_value)>::convert(return_value);
+            return py::convert(return_value);
         }
         catch (...)
         {
@@ -3230,28 +3229,6 @@ namespace py
     };
 
     template<>
-    struct winrt_type<winrt::Windows::Foundation::IDeferral>
-    {
-        static PyTypeObject* python_type;
-
-        static PyTypeObject* get_python_type()
-        {
-            return python_type;
-        }
-    };
-
-    template<>
-    struct winrt_type<winrt::Windows::Foundation::IDeferralFactory>
-    {
-        static PyTypeObject* python_type;
-
-        static PyTypeObject* get_python_type()
-        {
-            return python_type;
-        }
-    };
-
-    template<>
     struct winrt_type<winrt::Windows::Foundation::IGetActivationFactory>
     {
         static PyTypeObject* python_type;
@@ -3263,29 +3240,7 @@ namespace py
     };
 
     template<>
-    struct winrt_type<winrt::Windows::Foundation::IGuidHelperStatics>
-    {
-        static PyTypeObject* python_type;
-
-        static PyTypeObject* get_python_type()
-        {
-            return python_type;
-        }
-    };
-
-    template<>
     struct winrt_type<winrt::Windows::Foundation::IMemoryBuffer>
-    {
-        static PyTypeObject* python_type;
-
-        static PyTypeObject* get_python_type()
-        {
-            return python_type;
-        }
-    };
-
-    template<>
-    struct winrt_type<winrt::Windows::Foundation::IMemoryBufferFactory>
     {
         static PyTypeObject* python_type;
 
@@ -3308,17 +3263,6 @@ namespace py
 
     template<>
     struct winrt_type<winrt::Windows::Foundation::IPropertyValue>
-    {
-        static PyTypeObject* python_type;
-
-        static PyTypeObject* get_python_type()
-        {
-            return python_type;
-        }
-    };
-
-    template<>
-    struct winrt_type<winrt::Windows::Foundation::IPropertyValueStatics>
     {
         static PyTypeObject* python_type;
 
@@ -3362,73 +3306,7 @@ namespace py
     };
 
     template<>
-    struct winrt_type<winrt::Windows::Foundation::IUriEscapeStatics>
-    {
-        static PyTypeObject* python_type;
-
-        static PyTypeObject* get_python_type()
-        {
-            return python_type;
-        }
-    };
-
-    template<>
-    struct winrt_type<winrt::Windows::Foundation::IUriRuntimeClass>
-    {
-        static PyTypeObject* python_type;
-
-        static PyTypeObject* get_python_type()
-        {
-            return python_type;
-        }
-    };
-
-    template<>
-    struct winrt_type<winrt::Windows::Foundation::IUriRuntimeClassFactory>
-    {
-        static PyTypeObject* python_type;
-
-        static PyTypeObject* get_python_type()
-        {
-            return python_type;
-        }
-    };
-
-    template<>
-    struct winrt_type<winrt::Windows::Foundation::IUriRuntimeClassWithAbsoluteCanonicalUri>
-    {
-        static PyTypeObject* python_type;
-
-        static PyTypeObject* get_python_type()
-        {
-            return python_type;
-        }
-    };
-
-    template<>
     struct winrt_type<winrt::Windows::Foundation::IWwwFormUrlDecoderEntry>
-    {
-        static PyTypeObject* python_type;
-
-        static PyTypeObject* get_python_type()
-        {
-            return python_type;
-        }
-    };
-
-    template<>
-    struct winrt_type<winrt::Windows::Foundation::IWwwFormUrlDecoderRuntimeClass>
-    {
-        static PyTypeObject* python_type;
-
-        static PyTypeObject* get_python_type()
-        {
-            return python_type;
-        }
-    };
-
-    template<>
-    struct winrt_type<winrt::Windows::Foundation::IWwwFormUrlDecoderRuntimeClassFactory>
     {
         static PyTypeObject* python_type;
 

@@ -106,7 +106,7 @@ static PyObject* Matrix3x2_get_M11(py::winrt_struct_wrapper<winrt::Windows::Foun
 {
     try
     {
-        return py::converter<decltype(self->obj.m11)>::convert(self->obj.m11);
+        return py::convert(self->obj.m11);
     }
     catch (...)
     {
@@ -137,7 +137,7 @@ static PyObject* Matrix3x2_get_M12(py::winrt_struct_wrapper<winrt::Windows::Foun
 {
     try
     {
-        return py::converter<decltype(self->obj.m12)>::convert(self->obj.m12);
+        return py::convert(self->obj.m12);
     }
     catch (...)
     {
@@ -168,7 +168,7 @@ static PyObject* Matrix3x2_get_M21(py::winrt_struct_wrapper<winrt::Windows::Foun
 {
     try
     {
-        return py::converter<decltype(self->obj.m21)>::convert(self->obj.m21);
+        return py::convert(self->obj.m21);
     }
     catch (...)
     {
@@ -199,7 +199,7 @@ static PyObject* Matrix3x2_get_M22(py::winrt_struct_wrapper<winrt::Windows::Foun
 {
     try
     {
-        return py::converter<decltype(self->obj.m22)>::convert(self->obj.m22);
+        return py::convert(self->obj.m22);
     }
     catch (...)
     {
@@ -230,7 +230,7 @@ static PyObject* Matrix3x2_get_M31(py::winrt_struct_wrapper<winrt::Windows::Foun
 {
     try
     {
-        return py::converter<decltype(self->obj.m31)>::convert(self->obj.m31);
+        return py::convert(self->obj.m31);
     }
     catch (...)
     {
@@ -261,7 +261,7 @@ static PyObject* Matrix3x2_get_M32(py::winrt_struct_wrapper<winrt::Windows::Foun
 {
     try
     {
-        return py::converter<decltype(self->obj.m32)>::convert(self->obj.m32);
+        return py::convert(self->obj.m32);
     }
     catch (...)
     {
@@ -458,7 +458,7 @@ static PyObject* Matrix4x4_get_M11(py::winrt_struct_wrapper<winrt::Windows::Foun
 {
     try
     {
-        return py::converter<decltype(self->obj.m11)>::convert(self->obj.m11);
+        return py::convert(self->obj.m11);
     }
     catch (...)
     {
@@ -489,7 +489,7 @@ static PyObject* Matrix4x4_get_M12(py::winrt_struct_wrapper<winrt::Windows::Foun
 {
     try
     {
-        return py::converter<decltype(self->obj.m12)>::convert(self->obj.m12);
+        return py::convert(self->obj.m12);
     }
     catch (...)
     {
@@ -520,7 +520,7 @@ static PyObject* Matrix4x4_get_M13(py::winrt_struct_wrapper<winrt::Windows::Foun
 {
     try
     {
-        return py::converter<decltype(self->obj.m13)>::convert(self->obj.m13);
+        return py::convert(self->obj.m13);
     }
     catch (...)
     {
@@ -551,7 +551,7 @@ static PyObject* Matrix4x4_get_M14(py::winrt_struct_wrapper<winrt::Windows::Foun
 {
     try
     {
-        return py::converter<decltype(self->obj.m14)>::convert(self->obj.m14);
+        return py::convert(self->obj.m14);
     }
     catch (...)
     {
@@ -582,7 +582,7 @@ static PyObject* Matrix4x4_get_M21(py::winrt_struct_wrapper<winrt::Windows::Foun
 {
     try
     {
-        return py::converter<decltype(self->obj.m21)>::convert(self->obj.m21);
+        return py::convert(self->obj.m21);
     }
     catch (...)
     {
@@ -613,7 +613,7 @@ static PyObject* Matrix4x4_get_M22(py::winrt_struct_wrapper<winrt::Windows::Foun
 {
     try
     {
-        return py::converter<decltype(self->obj.m22)>::convert(self->obj.m22);
+        return py::convert(self->obj.m22);
     }
     catch (...)
     {
@@ -644,7 +644,7 @@ static PyObject* Matrix4x4_get_M23(py::winrt_struct_wrapper<winrt::Windows::Foun
 {
     try
     {
-        return py::converter<decltype(self->obj.m23)>::convert(self->obj.m23);
+        return py::convert(self->obj.m23);
     }
     catch (...)
     {
@@ -675,7 +675,7 @@ static PyObject* Matrix4x4_get_M24(py::winrt_struct_wrapper<winrt::Windows::Foun
 {
     try
     {
-        return py::converter<decltype(self->obj.m24)>::convert(self->obj.m24);
+        return py::convert(self->obj.m24);
     }
     catch (...)
     {
@@ -706,7 +706,7 @@ static PyObject* Matrix4x4_get_M31(py::winrt_struct_wrapper<winrt::Windows::Foun
 {
     try
     {
-        return py::converter<decltype(self->obj.m31)>::convert(self->obj.m31);
+        return py::convert(self->obj.m31);
     }
     catch (...)
     {
@@ -737,7 +737,7 @@ static PyObject* Matrix4x4_get_M32(py::winrt_struct_wrapper<winrt::Windows::Foun
 {
     try
     {
-        return py::converter<decltype(self->obj.m32)>::convert(self->obj.m32);
+        return py::convert(self->obj.m32);
     }
     catch (...)
     {
@@ -768,7 +768,7 @@ static PyObject* Matrix4x4_get_M33(py::winrt_struct_wrapper<winrt::Windows::Foun
 {
     try
     {
-        return py::converter<decltype(self->obj.m33)>::convert(self->obj.m33);
+        return py::convert(self->obj.m33);
     }
     catch (...)
     {
@@ -799,7 +799,7 @@ static PyObject* Matrix4x4_get_M34(py::winrt_struct_wrapper<winrt::Windows::Foun
 {
     try
     {
-        return py::converter<decltype(self->obj.m34)>::convert(self->obj.m34);
+        return py::convert(self->obj.m34);
     }
     catch (...)
     {
@@ -830,7 +830,7 @@ static PyObject* Matrix4x4_get_M41(py::winrt_struct_wrapper<winrt::Windows::Foun
 {
     try
     {
-        return py::converter<decltype(self->obj.m41)>::convert(self->obj.m41);
+        return py::convert(self->obj.m41);
     }
     catch (...)
     {
@@ -861,7 +861,7 @@ static PyObject* Matrix4x4_get_M42(py::winrt_struct_wrapper<winrt::Windows::Foun
 {
     try
     {
-        return py::converter<decltype(self->obj.m42)>::convert(self->obj.m42);
+        return py::convert(self->obj.m42);
     }
     catch (...)
     {
@@ -892,7 +892,7 @@ static PyObject* Matrix4x4_get_M43(py::winrt_struct_wrapper<winrt::Windows::Foun
 {
     try
     {
-        return py::converter<decltype(self->obj.m43)>::convert(self->obj.m43);
+        return py::convert(self->obj.m43);
     }
     catch (...)
     {
@@ -923,7 +923,7 @@ static PyObject* Matrix4x4_get_M44(py::winrt_struct_wrapper<winrt::Windows::Foun
 {
     try
     {
-        return py::converter<decltype(self->obj.m44)>::convert(self->obj.m44);
+        return py::convert(self->obj.m44);
     }
     catch (...)
     {
@@ -1074,7 +1074,7 @@ static PyObject* Plane_get_Normal(py::winrt_struct_wrapper<winrt::Windows::Found
 {
     try
     {
-        return py::converter<decltype(self->obj.normal)>::convert(self->obj.normal);
+        return py::convert(self->obj.normal);
     }
     catch (...)
     {
@@ -1105,7 +1105,7 @@ static PyObject* Plane_get_D(py::winrt_struct_wrapper<winrt::Windows::Foundation
 {
     try
     {
-        return py::converter<decltype(self->obj.d)>::convert(self->obj.d);
+        return py::convert(self->obj.d);
     }
     catch (...)
     {
@@ -1250,7 +1250,7 @@ static PyObject* Quaternion_get_X(py::winrt_struct_wrapper<winrt::Windows::Found
 {
     try
     {
-        return py::converter<decltype(self->obj.x)>::convert(self->obj.x);
+        return py::convert(self->obj.x);
     }
     catch (...)
     {
@@ -1281,7 +1281,7 @@ static PyObject* Quaternion_get_Y(py::winrt_struct_wrapper<winrt::Windows::Found
 {
     try
     {
-        return py::converter<decltype(self->obj.y)>::convert(self->obj.y);
+        return py::convert(self->obj.y);
     }
     catch (...)
     {
@@ -1312,7 +1312,7 @@ static PyObject* Quaternion_get_Z(py::winrt_struct_wrapper<winrt::Windows::Found
 {
     try
     {
-        return py::converter<decltype(self->obj.z)>::convert(self->obj.z);
+        return py::convert(self->obj.z);
     }
     catch (...)
     {
@@ -1343,7 +1343,7 @@ static PyObject* Quaternion_get_W(py::winrt_struct_wrapper<winrt::Windows::Found
 {
     try
     {
-        return py::converter<decltype(self->obj.w)>::convert(self->obj.w);
+        return py::convert(self->obj.w);
     }
     catch (...)
     {
@@ -1482,7 +1482,7 @@ static PyObject* Rational_get_Numerator(py::winrt_struct_wrapper<winrt::Windows:
 {
     try
     {
-        return py::converter<decltype(self->obj.Numerator)>::convert(self->obj.Numerator);
+        return py::convert(self->obj.Numerator);
     }
     catch (...)
     {
@@ -1513,7 +1513,7 @@ static PyObject* Rational_get_Denominator(py::winrt_struct_wrapper<winrt::Window
 {
     try
     {
-        return py::converter<decltype(self->obj.Denominator)>::convert(self->obj.Denominator);
+        return py::convert(self->obj.Denominator);
     }
     catch (...)
     {
@@ -1650,7 +1650,7 @@ static PyObject* Vector2_get_X(py::winrt_struct_wrapper<winrt::Windows::Foundati
 {
     try
     {
-        return py::converter<decltype(self->obj.x)>::convert(self->obj.x);
+        return py::convert(self->obj.x);
     }
     catch (...)
     {
@@ -1681,7 +1681,7 @@ static PyObject* Vector2_get_Y(py::winrt_struct_wrapper<winrt::Windows::Foundati
 {
     try
     {
-        return py::converter<decltype(self->obj.y)>::convert(self->obj.y);
+        return py::convert(self->obj.y);
     }
     catch (...)
     {
@@ -1822,7 +1822,7 @@ static PyObject* Vector3_get_X(py::winrt_struct_wrapper<winrt::Windows::Foundati
 {
     try
     {
-        return py::converter<decltype(self->obj.x)>::convert(self->obj.x);
+        return py::convert(self->obj.x);
     }
     catch (...)
     {
@@ -1853,7 +1853,7 @@ static PyObject* Vector3_get_Y(py::winrt_struct_wrapper<winrt::Windows::Foundati
 {
     try
     {
-        return py::converter<decltype(self->obj.y)>::convert(self->obj.y);
+        return py::convert(self->obj.y);
     }
     catch (...)
     {
@@ -1884,7 +1884,7 @@ static PyObject* Vector3_get_Z(py::winrt_struct_wrapper<winrt::Windows::Foundati
 {
     try
     {
-        return py::converter<decltype(self->obj.z)>::convert(self->obj.z);
+        return py::convert(self->obj.z);
     }
     catch (...)
     {
@@ -2030,7 +2030,7 @@ static PyObject* Vector4_get_X(py::winrt_struct_wrapper<winrt::Windows::Foundati
 {
     try
     {
-        return py::converter<decltype(self->obj.x)>::convert(self->obj.x);
+        return py::convert(self->obj.x);
     }
     catch (...)
     {
@@ -2061,7 +2061,7 @@ static PyObject* Vector4_get_Y(py::winrt_struct_wrapper<winrt::Windows::Foundati
 {
     try
     {
-        return py::converter<decltype(self->obj.y)>::convert(self->obj.y);
+        return py::convert(self->obj.y);
     }
     catch (...)
     {
@@ -2092,7 +2092,7 @@ static PyObject* Vector4_get_Z(py::winrt_struct_wrapper<winrt::Windows::Foundati
 {
     try
     {
-        return py::converter<decltype(self->obj.z)>::convert(self->obj.z);
+        return py::convert(self->obj.z);
     }
     catch (...)
     {
@@ -2123,7 +2123,7 @@ static PyObject* Vector4_get_W(py::winrt_struct_wrapper<winrt::Windows::Foundati
 {
     try
     {
-        return py::converter<decltype(self->obj.w)>::convert(self->obj.w);
+        return py::convert(self->obj.w);
     }
     catch (...)
     {
@@ -2179,8 +2179,8 @@ static PyType_Spec Vector4_Type_spec =
 int initialize_Windows_Foundation_Numerics(PyObject* module)
 {
     PyObject* type_object{ nullptr };
-
-
+    PyObject* bases = PyTuple_Pack(1, py::winrt_type<py::winrt_base>::python_type);
+    
     type_object = PyType_FromSpec(&Matrix3x2_Type_spec);
     if (type_object == nullptr)
     {
@@ -2188,10 +2188,12 @@ int initialize_Windows_Foundation_Numerics(PyObject* module)
     }
     if (PyModule_AddObject(module, "Matrix3x2", type_object) != 0)
     {
+        Py_DECREF(type_object);
         return -1;
     }
     py::winrt_type<winrt::Windows::Foundation::Numerics::float3x2>::python_type = reinterpret_cast<PyTypeObject*>(type_object);
-
+    type_object = nullptr;
+    
     type_object = PyType_FromSpec(&Matrix4x4_Type_spec);
     if (type_object == nullptr)
     {
@@ -2199,10 +2201,12 @@ int initialize_Windows_Foundation_Numerics(PyObject* module)
     }
     if (PyModule_AddObject(module, "Matrix4x4", type_object) != 0)
     {
+        Py_DECREF(type_object);
         return -1;
     }
     py::winrt_type<winrt::Windows::Foundation::Numerics::float4x4>::python_type = reinterpret_cast<PyTypeObject*>(type_object);
-
+    type_object = nullptr;
+    
     type_object = PyType_FromSpec(&Plane_Type_spec);
     if (type_object == nullptr)
     {
@@ -2210,10 +2214,12 @@ int initialize_Windows_Foundation_Numerics(PyObject* module)
     }
     if (PyModule_AddObject(module, "Plane", type_object) != 0)
     {
+        Py_DECREF(type_object);
         return -1;
     }
     py::winrt_type<winrt::Windows::Foundation::Numerics::plane>::python_type = reinterpret_cast<PyTypeObject*>(type_object);
-
+    type_object = nullptr;
+    
     type_object = PyType_FromSpec(&Quaternion_Type_spec);
     if (type_object == nullptr)
     {
@@ -2221,10 +2227,12 @@ int initialize_Windows_Foundation_Numerics(PyObject* module)
     }
     if (PyModule_AddObject(module, "Quaternion", type_object) != 0)
     {
+        Py_DECREF(type_object);
         return -1;
     }
     py::winrt_type<winrt::Windows::Foundation::Numerics::quaternion>::python_type = reinterpret_cast<PyTypeObject*>(type_object);
-
+    type_object = nullptr;
+    
     type_object = PyType_FromSpec(&Rational_Type_spec);
     if (type_object == nullptr)
     {
@@ -2232,10 +2240,12 @@ int initialize_Windows_Foundation_Numerics(PyObject* module)
     }
     if (PyModule_AddObject(module, "Rational", type_object) != 0)
     {
+        Py_DECREF(type_object);
         return -1;
     }
     py::winrt_type<winrt::Windows::Foundation::Numerics::Rational>::python_type = reinterpret_cast<PyTypeObject*>(type_object);
-
+    type_object = nullptr;
+    
     type_object = PyType_FromSpec(&Vector2_Type_spec);
     if (type_object == nullptr)
     {
@@ -2243,10 +2253,12 @@ int initialize_Windows_Foundation_Numerics(PyObject* module)
     }
     if (PyModule_AddObject(module, "Vector2", type_object) != 0)
     {
+        Py_DECREF(type_object);
         return -1;
     }
     py::winrt_type<winrt::Windows::Foundation::Numerics::float2>::python_type = reinterpret_cast<PyTypeObject*>(type_object);
-
+    type_object = nullptr;
+    
     type_object = PyType_FromSpec(&Vector3_Type_spec);
     if (type_object == nullptr)
     {
@@ -2254,10 +2266,12 @@ int initialize_Windows_Foundation_Numerics(PyObject* module)
     }
     if (PyModule_AddObject(module, "Vector3", type_object) != 0)
     {
+        Py_DECREF(type_object);
         return -1;
     }
     py::winrt_type<winrt::Windows::Foundation::Numerics::float3>::python_type = reinterpret_cast<PyTypeObject*>(type_object);
-
+    type_object = nullptr;
+    
     type_object = PyType_FromSpec(&Vector4_Type_spec);
     if (type_object == nullptr)
     {
@@ -2265,9 +2279,37 @@ int initialize_Windows_Foundation_Numerics(PyObject* module)
     }
     if (PyModule_AddObject(module, "Vector4", type_object) != 0)
     {
+        Py_DECREF(type_object);
         return -1;
     }
     py::winrt_type<winrt::Windows::Foundation::Numerics::float4>::python_type = reinterpret_cast<PyTypeObject*>(type_object);
+    type_object = nullptr;
     
+    Py_DECREF(bases);
     return 0;
+}
+
+static PyModuleDef_Slot module_slots[] = {
+    {Py_mod_exec, initialize_Windows_Foundation_Numerics},
+    {0, nullptr}
+};
+
+PyDoc_STRVAR(module_doc, "Langworthy projection module.\n");
+
+static struct PyModuleDef module_def = {
+    PyModuleDef_HEAD_INIT,
+    "_pyrt_Windows_Foundation_Numerics",
+    module_doc,
+    0,
+    nullptr,
+    module_slots,
+    nullptr,
+    nullptr,
+    nullptr
+};
+
+PyMODINIT_FUNC
+PyInit__pyrt_Windows_Foundation_Numerics(void)
+{
+    return PyModuleDef_Init(&module_def);
 }
