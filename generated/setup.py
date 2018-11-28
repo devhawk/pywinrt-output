@@ -6,7 +6,7 @@ import setuptools
 
 setuptools.setup(
     name = "pyrt",
-    version = "1.0.alpha",
+    version = "1.0a0",
     description="Generated Python/WinRT package",
     license="MIT",
     url="http://github.com/Microsoft/xlang",

@@ -6,97 +6,96 @@
 
 #include <winrt/Windows.Foundation.Numerics.h>
 
-
 namespace py
 {
     template<>
     struct winrt_type<winrt::Windows::Foundation::Numerics::float3x2>
     {
         static PyTypeObject* python_type;
-
+    
         static PyTypeObject* get_python_type()
         {
             return python_type;
         }
     };
-
+    
     template<>
     struct winrt_type<winrt::Windows::Foundation::Numerics::float4x4>
     {
         static PyTypeObject* python_type;
-
+    
         static PyTypeObject* get_python_type()
         {
             return python_type;
         }
     };
-
+    
     template<>
     struct winrt_type<winrt::Windows::Foundation::Numerics::plane>
     {
         static PyTypeObject* python_type;
-
+    
         static PyTypeObject* get_python_type()
         {
             return python_type;
         }
     };
-
+    
     template<>
     struct winrt_type<winrt::Windows::Foundation::Numerics::quaternion>
     {
         static PyTypeObject* python_type;
-
+    
         static PyTypeObject* get_python_type()
         {
             return python_type;
         }
     };
-
+    
     template<>
     struct winrt_type<winrt::Windows::Foundation::Numerics::Rational>
     {
         static PyTypeObject* python_type;
-
+    
         static PyTypeObject* get_python_type()
         {
             return python_type;
         }
     };
-
+    
     template<>
     struct winrt_type<winrt::Windows::Foundation::Numerics::float2>
     {
         static PyTypeObject* python_type;
-
+    
         static PyTypeObject* get_python_type()
         {
             return python_type;
         }
     };
-
+    
     template<>
     struct winrt_type<winrt::Windows::Foundation::Numerics::float3>
     {
         static PyTypeObject* python_type;
-
+    
         static PyTypeObject* get_python_type()
         {
             return python_type;
         }
     };
-
+    
     template<>
     struct winrt_type<winrt::Windows::Foundation::Numerics::float4>
     {
         static PyTypeObject* python_type;
-
+    
         static PyTypeObject* get_python_type()
         {
             return python_type;
         }
     };
-
+    
     template<>
     struct converter<winrt::Windows::Foundation::Numerics::float3x2>
     {

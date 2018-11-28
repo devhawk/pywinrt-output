@@ -3,12 +3,12 @@
 #pragma once
 
 #include "pybase.h"
+
 #if __has_include("py.Windows.Foundation.Collections.h")
 #include "py.Windows.Foundation.Collections.h"
 #endif
 
 #include <winrt/Windows.Data.Json.h>
-
 
 namespace py
 {
@@ -16,55 +16,55 @@ namespace py
     struct winrt_type<winrt::Windows::Data::Json::JsonArray>
     {
         static PyTypeObject* python_type;
-
+    
         static PyTypeObject* get_python_type()
         {
             return python_type;
         }
     };
-
+    
     template<>
     struct winrt_type<winrt::Windows::Data::Json::JsonError>
     {
         static PyTypeObject* python_type;
-
+    
         static PyTypeObject* get_python_type()
         {
             return python_type;
         }
     };
-
+    
     template<>
     struct winrt_type<winrt::Windows::Data::Json::JsonObject>
     {
         static PyTypeObject* python_type;
-
+    
         static PyTypeObject* get_python_type()
         {
             return python_type;
         }
     };
-
+    
     template<>
     struct winrt_type<winrt::Windows::Data::Json::JsonValue>
     {
         static PyTypeObject* python_type;
-
+    
         static PyTypeObject* get_python_type()
         {
             return python_type;
         }
     };
-
+    
     template<>
     struct winrt_type<winrt::Windows::Data::Json::IJsonValue>
     {
         static PyTypeObject* python_type;
-
+    
         static PyTypeObject* get_python_type()
         {
             return python_type;
         }
     };
-
+    
 }

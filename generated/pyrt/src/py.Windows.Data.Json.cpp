@@ -3,6 +3,7 @@
 #include "py.Windows.Data.Json.h"
 
 // ----- JsonArray class --------------------
+
 PyTypeObject* py::winrt_type<winrt::Windows::Data::Json::JsonArray>::python_type;
 
 static PyObject* JsonArray_new(PyTypeObject* type, PyObject* args, PyObject* kwds)
@@ -12,9 +13,9 @@ static PyObject* JsonArray_new(PyTypeObject* type, PyObject* args, PyObject* kwd
         PyErr_SetString(PyExc_TypeError, "keyword arguments not supported");
         return nullptr;
     }
-
+    
     Py_ssize_t arg_count = PyTuple_Size(args);
-
+    
     if (arg_count == 0)
     {
         try
@@ -27,12 +28,11 @@ static PyObject* JsonArray_new(PyTypeObject* type, PyObject* args, PyObject* kwd
             return py::to_PyErr();
         }
     }
-    else if (arg_count == -1)
+    else if (arg_count != -1)
     {
-        return nullptr; 
+        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
     }
-
-    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+    
     return nullptr;
 }
 
@@ -43,7 +43,744 @@ static void JsonArray_dealloc(py::winrt_wrapper<winrt::Windows::Data::Json::Json
     self->obj = nullptr;
 }
 
-static PyObject* JsonArray__from(PyObject* /*unused*/, PyObject* arg)
+static PyObject* JsonArray_Append(py::winrt_wrapper<winrt::Windows::Data::Json::JsonArray>* self, PyObject* args)
+{
+    Py_ssize_t arg_count = PyTuple_Size(args);
+    
+    if (arg_count == 1)
+    {
+        try
+        {
+            auto param0 = py::convert_to<winrt::Windows::Data::Json::IJsonValue>(args, 0);
+            
+            self->obj.Append(param0);
+            
+            Py_RETURN_NONE;
+        }
+        catch (...)
+        {
+            return py::to_PyErr();
+        }
+    }
+    else if (arg_count != -1)
+    {
+        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+    }
+    
+    return nullptr;
+}
+
+static PyObject* JsonArray_Clear(py::winrt_wrapper<winrt::Windows::Data::Json::JsonArray>* self, PyObject* args)
+{
+    Py_ssize_t arg_count = PyTuple_Size(args);
+    
+    if (arg_count == 0)
+    {
+        try
+        {
+            self->obj.Clear();
+            
+            Py_RETURN_NONE;
+        }
+        catch (...)
+        {
+            return py::to_PyErr();
+        }
+    }
+    else if (arg_count != -1)
+    {
+        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+    }
+    
+    return nullptr;
+}
+
+static PyObject* JsonArray_First(py::winrt_wrapper<winrt::Windows::Data::Json::JsonArray>* self, PyObject* args)
+{
+    Py_ssize_t arg_count = PyTuple_Size(args);
+    
+    if (arg_count == 0)
+    {
+        try
+        {
+            winrt::Windows::Foundation::Collections::IIterator<winrt::Windows::Data::Json::IJsonValue> return_value = self->obj.First();
+            
+            return py::convert(return_value);
+        }
+        catch (...)
+        {
+            return py::to_PyErr();
+        }
+    }
+    else if (arg_count != -1)
+    {
+        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+    }
+    
+    return nullptr;
+}
+
+static PyObject* JsonArray_GetArray(py::winrt_wrapper<winrt::Windows::Data::Json::JsonArray>* self, PyObject* args)
+{
+    Py_ssize_t arg_count = PyTuple_Size(args);
+    
+    if (arg_count == 0)
+    {
+        try
+        {
+            winrt::Windows::Data::Json::JsonArray return_value = self->obj.GetArray();
+            
+            return py::convert(return_value);
+        }
+        catch (...)
+        {
+            return py::to_PyErr();
+        }
+    }
+    else if (arg_count != -1)
+    {
+        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+    }
+    
+    return nullptr;
+}
+
+static PyObject* JsonArray_GetArrayAt(py::winrt_wrapper<winrt::Windows::Data::Json::JsonArray>* self, PyObject* args)
+{
+    Py_ssize_t arg_count = PyTuple_Size(args);
+    
+    if (arg_count == 1)
+    {
+        try
+        {
+            auto param0 = py::convert_to<uint32_t>(args, 0);
+            
+            winrt::Windows::Data::Json::JsonArray return_value = self->obj.GetArrayAt(param0);
+            
+            return py::convert(return_value);
+        }
+        catch (...)
+        {
+            return py::to_PyErr();
+        }
+    }
+    else if (arg_count != -1)
+    {
+        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+    }
+    
+    return nullptr;
+}
+
+static PyObject* JsonArray_GetAt(py::winrt_wrapper<winrt::Windows::Data::Json::JsonArray>* self, PyObject* args)
+{
+    Py_ssize_t arg_count = PyTuple_Size(args);
+    
+    if (arg_count == 1)
+    {
+        try
+        {
+            auto param0 = py::convert_to<uint32_t>(args, 0);
+            
+            winrt::Windows::Data::Json::IJsonValue return_value = self->obj.GetAt(param0);
+            
+            return py::convert(return_value);
+        }
+        catch (...)
+        {
+            return py::to_PyErr();
+        }
+    }
+    else if (arg_count != -1)
+    {
+        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+    }
+    
+    return nullptr;
+}
+
+static PyObject* JsonArray_GetBoolean(py::winrt_wrapper<winrt::Windows::Data::Json::JsonArray>* self, PyObject* args)
+{
+    Py_ssize_t arg_count = PyTuple_Size(args);
+    
+    if (arg_count == 0)
+    {
+        try
+        {
+            bool return_value = self->obj.GetBoolean();
+            
+            return py::convert(return_value);
+        }
+        catch (...)
+        {
+            return py::to_PyErr();
+        }
+    }
+    else if (arg_count != -1)
+    {
+        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+    }
+    
+    return nullptr;
+}
+
+static PyObject* JsonArray_GetBooleanAt(py::winrt_wrapper<winrt::Windows::Data::Json::JsonArray>* self, PyObject* args)
+{
+    Py_ssize_t arg_count = PyTuple_Size(args);
+    
+    if (arg_count == 1)
+    {
+        try
+        {
+            auto param0 = py::convert_to<uint32_t>(args, 0);
+            
+            bool return_value = self->obj.GetBooleanAt(param0);
+            
+            return py::convert(return_value);
+        }
+        catch (...)
+        {
+            return py::to_PyErr();
+        }
+    }
+    else if (arg_count != -1)
+    {
+        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+    }
+    
+    return nullptr;
+}
+
+static PyObject* JsonArray_GetMany(py::winrt_wrapper<winrt::Windows::Data::Json::JsonArray>* self, PyObject* args)
+{
+    Py_ssize_t arg_count = PyTuple_Size(args);
+    
+    if (arg_count == 2)
+    {
+        try
+        {
+            auto param0 = py::convert_to<uint32_t>(args, 0);
+            /*f*/ winrt::array_view<winrt::Windows::Data::Json::IJsonValue> param1 { }; // TODO: Convert incoming python parameter
+            
+            uint32_t return_value = self->obj.GetMany(param0, param1);
+            
+            return py::convert(return_value);
+        }
+        catch (...)
+        {
+            return py::to_PyErr();
+        }
+    }
+    else if (arg_count != -1)
+    {
+        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+    }
+    
+    return nullptr;
+}
+
+static PyObject* JsonArray_GetNumber(py::winrt_wrapper<winrt::Windows::Data::Json::JsonArray>* self, PyObject* args)
+{
+    Py_ssize_t arg_count = PyTuple_Size(args);
+    
+    if (arg_count == 0)
+    {
+        try
+        {
+            double return_value = self->obj.GetNumber();
+            
+            return py::convert(return_value);
+        }
+        catch (...)
+        {
+            return py::to_PyErr();
+        }
+    }
+    else if (arg_count != -1)
+    {
+        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+    }
+    
+    return nullptr;
+}
+
+static PyObject* JsonArray_GetNumberAt(py::winrt_wrapper<winrt::Windows::Data::Json::JsonArray>* self, PyObject* args)
+{
+    Py_ssize_t arg_count = PyTuple_Size(args);
+    
+    if (arg_count == 1)
+    {
+        try
+        {
+            auto param0 = py::convert_to<uint32_t>(args, 0);
+            
+            double return_value = self->obj.GetNumberAt(param0);
+            
+            return py::convert(return_value);
+        }
+        catch (...)
+        {
+            return py::to_PyErr();
+        }
+    }
+    else if (arg_count != -1)
+    {
+        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+    }
+    
+    return nullptr;
+}
+
+static PyObject* JsonArray_GetObject(py::winrt_wrapper<winrt::Windows::Data::Json::JsonArray>* self, PyObject* args)
+{
+    Py_ssize_t arg_count = PyTuple_Size(args);
+    
+    if (arg_count == 0)
+    {
+        try
+        {
+            winrt::Windows::Data::Json::JsonObject return_value = self->obj.GetObject();
+            
+            return py::convert(return_value);
+        }
+        catch (...)
+        {
+            return py::to_PyErr();
+        }
+    }
+    else if (arg_count != -1)
+    {
+        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+    }
+    
+    return nullptr;
+}
+
+static PyObject* JsonArray_GetObjectAt(py::winrt_wrapper<winrt::Windows::Data::Json::JsonArray>* self, PyObject* args)
+{
+    Py_ssize_t arg_count = PyTuple_Size(args);
+    
+    if (arg_count == 1)
+    {
+        try
+        {
+            auto param0 = py::convert_to<uint32_t>(args, 0);
+            
+            winrt::Windows::Data::Json::JsonObject return_value = self->obj.GetObjectAt(param0);
+            
+            return py::convert(return_value);
+        }
+        catch (...)
+        {
+            return py::to_PyErr();
+        }
+    }
+    else if (arg_count != -1)
+    {
+        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+    }
+    
+    return nullptr;
+}
+
+static PyObject* JsonArray_GetString(py::winrt_wrapper<winrt::Windows::Data::Json::JsonArray>* self, PyObject* args)
+{
+    Py_ssize_t arg_count = PyTuple_Size(args);
+    
+    if (arg_count == 0)
+    {
+        try
+        {
+            winrt::hstring return_value = self->obj.GetString();
+            
+            return py::convert(return_value);
+        }
+        catch (...)
+        {
+            return py::to_PyErr();
+        }
+    }
+    else if (arg_count != -1)
+    {
+        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+    }
+    
+    return nullptr;
+}
+
+static PyObject* JsonArray_GetStringAt(py::winrt_wrapper<winrt::Windows::Data::Json::JsonArray>* self, PyObject* args)
+{
+    Py_ssize_t arg_count = PyTuple_Size(args);
+    
+    if (arg_count == 1)
+    {
+        try
+        {
+            auto param0 = py::convert_to<uint32_t>(args, 0);
+            
+            winrt::hstring return_value = self->obj.GetStringAt(param0);
+            
+            return py::convert(return_value);
+        }
+        catch (...)
+        {
+            return py::to_PyErr();
+        }
+    }
+    else if (arg_count != -1)
+    {
+        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+    }
+    
+    return nullptr;
+}
+
+static PyObject* JsonArray_GetView(py::winrt_wrapper<winrt::Windows::Data::Json::JsonArray>* self, PyObject* args)
+{
+    Py_ssize_t arg_count = PyTuple_Size(args);
+    
+    if (arg_count == 0)
+    {
+        try
+        {
+            winrt::Windows::Foundation::Collections::IVectorView<winrt::Windows::Data::Json::IJsonValue> return_value = self->obj.GetView();
+            
+            return py::convert(return_value);
+        }
+        catch (...)
+        {
+            return py::to_PyErr();
+        }
+    }
+    else if (arg_count != -1)
+    {
+        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+    }
+    
+    return nullptr;
+}
+
+static PyObject* JsonArray_IndexOf(py::winrt_wrapper<winrt::Windows::Data::Json::JsonArray>* self, PyObject* args)
+{
+    Py_ssize_t arg_count = PyTuple_Size(args);
+    
+    if (arg_count == 1)
+    {
+        try
+        {
+            auto param0 = py::convert_to<winrt::Windows::Data::Json::IJsonValue>(args, 0);
+            uint32_t param1 {  };
+            
+            bool return_value = self->obj.IndexOf(param0, param1);
+            
+            PyObject* out_return_value = py::convert(return_value);
+            if (!out_return_value) 
+            { 
+                return nullptr;
+            };
+            
+            PyObject* out_param1 = py::convert(param1);
+            if (!out_param1) 
+            { 
+                return nullptr;
+            };
+            
+            return PyTuple_Pack(2, out_return_value, out_param1);
+        }
+        catch (...)
+        {
+            return py::to_PyErr();
+        }
+    }
+    else if (arg_count != -1)
+    {
+        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+    }
+    
+    return nullptr;
+}
+
+static PyObject* JsonArray_InsertAt(py::winrt_wrapper<winrt::Windows::Data::Json::JsonArray>* self, PyObject* args)
+{
+    Py_ssize_t arg_count = PyTuple_Size(args);
+    
+    if (arg_count == 2)
+    {
+        try
+        {
+            auto param0 = py::convert_to<uint32_t>(args, 0);
+            auto param1 = py::convert_to<winrt::Windows::Data::Json::IJsonValue>(args, 1);
+            
+            self->obj.InsertAt(param0, param1);
+            
+            Py_RETURN_NONE;
+        }
+        catch (...)
+        {
+            return py::to_PyErr();
+        }
+    }
+    else if (arg_count != -1)
+    {
+        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+    }
+    
+    return nullptr;
+}
+
+static PyObject* JsonArray_Parse(PyObject* /*unused*/, PyObject* args)
+{
+    Py_ssize_t arg_count = PyTuple_Size(args);
+    
+    if (arg_count == 1)
+    {
+        try
+        {
+            auto param0 = py::convert_to<winrt::hstring>(args, 0);
+            
+            winrt::Windows::Data::Json::JsonArray return_value = winrt::Windows::Data::Json::JsonArray::Parse(param0);
+            
+            return py::convert(return_value);
+        }
+        catch (...)
+        {
+            return py::to_PyErr();
+        }
+    }
+    else if (arg_count != -1)
+    {
+        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+    }
+    
+    return nullptr;
+}
+
+static PyObject* JsonArray_RemoveAt(py::winrt_wrapper<winrt::Windows::Data::Json::JsonArray>* self, PyObject* args)
+{
+    Py_ssize_t arg_count = PyTuple_Size(args);
+    
+    if (arg_count == 1)
+    {
+        try
+        {
+            auto param0 = py::convert_to<uint32_t>(args, 0);
+            
+            self->obj.RemoveAt(param0);
+            
+            Py_RETURN_NONE;
+        }
+        catch (...)
+        {
+            return py::to_PyErr();
+        }
+    }
+    else if (arg_count != -1)
+    {
+        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+    }
+    
+    return nullptr;
+}
+
+static PyObject* JsonArray_RemoveAtEnd(py::winrt_wrapper<winrt::Windows::Data::Json::JsonArray>* self, PyObject* args)
+{
+    Py_ssize_t arg_count = PyTuple_Size(args);
+    
+    if (arg_count == 0)
+    {
+        try
+        {
+            self->obj.RemoveAtEnd();
+            
+            Py_RETURN_NONE;
+        }
+        catch (...)
+        {
+            return py::to_PyErr();
+        }
+    }
+    else if (arg_count != -1)
+    {
+        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+    }
+    
+    return nullptr;
+}
+
+static PyObject* JsonArray_ReplaceAll(py::winrt_wrapper<winrt::Windows::Data::Json::JsonArray>* self, PyObject* args)
+{
+    Py_ssize_t arg_count = PyTuple_Size(args);
+    
+    if (arg_count == 1)
+    {
+        try
+        {
+            /*p*/ winrt::array_view<winrt::Windows::Data::Json::IJsonValue const> param0 { }; // TODO: Convert incoming python parameter
+            
+            self->obj.ReplaceAll(param0);
+            
+            Py_RETURN_NONE;
+        }
+        catch (...)
+        {
+            return py::to_PyErr();
+        }
+    }
+    else if (arg_count != -1)
+    {
+        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+    }
+    
+    return nullptr;
+}
+
+static PyObject* JsonArray_SetAt(py::winrt_wrapper<winrt::Windows::Data::Json::JsonArray>* self, PyObject* args)
+{
+    Py_ssize_t arg_count = PyTuple_Size(args);
+    
+    if (arg_count == 2)
+    {
+        try
+        {
+            auto param0 = py::convert_to<uint32_t>(args, 0);
+            auto param1 = py::convert_to<winrt::Windows::Data::Json::IJsonValue>(args, 1);
+            
+            self->obj.SetAt(param0, param1);
+            
+            Py_RETURN_NONE;
+        }
+        catch (...)
+        {
+            return py::to_PyErr();
+        }
+    }
+    else if (arg_count != -1)
+    {
+        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+    }
+    
+    return nullptr;
+}
+
+static PyObject* JsonArray_Stringify(py::winrt_wrapper<winrt::Windows::Data::Json::JsonArray>* self, PyObject* args)
+{
+    Py_ssize_t arg_count = PyTuple_Size(args);
+    
+    if (arg_count == 0)
+    {
+        try
+        {
+            winrt::hstring return_value = self->obj.Stringify();
+            
+            return py::convert(return_value);
+        }
+        catch (...)
+        {
+            return py::to_PyErr();
+        }
+    }
+    else if (arg_count != -1)
+    {
+        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+    }
+    
+    return nullptr;
+}
+
+static PyObject* JsonArray_ToString(py::winrt_wrapper<winrt::Windows::Data::Json::JsonArray>* self, PyObject* args)
+{
+    Py_ssize_t arg_count = PyTuple_Size(args);
+    
+    if (arg_count == 0)
+    {
+        try
+        {
+            winrt::hstring return_value = self->obj.ToString();
+            
+            return py::convert(return_value);
+        }
+        catch (...)
+        {
+            return py::to_PyErr();
+        }
+    }
+    else if (arg_count != -1)
+    {
+        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+    }
+    
+    return nullptr;
+}
+
+static PyObject* JsonArray_TryParse(PyObject* /*unused*/, PyObject* args)
+{
+    Py_ssize_t arg_count = PyTuple_Size(args);
+    
+    if (arg_count == 1)
+    {
+        try
+        {
+            auto param0 = py::convert_to<winrt::hstring>(args, 0);
+            winrt::Windows::Data::Json::JsonArray param1 { nullptr };
+            
+            bool return_value = winrt::Windows::Data::Json::JsonArray::TryParse(param0, param1);
+            
+            PyObject* out_return_value = py::convert(return_value);
+            if (!out_return_value) 
+            { 
+                return nullptr;
+            };
+            
+            PyObject* out_param1 = py::convert(param1);
+            if (!out_param1) 
+            { 
+                return nullptr;
+            };
+            
+            return PyTuple_Pack(2, out_return_value, out_param1);
+        }
+        catch (...)
+        {
+            return py::to_PyErr();
+        }
+    }
+    else if (arg_count != -1)
+    {
+        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+    }
+    
+    return nullptr;
+}
+
+static PyObject* JsonArray_get_ValueType(py::winrt_wrapper<winrt::Windows::Data::Json::JsonArray>* self, void* /*unused*/)
+{
+    try
+    {
+        winrt::Windows::Data::Json::JsonValueType return_value = self->obj.ValueType();
+        
+        return py::convert(return_value);
+    }
+    catch (...)
+    {
+        return py::to_PyErr();
+    }
+}
+
+static PyObject* JsonArray_get_Size(py::winrt_wrapper<winrt::Windows::Data::Json::JsonArray>* self, void* /*unused*/)
+{
+    try
+    {
+        uint32_t return_value = self->obj.Size();
+        
+        return py::convert(return_value);
+    }
+    catch (...)
+    {
+        return py::to_PyErr();
+    }
+}
+
+static PyObject* __JsonArray_from(PyObject* /*unused*/, PyObject* arg)
 {
     try
     {
@@ -56,770 +793,16 @@ static PyObject* JsonArray__from(PyObject* /*unused*/, PyObject* arg)
     }
 }
 
-static PyObject* JsonArray_Append(py::winrt_wrapper<winrt::Windows::Data::Json::JsonArray>* self, PyObject* args)
-{ 
-    Py_ssize_t arg_count = PyTuple_Size(args);
-
-    if (arg_count == 1)
+static PyObject* __JsonArray_str(py::winrt_wrapper<winrt::Windows::Data::Json::JsonArray>* self)
+{
+    try
     {
-        try
-        {
-            auto param0 = py::convert_to<winrt::Windows::Data::Json::IJsonValue>(args, 0);
-
-            self->obj.Append(param0);
-            Py_RETURN_NONE;
-        }
-        catch (...)
-        {
-            return py::to_PyErr();
-        }
+        return py::convert(self->obj.ToString());
     }
-    else if (arg_count == -1)
+    catch (...)
     {
-        return nullptr; 
+        return py::to_PyErr();
     }
-
-    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-    return nullptr;
-}
-
-static PyObject* JsonArray_Clear(py::winrt_wrapper<winrt::Windows::Data::Json::JsonArray>* self, PyObject* args)
-{ 
-    Py_ssize_t arg_count = PyTuple_Size(args);
-
-    if (arg_count == 0)
-    {
-        try
-        {
-            self->obj.Clear();
-            Py_RETURN_NONE;
-        }
-        catch (...)
-        {
-            return py::to_PyErr();
-        }
-    }
-    else if (arg_count == -1)
-    {
-        return nullptr; 
-    }
-
-    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-    return nullptr;
-}
-
-static PyObject* JsonArray_First(py::winrt_wrapper<winrt::Windows::Data::Json::JsonArray>* self, PyObject* args)
-{ 
-    Py_ssize_t arg_count = PyTuple_Size(args);
-
-    if (arg_count == 0)
-    {
-        try
-        {
-            winrt::Windows::Foundation::Collections::IIterator<winrt::Windows::Data::Json::IJsonValue> return_value = self->obj.First();
-
-            return py::convert(return_value);
-        }
-        catch (...)
-        {
-            return py::to_PyErr();
-        }
-    }
-    else if (arg_count == -1)
-    {
-        return nullptr; 
-    }
-
-    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-    return nullptr;
-}
-
-static PyObject* JsonArray_GetArray(py::winrt_wrapper<winrt::Windows::Data::Json::JsonArray>* self, PyObject* args)
-{ 
-    Py_ssize_t arg_count = PyTuple_Size(args);
-
-    if (arg_count == 0)
-    {
-        try
-        {
-            winrt::Windows::Data::Json::JsonArray return_value = self->obj.GetArray();
-
-            return py::convert(return_value);
-        }
-        catch (...)
-        {
-            return py::to_PyErr();
-        }
-    }
-    else if (arg_count == -1)
-    {
-        return nullptr; 
-    }
-
-    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-    return nullptr;
-}
-
-static PyObject* JsonArray_GetArrayAt(py::winrt_wrapper<winrt::Windows::Data::Json::JsonArray>* self, PyObject* args)
-{ 
-    Py_ssize_t arg_count = PyTuple_Size(args);
-
-    if (arg_count == 1)
-    {
-        try
-        {
-            auto param0 = py::convert_to<uint32_t>(args, 0);
-
-            winrt::Windows::Data::Json::JsonArray return_value = self->obj.GetArrayAt(param0);
-
-            return py::convert(return_value);
-        }
-        catch (...)
-        {
-            return py::to_PyErr();
-        }
-    }
-    else if (arg_count == -1)
-    {
-        return nullptr; 
-    }
-
-    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-    return nullptr;
-}
-
-static PyObject* JsonArray_GetAt(py::winrt_wrapper<winrt::Windows::Data::Json::JsonArray>* self, PyObject* args)
-{ 
-    Py_ssize_t arg_count = PyTuple_Size(args);
-
-    if (arg_count == 1)
-    {
-        try
-        {
-            auto param0 = py::convert_to<uint32_t>(args, 0);
-
-            winrt::Windows::Data::Json::IJsonValue return_value = self->obj.GetAt(param0);
-
-            return py::convert(return_value);
-        }
-        catch (...)
-        {
-            return py::to_PyErr();
-        }
-    }
-    else if (arg_count == -1)
-    {
-        return nullptr; 
-    }
-
-    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-    return nullptr;
-}
-
-static PyObject* JsonArray_GetBoolean(py::winrt_wrapper<winrt::Windows::Data::Json::JsonArray>* self, PyObject* args)
-{ 
-    Py_ssize_t arg_count = PyTuple_Size(args);
-
-    if (arg_count == 0)
-    {
-        try
-        {
-            bool return_value = self->obj.GetBoolean();
-
-            return py::convert(return_value);
-        }
-        catch (...)
-        {
-            return py::to_PyErr();
-        }
-    }
-    else if (arg_count == -1)
-    {
-        return nullptr; 
-    }
-
-    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-    return nullptr;
-}
-
-static PyObject* JsonArray_GetBooleanAt(py::winrt_wrapper<winrt::Windows::Data::Json::JsonArray>* self, PyObject* args)
-{ 
-    Py_ssize_t arg_count = PyTuple_Size(args);
-
-    if (arg_count == 1)
-    {
-        try
-        {
-            auto param0 = py::convert_to<uint32_t>(args, 0);
-
-            bool return_value = self->obj.GetBooleanAt(param0);
-
-            return py::convert(return_value);
-        }
-        catch (...)
-        {
-            return py::to_PyErr();
-        }
-    }
-    else if (arg_count == -1)
-    {
-        return nullptr; 
-    }
-
-    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-    return nullptr;
-}
-
-static PyObject* JsonArray_GetMany(py::winrt_wrapper<winrt::Windows::Data::Json::JsonArray>* self, PyObject* args)
-{ 
-    Py_ssize_t arg_count = PyTuple_Size(args);
-
-    if (arg_count == 2)
-    {
-        try
-        {
-            auto param0 = py::convert_to<uint32_t>(args, 0);
-            /*f*/ winrt::array_view<winrt::Windows::Data::Json::IJsonValue> param1 { }; // TODO: Convert incoming python parameter
-
-            uint32_t return_value = self->obj.GetMany(param0, param1);
-
-            return py::convert(return_value);
-        }
-        catch (...)
-        {
-            return py::to_PyErr();
-        }
-    }
-    else if (arg_count == -1)
-    {
-        return nullptr; 
-    }
-
-    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-    return nullptr;
-}
-
-static PyObject* JsonArray_GetNumber(py::winrt_wrapper<winrt::Windows::Data::Json::JsonArray>* self, PyObject* args)
-{ 
-    Py_ssize_t arg_count = PyTuple_Size(args);
-
-    if (arg_count == 0)
-    {
-        try
-        {
-            double return_value = self->obj.GetNumber();
-
-            return py::convert(return_value);
-        }
-        catch (...)
-        {
-            return py::to_PyErr();
-        }
-    }
-    else if (arg_count == -1)
-    {
-        return nullptr; 
-    }
-
-    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-    return nullptr;
-}
-
-static PyObject* JsonArray_GetNumberAt(py::winrt_wrapper<winrt::Windows::Data::Json::JsonArray>* self, PyObject* args)
-{ 
-    Py_ssize_t arg_count = PyTuple_Size(args);
-
-    if (arg_count == 1)
-    {
-        try
-        {
-            auto param0 = py::convert_to<uint32_t>(args, 0);
-
-            double return_value = self->obj.GetNumberAt(param0);
-
-            return py::convert(return_value);
-        }
-        catch (...)
-        {
-            return py::to_PyErr();
-        }
-    }
-    else if (arg_count == -1)
-    {
-        return nullptr; 
-    }
-
-    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-    return nullptr;
-}
-
-static PyObject* JsonArray_GetObject(py::winrt_wrapper<winrt::Windows::Data::Json::JsonArray>* self, PyObject* args)
-{ 
-    Py_ssize_t arg_count = PyTuple_Size(args);
-
-    if (arg_count == 0)
-    {
-        try
-        {
-            winrt::Windows::Data::Json::JsonObject return_value = self->obj.GetObject();
-
-            return py::convert(return_value);
-        }
-        catch (...)
-        {
-            return py::to_PyErr();
-        }
-    }
-    else if (arg_count == -1)
-    {
-        return nullptr; 
-    }
-
-    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-    return nullptr;
-}
-
-static PyObject* JsonArray_GetObjectAt(py::winrt_wrapper<winrt::Windows::Data::Json::JsonArray>* self, PyObject* args)
-{ 
-    Py_ssize_t arg_count = PyTuple_Size(args);
-
-    if (arg_count == 1)
-    {
-        try
-        {
-            auto param0 = py::convert_to<uint32_t>(args, 0);
-
-            winrt::Windows::Data::Json::JsonObject return_value = self->obj.GetObjectAt(param0);
-
-            return py::convert(return_value);
-        }
-        catch (...)
-        {
-            return py::to_PyErr();
-        }
-    }
-    else if (arg_count == -1)
-    {
-        return nullptr; 
-    }
-
-    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-    return nullptr;
-}
-
-static PyObject* JsonArray_GetString(py::winrt_wrapper<winrt::Windows::Data::Json::JsonArray>* self, PyObject* args)
-{ 
-    Py_ssize_t arg_count = PyTuple_Size(args);
-
-    if (arg_count == 0)
-    {
-        try
-        {
-            winrt::hstring return_value = self->obj.GetString();
-
-            return py::convert(return_value);
-        }
-        catch (...)
-        {
-            return py::to_PyErr();
-        }
-    }
-    else if (arg_count == -1)
-    {
-        return nullptr; 
-    }
-
-    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-    return nullptr;
-}
-
-static PyObject* JsonArray_GetStringAt(py::winrt_wrapper<winrt::Windows::Data::Json::JsonArray>* self, PyObject* args)
-{ 
-    Py_ssize_t arg_count = PyTuple_Size(args);
-
-    if (arg_count == 1)
-    {
-        try
-        {
-            auto param0 = py::convert_to<uint32_t>(args, 0);
-
-            winrt::hstring return_value = self->obj.GetStringAt(param0);
-
-            return py::convert(return_value);
-        }
-        catch (...)
-        {
-            return py::to_PyErr();
-        }
-    }
-    else if (arg_count == -1)
-    {
-        return nullptr; 
-    }
-
-    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-    return nullptr;
-}
-
-static PyObject* JsonArray_GetView(py::winrt_wrapper<winrt::Windows::Data::Json::JsonArray>* self, PyObject* args)
-{ 
-    Py_ssize_t arg_count = PyTuple_Size(args);
-
-    if (arg_count == 0)
-    {
-        try
-        {
-            winrt::Windows::Foundation::Collections::IVectorView<winrt::Windows::Data::Json::IJsonValue> return_value = self->obj.GetView();
-
-            return py::convert(return_value);
-        }
-        catch (...)
-        {
-            return py::to_PyErr();
-        }
-    }
-    else if (arg_count == -1)
-    {
-        return nullptr; 
-    }
-
-    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-    return nullptr;
-}
-
-static PyObject* JsonArray_IndexOf(py::winrt_wrapper<winrt::Windows::Data::Json::JsonArray>* self, PyObject* args)
-{ 
-    Py_ssize_t arg_count = PyTuple_Size(args);
-
-    if (arg_count == 1)
-    {
-        try
-        {
-            auto param0 = py::convert_to<winrt::Windows::Data::Json::IJsonValue>(args, 0);
-            uint32_t param1 {  };
-
-            bool return_value = self->obj.IndexOf(param0, param1);
-
-            PyObject* out_return_value = py::convert(return_value);
-            if (!out_return_value) 
-            { 
-                return nullptr;
-            };
-
-            PyObject* out1 = py::convert(param1);
-            if (!out1) 
-            {
-                return nullptr;
-            }
-
-            return PyTuple_Pack(2, out_return_value, out1);
-        }
-        catch (...)
-        {
-            return py::to_PyErr();
-        }
-    }
-    else if (arg_count == -1)
-    {
-        return nullptr; 
-    }
-
-    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-    return nullptr;
-}
-
-static PyObject* JsonArray_InsertAt(py::winrt_wrapper<winrt::Windows::Data::Json::JsonArray>* self, PyObject* args)
-{ 
-    Py_ssize_t arg_count = PyTuple_Size(args);
-
-    if (arg_count == 2)
-    {
-        try
-        {
-            auto param0 = py::convert_to<uint32_t>(args, 0);
-            auto param1 = py::convert_to<winrt::Windows::Data::Json::IJsonValue>(args, 1);
-
-            self->obj.InsertAt(param0, param1);
-            Py_RETURN_NONE;
-        }
-        catch (...)
-        {
-            return py::to_PyErr();
-        }
-    }
-    else if (arg_count == -1)
-    {
-        return nullptr; 
-    }
-
-    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-    return nullptr;
-}
-
-static PyObject* JsonArray_Parse(PyObject* /*unused*/, PyObject* args)
-{ 
-    Py_ssize_t arg_count = PyTuple_Size(args);
-
-    if (arg_count == 1)
-    {
-        try
-        {
-            auto param0 = py::convert_to<winrt::hstring>(args, 0);
-
-            winrt::Windows::Data::Json::JsonArray return_value = winrt::Windows::Data::Json::JsonArray::Parse(param0);
-
-            return py::convert(return_value);
-        }
-        catch (...)
-        {
-            return py::to_PyErr();
-        }
-    }
-    else if (arg_count == -1)
-    {
-        return nullptr; 
-    }
-
-    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-    return nullptr;
-}
-
-static PyObject* JsonArray_RemoveAt(py::winrt_wrapper<winrt::Windows::Data::Json::JsonArray>* self, PyObject* args)
-{ 
-    Py_ssize_t arg_count = PyTuple_Size(args);
-
-    if (arg_count == 1)
-    {
-        try
-        {
-            auto param0 = py::convert_to<uint32_t>(args, 0);
-
-            self->obj.RemoveAt(param0);
-            Py_RETURN_NONE;
-        }
-        catch (...)
-        {
-            return py::to_PyErr();
-        }
-    }
-    else if (arg_count == -1)
-    {
-        return nullptr; 
-    }
-
-    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-    return nullptr;
-}
-
-static PyObject* JsonArray_RemoveAtEnd(py::winrt_wrapper<winrt::Windows::Data::Json::JsonArray>* self, PyObject* args)
-{ 
-    Py_ssize_t arg_count = PyTuple_Size(args);
-
-    if (arg_count == 0)
-    {
-        try
-        {
-            self->obj.RemoveAtEnd();
-            Py_RETURN_NONE;
-        }
-        catch (...)
-        {
-            return py::to_PyErr();
-        }
-    }
-    else if (arg_count == -1)
-    {
-        return nullptr; 
-    }
-
-    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-    return nullptr;
-}
-
-static PyObject* JsonArray_ReplaceAll(py::winrt_wrapper<winrt::Windows::Data::Json::JsonArray>* self, PyObject* args)
-{ 
-    Py_ssize_t arg_count = PyTuple_Size(args);
-
-    if (arg_count == 1)
-    {
-        try
-        {
-            /*p*/ winrt::array_view<winrt::Windows::Data::Json::IJsonValue const> param0 { }; // TODO: Convert incoming python parameter
-
-            self->obj.ReplaceAll(param0);
-            Py_RETURN_NONE;
-        }
-        catch (...)
-        {
-            return py::to_PyErr();
-        }
-    }
-    else if (arg_count == -1)
-    {
-        return nullptr; 
-    }
-
-    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-    return nullptr;
-}
-
-static PyObject* JsonArray_SetAt(py::winrt_wrapper<winrt::Windows::Data::Json::JsonArray>* self, PyObject* args)
-{ 
-    Py_ssize_t arg_count = PyTuple_Size(args);
-
-    if (arg_count == 2)
-    {
-        try
-        {
-            auto param0 = py::convert_to<uint32_t>(args, 0);
-            auto param1 = py::convert_to<winrt::Windows::Data::Json::IJsonValue>(args, 1);
-
-            self->obj.SetAt(param0, param1);
-            Py_RETURN_NONE;
-        }
-        catch (...)
-        {
-            return py::to_PyErr();
-        }
-    }
-    else if (arg_count == -1)
-    {
-        return nullptr; 
-    }
-
-    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-    return nullptr;
-}
-
-static PyObject* JsonArray_Stringify(py::winrt_wrapper<winrt::Windows::Data::Json::JsonArray>* self, PyObject* args)
-{ 
-    Py_ssize_t arg_count = PyTuple_Size(args);
-
-    if (arg_count == 0)
-    {
-        try
-        {
-            winrt::hstring return_value = self->obj.Stringify();
-
-            return py::convert(return_value);
-        }
-        catch (...)
-        {
-            return py::to_PyErr();
-        }
-    }
-    else if (arg_count == -1)
-    {
-        return nullptr; 
-    }
-
-    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-    return nullptr;
-}
-
-static PyObject* JsonArray_ToString(py::winrt_wrapper<winrt::Windows::Data::Json::JsonArray>* self, PyObject* args)
-{ 
-    Py_ssize_t arg_count = PyTuple_Size(args);
-
-    if (arg_count == 0)
-    {
-        try
-        {
-            winrt::hstring return_value = self->obj.ToString();
-
-            return py::convert(return_value);
-        }
-        catch (...)
-        {
-            return py::to_PyErr();
-        }
-    }
-    else if (arg_count == -1)
-    {
-        return nullptr; 
-    }
-
-    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-    return nullptr;
-}
-
-static PyObject* JsonArray_TryParse(PyObject* /*unused*/, PyObject* args)
-{ 
-    Py_ssize_t arg_count = PyTuple_Size(args);
-
-    if (arg_count == 1)
-    {
-        try
-        {
-            auto param0 = py::convert_to<winrt::hstring>(args, 0);
-            winrt::Windows::Data::Json::JsonArray param1 { nullptr };
-
-            bool return_value = winrt::Windows::Data::Json::JsonArray::TryParse(param0, param1);
-
-            PyObject* out_return_value = py::convert(return_value);
-            if (!out_return_value) 
-            { 
-                return nullptr;
-            };
-
-            PyObject* out1 = py::convert(param1);
-            if (!out1) 
-            {
-                return nullptr;
-            }
-
-            return PyTuple_Pack(2, out_return_value, out1);
-        }
-        catch (...)
-        {
-            return py::to_PyErr();
-        }
-    }
-    else if (arg_count == -1)
-    {
-        return nullptr; 
-    }
-
-    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-    return nullptr;
-}
-
-static PyObject* JsonArray_get_Size(py::winrt_wrapper<winrt::Windows::Data::Json::JsonArray>* self, PyObject* args)
-{ 
-    if (args != nullptr)
-    {
-        PyErr_SetString(PyExc_TypeError, "arguments not supported for get methods");
-        return nullptr;
-    }
-        try
-        {
-            uint32_t return_value = self->obj.Size();
-
-            return py::convert(return_value);
-        }
-        catch (...)
-        {
-            return py::to_PyErr();
-        }
-}
-
-static PyObject* JsonArray_get_ValueType(py::winrt_wrapper<winrt::Windows::Data::Json::JsonArray>* self, PyObject* args)
-{ 
-    if (args != nullptr)
-    {
-        PyErr_SetString(PyExc_TypeError, "arguments not supported for get methods");
-        return nullptr;
-    }
-        try
-        {
-            winrt::Windows::Data::Json::JsonValueType return_value = self->obj.ValueType();
-
-            return py::convert(return_value);
-        }
-        catch (...)
-        {
-            return py::to_PyErr();
-        }
 }
 
 static PyMethodDef JsonArray_methods[] = {
@@ -849,9 +832,13 @@ static PyMethodDef JsonArray_methods[] = {
     { "Stringify", (PyCFunction)JsonArray_Stringify, METH_VARARGS, nullptr },
     { "ToString", (PyCFunction)JsonArray_ToString, METH_VARARGS, nullptr },
     { "TryParse", (PyCFunction)JsonArray_TryParse, METH_VARARGS | METH_STATIC, nullptr },
-    { "get_Size", (PyCFunction)JsonArray_get_Size, METH_NOARGS, nullptr },
-    { "get_ValueType", (PyCFunction)JsonArray_get_ValueType, METH_NOARGS, nullptr },
-    { "_from", (PyCFunction)JsonArray__from, METH_O | METH_STATIC, nullptr },
+    { "_from", (PyCFunction)__JsonArray_from, METH_O | METH_STATIC, nullptr },
+    { nullptr }
+};
+
+static PyGetSetDef JsonArray_getset[] = {
+    { const_cast<char*>("ValueType"), (getter)JsonArray_get_ValueType, nullptr, nullptr, nullptr },
+    { const_cast<char*>("Size"), (getter)JsonArray_get_Size, nullptr, nullptr, nullptr },
     { nullptr }
 };
 
@@ -860,6 +847,8 @@ static PyType_Slot JsonArray_Type_slots[] =
     { Py_tp_dealloc, JsonArray_dealloc },
     { Py_tp_new, JsonArray_new },
     { Py_tp_methods, JsonArray_methods },
+    { Py_tp_getset, JsonArray_getset },
+    { Py_tp_str, __JsonArray_str },
     { 0, nullptr },
 };
 
@@ -873,6 +862,7 @@ static PyType_Spec JsonArray_Type_spec =
 };
 
 // ----- JsonError class --------------------
+
 PyTypeObject* py::winrt_type<winrt::Windows::Data::Json::JsonError>::python_type;
 
 static PyObject* JsonError_new(PyTypeObject* type, PyObject* args, PyObject* kwds)
@@ -882,17 +872,17 @@ static PyObject* JsonError_new(PyTypeObject* type, PyObject* args, PyObject* kwd
 }
 
 static PyObject* JsonError_GetJsonStatus(PyObject* /*unused*/, PyObject* args)
-{ 
+{
     Py_ssize_t arg_count = PyTuple_Size(args);
-
+    
     if (arg_count == 1)
     {
         try
         {
             auto param0 = py::convert_to<int32_t>(args, 0);
-
+            
             winrt::Windows::Data::Json::JsonErrorStatus return_value = winrt::Windows::Data::Json::JsonError::GetJsonStatus(param0);
-
+            
             return py::convert(return_value);
         }
         catch (...)
@@ -900,12 +890,11 @@ static PyObject* JsonError_GetJsonStatus(PyObject* /*unused*/, PyObject* args)
             return py::to_PyErr();
         }
     }
-    else if (arg_count == -1)
+    else if (arg_count != -1)
     {
-        return nullptr; 
+        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
     }
-
-    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+    
     return nullptr;
 }
 
@@ -914,10 +903,15 @@ static PyMethodDef JsonError_methods[] = {
     { nullptr }
 };
 
+static PyGetSetDef JsonError_getset[] = {
+    { nullptr }
+};
+
 static PyType_Slot JsonError_Type_slots[] = 
 {
     { Py_tp_new, JsonError_new },
     { Py_tp_methods, JsonError_methods },
+    { Py_tp_getset, JsonError_getset },
     { 0, nullptr },
 };
 
@@ -931,6 +925,7 @@ static PyType_Spec JsonError_Type_spec =
 };
 
 // ----- JsonObject class --------------------
+
 PyTypeObject* py::winrt_type<winrt::Windows::Data::Json::JsonObject>::python_type;
 
 static PyObject* JsonObject_new(PyTypeObject* type, PyObject* args, PyObject* kwds)
@@ -940,9 +935,9 @@ static PyObject* JsonObject_new(PyTypeObject* type, PyObject* args, PyObject* kw
         PyErr_SetString(PyExc_TypeError, "keyword arguments not supported");
         return nullptr;
     }
-
+    
     Py_ssize_t arg_count = PyTuple_Size(args);
-
+    
     if (arg_count == 0)
     {
         try
@@ -955,12 +950,11 @@ static PyObject* JsonObject_new(PyTypeObject* type, PyObject* args, PyObject* kw
             return py::to_PyErr();
         }
     }
-    else if (arg_count == -1)
+    else if (arg_count != -1)
     {
-        return nullptr; 
+        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
     }
-
-    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+    
     return nullptr;
 }
 
@@ -971,28 +965,16 @@ static void JsonObject_dealloc(py::winrt_wrapper<winrt::Windows::Data::Json::Jso
     self->obj = nullptr;
 }
 
-static PyObject* JsonObject__from(PyObject* /*unused*/, PyObject* arg)
-{
-    try
-    {
-        auto instance = py::converter<winrt::Windows::Foundation::IInspectable>::convert_to(arg);
-        return py::convert(instance.as<winrt::Windows::Data::Json::JsonObject>());
-    }
-    catch (...)
-    {
-        return py::to_PyErr();
-    }
-}
-
 static PyObject* JsonObject_Clear(py::winrt_wrapper<winrt::Windows::Data::Json::JsonObject>* self, PyObject* args)
-{ 
+{
     Py_ssize_t arg_count = PyTuple_Size(args);
-
+    
     if (arg_count == 0)
     {
         try
         {
             self->obj.Clear();
+            
             Py_RETURN_NONE;
         }
         catch (...)
@@ -1000,25 +982,24 @@ static PyObject* JsonObject_Clear(py::winrt_wrapper<winrt::Windows::Data::Json::
             return py::to_PyErr();
         }
     }
-    else if (arg_count == -1)
+    else if (arg_count != -1)
     {
-        return nullptr; 
+        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
     }
-
-    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+    
     return nullptr;
 }
 
 static PyObject* JsonObject_First(py::winrt_wrapper<winrt::Windows::Data::Json::JsonObject>* self, PyObject* args)
-{ 
+{
     Py_ssize_t arg_count = PyTuple_Size(args);
-
+    
     if (arg_count == 0)
     {
         try
         {
             winrt::Windows::Foundation::Collections::IIterator<winrt::Windows::Foundation::Collections::IKeyValuePair<winrt::hstring, winrt::Windows::Data::Json::IJsonValue>> return_value = self->obj.First();
-
+            
             return py::convert(return_value);
         }
         catch (...)
@@ -1026,25 +1007,24 @@ static PyObject* JsonObject_First(py::winrt_wrapper<winrt::Windows::Data::Json::
             return py::to_PyErr();
         }
     }
-    else if (arg_count == -1)
+    else if (arg_count != -1)
     {
-        return nullptr; 
+        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
     }
-
-    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+    
     return nullptr;
 }
 
 static PyObject* JsonObject_GetArray(py::winrt_wrapper<winrt::Windows::Data::Json::JsonObject>* self, PyObject* args)
-{ 
+{
     Py_ssize_t arg_count = PyTuple_Size(args);
-
+    
     if (arg_count == 0)
     {
         try
         {
             winrt::Windows::Data::Json::JsonArray return_value = self->obj.GetArray();
-
+            
             return py::convert(return_value);
         }
         catch (...)
@@ -1052,25 +1032,24 @@ static PyObject* JsonObject_GetArray(py::winrt_wrapper<winrt::Windows::Data::Jso
             return py::to_PyErr();
         }
     }
-    else if (arg_count == -1)
+    else if (arg_count != -1)
     {
-        return nullptr; 
+        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
     }
-
-    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+    
     return nullptr;
 }
 
 static PyObject* JsonObject_GetBoolean(py::winrt_wrapper<winrt::Windows::Data::Json::JsonObject>* self, PyObject* args)
-{ 
+{
     Py_ssize_t arg_count = PyTuple_Size(args);
-
+    
     if (arg_count == 0)
     {
         try
         {
             bool return_value = self->obj.GetBoolean();
-
+            
             return py::convert(return_value);
         }
         catch (...)
@@ -1078,27 +1057,26 @@ static PyObject* JsonObject_GetBoolean(py::winrt_wrapper<winrt::Windows::Data::J
             return py::to_PyErr();
         }
     }
-    else if (arg_count == -1)
+    else if (arg_count != -1)
     {
-        return nullptr; 
+        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
     }
-
-    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+    
     return nullptr;
 }
 
 static PyObject* JsonObject_GetNamedArray(py::winrt_wrapper<winrt::Windows::Data::Json::JsonObject>* self, PyObject* args)
-{ 
+{
     Py_ssize_t arg_count = PyTuple_Size(args);
-
+    
     if (arg_count == 1)
     {
         try
         {
             auto param0 = py::convert_to<winrt::hstring>(args, 0);
-
+            
             winrt::Windows::Data::Json::JsonArray return_value = self->obj.GetNamedArray(param0);
-
+            
             return py::convert(return_value);
         }
         catch (...)
@@ -1112,9 +1090,9 @@ static PyObject* JsonObject_GetNamedArray(py::winrt_wrapper<winrt::Windows::Data
         {
             auto param0 = py::convert_to<winrt::hstring>(args, 0);
             auto param1 = py::convert_to<winrt::Windows::Data::Json::JsonArray>(args, 1);
-
+            
             winrt::Windows::Data::Json::JsonArray return_value = self->obj.GetNamedArray(param0, param1);
-
+            
             return py::convert(return_value);
         }
         catch (...)
@@ -1122,27 +1100,26 @@ static PyObject* JsonObject_GetNamedArray(py::winrt_wrapper<winrt::Windows::Data
             return py::to_PyErr();
         }
     }
-    else if (arg_count == -1)
+    else if (arg_count != -1)
     {
-        return nullptr; 
+        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
     }
-
-    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+    
     return nullptr;
 }
 
 static PyObject* JsonObject_GetNamedBoolean(py::winrt_wrapper<winrt::Windows::Data::Json::JsonObject>* self, PyObject* args)
-{ 
+{
     Py_ssize_t arg_count = PyTuple_Size(args);
-
+    
     if (arg_count == 1)
     {
         try
         {
             auto param0 = py::convert_to<winrt::hstring>(args, 0);
-
+            
             bool return_value = self->obj.GetNamedBoolean(param0);
-
+            
             return py::convert(return_value);
         }
         catch (...)
@@ -1156,9 +1133,9 @@ static PyObject* JsonObject_GetNamedBoolean(py::winrt_wrapper<winrt::Windows::Da
         {
             auto param0 = py::convert_to<winrt::hstring>(args, 0);
             auto param1 = py::convert_to<bool>(args, 1);
-
+            
             bool return_value = self->obj.GetNamedBoolean(param0, param1);
-
+            
             return py::convert(return_value);
         }
         catch (...)
@@ -1166,27 +1143,26 @@ static PyObject* JsonObject_GetNamedBoolean(py::winrt_wrapper<winrt::Windows::Da
             return py::to_PyErr();
         }
     }
-    else if (arg_count == -1)
+    else if (arg_count != -1)
     {
-        return nullptr; 
+        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
     }
-
-    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+    
     return nullptr;
 }
 
 static PyObject* JsonObject_GetNamedNumber(py::winrt_wrapper<winrt::Windows::Data::Json::JsonObject>* self, PyObject* args)
-{ 
+{
     Py_ssize_t arg_count = PyTuple_Size(args);
-
+    
     if (arg_count == 1)
     {
         try
         {
             auto param0 = py::convert_to<winrt::hstring>(args, 0);
-
+            
             double return_value = self->obj.GetNamedNumber(param0);
-
+            
             return py::convert(return_value);
         }
         catch (...)
@@ -1200,9 +1176,9 @@ static PyObject* JsonObject_GetNamedNumber(py::winrt_wrapper<winrt::Windows::Dat
         {
             auto param0 = py::convert_to<winrt::hstring>(args, 0);
             auto param1 = py::convert_to<double>(args, 1);
-
+            
             double return_value = self->obj.GetNamedNumber(param0, param1);
-
+            
             return py::convert(return_value);
         }
         catch (...)
@@ -1210,27 +1186,26 @@ static PyObject* JsonObject_GetNamedNumber(py::winrt_wrapper<winrt::Windows::Dat
             return py::to_PyErr();
         }
     }
-    else if (arg_count == -1)
+    else if (arg_count != -1)
     {
-        return nullptr; 
+        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
     }
-
-    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+    
     return nullptr;
 }
 
 static PyObject* JsonObject_GetNamedObject(py::winrt_wrapper<winrt::Windows::Data::Json::JsonObject>* self, PyObject* args)
-{ 
+{
     Py_ssize_t arg_count = PyTuple_Size(args);
-
+    
     if (arg_count == 1)
     {
         try
         {
             auto param0 = py::convert_to<winrt::hstring>(args, 0);
-
+            
             winrt::Windows::Data::Json::JsonObject return_value = self->obj.GetNamedObject(param0);
-
+            
             return py::convert(return_value);
         }
         catch (...)
@@ -1244,9 +1219,9 @@ static PyObject* JsonObject_GetNamedObject(py::winrt_wrapper<winrt::Windows::Dat
         {
             auto param0 = py::convert_to<winrt::hstring>(args, 0);
             auto param1 = py::convert_to<winrt::Windows::Data::Json::JsonObject>(args, 1);
-
+            
             winrt::Windows::Data::Json::JsonObject return_value = self->obj.GetNamedObject(param0, param1);
-
+            
             return py::convert(return_value);
         }
         catch (...)
@@ -1254,27 +1229,26 @@ static PyObject* JsonObject_GetNamedObject(py::winrt_wrapper<winrt::Windows::Dat
             return py::to_PyErr();
         }
     }
-    else if (arg_count == -1)
+    else if (arg_count != -1)
     {
-        return nullptr; 
+        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
     }
-
-    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+    
     return nullptr;
 }
 
 static PyObject* JsonObject_GetNamedString(py::winrt_wrapper<winrt::Windows::Data::Json::JsonObject>* self, PyObject* args)
-{ 
+{
     Py_ssize_t arg_count = PyTuple_Size(args);
-
+    
     if (arg_count == 1)
     {
         try
         {
             auto param0 = py::convert_to<winrt::hstring>(args, 0);
-
+            
             winrt::hstring return_value = self->obj.GetNamedString(param0);
-
+            
             return py::convert(return_value);
         }
         catch (...)
@@ -1288,9 +1262,9 @@ static PyObject* JsonObject_GetNamedString(py::winrt_wrapper<winrt::Windows::Dat
         {
             auto param0 = py::convert_to<winrt::hstring>(args, 0);
             auto param1 = py::convert_to<winrt::hstring>(args, 1);
-
+            
             winrt::hstring return_value = self->obj.GetNamedString(param0, param1);
-
+            
             return py::convert(return_value);
         }
         catch (...)
@@ -1298,27 +1272,26 @@ static PyObject* JsonObject_GetNamedString(py::winrt_wrapper<winrt::Windows::Dat
             return py::to_PyErr();
         }
     }
-    else if (arg_count == -1)
+    else if (arg_count != -1)
     {
-        return nullptr; 
+        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
     }
-
-    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+    
     return nullptr;
 }
 
 static PyObject* JsonObject_GetNamedValue(py::winrt_wrapper<winrt::Windows::Data::Json::JsonObject>* self, PyObject* args)
-{ 
+{
     Py_ssize_t arg_count = PyTuple_Size(args);
-
+    
     if (arg_count == 1)
     {
         try
         {
             auto param0 = py::convert_to<winrt::hstring>(args, 0);
-
+            
             winrt::Windows::Data::Json::JsonValue return_value = self->obj.GetNamedValue(param0);
-
+            
             return py::convert(return_value);
         }
         catch (...)
@@ -1332,9 +1305,9 @@ static PyObject* JsonObject_GetNamedValue(py::winrt_wrapper<winrt::Windows::Data
         {
             auto param0 = py::convert_to<winrt::hstring>(args, 0);
             auto param1 = py::convert_to<winrt::Windows::Data::Json::JsonValue>(args, 1);
-
+            
             winrt::Windows::Data::Json::JsonValue return_value = self->obj.GetNamedValue(param0, param1);
-
+            
             return py::convert(return_value);
         }
         catch (...)
@@ -1342,25 +1315,24 @@ static PyObject* JsonObject_GetNamedValue(py::winrt_wrapper<winrt::Windows::Data
             return py::to_PyErr();
         }
     }
-    else if (arg_count == -1)
+    else if (arg_count != -1)
     {
-        return nullptr; 
+        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
     }
-
-    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+    
     return nullptr;
 }
 
 static PyObject* JsonObject_GetNumber(py::winrt_wrapper<winrt::Windows::Data::Json::JsonObject>* self, PyObject* args)
-{ 
+{
     Py_ssize_t arg_count = PyTuple_Size(args);
-
+    
     if (arg_count == 0)
     {
         try
         {
             double return_value = self->obj.GetNumber();
-
+            
             return py::convert(return_value);
         }
         catch (...)
@@ -1368,25 +1340,24 @@ static PyObject* JsonObject_GetNumber(py::winrt_wrapper<winrt::Windows::Data::Js
             return py::to_PyErr();
         }
     }
-    else if (arg_count == -1)
+    else if (arg_count != -1)
     {
-        return nullptr; 
+        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
     }
-
-    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+    
     return nullptr;
 }
 
 static PyObject* JsonObject_GetObject(py::winrt_wrapper<winrt::Windows::Data::Json::JsonObject>* self, PyObject* args)
-{ 
+{
     Py_ssize_t arg_count = PyTuple_Size(args);
-
+    
     if (arg_count == 0)
     {
         try
         {
             winrt::Windows::Data::Json::JsonObject return_value = self->obj.GetObject();
-
+            
             return py::convert(return_value);
         }
         catch (...)
@@ -1394,25 +1365,24 @@ static PyObject* JsonObject_GetObject(py::winrt_wrapper<winrt::Windows::Data::Js
             return py::to_PyErr();
         }
     }
-    else if (arg_count == -1)
+    else if (arg_count != -1)
     {
-        return nullptr; 
+        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
     }
-
-    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+    
     return nullptr;
 }
 
 static PyObject* JsonObject_GetString(py::winrt_wrapper<winrt::Windows::Data::Json::JsonObject>* self, PyObject* args)
-{ 
+{
     Py_ssize_t arg_count = PyTuple_Size(args);
-
+    
     if (arg_count == 0)
     {
         try
         {
             winrt::hstring return_value = self->obj.GetString();
-
+            
             return py::convert(return_value);
         }
         catch (...)
@@ -1420,25 +1390,24 @@ static PyObject* JsonObject_GetString(py::winrt_wrapper<winrt::Windows::Data::Js
             return py::to_PyErr();
         }
     }
-    else if (arg_count == -1)
+    else if (arg_count != -1)
     {
-        return nullptr; 
+        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
     }
-
-    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+    
     return nullptr;
 }
 
 static PyObject* JsonObject_GetView(py::winrt_wrapper<winrt::Windows::Data::Json::JsonObject>* self, PyObject* args)
-{ 
+{
     Py_ssize_t arg_count = PyTuple_Size(args);
-
+    
     if (arg_count == 0)
     {
         try
         {
             winrt::Windows::Foundation::Collections::IMapView<winrt::hstring, winrt::Windows::Data::Json::IJsonValue> return_value = self->obj.GetView();
-
+            
             return py::convert(return_value);
         }
         catch (...)
@@ -1446,27 +1415,26 @@ static PyObject* JsonObject_GetView(py::winrt_wrapper<winrt::Windows::Data::Json
             return py::to_PyErr();
         }
     }
-    else if (arg_count == -1)
+    else if (arg_count != -1)
     {
-        return nullptr; 
+        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
     }
-
-    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+    
     return nullptr;
 }
 
 static PyObject* JsonObject_HasKey(py::winrt_wrapper<winrt::Windows::Data::Json::JsonObject>* self, PyObject* args)
-{ 
+{
     Py_ssize_t arg_count = PyTuple_Size(args);
-
+    
     if (arg_count == 1)
     {
         try
         {
             auto param0 = py::convert_to<winrt::hstring>(args, 0);
-
+            
             bool return_value = self->obj.HasKey(param0);
-
+            
             return py::convert(return_value);
         }
         catch (...)
@@ -1474,28 +1442,27 @@ static PyObject* JsonObject_HasKey(py::winrt_wrapper<winrt::Windows::Data::Json:
             return py::to_PyErr();
         }
     }
-    else if (arg_count == -1)
+    else if (arg_count != -1)
     {
-        return nullptr; 
+        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
     }
-
-    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+    
     return nullptr;
 }
 
 static PyObject* JsonObject_Insert(py::winrt_wrapper<winrt::Windows::Data::Json::JsonObject>* self, PyObject* args)
-{ 
+{
     Py_ssize_t arg_count = PyTuple_Size(args);
-
+    
     if (arg_count == 2)
     {
         try
         {
             auto param0 = py::convert_to<winrt::hstring>(args, 0);
             auto param1 = py::convert_to<winrt::Windows::Data::Json::IJsonValue>(args, 1);
-
+            
             bool return_value = self->obj.Insert(param0, param1);
-
+            
             return py::convert(return_value);
         }
         catch (...)
@@ -1503,27 +1470,26 @@ static PyObject* JsonObject_Insert(py::winrt_wrapper<winrt::Windows::Data::Json:
             return py::to_PyErr();
         }
     }
-    else if (arg_count == -1)
+    else if (arg_count != -1)
     {
-        return nullptr; 
+        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
     }
-
-    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+    
     return nullptr;
 }
 
 static PyObject* JsonObject_Lookup(py::winrt_wrapper<winrt::Windows::Data::Json::JsonObject>* self, PyObject* args)
-{ 
+{
     Py_ssize_t arg_count = PyTuple_Size(args);
-
+    
     if (arg_count == 1)
     {
         try
         {
             auto param0 = py::convert_to<winrt::hstring>(args, 0);
-
+            
             winrt::Windows::Data::Json::IJsonValue return_value = self->obj.Lookup(param0);
-
+            
             return py::convert(return_value);
         }
         catch (...)
@@ -1531,27 +1497,26 @@ static PyObject* JsonObject_Lookup(py::winrt_wrapper<winrt::Windows::Data::Json:
             return py::to_PyErr();
         }
     }
-    else if (arg_count == -1)
+    else if (arg_count != -1)
     {
-        return nullptr; 
+        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
     }
-
-    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+    
     return nullptr;
 }
 
 static PyObject* JsonObject_Parse(PyObject* /*unused*/, PyObject* args)
-{ 
+{
     Py_ssize_t arg_count = PyTuple_Size(args);
-
+    
     if (arg_count == 1)
     {
         try
         {
             auto param0 = py::convert_to<winrt::hstring>(args, 0);
-
+            
             winrt::Windows::Data::Json::JsonObject return_value = winrt::Windows::Data::Json::JsonObject::Parse(param0);
-
+            
             return py::convert(return_value);
         }
         catch (...)
@@ -1559,26 +1524,26 @@ static PyObject* JsonObject_Parse(PyObject* /*unused*/, PyObject* args)
             return py::to_PyErr();
         }
     }
-    else if (arg_count == -1)
+    else if (arg_count != -1)
     {
-        return nullptr; 
+        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
     }
-
-    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+    
     return nullptr;
 }
 
 static PyObject* JsonObject_Remove(py::winrt_wrapper<winrt::Windows::Data::Json::JsonObject>* self, PyObject* args)
-{ 
+{
     Py_ssize_t arg_count = PyTuple_Size(args);
-
+    
     if (arg_count == 1)
     {
         try
         {
             auto param0 = py::convert_to<winrt::hstring>(args, 0);
-
+            
             self->obj.Remove(param0);
+            
             Py_RETURN_NONE;
         }
         catch (...)
@@ -1586,27 +1551,27 @@ static PyObject* JsonObject_Remove(py::winrt_wrapper<winrt::Windows::Data::Json:
             return py::to_PyErr();
         }
     }
-    else if (arg_count == -1)
+    else if (arg_count != -1)
     {
-        return nullptr; 
+        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
     }
-
-    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+    
     return nullptr;
 }
 
 static PyObject* JsonObject_SetNamedValue(py::winrt_wrapper<winrt::Windows::Data::Json::JsonObject>* self, PyObject* args)
-{ 
+{
     Py_ssize_t arg_count = PyTuple_Size(args);
-
+    
     if (arg_count == 2)
     {
         try
         {
             auto param0 = py::convert_to<winrt::hstring>(args, 0);
             auto param1 = py::convert_to<winrt::Windows::Data::Json::IJsonValue>(args, 1);
-
+            
             self->obj.SetNamedValue(param0, param1);
+            
             Py_RETURN_NONE;
         }
         catch (...)
@@ -1614,25 +1579,24 @@ static PyObject* JsonObject_SetNamedValue(py::winrt_wrapper<winrt::Windows::Data
             return py::to_PyErr();
         }
     }
-    else if (arg_count == -1)
+    else if (arg_count != -1)
     {
-        return nullptr; 
+        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
     }
-
-    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+    
     return nullptr;
 }
 
 static PyObject* JsonObject_Stringify(py::winrt_wrapper<winrt::Windows::Data::Json::JsonObject>* self, PyObject* args)
-{ 
+{
     Py_ssize_t arg_count = PyTuple_Size(args);
-
+    
     if (arg_count == 0)
     {
         try
         {
             winrt::hstring return_value = self->obj.Stringify();
-
+            
             return py::convert(return_value);
         }
         catch (...)
@@ -1640,25 +1604,24 @@ static PyObject* JsonObject_Stringify(py::winrt_wrapper<winrt::Windows::Data::Js
             return py::to_PyErr();
         }
     }
-    else if (arg_count == -1)
+    else if (arg_count != -1)
     {
-        return nullptr; 
+        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
     }
-
-    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+    
     return nullptr;
 }
 
 static PyObject* JsonObject_ToString(py::winrt_wrapper<winrt::Windows::Data::Json::JsonObject>* self, PyObject* args)
-{ 
+{
     Py_ssize_t arg_count = PyTuple_Size(args);
-
+    
     if (arg_count == 0)
     {
         try
         {
             winrt::hstring return_value = self->obj.ToString();
-
+            
             return py::convert(return_value);
         }
         catch (...)
@@ -1666,92 +1629,105 @@ static PyObject* JsonObject_ToString(py::winrt_wrapper<winrt::Windows::Data::Jso
             return py::to_PyErr();
         }
     }
-    else if (arg_count == -1)
+    else if (arg_count != -1)
     {
-        return nullptr; 
+        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
     }
-
-    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+    
     return nullptr;
 }
 
 static PyObject* JsonObject_TryParse(PyObject* /*unused*/, PyObject* args)
-{ 
+{
     Py_ssize_t arg_count = PyTuple_Size(args);
-
+    
     if (arg_count == 1)
     {
         try
         {
             auto param0 = py::convert_to<winrt::hstring>(args, 0);
             winrt::Windows::Data::Json::JsonObject param1 { nullptr };
-
+            
             bool return_value = winrt::Windows::Data::Json::JsonObject::TryParse(param0, param1);
-
+            
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
             { 
                 return nullptr;
             };
-
-            PyObject* out1 = py::convert(param1);
-            if (!out1) 
-            {
+            
+            PyObject* out_param1 = py::convert(param1);
+            if (!out_param1) 
+            { 
                 return nullptr;
-            }
-
-            return PyTuple_Pack(2, out_return_value, out1);
+            };
+            
+            return PyTuple_Pack(2, out_return_value, out_param1);
         }
         catch (...)
         {
             return py::to_PyErr();
         }
     }
-    else if (arg_count == -1)
+    else if (arg_count != -1)
     {
-        return nullptr; 
+        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
     }
-
-    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+    
     return nullptr;
 }
 
-static PyObject* JsonObject_get_Size(py::winrt_wrapper<winrt::Windows::Data::Json::JsonObject>* self, PyObject* args)
-{ 
-    if (args != nullptr)
+static PyObject* JsonObject_get_ValueType(py::winrt_wrapper<winrt::Windows::Data::Json::JsonObject>* self, void* /*unused*/)
+{
+    try
     {
-        PyErr_SetString(PyExc_TypeError, "arguments not supported for get methods");
-        return nullptr;
+        winrt::Windows::Data::Json::JsonValueType return_value = self->obj.ValueType();
+        
+        return py::convert(return_value);
     }
-        try
-        {
-            uint32_t return_value = self->obj.Size();
-
-            return py::convert(return_value);
-        }
-        catch (...)
-        {
-            return py::to_PyErr();
-        }
+    catch (...)
+    {
+        return py::to_PyErr();
+    }
 }
 
-static PyObject* JsonObject_get_ValueType(py::winrt_wrapper<winrt::Windows::Data::Json::JsonObject>* self, PyObject* args)
-{ 
-    if (args != nullptr)
+static PyObject* JsonObject_get_Size(py::winrt_wrapper<winrt::Windows::Data::Json::JsonObject>* self, void* /*unused*/)
+{
+    try
     {
-        PyErr_SetString(PyExc_TypeError, "arguments not supported for get methods");
-        return nullptr;
+        uint32_t return_value = self->obj.Size();
+        
+        return py::convert(return_value);
     }
-        try
-        {
-            winrt::Windows::Data::Json::JsonValueType return_value = self->obj.ValueType();
+    catch (...)
+    {
+        return py::to_PyErr();
+    }
+}
 
-            return py::convert(return_value);
-        }
-        catch (...)
-        {
-            return py::to_PyErr();
-        }
+static PyObject* __JsonObject_from(PyObject* /*unused*/, PyObject* arg)
+{
+    try
+    {
+        auto instance = py::converter<winrt::Windows::Foundation::IInspectable>::convert_to(arg);
+        return py::convert(instance.as<winrt::Windows::Data::Json::JsonObject>());
+    }
+    catch (...)
+    {
+        return py::to_PyErr();
+    }
+}
+
+static PyObject* __JsonObject_str(py::winrt_wrapper<winrt::Windows::Data::Json::JsonObject>* self)
+{
+    try
+    {
+        return py::convert(self->obj.ToString());
+    }
+    catch (...)
+    {
+        return py::to_PyErr();
+    }
 }
 
 static PyMethodDef JsonObject_methods[] = {
@@ -1778,9 +1754,13 @@ static PyMethodDef JsonObject_methods[] = {
     { "Stringify", (PyCFunction)JsonObject_Stringify, METH_VARARGS, nullptr },
     { "ToString", (PyCFunction)JsonObject_ToString, METH_VARARGS, nullptr },
     { "TryParse", (PyCFunction)JsonObject_TryParse, METH_VARARGS | METH_STATIC, nullptr },
-    { "get_Size", (PyCFunction)JsonObject_get_Size, METH_NOARGS, nullptr },
-    { "get_ValueType", (PyCFunction)JsonObject_get_ValueType, METH_NOARGS, nullptr },
-    { "_from", (PyCFunction)JsonObject__from, METH_O | METH_STATIC, nullptr },
+    { "_from", (PyCFunction)__JsonObject_from, METH_O | METH_STATIC, nullptr },
+    { nullptr }
+};
+
+static PyGetSetDef JsonObject_getset[] = {
+    { const_cast<char*>("ValueType"), (getter)JsonObject_get_ValueType, nullptr, nullptr, nullptr },
+    { const_cast<char*>("Size"), (getter)JsonObject_get_Size, nullptr, nullptr, nullptr },
     { nullptr }
 };
 
@@ -1789,6 +1769,8 @@ static PyType_Slot JsonObject_Type_slots[] =
     { Py_tp_dealloc, JsonObject_dealloc },
     { Py_tp_new, JsonObject_new },
     { Py_tp_methods, JsonObject_methods },
+    { Py_tp_getset, JsonObject_getset },
+    { Py_tp_str, __JsonObject_str },
     { 0, nullptr },
 };
 
@@ -1802,6 +1784,7 @@ static PyType_Spec JsonObject_Type_spec =
 };
 
 // ----- JsonValue class --------------------
+
 PyTypeObject* py::winrt_type<winrt::Windows::Data::Json::JsonValue>::python_type;
 
 static PyObject* JsonValue_new(PyTypeObject* type, PyObject* args, PyObject* kwds)
@@ -1817,7 +1800,369 @@ static void JsonValue_dealloc(py::winrt_wrapper<winrt::Windows::Data::Json::Json
     self->obj = nullptr;
 }
 
-static PyObject* JsonValue__from(PyObject* /*unused*/, PyObject* arg)
+static PyObject* JsonValue_CreateBooleanValue(PyObject* /*unused*/, PyObject* args)
+{
+    Py_ssize_t arg_count = PyTuple_Size(args);
+    
+    if (arg_count == 1)
+    {
+        try
+        {
+            auto param0 = py::convert_to<bool>(args, 0);
+            
+            winrt::Windows::Data::Json::JsonValue return_value = winrt::Windows::Data::Json::JsonValue::CreateBooleanValue(param0);
+            
+            return py::convert(return_value);
+        }
+        catch (...)
+        {
+            return py::to_PyErr();
+        }
+    }
+    else if (arg_count != -1)
+    {
+        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+    }
+    
+    return nullptr;
+}
+
+static PyObject* JsonValue_CreateNullValue(PyObject* /*unused*/, PyObject* args)
+{
+    Py_ssize_t arg_count = PyTuple_Size(args);
+    
+    if (arg_count == 0)
+    {
+        try
+        {
+            winrt::Windows::Data::Json::JsonValue return_value = winrt::Windows::Data::Json::JsonValue::CreateNullValue();
+            
+            return py::convert(return_value);
+        }
+        catch (...)
+        {
+            return py::to_PyErr();
+        }
+    }
+    else if (arg_count != -1)
+    {
+        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+    }
+    
+    return nullptr;
+}
+
+static PyObject* JsonValue_CreateNumberValue(PyObject* /*unused*/, PyObject* args)
+{
+    Py_ssize_t arg_count = PyTuple_Size(args);
+    
+    if (arg_count == 1)
+    {
+        try
+        {
+            auto param0 = py::convert_to<double>(args, 0);
+            
+            winrt::Windows::Data::Json::JsonValue return_value = winrt::Windows::Data::Json::JsonValue::CreateNumberValue(param0);
+            
+            return py::convert(return_value);
+        }
+        catch (...)
+        {
+            return py::to_PyErr();
+        }
+    }
+    else if (arg_count != -1)
+    {
+        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+    }
+    
+    return nullptr;
+}
+
+static PyObject* JsonValue_CreateStringValue(PyObject* /*unused*/, PyObject* args)
+{
+    Py_ssize_t arg_count = PyTuple_Size(args);
+    
+    if (arg_count == 1)
+    {
+        try
+        {
+            auto param0 = py::convert_to<winrt::hstring>(args, 0);
+            
+            winrt::Windows::Data::Json::JsonValue return_value = winrt::Windows::Data::Json::JsonValue::CreateStringValue(param0);
+            
+            return py::convert(return_value);
+        }
+        catch (...)
+        {
+            return py::to_PyErr();
+        }
+    }
+    else if (arg_count != -1)
+    {
+        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+    }
+    
+    return nullptr;
+}
+
+static PyObject* JsonValue_GetArray(py::winrt_wrapper<winrt::Windows::Data::Json::JsonValue>* self, PyObject* args)
+{
+    Py_ssize_t arg_count = PyTuple_Size(args);
+    
+    if (arg_count == 0)
+    {
+        try
+        {
+            winrt::Windows::Data::Json::JsonArray return_value = self->obj.GetArray();
+            
+            return py::convert(return_value);
+        }
+        catch (...)
+        {
+            return py::to_PyErr();
+        }
+    }
+    else if (arg_count != -1)
+    {
+        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+    }
+    
+    return nullptr;
+}
+
+static PyObject* JsonValue_GetBoolean(py::winrt_wrapper<winrt::Windows::Data::Json::JsonValue>* self, PyObject* args)
+{
+    Py_ssize_t arg_count = PyTuple_Size(args);
+    
+    if (arg_count == 0)
+    {
+        try
+        {
+            bool return_value = self->obj.GetBoolean();
+            
+            return py::convert(return_value);
+        }
+        catch (...)
+        {
+            return py::to_PyErr();
+        }
+    }
+    else if (arg_count != -1)
+    {
+        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+    }
+    
+    return nullptr;
+}
+
+static PyObject* JsonValue_GetNumber(py::winrt_wrapper<winrt::Windows::Data::Json::JsonValue>* self, PyObject* args)
+{
+    Py_ssize_t arg_count = PyTuple_Size(args);
+    
+    if (arg_count == 0)
+    {
+        try
+        {
+            double return_value = self->obj.GetNumber();
+            
+            return py::convert(return_value);
+        }
+        catch (...)
+        {
+            return py::to_PyErr();
+        }
+    }
+    else if (arg_count != -1)
+    {
+        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+    }
+    
+    return nullptr;
+}
+
+static PyObject* JsonValue_GetObject(py::winrt_wrapper<winrt::Windows::Data::Json::JsonValue>* self, PyObject* args)
+{
+    Py_ssize_t arg_count = PyTuple_Size(args);
+    
+    if (arg_count == 0)
+    {
+        try
+        {
+            winrt::Windows::Data::Json::JsonObject return_value = self->obj.GetObject();
+            
+            return py::convert(return_value);
+        }
+        catch (...)
+        {
+            return py::to_PyErr();
+        }
+    }
+    else if (arg_count != -1)
+    {
+        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+    }
+    
+    return nullptr;
+}
+
+static PyObject* JsonValue_GetString(py::winrt_wrapper<winrt::Windows::Data::Json::JsonValue>* self, PyObject* args)
+{
+    Py_ssize_t arg_count = PyTuple_Size(args);
+    
+    if (arg_count == 0)
+    {
+        try
+        {
+            winrt::hstring return_value = self->obj.GetString();
+            
+            return py::convert(return_value);
+        }
+        catch (...)
+        {
+            return py::to_PyErr();
+        }
+    }
+    else if (arg_count != -1)
+    {
+        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+    }
+    
+    return nullptr;
+}
+
+static PyObject* JsonValue_Parse(PyObject* /*unused*/, PyObject* args)
+{
+    Py_ssize_t arg_count = PyTuple_Size(args);
+    
+    if (arg_count == 1)
+    {
+        try
+        {
+            auto param0 = py::convert_to<winrt::hstring>(args, 0);
+            
+            winrt::Windows::Data::Json::JsonValue return_value = winrt::Windows::Data::Json::JsonValue::Parse(param0);
+            
+            return py::convert(return_value);
+        }
+        catch (...)
+        {
+            return py::to_PyErr();
+        }
+    }
+    else if (arg_count != -1)
+    {
+        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+    }
+    
+    return nullptr;
+}
+
+static PyObject* JsonValue_Stringify(py::winrt_wrapper<winrt::Windows::Data::Json::JsonValue>* self, PyObject* args)
+{
+    Py_ssize_t arg_count = PyTuple_Size(args);
+    
+    if (arg_count == 0)
+    {
+        try
+        {
+            winrt::hstring return_value = self->obj.Stringify();
+            
+            return py::convert(return_value);
+        }
+        catch (...)
+        {
+            return py::to_PyErr();
+        }
+    }
+    else if (arg_count != -1)
+    {
+        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+    }
+    
+    return nullptr;
+}
+
+static PyObject* JsonValue_ToString(py::winrt_wrapper<winrt::Windows::Data::Json::JsonValue>* self, PyObject* args)
+{
+    Py_ssize_t arg_count = PyTuple_Size(args);
+    
+    if (arg_count == 0)
+    {
+        try
+        {
+            winrt::hstring return_value = self->obj.ToString();
+            
+            return py::convert(return_value);
+        }
+        catch (...)
+        {
+            return py::to_PyErr();
+        }
+    }
+    else if (arg_count != -1)
+    {
+        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+    }
+    
+    return nullptr;
+}
+
+static PyObject* JsonValue_TryParse(PyObject* /*unused*/, PyObject* args)
+{
+    Py_ssize_t arg_count = PyTuple_Size(args);
+    
+    if (arg_count == 1)
+    {
+        try
+        {
+            auto param0 = py::convert_to<winrt::hstring>(args, 0);
+            winrt::Windows::Data::Json::JsonValue param1 { nullptr };
+            
+            bool return_value = winrt::Windows::Data::Json::JsonValue::TryParse(param0, param1);
+            
+            PyObject* out_return_value = py::convert(return_value);
+            if (!out_return_value) 
+            { 
+                return nullptr;
+            };
+            
+            PyObject* out_param1 = py::convert(param1);
+            if (!out_param1) 
+            { 
+                return nullptr;
+            };
+            
+            return PyTuple_Pack(2, out_return_value, out_param1);
+        }
+        catch (...)
+        {
+            return py::to_PyErr();
+        }
+    }
+    else if (arg_count != -1)
+    {
+        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+    }
+    
+    return nullptr;
+}
+
+static PyObject* JsonValue_get_ValueType(py::winrt_wrapper<winrt::Windows::Data::Json::JsonValue>* self, void* /*unused*/)
+{
+    try
+    {
+        winrt::Windows::Data::Json::JsonValueType return_value = self->obj.ValueType();
+        
+        return py::convert(return_value);
+    }
+    catch (...)
+    {
+        return py::to_PyErr();
+    }
+}
+
+static PyObject* __JsonValue_from(PyObject* /*unused*/, PyObject* arg)
 {
     try
     {
@@ -1830,384 +2175,16 @@ static PyObject* JsonValue__from(PyObject* /*unused*/, PyObject* arg)
     }
 }
 
-static PyObject* JsonValue_CreateBooleanValue(PyObject* /*unused*/, PyObject* args)
-{ 
-    Py_ssize_t arg_count = PyTuple_Size(args);
-
-    if (arg_count == 1)
+static PyObject* __JsonValue_str(py::winrt_wrapper<winrt::Windows::Data::Json::JsonValue>* self)
+{
+    try
     {
-        try
-        {
-            auto param0 = py::convert_to<bool>(args, 0);
-
-            winrt::Windows::Data::Json::JsonValue return_value = winrt::Windows::Data::Json::JsonValue::CreateBooleanValue(param0);
-
-            return py::convert(return_value);
-        }
-        catch (...)
-        {
-            return py::to_PyErr();
-        }
+        return py::convert(self->obj.ToString());
     }
-    else if (arg_count == -1)
+    catch (...)
     {
-        return nullptr; 
+        return py::to_PyErr();
     }
-
-    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-    return nullptr;
-}
-
-static PyObject* JsonValue_CreateNullValue(PyObject* /*unused*/, PyObject* args)
-{ 
-    Py_ssize_t arg_count = PyTuple_Size(args);
-
-    if (arg_count == 0)
-    {
-        try
-        {
-            winrt::Windows::Data::Json::JsonValue return_value = winrt::Windows::Data::Json::JsonValue::CreateNullValue();
-
-            return py::convert(return_value);
-        }
-        catch (...)
-        {
-            return py::to_PyErr();
-        }
-    }
-    else if (arg_count == -1)
-    {
-        return nullptr; 
-    }
-
-    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-    return nullptr;
-}
-
-static PyObject* JsonValue_CreateNumberValue(PyObject* /*unused*/, PyObject* args)
-{ 
-    Py_ssize_t arg_count = PyTuple_Size(args);
-
-    if (arg_count == 1)
-    {
-        try
-        {
-            auto param0 = py::convert_to<double>(args, 0);
-
-            winrt::Windows::Data::Json::JsonValue return_value = winrt::Windows::Data::Json::JsonValue::CreateNumberValue(param0);
-
-            return py::convert(return_value);
-        }
-        catch (...)
-        {
-            return py::to_PyErr();
-        }
-    }
-    else if (arg_count == -1)
-    {
-        return nullptr; 
-    }
-
-    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-    return nullptr;
-}
-
-static PyObject* JsonValue_CreateStringValue(PyObject* /*unused*/, PyObject* args)
-{ 
-    Py_ssize_t arg_count = PyTuple_Size(args);
-
-    if (arg_count == 1)
-    {
-        try
-        {
-            auto param0 = py::convert_to<winrt::hstring>(args, 0);
-
-            winrt::Windows::Data::Json::JsonValue return_value = winrt::Windows::Data::Json::JsonValue::CreateStringValue(param0);
-
-            return py::convert(return_value);
-        }
-        catch (...)
-        {
-            return py::to_PyErr();
-        }
-    }
-    else if (arg_count == -1)
-    {
-        return nullptr; 
-    }
-
-    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-    return nullptr;
-}
-
-static PyObject* JsonValue_GetArray(py::winrt_wrapper<winrt::Windows::Data::Json::JsonValue>* self, PyObject* args)
-{ 
-    Py_ssize_t arg_count = PyTuple_Size(args);
-
-    if (arg_count == 0)
-    {
-        try
-        {
-            winrt::Windows::Data::Json::JsonArray return_value = self->obj.GetArray();
-
-            return py::convert(return_value);
-        }
-        catch (...)
-        {
-            return py::to_PyErr();
-        }
-    }
-    else if (arg_count == -1)
-    {
-        return nullptr; 
-    }
-
-    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-    return nullptr;
-}
-
-static PyObject* JsonValue_GetBoolean(py::winrt_wrapper<winrt::Windows::Data::Json::JsonValue>* self, PyObject* args)
-{ 
-    Py_ssize_t arg_count = PyTuple_Size(args);
-
-    if (arg_count == 0)
-    {
-        try
-        {
-            bool return_value = self->obj.GetBoolean();
-
-            return py::convert(return_value);
-        }
-        catch (...)
-        {
-            return py::to_PyErr();
-        }
-    }
-    else if (arg_count == -1)
-    {
-        return nullptr; 
-    }
-
-    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-    return nullptr;
-}
-
-static PyObject* JsonValue_GetNumber(py::winrt_wrapper<winrt::Windows::Data::Json::JsonValue>* self, PyObject* args)
-{ 
-    Py_ssize_t arg_count = PyTuple_Size(args);
-
-    if (arg_count == 0)
-    {
-        try
-        {
-            double return_value = self->obj.GetNumber();
-
-            return py::convert(return_value);
-        }
-        catch (...)
-        {
-            return py::to_PyErr();
-        }
-    }
-    else if (arg_count == -1)
-    {
-        return nullptr; 
-    }
-
-    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-    return nullptr;
-}
-
-static PyObject* JsonValue_GetObject(py::winrt_wrapper<winrt::Windows::Data::Json::JsonValue>* self, PyObject* args)
-{ 
-    Py_ssize_t arg_count = PyTuple_Size(args);
-
-    if (arg_count == 0)
-    {
-        try
-        {
-            winrt::Windows::Data::Json::JsonObject return_value = self->obj.GetObject();
-
-            return py::convert(return_value);
-        }
-        catch (...)
-        {
-            return py::to_PyErr();
-        }
-    }
-    else if (arg_count == -1)
-    {
-        return nullptr; 
-    }
-
-    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-    return nullptr;
-}
-
-static PyObject* JsonValue_GetString(py::winrt_wrapper<winrt::Windows::Data::Json::JsonValue>* self, PyObject* args)
-{ 
-    Py_ssize_t arg_count = PyTuple_Size(args);
-
-    if (arg_count == 0)
-    {
-        try
-        {
-            winrt::hstring return_value = self->obj.GetString();
-
-            return py::convert(return_value);
-        }
-        catch (...)
-        {
-            return py::to_PyErr();
-        }
-    }
-    else if (arg_count == -1)
-    {
-        return nullptr; 
-    }
-
-    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-    return nullptr;
-}
-
-static PyObject* JsonValue_Parse(PyObject* /*unused*/, PyObject* args)
-{ 
-    Py_ssize_t arg_count = PyTuple_Size(args);
-
-    if (arg_count == 1)
-    {
-        try
-        {
-            auto param0 = py::convert_to<winrt::hstring>(args, 0);
-
-            winrt::Windows::Data::Json::JsonValue return_value = winrt::Windows::Data::Json::JsonValue::Parse(param0);
-
-            return py::convert(return_value);
-        }
-        catch (...)
-        {
-            return py::to_PyErr();
-        }
-    }
-    else if (arg_count == -1)
-    {
-        return nullptr; 
-    }
-
-    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-    return nullptr;
-}
-
-static PyObject* JsonValue_Stringify(py::winrt_wrapper<winrt::Windows::Data::Json::JsonValue>* self, PyObject* args)
-{ 
-    Py_ssize_t arg_count = PyTuple_Size(args);
-
-    if (arg_count == 0)
-    {
-        try
-        {
-            winrt::hstring return_value = self->obj.Stringify();
-
-            return py::convert(return_value);
-        }
-        catch (...)
-        {
-            return py::to_PyErr();
-        }
-    }
-    else if (arg_count == -1)
-    {
-        return nullptr; 
-    }
-
-    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-    return nullptr;
-}
-
-static PyObject* JsonValue_ToString(py::winrt_wrapper<winrt::Windows::Data::Json::JsonValue>* self, PyObject* args)
-{ 
-    Py_ssize_t arg_count = PyTuple_Size(args);
-
-    if (arg_count == 0)
-    {
-        try
-        {
-            winrt::hstring return_value = self->obj.ToString();
-
-            return py::convert(return_value);
-        }
-        catch (...)
-        {
-            return py::to_PyErr();
-        }
-    }
-    else if (arg_count == -1)
-    {
-        return nullptr; 
-    }
-
-    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-    return nullptr;
-}
-
-static PyObject* JsonValue_TryParse(PyObject* /*unused*/, PyObject* args)
-{ 
-    Py_ssize_t arg_count = PyTuple_Size(args);
-
-    if (arg_count == 1)
-    {
-        try
-        {
-            auto param0 = py::convert_to<winrt::hstring>(args, 0);
-            winrt::Windows::Data::Json::JsonValue param1 { nullptr };
-
-            bool return_value = winrt::Windows::Data::Json::JsonValue::TryParse(param0, param1);
-
-            PyObject* out_return_value = py::convert(return_value);
-            if (!out_return_value) 
-            { 
-                return nullptr;
-            };
-
-            PyObject* out1 = py::convert(param1);
-            if (!out1) 
-            {
-                return nullptr;
-            }
-
-            return PyTuple_Pack(2, out_return_value, out1);
-        }
-        catch (...)
-        {
-            return py::to_PyErr();
-        }
-    }
-    else if (arg_count == -1)
-    {
-        return nullptr; 
-    }
-
-    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-    return nullptr;
-}
-
-static PyObject* JsonValue_get_ValueType(py::winrt_wrapper<winrt::Windows::Data::Json::JsonValue>* self, PyObject* args)
-{ 
-    if (args != nullptr)
-    {
-        PyErr_SetString(PyExc_TypeError, "arguments not supported for get methods");
-        return nullptr;
-    }
-        try
-        {
-            winrt::Windows::Data::Json::JsonValueType return_value = self->obj.ValueType();
-
-            return py::convert(return_value);
-        }
-        catch (...)
-        {
-            return py::to_PyErr();
-        }
 }
 
 static PyMethodDef JsonValue_methods[] = {
@@ -2224,8 +2201,12 @@ static PyMethodDef JsonValue_methods[] = {
     { "Stringify", (PyCFunction)JsonValue_Stringify, METH_VARARGS, nullptr },
     { "ToString", (PyCFunction)JsonValue_ToString, METH_VARARGS, nullptr },
     { "TryParse", (PyCFunction)JsonValue_TryParse, METH_VARARGS | METH_STATIC, nullptr },
-    { "get_ValueType", (PyCFunction)JsonValue_get_ValueType, METH_NOARGS, nullptr },
-    { "_from", (PyCFunction)JsonValue__from, METH_O | METH_STATIC, nullptr },
+    { "_from", (PyCFunction)__JsonValue_from, METH_O | METH_STATIC, nullptr },
+    { nullptr }
+};
+
+static PyGetSetDef JsonValue_getset[] = {
+    { const_cast<char*>("ValueType"), (getter)JsonValue_get_ValueType, nullptr, nullptr, nullptr },
     { nullptr }
 };
 
@@ -2234,6 +2215,8 @@ static PyType_Slot JsonValue_Type_slots[] =
     { Py_tp_dealloc, JsonValue_dealloc },
     { Py_tp_new, JsonValue_new },
     { Py_tp_methods, JsonValue_methods },
+    { Py_tp_getset, JsonValue_getset },
+    { Py_tp_str, __JsonValue_str },
     { 0, nullptr },
 };
 
@@ -2247,6 +2230,7 @@ static PyType_Spec JsonValue_Type_spec =
 };
 
 // ----- IJsonValue interface --------------------
+
 PyTypeObject* py::winrt_type<winrt::Windows::Data::Json::IJsonValue>::python_type;
 
 PyObject* IJsonValue_new(PyTypeObject* type, PyObject* args, PyObject* kwds)
@@ -2262,7 +2246,171 @@ static void IJsonValue_dealloc(py::winrt_wrapper<winrt::Windows::Data::Json::IJs
     self->obj = nullptr;
 }
 
-static PyObject* IJsonValue__from(PyObject* /*unused*/, PyObject* arg)
+static PyObject* IJsonValue_GetArray(py::winrt_wrapper<winrt::Windows::Data::Json::IJsonValue>* self, PyObject* args)
+{
+    Py_ssize_t arg_count = PyTuple_Size(args);
+    
+    if (arg_count == 0)
+    {
+        try
+        {
+            winrt::Windows::Data::Json::JsonArray return_value = self->obj.GetArray();
+            
+            return py::convert(return_value);
+        }
+        catch (...)
+        {
+            return py::to_PyErr();
+        }
+    }
+    else if (arg_count != -1)
+    {
+        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+    }
+    
+    return nullptr;
+}
+
+static PyObject* IJsonValue_GetBoolean(py::winrt_wrapper<winrt::Windows::Data::Json::IJsonValue>* self, PyObject* args)
+{
+    Py_ssize_t arg_count = PyTuple_Size(args);
+    
+    if (arg_count == 0)
+    {
+        try
+        {
+            bool return_value = self->obj.GetBoolean();
+            
+            return py::convert(return_value);
+        }
+        catch (...)
+        {
+            return py::to_PyErr();
+        }
+    }
+    else if (arg_count != -1)
+    {
+        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+    }
+    
+    return nullptr;
+}
+
+static PyObject* IJsonValue_GetNumber(py::winrt_wrapper<winrt::Windows::Data::Json::IJsonValue>* self, PyObject* args)
+{
+    Py_ssize_t arg_count = PyTuple_Size(args);
+    
+    if (arg_count == 0)
+    {
+        try
+        {
+            double return_value = self->obj.GetNumber();
+            
+            return py::convert(return_value);
+        }
+        catch (...)
+        {
+            return py::to_PyErr();
+        }
+    }
+    else if (arg_count != -1)
+    {
+        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+    }
+    
+    return nullptr;
+}
+
+static PyObject* IJsonValue_GetObject(py::winrt_wrapper<winrt::Windows::Data::Json::IJsonValue>* self, PyObject* args)
+{
+    Py_ssize_t arg_count = PyTuple_Size(args);
+    
+    if (arg_count == 0)
+    {
+        try
+        {
+            winrt::Windows::Data::Json::JsonObject return_value = self->obj.GetObject();
+            
+            return py::convert(return_value);
+        }
+        catch (...)
+        {
+            return py::to_PyErr();
+        }
+    }
+    else if (arg_count != -1)
+    {
+        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+    }
+    
+    return nullptr;
+}
+
+static PyObject* IJsonValue_GetString(py::winrt_wrapper<winrt::Windows::Data::Json::IJsonValue>* self, PyObject* args)
+{
+    Py_ssize_t arg_count = PyTuple_Size(args);
+    
+    if (arg_count == 0)
+    {
+        try
+        {
+            winrt::hstring return_value = self->obj.GetString();
+            
+            return py::convert(return_value);
+        }
+        catch (...)
+        {
+            return py::to_PyErr();
+        }
+    }
+    else if (arg_count != -1)
+    {
+        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+    }
+    
+    return nullptr;
+}
+
+static PyObject* IJsonValue_Stringify(py::winrt_wrapper<winrt::Windows::Data::Json::IJsonValue>* self, PyObject* args)
+{
+    Py_ssize_t arg_count = PyTuple_Size(args);
+    
+    if (arg_count == 0)
+    {
+        try
+        {
+            winrt::hstring return_value = self->obj.Stringify();
+            
+            return py::convert(return_value);
+        }
+        catch (...)
+        {
+            return py::to_PyErr();
+        }
+    }
+    else if (arg_count != -1)
+    {
+        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+    }
+    
+    return nullptr;
+}
+
+static PyObject* IJsonValue_get_ValueType(py::winrt_wrapper<winrt::Windows::Data::Json::IJsonValue>* self, void* /*unused*/)
+{
+    try
+    {
+        winrt::Windows::Data::Json::JsonValueType return_value = self->obj.ValueType();
+        
+        return py::convert(return_value);
+    }
+    catch (...)
+    {
+        return py::to_PyErr();
+    }
+}
+
+static PyObject* __IJsonValue_from(PyObject* /*unused*/, PyObject* arg)
 {
     try
     {
@@ -2275,181 +2423,6 @@ static PyObject* IJsonValue__from(PyObject* /*unused*/, PyObject* arg)
     }
 }
 
-static PyObject* IJsonValue_GetArray(py::winrt_wrapper<winrt::Windows::Data::Json::IJsonValue>* self, PyObject* args)
-{ 
-    Py_ssize_t arg_count = PyTuple_Size(args);
-
-    if (arg_count == 0)
-    {
-        try
-        {
-            winrt::Windows::Data::Json::JsonArray return_value = self->obj.GetArray();
-
-            return py::convert(return_value);
-        }
-        catch (...)
-        {
-            return py::to_PyErr();
-        }
-    }
-    else if (arg_count == -1)
-    {
-        return nullptr; 
-    }
-
-    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-    return nullptr;
-}
-
-static PyObject* IJsonValue_GetBoolean(py::winrt_wrapper<winrt::Windows::Data::Json::IJsonValue>* self, PyObject* args)
-{ 
-    Py_ssize_t arg_count = PyTuple_Size(args);
-
-    if (arg_count == 0)
-    {
-        try
-        {
-            bool return_value = self->obj.GetBoolean();
-
-            return py::convert(return_value);
-        }
-        catch (...)
-        {
-            return py::to_PyErr();
-        }
-    }
-    else if (arg_count == -1)
-    {
-        return nullptr; 
-    }
-
-    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-    return nullptr;
-}
-
-static PyObject* IJsonValue_GetNumber(py::winrt_wrapper<winrt::Windows::Data::Json::IJsonValue>* self, PyObject* args)
-{ 
-    Py_ssize_t arg_count = PyTuple_Size(args);
-
-    if (arg_count == 0)
-    {
-        try
-        {
-            double return_value = self->obj.GetNumber();
-
-            return py::convert(return_value);
-        }
-        catch (...)
-        {
-            return py::to_PyErr();
-        }
-    }
-    else if (arg_count == -1)
-    {
-        return nullptr; 
-    }
-
-    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-    return nullptr;
-}
-
-static PyObject* IJsonValue_GetObject(py::winrt_wrapper<winrt::Windows::Data::Json::IJsonValue>* self, PyObject* args)
-{ 
-    Py_ssize_t arg_count = PyTuple_Size(args);
-
-    if (arg_count == 0)
-    {
-        try
-        {
-            winrt::Windows::Data::Json::JsonObject return_value = self->obj.GetObject();
-
-            return py::convert(return_value);
-        }
-        catch (...)
-        {
-            return py::to_PyErr();
-        }
-    }
-    else if (arg_count == -1)
-    {
-        return nullptr; 
-    }
-
-    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-    return nullptr;
-}
-
-static PyObject* IJsonValue_GetString(py::winrt_wrapper<winrt::Windows::Data::Json::IJsonValue>* self, PyObject* args)
-{ 
-    Py_ssize_t arg_count = PyTuple_Size(args);
-
-    if (arg_count == 0)
-    {
-        try
-        {
-            winrt::hstring return_value = self->obj.GetString();
-
-            return py::convert(return_value);
-        }
-        catch (...)
-        {
-            return py::to_PyErr();
-        }
-    }
-    else if (arg_count == -1)
-    {
-        return nullptr; 
-    }
-
-    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-    return nullptr;
-}
-
-static PyObject* IJsonValue_Stringify(py::winrt_wrapper<winrt::Windows::Data::Json::IJsonValue>* self, PyObject* args)
-{ 
-    Py_ssize_t arg_count = PyTuple_Size(args);
-
-    if (arg_count == 0)
-    {
-        try
-        {
-            winrt::hstring return_value = self->obj.Stringify();
-
-            return py::convert(return_value);
-        }
-        catch (...)
-        {
-            return py::to_PyErr();
-        }
-    }
-    else if (arg_count == -1)
-    {
-        return nullptr; 
-    }
-
-    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-    return nullptr;
-}
-
-static PyObject* IJsonValue_get_ValueType(py::winrt_wrapper<winrt::Windows::Data::Json::IJsonValue>* self, PyObject* args)
-{ 
-    if (args != nullptr)
-    {
-        PyErr_SetString(PyExc_TypeError, "arguments not supported for get methods");
-        return nullptr;
-    }
-        try
-        {
-            winrt::Windows::Data::Json::JsonValueType return_value = self->obj.ValueType();
-
-            return py::convert(return_value);
-        }
-        catch (...)
-        {
-            return py::to_PyErr();
-        }
-}
-
 static PyMethodDef IJsonValue_methods[] = {
     { "GetArray", (PyCFunction)IJsonValue_GetArray, METH_VARARGS, nullptr },
     { "GetBoolean", (PyCFunction)IJsonValue_GetBoolean, METH_VARARGS, nullptr },
@@ -2457,8 +2430,12 @@ static PyMethodDef IJsonValue_methods[] = {
     { "GetObject", (PyCFunction)IJsonValue_GetObject, METH_VARARGS, nullptr },
     { "GetString", (PyCFunction)IJsonValue_GetString, METH_VARARGS, nullptr },
     { "Stringify", (PyCFunction)IJsonValue_Stringify, METH_VARARGS, nullptr },
-    { "get_ValueType", (PyCFunction)IJsonValue_get_ValueType, METH_NOARGS, nullptr },
-    { "_from", (PyCFunction)IJsonValue__from, METH_O | METH_STATIC, nullptr },
+    { "_from", (PyCFunction)__IJsonValue_from, METH_O | METH_STATIC, nullptr },
+    { nullptr }
+};
+
+static PyGetSetDef IJsonValue_getset[] = {
+    { const_cast<char*>("ValueType"), (getter)IJsonValue_get_ValueType, nullptr, nullptr, nullptr },
     { nullptr }
 };
 
@@ -2467,6 +2444,7 @@ static PyType_Slot IJsonValue_Type_slots[] =
     { Py_tp_dealloc, IJsonValue_dealloc },
     { Py_tp_new, IJsonValue_new },
     { Py_tp_methods, IJsonValue_methods },
+    { Py_tp_getset, IJsonValue_getset },
     { 0, nullptr },
 };
 
@@ -2481,7 +2459,7 @@ static PyType_Spec IJsonValue_Type_spec =
 
 // ----- Windows.Data.Json Initialization --------------------
 
-int initialize_Windows_Data_Json(PyObject* module)
+static int module_exec(PyObject* module)
 {
     PyObject* type_object{ nullptr };
     PyObject* bases = PyTuple_Pack(1, py::winrt_type<py::winrt_base>::python_type);
@@ -2556,13 +2534,13 @@ int initialize_Windows_Data_Json(PyObject* module)
 }
 
 static PyModuleDef_Slot module_slots[] = {
-    {Py_mod_exec, initialize_Windows_Data_Json},
+    {Py_mod_exec, module_exec},
     {0, nullptr}
 };
 
-PyDoc_STRVAR(module_doc, "Langworthy projection module.\n");
+PyDoc_STRVAR(module_doc, "Windows.Data.Json");
 
-static struct PyModuleDef module_def = {
+static PyModuleDef module_def = {
     PyModuleDef_HEAD_INIT,
     "_pyrt_Windows_Data_Json",
     module_doc,

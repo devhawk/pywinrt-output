@@ -4,7 +4,7 @@
 
 // ----- Windows.Graphics.DirectX Initialization --------------------
 
-int initialize_Windows_Graphics_DirectX(PyObject* module)
+static int module_exec(PyObject* module)
 {
     PyObject* type_object{ nullptr };
     PyObject* bases = PyTuple_Pack(1, py::winrt_type<py::winrt_base>::python_type);
@@ -14,13 +14,13 @@ int initialize_Windows_Graphics_DirectX(PyObject* module)
 }
 
 static PyModuleDef_Slot module_slots[] = {
-    {Py_mod_exec, initialize_Windows_Graphics_DirectX},
+    {Py_mod_exec, module_exec},
     {0, nullptr}
 };
 
-PyDoc_STRVAR(module_doc, "Langworthy projection module.\n");
+PyDoc_STRVAR(module_doc, "Windows.Graphics.DirectX");
 
-static struct PyModuleDef module_def = {
+static PyModuleDef module_def = {
     PyModuleDef_HEAD_INIT,
     "_pyrt_Windows_Graphics_DirectX",
     module_doc,

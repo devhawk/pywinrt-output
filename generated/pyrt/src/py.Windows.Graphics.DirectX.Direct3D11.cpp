@@ -3,6 +3,7 @@
 #include "py.Windows.Graphics.DirectX.Direct3D11.h"
 
 // ----- IDirect3DDevice interface --------------------
+
 PyTypeObject* py::winrt_type<winrt::Windows::Graphics::DirectX::Direct3D11::IDirect3DDevice>::python_type;
 
 PyObject* IDirect3DDevice_new(PyTypeObject* type, PyObject* args, PyObject* kwds)
@@ -18,7 +19,57 @@ static void IDirect3DDevice_dealloc(py::winrt_wrapper<winrt::Windows::Graphics::
     self->obj = nullptr;
 }
 
-static PyObject* IDirect3DDevice__from(PyObject* /*unused*/, PyObject* arg)
+static PyObject* IDirect3DDevice_Close(py::winrt_wrapper<winrt::Windows::Graphics::DirectX::Direct3D11::IDirect3DDevice>* self, PyObject* args)
+{
+    Py_ssize_t arg_count = PyTuple_Size(args);
+    
+    if (arg_count == 0)
+    {
+        try
+        {
+            self->obj.Close();
+            
+            Py_RETURN_NONE;
+        }
+        catch (...)
+        {
+            return py::to_PyErr();
+        }
+    }
+    else if (arg_count != -1)
+    {
+        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+    }
+    
+    return nullptr;
+}
+
+static PyObject* IDirect3DDevice_Trim(py::winrt_wrapper<winrt::Windows::Graphics::DirectX::Direct3D11::IDirect3DDevice>* self, PyObject* args)
+{
+    Py_ssize_t arg_count = PyTuple_Size(args);
+    
+    if (arg_count == 0)
+    {
+        try
+        {
+            self->obj.Trim();
+            
+            Py_RETURN_NONE;
+        }
+        catch (...)
+        {
+            return py::to_PyErr();
+        }
+    }
+    else if (arg_count != -1)
+    {
+        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+    }
+    
+    return nullptr;
+}
+
+static PyObject* __IDirect3DDevice_from(PyObject* /*unused*/, PyObject* arg)
 {
     try
     {
@@ -31,60 +82,35 @@ static PyObject* IDirect3DDevice__from(PyObject* /*unused*/, PyObject* arg)
     }
 }
 
-static PyObject* IDirect3DDevice_Close(py::winrt_wrapper<winrt::Windows::Graphics::DirectX::Direct3D11::IDirect3DDevice>* self, PyObject* args)
-{ 
-    Py_ssize_t arg_count = PyTuple_Size(args);
-
-    if (arg_count == 0)
-    {
-        try
-        {
-            self->obj.Close();
-            Py_RETURN_NONE;
-        }
-        catch (...)
-        {
-            return py::to_PyErr();
-        }
-    }
-    else if (arg_count == -1)
-    {
-        return nullptr; 
-    }
-
-    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-    return nullptr;
+static PyObject* __IDirect3DDevice_enter(py::winrt_wrapper<winrt::Windows::Graphics::DirectX::Direct3D11::IDirect3DDevice>* self)
+{
+    Py_INCREF(self);
+    return (PyObject*)self;
 }
 
-static PyObject* IDirect3DDevice_Trim(py::winrt_wrapper<winrt::Windows::Graphics::DirectX::Direct3D11::IDirect3DDevice>* self, PyObject* args)
-{ 
-    Py_ssize_t arg_count = PyTuple_Size(args);
-
-    if (arg_count == 0)
+static PyObject* __IDirect3DDevice_exit(py::winrt_wrapper<winrt::Windows::Graphics::DirectX::Direct3D11::IDirect3DDevice>* self)
+{
+    try
     {
-        try
-        {
-            self->obj.Trim();
-            Py_RETURN_NONE;
-        }
-        catch (...)
-        {
-            return py::to_PyErr();
-        }
+        self->obj.Close();
+        Py_RETURN_FALSE;
     }
-    else if (arg_count == -1)
+    catch (...)
     {
-        return nullptr; 
+        return py::to_PyErr();
     }
-
-    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-    return nullptr;
 }
 
 static PyMethodDef IDirect3DDevice_methods[] = {
     { "Close", (PyCFunction)IDirect3DDevice_Close, METH_VARARGS, nullptr },
     { "Trim", (PyCFunction)IDirect3DDevice_Trim, METH_VARARGS, nullptr },
-    { "_from", (PyCFunction)IDirect3DDevice__from, METH_O | METH_STATIC, nullptr },
+    { "_from", (PyCFunction)__IDirect3DDevice_from, METH_O | METH_STATIC, nullptr },
+    { "__enter__", (PyCFunction)__IDirect3DDevice_enter, METH_O, nullptr },
+    { "__exit__",  (PyCFunction)__IDirect3DDevice_exit,  METH_O, nullptr },
+    { nullptr }
+};
+
+static PyGetSetDef IDirect3DDevice_getset[] = {
     { nullptr }
 };
 
@@ -93,6 +119,7 @@ static PyType_Slot IDirect3DDevice_Type_slots[] =
     { Py_tp_dealloc, IDirect3DDevice_dealloc },
     { Py_tp_new, IDirect3DDevice_new },
     { Py_tp_methods, IDirect3DDevice_methods },
+    { Py_tp_getset, IDirect3DDevice_getset },
     { 0, nullptr },
 };
 
@@ -106,6 +133,7 @@ static PyType_Spec IDirect3DDevice_Type_spec =
 };
 
 // ----- IDirect3DSurface interface --------------------
+
 PyTypeObject* py::winrt_type<winrt::Windows::Graphics::DirectX::Direct3D11::IDirect3DSurface>::python_type;
 
 PyObject* IDirect3DSurface_new(PyTypeObject* type, PyObject* args, PyObject* kwds)
@@ -121,7 +149,46 @@ static void IDirect3DSurface_dealloc(py::winrt_wrapper<winrt::Windows::Graphics:
     self->obj = nullptr;
 }
 
-static PyObject* IDirect3DSurface__from(PyObject* /*unused*/, PyObject* arg)
+static PyObject* IDirect3DSurface_Close(py::winrt_wrapper<winrt::Windows::Graphics::DirectX::Direct3D11::IDirect3DSurface>* self, PyObject* args)
+{
+    Py_ssize_t arg_count = PyTuple_Size(args);
+    
+    if (arg_count == 0)
+    {
+        try
+        {
+            self->obj.Close();
+            
+            Py_RETURN_NONE;
+        }
+        catch (...)
+        {
+            return py::to_PyErr();
+        }
+    }
+    else if (arg_count != -1)
+    {
+        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+    }
+    
+    return nullptr;
+}
+
+static PyObject* IDirect3DSurface_get_Description(py::winrt_wrapper<winrt::Windows::Graphics::DirectX::Direct3D11::IDirect3DSurface>* self, void* /*unused*/)
+{
+    try
+    {
+        winrt::Windows::Graphics::DirectX::Direct3D11::Direct3DSurfaceDescription return_value = self->obj.Description();
+        
+        return py::convert(return_value);
+    }
+    catch (...)
+    {
+        return py::to_PyErr();
+    }
+}
+
+static PyObject* __IDirect3DSurface_from(PyObject* /*unused*/, PyObject* arg)
 {
     try
     {
@@ -134,54 +201,35 @@ static PyObject* IDirect3DSurface__from(PyObject* /*unused*/, PyObject* arg)
     }
 }
 
-static PyObject* IDirect3DSurface_Close(py::winrt_wrapper<winrt::Windows::Graphics::DirectX::Direct3D11::IDirect3DSurface>* self, PyObject* args)
-{ 
-    Py_ssize_t arg_count = PyTuple_Size(args);
-
-    if (arg_count == 0)
-    {
-        try
-        {
-            self->obj.Close();
-            Py_RETURN_NONE;
-        }
-        catch (...)
-        {
-            return py::to_PyErr();
-        }
-    }
-    else if (arg_count == -1)
-    {
-        return nullptr; 
-    }
-
-    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-    return nullptr;
+static PyObject* __IDirect3DSurface_enter(py::winrt_wrapper<winrt::Windows::Graphics::DirectX::Direct3D11::IDirect3DSurface>* self)
+{
+    Py_INCREF(self);
+    return (PyObject*)self;
 }
 
-static PyObject* IDirect3DSurface_get_Description(py::winrt_wrapper<winrt::Windows::Graphics::DirectX::Direct3D11::IDirect3DSurface>* self, PyObject* args)
-{ 
-    if (args != nullptr)
+static PyObject* __IDirect3DSurface_exit(py::winrt_wrapper<winrt::Windows::Graphics::DirectX::Direct3D11::IDirect3DSurface>* self)
+{
+    try
     {
-        PyErr_SetString(PyExc_TypeError, "arguments not supported for get methods");
-        return nullptr;
+        self->obj.Close();
+        Py_RETURN_FALSE;
     }
-        try
-        {
-            winrt::Windows::Graphics::DirectX::Direct3D11::Direct3DSurfaceDescription return_value = self->obj.Description();
-
-            return py::convert(return_value);
-        }
-        catch (...)
-        {
-            return py::to_PyErr();
-        }
+    catch (...)
+    {
+        return py::to_PyErr();
+    }
 }
 
 static PyMethodDef IDirect3DSurface_methods[] = {
     { "Close", (PyCFunction)IDirect3DSurface_Close, METH_VARARGS, nullptr },
-    { "get_Description", (PyCFunction)IDirect3DSurface_get_Description, METH_NOARGS, nullptr },
-    { "_from", (PyCFunction)IDirect3DSurface__from, METH_O | METH_STATIC, nullptr },
+    { "_from", (PyCFunction)__IDirect3DSurface_from, METH_O | METH_STATIC, nullptr },
+    { "__enter__", (PyCFunction)__IDirect3DSurface_enter, METH_O, nullptr },
+    { "__exit__",  (PyCFunction)__IDirect3DSurface_exit,  METH_O, nullptr },
+    { nullptr }
+};
+
+static PyGetSetDef IDirect3DSurface_getset[] = {
+    { const_cast<char*>("Description"), (getter)IDirect3DSurface_get_Description, nullptr, nullptr, nullptr },
     { nullptr }
 };
 
@@ -190,6 +238,7 @@ static PyType_Slot IDirect3DSurface_Type_slots[] =
     { Py_tp_dealloc, IDirect3DSurface_dealloc },
     { Py_tp_new, IDirect3DSurface_new },
     { Py_tp_methods, IDirect3DSurface_methods },
+    { Py_tp_getset, IDirect3DSurface_getset },
     { 0, nullptr },
 };
 
@@ -203,6 +252,7 @@ static PyType_Spec IDirect3DSurface_Type_spec =
 };
 
 // ----- Direct3DMultisampleDescription struct --------------------
+
 PyTypeObject* py::winrt_type<winrt::Windows::Graphics::DirectX::Direct3D11::Direct3DMultisampleDescription>::python_type;
 
 PyObject* py::converter<winrt::Windows::Graphics::DirectX::Direct3D11::Direct3DMultisampleDescription>::convert(winrt::Windows::Graphics::DirectX::Direct3D11::Direct3DMultisampleDescription instance) noexcept
@@ -213,6 +263,7 @@ PyObject* py::converter<winrt::Windows::Graphics::DirectX::Direct3D11::Direct3DM
 winrt::Windows::Graphics::DirectX::Direct3D11::Direct3DMultisampleDescription py::converter<winrt::Windows::Graphics::DirectX::Direct3D11::Direct3DMultisampleDescription>::convert_to(PyObject* obj)
 {
     throw_if_pyobj_null(obj);
+    
     if (Py_TYPE(obj) == py::get_python_type<winrt::Windows::Graphics::DirectX::Direct3D11::Direct3DMultisampleDescription>())
     {
         return reinterpret_cast<py::winrt_struct_wrapper<winrt::Windows::Graphics::DirectX::Direct3D11::Direct3DMultisampleDescription>*>(obj)->obj;
@@ -224,18 +275,22 @@ winrt::Windows::Graphics::DirectX::Direct3D11::Direct3DMultisampleDescription py
     }
     
     winrt::Windows::Graphics::DirectX::Direct3D11::Direct3DMultisampleDescription new_value{};
-    PyObject* pyCount = PyDict_GetItemString(obj, "Count");
-    if (!pyCount) { throw winrt::hresult_invalid_argument(); }
-    new_value.Count = converter<int32_t>::convert_to(pyCount);
-    PyObject* pyQuality = PyDict_GetItemString(obj, "Quality");
-    if (!pyQuality) { throw winrt::hresult_invalid_argument(); }
-    new_value.Quality = converter<int32_t>::convert_to(pyQuality);
+    
+    PyObject* py_Count = PyDict_GetItemString(obj, "Count");
+    if (!py_Count) { throw winrt::hresult_invalid_argument(); }
+    new_value.Count = converter<int32_t>::convert_to(py_Count);
+    
+    PyObject* py_Quality = PyDict_GetItemString(obj, "Quality");
+    if (!py_Quality) { throw winrt::hresult_invalid_argument(); }
+    new_value.Quality = converter<int32_t>::convert_to(py_Quality);
+    
     return new_value;
 }
 
 PyObject* Direct3DMultisampleDescription_new(PyTypeObject* type, PyObject* args, PyObject* kwds)
 {
     auto tuple_size = PyTuple_Size(args);
+    
     if ((tuple_size == 0) && (kwds == nullptr))
     {
         try
@@ -247,7 +302,7 @@ PyObject* Direct3DMultisampleDescription_new(PyTypeObject* type, PyObject* args,
         {
             return py::to_PyErr();
         }
-    }
+    };
     
     if ((tuple_size == 1) && (kwds == nullptr))
     {
@@ -256,20 +311,20 @@ PyObject* Direct3DMultisampleDescription_new(PyTypeObject* type, PyObject* args,
         {
             try
             {
-                auto instance = py::converter<winrt::Windows::Graphics::DirectX::Direct3D11::Direct3DMultisampleDescription>::convert_to(arg); 
+                auto instance = py::converter<winrt::Windows::Graphics::DirectX::Direct3D11::Direct3DMultisampleDescription>::convert_to(arg);
                 return py::wrap_struct(instance, type);
             }
             catch (...)
             {
                 return py::to_PyErr();
             }
-        }
-    }
+        };
+    };
     
     int32_t _Count{};
     int32_t _Quality{};
-    static char* kwlist[] = {"Count", "Quality", nullptr};
     
+    static char* kwlist[] = {"Count", "Quality", nullptr};
     if (!PyArg_ParseTupleAndKeywords(args, kwds, "ii", kwlist, &_Count, &_Quality))
     {
         return nullptr;
@@ -371,6 +426,7 @@ static PyType_Spec Direct3DMultisampleDescription_Type_spec =
 };
 
 // ----- Direct3DSurfaceDescription struct --------------------
+
 PyTypeObject* py::winrt_type<winrt::Windows::Graphics::DirectX::Direct3D11::Direct3DSurfaceDescription>::python_type;
 
 PyObject* py::converter<winrt::Windows::Graphics::DirectX::Direct3D11::Direct3DSurfaceDescription>::convert(winrt::Windows::Graphics::DirectX::Direct3D11::Direct3DSurfaceDescription instance) noexcept
@@ -381,6 +437,7 @@ PyObject* py::converter<winrt::Windows::Graphics::DirectX::Direct3D11::Direct3DS
 winrt::Windows::Graphics::DirectX::Direct3D11::Direct3DSurfaceDescription py::converter<winrt::Windows::Graphics::DirectX::Direct3D11::Direct3DSurfaceDescription>::convert_to(PyObject* obj)
 {
     throw_if_pyobj_null(obj);
+    
     if (Py_TYPE(obj) == py::get_python_type<winrt::Windows::Graphics::DirectX::Direct3D11::Direct3DSurfaceDescription>())
     {
         return reinterpret_cast<py::winrt_struct_wrapper<winrt::Windows::Graphics::DirectX::Direct3D11::Direct3DSurfaceDescription>*>(obj)->obj;
@@ -392,24 +449,30 @@ winrt::Windows::Graphics::DirectX::Direct3D11::Direct3DSurfaceDescription py::co
     }
     
     winrt::Windows::Graphics::DirectX::Direct3D11::Direct3DSurfaceDescription new_value{};
-    PyObject* pyWidth = PyDict_GetItemString(obj, "Width");
-    if (!pyWidth) { throw winrt::hresult_invalid_argument(); }
-    new_value.Width = converter<int32_t>::convert_to(pyWidth);
-    PyObject* pyHeight = PyDict_GetItemString(obj, "Height");
-    if (!pyHeight) { throw winrt::hresult_invalid_argument(); }
-    new_value.Height = converter<int32_t>::convert_to(pyHeight);
-    PyObject* pyFormat = PyDict_GetItemString(obj, "Format");
-    if (!pyFormat) { throw winrt::hresult_invalid_argument(); }
-    new_value.Format = converter<winrt::Windows::Graphics::DirectX::DirectXPixelFormat>::convert_to(pyFormat);
-    PyObject* pyMultisampleDescription = PyDict_GetItemString(obj, "MultisampleDescription");
-    if (!pyMultisampleDescription) { throw winrt::hresult_invalid_argument(); }
-    new_value.MultisampleDescription = converter<winrt::Windows::Graphics::DirectX::Direct3D11::Direct3DMultisampleDescription>::convert_to(pyMultisampleDescription);
+    
+    PyObject* py_Width = PyDict_GetItemString(obj, "Width");
+    if (!py_Width) { throw winrt::hresult_invalid_argument(); }
+    new_value.Width = converter<int32_t>::convert_to(py_Width);
+    
+    PyObject* py_Height = PyDict_GetItemString(obj, "Height");
+    if (!py_Height) { throw winrt::hresult_invalid_argument(); }
+    new_value.Height = converter<int32_t>::convert_to(py_Height);
+    
+    PyObject* py_Format = PyDict_GetItemString(obj, "Format");
+    if (!py_Format) { throw winrt::hresult_invalid_argument(); }
+    new_value.Format = converter<winrt::Windows::Graphics::DirectX::DirectXPixelFormat>::convert_to(py_Format);
+    
+    PyObject* py_MultisampleDescription = PyDict_GetItemString(obj, "MultisampleDescription");
+    if (!py_MultisampleDescription) { throw winrt::hresult_invalid_argument(); }
+    new_value.MultisampleDescription = converter<winrt::Windows::Graphics::DirectX::Direct3D11::Direct3DMultisampleDescription>::convert_to(py_MultisampleDescription);
+    
     return new_value;
 }
 
 PyObject* Direct3DSurfaceDescription_new(PyTypeObject* type, PyObject* args, PyObject* kwds)
 {
     auto tuple_size = PyTuple_Size(args);
+    
     if ((tuple_size == 0) && (kwds == nullptr))
     {
         try
@@ -421,7 +484,7 @@ PyObject* Direct3DSurfaceDescription_new(PyTypeObject* type, PyObject* args, PyO
         {
             return py::to_PyErr();
         }
-    }
+    };
     
     if ((tuple_size == 1) && (kwds == nullptr))
     {
@@ -430,22 +493,22 @@ PyObject* Direct3DSurfaceDescription_new(PyTypeObject* type, PyObject* args, PyO
         {
             try
             {
-                auto instance = py::converter<winrt::Windows::Graphics::DirectX::Direct3D11::Direct3DSurfaceDescription>::convert_to(arg); 
+                auto instance = py::converter<winrt::Windows::Graphics::DirectX::Direct3D11::Direct3DSurfaceDescription>::convert_to(arg);
                 return py::wrap_struct(instance, type);
             }
             catch (...)
             {
                 return py::to_PyErr();
             }
-        }
-    }
+        };
+    };
     
     int32_t _Width{};
     int32_t _Height{};
     int32_t _Format{};
     PyObject* _MultisampleDescription{};
-    static char* kwlist[] = {"Width", "Height", "Format", "MultisampleDescription", nullptr};
     
+    static char* kwlist[] = {"Width", "Height", "Format", "MultisampleDescription", nullptr};
     if (!PyArg_ParseTupleAndKeywords(args, kwds, "iiiO", kwlist, &_Width, &_Height, &_Format, &_MultisampleDescription))
     {
         return nullptr;
@@ -612,7 +675,7 @@ static PyType_Spec Direct3DSurfaceDescription_Type_spec =
 
 // ----- Windows.Graphics.DirectX.Direct3D11 Initialization --------------------
 
-int initialize_Windows_Graphics_DirectX_Direct3D11(PyObject* module)
+static int module_exec(PyObject* module)
 {
     PyObject* type_object{ nullptr };
     PyObject* bases = PyTuple_Pack(1, py::winrt_type<py::winrt_base>::python_type);
@@ -674,13 +737,13 @@ int initialize_Windows_Graphics_DirectX_Direct3D11(PyObject* module)
 }
 
 static PyModuleDef_Slot module_slots[] = {
-    {Py_mod_exec, initialize_Windows_Graphics_DirectX_Direct3D11},
+    {Py_mod_exec, module_exec},
     {0, nullptr}
 };
 
-PyDoc_STRVAR(module_doc, "Langworthy projection module.\n");
+PyDoc_STRVAR(module_doc, "Windows.Graphics.DirectX.Direct3D11");
 
-static struct PyModuleDef module_def = {
+static PyModuleDef module_def = {
     PyModuleDef_HEAD_INIT,
     "_pyrt_Windows_Graphics_DirectX_Direct3D11",
     module_doc,

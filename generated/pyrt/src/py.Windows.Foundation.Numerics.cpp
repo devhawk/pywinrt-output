@@ -3,6 +3,7 @@
 #include "py.Windows.Foundation.Numerics.h"
 
 // ----- Matrix3x2 struct --------------------
+
 PyTypeObject* py::winrt_type<winrt::Windows::Foundation::Numerics::float3x2>::python_type;
 
 PyObject* py::converter<winrt::Windows::Foundation::Numerics::float3x2>::convert(winrt::Windows::Foundation::Numerics::float3x2 instance) noexcept
@@ -13,6 +14,7 @@ PyObject* py::converter<winrt::Windows::Foundation::Numerics::float3x2>::convert
 winrt::Windows::Foundation::Numerics::float3x2 py::converter<winrt::Windows::Foundation::Numerics::float3x2>::convert_to(PyObject* obj)
 {
     throw_if_pyobj_null(obj);
+    
     if (Py_TYPE(obj) == py::get_python_type<winrt::Windows::Foundation::Numerics::float3x2>())
     {
         return reinterpret_cast<py::winrt_struct_wrapper<winrt::Windows::Foundation::Numerics::float3x2>*>(obj)->obj;
@@ -24,30 +26,38 @@ winrt::Windows::Foundation::Numerics::float3x2 py::converter<winrt::Windows::Fou
     }
     
     winrt::Windows::Foundation::Numerics::float3x2 new_value{};
-    PyObject* pym11 = PyDict_GetItemString(obj, "M11");
-    if (!pym11) { throw winrt::hresult_invalid_argument(); }
-    new_value.m11 = converter<float>::convert_to(pym11);
-    PyObject* pym12 = PyDict_GetItemString(obj, "M12");
-    if (!pym12) { throw winrt::hresult_invalid_argument(); }
-    new_value.m12 = converter<float>::convert_to(pym12);
-    PyObject* pym21 = PyDict_GetItemString(obj, "M21");
-    if (!pym21) { throw winrt::hresult_invalid_argument(); }
-    new_value.m21 = converter<float>::convert_to(pym21);
-    PyObject* pym22 = PyDict_GetItemString(obj, "M22");
-    if (!pym22) { throw winrt::hresult_invalid_argument(); }
-    new_value.m22 = converter<float>::convert_to(pym22);
-    PyObject* pym31 = PyDict_GetItemString(obj, "M31");
-    if (!pym31) { throw winrt::hresult_invalid_argument(); }
-    new_value.m31 = converter<float>::convert_to(pym31);
-    PyObject* pym32 = PyDict_GetItemString(obj, "M32");
-    if (!pym32) { throw winrt::hresult_invalid_argument(); }
-    new_value.m32 = converter<float>::convert_to(pym32);
+    
+    PyObject* py_m11 = PyDict_GetItemString(obj, "M11");
+    if (!py_m11) { throw winrt::hresult_invalid_argument(); }
+    new_value.m11 = converter<float>::convert_to(py_m11);
+    
+    PyObject* py_m12 = PyDict_GetItemString(obj, "M12");
+    if (!py_m12) { throw winrt::hresult_invalid_argument(); }
+    new_value.m12 = converter<float>::convert_to(py_m12);
+    
+    PyObject* py_m21 = PyDict_GetItemString(obj, "M21");
+    if (!py_m21) { throw winrt::hresult_invalid_argument(); }
+    new_value.m21 = converter<float>::convert_to(py_m21);
+    
+    PyObject* py_m22 = PyDict_GetItemString(obj, "M22");
+    if (!py_m22) { throw winrt::hresult_invalid_argument(); }
+    new_value.m22 = converter<float>::convert_to(py_m22);
+    
+    PyObject* py_m31 = PyDict_GetItemString(obj, "M31");
+    if (!py_m31) { throw winrt::hresult_invalid_argument(); }
+    new_value.m31 = converter<float>::convert_to(py_m31);
+    
+    PyObject* py_m32 = PyDict_GetItemString(obj, "M32");
+    if (!py_m32) { throw winrt::hresult_invalid_argument(); }
+    new_value.m32 = converter<float>::convert_to(py_m32);
+    
     return new_value;
 }
 
 PyObject* Matrix3x2_new(PyTypeObject* type, PyObject* args, PyObject* kwds)
 {
     auto tuple_size = PyTuple_Size(args);
+    
     if ((tuple_size == 0) && (kwds == nullptr))
     {
         try
@@ -59,7 +69,7 @@ PyObject* Matrix3x2_new(PyTypeObject* type, PyObject* args, PyObject* kwds)
         {
             return py::to_PyErr();
         }
-    }
+    };
     
     if ((tuple_size == 1) && (kwds == nullptr))
     {
@@ -68,15 +78,15 @@ PyObject* Matrix3x2_new(PyTypeObject* type, PyObject* args, PyObject* kwds)
         {
             try
             {
-                auto instance = py::converter<winrt::Windows::Foundation::Numerics::float3x2>::convert_to(arg); 
+                auto instance = py::converter<winrt::Windows::Foundation::Numerics::float3x2>::convert_to(arg);
                 return py::wrap_struct(instance, type);
             }
             catch (...)
             {
                 return py::to_PyErr();
             }
-        }
-    }
+        };
+    };
     
     float _M11{};
     float _M12{};
@@ -84,8 +94,8 @@ PyObject* Matrix3x2_new(PyTypeObject* type, PyObject* args, PyObject* kwds)
     float _M22{};
     float _M31{};
     float _M32{};
-    static char* kwlist[] = {"M11", "M12", "M21", "M22", "M31", "M32", nullptr};
     
+    static char* kwlist[] = {"M11", "M12", "M21", "M22", "M31", "M32", nullptr};
     if (!PyArg_ParseTupleAndKeywords(args, kwds, "ffffff", kwlist, &_M11, &_M12, &_M21, &_M22, &_M31, &_M32))
     {
         return nullptr;
@@ -315,6 +325,7 @@ static PyType_Spec Matrix3x2_Type_spec =
 };
 
 // ----- Matrix4x4 struct --------------------
+
 PyTypeObject* py::winrt_type<winrt::Windows::Foundation::Numerics::float4x4>::python_type;
 
 PyObject* py::converter<winrt::Windows::Foundation::Numerics::float4x4>::convert(winrt::Windows::Foundation::Numerics::float4x4 instance) noexcept
@@ -325,6 +336,7 @@ PyObject* py::converter<winrt::Windows::Foundation::Numerics::float4x4>::convert
 winrt::Windows::Foundation::Numerics::float4x4 py::converter<winrt::Windows::Foundation::Numerics::float4x4>::convert_to(PyObject* obj)
 {
     throw_if_pyobj_null(obj);
+    
     if (Py_TYPE(obj) == py::get_python_type<winrt::Windows::Foundation::Numerics::float4x4>())
     {
         return reinterpret_cast<py::winrt_struct_wrapper<winrt::Windows::Foundation::Numerics::float4x4>*>(obj)->obj;
@@ -336,60 +348,78 @@ winrt::Windows::Foundation::Numerics::float4x4 py::converter<winrt::Windows::Fou
     }
     
     winrt::Windows::Foundation::Numerics::float4x4 new_value{};
-    PyObject* pym11 = PyDict_GetItemString(obj, "M11");
-    if (!pym11) { throw winrt::hresult_invalid_argument(); }
-    new_value.m11 = converter<float>::convert_to(pym11);
-    PyObject* pym12 = PyDict_GetItemString(obj, "M12");
-    if (!pym12) { throw winrt::hresult_invalid_argument(); }
-    new_value.m12 = converter<float>::convert_to(pym12);
-    PyObject* pym13 = PyDict_GetItemString(obj, "M13");
-    if (!pym13) { throw winrt::hresult_invalid_argument(); }
-    new_value.m13 = converter<float>::convert_to(pym13);
-    PyObject* pym14 = PyDict_GetItemString(obj, "M14");
-    if (!pym14) { throw winrt::hresult_invalid_argument(); }
-    new_value.m14 = converter<float>::convert_to(pym14);
-    PyObject* pym21 = PyDict_GetItemString(obj, "M21");
-    if (!pym21) { throw winrt::hresult_invalid_argument(); }
-    new_value.m21 = converter<float>::convert_to(pym21);
-    PyObject* pym22 = PyDict_GetItemString(obj, "M22");
-    if (!pym22) { throw winrt::hresult_invalid_argument(); }
-    new_value.m22 = converter<float>::convert_to(pym22);
-    PyObject* pym23 = PyDict_GetItemString(obj, "M23");
-    if (!pym23) { throw winrt::hresult_invalid_argument(); }
-    new_value.m23 = converter<float>::convert_to(pym23);
-    PyObject* pym24 = PyDict_GetItemString(obj, "M24");
-    if (!pym24) { throw winrt::hresult_invalid_argument(); }
-    new_value.m24 = converter<float>::convert_to(pym24);
-    PyObject* pym31 = PyDict_GetItemString(obj, "M31");
-    if (!pym31) { throw winrt::hresult_invalid_argument(); }
-    new_value.m31 = converter<float>::convert_to(pym31);
-    PyObject* pym32 = PyDict_GetItemString(obj, "M32");
-    if (!pym32) { throw winrt::hresult_invalid_argument(); }
-    new_value.m32 = converter<float>::convert_to(pym32);
-    PyObject* pym33 = PyDict_GetItemString(obj, "M33");
-    if (!pym33) { throw winrt::hresult_invalid_argument(); }
-    new_value.m33 = converter<float>::convert_to(pym33);
-    PyObject* pym34 = PyDict_GetItemString(obj, "M34");
-    if (!pym34) { throw winrt::hresult_invalid_argument(); }
-    new_value.m34 = converter<float>::convert_to(pym34);
-    PyObject* pym41 = PyDict_GetItemString(obj, "M41");
-    if (!pym41) { throw winrt::hresult_invalid_argument(); }
-    new_value.m41 = converter<float>::convert_to(pym41);
-    PyObject* pym42 = PyDict_GetItemString(obj, "M42");
-    if (!pym42) { throw winrt::hresult_invalid_argument(); }
-    new_value.m42 = converter<float>::convert_to(pym42);
-    PyObject* pym43 = PyDict_GetItemString(obj, "M43");
-    if (!pym43) { throw winrt::hresult_invalid_argument(); }
-    new_value.m43 = converter<float>::convert_to(pym43);
-    PyObject* pym44 = PyDict_GetItemString(obj, "M44");
-    if (!pym44) { throw winrt::hresult_invalid_argument(); }
-    new_value.m44 = converter<float>::convert_to(pym44);
+    
+    PyObject* py_m11 = PyDict_GetItemString(obj, "M11");
+    if (!py_m11) { throw winrt::hresult_invalid_argument(); }
+    new_value.m11 = converter<float>::convert_to(py_m11);
+    
+    PyObject* py_m12 = PyDict_GetItemString(obj, "M12");
+    if (!py_m12) { throw winrt::hresult_invalid_argument(); }
+    new_value.m12 = converter<float>::convert_to(py_m12);
+    
+    PyObject* py_m13 = PyDict_GetItemString(obj, "M13");
+    if (!py_m13) { throw winrt::hresult_invalid_argument(); }
+    new_value.m13 = converter<float>::convert_to(py_m13);
+    
+    PyObject* py_m14 = PyDict_GetItemString(obj, "M14");
+    if (!py_m14) { throw winrt::hresult_invalid_argument(); }
+    new_value.m14 = converter<float>::convert_to(py_m14);
+    
+    PyObject* py_m21 = PyDict_GetItemString(obj, "M21");
+    if (!py_m21) { throw winrt::hresult_invalid_argument(); }
+    new_value.m21 = converter<float>::convert_to(py_m21);
+    
+    PyObject* py_m22 = PyDict_GetItemString(obj, "M22");
+    if (!py_m22) { throw winrt::hresult_invalid_argument(); }
+    new_value.m22 = converter<float>::convert_to(py_m22);
+    
+    PyObject* py_m23 = PyDict_GetItemString(obj, "M23");
+    if (!py_m23) { throw winrt::hresult_invalid_argument(); }
+    new_value.m23 = converter<float>::convert_to(py_m23);
+    
+    PyObject* py_m24 = PyDict_GetItemString(obj, "M24");
+    if (!py_m24) { throw winrt::hresult_invalid_argument(); }
+    new_value.m24 = converter<float>::convert_to(py_m24);
+    
+    PyObject* py_m31 = PyDict_GetItemString(obj, "M31");
+    if (!py_m31) { throw winrt::hresult_invalid_argument(); }
+    new_value.m31 = converter<float>::convert_to(py_m31);
+    
+    PyObject* py_m32 = PyDict_GetItemString(obj, "M32");
+    if (!py_m32) { throw winrt::hresult_invalid_argument(); }
+    new_value.m32 = converter<float>::convert_to(py_m32);
+    
+    PyObject* py_m33 = PyDict_GetItemString(obj, "M33");
+    if (!py_m33) { throw winrt::hresult_invalid_argument(); }
+    new_value.m33 = converter<float>::convert_to(py_m33);
+    
+    PyObject* py_m34 = PyDict_GetItemString(obj, "M34");
+    if (!py_m34) { throw winrt::hresult_invalid_argument(); }
+    new_value.m34 = converter<float>::convert_to(py_m34);
+    
+    PyObject* py_m41 = PyDict_GetItemString(obj, "M41");
+    if (!py_m41) { throw winrt::hresult_invalid_argument(); }
+    new_value.m41 = converter<float>::convert_to(py_m41);
+    
+    PyObject* py_m42 = PyDict_GetItemString(obj, "M42");
+    if (!py_m42) { throw winrt::hresult_invalid_argument(); }
+    new_value.m42 = converter<float>::convert_to(py_m42);
+    
+    PyObject* py_m43 = PyDict_GetItemString(obj, "M43");
+    if (!py_m43) { throw winrt::hresult_invalid_argument(); }
+    new_value.m43 = converter<float>::convert_to(py_m43);
+    
+    PyObject* py_m44 = PyDict_GetItemString(obj, "M44");
+    if (!py_m44) { throw winrt::hresult_invalid_argument(); }
+    new_value.m44 = converter<float>::convert_to(py_m44);
+    
     return new_value;
 }
 
 PyObject* Matrix4x4_new(PyTypeObject* type, PyObject* args, PyObject* kwds)
 {
     auto tuple_size = PyTuple_Size(args);
+    
     if ((tuple_size == 0) && (kwds == nullptr))
     {
         try
@@ -401,7 +431,7 @@ PyObject* Matrix4x4_new(PyTypeObject* type, PyObject* args, PyObject* kwds)
         {
             return py::to_PyErr();
         }
-    }
+    };
     
     if ((tuple_size == 1) && (kwds == nullptr))
     {
@@ -410,15 +440,15 @@ PyObject* Matrix4x4_new(PyTypeObject* type, PyObject* args, PyObject* kwds)
         {
             try
             {
-                auto instance = py::converter<winrt::Windows::Foundation::Numerics::float4x4>::convert_to(arg); 
+                auto instance = py::converter<winrt::Windows::Foundation::Numerics::float4x4>::convert_to(arg);
                 return py::wrap_struct(instance, type);
             }
             catch (...)
             {
                 return py::to_PyErr();
             }
-        }
-    }
+        };
+    };
     
     float _M11{};
     float _M12{};
@@ -436,8 +466,8 @@ PyObject* Matrix4x4_new(PyTypeObject* type, PyObject* args, PyObject* kwds)
     float _M42{};
     float _M43{};
     float _M44{};
-    static char* kwlist[] = {"M11", "M12", "M13", "M14", "M21", "M22", "M23", "M24", "M31", "M32", "M33", "M34", "M41", "M42", "M43", "M44", nullptr};
     
+    static char* kwlist[] = {"M11", "M12", "M13", "M14", "M21", "M22", "M23", "M24", "M31", "M32", "M33", "M34", "M41", "M42", "M43", "M44", nullptr};
     if (!PyArg_ParseTupleAndKeywords(args, kwds, "ffffffffffffffff", kwlist, &_M11, &_M12, &_M13, &_M14, &_M21, &_M22, &_M23, &_M24, &_M31, &_M32, &_M33, &_M34, &_M41, &_M42, &_M43, &_M44))
     {
         return nullptr;
@@ -987,6 +1017,7 @@ static PyType_Spec Matrix4x4_Type_spec =
 };
 
 // ----- Plane struct --------------------
+
 PyTypeObject* py::winrt_type<winrt::Windows::Foundation::Numerics::plane>::python_type;
 
 PyObject* py::converter<winrt::Windows::Foundation::Numerics::plane>::convert(winrt::Windows::Foundation::Numerics::plane instance) noexcept
@@ -997,6 +1028,7 @@ PyObject* py::converter<winrt::Windows::Foundation::Numerics::plane>::convert(wi
 winrt::Windows::Foundation::Numerics::plane py::converter<winrt::Windows::Foundation::Numerics::plane>::convert_to(PyObject* obj)
 {
     throw_if_pyobj_null(obj);
+    
     if (Py_TYPE(obj) == py::get_python_type<winrt::Windows::Foundation::Numerics::plane>())
     {
         return reinterpret_cast<py::winrt_struct_wrapper<winrt::Windows::Foundation::Numerics::plane>*>(obj)->obj;
@@ -1008,18 +1040,22 @@ winrt::Windows::Foundation::Numerics::plane py::converter<winrt::Windows::Founda
     }
     
     winrt::Windows::Foundation::Numerics::plane new_value{};
-    PyObject* pynormal = PyDict_GetItemString(obj, "Normal");
-    if (!pynormal) { throw winrt::hresult_invalid_argument(); }
-    new_value.normal = converter<winrt::Windows::Foundation::Numerics::float3>::convert_to(pynormal);
-    PyObject* pyd = PyDict_GetItemString(obj, "D");
-    if (!pyd) { throw winrt::hresult_invalid_argument(); }
-    new_value.d = converter<float>::convert_to(pyd);
+    
+    PyObject* py_normal = PyDict_GetItemString(obj, "Normal");
+    if (!py_normal) { throw winrt::hresult_invalid_argument(); }
+    new_value.normal = converter<winrt::Windows::Foundation::Numerics::float3>::convert_to(py_normal);
+    
+    PyObject* py_d = PyDict_GetItemString(obj, "D");
+    if (!py_d) { throw winrt::hresult_invalid_argument(); }
+    new_value.d = converter<float>::convert_to(py_d);
+    
     return new_value;
 }
 
 PyObject* Plane_new(PyTypeObject* type, PyObject* args, PyObject* kwds)
 {
     auto tuple_size = PyTuple_Size(args);
+    
     if ((tuple_size == 0) && (kwds == nullptr))
     {
         try
@@ -1031,7 +1067,7 @@ PyObject* Plane_new(PyTypeObject* type, PyObject* args, PyObject* kwds)
         {
             return py::to_PyErr();
         }
-    }
+    };
     
     if ((tuple_size == 1) && (kwds == nullptr))
     {
@@ -1040,20 +1076,20 @@ PyObject* Plane_new(PyTypeObject* type, PyObject* args, PyObject* kwds)
         {
             try
             {
-                auto instance = py::converter<winrt::Windows::Foundation::Numerics::plane>::convert_to(arg); 
+                auto instance = py::converter<winrt::Windows::Foundation::Numerics::plane>::convert_to(arg);
                 return py::wrap_struct(instance, type);
             }
             catch (...)
             {
                 return py::to_PyErr();
             }
-        }
-    }
+        };
+    };
     
     PyObject* _Normal{};
     float _D{};
-    static char* kwlist[] = {"Normal", "D", nullptr};
     
+    static char* kwlist[] = {"Normal", "D", nullptr};
     if (!PyArg_ParseTupleAndKeywords(args, kwds, "Of", kwlist, &_Normal, &_D))
     {
         return nullptr;
@@ -1155,6 +1191,7 @@ static PyType_Spec Plane_Type_spec =
 };
 
 // ----- Quaternion struct --------------------
+
 PyTypeObject* py::winrt_type<winrt::Windows::Foundation::Numerics::quaternion>::python_type;
 
 PyObject* py::converter<winrt::Windows::Foundation::Numerics::quaternion>::convert(winrt::Windows::Foundation::Numerics::quaternion instance) noexcept
@@ -1165,6 +1202,7 @@ PyObject* py::converter<winrt::Windows::Foundation::Numerics::quaternion>::conve
 winrt::Windows::Foundation::Numerics::quaternion py::converter<winrt::Windows::Foundation::Numerics::quaternion>::convert_to(PyObject* obj)
 {
     throw_if_pyobj_null(obj);
+    
     if (Py_TYPE(obj) == py::get_python_type<winrt::Windows::Foundation::Numerics::quaternion>())
     {
         return reinterpret_cast<py::winrt_struct_wrapper<winrt::Windows::Foundation::Numerics::quaternion>*>(obj)->obj;
@@ -1176,24 +1214,30 @@ winrt::Windows::Foundation::Numerics::quaternion py::converter<winrt::Windows::F
     }
     
     winrt::Windows::Foundation::Numerics::quaternion new_value{};
-    PyObject* pyx = PyDict_GetItemString(obj, "X");
-    if (!pyx) { throw winrt::hresult_invalid_argument(); }
-    new_value.x = converter<float>::convert_to(pyx);
-    PyObject* pyy = PyDict_GetItemString(obj, "Y");
-    if (!pyy) { throw winrt::hresult_invalid_argument(); }
-    new_value.y = converter<float>::convert_to(pyy);
-    PyObject* pyz = PyDict_GetItemString(obj, "Z");
-    if (!pyz) { throw winrt::hresult_invalid_argument(); }
-    new_value.z = converter<float>::convert_to(pyz);
-    PyObject* pyw = PyDict_GetItemString(obj, "W");
-    if (!pyw) { throw winrt::hresult_invalid_argument(); }
-    new_value.w = converter<float>::convert_to(pyw);
+    
+    PyObject* py_x = PyDict_GetItemString(obj, "X");
+    if (!py_x) { throw winrt::hresult_invalid_argument(); }
+    new_value.x = converter<float>::convert_to(py_x);
+    
+    PyObject* py_y = PyDict_GetItemString(obj, "Y");
+    if (!py_y) { throw winrt::hresult_invalid_argument(); }
+    new_value.y = converter<float>::convert_to(py_y);
+    
+    PyObject* py_z = PyDict_GetItemString(obj, "Z");
+    if (!py_z) { throw winrt::hresult_invalid_argument(); }
+    new_value.z = converter<float>::convert_to(py_z);
+    
+    PyObject* py_w = PyDict_GetItemString(obj, "W");
+    if (!py_w) { throw winrt::hresult_invalid_argument(); }
+    new_value.w = converter<float>::convert_to(py_w);
+    
     return new_value;
 }
 
 PyObject* Quaternion_new(PyTypeObject* type, PyObject* args, PyObject* kwds)
 {
     auto tuple_size = PyTuple_Size(args);
+    
     if ((tuple_size == 0) && (kwds == nullptr))
     {
         try
@@ -1205,7 +1249,7 @@ PyObject* Quaternion_new(PyTypeObject* type, PyObject* args, PyObject* kwds)
         {
             return py::to_PyErr();
         }
-    }
+    };
     
     if ((tuple_size == 1) && (kwds == nullptr))
     {
@@ -1214,22 +1258,22 @@ PyObject* Quaternion_new(PyTypeObject* type, PyObject* args, PyObject* kwds)
         {
             try
             {
-                auto instance = py::converter<winrt::Windows::Foundation::Numerics::quaternion>::convert_to(arg); 
+                auto instance = py::converter<winrt::Windows::Foundation::Numerics::quaternion>::convert_to(arg);
                 return py::wrap_struct(instance, type);
             }
             catch (...)
             {
                 return py::to_PyErr();
             }
-        }
-    }
+        };
+    };
     
     float _X{};
     float _Y{};
     float _Z{};
     float _W{};
-    static char* kwlist[] = {"X", "Y", "Z", "W", nullptr};
     
+    static char* kwlist[] = {"X", "Y", "Z", "W", nullptr};
     if (!PyArg_ParseTupleAndKeywords(args, kwds, "ffff", kwlist, &_X, &_Y, &_Z, &_W))
     {
         return nullptr;
@@ -1395,6 +1439,7 @@ static PyType_Spec Quaternion_Type_spec =
 };
 
 // ----- Rational struct --------------------
+
 PyTypeObject* py::winrt_type<winrt::Windows::Foundation::Numerics::Rational>::python_type;
 
 PyObject* py::converter<winrt::Windows::Foundation::Numerics::Rational>::convert(winrt::Windows::Foundation::Numerics::Rational instance) noexcept
@@ -1405,6 +1450,7 @@ PyObject* py::converter<winrt::Windows::Foundation::Numerics::Rational>::convert
 winrt::Windows::Foundation::Numerics::Rational py::converter<winrt::Windows::Foundation::Numerics::Rational>::convert_to(PyObject* obj)
 {
     throw_if_pyobj_null(obj);
+    
     if (Py_TYPE(obj) == py::get_python_type<winrt::Windows::Foundation::Numerics::Rational>())
     {
         return reinterpret_cast<py::winrt_struct_wrapper<winrt::Windows::Foundation::Numerics::Rational>*>(obj)->obj;
@@ -1416,18 +1462,22 @@ winrt::Windows::Foundation::Numerics::Rational py::converter<winrt::Windows::Fou
     }
     
     winrt::Windows::Foundation::Numerics::Rational new_value{};
-    PyObject* pyNumerator = PyDict_GetItemString(obj, "Numerator");
-    if (!pyNumerator) { throw winrt::hresult_invalid_argument(); }
-    new_value.Numerator = converter<uint32_t>::convert_to(pyNumerator);
-    PyObject* pyDenominator = PyDict_GetItemString(obj, "Denominator");
-    if (!pyDenominator) { throw winrt::hresult_invalid_argument(); }
-    new_value.Denominator = converter<uint32_t>::convert_to(pyDenominator);
+    
+    PyObject* py_Numerator = PyDict_GetItemString(obj, "Numerator");
+    if (!py_Numerator) { throw winrt::hresult_invalid_argument(); }
+    new_value.Numerator = converter<uint32_t>::convert_to(py_Numerator);
+    
+    PyObject* py_Denominator = PyDict_GetItemString(obj, "Denominator");
+    if (!py_Denominator) { throw winrt::hresult_invalid_argument(); }
+    new_value.Denominator = converter<uint32_t>::convert_to(py_Denominator);
+    
     return new_value;
 }
 
 PyObject* Rational_new(PyTypeObject* type, PyObject* args, PyObject* kwds)
 {
     auto tuple_size = PyTuple_Size(args);
+    
     if ((tuple_size == 0) && (kwds == nullptr))
     {
         try
@@ -1439,7 +1489,7 @@ PyObject* Rational_new(PyTypeObject* type, PyObject* args, PyObject* kwds)
         {
             return py::to_PyErr();
         }
-    }
+    };
     
     if ((tuple_size == 1) && (kwds == nullptr))
     {
@@ -1448,20 +1498,20 @@ PyObject* Rational_new(PyTypeObject* type, PyObject* args, PyObject* kwds)
         {
             try
             {
-                auto instance = py::converter<winrt::Windows::Foundation::Numerics::Rational>::convert_to(arg); 
+                auto instance = py::converter<winrt::Windows::Foundation::Numerics::Rational>::convert_to(arg);
                 return py::wrap_struct(instance, type);
             }
             catch (...)
             {
                 return py::to_PyErr();
             }
-        }
-    }
+        };
+    };
     
     uint32_t _Numerator{};
     uint32_t _Denominator{};
-    static char* kwlist[] = {"Numerator", "Denominator", nullptr};
     
+    static char* kwlist[] = {"Numerator", "Denominator", nullptr};
     if (!PyArg_ParseTupleAndKeywords(args, kwds, "II", kwlist, &_Numerator, &_Denominator))
     {
         return nullptr;
@@ -1563,6 +1613,7 @@ static PyType_Spec Rational_Type_spec =
 };
 
 // ----- Vector2 struct --------------------
+
 PyTypeObject* py::winrt_type<winrt::Windows::Foundation::Numerics::float2>::python_type;
 
 PyObject* py::converter<winrt::Windows::Foundation::Numerics::float2>::convert(winrt::Windows::Foundation::Numerics::float2 instance) noexcept
@@ -1573,6 +1624,7 @@ PyObject* py::converter<winrt::Windows::Foundation::Numerics::float2>::convert(w
 winrt::Windows::Foundation::Numerics::float2 py::converter<winrt::Windows::Foundation::Numerics::float2>::convert_to(PyObject* obj)
 {
     throw_if_pyobj_null(obj);
+    
     if (Py_TYPE(obj) == py::get_python_type<winrt::Windows::Foundation::Numerics::float2>())
     {
         return reinterpret_cast<py::winrt_struct_wrapper<winrt::Windows::Foundation::Numerics::float2>*>(obj)->obj;
@@ -1584,18 +1636,22 @@ winrt::Windows::Foundation::Numerics::float2 py::converter<winrt::Windows::Found
     }
     
     winrt::Windows::Foundation::Numerics::float2 new_value{};
-    PyObject* pyx = PyDict_GetItemString(obj, "X");
-    if (!pyx) { throw winrt::hresult_invalid_argument(); }
-    new_value.x = converter<float>::convert_to(pyx);
-    PyObject* pyy = PyDict_GetItemString(obj, "Y");
-    if (!pyy) { throw winrt::hresult_invalid_argument(); }
-    new_value.y = converter<float>::convert_to(pyy);
+    
+    PyObject* py_x = PyDict_GetItemString(obj, "X");
+    if (!py_x) { throw winrt::hresult_invalid_argument(); }
+    new_value.x = converter<float>::convert_to(py_x);
+    
+    PyObject* py_y = PyDict_GetItemString(obj, "Y");
+    if (!py_y) { throw winrt::hresult_invalid_argument(); }
+    new_value.y = converter<float>::convert_to(py_y);
+    
     return new_value;
 }
 
 PyObject* Vector2_new(PyTypeObject* type, PyObject* args, PyObject* kwds)
 {
     auto tuple_size = PyTuple_Size(args);
+    
     if ((tuple_size == 0) && (kwds == nullptr))
     {
         try
@@ -1607,7 +1663,7 @@ PyObject* Vector2_new(PyTypeObject* type, PyObject* args, PyObject* kwds)
         {
             return py::to_PyErr();
         }
-    }
+    };
     
     if ((tuple_size == 1) && (kwds == nullptr))
     {
@@ -1616,20 +1672,20 @@ PyObject* Vector2_new(PyTypeObject* type, PyObject* args, PyObject* kwds)
         {
             try
             {
-                auto instance = py::converter<winrt::Windows::Foundation::Numerics::float2>::convert_to(arg); 
+                auto instance = py::converter<winrt::Windows::Foundation::Numerics::float2>::convert_to(arg);
                 return py::wrap_struct(instance, type);
             }
             catch (...)
             {
                 return py::to_PyErr();
             }
-        }
-    }
+        };
+    };
     
     float _X{};
     float _Y{};
-    static char* kwlist[] = {"X", "Y", nullptr};
     
+    static char* kwlist[] = {"X", "Y", nullptr};
     if (!PyArg_ParseTupleAndKeywords(args, kwds, "ff", kwlist, &_X, &_Y))
     {
         return nullptr;
@@ -1731,6 +1787,7 @@ static PyType_Spec Vector2_Type_spec =
 };
 
 // ----- Vector3 struct --------------------
+
 PyTypeObject* py::winrt_type<winrt::Windows::Foundation::Numerics::float3>::python_type;
 
 PyObject* py::converter<winrt::Windows::Foundation::Numerics::float3>::convert(winrt::Windows::Foundation::Numerics::float3 instance) noexcept
@@ -1741,6 +1798,7 @@ PyObject* py::converter<winrt::Windows::Foundation::Numerics::float3>::convert(w
 winrt::Windows::Foundation::Numerics::float3 py::converter<winrt::Windows::Foundation::Numerics::float3>::convert_to(PyObject* obj)
 {
     throw_if_pyobj_null(obj);
+    
     if (Py_TYPE(obj) == py::get_python_type<winrt::Windows::Foundation::Numerics::float3>())
     {
         return reinterpret_cast<py::winrt_struct_wrapper<winrt::Windows::Foundation::Numerics::float3>*>(obj)->obj;
@@ -1752,21 +1810,26 @@ winrt::Windows::Foundation::Numerics::float3 py::converter<winrt::Windows::Found
     }
     
     winrt::Windows::Foundation::Numerics::float3 new_value{};
-    PyObject* pyx = PyDict_GetItemString(obj, "X");
-    if (!pyx) { throw winrt::hresult_invalid_argument(); }
-    new_value.x = converter<float>::convert_to(pyx);
-    PyObject* pyy = PyDict_GetItemString(obj, "Y");
-    if (!pyy) { throw winrt::hresult_invalid_argument(); }
-    new_value.y = converter<float>::convert_to(pyy);
-    PyObject* pyz = PyDict_GetItemString(obj, "Z");
-    if (!pyz) { throw winrt::hresult_invalid_argument(); }
-    new_value.z = converter<float>::convert_to(pyz);
+    
+    PyObject* py_x = PyDict_GetItemString(obj, "X");
+    if (!py_x) { throw winrt::hresult_invalid_argument(); }
+    new_value.x = converter<float>::convert_to(py_x);
+    
+    PyObject* py_y = PyDict_GetItemString(obj, "Y");
+    if (!py_y) { throw winrt::hresult_invalid_argument(); }
+    new_value.y = converter<float>::convert_to(py_y);
+    
+    PyObject* py_z = PyDict_GetItemString(obj, "Z");
+    if (!py_z) { throw winrt::hresult_invalid_argument(); }
+    new_value.z = converter<float>::convert_to(py_z);
+    
     return new_value;
 }
 
 PyObject* Vector3_new(PyTypeObject* type, PyObject* args, PyObject* kwds)
 {
     auto tuple_size = PyTuple_Size(args);
+    
     if ((tuple_size == 0) && (kwds == nullptr))
     {
         try
@@ -1778,7 +1841,7 @@ PyObject* Vector3_new(PyTypeObject* type, PyObject* args, PyObject* kwds)
         {
             return py::to_PyErr();
         }
-    }
+    };
     
     if ((tuple_size == 1) && (kwds == nullptr))
     {
@@ -1787,21 +1850,21 @@ PyObject* Vector3_new(PyTypeObject* type, PyObject* args, PyObject* kwds)
         {
             try
             {
-                auto instance = py::converter<winrt::Windows::Foundation::Numerics::float3>::convert_to(arg); 
+                auto instance = py::converter<winrt::Windows::Foundation::Numerics::float3>::convert_to(arg);
                 return py::wrap_struct(instance, type);
             }
             catch (...)
             {
                 return py::to_PyErr();
             }
-        }
-    }
+        };
+    };
     
     float _X{};
     float _Y{};
     float _Z{};
-    static char* kwlist[] = {"X", "Y", "Z", nullptr};
     
+    static char* kwlist[] = {"X", "Y", "Z", nullptr};
     if (!PyArg_ParseTupleAndKeywords(args, kwds, "fff", kwlist, &_X, &_Y, &_Z))
     {
         return nullptr;
@@ -1935,6 +1998,7 @@ static PyType_Spec Vector3_Type_spec =
 };
 
 // ----- Vector4 struct --------------------
+
 PyTypeObject* py::winrt_type<winrt::Windows::Foundation::Numerics::float4>::python_type;
 
 PyObject* py::converter<winrt::Windows::Foundation::Numerics::float4>::convert(winrt::Windows::Foundation::Numerics::float4 instance) noexcept
@@ -1945,6 +2009,7 @@ PyObject* py::converter<winrt::Windows::Foundation::Numerics::float4>::convert(w
 winrt::Windows::Foundation::Numerics::float4 py::converter<winrt::Windows::Foundation::Numerics::float4>::convert_to(PyObject* obj)
 {
     throw_if_pyobj_null(obj);
+    
     if (Py_TYPE(obj) == py::get_python_type<winrt::Windows::Foundation::Numerics::float4>())
     {
         return reinterpret_cast<py::winrt_struct_wrapper<winrt::Windows::Foundation::Numerics::float4>*>(obj)->obj;
@@ -1956,24 +2021,30 @@ winrt::Windows::Foundation::Numerics::float4 py::converter<winrt::Windows::Found
     }
     
     winrt::Windows::Foundation::Numerics::float4 new_value{};
-    PyObject* pyx = PyDict_GetItemString(obj, "X");
-    if (!pyx) { throw winrt::hresult_invalid_argument(); }
-    new_value.x = converter<float>::convert_to(pyx);
-    PyObject* pyy = PyDict_GetItemString(obj, "Y");
-    if (!pyy) { throw winrt::hresult_invalid_argument(); }
-    new_value.y = converter<float>::convert_to(pyy);
-    PyObject* pyz = PyDict_GetItemString(obj, "Z");
-    if (!pyz) { throw winrt::hresult_invalid_argument(); }
-    new_value.z = converter<float>::convert_to(pyz);
-    PyObject* pyw = PyDict_GetItemString(obj, "W");
-    if (!pyw) { throw winrt::hresult_invalid_argument(); }
-    new_value.w = converter<float>::convert_to(pyw);
+    
+    PyObject* py_x = PyDict_GetItemString(obj, "X");
+    if (!py_x) { throw winrt::hresult_invalid_argument(); }
+    new_value.x = converter<float>::convert_to(py_x);
+    
+    PyObject* py_y = PyDict_GetItemString(obj, "Y");
+    if (!py_y) { throw winrt::hresult_invalid_argument(); }
+    new_value.y = converter<float>::convert_to(py_y);
+    
+    PyObject* py_z = PyDict_GetItemString(obj, "Z");
+    if (!py_z) { throw winrt::hresult_invalid_argument(); }
+    new_value.z = converter<float>::convert_to(py_z);
+    
+    PyObject* py_w = PyDict_GetItemString(obj, "W");
+    if (!py_w) { throw winrt::hresult_invalid_argument(); }
+    new_value.w = converter<float>::convert_to(py_w);
+    
     return new_value;
 }
 
 PyObject* Vector4_new(PyTypeObject* type, PyObject* args, PyObject* kwds)
 {
     auto tuple_size = PyTuple_Size(args);
+    
     if ((tuple_size == 0) && (kwds == nullptr))
     {
         try
@@ -1985,7 +2056,7 @@ PyObject* Vector4_new(PyTypeObject* type, PyObject* args, PyObject* kwds)
         {
             return py::to_PyErr();
         }
-    }
+    };
     
     if ((tuple_size == 1) && (kwds == nullptr))
     {
@@ -1994,22 +2065,22 @@ PyObject* Vector4_new(PyTypeObject* type, PyObject* args, PyObject* kwds)
         {
             try
             {
-                auto instance = py::converter<winrt::Windows::Foundation::Numerics::float4>::convert_to(arg); 
+                auto instance = py::converter<winrt::Windows::Foundation::Numerics::float4>::convert_to(arg);
                 return py::wrap_struct(instance, type);
             }
             catch (...)
             {
                 return py::to_PyErr();
             }
-        }
-    }
+        };
+    };
     
     float _X{};
     float _Y{};
     float _Z{};
     float _W{};
-    static char* kwlist[] = {"X", "Y", "Z", "W", nullptr};
     
+    static char* kwlist[] = {"X", "Y", "Z", "W", nullptr};
     if (!PyArg_ParseTupleAndKeywords(args, kwds, "ffff", kwlist, &_X, &_Y, &_Z, &_W))
     {
         return nullptr;
@@ -2176,7 +2247,7 @@ static PyType_Spec Vector4_Type_spec =
 
 // ----- Windows.Foundation.Numerics Initialization --------------------
 
-int initialize_Windows_Foundation_Numerics(PyObject* module)
+static int module_exec(PyObject* module)
 {
     PyObject* type_object{ nullptr };
     PyObject* bases = PyTuple_Pack(1, py::winrt_type<py::winrt_base>::python_type);
@@ -2290,13 +2361,13 @@ int initialize_Windows_Foundation_Numerics(PyObject* module)
 }
 
 static PyModuleDef_Slot module_slots[] = {
-    {Py_mod_exec, initialize_Windows_Foundation_Numerics},
+    {Py_mod_exec, module_exec},
     {0, nullptr}
 };
 
-PyDoc_STRVAR(module_doc, "Langworthy projection module.\n");
+PyDoc_STRVAR(module_doc, "Windows.Foundation.Numerics");
 
-static struct PyModuleDef module_def = {
+static PyModuleDef module_def = {
     PyModuleDef_HEAD_INIT,
     "_pyrt_Windows_Foundation_Numerics",
     module_doc,

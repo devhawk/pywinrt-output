@@ -3,12 +3,12 @@
 #pragma once
 
 #include "pybase.h"
+
 #if __has_include("py.Windows.Foundation.Collections.h")
 #include "py.Windows.Foundation.Collections.h"
 #endif
 
 #include <winrt/Windows.Foundation.h>
-
 
 struct pyAsyncActionCompletedHandler
 {
@@ -18,22 +18,20 @@ struct pyAsyncActionCompletedHandler
         {
             throw winrt::hresult_invalid_argument();
         }
-
+        
         // TODO: How do I manage callable lifetime here?
-        return [callable](auto param1, auto param2)
+        return [callable](auto param0, auto param1)
         {
-            PyObject* pyObj1 = py::convert(param1);
-            PyObject* pyObj2 = py::convert(param2);
-
-            PyObject* args = PyTuple_Pack(2, pyObj1, pyObj2);
-
-            // TODO: RAII for GILState
-            PyGILState_STATE gstate;
-            gstate = PyGILState_Ensure();
+            winrt::handle_type<py::gil_state_traits> gil_state{ PyGILState_Ensure() };
+            
+            PyObject* py_param0 = py::convert(param0);
+            PyObject* py_param1 = py::convert(param1);
+            
+            PyObject* args = PyTuple_Pack(2, py_param0, py_param1);
+            
             PyObject_CallObject(callable, args);
-            PyGILState_Release(gstate);
         };
-    }
+    };
 };
 
 template <typename TProgress>
@@ -45,22 +43,20 @@ struct pyAsyncActionProgressHandler
         {
             throw winrt::hresult_invalid_argument();
         }
-
+        
         // TODO: How do I manage callable lifetime here?
-        return [callable](auto param1, auto param2)
+        return [callable](auto param0, auto param1)
         {
-            PyObject* pyObj1 = py::convert(param1);
-            PyObject* pyObj2 = py::convert(param2);
-
-            PyObject* args = PyTuple_Pack(2, pyObj1, pyObj2);
-
-            // TODO: RAII for GILState
-            PyGILState_STATE gstate;
-            gstate = PyGILState_Ensure();
+            winrt::handle_type<py::gil_state_traits> gil_state{ PyGILState_Ensure() };
+            
+            PyObject* py_param0 = py::convert(param0);
+            PyObject* py_param1 = py::convert(param1);
+            
+            PyObject* args = PyTuple_Pack(2, py_param0, py_param1);
+            
             PyObject_CallObject(callable, args);
-            PyGILState_Release(gstate);
         };
-    }
+    };
 };
 
 template <typename TProgress>
@@ -72,22 +68,20 @@ struct pyAsyncActionWithProgressCompletedHandler
         {
             throw winrt::hresult_invalid_argument();
         }
-
+        
         // TODO: How do I manage callable lifetime here?
-        return [callable](auto param1, auto param2)
+        return [callable](auto param0, auto param1)
         {
-            PyObject* pyObj1 = py::convert(param1);
-            PyObject* pyObj2 = py::convert(param2);
-
-            PyObject* args = PyTuple_Pack(2, pyObj1, pyObj2);
-
-            // TODO: RAII for GILState
-            PyGILState_STATE gstate;
-            gstate = PyGILState_Ensure();
+            winrt::handle_type<py::gil_state_traits> gil_state{ PyGILState_Ensure() };
+            
+            PyObject* py_param0 = py::convert(param0);
+            PyObject* py_param1 = py::convert(param1);
+            
+            PyObject* args = PyTuple_Pack(2, py_param0, py_param1);
+            
             PyObject_CallObject(callable, args);
-            PyGILState_Release(gstate);
         };
-    }
+    };
 };
 
 template <typename TResult>
@@ -99,22 +93,20 @@ struct pyAsyncOperationCompletedHandler
         {
             throw winrt::hresult_invalid_argument();
         }
-
+        
         // TODO: How do I manage callable lifetime here?
-        return [callable](auto param1, auto param2)
+        return [callable](auto param0, auto param1)
         {
-            PyObject* pyObj1 = py::convert(param1);
-            PyObject* pyObj2 = py::convert(param2);
-
-            PyObject* args = PyTuple_Pack(2, pyObj1, pyObj2);
-
-            // TODO: RAII for GILState
-            PyGILState_STATE gstate;
-            gstate = PyGILState_Ensure();
+            winrt::handle_type<py::gil_state_traits> gil_state{ PyGILState_Ensure() };
+            
+            PyObject* py_param0 = py::convert(param0);
+            PyObject* py_param1 = py::convert(param1);
+            
+            PyObject* args = PyTuple_Pack(2, py_param0, py_param1);
+            
             PyObject_CallObject(callable, args);
-            PyGILState_Release(gstate);
         };
-    }
+    };
 };
 
 template <typename TResult, typename TProgress>
@@ -126,22 +118,20 @@ struct pyAsyncOperationProgressHandler
         {
             throw winrt::hresult_invalid_argument();
         }
-
+        
         // TODO: How do I manage callable lifetime here?
-        return [callable](auto param1, auto param2)
+        return [callable](auto param0, auto param1)
         {
-            PyObject* pyObj1 = py::convert(param1);
-            PyObject* pyObj2 = py::convert(param2);
-
-            PyObject* args = PyTuple_Pack(2, pyObj1, pyObj2);
-
-            // TODO: RAII for GILState
-            PyGILState_STATE gstate;
-            gstate = PyGILState_Ensure();
+            winrt::handle_type<py::gil_state_traits> gil_state{ PyGILState_Ensure() };
+            
+            PyObject* py_param0 = py::convert(param0);
+            PyObject* py_param1 = py::convert(param1);
+            
+            PyObject* args = PyTuple_Pack(2, py_param0, py_param1);
+            
             PyObject_CallObject(callable, args);
-            PyGILState_Release(gstate);
         };
-    }
+    };
 };
 
 template <typename TResult, typename TProgress>
@@ -153,22 +143,20 @@ struct pyAsyncOperationWithProgressCompletedHandler
         {
             throw winrt::hresult_invalid_argument();
         }
-
+        
         // TODO: How do I manage callable lifetime here?
-        return [callable](auto param1, auto param2)
+        return [callable](auto param0, auto param1)
         {
-            PyObject* pyObj1 = py::convert(param1);
-            PyObject* pyObj2 = py::convert(param2);
-
-            PyObject* args = PyTuple_Pack(2, pyObj1, pyObj2);
-
-            // TODO: RAII for GILState
-            PyGILState_STATE gstate;
-            gstate = PyGILState_Ensure();
+            winrt::handle_type<py::gil_state_traits> gil_state{ PyGILState_Ensure() };
+            
+            PyObject* py_param0 = py::convert(param0);
+            PyObject* py_param1 = py::convert(param1);
+            
+            PyObject* args = PyTuple_Pack(2, py_param0, py_param1);
+            
             PyObject_CallObject(callable, args);
-            PyGILState_Release(gstate);
         };
-    }
+    };
 };
 
 struct pyDeferralCompletedHandler
@@ -179,20 +167,17 @@ struct pyDeferralCompletedHandler
         {
             throw winrt::hresult_invalid_argument();
         }
-
+        
         // TODO: How do I manage callable lifetime here?
         return [callable]()
         {
-
-            PyObject* args = PyTuple_Pack(0);
-
-            // TODO: RAII for GILState
-            PyGILState_STATE gstate;
-            gstate = PyGILState_Ensure();
+            winrt::handle_type<py::gil_state_traits> gil_state{ PyGILState_Ensure() };
+            
+            PyObject* args = nullptr;
+            
             PyObject_CallObject(callable, args);
-            PyGILState_Release(gstate);
         };
-    }
+    };
 };
 
 template <typename T>
@@ -204,22 +189,20 @@ struct pyEventHandler
         {
             throw winrt::hresult_invalid_argument();
         }
-
+        
         // TODO: How do I manage callable lifetime here?
-        return [callable](auto param1, auto param2)
+        return [callable](auto param0, auto param1)
         {
-            PyObject* pyObj1 = py::convert(param1);
-            PyObject* pyObj2 = py::convert(param2);
-
-            PyObject* args = PyTuple_Pack(2, pyObj1, pyObj2);
-
-            // TODO: RAII for GILState
-            PyGILState_STATE gstate;
-            gstate = PyGILState_Ensure();
+            winrt::handle_type<py::gil_state_traits> gil_state{ PyGILState_Ensure() };
+            
+            PyObject* py_param0 = py::convert(param0);
+            PyObject* py_param1 = py::convert(param1);
+            
+            PyObject* args = PyTuple_Pack(2, py_param0, py_param1);
+            
             PyObject_CallObject(callable, args);
-            PyGILState_Release(gstate);
         };
-    }
+    };
 };
 
 template <typename TSender, typename TResult>
@@ -231,22 +214,20 @@ struct pyTypedEventHandler
         {
             throw winrt::hresult_invalid_argument();
         }
-
+        
         // TODO: How do I manage callable lifetime here?
-        return [callable](auto param1, auto param2)
+        return [callable](auto param0, auto param1)
         {
-            PyObject* pyObj1 = py::convert(param1);
-            PyObject* pyObj2 = py::convert(param2);
-
-            PyObject* args = PyTuple_Pack(2, pyObj1, pyObj2);
-
-            // TODO: RAII for GILState
-            PyGILState_STATE gstate;
-            gstate = PyGILState_Ensure();
+            winrt::handle_type<py::gil_state_traits> gil_state{ PyGILState_Ensure() };
+            
+            PyObject* py_param0 = py::convert(param0);
+            PyObject* py_param1 = py::convert(param1);
+            
+            PyObject* args = PyTuple_Pack(2, py_param0, py_param1);
+            
             PyObject_CallObject(callable, args);
-            PyGILState_Release(gstate);
         };
-    }
+    };
 };
 
 struct pyIAsyncActionWithProgress
@@ -254,17 +235,172 @@ struct pyIAsyncActionWithProgress
     virtual ~pyIAsyncActionWithProgress() {};
     virtual winrt::Windows::Foundation::IUnknown const& get_unknown() = 0;
     virtual std::size_t hash() = 0;
-
+    
     virtual PyObject* Cancel(PyObject* args) = 0;
     virtual PyObject* Close(PyObject* args) = 0;
     virtual PyObject* GetResults(PyObject* args) = 0;
-    virtual PyObject* get_Completed(PyObject* args) = 0;
-    virtual PyObject* get_ErrorCode(PyObject* args) = 0;
-    virtual PyObject* get_Id(PyObject* args) = 0;
-    virtual PyObject* get_Progress(PyObject* args) = 0;
-    virtual PyObject* get_Status(PyObject* args) = 0;
-    virtual PyObject* put_Completed(PyObject* args) = 0;
-    virtual PyObject* put_Progress(PyObject* args) = 0;
+    virtual PyObject* get_Completed() = 0;
+    virtual PyObject* get_ErrorCode() = 0;
+    virtual PyObject* get_Id() = 0;
+    virtual PyObject* get_Progress() = 0;
+    virtual PyObject* get_Status() = 0;
+    virtual int put_Completed(PyObject* arg) = 0;
+    virtual int put_Progress(PyObject* arg) = 0;
+};
+
+template<typename TProgress>
+struct pyIAsyncActionWithProgressImpl : public pyIAsyncActionWithProgress
+{
+    pyIAsyncActionWithProgressImpl(winrt::Windows::Foundation::IAsyncActionWithProgress<TProgress> o) : obj(o) {}
+    winrt::Windows::Foundation::IUnknown const& get_unknown() override { return obj; }
+    std::size_t hash() override { return py::get_instance_hash(obj); }
+    
+    PyObject* Cancel(PyObject* args) override
+    {
+        try
+        {
+            obj.Cancel();
+            
+            Py_RETURN_NONE;
+        }
+        catch (...)
+        {
+            return  py::to_PyErr();
+        }
+    };
+    
+    PyObject* Close(PyObject* args) override
+    {
+        try
+        {
+            obj.Close();
+            
+            Py_RETURN_NONE;
+        }
+        catch (...)
+        {
+            return  py::to_PyErr();
+        }
+    };
+    
+    PyObject* GetResults(PyObject* args) override
+    {
+        try
+        {
+            obj.GetResults();
+            
+            Py_RETURN_NONE;
+        }
+        catch (...)
+        {
+            return  py::to_PyErr();
+        }
+    };
+    
+    PyObject* get_Completed() override
+    {
+        try
+        {
+            winrt::Windows::Foundation::AsyncActionWithProgressCompletedHandler<TProgress> return_value = obj.Completed();
+            
+            return py::convert(return_value);
+        }
+        catch (...)
+        {
+            return  py::to_PyErr();
+        }
+    };
+    
+    PyObject* get_ErrorCode() override
+    {
+        try
+        {
+            winrt::hresult return_value = obj.ErrorCode();
+            
+            return py::convert(return_value);
+        }
+        catch (...)
+        {
+            return  py::to_PyErr();
+        }
+    };
+    
+    PyObject* get_Id() override
+    {
+        try
+        {
+            uint32_t return_value = obj.Id();
+            
+            return py::convert(return_value);
+        }
+        catch (...)
+        {
+            return  py::to_PyErr();
+        }
+    };
+    
+    PyObject* get_Progress() override
+    {
+        try
+        {
+            winrt::Windows::Foundation::AsyncActionProgressHandler<TProgress> return_value = obj.Progress();
+            
+            return py::convert(return_value);
+        }
+        catch (...)
+        {
+            return  py::to_PyErr();
+        }
+    };
+    
+    PyObject* get_Status() override
+    {
+        try
+        {
+            winrt::Windows::Foundation::AsyncStatus return_value = obj.Status();
+            
+            return py::convert(return_value);
+        }
+        catch (...)
+        {
+            return  py::to_PyErr();
+        }
+    };
+    
+    int put_Completed(PyObject* arg) override
+    {
+        try
+        {
+            auto param0 = py::converter<winrt::Windows::Foundation::AsyncActionWithProgressCompletedHandler<TProgress>>::convert_to(arg);
+            
+            obj.Completed(param0);
+            
+            return 0;
+        }
+        catch (...)
+        {
+            return -1;
+        }
+    };
+    
+    int put_Progress(PyObject* arg) override
+    {
+        try
+        {
+            auto param0 = py::converter<winrt::Windows::Foundation::AsyncActionProgressHandler<TProgress>>::convert_to(arg);
+            
+            obj.Progress(param0);
+            
+            return 0;
+        }
+        catch (...)
+        {
+            return -1;
+        }
+    };
+    
+    
+    winrt::Windows::Foundation::IAsyncActionWithProgress<TProgress> obj{ nullptr };
 };
 
 struct pyIAsyncOperationWithProgress
@@ -272,17 +408,172 @@ struct pyIAsyncOperationWithProgress
     virtual ~pyIAsyncOperationWithProgress() {};
     virtual winrt::Windows::Foundation::IUnknown const& get_unknown() = 0;
     virtual std::size_t hash() = 0;
-
+    
     virtual PyObject* Cancel(PyObject* args) = 0;
     virtual PyObject* Close(PyObject* args) = 0;
     virtual PyObject* GetResults(PyObject* args) = 0;
-    virtual PyObject* get_Completed(PyObject* args) = 0;
-    virtual PyObject* get_ErrorCode(PyObject* args) = 0;
-    virtual PyObject* get_Id(PyObject* args) = 0;
-    virtual PyObject* get_Progress(PyObject* args) = 0;
-    virtual PyObject* get_Status(PyObject* args) = 0;
-    virtual PyObject* put_Completed(PyObject* args) = 0;
-    virtual PyObject* put_Progress(PyObject* args) = 0;
+    virtual PyObject* get_Completed() = 0;
+    virtual PyObject* get_ErrorCode() = 0;
+    virtual PyObject* get_Id() = 0;
+    virtual PyObject* get_Progress() = 0;
+    virtual PyObject* get_Status() = 0;
+    virtual int put_Completed(PyObject* arg) = 0;
+    virtual int put_Progress(PyObject* arg) = 0;
+};
+
+template<typename TResult, typename TProgress>
+struct pyIAsyncOperationWithProgressImpl : public pyIAsyncOperationWithProgress
+{
+    pyIAsyncOperationWithProgressImpl(winrt::Windows::Foundation::IAsyncOperationWithProgress<TResult, TProgress> o) : obj(o) {}
+    winrt::Windows::Foundation::IUnknown const& get_unknown() override { return obj; }
+    std::size_t hash() override { return py::get_instance_hash(obj); }
+    
+    PyObject* Cancel(PyObject* args) override
+    {
+        try
+        {
+            obj.Cancel();
+            
+            Py_RETURN_NONE;
+        }
+        catch (...)
+        {
+            return  py::to_PyErr();
+        }
+    };
+    
+    PyObject* Close(PyObject* args) override
+    {
+        try
+        {
+            obj.Close();
+            
+            Py_RETURN_NONE;
+        }
+        catch (...)
+        {
+            return  py::to_PyErr();
+        }
+    };
+    
+    PyObject* GetResults(PyObject* args) override
+    {
+        try
+        {
+            TResult return_value = obj.GetResults();
+            
+            return py::convert(return_value);
+        }
+        catch (...)
+        {
+            return  py::to_PyErr();
+        }
+    };
+    
+    PyObject* get_Completed() override
+    {
+        try
+        {
+            winrt::Windows::Foundation::AsyncOperationWithProgressCompletedHandler<TResult, TProgress> return_value = obj.Completed();
+            
+            return py::convert(return_value);
+        }
+        catch (...)
+        {
+            return  py::to_PyErr();
+        }
+    };
+    
+    PyObject* get_ErrorCode() override
+    {
+        try
+        {
+            winrt::hresult return_value = obj.ErrorCode();
+            
+            return py::convert(return_value);
+        }
+        catch (...)
+        {
+            return  py::to_PyErr();
+        }
+    };
+    
+    PyObject* get_Id() override
+    {
+        try
+        {
+            uint32_t return_value = obj.Id();
+            
+            return py::convert(return_value);
+        }
+        catch (...)
+        {
+            return  py::to_PyErr();
+        }
+    };
+    
+    PyObject* get_Progress() override
+    {
+        try
+        {
+            winrt::Windows::Foundation::AsyncOperationProgressHandler<TResult, TProgress> return_value = obj.Progress();
+            
+            return py::convert(return_value);
+        }
+        catch (...)
+        {
+            return  py::to_PyErr();
+        }
+    };
+    
+    PyObject* get_Status() override
+    {
+        try
+        {
+            winrt::Windows::Foundation::AsyncStatus return_value = obj.Status();
+            
+            return py::convert(return_value);
+        }
+        catch (...)
+        {
+            return  py::to_PyErr();
+        }
+    };
+    
+    int put_Completed(PyObject* arg) override
+    {
+        try
+        {
+            auto param0 = py::converter<winrt::Windows::Foundation::AsyncOperationWithProgressCompletedHandler<TResult, TProgress>>::convert_to(arg);
+            
+            obj.Completed(param0);
+            
+            return 0;
+        }
+        catch (...)
+        {
+            return -1;
+        }
+    };
+    
+    int put_Progress(PyObject* arg) override
+    {
+        try
+        {
+            auto param0 = py::converter<winrt::Windows::Foundation::AsyncOperationProgressHandler<TResult, TProgress>>::convert_to(arg);
+            
+            obj.Progress(param0);
+            
+            return 0;
+        }
+        catch (...)
+        {
+            return -1;
+        }
+    };
+    
+    
+    winrt::Windows::Foundation::IAsyncOperationWithProgress<TResult, TProgress> obj{ nullptr };
 };
 
 struct pyIAsyncOperation
@@ -290,15 +581,140 @@ struct pyIAsyncOperation
     virtual ~pyIAsyncOperation() {};
     virtual winrt::Windows::Foundation::IUnknown const& get_unknown() = 0;
     virtual std::size_t hash() = 0;
-
+    
     virtual PyObject* Cancel(PyObject* args) = 0;
     virtual PyObject* Close(PyObject* args) = 0;
     virtual PyObject* GetResults(PyObject* args) = 0;
-    virtual PyObject* get_Completed(PyObject* args) = 0;
-    virtual PyObject* get_ErrorCode(PyObject* args) = 0;
-    virtual PyObject* get_Id(PyObject* args) = 0;
-    virtual PyObject* get_Status(PyObject* args) = 0;
-    virtual PyObject* put_Completed(PyObject* args) = 0;
+    virtual PyObject* get_Completed() = 0;
+    virtual PyObject* get_ErrorCode() = 0;
+    virtual PyObject* get_Id() = 0;
+    virtual PyObject* get_Status() = 0;
+    virtual int put_Completed(PyObject* arg) = 0;
+};
+
+template<typename TResult>
+struct pyIAsyncOperationImpl : public pyIAsyncOperation
+{
+    pyIAsyncOperationImpl(winrt::Windows::Foundation::IAsyncOperation<TResult> o) : obj(o) {}
+    winrt::Windows::Foundation::IUnknown const& get_unknown() override { return obj; }
+    std::size_t hash() override { return py::get_instance_hash(obj); }
+    
+    PyObject* Cancel(PyObject* args) override
+    {
+        try
+        {
+            obj.Cancel();
+            
+            Py_RETURN_NONE;
+        }
+        catch (...)
+        {
+            return  py::to_PyErr();
+        }
+    };
+    
+    PyObject* Close(PyObject* args) override
+    {
+        try
+        {
+            obj.Close();
+            
+            Py_RETURN_NONE;
+        }
+        catch (...)
+        {
+            return  py::to_PyErr();
+        }
+    };
+    
+    PyObject* GetResults(PyObject* args) override
+    {
+        try
+        {
+            TResult return_value = obj.GetResults();
+            
+            return py::convert(return_value);
+        }
+        catch (...)
+        {
+            return  py::to_PyErr();
+        }
+    };
+    
+    PyObject* get_Completed() override
+    {
+        try
+        {
+            winrt::Windows::Foundation::AsyncOperationCompletedHandler<TResult> return_value = obj.Completed();
+            
+            return py::convert(return_value);
+        }
+        catch (...)
+        {
+            return  py::to_PyErr();
+        }
+    };
+    
+    PyObject* get_ErrorCode() override
+    {
+        try
+        {
+            winrt::hresult return_value = obj.ErrorCode();
+            
+            return py::convert(return_value);
+        }
+        catch (...)
+        {
+            return  py::to_PyErr();
+        }
+    };
+    
+    PyObject* get_Id() override
+    {
+        try
+        {
+            uint32_t return_value = obj.Id();
+            
+            return py::convert(return_value);
+        }
+        catch (...)
+        {
+            return  py::to_PyErr();
+        }
+    };
+    
+    PyObject* get_Status() override
+    {
+        try
+        {
+            winrt::Windows::Foundation::AsyncStatus return_value = obj.Status();
+            
+            return py::convert(return_value);
+        }
+        catch (...)
+        {
+            return  py::to_PyErr();
+        }
+    };
+    
+    int put_Completed(PyObject* arg) override
+    {
+        try
+        {
+            auto param0 = py::converter<winrt::Windows::Foundation::AsyncOperationCompletedHandler<TResult>>::convert_to(arg);
+            
+            obj.Completed(param0);
+            
+            return 0;
+        }
+        catch (...)
+        {
+            return -1;
+        }
+    };
+    
+    
+    winrt::Windows::Foundation::IAsyncOperation<TResult> obj{ nullptr };
 };
 
 struct pyIReferenceArray
@@ -306,7 +722,7 @@ struct pyIReferenceArray
     virtual ~pyIReferenceArray() {};
     virtual winrt::Windows::Foundation::IUnknown const& get_unknown() = 0;
     virtual std::size_t hash() = 0;
-
+    
     virtual PyObject* GetBoolean(PyObject* args) = 0;
     virtual PyObject* GetBooleanArray(PyObject* args) = 0;
     virtual PyObject* GetChar16(PyObject* args) = 0;
@@ -344,9 +760,636 @@ struct pyIReferenceArray
     virtual PyObject* GetUInt64Array(PyObject* args) = 0;
     virtual PyObject* GetUInt8(PyObject* args) = 0;
     virtual PyObject* GetUInt8Array(PyObject* args) = 0;
-    virtual PyObject* get_IsNumericScalar(PyObject* args) = 0;
-    virtual PyObject* get_Type(PyObject* args) = 0;
-    virtual PyObject* get_Value(PyObject* args) = 0;
+    virtual PyObject* get_IsNumericScalar() = 0;
+    virtual PyObject* get_Type() = 0;
+    virtual PyObject* get_Value() = 0;
+};
+
+template<typename T>
+struct pyIReferenceArrayImpl : public pyIReferenceArray
+{
+    pyIReferenceArrayImpl(winrt::Windows::Foundation::IReferenceArray<T> o) : obj(o) {}
+    winrt::Windows::Foundation::IUnknown const& get_unknown() override { return obj; }
+    std::size_t hash() override { return py::get_instance_hash(obj); }
+    
+    PyObject* GetBoolean(PyObject* args) override
+    {
+        try
+        {
+            bool return_value = obj.GetBoolean();
+            
+            return py::convert(return_value);
+        }
+        catch (...)
+        {
+            return  py::to_PyErr();
+        }
+    };
+    
+    PyObject* GetBooleanArray(PyObject* args) override
+    {
+        try
+        {
+            /*r*/ winrt::com_array<bool> param0 { };
+            
+            obj.GetBooleanArray(param0);
+            
+            PyObject* out_param0 = nullptr; // TODO: receive array impl
+            return PyTuple_Pack(1, out_param0);
+        }
+        catch (...)
+        {
+            return  py::to_PyErr();
+        }
+    };
+    
+    PyObject* GetChar16(PyObject* args) override
+    {
+        try
+        {
+            char16_t return_value = obj.GetChar16();
+            
+            return py::convert(return_value);
+        }
+        catch (...)
+        {
+            return  py::to_PyErr();
+        }
+    };
+    
+    PyObject* GetChar16Array(PyObject* args) override
+    {
+        try
+        {
+            /*r*/ winrt::com_array<char16_t> param0 { };
+            
+            obj.GetChar16Array(param0);
+            
+            PyObject* out_param0 = nullptr; // TODO: receive array impl
+            return PyTuple_Pack(1, out_param0);
+        }
+        catch (...)
+        {
+            return  py::to_PyErr();
+        }
+    };
+    
+    PyObject* GetDateTime(PyObject* args) override
+    {
+        try
+        {
+            winrt::Windows::Foundation::DateTime return_value = obj.GetDateTime();
+            
+            return py::convert(return_value);
+        }
+        catch (...)
+        {
+            return  py::to_PyErr();
+        }
+    };
+    
+    PyObject* GetDateTimeArray(PyObject* args) override
+    {
+        try
+        {
+            /*r*/ winrt::com_array<winrt::Windows::Foundation::DateTime> param0 { };
+            
+            obj.GetDateTimeArray(param0);
+            
+            PyObject* out_param0 = nullptr; // TODO: receive array impl
+            return PyTuple_Pack(1, out_param0);
+        }
+        catch (...)
+        {
+            return  py::to_PyErr();
+        }
+    };
+    
+    PyObject* GetDouble(PyObject* args) override
+    {
+        try
+        {
+            double return_value = obj.GetDouble();
+            
+            return py::convert(return_value);
+        }
+        catch (...)
+        {
+            return  py::to_PyErr();
+        }
+    };
+    
+    PyObject* GetDoubleArray(PyObject* args) override
+    {
+        try
+        {
+            /*r*/ winrt::com_array<double> param0 { };
+            
+            obj.GetDoubleArray(param0);
+            
+            PyObject* out_param0 = nullptr; // TODO: receive array impl
+            return PyTuple_Pack(1, out_param0);
+        }
+        catch (...)
+        {
+            return  py::to_PyErr();
+        }
+    };
+    
+    PyObject* GetGuid(PyObject* args) override
+    {
+        try
+        {
+            winrt::guid return_value = obj.GetGuid();
+            
+            return py::convert(return_value);
+        }
+        catch (...)
+        {
+            return  py::to_PyErr();
+        }
+    };
+    
+    PyObject* GetGuidArray(PyObject* args) override
+    {
+        try
+        {
+            /*r*/ winrt::com_array<winrt::guid> param0 { };
+            
+            obj.GetGuidArray(param0);
+            
+            PyObject* out_param0 = nullptr; // TODO: receive array impl
+            return PyTuple_Pack(1, out_param0);
+        }
+        catch (...)
+        {
+            return  py::to_PyErr();
+        }
+    };
+    
+    PyObject* GetInspectableArray(PyObject* args) override
+    {
+        try
+        {
+            /*r*/ winrt::com_array<winrt::Windows::Foundation::IInspectable> param0 { };
+            
+            obj.GetInspectableArray(param0);
+            
+            PyObject* out_param0 = nullptr; // TODO: receive array impl
+            return PyTuple_Pack(1, out_param0);
+        }
+        catch (...)
+        {
+            return  py::to_PyErr();
+        }
+    };
+    
+    PyObject* GetInt16(PyObject* args) override
+    {
+        try
+        {
+            int16_t return_value = obj.GetInt16();
+            
+            return py::convert(return_value);
+        }
+        catch (...)
+        {
+            return  py::to_PyErr();
+        }
+    };
+    
+    PyObject* GetInt16Array(PyObject* args) override
+    {
+        try
+        {
+            /*r*/ winrt::com_array<int16_t> param0 { };
+            
+            obj.GetInt16Array(param0);
+            
+            PyObject* out_param0 = nullptr; // TODO: receive array impl
+            return PyTuple_Pack(1, out_param0);
+        }
+        catch (...)
+        {
+            return  py::to_PyErr();
+        }
+    };
+    
+    PyObject* GetInt32(PyObject* args) override
+    {
+        try
+        {
+            int32_t return_value = obj.GetInt32();
+            
+            return py::convert(return_value);
+        }
+        catch (...)
+        {
+            return  py::to_PyErr();
+        }
+    };
+    
+    PyObject* GetInt32Array(PyObject* args) override
+    {
+        try
+        {
+            /*r*/ winrt::com_array<int32_t> param0 { };
+            
+            obj.GetInt32Array(param0);
+            
+            PyObject* out_param0 = nullptr; // TODO: receive array impl
+            return PyTuple_Pack(1, out_param0);
+        }
+        catch (...)
+        {
+            return  py::to_PyErr();
+        }
+    };
+    
+    PyObject* GetInt64(PyObject* args) override
+    {
+        try
+        {
+            int64_t return_value = obj.GetInt64();
+            
+            return py::convert(return_value);
+        }
+        catch (...)
+        {
+            return  py::to_PyErr();
+        }
+    };
+    
+    PyObject* GetInt64Array(PyObject* args) override
+    {
+        try
+        {
+            /*r*/ winrt::com_array<int64_t> param0 { };
+            
+            obj.GetInt64Array(param0);
+            
+            PyObject* out_param0 = nullptr; // TODO: receive array impl
+            return PyTuple_Pack(1, out_param0);
+        }
+        catch (...)
+        {
+            return  py::to_PyErr();
+        }
+    };
+    
+    PyObject* GetPoint(PyObject* args) override
+    {
+        try
+        {
+            winrt::Windows::Foundation::Point return_value = obj.GetPoint();
+            
+            return py::convert(return_value);
+        }
+        catch (...)
+        {
+            return  py::to_PyErr();
+        }
+    };
+    
+    PyObject* GetPointArray(PyObject* args) override
+    {
+        try
+        {
+            /*r*/ winrt::com_array<winrt::Windows::Foundation::Point> param0 { };
+            
+            obj.GetPointArray(param0);
+            
+            PyObject* out_param0 = nullptr; // TODO: receive array impl
+            return PyTuple_Pack(1, out_param0);
+        }
+        catch (...)
+        {
+            return  py::to_PyErr();
+        }
+    };
+    
+    PyObject* GetRect(PyObject* args) override
+    {
+        try
+        {
+            winrt::Windows::Foundation::Rect return_value = obj.GetRect();
+            
+            return py::convert(return_value);
+        }
+        catch (...)
+        {
+            return  py::to_PyErr();
+        }
+    };
+    
+    PyObject* GetRectArray(PyObject* args) override
+    {
+        try
+        {
+            /*r*/ winrt::com_array<winrt::Windows::Foundation::Rect> param0 { };
+            
+            obj.GetRectArray(param0);
+            
+            PyObject* out_param0 = nullptr; // TODO: receive array impl
+            return PyTuple_Pack(1, out_param0);
+        }
+        catch (...)
+        {
+            return  py::to_PyErr();
+        }
+    };
+    
+    PyObject* GetSingle(PyObject* args) override
+    {
+        try
+        {
+            float return_value = obj.GetSingle();
+            
+            return py::convert(return_value);
+        }
+        catch (...)
+        {
+            return  py::to_PyErr();
+        }
+    };
+    
+    PyObject* GetSingleArray(PyObject* args) override
+    {
+        try
+        {
+            /*r*/ winrt::com_array<float> param0 { };
+            
+            obj.GetSingleArray(param0);
+            
+            PyObject* out_param0 = nullptr; // TODO: receive array impl
+            return PyTuple_Pack(1, out_param0);
+        }
+        catch (...)
+        {
+            return  py::to_PyErr();
+        }
+    };
+    
+    PyObject* GetSize(PyObject* args) override
+    {
+        try
+        {
+            winrt::Windows::Foundation::Size return_value = obj.GetSize();
+            
+            return py::convert(return_value);
+        }
+        catch (...)
+        {
+            return  py::to_PyErr();
+        }
+    };
+    
+    PyObject* GetSizeArray(PyObject* args) override
+    {
+        try
+        {
+            /*r*/ winrt::com_array<winrt::Windows::Foundation::Size> param0 { };
+            
+            obj.GetSizeArray(param0);
+            
+            PyObject* out_param0 = nullptr; // TODO: receive array impl
+            return PyTuple_Pack(1, out_param0);
+        }
+        catch (...)
+        {
+            return  py::to_PyErr();
+        }
+    };
+    
+    PyObject* GetString(PyObject* args) override
+    {
+        try
+        {
+            winrt::hstring return_value = obj.GetString();
+            
+            return py::convert(return_value);
+        }
+        catch (...)
+        {
+            return  py::to_PyErr();
+        }
+    };
+    
+    PyObject* GetStringArray(PyObject* args) override
+    {
+        try
+        {
+            /*r*/ winrt::com_array<winrt::hstring> param0 { };
+            
+            obj.GetStringArray(param0);
+            
+            PyObject* out_param0 = nullptr; // TODO: receive array impl
+            return PyTuple_Pack(1, out_param0);
+        }
+        catch (...)
+        {
+            return  py::to_PyErr();
+        }
+    };
+    
+    PyObject* GetTimeSpan(PyObject* args) override
+    {
+        try
+        {
+            winrt::Windows::Foundation::TimeSpan return_value = obj.GetTimeSpan();
+            
+            return py::convert(return_value);
+        }
+        catch (...)
+        {
+            return  py::to_PyErr();
+        }
+    };
+    
+    PyObject* GetTimeSpanArray(PyObject* args) override
+    {
+        try
+        {
+            /*r*/ winrt::com_array<winrt::Windows::Foundation::TimeSpan> param0 { };
+            
+            obj.GetTimeSpanArray(param0);
+            
+            PyObject* out_param0 = nullptr; // TODO: receive array impl
+            return PyTuple_Pack(1, out_param0);
+        }
+        catch (...)
+        {
+            return  py::to_PyErr();
+        }
+    };
+    
+    PyObject* GetUInt16(PyObject* args) override
+    {
+        try
+        {
+            uint16_t return_value = obj.GetUInt16();
+            
+            return py::convert(return_value);
+        }
+        catch (...)
+        {
+            return  py::to_PyErr();
+        }
+    };
+    
+    PyObject* GetUInt16Array(PyObject* args) override
+    {
+        try
+        {
+            /*r*/ winrt::com_array<uint16_t> param0 { };
+            
+            obj.GetUInt16Array(param0);
+            
+            PyObject* out_param0 = nullptr; // TODO: receive array impl
+            return PyTuple_Pack(1, out_param0);
+        }
+        catch (...)
+        {
+            return  py::to_PyErr();
+        }
+    };
+    
+    PyObject* GetUInt32(PyObject* args) override
+    {
+        try
+        {
+            uint32_t return_value = obj.GetUInt32();
+            
+            return py::convert(return_value);
+        }
+        catch (...)
+        {
+            return  py::to_PyErr();
+        }
+    };
+    
+    PyObject* GetUInt32Array(PyObject* args) override
+    {
+        try
+        {
+            /*r*/ winrt::com_array<uint32_t> param0 { };
+            
+            obj.GetUInt32Array(param0);
+            
+            PyObject* out_param0 = nullptr; // TODO: receive array impl
+            return PyTuple_Pack(1, out_param0);
+        }
+        catch (...)
+        {
+            return  py::to_PyErr();
+        }
+    };
+    
+    PyObject* GetUInt64(PyObject* args) override
+    {
+        try
+        {
+            uint64_t return_value = obj.GetUInt64();
+            
+            return py::convert(return_value);
+        }
+        catch (...)
+        {
+            return  py::to_PyErr();
+        }
+    };
+    
+    PyObject* GetUInt64Array(PyObject* args) override
+    {
+        try
+        {
+            /*r*/ winrt::com_array<uint64_t> param0 { };
+            
+            obj.GetUInt64Array(param0);
+            
+            PyObject* out_param0 = nullptr; // TODO: receive array impl
+            return PyTuple_Pack(1, out_param0);
+        }
+        catch (...)
+        {
+            return  py::to_PyErr();
+        }
+    };
+    
+    PyObject* GetUInt8(PyObject* args) override
+    {
+        try
+        {
+            uint8_t return_value = obj.GetUInt8();
+            
+            return py::convert(return_value);
+        }
+        catch (...)
+        {
+            return  py::to_PyErr();
+        }
+    };
+    
+    PyObject* GetUInt8Array(PyObject* args) override
+    {
+        try
+        {
+            /*r*/ winrt::com_array<uint8_t> param0 { };
+            
+            obj.GetUInt8Array(param0);
+            
+            PyObject* out_param0 = nullptr; // TODO: receive array impl
+            return PyTuple_Pack(1, out_param0);
+        }
+        catch (...)
+        {
+            return  py::to_PyErr();
+        }
+    };
+    
+    PyObject* get_IsNumericScalar() override
+    {
+        try
+        {
+            bool return_value = obj.IsNumericScalar();
+            
+            return py::convert(return_value);
+        }
+        catch (...)
+        {
+            return  py::to_PyErr();
+        }
+    };
+    
+    PyObject* get_Type() override
+    {
+        try
+        {
+            winrt::Windows::Foundation::PropertyType return_value = obj.Type();
+            
+            return py::convert(return_value);
+        }
+        catch (...)
+        {
+            return  py::to_PyErr();
+        }
+    };
+    
+    PyObject* get_Value() override
+    {
+        try
+        {
+            // returning a ReceiveArray not impl
+            return nullptr;
+        }
+        catch (...)
+        {
+            return  py::to_PyErr();
+        }
+    };
+    
+    
+    winrt::Windows::Foundation::IReferenceArray<T> obj{ nullptr };
 };
 
 struct pyIReference
@@ -354,7 +1397,7 @@ struct pyIReference
     virtual ~pyIReference() {};
     virtual winrt::Windows::Foundation::IUnknown const& get_unknown() = 0;
     virtual std::size_t hash() = 0;
-
+    
     virtual PyObject* GetBoolean(PyObject* args) = 0;
     virtual PyObject* GetBooleanArray(PyObject* args) = 0;
     virtual PyObject* GetChar16(PyObject* args) = 0;
@@ -392,2694 +1435,636 @@ struct pyIReference
     virtual PyObject* GetUInt64Array(PyObject* args) = 0;
     virtual PyObject* GetUInt8(PyObject* args) = 0;
     virtual PyObject* GetUInt8Array(PyObject* args) = 0;
-    virtual PyObject* get_IsNumericScalar(PyObject* args) = 0;
-    virtual PyObject* get_Type(PyObject* args) = 0;
-    virtual PyObject* get_Value(PyObject* args) = 0;
-};
-
-template<typename TProgress>
-struct pyIAsyncActionWithProgressImpl : public pyIAsyncActionWithProgress
-{
-pyIAsyncActionWithProgressImpl(winrt::Windows::Foundation::IAsyncActionWithProgress<TProgress> o) : obj(o) {}
-winrt::Windows::Foundation::IUnknown const& get_unknown() override { return obj; }
-std::size_t hash() override { return py::get_instance_hash(obj); }
-
-PyObject* Cancel(PyObject* args) override
-{
-    Py_ssize_t arg_count = PyTuple_Size(args);
-
-    if (arg_count == 0)
-    {
-        try
-        {
-            obj.Cancel();
-            Py_RETURN_NONE;
-        }
-        catch (...)
-        {
-            return py::to_PyErr();
-        }
-    }
-    else if (arg_count == -1)
-    {
-        return nullptr; 
-    }
-
-    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-    return nullptr;
-}
-
-PyObject* Close(PyObject* args) override
-{
-    Py_ssize_t arg_count = PyTuple_Size(args);
-
-    if (arg_count == 0)
-    {
-        try
-        {
-            obj.Close();
-            Py_RETURN_NONE;
-        }
-        catch (...)
-        {
-            return py::to_PyErr();
-        }
-    }
-    else if (arg_count == -1)
-    {
-        return nullptr; 
-    }
-
-    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-    return nullptr;
-}
-
-PyObject* GetResults(PyObject* args) override
-{
-    Py_ssize_t arg_count = PyTuple_Size(args);
-
-    if (arg_count == 0)
-    {
-        try
-        {
-            obj.GetResults();
-            Py_RETURN_NONE;
-        }
-        catch (...)
-        {
-            return py::to_PyErr();
-        }
-    }
-    else if (arg_count == -1)
-    {
-        return nullptr; 
-    }
-
-    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-    return nullptr;
-}
-
-PyObject* get_Completed(PyObject* args) override
-{
-    if (args != nullptr)
-    {
-        PyErr_SetString(PyExc_TypeError, "arguments not supported for get methods");
-        return nullptr;
-    }
-        try
-        {
-            winrt::Windows::Foundation::AsyncActionWithProgressCompletedHandler<TProgress> return_value = obj.Completed();
-
-            return py::convert(return_value);
-        }
-        catch (...)
-        {
-            return py::to_PyErr();
-        }
-}
-
-PyObject* get_ErrorCode(PyObject* args) override
-{
-    if (args != nullptr)
-    {
-        PyErr_SetString(PyExc_TypeError, "arguments not supported for get methods");
-        return nullptr;
-    }
-        try
-        {
-            winrt::hresult return_value = obj.ErrorCode();
-
-            return py::convert(return_value);
-        }
-        catch (...)
-        {
-            return py::to_PyErr();
-        }
-}
-
-PyObject* get_Id(PyObject* args) override
-{
-    if (args != nullptr)
-    {
-        PyErr_SetString(PyExc_TypeError, "arguments not supported for get methods");
-        return nullptr;
-    }
-        try
-        {
-            uint32_t return_value = obj.Id();
-
-            return py::convert(return_value);
-        }
-        catch (...)
-        {
-            return py::to_PyErr();
-        }
-}
-
-PyObject* get_Progress(PyObject* args) override
-{
-    if (args != nullptr)
-    {
-        PyErr_SetString(PyExc_TypeError, "arguments not supported for get methods");
-        return nullptr;
-    }
-        try
-        {
-            winrt::Windows::Foundation::AsyncActionProgressHandler<TProgress> return_value = obj.Progress();
-
-            return py::convert(return_value);
-        }
-        catch (...)
-        {
-            return py::to_PyErr();
-        }
-}
-
-PyObject* get_Status(PyObject* args) override
-{
-    if (args != nullptr)
-    {
-        PyErr_SetString(PyExc_TypeError, "arguments not supported for get methods");
-        return nullptr;
-    }
-        try
-        {
-            winrt::Windows::Foundation::AsyncStatus return_value = obj.Status();
-
-            return py::convert(return_value);
-        }
-        catch (...)
-        {
-            return py::to_PyErr();
-        }
-}
-
-PyObject* put_Completed(PyObject* args) override
-{
-        try
-        {
-            auto param0 = py::converter<winrt::Windows::Foundation::AsyncActionWithProgressCompletedHandler<TProgress>>::convert_to(args);
-
-            obj.Completed(param0);
-            Py_RETURN_NONE;
-        }
-        catch (...)
-        {
-            return py::to_PyErr();
-        }
-}
-
-PyObject* put_Progress(PyObject* args) override
-{
-        try
-        {
-            auto param0 = py::converter<winrt::Windows::Foundation::AsyncActionProgressHandler<TProgress>>::convert_to(args);
-
-            obj.Progress(param0);
-            Py_RETURN_NONE;
-        }
-        catch (...)
-        {
-            return py::to_PyErr();
-        }
-}
-
-    winrt::Windows::Foundation::IAsyncActionWithProgress<TProgress> obj{ nullptr };
-};
-
-template<typename TResult, typename TProgress>
-struct pyIAsyncOperationWithProgressImpl : public pyIAsyncOperationWithProgress
-{
-pyIAsyncOperationWithProgressImpl(winrt::Windows::Foundation::IAsyncOperationWithProgress<TResult, TProgress> o) : obj(o) {}
-winrt::Windows::Foundation::IUnknown const& get_unknown() override { return obj; }
-std::size_t hash() override { return py::get_instance_hash(obj); }
-
-PyObject* Cancel(PyObject* args) override
-{
-    Py_ssize_t arg_count = PyTuple_Size(args);
-
-    if (arg_count == 0)
-    {
-        try
-        {
-            obj.Cancel();
-            Py_RETURN_NONE;
-        }
-        catch (...)
-        {
-            return py::to_PyErr();
-        }
-    }
-    else if (arg_count == -1)
-    {
-        return nullptr; 
-    }
-
-    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-    return nullptr;
-}
-
-PyObject* Close(PyObject* args) override
-{
-    Py_ssize_t arg_count = PyTuple_Size(args);
-
-    if (arg_count == 0)
-    {
-        try
-        {
-            obj.Close();
-            Py_RETURN_NONE;
-        }
-        catch (...)
-        {
-            return py::to_PyErr();
-        }
-    }
-    else if (arg_count == -1)
-    {
-        return nullptr; 
-    }
-
-    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-    return nullptr;
-}
-
-PyObject* GetResults(PyObject* args) override
-{
-    Py_ssize_t arg_count = PyTuple_Size(args);
-
-    if (arg_count == 0)
-    {
-        try
-        {
-            TResult return_value = obj.GetResults();
-
-            return py::convert(return_value);
-        }
-        catch (...)
-        {
-            return py::to_PyErr();
-        }
-    }
-    else if (arg_count == -1)
-    {
-        return nullptr; 
-    }
-
-    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-    return nullptr;
-}
-
-PyObject* get_Completed(PyObject* args) override
-{
-    if (args != nullptr)
-    {
-        PyErr_SetString(PyExc_TypeError, "arguments not supported for get methods");
-        return nullptr;
-    }
-        try
-        {
-            winrt::Windows::Foundation::AsyncOperationWithProgressCompletedHandler<TResult, TProgress> return_value = obj.Completed();
-
-            return py::convert(return_value);
-        }
-        catch (...)
-        {
-            return py::to_PyErr();
-        }
-}
-
-PyObject* get_ErrorCode(PyObject* args) override
-{
-    if (args != nullptr)
-    {
-        PyErr_SetString(PyExc_TypeError, "arguments not supported for get methods");
-        return nullptr;
-    }
-        try
-        {
-            winrt::hresult return_value = obj.ErrorCode();
-
-            return py::convert(return_value);
-        }
-        catch (...)
-        {
-            return py::to_PyErr();
-        }
-}
-
-PyObject* get_Id(PyObject* args) override
-{
-    if (args != nullptr)
-    {
-        PyErr_SetString(PyExc_TypeError, "arguments not supported for get methods");
-        return nullptr;
-    }
-        try
-        {
-            uint32_t return_value = obj.Id();
-
-            return py::convert(return_value);
-        }
-        catch (...)
-        {
-            return py::to_PyErr();
-        }
-}
-
-PyObject* get_Progress(PyObject* args) override
-{
-    if (args != nullptr)
-    {
-        PyErr_SetString(PyExc_TypeError, "arguments not supported for get methods");
-        return nullptr;
-    }
-        try
-        {
-            winrt::Windows::Foundation::AsyncOperationProgressHandler<TResult, TProgress> return_value = obj.Progress();
-
-            return py::convert(return_value);
-        }
-        catch (...)
-        {
-            return py::to_PyErr();
-        }
-}
-
-PyObject* get_Status(PyObject* args) override
-{
-    if (args != nullptr)
-    {
-        PyErr_SetString(PyExc_TypeError, "arguments not supported for get methods");
-        return nullptr;
-    }
-        try
-        {
-            winrt::Windows::Foundation::AsyncStatus return_value = obj.Status();
-
-            return py::convert(return_value);
-        }
-        catch (...)
-        {
-            return py::to_PyErr();
-        }
-}
-
-PyObject* put_Completed(PyObject* args) override
-{
-        try
-        {
-            auto param0 = py::converter<winrt::Windows::Foundation::AsyncOperationWithProgressCompletedHandler<TResult, TProgress>>::convert_to(args);
-
-            obj.Completed(param0);
-            Py_RETURN_NONE;
-        }
-        catch (...)
-        {
-            return py::to_PyErr();
-        }
-}
-
-PyObject* put_Progress(PyObject* args) override
-{
-        try
-        {
-            auto param0 = py::converter<winrt::Windows::Foundation::AsyncOperationProgressHandler<TResult, TProgress>>::convert_to(args);
-
-            obj.Progress(param0);
-            Py_RETURN_NONE;
-        }
-        catch (...)
-        {
-            return py::to_PyErr();
-        }
-}
-
-    winrt::Windows::Foundation::IAsyncOperationWithProgress<TResult, TProgress> obj{ nullptr };
-};
-
-template<typename TResult>
-struct pyIAsyncOperationImpl : public pyIAsyncOperation
-{
-pyIAsyncOperationImpl(winrt::Windows::Foundation::IAsyncOperation<TResult> o) : obj(o) {}
-winrt::Windows::Foundation::IUnknown const& get_unknown() override { return obj; }
-std::size_t hash() override { return py::get_instance_hash(obj); }
-
-PyObject* Cancel(PyObject* args) override
-{
-    Py_ssize_t arg_count = PyTuple_Size(args);
-
-    if (arg_count == 0)
-    {
-        try
-        {
-            obj.Cancel();
-            Py_RETURN_NONE;
-        }
-        catch (...)
-        {
-            return py::to_PyErr();
-        }
-    }
-    else if (arg_count == -1)
-    {
-        return nullptr; 
-    }
-
-    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-    return nullptr;
-}
-
-PyObject* Close(PyObject* args) override
-{
-    Py_ssize_t arg_count = PyTuple_Size(args);
-
-    if (arg_count == 0)
-    {
-        try
-        {
-            obj.Close();
-            Py_RETURN_NONE;
-        }
-        catch (...)
-        {
-            return py::to_PyErr();
-        }
-    }
-    else if (arg_count == -1)
-    {
-        return nullptr; 
-    }
-
-    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-    return nullptr;
-}
-
-PyObject* GetResults(PyObject* args) override
-{
-    Py_ssize_t arg_count = PyTuple_Size(args);
-
-    if (arg_count == 0)
-    {
-        try
-        {
-            TResult return_value = obj.GetResults();
-
-            return py::convert(return_value);
-        }
-        catch (...)
-        {
-            return py::to_PyErr();
-        }
-    }
-    else if (arg_count == -1)
-    {
-        return nullptr; 
-    }
-
-    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-    return nullptr;
-}
-
-PyObject* get_Completed(PyObject* args) override
-{
-    if (args != nullptr)
-    {
-        PyErr_SetString(PyExc_TypeError, "arguments not supported for get methods");
-        return nullptr;
-    }
-        try
-        {
-            winrt::Windows::Foundation::AsyncOperationCompletedHandler<TResult> return_value = obj.Completed();
-
-            return py::convert(return_value);
-        }
-        catch (...)
-        {
-            return py::to_PyErr();
-        }
-}
-
-PyObject* get_ErrorCode(PyObject* args) override
-{
-    if (args != nullptr)
-    {
-        PyErr_SetString(PyExc_TypeError, "arguments not supported for get methods");
-        return nullptr;
-    }
-        try
-        {
-            winrt::hresult return_value = obj.ErrorCode();
-
-            return py::convert(return_value);
-        }
-        catch (...)
-        {
-            return py::to_PyErr();
-        }
-}
-
-PyObject* get_Id(PyObject* args) override
-{
-    if (args != nullptr)
-    {
-        PyErr_SetString(PyExc_TypeError, "arguments not supported for get methods");
-        return nullptr;
-    }
-        try
-        {
-            uint32_t return_value = obj.Id();
-
-            return py::convert(return_value);
-        }
-        catch (...)
-        {
-            return py::to_PyErr();
-        }
-}
-
-PyObject* get_Status(PyObject* args) override
-{
-    if (args != nullptr)
-    {
-        PyErr_SetString(PyExc_TypeError, "arguments not supported for get methods");
-        return nullptr;
-    }
-        try
-        {
-            winrt::Windows::Foundation::AsyncStatus return_value = obj.Status();
-
-            return py::convert(return_value);
-        }
-        catch (...)
-        {
-            return py::to_PyErr();
-        }
-}
-
-PyObject* put_Completed(PyObject* args) override
-{
-        try
-        {
-            auto param0 = py::converter<winrt::Windows::Foundation::AsyncOperationCompletedHandler<TResult>>::convert_to(args);
-
-            obj.Completed(param0);
-            Py_RETURN_NONE;
-        }
-        catch (...)
-        {
-            return py::to_PyErr();
-        }
-}
-
-    winrt::Windows::Foundation::IAsyncOperation<TResult> obj{ nullptr };
-};
-
-template<typename T>
-struct pyIReferenceArrayImpl : public pyIReferenceArray
-{
-pyIReferenceArrayImpl(winrt::Windows::Foundation::IReferenceArray<T> o) : obj(o) {}
-winrt::Windows::Foundation::IUnknown const& get_unknown() override { return obj; }
-std::size_t hash() override { return py::get_instance_hash(obj); }
-
-PyObject* GetBoolean(PyObject* args) override
-{
-    Py_ssize_t arg_count = PyTuple_Size(args);
-
-    if (arg_count == 0)
-    {
-        try
-        {
-            bool return_value = obj.GetBoolean();
-
-            return py::convert(return_value);
-        }
-        catch (...)
-        {
-            return py::to_PyErr();
-        }
-    }
-    else if (arg_count == -1)
-    {
-        return nullptr; 
-    }
-
-    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-    return nullptr;
-}
-
-PyObject* GetBooleanArray(PyObject* args) override
-{
-    Py_ssize_t arg_count = PyTuple_Size(args);
-
-    if (arg_count == 0)
-    {
-        try
-        {
-            /*r*/ winrt::com_array<bool> param0 { };
-
-            obj.GetBooleanArray(param0);
-            Py_RETURN_NONE;
-        }
-        catch (...)
-        {
-            return py::to_PyErr();
-        }
-    }
-    else if (arg_count == -1)
-    {
-        return nullptr; 
-    }
-
-    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-    return nullptr;
-}
-
-PyObject* GetChar16(PyObject* args) override
-{
-    Py_ssize_t arg_count = PyTuple_Size(args);
-
-    if (arg_count == 0)
-    {
-        try
-        {
-            char16_t return_value = obj.GetChar16();
-
-            return py::convert(return_value);
-        }
-        catch (...)
-        {
-            return py::to_PyErr();
-        }
-    }
-    else if (arg_count == -1)
-    {
-        return nullptr; 
-    }
-
-    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-    return nullptr;
-}
-
-PyObject* GetChar16Array(PyObject* args) override
-{
-    Py_ssize_t arg_count = PyTuple_Size(args);
-
-    if (arg_count == 0)
-    {
-        try
-        {
-            /*r*/ winrt::com_array<char16_t> param0 { };
-
-            obj.GetChar16Array(param0);
-            Py_RETURN_NONE;
-        }
-        catch (...)
-        {
-            return py::to_PyErr();
-        }
-    }
-    else if (arg_count == -1)
-    {
-        return nullptr; 
-    }
-
-    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-    return nullptr;
-}
-
-PyObject* GetDateTime(PyObject* args) override
-{
-    Py_ssize_t arg_count = PyTuple_Size(args);
-
-    if (arg_count == 0)
-    {
-        try
-        {
-            winrt::Windows::Foundation::DateTime return_value = obj.GetDateTime();
-
-            return py::convert(return_value);
-        }
-        catch (...)
-        {
-            return py::to_PyErr();
-        }
-    }
-    else if (arg_count == -1)
-    {
-        return nullptr; 
-    }
-
-    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-    return nullptr;
-}
-
-PyObject* GetDateTimeArray(PyObject* args) override
-{
-    Py_ssize_t arg_count = PyTuple_Size(args);
-
-    if (arg_count == 0)
-    {
-        try
-        {
-            /*r*/ winrt::com_array<winrt::Windows::Foundation::DateTime> param0 { };
-
-            obj.GetDateTimeArray(param0);
-            Py_RETURN_NONE;
-        }
-        catch (...)
-        {
-            return py::to_PyErr();
-        }
-    }
-    else if (arg_count == -1)
-    {
-        return nullptr; 
-    }
-
-    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-    return nullptr;
-}
-
-PyObject* GetDouble(PyObject* args) override
-{
-    Py_ssize_t arg_count = PyTuple_Size(args);
-
-    if (arg_count == 0)
-    {
-        try
-        {
-            double return_value = obj.GetDouble();
-
-            return py::convert(return_value);
-        }
-        catch (...)
-        {
-            return py::to_PyErr();
-        }
-    }
-    else if (arg_count == -1)
-    {
-        return nullptr; 
-    }
-
-    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-    return nullptr;
-}
-
-PyObject* GetDoubleArray(PyObject* args) override
-{
-    Py_ssize_t arg_count = PyTuple_Size(args);
-
-    if (arg_count == 0)
-    {
-        try
-        {
-            /*r*/ winrt::com_array<double> param0 { };
-
-            obj.GetDoubleArray(param0);
-            Py_RETURN_NONE;
-        }
-        catch (...)
-        {
-            return py::to_PyErr();
-        }
-    }
-    else if (arg_count == -1)
-    {
-        return nullptr; 
-    }
-
-    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-    return nullptr;
-}
-
-PyObject* GetGuid(PyObject* args) override
-{
-    Py_ssize_t arg_count = PyTuple_Size(args);
-
-    if (arg_count == 0)
-    {
-        try
-        {
-            winrt::guid return_value = obj.GetGuid();
-
-            return py::convert(return_value);
-        }
-        catch (...)
-        {
-            return py::to_PyErr();
-        }
-    }
-    else if (arg_count == -1)
-    {
-        return nullptr; 
-    }
-
-    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-    return nullptr;
-}
-
-PyObject* GetGuidArray(PyObject* args) override
-{
-    Py_ssize_t arg_count = PyTuple_Size(args);
-
-    if (arg_count == 0)
-    {
-        try
-        {
-            /*r*/ winrt::com_array<winrt::guid> param0 { };
-
-            obj.GetGuidArray(param0);
-            Py_RETURN_NONE;
-        }
-        catch (...)
-        {
-            return py::to_PyErr();
-        }
-    }
-    else if (arg_count == -1)
-    {
-        return nullptr; 
-    }
-
-    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-    return nullptr;
-}
-
-PyObject* GetInspectableArray(PyObject* args) override
-{
-    Py_ssize_t arg_count = PyTuple_Size(args);
-
-    if (arg_count == 0)
-    {
-        try
-        {
-            /*r*/ winrt::com_array<winrt::Windows::Foundation::IInspectable> param0 { };
-
-            obj.GetInspectableArray(param0);
-            Py_RETURN_NONE;
-        }
-        catch (...)
-        {
-            return py::to_PyErr();
-        }
-    }
-    else if (arg_count == -1)
-    {
-        return nullptr; 
-    }
-
-    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-    return nullptr;
-}
-
-PyObject* GetInt16(PyObject* args) override
-{
-    Py_ssize_t arg_count = PyTuple_Size(args);
-
-    if (arg_count == 0)
-    {
-        try
-        {
-            int16_t return_value = obj.GetInt16();
-
-            return py::convert(return_value);
-        }
-        catch (...)
-        {
-            return py::to_PyErr();
-        }
-    }
-    else if (arg_count == -1)
-    {
-        return nullptr; 
-    }
-
-    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-    return nullptr;
-}
-
-PyObject* GetInt16Array(PyObject* args) override
-{
-    Py_ssize_t arg_count = PyTuple_Size(args);
-
-    if (arg_count == 0)
-    {
-        try
-        {
-            /*r*/ winrt::com_array<int16_t> param0 { };
-
-            obj.GetInt16Array(param0);
-            Py_RETURN_NONE;
-        }
-        catch (...)
-        {
-            return py::to_PyErr();
-        }
-    }
-    else if (arg_count == -1)
-    {
-        return nullptr; 
-    }
-
-    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-    return nullptr;
-}
-
-PyObject* GetInt32(PyObject* args) override
-{
-    Py_ssize_t arg_count = PyTuple_Size(args);
-
-    if (arg_count == 0)
-    {
-        try
-        {
-            int32_t return_value = obj.GetInt32();
-
-            return py::convert(return_value);
-        }
-        catch (...)
-        {
-            return py::to_PyErr();
-        }
-    }
-    else if (arg_count == -1)
-    {
-        return nullptr; 
-    }
-
-    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-    return nullptr;
-}
-
-PyObject* GetInt32Array(PyObject* args) override
-{
-    Py_ssize_t arg_count = PyTuple_Size(args);
-
-    if (arg_count == 0)
-    {
-        try
-        {
-            /*r*/ winrt::com_array<int32_t> param0 { };
-
-            obj.GetInt32Array(param0);
-            Py_RETURN_NONE;
-        }
-        catch (...)
-        {
-            return py::to_PyErr();
-        }
-    }
-    else if (arg_count == -1)
-    {
-        return nullptr; 
-    }
-
-    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-    return nullptr;
-}
-
-PyObject* GetInt64(PyObject* args) override
-{
-    Py_ssize_t arg_count = PyTuple_Size(args);
-
-    if (arg_count == 0)
-    {
-        try
-        {
-            int64_t return_value = obj.GetInt64();
-
-            return py::convert(return_value);
-        }
-        catch (...)
-        {
-            return py::to_PyErr();
-        }
-    }
-    else if (arg_count == -1)
-    {
-        return nullptr; 
-    }
-
-    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-    return nullptr;
-}
-
-PyObject* GetInt64Array(PyObject* args) override
-{
-    Py_ssize_t arg_count = PyTuple_Size(args);
-
-    if (arg_count == 0)
-    {
-        try
-        {
-            /*r*/ winrt::com_array<int64_t> param0 { };
-
-            obj.GetInt64Array(param0);
-            Py_RETURN_NONE;
-        }
-        catch (...)
-        {
-            return py::to_PyErr();
-        }
-    }
-    else if (arg_count == -1)
-    {
-        return nullptr; 
-    }
-
-    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-    return nullptr;
-}
-
-PyObject* GetPoint(PyObject* args) override
-{
-    Py_ssize_t arg_count = PyTuple_Size(args);
-
-    if (arg_count == 0)
-    {
-        try
-        {
-            winrt::Windows::Foundation::Point return_value = obj.GetPoint();
-
-            return py::convert(return_value);
-        }
-        catch (...)
-        {
-            return py::to_PyErr();
-        }
-    }
-    else if (arg_count == -1)
-    {
-        return nullptr; 
-    }
-
-    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-    return nullptr;
-}
-
-PyObject* GetPointArray(PyObject* args) override
-{
-    Py_ssize_t arg_count = PyTuple_Size(args);
-
-    if (arg_count == 0)
-    {
-        try
-        {
-            /*r*/ winrt::com_array<winrt::Windows::Foundation::Point> param0 { };
-
-            obj.GetPointArray(param0);
-            Py_RETURN_NONE;
-        }
-        catch (...)
-        {
-            return py::to_PyErr();
-        }
-    }
-    else if (arg_count == -1)
-    {
-        return nullptr; 
-    }
-
-    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-    return nullptr;
-}
-
-PyObject* GetRect(PyObject* args) override
-{
-    Py_ssize_t arg_count = PyTuple_Size(args);
-
-    if (arg_count == 0)
-    {
-        try
-        {
-            winrt::Windows::Foundation::Rect return_value = obj.GetRect();
-
-            return py::convert(return_value);
-        }
-        catch (...)
-        {
-            return py::to_PyErr();
-        }
-    }
-    else if (arg_count == -1)
-    {
-        return nullptr; 
-    }
-
-    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-    return nullptr;
-}
-
-PyObject* GetRectArray(PyObject* args) override
-{
-    Py_ssize_t arg_count = PyTuple_Size(args);
-
-    if (arg_count == 0)
-    {
-        try
-        {
-            /*r*/ winrt::com_array<winrt::Windows::Foundation::Rect> param0 { };
-
-            obj.GetRectArray(param0);
-            Py_RETURN_NONE;
-        }
-        catch (...)
-        {
-            return py::to_PyErr();
-        }
-    }
-    else if (arg_count == -1)
-    {
-        return nullptr; 
-    }
-
-    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-    return nullptr;
-}
-
-PyObject* GetSingle(PyObject* args) override
-{
-    Py_ssize_t arg_count = PyTuple_Size(args);
-
-    if (arg_count == 0)
-    {
-        try
-        {
-            float return_value = obj.GetSingle();
-
-            return py::convert(return_value);
-        }
-        catch (...)
-        {
-            return py::to_PyErr();
-        }
-    }
-    else if (arg_count == -1)
-    {
-        return nullptr; 
-    }
-
-    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-    return nullptr;
-}
-
-PyObject* GetSingleArray(PyObject* args) override
-{
-    Py_ssize_t arg_count = PyTuple_Size(args);
-
-    if (arg_count == 0)
-    {
-        try
-        {
-            /*r*/ winrt::com_array<float> param0 { };
-
-            obj.GetSingleArray(param0);
-            Py_RETURN_NONE;
-        }
-        catch (...)
-        {
-            return py::to_PyErr();
-        }
-    }
-    else if (arg_count == -1)
-    {
-        return nullptr; 
-    }
-
-    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-    return nullptr;
-}
-
-PyObject* GetSize(PyObject* args) override
-{
-    Py_ssize_t arg_count = PyTuple_Size(args);
-
-    if (arg_count == 0)
-    {
-        try
-        {
-            winrt::Windows::Foundation::Size return_value = obj.GetSize();
-
-            return py::convert(return_value);
-        }
-        catch (...)
-        {
-            return py::to_PyErr();
-        }
-    }
-    else if (arg_count == -1)
-    {
-        return nullptr; 
-    }
-
-    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-    return nullptr;
-}
-
-PyObject* GetSizeArray(PyObject* args) override
-{
-    Py_ssize_t arg_count = PyTuple_Size(args);
-
-    if (arg_count == 0)
-    {
-        try
-        {
-            /*r*/ winrt::com_array<winrt::Windows::Foundation::Size> param0 { };
-
-            obj.GetSizeArray(param0);
-            Py_RETURN_NONE;
-        }
-        catch (...)
-        {
-            return py::to_PyErr();
-        }
-    }
-    else if (arg_count == -1)
-    {
-        return nullptr; 
-    }
-
-    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-    return nullptr;
-}
-
-PyObject* GetString(PyObject* args) override
-{
-    Py_ssize_t arg_count = PyTuple_Size(args);
-
-    if (arg_count == 0)
-    {
-        try
-        {
-            winrt::hstring return_value = obj.GetString();
-
-            return py::convert(return_value);
-        }
-        catch (...)
-        {
-            return py::to_PyErr();
-        }
-    }
-    else if (arg_count == -1)
-    {
-        return nullptr; 
-    }
-
-    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-    return nullptr;
-}
-
-PyObject* GetStringArray(PyObject* args) override
-{
-    Py_ssize_t arg_count = PyTuple_Size(args);
-
-    if (arg_count == 0)
-    {
-        try
-        {
-            /*r*/ winrt::com_array<winrt::hstring> param0 { };
-
-            obj.GetStringArray(param0);
-            Py_RETURN_NONE;
-        }
-        catch (...)
-        {
-            return py::to_PyErr();
-        }
-    }
-    else if (arg_count == -1)
-    {
-        return nullptr; 
-    }
-
-    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-    return nullptr;
-}
-
-PyObject* GetTimeSpan(PyObject* args) override
-{
-    Py_ssize_t arg_count = PyTuple_Size(args);
-
-    if (arg_count == 0)
-    {
-        try
-        {
-            winrt::Windows::Foundation::TimeSpan return_value = obj.GetTimeSpan();
-
-            return py::convert(return_value);
-        }
-        catch (...)
-        {
-            return py::to_PyErr();
-        }
-    }
-    else if (arg_count == -1)
-    {
-        return nullptr; 
-    }
-
-    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-    return nullptr;
-}
-
-PyObject* GetTimeSpanArray(PyObject* args) override
-{
-    Py_ssize_t arg_count = PyTuple_Size(args);
-
-    if (arg_count == 0)
-    {
-        try
-        {
-            /*r*/ winrt::com_array<winrt::Windows::Foundation::TimeSpan> param0 { };
-
-            obj.GetTimeSpanArray(param0);
-            Py_RETURN_NONE;
-        }
-        catch (...)
-        {
-            return py::to_PyErr();
-        }
-    }
-    else if (arg_count == -1)
-    {
-        return nullptr; 
-    }
-
-    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-    return nullptr;
-}
-
-PyObject* GetUInt16(PyObject* args) override
-{
-    Py_ssize_t arg_count = PyTuple_Size(args);
-
-    if (arg_count == 0)
-    {
-        try
-        {
-            uint16_t return_value = obj.GetUInt16();
-
-            return py::convert(return_value);
-        }
-        catch (...)
-        {
-            return py::to_PyErr();
-        }
-    }
-    else if (arg_count == -1)
-    {
-        return nullptr; 
-    }
-
-    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-    return nullptr;
-}
-
-PyObject* GetUInt16Array(PyObject* args) override
-{
-    Py_ssize_t arg_count = PyTuple_Size(args);
-
-    if (arg_count == 0)
-    {
-        try
-        {
-            /*r*/ winrt::com_array<uint16_t> param0 { };
-
-            obj.GetUInt16Array(param0);
-            Py_RETURN_NONE;
-        }
-        catch (...)
-        {
-            return py::to_PyErr();
-        }
-    }
-    else if (arg_count == -1)
-    {
-        return nullptr; 
-    }
-
-    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-    return nullptr;
-}
-
-PyObject* GetUInt32(PyObject* args) override
-{
-    Py_ssize_t arg_count = PyTuple_Size(args);
-
-    if (arg_count == 0)
-    {
-        try
-        {
-            uint32_t return_value = obj.GetUInt32();
-
-            return py::convert(return_value);
-        }
-        catch (...)
-        {
-            return py::to_PyErr();
-        }
-    }
-    else if (arg_count == -1)
-    {
-        return nullptr; 
-    }
-
-    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-    return nullptr;
-}
-
-PyObject* GetUInt32Array(PyObject* args) override
-{
-    Py_ssize_t arg_count = PyTuple_Size(args);
-
-    if (arg_count == 0)
-    {
-        try
-        {
-            /*r*/ winrt::com_array<uint32_t> param0 { };
-
-            obj.GetUInt32Array(param0);
-            Py_RETURN_NONE;
-        }
-        catch (...)
-        {
-            return py::to_PyErr();
-        }
-    }
-    else if (arg_count == -1)
-    {
-        return nullptr; 
-    }
-
-    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-    return nullptr;
-}
-
-PyObject* GetUInt64(PyObject* args) override
-{
-    Py_ssize_t arg_count = PyTuple_Size(args);
-
-    if (arg_count == 0)
-    {
-        try
-        {
-            uint64_t return_value = obj.GetUInt64();
-
-            return py::convert(return_value);
-        }
-        catch (...)
-        {
-            return py::to_PyErr();
-        }
-    }
-    else if (arg_count == -1)
-    {
-        return nullptr; 
-    }
-
-    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-    return nullptr;
-}
-
-PyObject* GetUInt64Array(PyObject* args) override
-{
-    Py_ssize_t arg_count = PyTuple_Size(args);
-
-    if (arg_count == 0)
-    {
-        try
-        {
-            /*r*/ winrt::com_array<uint64_t> param0 { };
-
-            obj.GetUInt64Array(param0);
-            Py_RETURN_NONE;
-        }
-        catch (...)
-        {
-            return py::to_PyErr();
-        }
-    }
-    else if (arg_count == -1)
-    {
-        return nullptr; 
-    }
-
-    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-    return nullptr;
-}
-
-PyObject* GetUInt8(PyObject* args) override
-{
-    Py_ssize_t arg_count = PyTuple_Size(args);
-
-    if (arg_count == 0)
-    {
-        try
-        {
-            uint8_t return_value = obj.GetUInt8();
-
-            return py::convert(return_value);
-        }
-        catch (...)
-        {
-            return py::to_PyErr();
-        }
-    }
-    else if (arg_count == -1)
-    {
-        return nullptr; 
-    }
-
-    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-    return nullptr;
-}
-
-PyObject* GetUInt8Array(PyObject* args) override
-{
-    Py_ssize_t arg_count = PyTuple_Size(args);
-
-    if (arg_count == 0)
-    {
-        try
-        {
-            /*r*/ winrt::com_array<uint8_t> param0 { };
-
-            obj.GetUInt8Array(param0);
-            Py_RETURN_NONE;
-        }
-        catch (...)
-        {
-            return py::to_PyErr();
-        }
-    }
-    else if (arg_count == -1)
-    {
-        return nullptr; 
-    }
-
-    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-    return nullptr;
-}
-
-PyObject* get_IsNumericScalar(PyObject* args) override
-{
-    if (args != nullptr)
-    {
-        PyErr_SetString(PyExc_TypeError, "arguments not supported for get methods");
-        return nullptr;
-    }
-        try
-        {
-            bool return_value = obj.IsNumericScalar();
-
-            return py::convert(return_value);
-        }
-        catch (...)
-        {
-            return py::to_PyErr();
-        }
-}
-
-PyObject* get_Type(PyObject* args) override
-{
-    if (args != nullptr)
-    {
-        PyErr_SetString(PyExc_TypeError, "arguments not supported for get methods");
-        return nullptr;
-    }
-        try
-        {
-            winrt::Windows::Foundation::PropertyType return_value = obj.Type();
-
-            return py::convert(return_value);
-        }
-        catch (...)
-        {
-            return py::to_PyErr();
-        }
-}
-
-PyObject* get_Value(PyObject* args) override
-{
-    if (args != nullptr)
-    {
-        PyErr_SetString(PyExc_TypeError, "arguments not supported for get methods");
-        return nullptr;
-    }
-        // returning a ReceiveArray not impl
-        return nullptr;
-}
-
-    winrt::Windows::Foundation::IReferenceArray<T> obj{ nullptr };
+    virtual PyObject* get_IsNumericScalar() = 0;
+    virtual PyObject* get_Type() = 0;
+    virtual PyObject* get_Value() = 0;
 };
 
 template<typename T>
 struct pyIReferenceImpl : public pyIReference
 {
-pyIReferenceImpl(winrt::Windows::Foundation::IReference<T> o) : obj(o) {}
-winrt::Windows::Foundation::IUnknown const& get_unknown() override { return obj; }
-std::size_t hash() override { return py::get_instance_hash(obj); }
-
-PyObject* GetBoolean(PyObject* args) override
-{
-    Py_ssize_t arg_count = PyTuple_Size(args);
-
-    if (arg_count == 0)
+    pyIReferenceImpl(winrt::Windows::Foundation::IReference<T> o) : obj(o) {}
+    winrt::Windows::Foundation::IUnknown const& get_unknown() override { return obj; }
+    std::size_t hash() override { return py::get_instance_hash(obj); }
+    
+    PyObject* GetBoolean(PyObject* args) override
     {
         try
         {
             bool return_value = obj.GetBoolean();
-
+            
             return py::convert(return_value);
         }
         catch (...)
         {
-            return py::to_PyErr();
+            return  py::to_PyErr();
         }
-    }
-    else if (arg_count == -1)
-    {
-        return nullptr; 
-    }
-
-    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-    return nullptr;
-}
-
-PyObject* GetBooleanArray(PyObject* args) override
-{
-    Py_ssize_t arg_count = PyTuple_Size(args);
-
-    if (arg_count == 0)
+    };
+    
+    PyObject* GetBooleanArray(PyObject* args) override
     {
         try
         {
             /*r*/ winrt::com_array<bool> param0 { };
-
+            
             obj.GetBooleanArray(param0);
-            Py_RETURN_NONE;
+            
+            PyObject* out_param0 = nullptr; // TODO: receive array impl
+            return PyTuple_Pack(1, out_param0);
         }
         catch (...)
         {
-            return py::to_PyErr();
+            return  py::to_PyErr();
         }
-    }
-    else if (arg_count == -1)
-    {
-        return nullptr; 
-    }
-
-    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-    return nullptr;
-}
-
-PyObject* GetChar16(PyObject* args) override
-{
-    Py_ssize_t arg_count = PyTuple_Size(args);
-
-    if (arg_count == 0)
+    };
+    
+    PyObject* GetChar16(PyObject* args) override
     {
         try
         {
             char16_t return_value = obj.GetChar16();
-
+            
             return py::convert(return_value);
         }
         catch (...)
         {
-            return py::to_PyErr();
+            return  py::to_PyErr();
         }
-    }
-    else if (arg_count == -1)
-    {
-        return nullptr; 
-    }
-
-    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-    return nullptr;
-}
-
-PyObject* GetChar16Array(PyObject* args) override
-{
-    Py_ssize_t arg_count = PyTuple_Size(args);
-
-    if (arg_count == 0)
+    };
+    
+    PyObject* GetChar16Array(PyObject* args) override
     {
         try
         {
             /*r*/ winrt::com_array<char16_t> param0 { };
-
+            
             obj.GetChar16Array(param0);
-            Py_RETURN_NONE;
+            
+            PyObject* out_param0 = nullptr; // TODO: receive array impl
+            return PyTuple_Pack(1, out_param0);
         }
         catch (...)
         {
-            return py::to_PyErr();
+            return  py::to_PyErr();
         }
-    }
-    else if (arg_count == -1)
-    {
-        return nullptr; 
-    }
-
-    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-    return nullptr;
-}
-
-PyObject* GetDateTime(PyObject* args) override
-{
-    Py_ssize_t arg_count = PyTuple_Size(args);
-
-    if (arg_count == 0)
+    };
+    
+    PyObject* GetDateTime(PyObject* args) override
     {
         try
         {
             winrt::Windows::Foundation::DateTime return_value = obj.GetDateTime();
-
+            
             return py::convert(return_value);
         }
         catch (...)
         {
-            return py::to_PyErr();
+            return  py::to_PyErr();
         }
-    }
-    else if (arg_count == -1)
-    {
-        return nullptr; 
-    }
-
-    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-    return nullptr;
-}
-
-PyObject* GetDateTimeArray(PyObject* args) override
-{
-    Py_ssize_t arg_count = PyTuple_Size(args);
-
-    if (arg_count == 0)
+    };
+    
+    PyObject* GetDateTimeArray(PyObject* args) override
     {
         try
         {
             /*r*/ winrt::com_array<winrt::Windows::Foundation::DateTime> param0 { };
-
+            
             obj.GetDateTimeArray(param0);
-            Py_RETURN_NONE;
+            
+            PyObject* out_param0 = nullptr; // TODO: receive array impl
+            return PyTuple_Pack(1, out_param0);
         }
         catch (...)
         {
-            return py::to_PyErr();
+            return  py::to_PyErr();
         }
-    }
-    else if (arg_count == -1)
-    {
-        return nullptr; 
-    }
-
-    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-    return nullptr;
-}
-
-PyObject* GetDouble(PyObject* args) override
-{
-    Py_ssize_t arg_count = PyTuple_Size(args);
-
-    if (arg_count == 0)
+    };
+    
+    PyObject* GetDouble(PyObject* args) override
     {
         try
         {
             double return_value = obj.GetDouble();
-
+            
             return py::convert(return_value);
         }
         catch (...)
         {
-            return py::to_PyErr();
+            return  py::to_PyErr();
         }
-    }
-    else if (arg_count == -1)
-    {
-        return nullptr; 
-    }
-
-    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-    return nullptr;
-}
-
-PyObject* GetDoubleArray(PyObject* args) override
-{
-    Py_ssize_t arg_count = PyTuple_Size(args);
-
-    if (arg_count == 0)
+    };
+    
+    PyObject* GetDoubleArray(PyObject* args) override
     {
         try
         {
             /*r*/ winrt::com_array<double> param0 { };
-
+            
             obj.GetDoubleArray(param0);
-            Py_RETURN_NONE;
+            
+            PyObject* out_param0 = nullptr; // TODO: receive array impl
+            return PyTuple_Pack(1, out_param0);
         }
         catch (...)
         {
-            return py::to_PyErr();
+            return  py::to_PyErr();
         }
-    }
-    else if (arg_count == -1)
-    {
-        return nullptr; 
-    }
-
-    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-    return nullptr;
-}
-
-PyObject* GetGuid(PyObject* args) override
-{
-    Py_ssize_t arg_count = PyTuple_Size(args);
-
-    if (arg_count == 0)
+    };
+    
+    PyObject* GetGuid(PyObject* args) override
     {
         try
         {
             winrt::guid return_value = obj.GetGuid();
-
+            
             return py::convert(return_value);
         }
         catch (...)
         {
-            return py::to_PyErr();
+            return  py::to_PyErr();
         }
-    }
-    else if (arg_count == -1)
-    {
-        return nullptr; 
-    }
-
-    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-    return nullptr;
-}
-
-PyObject* GetGuidArray(PyObject* args) override
-{
-    Py_ssize_t arg_count = PyTuple_Size(args);
-
-    if (arg_count == 0)
+    };
+    
+    PyObject* GetGuidArray(PyObject* args) override
     {
         try
         {
             /*r*/ winrt::com_array<winrt::guid> param0 { };
-
+            
             obj.GetGuidArray(param0);
-            Py_RETURN_NONE;
+            
+            PyObject* out_param0 = nullptr; // TODO: receive array impl
+            return PyTuple_Pack(1, out_param0);
         }
         catch (...)
         {
-            return py::to_PyErr();
+            return  py::to_PyErr();
         }
-    }
-    else if (arg_count == -1)
-    {
-        return nullptr; 
-    }
-
-    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-    return nullptr;
-}
-
-PyObject* GetInspectableArray(PyObject* args) override
-{
-    Py_ssize_t arg_count = PyTuple_Size(args);
-
-    if (arg_count == 0)
+    };
+    
+    PyObject* GetInspectableArray(PyObject* args) override
     {
         try
         {
             /*r*/ winrt::com_array<winrt::Windows::Foundation::IInspectable> param0 { };
-
+            
             obj.GetInspectableArray(param0);
-            Py_RETURN_NONE;
+            
+            PyObject* out_param0 = nullptr; // TODO: receive array impl
+            return PyTuple_Pack(1, out_param0);
         }
         catch (...)
         {
-            return py::to_PyErr();
+            return  py::to_PyErr();
         }
-    }
-    else if (arg_count == -1)
-    {
-        return nullptr; 
-    }
-
-    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-    return nullptr;
-}
-
-PyObject* GetInt16(PyObject* args) override
-{
-    Py_ssize_t arg_count = PyTuple_Size(args);
-
-    if (arg_count == 0)
+    };
+    
+    PyObject* GetInt16(PyObject* args) override
     {
         try
         {
             int16_t return_value = obj.GetInt16();
-
+            
             return py::convert(return_value);
         }
         catch (...)
         {
-            return py::to_PyErr();
+            return  py::to_PyErr();
         }
-    }
-    else if (arg_count == -1)
-    {
-        return nullptr; 
-    }
-
-    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-    return nullptr;
-}
-
-PyObject* GetInt16Array(PyObject* args) override
-{
-    Py_ssize_t arg_count = PyTuple_Size(args);
-
-    if (arg_count == 0)
+    };
+    
+    PyObject* GetInt16Array(PyObject* args) override
     {
         try
         {
             /*r*/ winrt::com_array<int16_t> param0 { };
-
+            
             obj.GetInt16Array(param0);
-            Py_RETURN_NONE;
+            
+            PyObject* out_param0 = nullptr; // TODO: receive array impl
+            return PyTuple_Pack(1, out_param0);
         }
         catch (...)
         {
-            return py::to_PyErr();
+            return  py::to_PyErr();
         }
-    }
-    else if (arg_count == -1)
-    {
-        return nullptr; 
-    }
-
-    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-    return nullptr;
-}
-
-PyObject* GetInt32(PyObject* args) override
-{
-    Py_ssize_t arg_count = PyTuple_Size(args);
-
-    if (arg_count == 0)
+    };
+    
+    PyObject* GetInt32(PyObject* args) override
     {
         try
         {
             int32_t return_value = obj.GetInt32();
-
+            
             return py::convert(return_value);
         }
         catch (...)
         {
-            return py::to_PyErr();
+            return  py::to_PyErr();
         }
-    }
-    else if (arg_count == -1)
-    {
-        return nullptr; 
-    }
-
-    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-    return nullptr;
-}
-
-PyObject* GetInt32Array(PyObject* args) override
-{
-    Py_ssize_t arg_count = PyTuple_Size(args);
-
-    if (arg_count == 0)
+    };
+    
+    PyObject* GetInt32Array(PyObject* args) override
     {
         try
         {
             /*r*/ winrt::com_array<int32_t> param0 { };
-
+            
             obj.GetInt32Array(param0);
-            Py_RETURN_NONE;
+            
+            PyObject* out_param0 = nullptr; // TODO: receive array impl
+            return PyTuple_Pack(1, out_param0);
         }
         catch (...)
         {
-            return py::to_PyErr();
+            return  py::to_PyErr();
         }
-    }
-    else if (arg_count == -1)
-    {
-        return nullptr; 
-    }
-
-    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-    return nullptr;
-}
-
-PyObject* GetInt64(PyObject* args) override
-{
-    Py_ssize_t arg_count = PyTuple_Size(args);
-
-    if (arg_count == 0)
+    };
+    
+    PyObject* GetInt64(PyObject* args) override
     {
         try
         {
             int64_t return_value = obj.GetInt64();
-
+            
             return py::convert(return_value);
         }
         catch (...)
         {
-            return py::to_PyErr();
+            return  py::to_PyErr();
         }
-    }
-    else if (arg_count == -1)
-    {
-        return nullptr; 
-    }
-
-    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-    return nullptr;
-}
-
-PyObject* GetInt64Array(PyObject* args) override
-{
-    Py_ssize_t arg_count = PyTuple_Size(args);
-
-    if (arg_count == 0)
+    };
+    
+    PyObject* GetInt64Array(PyObject* args) override
     {
         try
         {
             /*r*/ winrt::com_array<int64_t> param0 { };
-
+            
             obj.GetInt64Array(param0);
-            Py_RETURN_NONE;
+            
+            PyObject* out_param0 = nullptr; // TODO: receive array impl
+            return PyTuple_Pack(1, out_param0);
         }
         catch (...)
         {
-            return py::to_PyErr();
+            return  py::to_PyErr();
         }
-    }
-    else if (arg_count == -1)
-    {
-        return nullptr; 
-    }
-
-    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-    return nullptr;
-}
-
-PyObject* GetPoint(PyObject* args) override
-{
-    Py_ssize_t arg_count = PyTuple_Size(args);
-
-    if (arg_count == 0)
+    };
+    
+    PyObject* GetPoint(PyObject* args) override
     {
         try
         {
             winrt::Windows::Foundation::Point return_value = obj.GetPoint();
-
+            
             return py::convert(return_value);
         }
         catch (...)
         {
-            return py::to_PyErr();
+            return  py::to_PyErr();
         }
-    }
-    else if (arg_count == -1)
-    {
-        return nullptr; 
-    }
-
-    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-    return nullptr;
-}
-
-PyObject* GetPointArray(PyObject* args) override
-{
-    Py_ssize_t arg_count = PyTuple_Size(args);
-
-    if (arg_count == 0)
+    };
+    
+    PyObject* GetPointArray(PyObject* args) override
     {
         try
         {
             /*r*/ winrt::com_array<winrt::Windows::Foundation::Point> param0 { };
-
+            
             obj.GetPointArray(param0);
-            Py_RETURN_NONE;
+            
+            PyObject* out_param0 = nullptr; // TODO: receive array impl
+            return PyTuple_Pack(1, out_param0);
         }
         catch (...)
         {
-            return py::to_PyErr();
+            return  py::to_PyErr();
         }
-    }
-    else if (arg_count == -1)
-    {
-        return nullptr; 
-    }
-
-    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-    return nullptr;
-}
-
-PyObject* GetRect(PyObject* args) override
-{
-    Py_ssize_t arg_count = PyTuple_Size(args);
-
-    if (arg_count == 0)
+    };
+    
+    PyObject* GetRect(PyObject* args) override
     {
         try
         {
             winrt::Windows::Foundation::Rect return_value = obj.GetRect();
-
+            
             return py::convert(return_value);
         }
         catch (...)
         {
-            return py::to_PyErr();
+            return  py::to_PyErr();
         }
-    }
-    else if (arg_count == -1)
-    {
-        return nullptr; 
-    }
-
-    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-    return nullptr;
-}
-
-PyObject* GetRectArray(PyObject* args) override
-{
-    Py_ssize_t arg_count = PyTuple_Size(args);
-
-    if (arg_count == 0)
+    };
+    
+    PyObject* GetRectArray(PyObject* args) override
     {
         try
         {
             /*r*/ winrt::com_array<winrt::Windows::Foundation::Rect> param0 { };
-
+            
             obj.GetRectArray(param0);
-            Py_RETURN_NONE;
+            
+            PyObject* out_param0 = nullptr; // TODO: receive array impl
+            return PyTuple_Pack(1, out_param0);
         }
         catch (...)
         {
-            return py::to_PyErr();
+            return  py::to_PyErr();
         }
-    }
-    else if (arg_count == -1)
-    {
-        return nullptr; 
-    }
-
-    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-    return nullptr;
-}
-
-PyObject* GetSingle(PyObject* args) override
-{
-    Py_ssize_t arg_count = PyTuple_Size(args);
-
-    if (arg_count == 0)
+    };
+    
+    PyObject* GetSingle(PyObject* args) override
     {
         try
         {
             float return_value = obj.GetSingle();
-
+            
             return py::convert(return_value);
         }
         catch (...)
         {
-            return py::to_PyErr();
+            return  py::to_PyErr();
         }
-    }
-    else if (arg_count == -1)
-    {
-        return nullptr; 
-    }
-
-    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-    return nullptr;
-}
-
-PyObject* GetSingleArray(PyObject* args) override
-{
-    Py_ssize_t arg_count = PyTuple_Size(args);
-
-    if (arg_count == 0)
+    };
+    
+    PyObject* GetSingleArray(PyObject* args) override
     {
         try
         {
             /*r*/ winrt::com_array<float> param0 { };
-
+            
             obj.GetSingleArray(param0);
-            Py_RETURN_NONE;
+            
+            PyObject* out_param0 = nullptr; // TODO: receive array impl
+            return PyTuple_Pack(1, out_param0);
         }
         catch (...)
         {
-            return py::to_PyErr();
+            return  py::to_PyErr();
         }
-    }
-    else if (arg_count == -1)
-    {
-        return nullptr; 
-    }
-
-    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-    return nullptr;
-}
-
-PyObject* GetSize(PyObject* args) override
-{
-    Py_ssize_t arg_count = PyTuple_Size(args);
-
-    if (arg_count == 0)
+    };
+    
+    PyObject* GetSize(PyObject* args) override
     {
         try
         {
             winrt::Windows::Foundation::Size return_value = obj.GetSize();
-
+            
             return py::convert(return_value);
         }
         catch (...)
         {
-            return py::to_PyErr();
+            return  py::to_PyErr();
         }
-    }
-    else if (arg_count == -1)
-    {
-        return nullptr; 
-    }
-
-    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-    return nullptr;
-}
-
-PyObject* GetSizeArray(PyObject* args) override
-{
-    Py_ssize_t arg_count = PyTuple_Size(args);
-
-    if (arg_count == 0)
+    };
+    
+    PyObject* GetSizeArray(PyObject* args) override
     {
         try
         {
             /*r*/ winrt::com_array<winrt::Windows::Foundation::Size> param0 { };
-
+            
             obj.GetSizeArray(param0);
-            Py_RETURN_NONE;
+            
+            PyObject* out_param0 = nullptr; // TODO: receive array impl
+            return PyTuple_Pack(1, out_param0);
         }
         catch (...)
         {
-            return py::to_PyErr();
+            return  py::to_PyErr();
         }
-    }
-    else if (arg_count == -1)
-    {
-        return nullptr; 
-    }
-
-    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-    return nullptr;
-}
-
-PyObject* GetString(PyObject* args) override
-{
-    Py_ssize_t arg_count = PyTuple_Size(args);
-
-    if (arg_count == 0)
+    };
+    
+    PyObject* GetString(PyObject* args) override
     {
         try
         {
             winrt::hstring return_value = obj.GetString();
-
+            
             return py::convert(return_value);
         }
         catch (...)
         {
-            return py::to_PyErr();
+            return  py::to_PyErr();
         }
-    }
-    else if (arg_count == -1)
-    {
-        return nullptr; 
-    }
-
-    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-    return nullptr;
-}
-
-PyObject* GetStringArray(PyObject* args) override
-{
-    Py_ssize_t arg_count = PyTuple_Size(args);
-
-    if (arg_count == 0)
+    };
+    
+    PyObject* GetStringArray(PyObject* args) override
     {
         try
         {
             /*r*/ winrt::com_array<winrt::hstring> param0 { };
-
+            
             obj.GetStringArray(param0);
-            Py_RETURN_NONE;
+            
+            PyObject* out_param0 = nullptr; // TODO: receive array impl
+            return PyTuple_Pack(1, out_param0);
         }
         catch (...)
         {
-            return py::to_PyErr();
+            return  py::to_PyErr();
         }
-    }
-    else if (arg_count == -1)
-    {
-        return nullptr; 
-    }
-
-    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-    return nullptr;
-}
-
-PyObject* GetTimeSpan(PyObject* args) override
-{
-    Py_ssize_t arg_count = PyTuple_Size(args);
-
-    if (arg_count == 0)
+    };
+    
+    PyObject* GetTimeSpan(PyObject* args) override
     {
         try
         {
             winrt::Windows::Foundation::TimeSpan return_value = obj.GetTimeSpan();
-
+            
             return py::convert(return_value);
         }
         catch (...)
         {
-            return py::to_PyErr();
+            return  py::to_PyErr();
         }
-    }
-    else if (arg_count == -1)
-    {
-        return nullptr; 
-    }
-
-    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-    return nullptr;
-}
-
-PyObject* GetTimeSpanArray(PyObject* args) override
-{
-    Py_ssize_t arg_count = PyTuple_Size(args);
-
-    if (arg_count == 0)
+    };
+    
+    PyObject* GetTimeSpanArray(PyObject* args) override
     {
         try
         {
             /*r*/ winrt::com_array<winrt::Windows::Foundation::TimeSpan> param0 { };
-
+            
             obj.GetTimeSpanArray(param0);
-            Py_RETURN_NONE;
+            
+            PyObject* out_param0 = nullptr; // TODO: receive array impl
+            return PyTuple_Pack(1, out_param0);
         }
         catch (...)
         {
-            return py::to_PyErr();
+            return  py::to_PyErr();
         }
-    }
-    else if (arg_count == -1)
-    {
-        return nullptr; 
-    }
-
-    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-    return nullptr;
-}
-
-PyObject* GetUInt16(PyObject* args) override
-{
-    Py_ssize_t arg_count = PyTuple_Size(args);
-
-    if (arg_count == 0)
+    };
+    
+    PyObject* GetUInt16(PyObject* args) override
     {
         try
         {
             uint16_t return_value = obj.GetUInt16();
-
+            
             return py::convert(return_value);
         }
         catch (...)
         {
-            return py::to_PyErr();
+            return  py::to_PyErr();
         }
-    }
-    else if (arg_count == -1)
-    {
-        return nullptr; 
-    }
-
-    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-    return nullptr;
-}
-
-PyObject* GetUInt16Array(PyObject* args) override
-{
-    Py_ssize_t arg_count = PyTuple_Size(args);
-
-    if (arg_count == 0)
+    };
+    
+    PyObject* GetUInt16Array(PyObject* args) override
     {
         try
         {
             /*r*/ winrt::com_array<uint16_t> param0 { };
-
+            
             obj.GetUInt16Array(param0);
-            Py_RETURN_NONE;
+            
+            PyObject* out_param0 = nullptr; // TODO: receive array impl
+            return PyTuple_Pack(1, out_param0);
         }
         catch (...)
         {
-            return py::to_PyErr();
+            return  py::to_PyErr();
         }
-    }
-    else if (arg_count == -1)
-    {
-        return nullptr; 
-    }
-
-    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-    return nullptr;
-}
-
-PyObject* GetUInt32(PyObject* args) override
-{
-    Py_ssize_t arg_count = PyTuple_Size(args);
-
-    if (arg_count == 0)
+    };
+    
+    PyObject* GetUInt32(PyObject* args) override
     {
         try
         {
             uint32_t return_value = obj.GetUInt32();
-
+            
             return py::convert(return_value);
         }
         catch (...)
         {
-            return py::to_PyErr();
+            return  py::to_PyErr();
         }
-    }
-    else if (arg_count == -1)
-    {
-        return nullptr; 
-    }
-
-    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-    return nullptr;
-}
-
-PyObject* GetUInt32Array(PyObject* args) override
-{
-    Py_ssize_t arg_count = PyTuple_Size(args);
-
-    if (arg_count == 0)
+    };
+    
+    PyObject* GetUInt32Array(PyObject* args) override
     {
         try
         {
             /*r*/ winrt::com_array<uint32_t> param0 { };
-
+            
             obj.GetUInt32Array(param0);
-            Py_RETURN_NONE;
+            
+            PyObject* out_param0 = nullptr; // TODO: receive array impl
+            return PyTuple_Pack(1, out_param0);
         }
         catch (...)
         {
-            return py::to_PyErr();
+            return  py::to_PyErr();
         }
-    }
-    else if (arg_count == -1)
-    {
-        return nullptr; 
-    }
-
-    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-    return nullptr;
-}
-
-PyObject* GetUInt64(PyObject* args) override
-{
-    Py_ssize_t arg_count = PyTuple_Size(args);
-
-    if (arg_count == 0)
+    };
+    
+    PyObject* GetUInt64(PyObject* args) override
     {
         try
         {
             uint64_t return_value = obj.GetUInt64();
-
+            
             return py::convert(return_value);
         }
         catch (...)
         {
-            return py::to_PyErr();
+            return  py::to_PyErr();
         }
-    }
-    else if (arg_count == -1)
-    {
-        return nullptr; 
-    }
-
-    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-    return nullptr;
-}
-
-PyObject* GetUInt64Array(PyObject* args) override
-{
-    Py_ssize_t arg_count = PyTuple_Size(args);
-
-    if (arg_count == 0)
+    };
+    
+    PyObject* GetUInt64Array(PyObject* args) override
     {
         try
         {
             /*r*/ winrt::com_array<uint64_t> param0 { };
-
+            
             obj.GetUInt64Array(param0);
-            Py_RETURN_NONE;
+            
+            PyObject* out_param0 = nullptr; // TODO: receive array impl
+            return PyTuple_Pack(1, out_param0);
         }
         catch (...)
         {
-            return py::to_PyErr();
+            return  py::to_PyErr();
         }
-    }
-    else if (arg_count == -1)
-    {
-        return nullptr; 
-    }
-
-    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-    return nullptr;
-}
-
-PyObject* GetUInt8(PyObject* args) override
-{
-    Py_ssize_t arg_count = PyTuple_Size(args);
-
-    if (arg_count == 0)
+    };
+    
+    PyObject* GetUInt8(PyObject* args) override
     {
         try
         {
             uint8_t return_value = obj.GetUInt8();
-
+            
             return py::convert(return_value);
         }
         catch (...)
         {
-            return py::to_PyErr();
+            return  py::to_PyErr();
         }
-    }
-    else if (arg_count == -1)
-    {
-        return nullptr; 
-    }
-
-    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-    return nullptr;
-}
-
-PyObject* GetUInt8Array(PyObject* args) override
-{
-    Py_ssize_t arg_count = PyTuple_Size(args);
-
-    if (arg_count == 0)
+    };
+    
+    PyObject* GetUInt8Array(PyObject* args) override
     {
         try
         {
             /*r*/ winrt::com_array<uint8_t> param0 { };
-
+            
             obj.GetUInt8Array(param0);
-            Py_RETURN_NONE;
+            
+            PyObject* out_param0 = nullptr; // TODO: receive array impl
+            return PyTuple_Pack(1, out_param0);
         }
         catch (...)
         {
-            return py::to_PyErr();
+            return  py::to_PyErr();
         }
-    }
-    else if (arg_count == -1)
+    };
+    
+    PyObject* get_IsNumericScalar() override
     {
-        return nullptr; 
-    }
-
-    PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-    return nullptr;
-}
-
-PyObject* get_IsNumericScalar(PyObject* args) override
-{
-    if (args != nullptr)
-    {
-        PyErr_SetString(PyExc_TypeError, "arguments not supported for get methods");
-        return nullptr;
-    }
         try
         {
             bool return_value = obj.IsNumericScalar();
-
+            
             return py::convert(return_value);
         }
         catch (...)
         {
-            return py::to_PyErr();
+            return  py::to_PyErr();
         }
-}
-
-PyObject* get_Type(PyObject* args) override
-{
-    if (args != nullptr)
+    };
+    
+    PyObject* get_Type() override
     {
-        PyErr_SetString(PyExc_TypeError, "arguments not supported for get methods");
-        return nullptr;
-    }
         try
         {
             winrt::Windows::Foundation::PropertyType return_value = obj.Type();
-
+            
             return py::convert(return_value);
         }
         catch (...)
         {
-            return py::to_PyErr();
+            return  py::to_PyErr();
         }
-}
-
-PyObject* get_Value(PyObject* args) override
-{
-    if (args != nullptr)
+    };
+    
+    PyObject* get_Value() override
     {
-        PyErr_SetString(PyExc_TypeError, "arguments not supported for get methods");
-        return nullptr;
-    }
         try
         {
             T return_value = obj.Value();
-
+            
             return py::convert(return_value);
         }
         catch (...)
         {
-            return py::to_PyErr();
+            return  py::to_PyErr();
         }
-}
-
+    };
+    
+    
     winrt::Windows::Foundation::IReference<T> obj{ nullptr };
 };
 
@@ -3089,310 +2074,310 @@ namespace py
     struct winrt_type<winrt::Windows::Foundation::Deferral>
     {
         static PyTypeObject* python_type;
-
+    
         static PyTypeObject* get_python_type()
         {
             return python_type;
         }
     };
-
+    
     template<>
     struct winrt_type<winrt::Windows::Foundation::GuidHelper>
     {
         static PyTypeObject* python_type;
-
+    
         static PyTypeObject* get_python_type()
         {
             return python_type;
         }
     };
-
+    
     template<>
     struct winrt_type<winrt::Windows::Foundation::MemoryBuffer>
     {
         static PyTypeObject* python_type;
-
+    
         static PyTypeObject* get_python_type()
         {
             return python_type;
         }
     };
-
+    
     template<>
     struct winrt_type<winrt::Windows::Foundation::PropertyValue>
     {
         static PyTypeObject* python_type;
-
+    
         static PyTypeObject* get_python_type()
         {
             return python_type;
         }
     };
-
+    
     template<>
     struct winrt_type<winrt::Windows::Foundation::Uri>
     {
         static PyTypeObject* python_type;
-
+    
         static PyTypeObject* get_python_type()
         {
             return python_type;
         }
     };
-
+    
     template<>
     struct winrt_type<winrt::Windows::Foundation::WwwFormUrlDecoder>
     {
         static PyTypeObject* python_type;
-
+    
         static PyTypeObject* get_python_type()
         {
             return python_type;
         }
     };
-
+    
     template<>
     struct winrt_type<winrt::Windows::Foundation::WwwFormUrlDecoderEntry>
     {
         static PyTypeObject* python_type;
-
+    
         static PyTypeObject* get_python_type()
         {
             return python_type;
         }
     };
-
+    
     template<>
     struct winrt_type<winrt::Windows::Foundation::IAsyncAction>
     {
         static PyTypeObject* python_type;
-
+    
         static PyTypeObject* get_python_type()
         {
             return python_type;
         }
     };
-
+    
     template<>
     struct winrt_type<pyIAsyncActionWithProgress>
     {
         static PyTypeObject* python_type;
-
+    
         static PyTypeObject* get_python_type()
         {
             return python_type;
         }
     };
-
+    
     template<>
     struct winrt_type<winrt::Windows::Foundation::IAsyncInfo>
     {
         static PyTypeObject* python_type;
-
+    
         static PyTypeObject* get_python_type()
         {
             return python_type;
         }
     };
-
+    
     template<>
     struct winrt_type<pyIAsyncOperationWithProgress>
     {
         static PyTypeObject* python_type;
-
+    
         static PyTypeObject* get_python_type()
         {
             return python_type;
         }
     };
-
+    
     template<>
     struct winrt_type<pyIAsyncOperation>
     {
         static PyTypeObject* python_type;
-
+    
         static PyTypeObject* get_python_type()
         {
             return python_type;
         }
     };
-
+    
     template<>
     struct winrt_type<winrt::Windows::Foundation::IClosable>
     {
         static PyTypeObject* python_type;
-
+    
         static PyTypeObject* get_python_type()
         {
             return python_type;
         }
     };
-
+    
     template<>
     struct winrt_type<winrt::Windows::Foundation::IGetActivationFactory>
     {
         static PyTypeObject* python_type;
-
+    
         static PyTypeObject* get_python_type()
         {
             return python_type;
         }
     };
-
+    
     template<>
     struct winrt_type<winrt::Windows::Foundation::IMemoryBuffer>
     {
         static PyTypeObject* python_type;
-
+    
         static PyTypeObject* get_python_type()
         {
             return python_type;
         }
     };
-
+    
     template<>
     struct winrt_type<winrt::Windows::Foundation::IMemoryBufferReference>
     {
         static PyTypeObject* python_type;
-
+    
         static PyTypeObject* get_python_type()
         {
             return python_type;
         }
     };
-
+    
     template<>
     struct winrt_type<winrt::Windows::Foundation::IPropertyValue>
     {
         static PyTypeObject* python_type;
-
+    
         static PyTypeObject* get_python_type()
         {
             return python_type;
         }
     };
-
+    
     template<>
     struct winrt_type<pyIReferenceArray>
     {
         static PyTypeObject* python_type;
-
+    
         static PyTypeObject* get_python_type()
         {
             return python_type;
         }
     };
-
+    
     template<>
     struct winrt_type<pyIReference>
     {
         static PyTypeObject* python_type;
-
+    
         static PyTypeObject* get_python_type()
         {
             return python_type;
         }
     };
-
+    
     template<>
     struct winrt_type<winrt::Windows::Foundation::IStringable>
     {
         static PyTypeObject* python_type;
-
+    
         static PyTypeObject* get_python_type()
         {
             return python_type;
         }
     };
-
+    
     template<>
     struct winrt_type<winrt::Windows::Foundation::IWwwFormUrlDecoderEntry>
     {
         static PyTypeObject* python_type;
-
+    
         static PyTypeObject* get_python_type()
         {
             return python_type;
         }
     };
-
+    
     template<>
     struct winrt_type<winrt::Windows::Foundation::DateTime>
     {
         static PyTypeObject* python_type;
-
+    
         static PyTypeObject* get_python_type()
         {
             return python_type;
         }
     };
-
+    
     template<>
     struct winrt_type<winrt::event_token>
     {
         static PyTypeObject* python_type;
-
+    
         static PyTypeObject* get_python_type()
         {
             return python_type;
         }
     };
-
+    
     template<>
     struct winrt_type<winrt::hresult>
     {
         static PyTypeObject* python_type;
-
+    
         static PyTypeObject* get_python_type()
         {
             return python_type;
         }
     };
-
+    
     template<>
     struct winrt_type<winrt::Windows::Foundation::Point>
     {
         static PyTypeObject* python_type;
-
+    
         static PyTypeObject* get_python_type()
         {
             return python_type;
         }
     };
-
+    
     template<>
     struct winrt_type<winrt::Windows::Foundation::Rect>
     {
         static PyTypeObject* python_type;
-
+    
         static PyTypeObject* get_python_type()
         {
             return python_type;
         }
     };
-
+    
     template<>
     struct winrt_type<winrt::Windows::Foundation::Size>
     {
         static PyTypeObject* python_type;
-
+    
         static PyTypeObject* get_python_type()
         {
             return python_type;
         }
     };
-
+    
     template<>
     struct winrt_type<winrt::Windows::Foundation::TimeSpan>
     {
         static PyTypeObject* python_type;
-
+    
         static PyTypeObject* get_python_type()
         {
             return python_type;
         }
     };
-
+    
     template<>
     struct converter<winrt::Windows::Foundation::DateTime>
     {
@@ -3448,87 +2433,87 @@ namespace py
         using abstract = ::pyIAsyncActionWithProgress;
         using concrete = ::pyIAsyncActionWithProgressImpl<TProgress>;
     };
-
+    
     template <typename TResult, typename TProgress>
     struct pinterface_python_type<winrt::Windows::Foundation::IAsyncOperationWithProgress<TResult, TProgress>>
     {
         using abstract = ::pyIAsyncOperationWithProgress;
         using concrete = ::pyIAsyncOperationWithProgressImpl<TResult, TProgress>;
     };
-
+    
     template <typename TResult>
     struct pinterface_python_type<winrt::Windows::Foundation::IAsyncOperation<TResult>>
     {
         using abstract = ::pyIAsyncOperation;
         using concrete = ::pyIAsyncOperationImpl<TResult>;
     };
-
+    
     template <typename T>
     struct pinterface_python_type<winrt::Windows::Foundation::IReferenceArray<T>>
     {
         using abstract = ::pyIReferenceArray;
         using concrete = ::pyIReferenceArrayImpl<T>;
     };
-
+    
     template <typename T>
     struct pinterface_python_type<winrt::Windows::Foundation::IReference<T>>
     {
         using abstract = ::pyIReference;
         using concrete = ::pyIReferenceImpl<T>;
     };
-
+    
     template <>
     struct delegate_python_type<winrt::Windows::Foundation::AsyncActionCompletedHandler>
     {
         using type = ::pyAsyncActionCompletedHandler;
     };
-
+    
     template <typename TProgress>
     struct delegate_python_type<winrt::Windows::Foundation::AsyncActionProgressHandler<TProgress>>
     {
         using type = ::pyAsyncActionProgressHandler<TProgress>;
     };
-
+    
     template <typename TProgress>
     struct delegate_python_type<winrt::Windows::Foundation::AsyncActionWithProgressCompletedHandler<TProgress>>
     {
         using type = ::pyAsyncActionWithProgressCompletedHandler<TProgress>;
     };
-
+    
     template <typename TResult>
     struct delegate_python_type<winrt::Windows::Foundation::AsyncOperationCompletedHandler<TResult>>
     {
         using type = ::pyAsyncOperationCompletedHandler<TResult>;
     };
-
+    
     template <typename TResult, typename TProgress>
     struct delegate_python_type<winrt::Windows::Foundation::AsyncOperationProgressHandler<TResult, TProgress>>
     {
         using type = ::pyAsyncOperationProgressHandler<TResult, TProgress>;
     };
-
+    
     template <typename TResult, typename TProgress>
     struct delegate_python_type<winrt::Windows::Foundation::AsyncOperationWithProgressCompletedHandler<TResult, TProgress>>
     {
         using type = ::pyAsyncOperationWithProgressCompletedHandler<TResult, TProgress>;
     };
-
+    
     template <>
     struct delegate_python_type<winrt::Windows::Foundation::DeferralCompletedHandler>
     {
         using type = ::pyDeferralCompletedHandler;
     };
-
+    
     template <typename T>
     struct delegate_python_type<winrt::Windows::Foundation::EventHandler<T>>
     {
         using type = ::pyEventHandler<T>;
     };
-
+    
     template <typename TSender, typename TResult>
     struct delegate_python_type<winrt::Windows::Foundation::TypedEventHandler<TSender, TResult>>
     {
         using type = ::pyTypedEventHandler<TSender, TResult>;
     };
-
+    
 }
