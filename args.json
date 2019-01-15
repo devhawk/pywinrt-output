@@ -11,6 +11,6 @@
     ],
     "excluded_namespaces": [
         "Windows.Foundation.Diagnostics",
-        "Windows.Foundation.Metadata",
+        "Windows.Foundation.Metadata"
     ]
 }
