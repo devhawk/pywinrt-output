@@ -19,7 +19,8 @@ struct pyAsyncActionCompletedHandler
             throw winrt::hresult_invalid_argument();
         }
         
-        // TODO: How do I manage callable lifetime here?
+        Py_INCREF(callable);
+        
         return [callable](auto param0, auto param1)
         {
             winrt::handle_type<py::gil_state_traits> gil_state{ PyGILState_Ensure() };
@@ -30,6 +31,7 @@ struct pyAsyncActionCompletedHandler
             PyObject* args = PyTuple_Pack(2, py_param0, py_param1);
             
             PyObject_CallObject(callable, args);
+            Py_DECREF(callable);
         };
     };
 };
@@ -44,7 +46,8 @@ struct pyAsyncActionProgressHandler
             throw winrt::hresult_invalid_argument();
         }
         
-        // TODO: How do I manage callable lifetime here?
+        Py_INCREF(callable);
+        
         return [callable](auto param0, auto param1)
         {
             winrt::handle_type<py::gil_state_traits> gil_state{ PyGILState_Ensure() };
@@ -55,6 +58,7 @@ struct pyAsyncActionProgressHandler
             PyObject* args = PyTuple_Pack(2, py_param0, py_param1);
             
             PyObject_CallObject(callable, args);
+            Py_DECREF(callable);
         };
     };
 };
@@ -69,7 +73,8 @@ struct pyAsyncActionWithProgressCompletedHandler
             throw winrt::hresult_invalid_argument();
         }
         
-        // TODO: How do I manage callable lifetime here?
+        Py_INCREF(callable);
+        
         return [callable](auto param0, auto param1)
         {
             winrt::handle_type<py::gil_state_traits> gil_state{ PyGILState_Ensure() };
@@ -80,6 +85,7 @@ struct pyAsyncActionWithProgressCompletedHandler
             PyObject* args = PyTuple_Pack(2, py_param0, py_param1);
             
             PyObject_CallObject(callable, args);
+            Py_DECREF(callable);
         };
     };
 };
@@ -94,7 +100,8 @@ struct pyAsyncOperationCompletedHandler
             throw winrt::hresult_invalid_argument();
         }
         
-        // TODO: How do I manage callable lifetime here?
+        Py_INCREF(callable);
+        
         return [callable](auto param0, auto param1)
         {
             winrt::handle_type<py::gil_state_traits> gil_state{ PyGILState_Ensure() };
@@ -105,6 +112,7 @@ struct pyAsyncOperationCompletedHandler
             PyObject* args = PyTuple_Pack(2, py_param0, py_param1);
             
             PyObject_CallObject(callable, args);
+            Py_DECREF(callable);
         };
     };
 };
@@ -119,7 +127,8 @@ struct pyAsyncOperationProgressHandler
             throw winrt::hresult_invalid_argument();
         }
         
-        // TODO: How do I manage callable lifetime here?
+        Py_INCREF(callable);
+        
         return [callable](auto param0, auto param1)
         {
             winrt::handle_type<py::gil_state_traits> gil_state{ PyGILState_Ensure() };
@@ -130,6 +139,7 @@ struct pyAsyncOperationProgressHandler
             PyObject* args = PyTuple_Pack(2, py_param0, py_param1);
             
             PyObject_CallObject(callable, args);
+            Py_DECREF(callable);
         };
     };
 };
@@ -144,7 +154,8 @@ struct pyAsyncOperationWithProgressCompletedHandler
             throw winrt::hresult_invalid_argument();
         }
         
-        // TODO: How do I manage callable lifetime here?
+        Py_INCREF(callable);
+        
         return [callable](auto param0, auto param1)
         {
             winrt::handle_type<py::gil_state_traits> gil_state{ PyGILState_Ensure() };
@@ -155,6 +166,7 @@ struct pyAsyncOperationWithProgressCompletedHandler
             PyObject* args = PyTuple_Pack(2, py_param0, py_param1);
             
             PyObject_CallObject(callable, args);
+            Py_DECREF(callable);
         };
     };
 };
@@ -168,7 +180,8 @@ struct pyDeferralCompletedHandler
             throw winrt::hresult_invalid_argument();
         }
         
-        // TODO: How do I manage callable lifetime here?
+        Py_INCREF(callable);
+        
         return [callable]()
         {
             winrt::handle_type<py::gil_state_traits> gil_state{ PyGILState_Ensure() };
@@ -176,6 +189,7 @@ struct pyDeferralCompletedHandler
             PyObject* args = nullptr;
             
             PyObject_CallObject(callable, args);
+            Py_DECREF(callable);
         };
     };
 };
@@ -190,7 +204,8 @@ struct pyEventHandler
             throw winrt::hresult_invalid_argument();
         }
         
-        // TODO: How do I manage callable lifetime here?
+        Py_INCREF(callable);
+        
         return [callable](auto param0, auto param1)
         {
             winrt::handle_type<py::gil_state_traits> gil_state{ PyGILState_Ensure() };
@@ -201,6 +216,7 @@ struct pyEventHandler
             PyObject* args = PyTuple_Pack(2, py_param0, py_param1);
             
             PyObject_CallObject(callable, args);
+            Py_DECREF(callable);
         };
     };
 };
@@ -215,7 +231,8 @@ struct pyTypedEventHandler
             throw winrt::hresult_invalid_argument();
         }
         
-        // TODO: How do I manage callable lifetime here?
+        Py_INCREF(callable);
+        
         return [callable](auto param0, auto param1)
         {
             winrt::handle_type<py::gil_state_traits> gil_state{ PyGILState_Ensure() };
@@ -226,6 +243,7 @@ struct pyTypedEventHandler
             PyObject* args = PyTuple_Pack(2, py_param0, py_param1);
             
             PyObject_CallObject(callable, args);
+            Py_DECREF(callable);
         };
     };
 };
@@ -235,6 +253,7 @@ struct pyIAsyncActionWithProgress
     virtual ~pyIAsyncActionWithProgress() {};
     virtual winrt::Windows::Foundation::IUnknown const& get_unknown() = 0;
     virtual std::size_t hash() = 0;
+    virtual PyObject* dunder_await() = 0;
     
     virtual PyObject* Cancel(PyObject* args) = 0;
     virtual PyObject* Close(PyObject* args) = 0;
@@ -254,6 +273,7 @@ struct pyIAsyncActionWithProgressImpl : public pyIAsyncActionWithProgress
     pyIAsyncActionWithProgressImpl(winrt::Windows::Foundation::IAsyncActionWithProgress<TProgress> o) : obj(o) {}
     winrt::Windows::Foundation::IUnknown const& get_unknown() override { return obj; }
     std::size_t hash() override { return py::get_instance_hash(obj); }
+    PyObject* dunder_await() override { return py::dunder_await(obj); }
     
     PyObject* Cancel(PyObject* args) override
     {
@@ -408,6 +428,7 @@ struct pyIAsyncOperationWithProgress
     virtual ~pyIAsyncOperationWithProgress() {};
     virtual winrt::Windows::Foundation::IUnknown const& get_unknown() = 0;
     virtual std::size_t hash() = 0;
+    virtual PyObject* dunder_await() = 0;
     
     virtual PyObject* Cancel(PyObject* args) = 0;
     virtual PyObject* Close(PyObject* args) = 0;
@@ -427,6 +448,7 @@ struct pyIAsyncOperationWithProgressImpl : public pyIAsyncOperationWithProgress
     pyIAsyncOperationWithProgressImpl(winrt::Windows::Foundation::IAsyncOperationWithProgress<TResult, TProgress> o) : obj(o) {}
     winrt::Windows::Foundation::IUnknown const& get_unknown() override { return obj; }
     std::size_t hash() override { return py::get_instance_hash(obj); }
+    PyObject* dunder_await() override { return py::dunder_await(obj); }
     
     PyObject* Cancel(PyObject* args) override
     {
@@ -581,6 +603,7 @@ struct pyIAsyncOperation
     virtual ~pyIAsyncOperation() {};
     virtual winrt::Windows::Foundation::IUnknown const& get_unknown() = 0;
     virtual std::size_t hash() = 0;
+    virtual PyObject* dunder_await() = 0;
     
     virtual PyObject* Cancel(PyObject* args) = 0;
     virtual PyObject* Close(PyObject* args) = 0;
@@ -598,6 +621,7 @@ struct pyIAsyncOperationImpl : public pyIAsyncOperation
     pyIAsyncOperationImpl(winrt::Windows::Foundation::IAsyncOperation<TResult> o) : obj(o) {}
     winrt::Windows::Foundation::IUnknown const& get_unknown() override { return obj; }
     std::size_t hash() override { return py::get_instance_hash(obj); }
+    PyObject* dunder_await() override { return py::dunder_await(obj); }
     
     PyObject* Cancel(PyObject* args) override
     {

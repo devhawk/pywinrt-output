@@ -20,7 +20,8 @@ struct pyMapChangedEventHandler
             throw winrt::hresult_invalid_argument();
         }
         
-        // TODO: How do I manage callable lifetime here?
+        Py_INCREF(callable);
+        
         return [callable](auto param0, auto param1)
         {
             winrt::handle_type<py::gil_state_traits> gil_state{ PyGILState_Ensure() };
@@ -31,6 +32,7 @@ struct pyMapChangedEventHandler
             PyObject* args = PyTuple_Pack(2, py_param0, py_param1);
             
             PyObject_CallObject(callable, args);
+            Py_DECREF(callable);
         };
     };
 };
@@ -45,7 +47,8 @@ struct pyVectorChangedEventHandler
             throw winrt::hresult_invalid_argument();
         }
         
-        // TODO: How do I manage callable lifetime here?
+        Py_INCREF(callable);
+        
         return [callable](auto param0, auto param1)
         {
             winrt::handle_type<py::gil_state_traits> gil_state{ PyGILState_Ensure() };
@@ -56,6 +59,7 @@ struct pyVectorChangedEventHandler
             PyObject* args = PyTuple_Pack(2, py_param0, py_param1);
             
             PyObject_CallObject(callable, args);
+            Py_DECREF(callable);
         };
     };
 };

@@ -2568,6 +2568,11 @@ static PyObject* __IAsyncAction_from(PyObject* /*unused*/, PyObject* arg)
     }
 }
 
+static PyObject* __IAsyncAction_await(py::winrt_wrapper<winrt::Windows::Foundation::IAsyncAction>* self)
+{
+    return py::dunder_await(self->obj);
+}
+
 static PyMethodDef IAsyncAction_methods[] = {
     { "Cancel", (PyCFunction)IAsyncAction_Cancel, METH_VARARGS, nullptr },
     { "Close", (PyCFunction)IAsyncAction_Close, METH_VARARGS, nullptr },
@@ -2590,6 +2595,7 @@ static PyType_Slot IAsyncAction_Type_slots[] =
     { Py_tp_new, IAsyncAction_new },
     { Py_tp_methods, IAsyncAction_methods },
     { Py_tp_getset, IAsyncAction_getset },
+    { Py_am_await, (unaryfunc)__IAsyncAction_await },
     { 0, nullptr },
 };
 
@@ -2681,6 +2687,11 @@ static PyObject* IAsyncActionWithProgress_get_Status(py::winrt_pinterface_wrappe
     return self->obj->get_Status(/*unused*/);
 }
 
+static PyObject* __IAsyncActionWithProgress_await(py::winrt_pinterface_wrapper<pyIAsyncActionWithProgress>* self)
+{
+    return self->obj->dunder_await();
+}
+
 static PyMethodDef IAsyncActionWithProgress_methods[] = {
     { "Cancel", (PyCFunction)IAsyncActionWithProgress_Cancel, METH_VARARGS, nullptr },
     { "Close", (PyCFunction)IAsyncActionWithProgress_Close, METH_VARARGS, nullptr },
@@ -2703,6 +2714,7 @@ static PyType_Slot IAsyncActionWithProgress_Type_slots[] =
     { Py_tp_new, IAsyncActionWithProgress_new },
     { Py_tp_methods, IAsyncActionWithProgress_methods },
     { Py_tp_getset, IAsyncActionWithProgress_getset },
+    { Py_am_await, (unaryfunc)__IAsyncActionWithProgress_await },
     { 0, nullptr },
 };
 
@@ -2948,6 +2960,11 @@ static PyObject* IAsyncOperationWithProgress_get_Status(py::winrt_pinterface_wra
     return self->obj->get_Status(/*unused*/);
 }
 
+static PyObject* __IAsyncOperationWithProgress_await(py::winrt_pinterface_wrapper<pyIAsyncOperationWithProgress>* self)
+{
+    return self->obj->dunder_await();
+}
+
 static PyMethodDef IAsyncOperationWithProgress_methods[] = {
     { "Cancel", (PyCFunction)IAsyncOperationWithProgress_Cancel, METH_VARARGS, nullptr },
     { "Close", (PyCFunction)IAsyncOperationWithProgress_Close, METH_VARARGS, nullptr },
@@ -2970,6 +2987,7 @@ static PyType_Slot IAsyncOperationWithProgress_Type_slots[] =
     { Py_tp_new, IAsyncOperationWithProgress_new },
     { Py_tp_methods, IAsyncOperationWithProgress_methods },
     { Py_tp_getset, IAsyncOperationWithProgress_getset },
+    { Py_am_await, (unaryfunc)__IAsyncOperationWithProgress_await },
     { 0, nullptr },
 };
 
@@ -3045,6 +3063,11 @@ static PyObject* IAsyncOperation_get_Status(py::winrt_pinterface_wrapper<pyIAsyn
     return self->obj->get_Status(/*unused*/);
 }
 
+static PyObject* __IAsyncOperation_await(py::winrt_pinterface_wrapper<pyIAsyncOperation>* self)
+{
+    return self->obj->dunder_await();
+}
+
 static PyMethodDef IAsyncOperation_methods[] = {
     { "Cancel", (PyCFunction)IAsyncOperation_Cancel, METH_VARARGS, nullptr },
     { "Close", (PyCFunction)IAsyncOperation_Close, METH_VARARGS, nullptr },
@@ -3066,6 +3089,7 @@ static PyType_Slot IAsyncOperation_Type_slots[] =
     { Py_tp_new, IAsyncOperation_new },
     { Py_tp_methods, IAsyncOperation_methods },
     { Py_tp_getset, IAsyncOperation_getset },
+    { Py_am_await, (unaryfunc)__IAsyncOperation_await },
     { 0, nullptr },
 };
 
