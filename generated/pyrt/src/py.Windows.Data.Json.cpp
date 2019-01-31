@@ -805,6 +805,58 @@ static PyObject* __JsonArray_str(py::winrt_wrapper<winrt::Windows::Data::Json::J
     }
 }
 
+static PyObject* __JsonArray_iter(py::winrt_wrapper<winrt::Windows::Data::Json::JsonArray>* self)
+{
+    try
+    {
+        return py::convert(self->obj.First());
+    }
+    catch (...)
+    {
+        return py::to_PyErr();
+    }
+}
+
+static Py_ssize_t __JsonArray_sq_length(py::winrt_wrapper<winrt::Windows::Data::Json::JsonArray>* self)
+{
+    try
+    {
+        return static_cast<Py_ssize_t>(self->obj.Size());
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return -1;
+    }
+}
+
+static PyObject* __JsonArray_sq_item(py::winrt_wrapper<winrt::Windows::Data::Json::JsonArray>* self, Py_ssize_t i)
+{
+    try
+    {
+        return py::convert(self->obj.GetAt(static_cast<uint32_t>(i)));
+    }
+    catch (...)
+    {
+        return py::to_PyErr();
+    }
+}
+
+static int __JsonArray_sq_ass_item(py::winrt_wrapper<winrt::Windows::Data::Json::JsonArray>* self, Py_ssize_t i, PyObject* value)
+{
+    try
+    {
+        if (value == nullptr) { self->obj.RemoveAt(static_cast<uint32_t>(i)); }
+         else { self->obj.SetAt(static_cast<uint32_t>(i), py::convert_to<winrt::Windows::Data::Json::IJsonValue>(value)); }
+         return 0;
+         }
+    catch (...)
+    {
+        py::to_PyErr();
+        return -1;
+    }
+}
+
 static PyMethodDef JsonArray_methods[] = {
     { "Append", (PyCFunction)JsonArray_Append, METH_VARARGS, nullptr },
     { "Clear", (PyCFunction)JsonArray_Clear, METH_VARARGS, nullptr },
@@ -849,6 +901,10 @@ static PyType_Slot JsonArray_Type_slots[] =
     { Py_tp_methods, JsonArray_methods },
     { Py_tp_getset, JsonArray_getset },
     { Py_tp_str, __JsonArray_str },
+    { Py_tp_iter, __JsonArray_iter },
+    { Py_sq_length, __JsonArray_sq_length },
+    { Py_sq_item, __JsonArray_sq_item },
+    { Py_sq_ass_item, __JsonArray_sq_ass_item },
     { 0, nullptr },
 };
 
@@ -1730,6 +1786,58 @@ static PyObject* __JsonObject_str(py::winrt_wrapper<winrt::Windows::Data::Json::
     }
 }
 
+static PyObject* __JsonObject_iter(py::winrt_wrapper<winrt::Windows::Data::Json::JsonObject>* self)
+{
+    try
+    {
+        return py::convert(self->obj.First());
+    }
+    catch (...)
+    {
+        return py::to_PyErr();
+    }
+}
+
+static Py_ssize_t __JsonObject_mp_length(py::winrt_wrapper<winrt::Windows::Data::Json::JsonObject>* self)
+{
+    try
+    {
+        return static_cast<Py_ssize_t>(self->obj.Size());
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return -1;
+    }
+}
+
+static PyObject* __JsonObject_mp_subscript(py::winrt_wrapper<winrt::Windows::Data::Json::JsonObject>* self, PyObject* key)
+{
+    try
+    {
+        return py::convert(self->obj.Lookup(py::convert_to<winrt::hstring>(key)));
+    }
+    catch (...)
+    {
+        return py::to_PyErr();
+    }
+}
+
+static int __JsonObject_mp_ass_item(py::winrt_wrapper<winrt::Windows::Data::Json::JsonObject>* self, PyObject* key, PyObject* value)
+{
+    try
+    {
+        if (value == nullptr) { self->obj.Remove(py::convert_to<winrt::hstring>(key)); }
+        else { self->obj.Insert(py::convert_to<winrt::hstring>(key), py::convert_to<winrt::Windows::Data::Json::IJsonValue>(value)); }
+        return 0;
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return -1;
+    }
+}
+
 static PyMethodDef JsonObject_methods[] = {
     { "Clear", (PyCFunction)JsonObject_Clear, METH_VARARGS, nullptr },
     { "First", (PyCFunction)JsonObject_First, METH_VARARGS, nullptr },
@@ -1771,6 +1879,10 @@ static PyType_Slot JsonObject_Type_slots[] =
     { Py_tp_methods, JsonObject_methods },
     { Py_tp_getset, JsonObject_getset },
     { Py_tp_str, __JsonObject_str },
+    { Py_tp_iter, __JsonObject_iter },
+    { Py_mp_length, __JsonObject_mp_length },
+    { Py_mp_subscript, __JsonObject_mp_subscript },
+    { Py_mp_ass_subscript, __JsonObject_mp_ass_item },
     { 0, nullptr },
 };
 

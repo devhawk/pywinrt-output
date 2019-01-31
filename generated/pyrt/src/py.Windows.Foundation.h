@@ -277,44 +277,77 @@ struct pyIAsyncActionWithProgressImpl : public pyIAsyncActionWithProgress
     
     PyObject* Cancel(PyObject* args) override
     {
-        try
+        Py_ssize_t arg_count = PyTuple_Size(args);
+        
+        if (arg_count == 0)
         {
-            obj.Cancel();
-            
-            Py_RETURN_NONE;
+            try
+            {
+                obj.Cancel();
+                
+                Py_RETURN_NONE;
+            }
+            catch (...)
+            {
+                return py::to_PyErr();
+            }
         }
-        catch (...)
+        else if (arg_count != -1)
         {
-            return  py::to_PyErr();
+            PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
         }
+        
+        return nullptr;
     };
     
     PyObject* Close(PyObject* args) override
     {
-        try
+        Py_ssize_t arg_count = PyTuple_Size(args);
+        
+        if (arg_count == 0)
         {
-            obj.Close();
-            
-            Py_RETURN_NONE;
+            try
+            {
+                obj.Close();
+                
+                Py_RETURN_NONE;
+            }
+            catch (...)
+            {
+                return py::to_PyErr();
+            }
         }
-        catch (...)
+        else if (arg_count != -1)
         {
-            return  py::to_PyErr();
+            PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
         }
+        
+        return nullptr;
     };
     
     PyObject* GetResults(PyObject* args) override
     {
-        try
+        Py_ssize_t arg_count = PyTuple_Size(args);
+        
+        if (arg_count == 0)
         {
-            obj.GetResults();
-            
-            Py_RETURN_NONE;
+            try
+            {
+                obj.GetResults();
+                
+                Py_RETURN_NONE;
+            }
+            catch (...)
+            {
+                return py::to_PyErr();
+            }
         }
-        catch (...)
+        else if (arg_count != -1)
         {
-            return  py::to_PyErr();
+            PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
         }
+        
+        return nullptr;
     };
     
     PyObject* get_Completed() override
@@ -327,7 +360,7 @@ struct pyIAsyncActionWithProgressImpl : public pyIAsyncActionWithProgress
         }
         catch (...)
         {
-            return  py::to_PyErr();
+            return py::to_PyErr();
         }
     };
     
@@ -341,7 +374,7 @@ struct pyIAsyncActionWithProgressImpl : public pyIAsyncActionWithProgress
         }
         catch (...)
         {
-            return  py::to_PyErr();
+            return py::to_PyErr();
         }
     };
     
@@ -355,7 +388,7 @@ struct pyIAsyncActionWithProgressImpl : public pyIAsyncActionWithProgress
         }
         catch (...)
         {
-            return  py::to_PyErr();
+            return py::to_PyErr();
         }
     };
     
@@ -369,7 +402,7 @@ struct pyIAsyncActionWithProgressImpl : public pyIAsyncActionWithProgress
         }
         catch (...)
         {
-            return  py::to_PyErr();
+            return py::to_PyErr();
         }
     };
     
@@ -383,7 +416,7 @@ struct pyIAsyncActionWithProgressImpl : public pyIAsyncActionWithProgress
         }
         catch (...)
         {
-            return  py::to_PyErr();
+            return py::to_PyErr();
         }
     };
     
@@ -452,44 +485,77 @@ struct pyIAsyncOperationWithProgressImpl : public pyIAsyncOperationWithProgress
     
     PyObject* Cancel(PyObject* args) override
     {
-        try
+        Py_ssize_t arg_count = PyTuple_Size(args);
+        
+        if (arg_count == 0)
         {
-            obj.Cancel();
-            
-            Py_RETURN_NONE;
+            try
+            {
+                obj.Cancel();
+                
+                Py_RETURN_NONE;
+            }
+            catch (...)
+            {
+                return py::to_PyErr();
+            }
         }
-        catch (...)
+        else if (arg_count != -1)
         {
-            return  py::to_PyErr();
+            PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
         }
+        
+        return nullptr;
     };
     
     PyObject* Close(PyObject* args) override
     {
-        try
+        Py_ssize_t arg_count = PyTuple_Size(args);
+        
+        if (arg_count == 0)
         {
-            obj.Close();
-            
-            Py_RETURN_NONE;
+            try
+            {
+                obj.Close();
+                
+                Py_RETURN_NONE;
+            }
+            catch (...)
+            {
+                return py::to_PyErr();
+            }
         }
-        catch (...)
+        else if (arg_count != -1)
         {
-            return  py::to_PyErr();
+            PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
         }
+        
+        return nullptr;
     };
     
     PyObject* GetResults(PyObject* args) override
     {
-        try
+        Py_ssize_t arg_count = PyTuple_Size(args);
+        
+        if (arg_count == 0)
         {
-            TResult return_value = obj.GetResults();
-            
-            return py::convert(return_value);
+            try
+            {
+                TResult return_value = obj.GetResults();
+                
+                return py::convert(return_value);
+            }
+            catch (...)
+            {
+                return py::to_PyErr();
+            }
         }
-        catch (...)
+        else if (arg_count != -1)
         {
-            return  py::to_PyErr();
+            PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
         }
+        
+        return nullptr;
     };
     
     PyObject* get_Completed() override
@@ -502,7 +568,7 @@ struct pyIAsyncOperationWithProgressImpl : public pyIAsyncOperationWithProgress
         }
         catch (...)
         {
-            return  py::to_PyErr();
+            return py::to_PyErr();
         }
     };
     
@@ -516,7 +582,7 @@ struct pyIAsyncOperationWithProgressImpl : public pyIAsyncOperationWithProgress
         }
         catch (...)
         {
-            return  py::to_PyErr();
+            return py::to_PyErr();
         }
     };
     
@@ -530,7 +596,7 @@ struct pyIAsyncOperationWithProgressImpl : public pyIAsyncOperationWithProgress
         }
         catch (...)
         {
-            return  py::to_PyErr();
+            return py::to_PyErr();
         }
     };
     
@@ -544,7 +610,7 @@ struct pyIAsyncOperationWithProgressImpl : public pyIAsyncOperationWithProgress
         }
         catch (...)
         {
-            return  py::to_PyErr();
+            return py::to_PyErr();
         }
     };
     
@@ -558,7 +624,7 @@ struct pyIAsyncOperationWithProgressImpl : public pyIAsyncOperationWithProgress
         }
         catch (...)
         {
-            return  py::to_PyErr();
+            return py::to_PyErr();
         }
     };
     
@@ -625,44 +691,77 @@ struct pyIAsyncOperationImpl : public pyIAsyncOperation
     
     PyObject* Cancel(PyObject* args) override
     {
-        try
+        Py_ssize_t arg_count = PyTuple_Size(args);
+        
+        if (arg_count == 0)
         {
-            obj.Cancel();
-            
-            Py_RETURN_NONE;
+            try
+            {
+                obj.Cancel();
+                
+                Py_RETURN_NONE;
+            }
+            catch (...)
+            {
+                return py::to_PyErr();
+            }
         }
-        catch (...)
+        else if (arg_count != -1)
         {
-            return  py::to_PyErr();
+            PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
         }
+        
+        return nullptr;
     };
     
     PyObject* Close(PyObject* args) override
     {
-        try
+        Py_ssize_t arg_count = PyTuple_Size(args);
+        
+        if (arg_count == 0)
         {
-            obj.Close();
-            
-            Py_RETURN_NONE;
+            try
+            {
+                obj.Close();
+                
+                Py_RETURN_NONE;
+            }
+            catch (...)
+            {
+                return py::to_PyErr();
+            }
         }
-        catch (...)
+        else if (arg_count != -1)
         {
-            return  py::to_PyErr();
+            PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
         }
+        
+        return nullptr;
     };
     
     PyObject* GetResults(PyObject* args) override
     {
-        try
+        Py_ssize_t arg_count = PyTuple_Size(args);
+        
+        if (arg_count == 0)
         {
-            TResult return_value = obj.GetResults();
-            
-            return py::convert(return_value);
+            try
+            {
+                TResult return_value = obj.GetResults();
+                
+                return py::convert(return_value);
+            }
+            catch (...)
+            {
+                return py::to_PyErr();
+            }
         }
-        catch (...)
+        else if (arg_count != -1)
         {
-            return  py::to_PyErr();
+            PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
         }
+        
+        return nullptr;
     };
     
     PyObject* get_Completed() override
@@ -675,7 +774,7 @@ struct pyIAsyncOperationImpl : public pyIAsyncOperation
         }
         catch (...)
         {
-            return  py::to_PyErr();
+            return py::to_PyErr();
         }
     };
     
@@ -689,7 +788,7 @@ struct pyIAsyncOperationImpl : public pyIAsyncOperation
         }
         catch (...)
         {
-            return  py::to_PyErr();
+            return py::to_PyErr();
         }
     };
     
@@ -703,7 +802,7 @@ struct pyIAsyncOperationImpl : public pyIAsyncOperation
         }
         catch (...)
         {
-            return  py::to_PyErr();
+            return py::to_PyErr();
         }
     };
     
@@ -717,7 +816,7 @@ struct pyIAsyncOperationImpl : public pyIAsyncOperation
         }
         catch (...)
         {
-            return  py::to_PyErr();
+            return py::to_PyErr();
         }
     };
     
@@ -798,577 +897,984 @@ struct pyIReferenceArrayImpl : public pyIReferenceArray
     
     PyObject* GetBoolean(PyObject* args) override
     {
-        try
+        Py_ssize_t arg_count = PyTuple_Size(args);
+        
+        if (arg_count == 0)
         {
-            bool return_value = obj.GetBoolean();
-            
-            return py::convert(return_value);
+            try
+            {
+                bool return_value = obj.GetBoolean();
+                
+                return py::convert(return_value);
+            }
+            catch (...)
+            {
+                return py::to_PyErr();
+            }
         }
-        catch (...)
+        else if (arg_count != -1)
         {
-            return  py::to_PyErr();
+            PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
         }
+        
+        return nullptr;
     };
     
     PyObject* GetBooleanArray(PyObject* args) override
     {
-        try
+        Py_ssize_t arg_count = PyTuple_Size(args);
+        
+        if (arg_count == 0)
         {
-            /*r*/ winrt::com_array<bool> param0 { };
-            
-            obj.GetBooleanArray(param0);
-            
-            PyObject* out_param0 = nullptr; // TODO: receive array impl
-            return PyTuple_Pack(1, out_param0);
+            try
+            {
+                /*r*/ winrt::com_array<bool> param0 { };
+                
+                obj.GetBooleanArray(param0);
+                
+                PyObject* out_param0 = nullptr; // TODO: receive array impl
+                return PyTuple_Pack(1, out_param0);
+            }
+            catch (...)
+            {
+                return py::to_PyErr();
+            }
         }
-        catch (...)
+        else if (arg_count != -1)
         {
-            return  py::to_PyErr();
+            PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
         }
+        
+        return nullptr;
     };
     
     PyObject* GetChar16(PyObject* args) override
     {
-        try
+        Py_ssize_t arg_count = PyTuple_Size(args);
+        
+        if (arg_count == 0)
         {
-            char16_t return_value = obj.GetChar16();
-            
-            return py::convert(return_value);
+            try
+            {
+                char16_t return_value = obj.GetChar16();
+                
+                return py::convert(return_value);
+            }
+            catch (...)
+            {
+                return py::to_PyErr();
+            }
         }
-        catch (...)
+        else if (arg_count != -1)
         {
-            return  py::to_PyErr();
+            PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
         }
+        
+        return nullptr;
     };
     
     PyObject* GetChar16Array(PyObject* args) override
     {
-        try
+        Py_ssize_t arg_count = PyTuple_Size(args);
+        
+        if (arg_count == 0)
         {
-            /*r*/ winrt::com_array<char16_t> param0 { };
-            
-            obj.GetChar16Array(param0);
-            
-            PyObject* out_param0 = nullptr; // TODO: receive array impl
-            return PyTuple_Pack(1, out_param0);
+            try
+            {
+                /*r*/ winrt::com_array<char16_t> param0 { };
+                
+                obj.GetChar16Array(param0);
+                
+                PyObject* out_param0 = nullptr; // TODO: receive array impl
+                return PyTuple_Pack(1, out_param0);
+            }
+            catch (...)
+            {
+                return py::to_PyErr();
+            }
         }
-        catch (...)
+        else if (arg_count != -1)
         {
-            return  py::to_PyErr();
+            PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
         }
+        
+        return nullptr;
     };
     
     PyObject* GetDateTime(PyObject* args) override
     {
-        try
+        Py_ssize_t arg_count = PyTuple_Size(args);
+        
+        if (arg_count == 0)
         {
-            winrt::Windows::Foundation::DateTime return_value = obj.GetDateTime();
-            
-            return py::convert(return_value);
+            try
+            {
+                winrt::Windows::Foundation::DateTime return_value = obj.GetDateTime();
+                
+                return py::convert(return_value);
+            }
+            catch (...)
+            {
+                return py::to_PyErr();
+            }
         }
-        catch (...)
+        else if (arg_count != -1)
         {
-            return  py::to_PyErr();
+            PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
         }
+        
+        return nullptr;
     };
     
     PyObject* GetDateTimeArray(PyObject* args) override
     {
-        try
+        Py_ssize_t arg_count = PyTuple_Size(args);
+        
+        if (arg_count == 0)
         {
-            /*r*/ winrt::com_array<winrt::Windows::Foundation::DateTime> param0 { };
-            
-            obj.GetDateTimeArray(param0);
-            
-            PyObject* out_param0 = nullptr; // TODO: receive array impl
-            return PyTuple_Pack(1, out_param0);
+            try
+            {
+                /*r*/ winrt::com_array<winrt::Windows::Foundation::DateTime> param0 { };
+                
+                obj.GetDateTimeArray(param0);
+                
+                PyObject* out_param0 = nullptr; // TODO: receive array impl
+                return PyTuple_Pack(1, out_param0);
+            }
+            catch (...)
+            {
+                return py::to_PyErr();
+            }
         }
-        catch (...)
+        else if (arg_count != -1)
         {
-            return  py::to_PyErr();
+            PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
         }
+        
+        return nullptr;
     };
     
     PyObject* GetDouble(PyObject* args) override
     {
-        try
+        Py_ssize_t arg_count = PyTuple_Size(args);
+        
+        if (arg_count == 0)
         {
-            double return_value = obj.GetDouble();
-            
-            return py::convert(return_value);
+            try
+            {
+                double return_value = obj.GetDouble();
+                
+                return py::convert(return_value);
+            }
+            catch (...)
+            {
+                return py::to_PyErr();
+            }
         }
-        catch (...)
+        else if (arg_count != -1)
         {
-            return  py::to_PyErr();
+            PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
         }
+        
+        return nullptr;
     };
     
     PyObject* GetDoubleArray(PyObject* args) override
     {
-        try
+        Py_ssize_t arg_count = PyTuple_Size(args);
+        
+        if (arg_count == 0)
         {
-            /*r*/ winrt::com_array<double> param0 { };
-            
-            obj.GetDoubleArray(param0);
-            
-            PyObject* out_param0 = nullptr; // TODO: receive array impl
-            return PyTuple_Pack(1, out_param0);
+            try
+            {
+                /*r*/ winrt::com_array<double> param0 { };
+                
+                obj.GetDoubleArray(param0);
+                
+                PyObject* out_param0 = nullptr; // TODO: receive array impl
+                return PyTuple_Pack(1, out_param0);
+            }
+            catch (...)
+            {
+                return py::to_PyErr();
+            }
         }
-        catch (...)
+        else if (arg_count != -1)
         {
-            return  py::to_PyErr();
+            PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
         }
+        
+        return nullptr;
     };
     
     PyObject* GetGuid(PyObject* args) override
     {
-        try
+        Py_ssize_t arg_count = PyTuple_Size(args);
+        
+        if (arg_count == 0)
         {
-            winrt::guid return_value = obj.GetGuid();
-            
-            return py::convert(return_value);
+            try
+            {
+                winrt::guid return_value = obj.GetGuid();
+                
+                return py::convert(return_value);
+            }
+            catch (...)
+            {
+                return py::to_PyErr();
+            }
         }
-        catch (...)
+        else if (arg_count != -1)
         {
-            return  py::to_PyErr();
+            PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
         }
+        
+        return nullptr;
     };
     
     PyObject* GetGuidArray(PyObject* args) override
     {
-        try
+        Py_ssize_t arg_count = PyTuple_Size(args);
+        
+        if (arg_count == 0)
         {
-            /*r*/ winrt::com_array<winrt::guid> param0 { };
-            
-            obj.GetGuidArray(param0);
-            
-            PyObject* out_param0 = nullptr; // TODO: receive array impl
-            return PyTuple_Pack(1, out_param0);
+            try
+            {
+                /*r*/ winrt::com_array<winrt::guid> param0 { };
+                
+                obj.GetGuidArray(param0);
+                
+                PyObject* out_param0 = nullptr; // TODO: receive array impl
+                return PyTuple_Pack(1, out_param0);
+            }
+            catch (...)
+            {
+                return py::to_PyErr();
+            }
         }
-        catch (...)
+        else if (arg_count != -1)
         {
-            return  py::to_PyErr();
+            PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
         }
+        
+        return nullptr;
     };
     
     PyObject* GetInspectableArray(PyObject* args) override
     {
-        try
+        Py_ssize_t arg_count = PyTuple_Size(args);
+        
+        if (arg_count == 0)
         {
-            /*r*/ winrt::com_array<winrt::Windows::Foundation::IInspectable> param0 { };
-            
-            obj.GetInspectableArray(param0);
-            
-            PyObject* out_param0 = nullptr; // TODO: receive array impl
-            return PyTuple_Pack(1, out_param0);
+            try
+            {
+                /*r*/ winrt::com_array<winrt::Windows::Foundation::IInspectable> param0 { };
+                
+                obj.GetInspectableArray(param0);
+                
+                PyObject* out_param0 = nullptr; // TODO: receive array impl
+                return PyTuple_Pack(1, out_param0);
+            }
+            catch (...)
+            {
+                return py::to_PyErr();
+            }
         }
-        catch (...)
+        else if (arg_count != -1)
         {
-            return  py::to_PyErr();
+            PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
         }
+        
+        return nullptr;
     };
     
     PyObject* GetInt16(PyObject* args) override
     {
-        try
+        Py_ssize_t arg_count = PyTuple_Size(args);
+        
+        if (arg_count == 0)
         {
-            int16_t return_value = obj.GetInt16();
-            
-            return py::convert(return_value);
+            try
+            {
+                int16_t return_value = obj.GetInt16();
+                
+                return py::convert(return_value);
+            }
+            catch (...)
+            {
+                return py::to_PyErr();
+            }
         }
-        catch (...)
+        else if (arg_count != -1)
         {
-            return  py::to_PyErr();
+            PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
         }
+        
+        return nullptr;
     };
     
     PyObject* GetInt16Array(PyObject* args) override
     {
-        try
+        Py_ssize_t arg_count = PyTuple_Size(args);
+        
+        if (arg_count == 0)
         {
-            /*r*/ winrt::com_array<int16_t> param0 { };
-            
-            obj.GetInt16Array(param0);
-            
-            PyObject* out_param0 = nullptr; // TODO: receive array impl
-            return PyTuple_Pack(1, out_param0);
+            try
+            {
+                /*r*/ winrt::com_array<int16_t> param0 { };
+                
+                obj.GetInt16Array(param0);
+                
+                PyObject* out_param0 = nullptr; // TODO: receive array impl
+                return PyTuple_Pack(1, out_param0);
+            }
+            catch (...)
+            {
+                return py::to_PyErr();
+            }
         }
-        catch (...)
+        else if (arg_count != -1)
         {
-            return  py::to_PyErr();
+            PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
         }
+        
+        return nullptr;
     };
     
     PyObject* GetInt32(PyObject* args) override
     {
-        try
+        Py_ssize_t arg_count = PyTuple_Size(args);
+        
+        if (arg_count == 0)
         {
-            int32_t return_value = obj.GetInt32();
-            
-            return py::convert(return_value);
+            try
+            {
+                int32_t return_value = obj.GetInt32();
+                
+                return py::convert(return_value);
+            }
+            catch (...)
+            {
+                return py::to_PyErr();
+            }
         }
-        catch (...)
+        else if (arg_count != -1)
         {
-            return  py::to_PyErr();
+            PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
         }
+        
+        return nullptr;
     };
     
     PyObject* GetInt32Array(PyObject* args) override
     {
-        try
+        Py_ssize_t arg_count = PyTuple_Size(args);
+        
+        if (arg_count == 0)
         {
-            /*r*/ winrt::com_array<int32_t> param0 { };
-            
-            obj.GetInt32Array(param0);
-            
-            PyObject* out_param0 = nullptr; // TODO: receive array impl
-            return PyTuple_Pack(1, out_param0);
+            try
+            {
+                /*r*/ winrt::com_array<int32_t> param0 { };
+                
+                obj.GetInt32Array(param0);
+                
+                PyObject* out_param0 = nullptr; // TODO: receive array impl
+                return PyTuple_Pack(1, out_param0);
+            }
+            catch (...)
+            {
+                return py::to_PyErr();
+            }
         }
-        catch (...)
+        else if (arg_count != -1)
         {
-            return  py::to_PyErr();
+            PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
         }
+        
+        return nullptr;
     };
     
     PyObject* GetInt64(PyObject* args) override
     {
-        try
+        Py_ssize_t arg_count = PyTuple_Size(args);
+        
+        if (arg_count == 0)
         {
-            int64_t return_value = obj.GetInt64();
-            
-            return py::convert(return_value);
+            try
+            {
+                int64_t return_value = obj.GetInt64();
+                
+                return py::convert(return_value);
+            }
+            catch (...)
+            {
+                return py::to_PyErr();
+            }
         }
-        catch (...)
+        else if (arg_count != -1)
         {
-            return  py::to_PyErr();
+            PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
         }
+        
+        return nullptr;
     };
     
     PyObject* GetInt64Array(PyObject* args) override
     {
-        try
+        Py_ssize_t arg_count = PyTuple_Size(args);
+        
+        if (arg_count == 0)
         {
-            /*r*/ winrt::com_array<int64_t> param0 { };
-            
-            obj.GetInt64Array(param0);
-            
-            PyObject* out_param0 = nullptr; // TODO: receive array impl
-            return PyTuple_Pack(1, out_param0);
+            try
+            {
+                /*r*/ winrt::com_array<int64_t> param0 { };
+                
+                obj.GetInt64Array(param0);
+                
+                PyObject* out_param0 = nullptr; // TODO: receive array impl
+                return PyTuple_Pack(1, out_param0);
+            }
+            catch (...)
+            {
+                return py::to_PyErr();
+            }
         }
-        catch (...)
+        else if (arg_count != -1)
         {
-            return  py::to_PyErr();
+            PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
         }
+        
+        return nullptr;
     };
     
     PyObject* GetPoint(PyObject* args) override
     {
-        try
+        Py_ssize_t arg_count = PyTuple_Size(args);
+        
+        if (arg_count == 0)
         {
-            winrt::Windows::Foundation::Point return_value = obj.GetPoint();
-            
-            return py::convert(return_value);
+            try
+            {
+                winrt::Windows::Foundation::Point return_value = obj.GetPoint();
+                
+                return py::convert(return_value);
+            }
+            catch (...)
+            {
+                return py::to_PyErr();
+            }
         }
-        catch (...)
+        else if (arg_count != -1)
         {
-            return  py::to_PyErr();
+            PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
         }
+        
+        return nullptr;
     };
     
     PyObject* GetPointArray(PyObject* args) override
     {
-        try
+        Py_ssize_t arg_count = PyTuple_Size(args);
+        
+        if (arg_count == 0)
         {
-            /*r*/ winrt::com_array<winrt::Windows::Foundation::Point> param0 { };
-            
-            obj.GetPointArray(param0);
-            
-            PyObject* out_param0 = nullptr; // TODO: receive array impl
-            return PyTuple_Pack(1, out_param0);
+            try
+            {
+                /*r*/ winrt::com_array<winrt::Windows::Foundation::Point> param0 { };
+                
+                obj.GetPointArray(param0);
+                
+                PyObject* out_param0 = nullptr; // TODO: receive array impl
+                return PyTuple_Pack(1, out_param0);
+            }
+            catch (...)
+            {
+                return py::to_PyErr();
+            }
         }
-        catch (...)
+        else if (arg_count != -1)
         {
-            return  py::to_PyErr();
+            PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
         }
+        
+        return nullptr;
     };
     
     PyObject* GetRect(PyObject* args) override
     {
-        try
+        Py_ssize_t arg_count = PyTuple_Size(args);
+        
+        if (arg_count == 0)
         {
-            winrt::Windows::Foundation::Rect return_value = obj.GetRect();
-            
-            return py::convert(return_value);
+            try
+            {
+                winrt::Windows::Foundation::Rect return_value = obj.GetRect();
+                
+                return py::convert(return_value);
+            }
+            catch (...)
+            {
+                return py::to_PyErr();
+            }
         }
-        catch (...)
+        else if (arg_count != -1)
         {
-            return  py::to_PyErr();
+            PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
         }
+        
+        return nullptr;
     };
     
     PyObject* GetRectArray(PyObject* args) override
     {
-        try
+        Py_ssize_t arg_count = PyTuple_Size(args);
+        
+        if (arg_count == 0)
         {
-            /*r*/ winrt::com_array<winrt::Windows::Foundation::Rect> param0 { };
-            
-            obj.GetRectArray(param0);
-            
-            PyObject* out_param0 = nullptr; // TODO: receive array impl
-            return PyTuple_Pack(1, out_param0);
+            try
+            {
+                /*r*/ winrt::com_array<winrt::Windows::Foundation::Rect> param0 { };
+                
+                obj.GetRectArray(param0);
+                
+                PyObject* out_param0 = nullptr; // TODO: receive array impl
+                return PyTuple_Pack(1, out_param0);
+            }
+            catch (...)
+            {
+                return py::to_PyErr();
+            }
         }
-        catch (...)
+        else if (arg_count != -1)
         {
-            return  py::to_PyErr();
+            PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
         }
+        
+        return nullptr;
     };
     
     PyObject* GetSingle(PyObject* args) override
     {
-        try
+        Py_ssize_t arg_count = PyTuple_Size(args);
+        
+        if (arg_count == 0)
         {
-            float return_value = obj.GetSingle();
-            
-            return py::convert(return_value);
+            try
+            {
+                float return_value = obj.GetSingle();
+                
+                return py::convert(return_value);
+            }
+            catch (...)
+            {
+                return py::to_PyErr();
+            }
         }
-        catch (...)
+        else if (arg_count != -1)
         {
-            return  py::to_PyErr();
+            PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
         }
+        
+        return nullptr;
     };
     
     PyObject* GetSingleArray(PyObject* args) override
     {
-        try
+        Py_ssize_t arg_count = PyTuple_Size(args);
+        
+        if (arg_count == 0)
         {
-            /*r*/ winrt::com_array<float> param0 { };
-            
-            obj.GetSingleArray(param0);
-            
-            PyObject* out_param0 = nullptr; // TODO: receive array impl
-            return PyTuple_Pack(1, out_param0);
+            try
+            {
+                /*r*/ winrt::com_array<float> param0 { };
+                
+                obj.GetSingleArray(param0);
+                
+                PyObject* out_param0 = nullptr; // TODO: receive array impl
+                return PyTuple_Pack(1, out_param0);
+            }
+            catch (...)
+            {
+                return py::to_PyErr();
+            }
         }
-        catch (...)
+        else if (arg_count != -1)
         {
-            return  py::to_PyErr();
+            PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
         }
+        
+        return nullptr;
     };
     
     PyObject* GetSize(PyObject* args) override
     {
-        try
+        Py_ssize_t arg_count = PyTuple_Size(args);
+        
+        if (arg_count == 0)
         {
-            winrt::Windows::Foundation::Size return_value = obj.GetSize();
-            
-            return py::convert(return_value);
+            try
+            {
+                winrt::Windows::Foundation::Size return_value = obj.GetSize();
+                
+                return py::convert(return_value);
+            }
+            catch (...)
+            {
+                return py::to_PyErr();
+            }
         }
-        catch (...)
+        else if (arg_count != -1)
         {
-            return  py::to_PyErr();
+            PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
         }
+        
+        return nullptr;
     };
     
     PyObject* GetSizeArray(PyObject* args) override
     {
-        try
+        Py_ssize_t arg_count = PyTuple_Size(args);
+        
+        if (arg_count == 0)
         {
-            /*r*/ winrt::com_array<winrt::Windows::Foundation::Size> param0 { };
-            
-            obj.GetSizeArray(param0);
-            
-            PyObject* out_param0 = nullptr; // TODO: receive array impl
-            return PyTuple_Pack(1, out_param0);
+            try
+            {
+                /*r*/ winrt::com_array<winrt::Windows::Foundation::Size> param0 { };
+                
+                obj.GetSizeArray(param0);
+                
+                PyObject* out_param0 = nullptr; // TODO: receive array impl
+                return PyTuple_Pack(1, out_param0);
+            }
+            catch (...)
+            {
+                return py::to_PyErr();
+            }
         }
-        catch (...)
+        else if (arg_count != -1)
         {
-            return  py::to_PyErr();
+            PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
         }
+        
+        return nullptr;
     };
     
     PyObject* GetString(PyObject* args) override
     {
-        try
+        Py_ssize_t arg_count = PyTuple_Size(args);
+        
+        if (arg_count == 0)
         {
-            winrt::hstring return_value = obj.GetString();
-            
-            return py::convert(return_value);
+            try
+            {
+                winrt::hstring return_value = obj.GetString();
+                
+                return py::convert(return_value);
+            }
+            catch (...)
+            {
+                return py::to_PyErr();
+            }
         }
-        catch (...)
+        else if (arg_count != -1)
         {
-            return  py::to_PyErr();
+            PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
         }
+        
+        return nullptr;
     };
     
     PyObject* GetStringArray(PyObject* args) override
     {
-        try
+        Py_ssize_t arg_count = PyTuple_Size(args);
+        
+        if (arg_count == 0)
         {
-            /*r*/ winrt::com_array<winrt::hstring> param0 { };
-            
-            obj.GetStringArray(param0);
-            
-            PyObject* out_param0 = nullptr; // TODO: receive array impl
-            return PyTuple_Pack(1, out_param0);
+            try
+            {
+                /*r*/ winrt::com_array<winrt::hstring> param0 { };
+                
+                obj.GetStringArray(param0);
+                
+                PyObject* out_param0 = nullptr; // TODO: receive array impl
+                return PyTuple_Pack(1, out_param0);
+            }
+            catch (...)
+            {
+                return py::to_PyErr();
+            }
         }
-        catch (...)
+        else if (arg_count != -1)
         {
-            return  py::to_PyErr();
+            PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
         }
+        
+        return nullptr;
     };
     
     PyObject* GetTimeSpan(PyObject* args) override
     {
-        try
+        Py_ssize_t arg_count = PyTuple_Size(args);
+        
+        if (arg_count == 0)
         {
-            winrt::Windows::Foundation::TimeSpan return_value = obj.GetTimeSpan();
-            
-            return py::convert(return_value);
+            try
+            {
+                winrt::Windows::Foundation::TimeSpan return_value = obj.GetTimeSpan();
+                
+                return py::convert(return_value);
+            }
+            catch (...)
+            {
+                return py::to_PyErr();
+            }
         }
-        catch (...)
+        else if (arg_count != -1)
         {
-            return  py::to_PyErr();
+            PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
         }
+        
+        return nullptr;
     };
     
     PyObject* GetTimeSpanArray(PyObject* args) override
     {
-        try
+        Py_ssize_t arg_count = PyTuple_Size(args);
+        
+        if (arg_count == 0)
         {
-            /*r*/ winrt::com_array<winrt::Windows::Foundation::TimeSpan> param0 { };
-            
-            obj.GetTimeSpanArray(param0);
-            
-            PyObject* out_param0 = nullptr; // TODO: receive array impl
-            return PyTuple_Pack(1, out_param0);
+            try
+            {
+                /*r*/ winrt::com_array<winrt::Windows::Foundation::TimeSpan> param0 { };
+                
+                obj.GetTimeSpanArray(param0);
+                
+                PyObject* out_param0 = nullptr; // TODO: receive array impl
+                return PyTuple_Pack(1, out_param0);
+            }
+            catch (...)
+            {
+                return py::to_PyErr();
+            }
         }
-        catch (...)
+        else if (arg_count != -1)
         {
-            return  py::to_PyErr();
+            PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
         }
+        
+        return nullptr;
     };
     
     PyObject* GetUInt16(PyObject* args) override
     {
-        try
+        Py_ssize_t arg_count = PyTuple_Size(args);
+        
+        if (arg_count == 0)
         {
-            uint16_t return_value = obj.GetUInt16();
-            
-            return py::convert(return_value);
+            try
+            {
+                uint16_t return_value = obj.GetUInt16();
+                
+                return py::convert(return_value);
+            }
+            catch (...)
+            {
+                return py::to_PyErr();
+            }
         }
-        catch (...)
+        else if (arg_count != -1)
         {
-            return  py::to_PyErr();
+            PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
         }
+        
+        return nullptr;
     };
     
     PyObject* GetUInt16Array(PyObject* args) override
     {
-        try
+        Py_ssize_t arg_count = PyTuple_Size(args);
+        
+        if (arg_count == 0)
         {
-            /*r*/ winrt::com_array<uint16_t> param0 { };
-            
-            obj.GetUInt16Array(param0);
-            
-            PyObject* out_param0 = nullptr; // TODO: receive array impl
-            return PyTuple_Pack(1, out_param0);
+            try
+            {
+                /*r*/ winrt::com_array<uint16_t> param0 { };
+                
+                obj.GetUInt16Array(param0);
+                
+                PyObject* out_param0 = nullptr; // TODO: receive array impl
+                return PyTuple_Pack(1, out_param0);
+            }
+            catch (...)
+            {
+                return py::to_PyErr();
+            }
         }
-        catch (...)
+        else if (arg_count != -1)
         {
-            return  py::to_PyErr();
+            PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
         }
+        
+        return nullptr;
     };
     
     PyObject* GetUInt32(PyObject* args) override
     {
-        try
+        Py_ssize_t arg_count = PyTuple_Size(args);
+        
+        if (arg_count == 0)
         {
-            uint32_t return_value = obj.GetUInt32();
-            
-            return py::convert(return_value);
+            try
+            {
+                uint32_t return_value = obj.GetUInt32();
+                
+                return py::convert(return_value);
+            }
+            catch (...)
+            {
+                return py::to_PyErr();
+            }
         }
-        catch (...)
+        else if (arg_count != -1)
         {
-            return  py::to_PyErr();
+            PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
         }
+        
+        return nullptr;
     };
     
     PyObject* GetUInt32Array(PyObject* args) override
     {
-        try
+        Py_ssize_t arg_count = PyTuple_Size(args);
+        
+        if (arg_count == 0)
         {
-            /*r*/ winrt::com_array<uint32_t> param0 { };
-            
-            obj.GetUInt32Array(param0);
-            
-            PyObject* out_param0 = nullptr; // TODO: receive array impl
-            return PyTuple_Pack(1, out_param0);
+            try
+            {
+                /*r*/ winrt::com_array<uint32_t> param0 { };
+                
+                obj.GetUInt32Array(param0);
+                
+                PyObject* out_param0 = nullptr; // TODO: receive array impl
+                return PyTuple_Pack(1, out_param0);
+            }
+            catch (...)
+            {
+                return py::to_PyErr();
+            }
         }
-        catch (...)
+        else if (arg_count != -1)
         {
-            return  py::to_PyErr();
+            PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
         }
+        
+        return nullptr;
     };
     
     PyObject* GetUInt64(PyObject* args) override
     {
-        try
+        Py_ssize_t arg_count = PyTuple_Size(args);
+        
+        if (arg_count == 0)
         {
-            uint64_t return_value = obj.GetUInt64();
-            
-            return py::convert(return_value);
+            try
+            {
+                uint64_t return_value = obj.GetUInt64();
+                
+                return py::convert(return_value);
+            }
+            catch (...)
+            {
+                return py::to_PyErr();
+            }
         }
-        catch (...)
+        else if (arg_count != -1)
         {
-            return  py::to_PyErr();
+            PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
         }
+        
+        return nullptr;
     };
     
     PyObject* GetUInt64Array(PyObject* args) override
     {
-        try
+        Py_ssize_t arg_count = PyTuple_Size(args);
+        
+        if (arg_count == 0)
         {
-            /*r*/ winrt::com_array<uint64_t> param0 { };
-            
-            obj.GetUInt64Array(param0);
-            
-            PyObject* out_param0 = nullptr; // TODO: receive array impl
-            return PyTuple_Pack(1, out_param0);
+            try
+            {
+                /*r*/ winrt::com_array<uint64_t> param0 { };
+                
+                obj.GetUInt64Array(param0);
+                
+                PyObject* out_param0 = nullptr; // TODO: receive array impl
+                return PyTuple_Pack(1, out_param0);
+            }
+            catch (...)
+            {
+                return py::to_PyErr();
+            }
         }
-        catch (...)
+        else if (arg_count != -1)
         {
-            return  py::to_PyErr();
+            PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
         }
+        
+        return nullptr;
     };
     
     PyObject* GetUInt8(PyObject* args) override
     {
-        try
+        Py_ssize_t arg_count = PyTuple_Size(args);
+        
+        if (arg_count == 0)
         {
-            uint8_t return_value = obj.GetUInt8();
-            
-            return py::convert(return_value);
+            try
+            {
+                uint8_t return_value = obj.GetUInt8();
+                
+                return py::convert(return_value);
+            }
+            catch (...)
+            {
+                return py::to_PyErr();
+            }
         }
-        catch (...)
+        else if (arg_count != -1)
         {
-            return  py::to_PyErr();
+            PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
         }
+        
+        return nullptr;
     };
     
     PyObject* GetUInt8Array(PyObject* args) override
     {
-        try
+        Py_ssize_t arg_count = PyTuple_Size(args);
+        
+        if (arg_count == 0)
         {
-            /*r*/ winrt::com_array<uint8_t> param0 { };
-            
-            obj.GetUInt8Array(param0);
-            
-            PyObject* out_param0 = nullptr; // TODO: receive array impl
-            return PyTuple_Pack(1, out_param0);
+            try
+            {
+                /*r*/ winrt::com_array<uint8_t> param0 { };
+                
+                obj.GetUInt8Array(param0);
+                
+                PyObject* out_param0 = nullptr; // TODO: receive array impl
+                return PyTuple_Pack(1, out_param0);
+            }
+            catch (...)
+            {
+                return py::to_PyErr();
+            }
         }
-        catch (...)
+        else if (arg_count != -1)
         {
-            return  py::to_PyErr();
+            PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
         }
+        
+        return nullptr;
     };
     
     PyObject* get_IsNumericScalar() override
@@ -1381,7 +1887,7 @@ struct pyIReferenceArrayImpl : public pyIReferenceArray
         }
         catch (...)
         {
-            return  py::to_PyErr();
+            return py::to_PyErr();
         }
     };
     
@@ -1395,7 +1901,7 @@ struct pyIReferenceArrayImpl : public pyIReferenceArray
         }
         catch (...)
         {
-            return  py::to_PyErr();
+            return py::to_PyErr();
         }
     };
     
@@ -1408,7 +1914,7 @@ struct pyIReferenceArrayImpl : public pyIReferenceArray
         }
         catch (...)
         {
-            return  py::to_PyErr();
+            return py::to_PyErr();
         }
     };
     
@@ -1473,577 +1979,984 @@ struct pyIReferenceImpl : public pyIReference
     
     PyObject* GetBoolean(PyObject* args) override
     {
-        try
+        Py_ssize_t arg_count = PyTuple_Size(args);
+        
+        if (arg_count == 0)
         {
-            bool return_value = obj.GetBoolean();
-            
-            return py::convert(return_value);
+            try
+            {
+                bool return_value = obj.GetBoolean();
+                
+                return py::convert(return_value);
+            }
+            catch (...)
+            {
+                return py::to_PyErr();
+            }
         }
-        catch (...)
+        else if (arg_count != -1)
         {
-            return  py::to_PyErr();
+            PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
         }
+        
+        return nullptr;
     };
     
     PyObject* GetBooleanArray(PyObject* args) override
     {
-        try
+        Py_ssize_t arg_count = PyTuple_Size(args);
+        
+        if (arg_count == 0)
         {
-            /*r*/ winrt::com_array<bool> param0 { };
-            
-            obj.GetBooleanArray(param0);
-            
-            PyObject* out_param0 = nullptr; // TODO: receive array impl
-            return PyTuple_Pack(1, out_param0);
+            try
+            {
+                /*r*/ winrt::com_array<bool> param0 { };
+                
+                obj.GetBooleanArray(param0);
+                
+                PyObject* out_param0 = nullptr; // TODO: receive array impl
+                return PyTuple_Pack(1, out_param0);
+            }
+            catch (...)
+            {
+                return py::to_PyErr();
+            }
         }
-        catch (...)
+        else if (arg_count != -1)
         {
-            return  py::to_PyErr();
+            PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
         }
+        
+        return nullptr;
     };
     
     PyObject* GetChar16(PyObject* args) override
     {
-        try
+        Py_ssize_t arg_count = PyTuple_Size(args);
+        
+        if (arg_count == 0)
         {
-            char16_t return_value = obj.GetChar16();
-            
-            return py::convert(return_value);
+            try
+            {
+                char16_t return_value = obj.GetChar16();
+                
+                return py::convert(return_value);
+            }
+            catch (...)
+            {
+                return py::to_PyErr();
+            }
         }
-        catch (...)
+        else if (arg_count != -1)
         {
-            return  py::to_PyErr();
+            PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
         }
+        
+        return nullptr;
     };
     
     PyObject* GetChar16Array(PyObject* args) override
     {
-        try
+        Py_ssize_t arg_count = PyTuple_Size(args);
+        
+        if (arg_count == 0)
         {
-            /*r*/ winrt::com_array<char16_t> param0 { };
-            
-            obj.GetChar16Array(param0);
-            
-            PyObject* out_param0 = nullptr; // TODO: receive array impl
-            return PyTuple_Pack(1, out_param0);
+            try
+            {
+                /*r*/ winrt::com_array<char16_t> param0 { };
+                
+                obj.GetChar16Array(param0);
+                
+                PyObject* out_param0 = nullptr; // TODO: receive array impl
+                return PyTuple_Pack(1, out_param0);
+            }
+            catch (...)
+            {
+                return py::to_PyErr();
+            }
         }
-        catch (...)
+        else if (arg_count != -1)
         {
-            return  py::to_PyErr();
+            PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
         }
+        
+        return nullptr;
     };
     
     PyObject* GetDateTime(PyObject* args) override
     {
-        try
+        Py_ssize_t arg_count = PyTuple_Size(args);
+        
+        if (arg_count == 0)
         {
-            winrt::Windows::Foundation::DateTime return_value = obj.GetDateTime();
-            
-            return py::convert(return_value);
+            try
+            {
+                winrt::Windows::Foundation::DateTime return_value = obj.GetDateTime();
+                
+                return py::convert(return_value);
+            }
+            catch (...)
+            {
+                return py::to_PyErr();
+            }
         }
-        catch (...)
+        else if (arg_count != -1)
         {
-            return  py::to_PyErr();
+            PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
         }
+        
+        return nullptr;
     };
     
     PyObject* GetDateTimeArray(PyObject* args) override
     {
-        try
+        Py_ssize_t arg_count = PyTuple_Size(args);
+        
+        if (arg_count == 0)
         {
-            /*r*/ winrt::com_array<winrt::Windows::Foundation::DateTime> param0 { };
-            
-            obj.GetDateTimeArray(param0);
-            
-            PyObject* out_param0 = nullptr; // TODO: receive array impl
-            return PyTuple_Pack(1, out_param0);
+            try
+            {
+                /*r*/ winrt::com_array<winrt::Windows::Foundation::DateTime> param0 { };
+                
+                obj.GetDateTimeArray(param0);
+                
+                PyObject* out_param0 = nullptr; // TODO: receive array impl
+                return PyTuple_Pack(1, out_param0);
+            }
+            catch (...)
+            {
+                return py::to_PyErr();
+            }
         }
-        catch (...)
+        else if (arg_count != -1)
         {
-            return  py::to_PyErr();
+            PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
         }
+        
+        return nullptr;
     };
     
     PyObject* GetDouble(PyObject* args) override
     {
-        try
+        Py_ssize_t arg_count = PyTuple_Size(args);
+        
+        if (arg_count == 0)
         {
-            double return_value = obj.GetDouble();
-            
-            return py::convert(return_value);
+            try
+            {
+                double return_value = obj.GetDouble();
+                
+                return py::convert(return_value);
+            }
+            catch (...)
+            {
+                return py::to_PyErr();
+            }
         }
-        catch (...)
+        else if (arg_count != -1)
         {
-            return  py::to_PyErr();
+            PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
         }
+        
+        return nullptr;
     };
     
     PyObject* GetDoubleArray(PyObject* args) override
     {
-        try
+        Py_ssize_t arg_count = PyTuple_Size(args);
+        
+        if (arg_count == 0)
         {
-            /*r*/ winrt::com_array<double> param0 { };
-            
-            obj.GetDoubleArray(param0);
-            
-            PyObject* out_param0 = nullptr; // TODO: receive array impl
-            return PyTuple_Pack(1, out_param0);
+            try
+            {
+                /*r*/ winrt::com_array<double> param0 { };
+                
+                obj.GetDoubleArray(param0);
+                
+                PyObject* out_param0 = nullptr; // TODO: receive array impl
+                return PyTuple_Pack(1, out_param0);
+            }
+            catch (...)
+            {
+                return py::to_PyErr();
+            }
         }
-        catch (...)
+        else if (arg_count != -1)
         {
-            return  py::to_PyErr();
+            PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
         }
+        
+        return nullptr;
     };
     
     PyObject* GetGuid(PyObject* args) override
     {
-        try
+        Py_ssize_t arg_count = PyTuple_Size(args);
+        
+        if (arg_count == 0)
         {
-            winrt::guid return_value = obj.GetGuid();
-            
-            return py::convert(return_value);
+            try
+            {
+                winrt::guid return_value = obj.GetGuid();
+                
+                return py::convert(return_value);
+            }
+            catch (...)
+            {
+                return py::to_PyErr();
+            }
         }
-        catch (...)
+        else if (arg_count != -1)
         {
-            return  py::to_PyErr();
+            PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
         }
+        
+        return nullptr;
     };
     
     PyObject* GetGuidArray(PyObject* args) override
     {
-        try
+        Py_ssize_t arg_count = PyTuple_Size(args);
+        
+        if (arg_count == 0)
         {
-            /*r*/ winrt::com_array<winrt::guid> param0 { };
-            
-            obj.GetGuidArray(param0);
-            
-            PyObject* out_param0 = nullptr; // TODO: receive array impl
-            return PyTuple_Pack(1, out_param0);
+            try
+            {
+                /*r*/ winrt::com_array<winrt::guid> param0 { };
+                
+                obj.GetGuidArray(param0);
+                
+                PyObject* out_param0 = nullptr; // TODO: receive array impl
+                return PyTuple_Pack(1, out_param0);
+            }
+            catch (...)
+            {
+                return py::to_PyErr();
+            }
         }
-        catch (...)
+        else if (arg_count != -1)
         {
-            return  py::to_PyErr();
+            PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
         }
+        
+        return nullptr;
     };
     
     PyObject* GetInspectableArray(PyObject* args) override
     {
-        try
+        Py_ssize_t arg_count = PyTuple_Size(args);
+        
+        if (arg_count == 0)
         {
-            /*r*/ winrt::com_array<winrt::Windows::Foundation::IInspectable> param0 { };
-            
-            obj.GetInspectableArray(param0);
-            
-            PyObject* out_param0 = nullptr; // TODO: receive array impl
-            return PyTuple_Pack(1, out_param0);
+            try
+            {
+                /*r*/ winrt::com_array<winrt::Windows::Foundation::IInspectable> param0 { };
+                
+                obj.GetInspectableArray(param0);
+                
+                PyObject* out_param0 = nullptr; // TODO: receive array impl
+                return PyTuple_Pack(1, out_param0);
+            }
+            catch (...)
+            {
+                return py::to_PyErr();
+            }
         }
-        catch (...)
+        else if (arg_count != -1)
         {
-            return  py::to_PyErr();
+            PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
         }
+        
+        return nullptr;
     };
     
     PyObject* GetInt16(PyObject* args) override
     {
-        try
+        Py_ssize_t arg_count = PyTuple_Size(args);
+        
+        if (arg_count == 0)
         {
-            int16_t return_value = obj.GetInt16();
-            
-            return py::convert(return_value);
+            try
+            {
+                int16_t return_value = obj.GetInt16();
+                
+                return py::convert(return_value);
+            }
+            catch (...)
+            {
+                return py::to_PyErr();
+            }
         }
-        catch (...)
+        else if (arg_count != -1)
         {
-            return  py::to_PyErr();
+            PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
         }
+        
+        return nullptr;
     };
     
     PyObject* GetInt16Array(PyObject* args) override
     {
-        try
+        Py_ssize_t arg_count = PyTuple_Size(args);
+        
+        if (arg_count == 0)
         {
-            /*r*/ winrt::com_array<int16_t> param0 { };
-            
-            obj.GetInt16Array(param0);
-            
-            PyObject* out_param0 = nullptr; // TODO: receive array impl
-            return PyTuple_Pack(1, out_param0);
+            try
+            {
+                /*r*/ winrt::com_array<int16_t> param0 { };
+                
+                obj.GetInt16Array(param0);
+                
+                PyObject* out_param0 = nullptr; // TODO: receive array impl
+                return PyTuple_Pack(1, out_param0);
+            }
+            catch (...)
+            {
+                return py::to_PyErr();
+            }
         }
-        catch (...)
+        else if (arg_count != -1)
         {
-            return  py::to_PyErr();
+            PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
         }
+        
+        return nullptr;
     };
     
     PyObject* GetInt32(PyObject* args) override
     {
-        try
+        Py_ssize_t arg_count = PyTuple_Size(args);
+        
+        if (arg_count == 0)
         {
-            int32_t return_value = obj.GetInt32();
-            
-            return py::convert(return_value);
+            try
+            {
+                int32_t return_value = obj.GetInt32();
+                
+                return py::convert(return_value);
+            }
+            catch (...)
+            {
+                return py::to_PyErr();
+            }
         }
-        catch (...)
+        else if (arg_count != -1)
         {
-            return  py::to_PyErr();
+            PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
         }
+        
+        return nullptr;
     };
     
     PyObject* GetInt32Array(PyObject* args) override
     {
-        try
+        Py_ssize_t arg_count = PyTuple_Size(args);
+        
+        if (arg_count == 0)
         {
-            /*r*/ winrt::com_array<int32_t> param0 { };
-            
-            obj.GetInt32Array(param0);
-            
-            PyObject* out_param0 = nullptr; // TODO: receive array impl
-            return PyTuple_Pack(1, out_param0);
+            try
+            {
+                /*r*/ winrt::com_array<int32_t> param0 { };
+                
+                obj.GetInt32Array(param0);
+                
+                PyObject* out_param0 = nullptr; // TODO: receive array impl
+                return PyTuple_Pack(1, out_param0);
+            }
+            catch (...)
+            {
+                return py::to_PyErr();
+            }
         }
-        catch (...)
+        else if (arg_count != -1)
         {
-            return  py::to_PyErr();
+            PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
         }
+        
+        return nullptr;
     };
     
     PyObject* GetInt64(PyObject* args) override
     {
-        try
+        Py_ssize_t arg_count = PyTuple_Size(args);
+        
+        if (arg_count == 0)
         {
-            int64_t return_value = obj.GetInt64();
-            
-            return py::convert(return_value);
+            try
+            {
+                int64_t return_value = obj.GetInt64();
+                
+                return py::convert(return_value);
+            }
+            catch (...)
+            {
+                return py::to_PyErr();
+            }
         }
-        catch (...)
+        else if (arg_count != -1)
         {
-            return  py::to_PyErr();
+            PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
         }
+        
+        return nullptr;
     };
     
     PyObject* GetInt64Array(PyObject* args) override
     {
-        try
+        Py_ssize_t arg_count = PyTuple_Size(args);
+        
+        if (arg_count == 0)
         {
-            /*r*/ winrt::com_array<int64_t> param0 { };
-            
-            obj.GetInt64Array(param0);
-            
-            PyObject* out_param0 = nullptr; // TODO: receive array impl
-            return PyTuple_Pack(1, out_param0);
+            try
+            {
+                /*r*/ winrt::com_array<int64_t> param0 { };
+                
+                obj.GetInt64Array(param0);
+                
+                PyObject* out_param0 = nullptr; // TODO: receive array impl
+                return PyTuple_Pack(1, out_param0);
+            }
+            catch (...)
+            {
+                return py::to_PyErr();
+            }
         }
-        catch (...)
+        else if (arg_count != -1)
         {
-            return  py::to_PyErr();
+            PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
         }
+        
+        return nullptr;
     };
     
     PyObject* GetPoint(PyObject* args) override
     {
-        try
+        Py_ssize_t arg_count = PyTuple_Size(args);
+        
+        if (arg_count == 0)
         {
-            winrt::Windows::Foundation::Point return_value = obj.GetPoint();
-            
-            return py::convert(return_value);
+            try
+            {
+                winrt::Windows::Foundation::Point return_value = obj.GetPoint();
+                
+                return py::convert(return_value);
+            }
+            catch (...)
+            {
+                return py::to_PyErr();
+            }
         }
-        catch (...)
+        else if (arg_count != -1)
         {
-            return  py::to_PyErr();
+            PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
         }
+        
+        return nullptr;
     };
     
     PyObject* GetPointArray(PyObject* args) override
     {
-        try
+        Py_ssize_t arg_count = PyTuple_Size(args);
+        
+        if (arg_count == 0)
         {
-            /*r*/ winrt::com_array<winrt::Windows::Foundation::Point> param0 { };
-            
-            obj.GetPointArray(param0);
-            
-            PyObject* out_param0 = nullptr; // TODO: receive array impl
-            return PyTuple_Pack(1, out_param0);
+            try
+            {
+                /*r*/ winrt::com_array<winrt::Windows::Foundation::Point> param0 { };
+                
+                obj.GetPointArray(param0);
+                
+                PyObject* out_param0 = nullptr; // TODO: receive array impl
+                return PyTuple_Pack(1, out_param0);
+            }
+            catch (...)
+            {
+                return py::to_PyErr();
+            }
         }
-        catch (...)
+        else if (arg_count != -1)
         {
-            return  py::to_PyErr();
+            PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
         }
+        
+        return nullptr;
     };
     
     PyObject* GetRect(PyObject* args) override
     {
-        try
+        Py_ssize_t arg_count = PyTuple_Size(args);
+        
+        if (arg_count == 0)
         {
-            winrt::Windows::Foundation::Rect return_value = obj.GetRect();
-            
-            return py::convert(return_value);
+            try
+            {
+                winrt::Windows::Foundation::Rect return_value = obj.GetRect();
+                
+                return py::convert(return_value);
+            }
+            catch (...)
+            {
+                return py::to_PyErr();
+            }
         }
-        catch (...)
+        else if (arg_count != -1)
         {
-            return  py::to_PyErr();
+            PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
         }
+        
+        return nullptr;
     };
     
     PyObject* GetRectArray(PyObject* args) override
     {
-        try
+        Py_ssize_t arg_count = PyTuple_Size(args);
+        
+        if (arg_count == 0)
         {
-            /*r*/ winrt::com_array<winrt::Windows::Foundation::Rect> param0 { };
-            
-            obj.GetRectArray(param0);
-            
-            PyObject* out_param0 = nullptr; // TODO: receive array impl
-            return PyTuple_Pack(1, out_param0);
+            try
+            {
+                /*r*/ winrt::com_array<winrt::Windows::Foundation::Rect> param0 { };
+                
+                obj.GetRectArray(param0);
+                
+                PyObject* out_param0 = nullptr; // TODO: receive array impl
+                return PyTuple_Pack(1, out_param0);
+            }
+            catch (...)
+            {
+                return py::to_PyErr();
+            }
         }
-        catch (...)
+        else if (arg_count != -1)
         {
-            return  py::to_PyErr();
+            PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
         }
+        
+        return nullptr;
     };
     
     PyObject* GetSingle(PyObject* args) override
     {
-        try
+        Py_ssize_t arg_count = PyTuple_Size(args);
+        
+        if (arg_count == 0)
         {
-            float return_value = obj.GetSingle();
-            
-            return py::convert(return_value);
+            try
+            {
+                float return_value = obj.GetSingle();
+                
+                return py::convert(return_value);
+            }
+            catch (...)
+            {
+                return py::to_PyErr();
+            }
         }
-        catch (...)
+        else if (arg_count != -1)
         {
-            return  py::to_PyErr();
+            PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
         }
+        
+        return nullptr;
     };
     
     PyObject* GetSingleArray(PyObject* args) override
     {
-        try
+        Py_ssize_t arg_count = PyTuple_Size(args);
+        
+        if (arg_count == 0)
         {
-            /*r*/ winrt::com_array<float> param0 { };
-            
-            obj.GetSingleArray(param0);
-            
-            PyObject* out_param0 = nullptr; // TODO: receive array impl
-            return PyTuple_Pack(1, out_param0);
+            try
+            {
+                /*r*/ winrt::com_array<float> param0 { };
+                
+                obj.GetSingleArray(param0);
+                
+                PyObject* out_param0 = nullptr; // TODO: receive array impl
+                return PyTuple_Pack(1, out_param0);
+            }
+            catch (...)
+            {
+                return py::to_PyErr();
+            }
         }
-        catch (...)
+        else if (arg_count != -1)
         {
-            return  py::to_PyErr();
+            PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
         }
+        
+        return nullptr;
     };
     
     PyObject* GetSize(PyObject* args) override
     {
-        try
+        Py_ssize_t arg_count = PyTuple_Size(args);
+        
+        if (arg_count == 0)
         {
-            winrt::Windows::Foundation::Size return_value = obj.GetSize();
-            
-            return py::convert(return_value);
+            try
+            {
+                winrt::Windows::Foundation::Size return_value = obj.GetSize();
+                
+                return py::convert(return_value);
+            }
+            catch (...)
+            {
+                return py::to_PyErr();
+            }
         }
-        catch (...)
+        else if (arg_count != -1)
         {
-            return  py::to_PyErr();
+            PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
         }
+        
+        return nullptr;
     };
     
     PyObject* GetSizeArray(PyObject* args) override
     {
-        try
+        Py_ssize_t arg_count = PyTuple_Size(args);
+        
+        if (arg_count == 0)
         {
-            /*r*/ winrt::com_array<winrt::Windows::Foundation::Size> param0 { };
-            
-            obj.GetSizeArray(param0);
-            
-            PyObject* out_param0 = nullptr; // TODO: receive array impl
-            return PyTuple_Pack(1, out_param0);
+            try
+            {
+                /*r*/ winrt::com_array<winrt::Windows::Foundation::Size> param0 { };
+                
+                obj.GetSizeArray(param0);
+                
+                PyObject* out_param0 = nullptr; // TODO: receive array impl
+                return PyTuple_Pack(1, out_param0);
+            }
+            catch (...)
+            {
+                return py::to_PyErr();
+            }
         }
-        catch (...)
+        else if (arg_count != -1)
         {
-            return  py::to_PyErr();
+            PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
         }
+        
+        return nullptr;
     };
     
     PyObject* GetString(PyObject* args) override
     {
-        try
+        Py_ssize_t arg_count = PyTuple_Size(args);
+        
+        if (arg_count == 0)
         {
-            winrt::hstring return_value = obj.GetString();
-            
-            return py::convert(return_value);
+            try
+            {
+                winrt::hstring return_value = obj.GetString();
+                
+                return py::convert(return_value);
+            }
+            catch (...)
+            {
+                return py::to_PyErr();
+            }
         }
-        catch (...)
+        else if (arg_count != -1)
         {
-            return  py::to_PyErr();
+            PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
         }
+        
+        return nullptr;
     };
     
     PyObject* GetStringArray(PyObject* args) override
     {
-        try
+        Py_ssize_t arg_count = PyTuple_Size(args);
+        
+        if (arg_count == 0)
         {
-            /*r*/ winrt::com_array<winrt::hstring> param0 { };
-            
-            obj.GetStringArray(param0);
-            
-            PyObject* out_param0 = nullptr; // TODO: receive array impl
-            return PyTuple_Pack(1, out_param0);
+            try
+            {
+                /*r*/ winrt::com_array<winrt::hstring> param0 { };
+                
+                obj.GetStringArray(param0);
+                
+                PyObject* out_param0 = nullptr; // TODO: receive array impl
+                return PyTuple_Pack(1, out_param0);
+            }
+            catch (...)
+            {
+                return py::to_PyErr();
+            }
         }
-        catch (...)
+        else if (arg_count != -1)
         {
-            return  py::to_PyErr();
+            PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
         }
+        
+        return nullptr;
     };
     
     PyObject* GetTimeSpan(PyObject* args) override
     {
-        try
+        Py_ssize_t arg_count = PyTuple_Size(args);
+        
+        if (arg_count == 0)
         {
-            winrt::Windows::Foundation::TimeSpan return_value = obj.GetTimeSpan();
-            
-            return py::convert(return_value);
+            try
+            {
+                winrt::Windows::Foundation::TimeSpan return_value = obj.GetTimeSpan();
+                
+                return py::convert(return_value);
+            }
+            catch (...)
+            {
+                return py::to_PyErr();
+            }
         }
-        catch (...)
+        else if (arg_count != -1)
         {
-            return  py::to_PyErr();
+            PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
         }
+        
+        return nullptr;
     };
     
     PyObject* GetTimeSpanArray(PyObject* args) override
     {
-        try
+        Py_ssize_t arg_count = PyTuple_Size(args);
+        
+        if (arg_count == 0)
         {
-            /*r*/ winrt::com_array<winrt::Windows::Foundation::TimeSpan> param0 { };
-            
-            obj.GetTimeSpanArray(param0);
-            
-            PyObject* out_param0 = nullptr; // TODO: receive array impl
-            return PyTuple_Pack(1, out_param0);
+            try
+            {
+                /*r*/ winrt::com_array<winrt::Windows::Foundation::TimeSpan> param0 { };
+                
+                obj.GetTimeSpanArray(param0);
+                
+                PyObject* out_param0 = nullptr; // TODO: receive array impl
+                return PyTuple_Pack(1, out_param0);
+            }
+            catch (...)
+            {
+                return py::to_PyErr();
+            }
         }
-        catch (...)
+        else if (arg_count != -1)
         {
-            return  py::to_PyErr();
+            PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
         }
+        
+        return nullptr;
     };
     
     PyObject* GetUInt16(PyObject* args) override
     {
-        try
+        Py_ssize_t arg_count = PyTuple_Size(args);
+        
+        if (arg_count == 0)
         {
-            uint16_t return_value = obj.GetUInt16();
-            
-            return py::convert(return_value);
+            try
+            {
+                uint16_t return_value = obj.GetUInt16();
+                
+                return py::convert(return_value);
+            }
+            catch (...)
+            {
+                return py::to_PyErr();
+            }
         }
-        catch (...)
+        else if (arg_count != -1)
         {
-            return  py::to_PyErr();
+            PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
         }
+        
+        return nullptr;
     };
     
     PyObject* GetUInt16Array(PyObject* args) override
     {
-        try
+        Py_ssize_t arg_count = PyTuple_Size(args);
+        
+        if (arg_count == 0)
         {
-            /*r*/ winrt::com_array<uint16_t> param0 { };
-            
-            obj.GetUInt16Array(param0);
-            
-            PyObject* out_param0 = nullptr; // TODO: receive array impl
-            return PyTuple_Pack(1, out_param0);
+            try
+            {
+                /*r*/ winrt::com_array<uint16_t> param0 { };
+                
+                obj.GetUInt16Array(param0);
+                
+                PyObject* out_param0 = nullptr; // TODO: receive array impl
+                return PyTuple_Pack(1, out_param0);
+            }
+            catch (...)
+            {
+                return py::to_PyErr();
+            }
         }
-        catch (...)
+        else if (arg_count != -1)
         {
-            return  py::to_PyErr();
+            PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
         }
+        
+        return nullptr;
     };
     
     PyObject* GetUInt32(PyObject* args) override
     {
-        try
+        Py_ssize_t arg_count = PyTuple_Size(args);
+        
+        if (arg_count == 0)
         {
-            uint32_t return_value = obj.GetUInt32();
-            
-            return py::convert(return_value);
+            try
+            {
+                uint32_t return_value = obj.GetUInt32();
+                
+                return py::convert(return_value);
+            }
+            catch (...)
+            {
+                return py::to_PyErr();
+            }
         }
-        catch (...)
+        else if (arg_count != -1)
         {
-            return  py::to_PyErr();
+            PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
         }
+        
+        return nullptr;
     };
     
     PyObject* GetUInt32Array(PyObject* args) override
     {
-        try
+        Py_ssize_t arg_count = PyTuple_Size(args);
+        
+        if (arg_count == 0)
         {
-            /*r*/ winrt::com_array<uint32_t> param0 { };
-            
-            obj.GetUInt32Array(param0);
-            
-            PyObject* out_param0 = nullptr; // TODO: receive array impl
-            return PyTuple_Pack(1, out_param0);
+            try
+            {
+                /*r*/ winrt::com_array<uint32_t> param0 { };
+                
+                obj.GetUInt32Array(param0);
+                
+                PyObject* out_param0 = nullptr; // TODO: receive array impl
+                return PyTuple_Pack(1, out_param0);
+            }
+            catch (...)
+            {
+                return py::to_PyErr();
+            }
         }
-        catch (...)
+        else if (arg_count != -1)
         {
-            return  py::to_PyErr();
+            PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
         }
+        
+        return nullptr;
     };
     
     PyObject* GetUInt64(PyObject* args) override
     {
-        try
+        Py_ssize_t arg_count = PyTuple_Size(args);
+        
+        if (arg_count == 0)
         {
-            uint64_t return_value = obj.GetUInt64();
-            
-            return py::convert(return_value);
+            try
+            {
+                uint64_t return_value = obj.GetUInt64();
+                
+                return py::convert(return_value);
+            }
+            catch (...)
+            {
+                return py::to_PyErr();
+            }
         }
-        catch (...)
+        else if (arg_count != -1)
         {
-            return  py::to_PyErr();
+            PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
         }
+        
+        return nullptr;
     };
     
     PyObject* GetUInt64Array(PyObject* args) override
     {
-        try
+        Py_ssize_t arg_count = PyTuple_Size(args);
+        
+        if (arg_count == 0)
         {
-            /*r*/ winrt::com_array<uint64_t> param0 { };
-            
-            obj.GetUInt64Array(param0);
-            
-            PyObject* out_param0 = nullptr; // TODO: receive array impl
-            return PyTuple_Pack(1, out_param0);
+            try
+            {
+                /*r*/ winrt::com_array<uint64_t> param0 { };
+                
+                obj.GetUInt64Array(param0);
+                
+                PyObject* out_param0 = nullptr; // TODO: receive array impl
+                return PyTuple_Pack(1, out_param0);
+            }
+            catch (...)
+            {
+                return py::to_PyErr();
+            }
         }
-        catch (...)
+        else if (arg_count != -1)
         {
-            return  py::to_PyErr();
+            PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
         }
+        
+        return nullptr;
     };
     
     PyObject* GetUInt8(PyObject* args) override
     {
-        try
+        Py_ssize_t arg_count = PyTuple_Size(args);
+        
+        if (arg_count == 0)
         {
-            uint8_t return_value = obj.GetUInt8();
-            
-            return py::convert(return_value);
+            try
+            {
+                uint8_t return_value = obj.GetUInt8();
+                
+                return py::convert(return_value);
+            }
+            catch (...)
+            {
+                return py::to_PyErr();
+            }
         }
-        catch (...)
+        else if (arg_count != -1)
         {
-            return  py::to_PyErr();
+            PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
         }
+        
+        return nullptr;
     };
     
     PyObject* GetUInt8Array(PyObject* args) override
     {
-        try
+        Py_ssize_t arg_count = PyTuple_Size(args);
+        
+        if (arg_count == 0)
         {
-            /*r*/ winrt::com_array<uint8_t> param0 { };
-            
-            obj.GetUInt8Array(param0);
-            
-            PyObject* out_param0 = nullptr; // TODO: receive array impl
-            return PyTuple_Pack(1, out_param0);
+            try
+            {
+                /*r*/ winrt::com_array<uint8_t> param0 { };
+                
+                obj.GetUInt8Array(param0);
+                
+                PyObject* out_param0 = nullptr; // TODO: receive array impl
+                return PyTuple_Pack(1, out_param0);
+            }
+            catch (...)
+            {
+                return py::to_PyErr();
+            }
         }
-        catch (...)
+        else if (arg_count != -1)
         {
-            return  py::to_PyErr();
+            PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
         }
+        
+        return nullptr;
     };
     
     PyObject* get_IsNumericScalar() override
@@ -2056,7 +2969,7 @@ struct pyIReferenceImpl : public pyIReference
         }
         catch (...)
         {
-            return  py::to_PyErr();
+            return py::to_PyErr();
         }
     };
     
@@ -2070,7 +2983,7 @@ struct pyIReferenceImpl : public pyIReference
         }
         catch (...)
         {
-            return  py::to_PyErr();
+            return py::to_PyErr();
         }
     };
     
@@ -2084,7 +2997,7 @@ struct pyIReferenceImpl : public pyIReference
         }
         catch (...)
         {
-            return  py::to_PyErr();
+            return py::to_PyErr();
         }
     };
     

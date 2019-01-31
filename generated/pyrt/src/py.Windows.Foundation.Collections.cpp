@@ -286,6 +286,58 @@ static PyObject* __PropertySet_from(PyObject* /*unused*/, PyObject* arg)
     }
 }
 
+static PyObject* __PropertySet_iter(py::winrt_wrapper<winrt::Windows::Foundation::Collections::PropertySet>* self)
+{
+    try
+    {
+        return py::convert(self->obj.First());
+    }
+    catch (...)
+    {
+        return py::to_PyErr();
+    }
+}
+
+static Py_ssize_t __PropertySet_mp_length(py::winrt_wrapper<winrt::Windows::Foundation::Collections::PropertySet>* self)
+{
+    try
+    {
+        return static_cast<Py_ssize_t>(self->obj.Size());
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return -1;
+    }
+}
+
+static PyObject* __PropertySet_mp_subscript(py::winrt_wrapper<winrt::Windows::Foundation::Collections::PropertySet>* self, PyObject* key)
+{
+    try
+    {
+        return py::convert(self->obj.Lookup(py::convert_to<winrt::hstring>(key)));
+    }
+    catch (...)
+    {
+        return py::to_PyErr();
+    }
+}
+
+static int __PropertySet_mp_ass_item(py::winrt_wrapper<winrt::Windows::Foundation::Collections::PropertySet>* self, PyObject* key, PyObject* value)
+{
+    try
+    {
+        if (value == nullptr) { self->obj.Remove(py::convert_to<winrt::hstring>(key)); }
+        else { self->obj.Insert(py::convert_to<winrt::hstring>(key), py::convert_to<winrt::Windows::Foundation::IInspectable>(value)); }
+        return 0;
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return -1;
+    }
+}
+
 static PyMethodDef PropertySet_methods[] = {
     { "Clear", (PyCFunction)PropertySet_Clear, METH_VARARGS, nullptr },
     { "First", (PyCFunction)PropertySet_First, METH_VARARGS, nullptr },
@@ -311,6 +363,10 @@ static PyType_Slot PropertySet_Type_slots[] =
     { Py_tp_new, PropertySet_new },
     { Py_tp_methods, PropertySet_methods },
     { Py_tp_getset, PropertySet_getset },
+    { Py_tp_iter, __PropertySet_iter },
+    { Py_mp_length, __PropertySet_mp_length },
+    { Py_mp_subscript, __PropertySet_mp_subscript },
+    { Py_mp_ass_subscript, __PropertySet_mp_ass_item },
     { 0, nullptr },
 };
 
@@ -607,6 +663,58 @@ static PyObject* __StringMap_from(PyObject* /*unused*/, PyObject* arg)
     }
 }
 
+static PyObject* __StringMap_iter(py::winrt_wrapper<winrt::Windows::Foundation::Collections::StringMap>* self)
+{
+    try
+    {
+        return py::convert(self->obj.First());
+    }
+    catch (...)
+    {
+        return py::to_PyErr();
+    }
+}
+
+static Py_ssize_t __StringMap_mp_length(py::winrt_wrapper<winrt::Windows::Foundation::Collections::StringMap>* self)
+{
+    try
+    {
+        return static_cast<Py_ssize_t>(self->obj.Size());
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return -1;
+    }
+}
+
+static PyObject* __StringMap_mp_subscript(py::winrt_wrapper<winrt::Windows::Foundation::Collections::StringMap>* self, PyObject* key)
+{
+    try
+    {
+        return py::convert(self->obj.Lookup(py::convert_to<winrt::hstring>(key)));
+    }
+    catch (...)
+    {
+        return py::to_PyErr();
+    }
+}
+
+static int __StringMap_mp_ass_item(py::winrt_wrapper<winrt::Windows::Foundation::Collections::StringMap>* self, PyObject* key, PyObject* value)
+{
+    try
+    {
+        if (value == nullptr) { self->obj.Remove(py::convert_to<winrt::hstring>(key)); }
+        else { self->obj.Insert(py::convert_to<winrt::hstring>(key), py::convert_to<winrt::hstring>(value)); }
+        return 0;
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return -1;
+    }
+}
+
 static PyMethodDef StringMap_methods[] = {
     { "Clear", (PyCFunction)StringMap_Clear, METH_VARARGS, nullptr },
     { "First", (PyCFunction)StringMap_First, METH_VARARGS, nullptr },
@@ -632,6 +740,10 @@ static PyType_Slot StringMap_Type_slots[] =
     { Py_tp_new, StringMap_new },
     { Py_tp_methods, StringMap_methods },
     { Py_tp_getset, StringMap_getset },
+    { Py_tp_iter, __StringMap_iter },
+    { Py_mp_length, __StringMap_mp_length },
+    { Py_mp_subscript, __StringMap_mp_subscript },
+    { Py_mp_ass_subscript, __StringMap_mp_ass_item },
     { 0, nullptr },
 };
 
@@ -928,6 +1040,58 @@ static PyObject* __ValueSet_from(PyObject* /*unused*/, PyObject* arg)
     }
 }
 
+static PyObject* __ValueSet_iter(py::winrt_wrapper<winrt::Windows::Foundation::Collections::ValueSet>* self)
+{
+    try
+    {
+        return py::convert(self->obj.First());
+    }
+    catch (...)
+    {
+        return py::to_PyErr();
+    }
+}
+
+static Py_ssize_t __ValueSet_mp_length(py::winrt_wrapper<winrt::Windows::Foundation::Collections::ValueSet>* self)
+{
+    try
+    {
+        return static_cast<Py_ssize_t>(self->obj.Size());
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return -1;
+    }
+}
+
+static PyObject* __ValueSet_mp_subscript(py::winrt_wrapper<winrt::Windows::Foundation::Collections::ValueSet>* self, PyObject* key)
+{
+    try
+    {
+        return py::convert(self->obj.Lookup(py::convert_to<winrt::hstring>(key)));
+    }
+    catch (...)
+    {
+        return py::to_PyErr();
+    }
+}
+
+static int __ValueSet_mp_ass_item(py::winrt_wrapper<winrt::Windows::Foundation::Collections::ValueSet>* self, PyObject* key, PyObject* value)
+{
+    try
+    {
+        if (value == nullptr) { self->obj.Remove(py::convert_to<winrt::hstring>(key)); }
+        else { self->obj.Insert(py::convert_to<winrt::hstring>(key), py::convert_to<winrt::Windows::Foundation::IInspectable>(value)); }
+        return 0;
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return -1;
+    }
+}
+
 static PyMethodDef ValueSet_methods[] = {
     { "Clear", (PyCFunction)ValueSet_Clear, METH_VARARGS, nullptr },
     { "First", (PyCFunction)ValueSet_First, METH_VARARGS, nullptr },
@@ -953,6 +1117,10 @@ static PyType_Slot ValueSet_Type_slots[] =
     { Py_tp_new, ValueSet_new },
     { Py_tp_methods, ValueSet_methods },
     { Py_tp_getset, ValueSet_getset },
+    { Py_tp_iter, __ValueSet_iter },
+    { Py_mp_length, __ValueSet_mp_length },
+    { Py_mp_subscript, __ValueSet_mp_subscript },
+    { Py_mp_ass_subscript, __ValueSet_mp_ass_item },
     { 0, nullptr },
 };
 
@@ -987,6 +1155,11 @@ static PyObject* IIterable_First(py::winrt_pinterface_wrapper<pyIIterable>* self
     return self->obj->First(args);
 }
 
+static PyObject* __IIterable_iter(py::winrt_pinterface_wrapper<pyIIterable>* self)
+{
+    return self->obj->dunder_iter();
+}
+
 static PyMethodDef IIterable_methods[] = {
     { "First", (PyCFunction)IIterable_First, METH_VARARGS, nullptr },
     { nullptr }
@@ -1002,6 +1175,7 @@ static PyType_Slot IIterable_Type_slots[] =
     { Py_tp_new, IIterable_new },
     { Py_tp_methods, IIterable_methods },
     { Py_tp_getset, IIterable_getset },
+    { Py_tp_iter, __IIterable_iter },
     { 0, nullptr },
 };
 
@@ -1051,6 +1225,23 @@ static PyObject* IIterator_get_HasCurrent(py::winrt_pinterface_wrapper<pyIIterat
     return self->obj->get_HasCurrent(/*unused*/);
 }
 
+static PyObject* __IIterator_iter(py::winrt_pinterface_wrapper<pyIIterator>* self)
+{
+    try
+    {
+        return reinterpret_cast<PyObject*>(self);
+    }
+    catch (...)
+    {
+        return py::to_PyErr();
+    }
+}
+
+static PyObject* __IIterator_iternext(py::winrt_pinterface_wrapper<pyIIterator>* self)
+{
+    return self->obj->dunder_iternext();
+}
+
 static PyMethodDef IIterator_methods[] = {
     { "GetMany", (PyCFunction)IIterator_GetMany, METH_VARARGS, nullptr },
     { "MoveNext", (PyCFunction)IIterator_MoveNext, METH_VARARGS, nullptr },
@@ -1069,6 +1260,8 @@ static PyType_Slot IIterator_Type_slots[] =
     { Py_tp_new, IIterator_new },
     { Py_tp_methods, IIterator_methods },
     { Py_tp_getset, IIterator_getset },
+    { Py_tp_iter, __IIterator_iter },
+    { Py_tp_iternext, __IIterator_iternext },
     { 0, nullptr },
 };
 
@@ -1233,6 +1426,21 @@ static PyObject* IMapView_get_Size(py::winrt_pinterface_wrapper<pyIMapView>* sel
     return self->obj->get_Size(/*unused*/);
 }
 
+static PyObject* __IMapView_iter(py::winrt_pinterface_wrapper<pyIMapView>* self)
+{
+    return self->obj->dunder_iter();
+}
+
+static Py_ssize_t __IMapView_mp_length(py::winrt_pinterface_wrapper<pyIMapView>* self)
+{
+    return self->obj->_mp_length();
+}
+
+static PyObject* __IMapView_mp_subscript(py::winrt_pinterface_wrapper<pyIMapView>* self, PyObject* key)
+{
+    return self->obj->_mp_subscript(key);
+}
+
 static PyMethodDef IMapView_methods[] = {
     { "First", (PyCFunction)IMapView_First, METH_VARARGS, nullptr },
     { "HasKey", (PyCFunction)IMapView_HasKey, METH_VARARGS, nullptr },
@@ -1252,6 +1460,9 @@ static PyType_Slot IMapView_Type_slots[] =
     { Py_tp_new, IMapView_new },
     { Py_tp_methods, IMapView_methods },
     { Py_tp_getset, IMapView_getset },
+    { Py_tp_iter, __IMapView_iter },
+    { Py_mp_length, __IMapView_mp_length },
+    { Py_mp_subscript, __IMapView_mp_subscript },
     { 0, nullptr },
 };
 
@@ -1321,6 +1532,26 @@ static PyObject* IMap_get_Size(py::winrt_pinterface_wrapper<pyIMap>* self, void*
     return self->obj->get_Size(/*unused*/);
 }
 
+static PyObject* __IMap_iter(py::winrt_pinterface_wrapper<pyIMap>* self)
+{
+    return self->obj->dunder_iter();
+}
+
+static Py_ssize_t __IMap_mp_length(py::winrt_pinterface_wrapper<pyIMap>* self)
+{
+    return self->obj->_mp_length();
+}
+
+static PyObject* __IMap_mp_subscript(py::winrt_pinterface_wrapper<pyIMap>* self, PyObject* key)
+{
+    return self->obj->_mp_subscript(key);
+}
+
+static int __IMap_mp_ass_item(py::winrt_pinterface_wrapper<pyIMap>* self, PyObject* key, PyObject* value)
+{
+    return self->obj->_mp_ass_item(key, value);
+}
+
 static PyMethodDef IMap_methods[] = {
     { "Clear", (PyCFunction)IMap_Clear, METH_VARARGS, nullptr },
     { "First", (PyCFunction)IMap_First, METH_VARARGS, nullptr },
@@ -1343,6 +1574,10 @@ static PyType_Slot IMap_Type_slots[] =
     { Py_tp_new, IMap_new },
     { Py_tp_methods, IMap_methods },
     { Py_tp_getset, IMap_getset },
+    { Py_tp_iter, __IMap_iter },
+    { Py_mp_length, __IMap_mp_length },
+    { Py_mp_subscript, __IMap_mp_subscript },
+    { Py_mp_ass_subscript, __IMap_mp_ass_item },
     { 0, nullptr },
 };
 
@@ -1422,6 +1657,26 @@ static PyObject* IObservableMap_remove_MapChanged(py::winrt_pinterface_wrapper<p
     return self->obj->remove_MapChanged(arg);
 }
 
+static PyObject* __IObservableMap_iter(py::winrt_pinterface_wrapper<pyIObservableMap>* self)
+{
+    return self->obj->dunder_iter();
+}
+
+static Py_ssize_t __IObservableMap_mp_length(py::winrt_pinterface_wrapper<pyIObservableMap>* self)
+{
+    return self->obj->_mp_length();
+}
+
+static PyObject* __IObservableMap_mp_subscript(py::winrt_pinterface_wrapper<pyIObservableMap>* self, PyObject* key)
+{
+    return self->obj->_mp_subscript(key);
+}
+
+static int __IObservableMap_mp_ass_item(py::winrt_pinterface_wrapper<pyIObservableMap>* self, PyObject* key, PyObject* value)
+{
+    return self->obj->_mp_ass_item(key, value);
+}
+
 static PyMethodDef IObservableMap_methods[] = {
     { "Clear", (PyCFunction)IObservableMap_Clear, METH_VARARGS, nullptr },
     { "First", (PyCFunction)IObservableMap_First, METH_VARARGS, nullptr },
@@ -1446,6 +1701,10 @@ static PyType_Slot IObservableMap_Type_slots[] =
     { Py_tp_new, IObservableMap_new },
     { Py_tp_methods, IObservableMap_methods },
     { Py_tp_getset, IObservableMap_getset },
+    { Py_tp_iter, __IObservableMap_iter },
+    { Py_mp_length, __IObservableMap_mp_length },
+    { Py_mp_subscript, __IObservableMap_mp_subscript },
+    { Py_mp_ass_subscript, __IObservableMap_mp_ass_item },
     { 0, nullptr },
 };
 
@@ -1550,6 +1809,26 @@ static PyObject* IObservableVector_remove_VectorChanged(py::winrt_pinterface_wra
     return self->obj->remove_VectorChanged(arg);
 }
 
+static PyObject* __IObservableVector_iter(py::winrt_pinterface_wrapper<pyIObservableVector>* self)
+{
+    return self->obj->dunder_iter();
+}
+
+static Py_ssize_t __IObservableVector_sq_length(py::winrt_pinterface_wrapper<pyIObservableVector>* self)
+{
+    return self->obj->_sq_length();
+}
+
+static PyObject* __IObservableVector_sq_item(py::winrt_pinterface_wrapper<pyIObservableVector>* self, Py_ssize_t i)
+{
+    return self->obj->_sq_item(i);
+}
+
+static int __IObservableVector_sq_ass_item(py::winrt_pinterface_wrapper<pyIObservableVector>* self, Py_ssize_t i, PyObject* value)
+{
+    return self->obj->_sq_ass_item(i, value);
+}
+
 static PyMethodDef IObservableVector_methods[] = {
     { "Append", (PyCFunction)IObservableVector_Append, METH_VARARGS, nullptr },
     { "Clear", (PyCFunction)IObservableVector_Clear, METH_VARARGS, nullptr },
@@ -1579,6 +1858,10 @@ static PyType_Slot IObservableVector_Type_slots[] =
     { Py_tp_new, IObservableVector_new },
     { Py_tp_methods, IObservableVector_methods },
     { Py_tp_getset, IObservableVector_getset },
+    { Py_tp_iter, __IObservableVector_iter },
+    { Py_sq_length, __IObservableVector_sq_length },
+    { Py_sq_item, __IObservableVector_sq_item },
+    { Py_sq_ass_item, __IObservableVector_sq_ass_item },
     { 0, nullptr },
 };
 
@@ -1851,6 +2134,58 @@ static PyObject* __IPropertySet_from(PyObject* /*unused*/, PyObject* arg)
     }
 }
 
+static PyObject* __IPropertySet_iter(py::winrt_wrapper<winrt::Windows::Foundation::Collections::IPropertySet>* self)
+{
+    try
+    {
+        return py::convert(self->obj.First());
+    }
+    catch (...)
+    {
+        return py::to_PyErr();
+    }
+}
+
+static Py_ssize_t __IPropertySet_mp_length(py::winrt_wrapper<winrt::Windows::Foundation::Collections::IPropertySet>* self)
+{
+    try
+    {
+        return static_cast<Py_ssize_t>(self->obj.Size());
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return -1;
+    }
+}
+
+static PyObject* __IPropertySet_mp_subscript(py::winrt_wrapper<winrt::Windows::Foundation::Collections::IPropertySet>* self, PyObject* key)
+{
+    try
+    {
+        return py::convert(self->obj.Lookup(py::convert_to<winrt::hstring>(key)));
+    }
+    catch (...)
+    {
+        return py::to_PyErr();
+    }
+}
+
+static int __IPropertySet_mp_ass_item(py::winrt_wrapper<winrt::Windows::Foundation::Collections::IPropertySet>* self, PyObject* key, PyObject* value)
+{
+    try
+    {
+        if (value == nullptr) { self->obj.Remove(py::convert_to<winrt::hstring>(key)); }
+        else { self->obj.Insert(py::convert_to<winrt::hstring>(key), py::convert_to<winrt::Windows::Foundation::IInspectable>(value)); }
+        return 0;
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return -1;
+    }
+}
+
 static PyMethodDef IPropertySet_methods[] = {
     { "Clear", (PyCFunction)IPropertySet_Clear, METH_VARARGS, nullptr },
     { "First", (PyCFunction)IPropertySet_First, METH_VARARGS, nullptr },
@@ -1876,6 +2211,10 @@ static PyType_Slot IPropertySet_Type_slots[] =
     { Py_tp_new, IPropertySet_new },
     { Py_tp_methods, IPropertySet_methods },
     { Py_tp_getset, IPropertySet_getset },
+    { Py_tp_iter, __IPropertySet_iter },
+    { Py_mp_length, __IPropertySet_mp_length },
+    { Py_mp_subscript, __IPropertySet_mp_subscript },
+    { Py_mp_ass_subscript, __IPropertySet_mp_ass_item },
     { 0, nullptr },
 };
 
@@ -2017,6 +2356,21 @@ static PyObject* IVectorView_get_Size(py::winrt_pinterface_wrapper<pyIVectorView
     return self->obj->get_Size(/*unused*/);
 }
 
+static PyObject* __IVectorView_iter(py::winrt_pinterface_wrapper<pyIVectorView>* self)
+{
+    return self->obj->dunder_iter();
+}
+
+static Py_ssize_t __IVectorView_sq_length(py::winrt_pinterface_wrapper<pyIVectorView>* self)
+{
+    return self->obj->_sq_length();
+}
+
+static PyObject* __IVectorView_sq_item(py::winrt_pinterface_wrapper<pyIVectorView>* self, Py_ssize_t i)
+{
+    return self->obj->_sq_item(i);
+}
+
 static PyMethodDef IVectorView_methods[] = {
     { "First", (PyCFunction)IVectorView_First, METH_VARARGS, nullptr },
     { "GetAt", (PyCFunction)IVectorView_GetAt, METH_VARARGS, nullptr },
@@ -2036,6 +2390,9 @@ static PyType_Slot IVectorView_Type_slots[] =
     { Py_tp_new, IVectorView_new },
     { Py_tp_methods, IVectorView_methods },
     { Py_tp_getset, IVectorView_getset },
+    { Py_tp_iter, __IVectorView_iter },
+    { Py_sq_length, __IVectorView_sq_length },
+    { Py_sq_item, __IVectorView_sq_item },
     { 0, nullptr },
 };
 
@@ -2130,6 +2487,26 @@ static PyObject* IVector_get_Size(py::winrt_pinterface_wrapper<pyIVector>* self,
     return self->obj->get_Size(/*unused*/);
 }
 
+static PyObject* __IVector_iter(py::winrt_pinterface_wrapper<pyIVector>* self)
+{
+    return self->obj->dunder_iter();
+}
+
+static Py_ssize_t __IVector_sq_length(py::winrt_pinterface_wrapper<pyIVector>* self)
+{
+    return self->obj->_sq_length();
+}
+
+static PyObject* __IVector_sq_item(py::winrt_pinterface_wrapper<pyIVector>* self, Py_ssize_t i)
+{
+    return self->obj->_sq_item(i);
+}
+
+static int __IVector_sq_ass_item(py::winrt_pinterface_wrapper<pyIVector>* self, Py_ssize_t i, PyObject* value)
+{
+    return self->obj->_sq_ass_item(i, value);
+}
+
 static PyMethodDef IVector_methods[] = {
     { "Append", (PyCFunction)IVector_Append, METH_VARARGS, nullptr },
     { "Clear", (PyCFunction)IVector_Clear, METH_VARARGS, nullptr },
@@ -2157,6 +2534,10 @@ static PyType_Slot IVector_Type_slots[] =
     { Py_tp_new, IVector_new },
     { Py_tp_methods, IVector_methods },
     { Py_tp_getset, IVector_getset },
+    { Py_tp_iter, __IVector_iter },
+    { Py_sq_length, __IVector_sq_length },
+    { Py_sq_item, __IVector_sq_item },
+    { Py_sq_ass_item, __IVector_sq_ass_item },
     { 0, nullptr },
 };
 

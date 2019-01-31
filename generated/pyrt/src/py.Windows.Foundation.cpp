@@ -2265,6 +2265,43 @@ static PyObject* __WwwFormUrlDecoder_from(PyObject* /*unused*/, PyObject* arg)
     }
 }
 
+static PyObject* __WwwFormUrlDecoder_iter(py::winrt_wrapper<winrt::Windows::Foundation::WwwFormUrlDecoder>* self)
+{
+    try
+    {
+        return py::convert(self->obj.First());
+    }
+    catch (...)
+    {
+        return py::to_PyErr();
+    }
+}
+
+static Py_ssize_t __WwwFormUrlDecoder_sq_length(py::winrt_wrapper<winrt::Windows::Foundation::WwwFormUrlDecoder>* self)
+{
+    try
+    {
+        return static_cast<Py_ssize_t>(self->obj.Size());
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return -1;
+    }
+}
+
+static PyObject* __WwwFormUrlDecoder_sq_item(py::winrt_wrapper<winrt::Windows::Foundation::WwwFormUrlDecoder>* self, Py_ssize_t i)
+{
+    try
+    {
+        return py::convert(self->obj.GetAt(static_cast<uint32_t>(i)));
+    }
+    catch (...)
+    {
+        return py::to_PyErr();
+    }
+}
+
 static PyMethodDef WwwFormUrlDecoder_methods[] = {
     { "First", (PyCFunction)WwwFormUrlDecoder_First, METH_VARARGS, nullptr },
     { "GetAt", (PyCFunction)WwwFormUrlDecoder_GetAt, METH_VARARGS, nullptr },
@@ -2286,6 +2323,9 @@ static PyType_Slot WwwFormUrlDecoder_Type_slots[] =
     { Py_tp_new, WwwFormUrlDecoder_new },
     { Py_tp_methods, WwwFormUrlDecoder_methods },
     { Py_tp_getset, WwwFormUrlDecoder_getset },
+    { Py_tp_iter, __WwwFormUrlDecoder_iter },
+    { Py_sq_length, __WwwFormUrlDecoder_sq_length },
+    { Py_sq_item, __WwwFormUrlDecoder_sq_item },
     { 0, nullptr },
 };
 
