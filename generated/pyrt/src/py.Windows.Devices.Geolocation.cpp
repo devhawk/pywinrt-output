@@ -25,7 +25,13 @@ static PyObject* CivicAddress_get_City(py::winrt_wrapper<winrt::Windows::Devices
     {
         winrt::hstring return_value = self->obj.City();
         
-        return py::convert(return_value);
+        PyObject* out_return_value = py::convert(return_value);
+        if (!out_return_value) 
+        { 
+            return nullptr;
+        }
+        
+        return out_return_value;
     }
     catch (...)
     {
@@ -39,7 +45,13 @@ static PyObject* CivicAddress_get_Country(py::winrt_wrapper<winrt::Windows::Devi
     {
         winrt::hstring return_value = self->obj.Country();
         
-        return py::convert(return_value);
+        PyObject* out_return_value = py::convert(return_value);
+        if (!out_return_value) 
+        { 
+            return nullptr;
+        }
+        
+        return out_return_value;
     }
     catch (...)
     {
@@ -53,7 +65,13 @@ static PyObject* CivicAddress_get_PostalCode(py::winrt_wrapper<winrt::Windows::D
     {
         winrt::hstring return_value = self->obj.PostalCode();
         
-        return py::convert(return_value);
+        PyObject* out_return_value = py::convert(return_value);
+        if (!out_return_value) 
+        { 
+            return nullptr;
+        }
+        
+        return out_return_value;
     }
     catch (...)
     {
@@ -67,7 +85,13 @@ static PyObject* CivicAddress_get_State(py::winrt_wrapper<winrt::Windows::Device
     {
         winrt::hstring return_value = self->obj.State();
         
-        return py::convert(return_value);
+        PyObject* out_return_value = py::convert(return_value);
+        if (!out_return_value) 
+        { 
+            return nullptr;
+        }
+        
+        return out_return_value;
     }
     catch (...)
     {
@@ -81,7 +105,13 @@ static PyObject* CivicAddress_get_Timestamp(py::winrt_wrapper<winrt::Windows::De
     {
         winrt::Windows::Foundation::DateTime return_value = self->obj.Timestamp();
         
-        return py::convert(return_value);
+        PyObject* out_return_value = py::convert(return_value);
+        if (!out_return_value) 
+        { 
+            return nullptr;
+        }
+        
+        return out_return_value;
     }
     catch (...)
     {
@@ -223,7 +253,13 @@ static PyObject* GeoboundingBox_TryCompute(PyObject* /*unused*/, PyObject* args)
             
             winrt::Windows::Devices::Geolocation::GeoboundingBox return_value = winrt::Windows::Devices::Geolocation::GeoboundingBox::TryCompute(param0);
             
-            return py::convert(return_value);
+            PyObject* out_return_value = py::convert(return_value);
+            if (!out_return_value) 
+            { 
+                return nullptr;
+            }
+            
+            return out_return_value;
         }
         catch (...)
         {
@@ -239,7 +275,13 @@ static PyObject* GeoboundingBox_TryCompute(PyObject* /*unused*/, PyObject* args)
             
             winrt::Windows::Devices::Geolocation::GeoboundingBox return_value = winrt::Windows::Devices::Geolocation::GeoboundingBox::TryCompute(param0, param1);
             
-            return py::convert(return_value);
+            PyObject* out_return_value = py::convert(return_value);
+            if (!out_return_value) 
+            { 
+                return nullptr;
+            }
+            
+            return out_return_value;
         }
         catch (...)
         {
@@ -256,7 +298,13 @@ static PyObject* GeoboundingBox_TryCompute(PyObject* /*unused*/, PyObject* args)
             
             winrt::Windows::Devices::Geolocation::GeoboundingBox return_value = winrt::Windows::Devices::Geolocation::GeoboundingBox::TryCompute(param0, param1, param2);
             
-            return py::convert(return_value);
+            PyObject* out_return_value = py::convert(return_value);
+            if (!out_return_value) 
+            { 
+                return nullptr;
+            }
+            
+            return out_return_value;
         }
         catch (...)
         {
@@ -277,7 +325,13 @@ static PyObject* GeoboundingBox_get_Center(py::winrt_wrapper<winrt::Windows::Dev
     {
         winrt::Windows::Devices::Geolocation::BasicGeoposition return_value = self->obj.Center();
         
-        return py::convert(return_value);
+        PyObject* out_return_value = py::convert(return_value);
+        if (!out_return_value) 
+        { 
+            return nullptr;
+        }
+        
+        return out_return_value;
     }
     catch (...)
     {
@@ -291,7 +345,13 @@ static PyObject* GeoboundingBox_get_MaxAltitude(py::winrt_wrapper<winrt::Windows
     {
         double return_value = self->obj.MaxAltitude();
         
-        return py::convert(return_value);
+        PyObject* out_return_value = py::convert(return_value);
+        if (!out_return_value) 
+        { 
+            return nullptr;
+        }
+        
+        return out_return_value;
     }
     catch (...)
     {
@@ -305,7 +365,13 @@ static PyObject* GeoboundingBox_get_MinAltitude(py::winrt_wrapper<winrt::Windows
     {
         double return_value = self->obj.MinAltitude();
         
-        return py::convert(return_value);
+        PyObject* out_return_value = py::convert(return_value);
+        if (!out_return_value) 
+        { 
+            return nullptr;
+        }
+        
+        return out_return_value;
     }
     catch (...)
     {
@@ -319,7 +385,13 @@ static PyObject* GeoboundingBox_get_NorthwestCorner(py::winrt_wrapper<winrt::Win
     {
         winrt::Windows::Devices::Geolocation::BasicGeoposition return_value = self->obj.NorthwestCorner();
         
-        return py::convert(return_value);
+        PyObject* out_return_value = py::convert(return_value);
+        if (!out_return_value) 
+        { 
+            return nullptr;
+        }
+        
+        return out_return_value;
     }
     catch (...)
     {
@@ -333,7 +405,13 @@ static PyObject* GeoboundingBox_get_SoutheastCorner(py::winrt_wrapper<winrt::Win
     {
         winrt::Windows::Devices::Geolocation::BasicGeoposition return_value = self->obj.SoutheastCorner();
         
-        return py::convert(return_value);
+        PyObject* out_return_value = py::convert(return_value);
+        if (!out_return_value) 
+        { 
+            return nullptr;
+        }
+        
+        return out_return_value;
     }
     catch (...)
     {
@@ -347,7 +425,13 @@ static PyObject* GeoboundingBox_get_AltitudeReferenceSystem(py::winrt_wrapper<wi
     {
         winrt::Windows::Devices::Geolocation::AltitudeReferenceSystem return_value = self->obj.AltitudeReferenceSystem();
         
-        return py::convert(return_value);
+        PyObject* out_return_value = py::convert(return_value);
+        if (!out_return_value) 
+        { 
+            return nullptr;
+        }
+        
+        return out_return_value;
     }
     catch (...)
     {
@@ -361,7 +445,13 @@ static PyObject* GeoboundingBox_get_GeoshapeType(py::winrt_wrapper<winrt::Window
     {
         winrt::Windows::Devices::Geolocation::GeoshapeType return_value = self->obj.GeoshapeType();
         
-        return py::convert(return_value);
+        PyObject* out_return_value = py::convert(return_value);
+        if (!out_return_value) 
+        { 
+            return nullptr;
+        }
+        
+        return out_return_value;
     }
     catch (...)
     {
@@ -375,7 +465,13 @@ static PyObject* GeoboundingBox_get_SpatialReferenceId(py::winrt_wrapper<winrt::
     {
         uint32_t return_value = self->obj.SpatialReferenceId();
         
-        return py::convert(return_value);
+        PyObject* out_return_value = py::convert(return_value);
+        if (!out_return_value) 
+        { 
+            return nullptr;
+        }
+        
+        return out_return_value;
     }
     catch (...)
     {
@@ -515,7 +611,13 @@ static PyObject* Geocircle_get_Center(py::winrt_wrapper<winrt::Windows::Devices:
     {
         winrt::Windows::Devices::Geolocation::BasicGeoposition return_value = self->obj.Center();
         
-        return py::convert(return_value);
+        PyObject* out_return_value = py::convert(return_value);
+        if (!out_return_value) 
+        { 
+            return nullptr;
+        }
+        
+        return out_return_value;
     }
     catch (...)
     {
@@ -529,7 +631,13 @@ static PyObject* Geocircle_get_Radius(py::winrt_wrapper<winrt::Windows::Devices:
     {
         double return_value = self->obj.Radius();
         
-        return py::convert(return_value);
+        PyObject* out_return_value = py::convert(return_value);
+        if (!out_return_value) 
+        { 
+            return nullptr;
+        }
+        
+        return out_return_value;
     }
     catch (...)
     {
@@ -543,7 +651,13 @@ static PyObject* Geocircle_get_AltitudeReferenceSystem(py::winrt_wrapper<winrt::
     {
         winrt::Windows::Devices::Geolocation::AltitudeReferenceSystem return_value = self->obj.AltitudeReferenceSystem();
         
-        return py::convert(return_value);
+        PyObject* out_return_value = py::convert(return_value);
+        if (!out_return_value) 
+        { 
+            return nullptr;
+        }
+        
+        return out_return_value;
     }
     catch (...)
     {
@@ -557,7 +671,13 @@ static PyObject* Geocircle_get_GeoshapeType(py::winrt_wrapper<winrt::Windows::De
     {
         winrt::Windows::Devices::Geolocation::GeoshapeType return_value = self->obj.GeoshapeType();
         
-        return py::convert(return_value);
+        PyObject* out_return_value = py::convert(return_value);
+        if (!out_return_value) 
+        { 
+            return nullptr;
+        }
+        
+        return out_return_value;
     }
     catch (...)
     {
@@ -571,7 +691,13 @@ static PyObject* Geocircle_get_SpatialReferenceId(py::winrt_wrapper<winrt::Windo
     {
         uint32_t return_value = self->obj.SpatialReferenceId();
         
-        return py::convert(return_value);
+        PyObject* out_return_value = py::convert(return_value);
+        if (!out_return_value) 
+        { 
+            return nullptr;
+        }
+        
+        return out_return_value;
     }
     catch (...)
     {
@@ -647,7 +773,13 @@ static PyObject* Geocoordinate_get_Accuracy(py::winrt_wrapper<winrt::Windows::De
     {
         double return_value = self->obj.Accuracy();
         
-        return py::convert(return_value);
+        PyObject* out_return_value = py::convert(return_value);
+        if (!out_return_value) 
+        { 
+            return nullptr;
+        }
+        
+        return out_return_value;
     }
     catch (...)
     {
@@ -661,7 +793,13 @@ static PyObject* Geocoordinate_get_Altitude(py::winrt_wrapper<winrt::Windows::De
     {
         winrt::Windows::Foundation::IReference<double> return_value = self->obj.Altitude();
         
-        return py::convert(return_value);
+        PyObject* out_return_value = py::convert(return_value);
+        if (!out_return_value) 
+        { 
+            return nullptr;
+        }
+        
+        return out_return_value;
     }
     catch (...)
     {
@@ -675,7 +813,13 @@ static PyObject* Geocoordinate_get_AltitudeAccuracy(py::winrt_wrapper<winrt::Win
     {
         winrt::Windows::Foundation::IReference<double> return_value = self->obj.AltitudeAccuracy();
         
-        return py::convert(return_value);
+        PyObject* out_return_value = py::convert(return_value);
+        if (!out_return_value) 
+        { 
+            return nullptr;
+        }
+        
+        return out_return_value;
     }
     catch (...)
     {
@@ -689,7 +833,13 @@ static PyObject* Geocoordinate_get_Heading(py::winrt_wrapper<winrt::Windows::Dev
     {
         winrt::Windows::Foundation::IReference<double> return_value = self->obj.Heading();
         
-        return py::convert(return_value);
+        PyObject* out_return_value = py::convert(return_value);
+        if (!out_return_value) 
+        { 
+            return nullptr;
+        }
+        
+        return out_return_value;
     }
     catch (...)
     {
@@ -703,7 +853,13 @@ static PyObject* Geocoordinate_get_Latitude(py::winrt_wrapper<winrt::Windows::De
     {
         double return_value = self->obj.Latitude();
         
-        return py::convert(return_value);
+        PyObject* out_return_value = py::convert(return_value);
+        if (!out_return_value) 
+        { 
+            return nullptr;
+        }
+        
+        return out_return_value;
     }
     catch (...)
     {
@@ -717,7 +873,13 @@ static PyObject* Geocoordinate_get_Longitude(py::winrt_wrapper<winrt::Windows::D
     {
         double return_value = self->obj.Longitude();
         
-        return py::convert(return_value);
+        PyObject* out_return_value = py::convert(return_value);
+        if (!out_return_value) 
+        { 
+            return nullptr;
+        }
+        
+        return out_return_value;
     }
     catch (...)
     {
@@ -731,7 +893,13 @@ static PyObject* Geocoordinate_get_Speed(py::winrt_wrapper<winrt::Windows::Devic
     {
         winrt::Windows::Foundation::IReference<double> return_value = self->obj.Speed();
         
-        return py::convert(return_value);
+        PyObject* out_return_value = py::convert(return_value);
+        if (!out_return_value) 
+        { 
+            return nullptr;
+        }
+        
+        return out_return_value;
     }
     catch (...)
     {
@@ -745,7 +913,13 @@ static PyObject* Geocoordinate_get_Timestamp(py::winrt_wrapper<winrt::Windows::D
     {
         winrt::Windows::Foundation::DateTime return_value = self->obj.Timestamp();
         
-        return py::convert(return_value);
+        PyObject* out_return_value = py::convert(return_value);
+        if (!out_return_value) 
+        { 
+            return nullptr;
+        }
+        
+        return out_return_value;
     }
     catch (...)
     {
@@ -759,7 +933,13 @@ static PyObject* Geocoordinate_get_Point(py::winrt_wrapper<winrt::Windows::Devic
     {
         winrt::Windows::Devices::Geolocation::Geopoint return_value = self->obj.Point();
         
-        return py::convert(return_value);
+        PyObject* out_return_value = py::convert(return_value);
+        if (!out_return_value) 
+        { 
+            return nullptr;
+        }
+        
+        return out_return_value;
     }
     catch (...)
     {
@@ -773,7 +953,13 @@ static PyObject* Geocoordinate_get_PositionSource(py::winrt_wrapper<winrt::Windo
     {
         winrt::Windows::Devices::Geolocation::PositionSource return_value = self->obj.PositionSource();
         
-        return py::convert(return_value);
+        PyObject* out_return_value = py::convert(return_value);
+        if (!out_return_value) 
+        { 
+            return nullptr;
+        }
+        
+        return out_return_value;
     }
     catch (...)
     {
@@ -787,7 +973,13 @@ static PyObject* Geocoordinate_get_SatelliteData(py::winrt_wrapper<winrt::Window
     {
         winrt::Windows::Devices::Geolocation::GeocoordinateSatelliteData return_value = self->obj.SatelliteData();
         
-        return py::convert(return_value);
+        PyObject* out_return_value = py::convert(return_value);
+        if (!out_return_value) 
+        { 
+            return nullptr;
+        }
+        
+        return out_return_value;
     }
     catch (...)
     {
@@ -801,7 +993,13 @@ static PyObject* Geocoordinate_get_PositionSourceTimestamp(py::winrt_wrapper<win
     {
         winrt::Windows::Foundation::IReference<winrt::Windows::Foundation::DateTime> return_value = self->obj.PositionSourceTimestamp();
         
-        return py::convert(return_value);
+        PyObject* out_return_value = py::convert(return_value);
+        if (!out_return_value) 
+        { 
+            return nullptr;
+        }
+        
+        return out_return_value;
     }
     catch (...)
     {
@@ -884,7 +1082,13 @@ static PyObject* GeocoordinateSatelliteData_get_HorizontalDilutionOfPrecision(py
     {
         winrt::Windows::Foundation::IReference<double> return_value = self->obj.HorizontalDilutionOfPrecision();
         
-        return py::convert(return_value);
+        PyObject* out_return_value = py::convert(return_value);
+        if (!out_return_value) 
+        { 
+            return nullptr;
+        }
+        
+        return out_return_value;
     }
     catch (...)
     {
@@ -898,7 +1102,13 @@ static PyObject* GeocoordinateSatelliteData_get_PositionDilutionOfPrecision(py::
     {
         winrt::Windows::Foundation::IReference<double> return_value = self->obj.PositionDilutionOfPrecision();
         
-        return py::convert(return_value);
+        PyObject* out_return_value = py::convert(return_value);
+        if (!out_return_value) 
+        { 
+            return nullptr;
+        }
+        
+        return out_return_value;
     }
     catch (...)
     {
@@ -912,7 +1122,13 @@ static PyObject* GeocoordinateSatelliteData_get_VerticalDilutionOfPrecision(py::
     {
         winrt::Windows::Foundation::IReference<double> return_value = self->obj.VerticalDilutionOfPrecision();
         
-        return py::convert(return_value);
+        PyObject* out_return_value = py::convert(return_value);
+        if (!out_return_value) 
+        { 
+            return nullptr;
+        }
+        
+        return out_return_value;
     }
     catch (...)
     {
@@ -1039,7 +1255,13 @@ static PyObject* Geolocator_GetGeopositionAsync(py::winrt_wrapper<winrt::Windows
         {
             winrt::Windows::Foundation::IAsyncOperation<winrt::Windows::Devices::Geolocation::Geoposition> return_value = self->obj.GetGeopositionAsync();
             
-            return py::convert(return_value);
+            PyObject* out_return_value = py::convert(return_value);
+            if (!out_return_value) 
+            { 
+                return nullptr;
+            }
+            
+            return out_return_value;
         }
         catch (...)
         {
@@ -1055,7 +1277,13 @@ static PyObject* Geolocator_GetGeopositionAsync(py::winrt_wrapper<winrt::Windows
             
             winrt::Windows::Foundation::IAsyncOperation<winrt::Windows::Devices::Geolocation::Geoposition> return_value = self->obj.GetGeopositionAsync(param0, param1);
             
-            return py::convert(return_value);
+            PyObject* out_return_value = py::convert(return_value);
+            if (!out_return_value) 
+            { 
+                return nullptr;
+            }
+            
+            return out_return_value;
         }
         catch (...)
         {
@@ -1082,7 +1310,13 @@ static PyObject* Geolocator_GetGeopositionHistoryAsync(PyObject* /*unused*/, PyO
             
             winrt::Windows::Foundation::IAsyncOperation<winrt::Windows::Foundation::Collections::IVectorView<winrt::Windows::Devices::Geolocation::Geoposition>> return_value = winrt::Windows::Devices::Geolocation::Geolocator::GetGeopositionHistoryAsync(param0);
             
-            return py::convert(return_value);
+            PyObject* out_return_value = py::convert(return_value);
+            if (!out_return_value) 
+            { 
+                return nullptr;
+            }
+            
+            return out_return_value;
         }
         catch (...)
         {
@@ -1098,7 +1332,13 @@ static PyObject* Geolocator_GetGeopositionHistoryAsync(PyObject* /*unused*/, PyO
             
             winrt::Windows::Foundation::IAsyncOperation<winrt::Windows::Foundation::Collections::IVectorView<winrt::Windows::Devices::Geolocation::Geoposition>> return_value = winrt::Windows::Devices::Geolocation::Geolocator::GetGeopositionHistoryAsync(param0, param1);
             
-            return py::convert(return_value);
+            PyObject* out_return_value = py::convert(return_value);
+            if (!out_return_value) 
+            { 
+                return nullptr;
+            }
+            
+            return out_return_value;
         }
         catch (...)
         {
@@ -1123,7 +1363,13 @@ static PyObject* Geolocator_RequestAccessAsync(PyObject* /*unused*/, PyObject* a
         {
             winrt::Windows::Foundation::IAsyncOperation<winrt::Windows::Devices::Geolocation::GeolocationAccessStatus> return_value = winrt::Windows::Devices::Geolocation::Geolocator::RequestAccessAsync();
             
-            return py::convert(return_value);
+            PyObject* out_return_value = py::convert(return_value);
+            if (!out_return_value) 
+            { 
+                return nullptr;
+            }
+            
+            return out_return_value;
         }
         catch (...)
         {
@@ -1144,7 +1390,13 @@ static PyObject* Geolocator_get_ReportInterval(py::winrt_wrapper<winrt::Windows:
     {
         uint32_t return_value = self->obj.ReportInterval();
         
-        return py::convert(return_value);
+        PyObject* out_return_value = py::convert(return_value);
+        if (!out_return_value) 
+        { 
+            return nullptr;
+        }
+        
+        return out_return_value;
     }
     catch (...)
     {
@@ -1162,7 +1414,7 @@ static int Geolocator_put_ReportInterval(py::winrt_wrapper<winrt::Windows::Devic
     
     try
     {
-        auto param0 = py::converter<uint32_t>::convert_to(arg);
+        auto param0 = py::convert_to<uint32_t>(arg);
         
         self->obj.ReportInterval(param0);
         
@@ -1180,7 +1432,13 @@ static PyObject* Geolocator_get_MovementThreshold(py::winrt_wrapper<winrt::Windo
     {
         double return_value = self->obj.MovementThreshold();
         
-        return py::convert(return_value);
+        PyObject* out_return_value = py::convert(return_value);
+        if (!out_return_value) 
+        { 
+            return nullptr;
+        }
+        
+        return out_return_value;
     }
     catch (...)
     {
@@ -1198,7 +1456,7 @@ static int Geolocator_put_MovementThreshold(py::winrt_wrapper<winrt::Windows::De
     
     try
     {
-        auto param0 = py::converter<double>::convert_to(arg);
+        auto param0 = py::convert_to<double>(arg);
         
         self->obj.MovementThreshold(param0);
         
@@ -1216,7 +1474,13 @@ static PyObject* Geolocator_get_DesiredAccuracy(py::winrt_wrapper<winrt::Windows
     {
         winrt::Windows::Devices::Geolocation::PositionAccuracy return_value = self->obj.DesiredAccuracy();
         
-        return py::convert(return_value);
+        PyObject* out_return_value = py::convert(return_value);
+        if (!out_return_value) 
+        { 
+            return nullptr;
+        }
+        
+        return out_return_value;
     }
     catch (...)
     {
@@ -1234,7 +1498,7 @@ static int Geolocator_put_DesiredAccuracy(py::winrt_wrapper<winrt::Windows::Devi
     
     try
     {
-        auto param0 = py::converter<winrt::Windows::Devices::Geolocation::PositionAccuracy>::convert_to(arg);
+        auto param0 = py::convert_to<winrt::Windows::Devices::Geolocation::PositionAccuracy>(arg);
         
         self->obj.DesiredAccuracy(param0);
         
@@ -1252,7 +1516,13 @@ static PyObject* Geolocator_get_LocationStatus(py::winrt_wrapper<winrt::Windows:
     {
         winrt::Windows::Devices::Geolocation::PositionStatus return_value = self->obj.LocationStatus();
         
-        return py::convert(return_value);
+        PyObject* out_return_value = py::convert(return_value);
+        if (!out_return_value) 
+        { 
+            return nullptr;
+        }
+        
+        return out_return_value;
     }
     catch (...)
     {
@@ -1266,7 +1536,13 @@ static PyObject* Geolocator_get_DesiredAccuracyInMeters(py::winrt_wrapper<winrt:
     {
         winrt::Windows::Foundation::IReference<uint32_t> return_value = self->obj.DesiredAccuracyInMeters();
         
-        return py::convert(return_value);
+        PyObject* out_return_value = py::convert(return_value);
+        if (!out_return_value) 
+        { 
+            return nullptr;
+        }
+        
+        return out_return_value;
     }
     catch (...)
     {
@@ -1284,7 +1560,7 @@ static int Geolocator_put_DesiredAccuracyInMeters(py::winrt_wrapper<winrt::Windo
     
     try
     {
-        auto param0 = py::converter<winrt::Windows::Foundation::IReference<uint32_t>>::convert_to(arg);
+        auto param0 = py::convert_to<winrt::Windows::Foundation::IReference<uint32_t>>(arg);
         
         self->obj.DesiredAccuracyInMeters(param0);
         
@@ -1302,7 +1578,13 @@ static PyObject* Geolocator_get_DefaultGeoposition(PyObject* /*unused*/, PyObjec
     {
         winrt::Windows::Foundation::IReference<winrt::Windows::Devices::Geolocation::BasicGeoposition> return_value = winrt::Windows::Devices::Geolocation::Geolocator::DefaultGeoposition();
         
-        return py::convert(return_value);
+        PyObject* out_return_value = py::convert(return_value);
+        if (!out_return_value) 
+        { 
+            return nullptr;
+        }
+        
+        return out_return_value;
     }
     catch (...)
     {
@@ -1314,7 +1596,7 @@ static PyObject* Geolocator_put_DefaultGeoposition(PyObject* /*unused*/, PyObjec
 {
     try
     {
-        auto param0 = py::converter<winrt::Windows::Foundation::IReference<winrt::Windows::Devices::Geolocation::BasicGeoposition>>::convert_to(arg);
+        auto param0 = py::convert_to<winrt::Windows::Foundation::IReference<winrt::Windows::Devices::Geolocation::BasicGeoposition>>(arg);
         
         winrt::Windows::Devices::Geolocation::Geolocator::DefaultGeoposition(param0);
         
@@ -1332,7 +1614,13 @@ static PyObject* Geolocator_get_IsDefaultGeopositionRecommended(PyObject* /*unus
     {
         bool return_value = winrt::Windows::Devices::Geolocation::Geolocator::IsDefaultGeopositionRecommended();
         
-        return py::convert(return_value);
+        PyObject* out_return_value = py::convert(return_value);
+        if (!out_return_value) 
+        { 
+            return nullptr;
+        }
+        
+        return out_return_value;
     }
     catch (...)
     {
@@ -1344,11 +1632,17 @@ static PyObject* Geolocator_add_PositionChanged(py::winrt_wrapper<winrt::Windows
 {
     try
     {
-        auto param0 = py::converter<winrt::Windows::Foundation::TypedEventHandler<winrt::Windows::Devices::Geolocation::Geolocator, winrt::Windows::Devices::Geolocation::PositionChangedEventArgs>>::convert_to(arg);
+        auto param0 = py::convert_to<winrt::Windows::Foundation::TypedEventHandler<winrt::Windows::Devices::Geolocation::Geolocator, winrt::Windows::Devices::Geolocation::PositionChangedEventArgs>>(arg);
         
         winrt::event_token return_value = self->obj.PositionChanged(param0);
         
-        return py::convert(return_value);
+        PyObject* out_return_value = py::convert(return_value);
+        if (!out_return_value) 
+        { 
+            return nullptr;
+        }
+        
+        return out_return_value;
     }
     catch (...)
     {
@@ -1360,7 +1654,7 @@ static PyObject* Geolocator_remove_PositionChanged(py::winrt_wrapper<winrt::Wind
 {
     try
     {
-        auto param0 = py::converter<winrt::event_token>::convert_to(arg);
+        auto param0 = py::convert_to<winrt::event_token>(arg);
         
         self->obj.PositionChanged(param0);
         
@@ -1376,11 +1670,17 @@ static PyObject* Geolocator_add_StatusChanged(py::winrt_wrapper<winrt::Windows::
 {
     try
     {
-        auto param0 = py::converter<winrt::Windows::Foundation::TypedEventHandler<winrt::Windows::Devices::Geolocation::Geolocator, winrt::Windows::Devices::Geolocation::StatusChangedEventArgs>>::convert_to(arg);
+        auto param0 = py::convert_to<winrt::Windows::Foundation::TypedEventHandler<winrt::Windows::Devices::Geolocation::Geolocator, winrt::Windows::Devices::Geolocation::StatusChangedEventArgs>>(arg);
         
         winrt::event_token return_value = self->obj.StatusChanged(param0);
         
-        return py::convert(return_value);
+        PyObject* out_return_value = py::convert(return_value);
+        if (!out_return_value) 
+        { 
+            return nullptr;
+        }
+        
+        return out_return_value;
     }
     catch (...)
     {
@@ -1392,7 +1692,7 @@ static PyObject* Geolocator_remove_StatusChanged(py::winrt_wrapper<winrt::Window
 {
     try
     {
-        auto param0 = py::converter<winrt::event_token>::convert_to(arg);
+        auto param0 = py::convert_to<winrt::event_token>(arg);
         
         self->obj.StatusChanged(param0);
         
@@ -1540,7 +1840,13 @@ static PyObject* Geopath_get_Positions(py::winrt_wrapper<winrt::Windows::Devices
     {
         winrt::Windows::Foundation::Collections::IVectorView<winrt::Windows::Devices::Geolocation::BasicGeoposition> return_value = self->obj.Positions();
         
-        return py::convert(return_value);
+        PyObject* out_return_value = py::convert(return_value);
+        if (!out_return_value) 
+        { 
+            return nullptr;
+        }
+        
+        return out_return_value;
     }
     catch (...)
     {
@@ -1554,7 +1860,13 @@ static PyObject* Geopath_get_AltitudeReferenceSystem(py::winrt_wrapper<winrt::Wi
     {
         winrt::Windows::Devices::Geolocation::AltitudeReferenceSystem return_value = self->obj.AltitudeReferenceSystem();
         
-        return py::convert(return_value);
+        PyObject* out_return_value = py::convert(return_value);
+        if (!out_return_value) 
+        { 
+            return nullptr;
+        }
+        
+        return out_return_value;
     }
     catch (...)
     {
@@ -1568,7 +1880,13 @@ static PyObject* Geopath_get_GeoshapeType(py::winrt_wrapper<winrt::Windows::Devi
     {
         winrt::Windows::Devices::Geolocation::GeoshapeType return_value = self->obj.GeoshapeType();
         
-        return py::convert(return_value);
+        PyObject* out_return_value = py::convert(return_value);
+        if (!out_return_value) 
+        { 
+            return nullptr;
+        }
+        
+        return out_return_value;
     }
     catch (...)
     {
@@ -1582,7 +1900,13 @@ static PyObject* Geopath_get_SpatialReferenceId(py::winrt_wrapper<winrt::Windows
     {
         uint32_t return_value = self->obj.SpatialReferenceId();
         
-        return py::convert(return_value);
+        PyObject* out_return_value = py::convert(return_value);
+        if (!out_return_value) 
+        { 
+            return nullptr;
+        }
+        
+        return out_return_value;
     }
     catch (...)
     {
@@ -1714,7 +2038,13 @@ static PyObject* Geopoint_get_Position(py::winrt_wrapper<winrt::Windows::Devices
     {
         winrt::Windows::Devices::Geolocation::BasicGeoposition return_value = self->obj.Position();
         
-        return py::convert(return_value);
+        PyObject* out_return_value = py::convert(return_value);
+        if (!out_return_value) 
+        { 
+            return nullptr;
+        }
+        
+        return out_return_value;
     }
     catch (...)
     {
@@ -1728,7 +2058,13 @@ static PyObject* Geopoint_get_AltitudeReferenceSystem(py::winrt_wrapper<winrt::W
     {
         winrt::Windows::Devices::Geolocation::AltitudeReferenceSystem return_value = self->obj.AltitudeReferenceSystem();
         
-        return py::convert(return_value);
+        PyObject* out_return_value = py::convert(return_value);
+        if (!out_return_value) 
+        { 
+            return nullptr;
+        }
+        
+        return out_return_value;
     }
     catch (...)
     {
@@ -1742,7 +2078,13 @@ static PyObject* Geopoint_get_GeoshapeType(py::winrt_wrapper<winrt::Windows::Dev
     {
         winrt::Windows::Devices::Geolocation::GeoshapeType return_value = self->obj.GeoshapeType();
         
-        return py::convert(return_value);
+        PyObject* out_return_value = py::convert(return_value);
+        if (!out_return_value) 
+        { 
+            return nullptr;
+        }
+        
+        return out_return_value;
     }
     catch (...)
     {
@@ -1756,7 +2098,13 @@ static PyObject* Geopoint_get_SpatialReferenceId(py::winrt_wrapper<winrt::Window
     {
         uint32_t return_value = self->obj.SpatialReferenceId();
         
-        return py::convert(return_value);
+        PyObject* out_return_value = py::convert(return_value);
+        if (!out_return_value) 
+        { 
+            return nullptr;
+        }
+        
+        return out_return_value;
     }
     catch (...)
     {
@@ -1831,7 +2179,13 @@ static PyObject* Geoposition_get_CivicAddress(py::winrt_wrapper<winrt::Windows::
     {
         winrt::Windows::Devices::Geolocation::CivicAddress return_value = self->obj.CivicAddress();
         
-        return py::convert(return_value);
+        PyObject* out_return_value = py::convert(return_value);
+        if (!out_return_value) 
+        { 
+            return nullptr;
+        }
+        
+        return out_return_value;
     }
     catch (...)
     {
@@ -1845,7 +2199,13 @@ static PyObject* Geoposition_get_Coordinate(py::winrt_wrapper<winrt::Windows::De
     {
         winrt::Windows::Devices::Geolocation::Geocoordinate return_value = self->obj.Coordinate();
         
-        return py::convert(return_value);
+        PyObject* out_return_value = py::convert(return_value);
+        if (!out_return_value) 
+        { 
+            return nullptr;
+        }
+        
+        return out_return_value;
     }
     catch (...)
     {
@@ -1859,7 +2219,13 @@ static PyObject* Geoposition_get_VenueData(py::winrt_wrapper<winrt::Windows::Dev
     {
         winrt::Windows::Devices::Geolocation::VenueData return_value = self->obj.VenueData();
         
-        return py::convert(return_value);
+        PyObject* out_return_value = py::convert(return_value);
+        if (!out_return_value) 
+        { 
+            return nullptr;
+        }
+        
+        return out_return_value;
     }
     catch (...)
     {
@@ -1933,7 +2299,13 @@ static PyObject* Geovisit_get_Position(py::winrt_wrapper<winrt::Windows::Devices
     {
         winrt::Windows::Devices::Geolocation::Geoposition return_value = self->obj.Position();
         
-        return py::convert(return_value);
+        PyObject* out_return_value = py::convert(return_value);
+        if (!out_return_value) 
+        { 
+            return nullptr;
+        }
+        
+        return out_return_value;
     }
     catch (...)
     {
@@ -1947,7 +2319,13 @@ static PyObject* Geovisit_get_StateChange(py::winrt_wrapper<winrt::Windows::Devi
     {
         winrt::Windows::Devices::Geolocation::VisitStateChange return_value = self->obj.StateChange();
         
-        return py::convert(return_value);
+        PyObject* out_return_value = py::convert(return_value);
+        if (!out_return_value) 
+        { 
+            return nullptr;
+        }
+        
+        return out_return_value;
     }
     catch (...)
     {
@@ -1961,7 +2339,13 @@ static PyObject* Geovisit_get_Timestamp(py::winrt_wrapper<winrt::Windows::Device
     {
         winrt::Windows::Foundation::DateTime return_value = self->obj.Timestamp();
         
-        return py::convert(return_value);
+        PyObject* out_return_value = py::convert(return_value);
+        if (!out_return_value) 
+        { 
+            return nullptr;
+        }
+        
+        return out_return_value;
     }
     catch (...)
     {
@@ -2063,7 +2447,13 @@ static PyObject* GeovisitMonitor_GetLastReportAsync(PyObject* /*unused*/, PyObje
         {
             winrt::Windows::Foundation::IAsyncOperation<winrt::Windows::Devices::Geolocation::Geovisit> return_value = winrt::Windows::Devices::Geolocation::GeovisitMonitor::GetLastReportAsync();
             
-            return py::convert(return_value);
+            PyObject* out_return_value = py::convert(return_value);
+            if (!out_return_value) 
+            { 
+                return nullptr;
+            }
+            
+            return out_return_value;
         }
         catch (...)
         {
@@ -2136,7 +2526,13 @@ static PyObject* GeovisitMonitor_get_MonitoringScope(py::winrt_wrapper<winrt::Wi
     {
         winrt::Windows::Devices::Geolocation::VisitMonitoringScope return_value = self->obj.MonitoringScope();
         
-        return py::convert(return_value);
+        PyObject* out_return_value = py::convert(return_value);
+        if (!out_return_value) 
+        { 
+            return nullptr;
+        }
+        
+        return out_return_value;
     }
     catch (...)
     {
@@ -2148,11 +2544,17 @@ static PyObject* GeovisitMonitor_add_VisitStateChanged(py::winrt_wrapper<winrt::
 {
     try
     {
-        auto param0 = py::converter<winrt::Windows::Foundation::TypedEventHandler<winrt::Windows::Devices::Geolocation::GeovisitMonitor, winrt::Windows::Devices::Geolocation::GeovisitStateChangedEventArgs>>::convert_to(arg);
+        auto param0 = py::convert_to<winrt::Windows::Foundation::TypedEventHandler<winrt::Windows::Devices::Geolocation::GeovisitMonitor, winrt::Windows::Devices::Geolocation::GeovisitStateChangedEventArgs>>(arg);
         
         winrt::event_token return_value = self->obj.VisitStateChanged(param0);
         
-        return py::convert(return_value);
+        PyObject* out_return_value = py::convert(return_value);
+        if (!out_return_value) 
+        { 
+            return nullptr;
+        }
+        
+        return out_return_value;
     }
     catch (...)
     {
@@ -2164,7 +2566,7 @@ static PyObject* GeovisitMonitor_remove_VisitStateChanged(py::winrt_wrapper<winr
 {
     try
     {
-        auto param0 = py::converter<winrt::event_token>::convert_to(arg);
+        auto param0 = py::convert_to<winrt::event_token>(arg);
         
         self->obj.VisitStateChanged(param0);
         
@@ -2245,7 +2647,13 @@ static PyObject* GeovisitStateChangedEventArgs_get_Visit(py::winrt_wrapper<winrt
     {
         winrt::Windows::Devices::Geolocation::Geovisit return_value = self->obj.Visit();
         
-        return py::convert(return_value);
+        PyObject* out_return_value = py::convert(return_value);
+        if (!out_return_value) 
+        { 
+            return nullptr;
+        }
+        
+        return out_return_value;
     }
     catch (...)
     {
@@ -2321,7 +2729,13 @@ static PyObject* GeovisitTriggerDetails_ReadReports(py::winrt_wrapper<winrt::Win
         {
             winrt::Windows::Foundation::Collections::IVectorView<winrt::Windows::Devices::Geolocation::Geovisit> return_value = self->obj.ReadReports();
             
-            return py::convert(return_value);
+            PyObject* out_return_value = py::convert(return_value);
+            if (!out_return_value) 
+            { 
+                return nullptr;
+            }
+            
+            return out_return_value;
         }
         catch (...)
         {
@@ -2400,7 +2814,13 @@ static PyObject* PositionChangedEventArgs_get_Position(py::winrt_wrapper<winrt::
     {
         winrt::Windows::Devices::Geolocation::Geoposition return_value = self->obj.Position();
         
-        return py::convert(return_value);
+        PyObject* out_return_value = py::convert(return_value);
+        if (!out_return_value) 
+        { 
+            return nullptr;
+        }
+        
+        return out_return_value;
     }
     catch (...)
     {
@@ -2472,7 +2892,13 @@ static PyObject* StatusChangedEventArgs_get_Status(py::winrt_wrapper<winrt::Wind
     {
         winrt::Windows::Devices::Geolocation::PositionStatus return_value = self->obj.Status();
         
-        return py::convert(return_value);
+        PyObject* out_return_value = py::convert(return_value);
+        if (!out_return_value) 
+        { 
+            return nullptr;
+        }
+        
+        return out_return_value;
     }
     catch (...)
     {
@@ -2544,7 +2970,13 @@ static PyObject* VenueData_get_Id(py::winrt_wrapper<winrt::Windows::Devices::Geo
     {
         winrt::hstring return_value = self->obj.Id();
         
-        return py::convert(return_value);
+        PyObject* out_return_value = py::convert(return_value);
+        if (!out_return_value) 
+        { 
+            return nullptr;
+        }
+        
+        return out_return_value;
     }
     catch (...)
     {
@@ -2558,7 +2990,13 @@ static PyObject* VenueData_get_Level(py::winrt_wrapper<winrt::Windows::Devices::
     {
         winrt::hstring return_value = self->obj.Level();
         
-        return py::convert(return_value);
+        PyObject* out_return_value = py::convert(return_value);
+        if (!out_return_value) 
+        { 
+            return nullptr;
+        }
+        
+        return out_return_value;
     }
     catch (...)
     {
@@ -2631,7 +3069,13 @@ static PyObject* IGeoshape_get_AltitudeReferenceSystem(py::winrt_wrapper<winrt::
     {
         winrt::Windows::Devices::Geolocation::AltitudeReferenceSystem return_value = self->obj.AltitudeReferenceSystem();
         
-        return py::convert(return_value);
+        PyObject* out_return_value = py::convert(return_value);
+        if (!out_return_value) 
+        { 
+            return nullptr;
+        }
+        
+        return out_return_value;
     }
     catch (...)
     {
@@ -2645,7 +3089,13 @@ static PyObject* IGeoshape_get_GeoshapeType(py::winrt_wrapper<winrt::Windows::De
     {
         winrt::Windows::Devices::Geolocation::GeoshapeType return_value = self->obj.GeoshapeType();
         
-        return py::convert(return_value);
+        PyObject* out_return_value = py::convert(return_value);
+        if (!out_return_value) 
+        { 
+            return nullptr;
+        }
+        
+        return out_return_value;
     }
     catch (...)
     {
@@ -2659,7 +3109,13 @@ static PyObject* IGeoshape_get_SpatialReferenceId(py::winrt_wrapper<winrt::Windo
     {
         uint32_t return_value = self->obj.SpatialReferenceId();
         
-        return py::convert(return_value);
+        PyObject* out_return_value = py::convert(return_value);
+        if (!out_return_value) 
+        { 
+            return nullptr;
+        }
+        
+        return out_return_value;
     }
     catch (...)
     {

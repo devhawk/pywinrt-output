@@ -103,7 +103,13 @@ struct pyIIterableImpl : public pyIIterable
             {
                 winrt::Windows::Foundation::Collections::IIterator<T> return_value = obj.First();
                 
-                return py::convert(return_value);
+                PyObject* out_return_value = py::convert(return_value);
+                if (!out_return_value) 
+                { 
+                    return nullptr;
+                }
+                
+                return out_return_value;
             }
             catch (...)
             {
@@ -173,11 +179,24 @@ struct pyIIteratorImpl : public pyIIterator
         {
             try
             {
-                /*f*/ winrt::array_view<T> param0 { }; // TODO: Convert incoming python parameter
+                auto param0_count = py::convert_to<winrt::com_array<T>::size_type>(args, 0);
+                winrt::com_array<T> param0 { param0_count, py::empty_instance<T>::get() };
                 
                 uint32_t return_value = obj.GetMany(param0);
                 
-                return py::convert(return_value);
+                PyObject* out_return_value = py::convert(return_value);
+                if (!out_return_value) 
+                { 
+                    return nullptr;
+                }
+                
+                PyObject* out0 = py::convert(param0);
+                if (!out0) 
+                {
+                    return nullptr;
+                }
+                
+                return PyTuple_Pack(2, out_return_value, out0);
             }
             catch (...)
             {
@@ -202,7 +221,13 @@ struct pyIIteratorImpl : public pyIIterator
             {
                 bool return_value = obj.MoveNext();
                 
-                return py::convert(return_value);
+                PyObject* out_return_value = py::convert(return_value);
+                if (!out_return_value) 
+                { 
+                    return nullptr;
+                }
+                
+                return out_return_value;
             }
             catch (...)
             {
@@ -223,7 +248,13 @@ struct pyIIteratorImpl : public pyIIterator
         {
             T return_value = obj.Current();
             
-            return py::convert(return_value);
+            PyObject* out_return_value = py::convert(return_value);
+            if (!out_return_value) 
+            { 
+                return nullptr;
+            }
+            
+            return out_return_value;
         }
         catch (...)
         {
@@ -237,7 +268,13 @@ struct pyIIteratorImpl : public pyIIterator
         {
             bool return_value = obj.HasCurrent();
             
-            return py::convert(return_value);
+            PyObject* out_return_value = py::convert(return_value);
+            if (!out_return_value) 
+            { 
+                return nullptr;
+            }
+            
+            return out_return_value;
         }
         catch (...)
         {
@@ -272,7 +309,13 @@ struct pyIKeyValuePairImpl : public pyIKeyValuePair
         {
             K return_value = obj.Key();
             
-            return py::convert(return_value);
+            PyObject* out_return_value = py::convert(return_value);
+            if (!out_return_value) 
+            { 
+                return nullptr;
+            }
+            
+            return out_return_value;
         }
         catch (...)
         {
@@ -286,7 +329,13 @@ struct pyIKeyValuePairImpl : public pyIKeyValuePair
         {
             V return_value = obj.Value();
             
-            return py::convert(return_value);
+            PyObject* out_return_value = py::convert(return_value);
+            if (!out_return_value) 
+            { 
+                return nullptr;
+            }
+            
+            return out_return_value;
         }
         catch (...)
         {
@@ -321,7 +370,13 @@ struct pyIMapChangedEventArgsImpl : public pyIMapChangedEventArgs
         {
             winrt::Windows::Foundation::Collections::CollectionChange return_value = obj.CollectionChange();
             
-            return py::convert(return_value);
+            PyObject* out_return_value = py::convert(return_value);
+            if (!out_return_value) 
+            { 
+                return nullptr;
+            }
+            
+            return out_return_value;
         }
         catch (...)
         {
@@ -335,7 +390,13 @@ struct pyIMapChangedEventArgsImpl : public pyIMapChangedEventArgs
         {
             K return_value = obj.Key();
             
-            return py::convert(return_value);
+            PyObject* out_return_value = py::convert(return_value);
+            if (!out_return_value) 
+            { 
+                return nullptr;
+            }
+            
+            return out_return_value;
         }
         catch (...)
         {
@@ -417,7 +478,13 @@ struct pyIMapViewImpl : public pyIMapView
             {
                 winrt::Windows::Foundation::Collections::IIterator<winrt::Windows::Foundation::Collections::IKeyValuePair<K, V>> return_value = obj.First();
                 
-                return py::convert(return_value);
+                PyObject* out_return_value = py::convert(return_value);
+                if (!out_return_value) 
+                { 
+                    return nullptr;
+                }
+                
+                return out_return_value;
             }
             catch (...)
             {
@@ -444,7 +511,13 @@ struct pyIMapViewImpl : public pyIMapView
                 
                 bool return_value = obj.HasKey(param0);
                 
-                return py::convert(return_value);
+                PyObject* out_return_value = py::convert(return_value);
+                if (!out_return_value) 
+                { 
+                    return nullptr;
+                }
+                
+                return out_return_value;
             }
             catch (...)
             {
@@ -471,7 +544,13 @@ struct pyIMapViewImpl : public pyIMapView
                 
                 V return_value = obj.Lookup(param0);
                 
-                return py::convert(return_value);
+                PyObject* out_return_value = py::convert(return_value);
+                if (!out_return_value) 
+                { 
+                    return nullptr;
+                }
+                
+                return out_return_value;
             }
             catch (...)
             {
@@ -499,19 +578,19 @@ struct pyIMapViewImpl : public pyIMapView
                 
                 obj.Split(param0, param1);
                 
-                PyObject* out_param0 = py::convert(param0);
-                if (!out_param0) 
-                { 
+                PyObject* out0 = py::convert(param0);
+                if (!out0) 
+                {
                     return nullptr;
-                };
+                }
                 
-                PyObject* out_param1 = py::convert(param1);
-                if (!out_param1) 
-                { 
+                PyObject* out1 = py::convert(param1);
+                if (!out1) 
+                {
                     return nullptr;
-                };
+                }
                 
-                return PyTuple_Pack(2, out_param0, out_param1);
+                return PyTuple_Pack(2, out0, out1);
             }
             catch (...)
             {
@@ -532,7 +611,13 @@ struct pyIMapViewImpl : public pyIMapView
         {
             uint32_t return_value = obj.Size();
             
-            return py::convert(return_value);
+            PyObject* out_return_value = py::convert(return_value);
+            if (!out_return_value) 
+            { 
+                return nullptr;
+            }
+            
+            return out_return_value;
         }
         catch (...)
         {
@@ -658,7 +743,13 @@ struct pyIMapImpl : public pyIMap
             {
                 winrt::Windows::Foundation::Collections::IIterator<winrt::Windows::Foundation::Collections::IKeyValuePair<K, V>> return_value = obj.First();
                 
-                return py::convert(return_value);
+                PyObject* out_return_value = py::convert(return_value);
+                if (!out_return_value) 
+                { 
+                    return nullptr;
+                }
+                
+                return out_return_value;
             }
             catch (...)
             {
@@ -683,7 +774,13 @@ struct pyIMapImpl : public pyIMap
             {
                 winrt::Windows::Foundation::Collections::IMapView<K, V> return_value = obj.GetView();
                 
-                return py::convert(return_value);
+                PyObject* out_return_value = py::convert(return_value);
+                if (!out_return_value) 
+                { 
+                    return nullptr;
+                }
+                
+                return out_return_value;
             }
             catch (...)
             {
@@ -710,7 +807,13 @@ struct pyIMapImpl : public pyIMap
                 
                 bool return_value = obj.HasKey(param0);
                 
-                return py::convert(return_value);
+                PyObject* out_return_value = py::convert(return_value);
+                if (!out_return_value) 
+                { 
+                    return nullptr;
+                }
+                
+                return out_return_value;
             }
             catch (...)
             {
@@ -738,7 +841,13 @@ struct pyIMapImpl : public pyIMap
                 
                 bool return_value = obj.Insert(param0, param1);
                 
-                return py::convert(return_value);
+                PyObject* out_return_value = py::convert(return_value);
+                if (!out_return_value) 
+                { 
+                    return nullptr;
+                }
+                
+                return out_return_value;
             }
             catch (...)
             {
@@ -765,7 +874,13 @@ struct pyIMapImpl : public pyIMap
                 
                 V return_value = obj.Lookup(param0);
                 
-                return py::convert(return_value);
+                PyObject* out_return_value = py::convert(return_value);
+                if (!out_return_value) 
+                { 
+                    return nullptr;
+                }
+                
+                return out_return_value;
             }
             catch (...)
             {
@@ -813,7 +928,13 @@ struct pyIMapImpl : public pyIMap
         {
             uint32_t return_value = obj.Size();
             
-            return py::convert(return_value);
+            PyObject* out_return_value = py::convert(return_value);
+            if (!out_return_value) 
+            { 
+                return nullptr;
+            }
+            
+            return out_return_value;
         }
         catch (...)
         {
@@ -941,7 +1062,13 @@ struct pyIObservableMapImpl : public pyIObservableMap
             {
                 winrt::Windows::Foundation::Collections::IIterator<winrt::Windows::Foundation::Collections::IKeyValuePair<K, V>> return_value = obj.First();
                 
-                return py::convert(return_value);
+                PyObject* out_return_value = py::convert(return_value);
+                if (!out_return_value) 
+                { 
+                    return nullptr;
+                }
+                
+                return out_return_value;
             }
             catch (...)
             {
@@ -966,7 +1093,13 @@ struct pyIObservableMapImpl : public pyIObservableMap
             {
                 winrt::Windows::Foundation::Collections::IMapView<K, V> return_value = obj.GetView();
                 
-                return py::convert(return_value);
+                PyObject* out_return_value = py::convert(return_value);
+                if (!out_return_value) 
+                { 
+                    return nullptr;
+                }
+                
+                return out_return_value;
             }
             catch (...)
             {
@@ -993,7 +1126,13 @@ struct pyIObservableMapImpl : public pyIObservableMap
                 
                 bool return_value = obj.HasKey(param0);
                 
-                return py::convert(return_value);
+                PyObject* out_return_value = py::convert(return_value);
+                if (!out_return_value) 
+                { 
+                    return nullptr;
+                }
+                
+                return out_return_value;
             }
             catch (...)
             {
@@ -1021,7 +1160,13 @@ struct pyIObservableMapImpl : public pyIObservableMap
                 
                 bool return_value = obj.Insert(param0, param1);
                 
-                return py::convert(return_value);
+                PyObject* out_return_value = py::convert(return_value);
+                if (!out_return_value) 
+                { 
+                    return nullptr;
+                }
+                
+                return out_return_value;
             }
             catch (...)
             {
@@ -1048,7 +1193,13 @@ struct pyIObservableMapImpl : public pyIObservableMap
                 
                 V return_value = obj.Lookup(param0);
                 
-                return py::convert(return_value);
+                PyObject* out_return_value = py::convert(return_value);
+                if (!out_return_value) 
+                { 
+                    return nullptr;
+                }
+                
+                return out_return_value;
             }
             catch (...)
             {
@@ -1094,11 +1245,17 @@ struct pyIObservableMapImpl : public pyIObservableMap
     {
         try
         {
-            auto param0 = py::converter<winrt::Windows::Foundation::Collections::MapChangedEventHandler<K, V>>::convert_to(arg);
+            auto param0 = py::convert_to<winrt::Windows::Foundation::Collections::MapChangedEventHandler<K, V>>(arg);
             
             winrt::event_token return_value = obj.MapChanged(param0);
             
-            return py::convert(return_value);
+            PyObject* out_return_value = py::convert(return_value);
+            if (!out_return_value) 
+            { 
+                return nullptr;
+            }
+            
+            return out_return_value;
         }
         catch (...)
         {
@@ -1112,7 +1269,13 @@ struct pyIObservableMapImpl : public pyIObservableMap
         {
             uint32_t return_value = obj.Size();
             
-            return py::convert(return_value);
+            PyObject* out_return_value = py::convert(return_value);
+            if (!out_return_value) 
+            { 
+                return nullptr;
+            }
+            
+            return out_return_value;
         }
         catch (...)
         {
@@ -1124,7 +1287,7 @@ struct pyIObservableMapImpl : public pyIObservableMap
     {
         try
         {
-            auto param0 = py::converter<winrt::event_token>::convert_to(arg);
+            auto param0 = py::convert_to<winrt::event_token>(arg);
             
             obj.MapChanged(param0);
             
@@ -1288,7 +1451,13 @@ struct pyIObservableVectorImpl : public pyIObservableVector
             {
                 winrt::Windows::Foundation::Collections::IIterator<T> return_value = obj.First();
                 
-                return py::convert(return_value);
+                PyObject* out_return_value = py::convert(return_value);
+                if (!out_return_value) 
+                { 
+                    return nullptr;
+                }
+                
+                return out_return_value;
             }
             catch (...)
             {
@@ -1315,7 +1484,13 @@ struct pyIObservableVectorImpl : public pyIObservableVector
                 
                 T return_value = obj.GetAt(param0);
                 
-                return py::convert(return_value);
+                PyObject* out_return_value = py::convert(return_value);
+                if (!out_return_value) 
+                { 
+                    return nullptr;
+                }
+                
+                return out_return_value;
             }
             catch (...)
             {
@@ -1339,11 +1514,24 @@ struct pyIObservableVectorImpl : public pyIObservableVector
             try
             {
                 auto param0 = py::convert_to<uint32_t>(args, 0);
-                /*f*/ winrt::array_view<T> param1 { }; // TODO: Convert incoming python parameter
+                auto param1_count = py::convert_to<winrt::com_array<T>::size_type>(args, 1);
+                winrt::com_array<T> param1 { param1_count, py::empty_instance<T>::get() };
                 
                 uint32_t return_value = obj.GetMany(param0, param1);
                 
-                return py::convert(return_value);
+                PyObject* out_return_value = py::convert(return_value);
+                if (!out_return_value) 
+                { 
+                    return nullptr;
+                }
+                
+                PyObject* out1 = py::convert(param1);
+                if (!out1) 
+                {
+                    return nullptr;
+                }
+                
+                return PyTuple_Pack(2, out_return_value, out1);
             }
             catch (...)
             {
@@ -1368,7 +1556,13 @@ struct pyIObservableVectorImpl : public pyIObservableVector
             {
                 winrt::Windows::Foundation::Collections::IVectorView<T> return_value = obj.GetView();
                 
-                return py::convert(return_value);
+                PyObject* out_return_value = py::convert(return_value);
+                if (!out_return_value) 
+                { 
+                    return nullptr;
+                }
+                
+                return out_return_value;
             }
             catch (...)
             {
@@ -1400,15 +1594,15 @@ struct pyIObservableVectorImpl : public pyIObservableVector
                 if (!out_return_value) 
                 { 
                     return nullptr;
-                };
+                }
                 
-                PyObject* out_param1 = py::convert(param1);
-                if (!out_param1) 
-                { 
+                PyObject* out1 = py::convert(param1);
+                if (!out1) 
+                {
                     return nullptr;
-                };
+                }
                 
-                return PyTuple_Pack(2, out_return_value, out_param1);
+                return PyTuple_Pack(2, out_return_value, out1);
             }
             catch (...)
             {
@@ -1511,7 +1705,8 @@ struct pyIObservableVectorImpl : public pyIObservableVector
         {
             try
             {
-                /*p*/ winrt::array_view<T const> param0 { }; // TODO: Convert incoming python parameter
+                auto _param0 = py::convert_to<winrt::com_array<T>>(args, 0);
+                auto param0 = winrt::array_view<const T>(_param0.begin(), _param0.end());
                 
                 obj.ReplaceAll(param0);
                 
@@ -1562,11 +1757,17 @@ struct pyIObservableVectorImpl : public pyIObservableVector
     {
         try
         {
-            auto param0 = py::converter<winrt::Windows::Foundation::Collections::VectorChangedEventHandler<T>>::convert_to(arg);
+            auto param0 = py::convert_to<winrt::Windows::Foundation::Collections::VectorChangedEventHandler<T>>(arg);
             
             winrt::event_token return_value = obj.VectorChanged(param0);
             
-            return py::convert(return_value);
+            PyObject* out_return_value = py::convert(return_value);
+            if (!out_return_value) 
+            { 
+                return nullptr;
+            }
+            
+            return out_return_value;
         }
         catch (...)
         {
@@ -1580,7 +1781,13 @@ struct pyIObservableVectorImpl : public pyIObservableVector
         {
             uint32_t return_value = obj.Size();
             
-            return py::convert(return_value);
+            PyObject* out_return_value = py::convert(return_value);
+            if (!out_return_value) 
+            { 
+                return nullptr;
+            }
+            
+            return out_return_value;
         }
         catch (...)
         {
@@ -1592,7 +1799,7 @@ struct pyIObservableVectorImpl : public pyIObservableVector
     {
         try
         {
-            auto param0 = py::converter<winrt::event_token>::convert_to(arg);
+            auto param0 = py::convert_to<winrt::event_token>(arg);
             
             obj.VectorChanged(param0);
             
@@ -1678,7 +1885,13 @@ struct pyIVectorViewImpl : public pyIVectorView
             {
                 winrt::Windows::Foundation::Collections::IIterator<T> return_value = obj.First();
                 
-                return py::convert(return_value);
+                PyObject* out_return_value = py::convert(return_value);
+                if (!out_return_value) 
+                { 
+                    return nullptr;
+                }
+                
+                return out_return_value;
             }
             catch (...)
             {
@@ -1705,7 +1918,13 @@ struct pyIVectorViewImpl : public pyIVectorView
                 
                 T return_value = obj.GetAt(param0);
                 
-                return py::convert(return_value);
+                PyObject* out_return_value = py::convert(return_value);
+                if (!out_return_value) 
+                { 
+                    return nullptr;
+                }
+                
+                return out_return_value;
             }
             catch (...)
             {
@@ -1729,11 +1948,24 @@ struct pyIVectorViewImpl : public pyIVectorView
             try
             {
                 auto param0 = py::convert_to<uint32_t>(args, 0);
-                /*f*/ winrt::array_view<T> param1 { }; // TODO: Convert incoming python parameter
+                auto param1_count = py::convert_to<winrt::com_array<T>::size_type>(args, 1);
+                winrt::com_array<T> param1 { param1_count, py::empty_instance<T>::get() };
                 
                 uint32_t return_value = obj.GetMany(param0, param1);
                 
-                return py::convert(return_value);
+                PyObject* out_return_value = py::convert(return_value);
+                if (!out_return_value) 
+                { 
+                    return nullptr;
+                }
+                
+                PyObject* out1 = py::convert(param1);
+                if (!out1) 
+                {
+                    return nullptr;
+                }
+                
+                return PyTuple_Pack(2, out_return_value, out1);
             }
             catch (...)
             {
@@ -1765,15 +1997,15 @@ struct pyIVectorViewImpl : public pyIVectorView
                 if (!out_return_value) 
                 { 
                     return nullptr;
-                };
+                }
                 
-                PyObject* out_param1 = py::convert(param1);
-                if (!out_param1) 
-                { 
+                PyObject* out1 = py::convert(param1);
+                if (!out1) 
+                {
                     return nullptr;
-                };
+                }
                 
-                return PyTuple_Pack(2, out_return_value, out_param1);
+                return PyTuple_Pack(2, out_return_value, out1);
             }
             catch (...)
             {
@@ -1794,7 +2026,13 @@ struct pyIVectorViewImpl : public pyIVectorView
         {
             uint32_t return_value = obj.Size();
             
-            return py::convert(return_value);
+            PyObject* out_return_value = py::convert(return_value);
+            if (!out_return_value) 
+            { 
+                return nullptr;
+            }
+            
+            return out_return_value;
         }
         catch (...)
         {
@@ -1952,7 +2190,13 @@ struct pyIVectorImpl : public pyIVector
             {
                 winrt::Windows::Foundation::Collections::IIterator<T> return_value = obj.First();
                 
-                return py::convert(return_value);
+                PyObject* out_return_value = py::convert(return_value);
+                if (!out_return_value) 
+                { 
+                    return nullptr;
+                }
+                
+                return out_return_value;
             }
             catch (...)
             {
@@ -1979,7 +2223,13 @@ struct pyIVectorImpl : public pyIVector
                 
                 T return_value = obj.GetAt(param0);
                 
-                return py::convert(return_value);
+                PyObject* out_return_value = py::convert(return_value);
+                if (!out_return_value) 
+                { 
+                    return nullptr;
+                }
+                
+                return out_return_value;
             }
             catch (...)
             {
@@ -2003,11 +2253,24 @@ struct pyIVectorImpl : public pyIVector
             try
             {
                 auto param0 = py::convert_to<uint32_t>(args, 0);
-                /*f*/ winrt::array_view<T> param1 { }; // TODO: Convert incoming python parameter
+                auto param1_count = py::convert_to<winrt::com_array<T>::size_type>(args, 1);
+                winrt::com_array<T> param1 { param1_count, py::empty_instance<T>::get() };
                 
                 uint32_t return_value = obj.GetMany(param0, param1);
                 
-                return py::convert(return_value);
+                PyObject* out_return_value = py::convert(return_value);
+                if (!out_return_value) 
+                { 
+                    return nullptr;
+                }
+                
+                PyObject* out1 = py::convert(param1);
+                if (!out1) 
+                {
+                    return nullptr;
+                }
+                
+                return PyTuple_Pack(2, out_return_value, out1);
             }
             catch (...)
             {
@@ -2032,7 +2295,13 @@ struct pyIVectorImpl : public pyIVector
             {
                 winrt::Windows::Foundation::Collections::IVectorView<T> return_value = obj.GetView();
                 
-                return py::convert(return_value);
+                PyObject* out_return_value = py::convert(return_value);
+                if (!out_return_value) 
+                { 
+                    return nullptr;
+                }
+                
+                return out_return_value;
             }
             catch (...)
             {
@@ -2064,15 +2333,15 @@ struct pyIVectorImpl : public pyIVector
                 if (!out_return_value) 
                 { 
                     return nullptr;
-                };
+                }
                 
-                PyObject* out_param1 = py::convert(param1);
-                if (!out_param1) 
-                { 
+                PyObject* out1 = py::convert(param1);
+                if (!out1) 
+                {
                     return nullptr;
-                };
+                }
                 
-                return PyTuple_Pack(2, out_return_value, out_param1);
+                return PyTuple_Pack(2, out_return_value, out1);
             }
             catch (...)
             {
@@ -2175,7 +2444,8 @@ struct pyIVectorImpl : public pyIVector
         {
             try
             {
-                /*p*/ winrt::array_view<T const> param0 { }; // TODO: Convert incoming python parameter
+                auto _param0 = py::convert_to<winrt::com_array<T>>(args, 0);
+                auto param0 = winrt::array_view<const T>(_param0.begin(), _param0.end());
                 
                 obj.ReplaceAll(param0);
                 
@@ -2228,7 +2498,13 @@ struct pyIVectorImpl : public pyIVector
         {
             uint32_t return_value = obj.Size();
             
-            return py::convert(return_value);
+            PyObject* out_return_value = py::convert(return_value);
+            if (!out_return_value) 
+            { 
+                return nullptr;
+            }
+            
+            return out_return_value;
         }
         catch (...)
         {

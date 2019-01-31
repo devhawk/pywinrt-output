@@ -356,7 +356,13 @@ struct pyIAsyncActionWithProgressImpl : public pyIAsyncActionWithProgress
         {
             winrt::Windows::Foundation::AsyncActionWithProgressCompletedHandler<TProgress> return_value = obj.Completed();
             
-            return py::convert(return_value);
+            PyObject* out_return_value = py::convert(return_value);
+            if (!out_return_value) 
+            { 
+                return nullptr;
+            }
+            
+            return out_return_value;
         }
         catch (...)
         {
@@ -370,7 +376,13 @@ struct pyIAsyncActionWithProgressImpl : public pyIAsyncActionWithProgress
         {
             winrt::hresult return_value = obj.ErrorCode();
             
-            return py::convert(return_value);
+            PyObject* out_return_value = py::convert(return_value);
+            if (!out_return_value) 
+            { 
+                return nullptr;
+            }
+            
+            return out_return_value;
         }
         catch (...)
         {
@@ -384,7 +396,13 @@ struct pyIAsyncActionWithProgressImpl : public pyIAsyncActionWithProgress
         {
             uint32_t return_value = obj.Id();
             
-            return py::convert(return_value);
+            PyObject* out_return_value = py::convert(return_value);
+            if (!out_return_value) 
+            { 
+                return nullptr;
+            }
+            
+            return out_return_value;
         }
         catch (...)
         {
@@ -398,7 +416,13 @@ struct pyIAsyncActionWithProgressImpl : public pyIAsyncActionWithProgress
         {
             winrt::Windows::Foundation::AsyncActionProgressHandler<TProgress> return_value = obj.Progress();
             
-            return py::convert(return_value);
+            PyObject* out_return_value = py::convert(return_value);
+            if (!out_return_value) 
+            { 
+                return nullptr;
+            }
+            
+            return out_return_value;
         }
         catch (...)
         {
@@ -412,7 +436,13 @@ struct pyIAsyncActionWithProgressImpl : public pyIAsyncActionWithProgress
         {
             winrt::Windows::Foundation::AsyncStatus return_value = obj.Status();
             
-            return py::convert(return_value);
+            PyObject* out_return_value = py::convert(return_value);
+            if (!out_return_value) 
+            { 
+                return nullptr;
+            }
+            
+            return out_return_value;
         }
         catch (...)
         {
@@ -424,7 +454,7 @@ struct pyIAsyncActionWithProgressImpl : public pyIAsyncActionWithProgress
     {
         try
         {
-            auto param0 = py::converter<winrt::Windows::Foundation::AsyncActionWithProgressCompletedHandler<TProgress>>::convert_to(arg);
+            auto param0 = py::convert_to<winrt::Windows::Foundation::AsyncActionWithProgressCompletedHandler<TProgress>>(arg);
             
             obj.Completed(param0);
             
@@ -440,7 +470,7 @@ struct pyIAsyncActionWithProgressImpl : public pyIAsyncActionWithProgress
     {
         try
         {
-            auto param0 = py::converter<winrt::Windows::Foundation::AsyncActionProgressHandler<TProgress>>::convert_to(arg);
+            auto param0 = py::convert_to<winrt::Windows::Foundation::AsyncActionProgressHandler<TProgress>>(arg);
             
             obj.Progress(param0);
             
@@ -543,7 +573,13 @@ struct pyIAsyncOperationWithProgressImpl : public pyIAsyncOperationWithProgress
             {
                 TResult return_value = obj.GetResults();
                 
-                return py::convert(return_value);
+                PyObject* out_return_value = py::convert(return_value);
+                if (!out_return_value) 
+                { 
+                    return nullptr;
+                }
+                
+                return out_return_value;
             }
             catch (...)
             {
@@ -564,7 +600,13 @@ struct pyIAsyncOperationWithProgressImpl : public pyIAsyncOperationWithProgress
         {
             winrt::Windows::Foundation::AsyncOperationWithProgressCompletedHandler<TResult, TProgress> return_value = obj.Completed();
             
-            return py::convert(return_value);
+            PyObject* out_return_value = py::convert(return_value);
+            if (!out_return_value) 
+            { 
+                return nullptr;
+            }
+            
+            return out_return_value;
         }
         catch (...)
         {
@@ -578,7 +620,13 @@ struct pyIAsyncOperationWithProgressImpl : public pyIAsyncOperationWithProgress
         {
             winrt::hresult return_value = obj.ErrorCode();
             
-            return py::convert(return_value);
+            PyObject* out_return_value = py::convert(return_value);
+            if (!out_return_value) 
+            { 
+                return nullptr;
+            }
+            
+            return out_return_value;
         }
         catch (...)
         {
@@ -592,7 +640,13 @@ struct pyIAsyncOperationWithProgressImpl : public pyIAsyncOperationWithProgress
         {
             uint32_t return_value = obj.Id();
             
-            return py::convert(return_value);
+            PyObject* out_return_value = py::convert(return_value);
+            if (!out_return_value) 
+            { 
+                return nullptr;
+            }
+            
+            return out_return_value;
         }
         catch (...)
         {
@@ -606,7 +660,13 @@ struct pyIAsyncOperationWithProgressImpl : public pyIAsyncOperationWithProgress
         {
             winrt::Windows::Foundation::AsyncOperationProgressHandler<TResult, TProgress> return_value = obj.Progress();
             
-            return py::convert(return_value);
+            PyObject* out_return_value = py::convert(return_value);
+            if (!out_return_value) 
+            { 
+                return nullptr;
+            }
+            
+            return out_return_value;
         }
         catch (...)
         {
@@ -620,7 +680,13 @@ struct pyIAsyncOperationWithProgressImpl : public pyIAsyncOperationWithProgress
         {
             winrt::Windows::Foundation::AsyncStatus return_value = obj.Status();
             
-            return py::convert(return_value);
+            PyObject* out_return_value = py::convert(return_value);
+            if (!out_return_value) 
+            { 
+                return nullptr;
+            }
+            
+            return out_return_value;
         }
         catch (...)
         {
@@ -632,7 +698,7 @@ struct pyIAsyncOperationWithProgressImpl : public pyIAsyncOperationWithProgress
     {
         try
         {
-            auto param0 = py::converter<winrt::Windows::Foundation::AsyncOperationWithProgressCompletedHandler<TResult, TProgress>>::convert_to(arg);
+            auto param0 = py::convert_to<winrt::Windows::Foundation::AsyncOperationWithProgressCompletedHandler<TResult, TProgress>>(arg);
             
             obj.Completed(param0);
             
@@ -648,7 +714,7 @@ struct pyIAsyncOperationWithProgressImpl : public pyIAsyncOperationWithProgress
     {
         try
         {
-            auto param0 = py::converter<winrt::Windows::Foundation::AsyncOperationProgressHandler<TResult, TProgress>>::convert_to(arg);
+            auto param0 = py::convert_to<winrt::Windows::Foundation::AsyncOperationProgressHandler<TResult, TProgress>>(arg);
             
             obj.Progress(param0);
             
@@ -749,7 +815,13 @@ struct pyIAsyncOperationImpl : public pyIAsyncOperation
             {
                 TResult return_value = obj.GetResults();
                 
-                return py::convert(return_value);
+                PyObject* out_return_value = py::convert(return_value);
+                if (!out_return_value) 
+                { 
+                    return nullptr;
+                }
+                
+                return out_return_value;
             }
             catch (...)
             {
@@ -770,7 +842,13 @@ struct pyIAsyncOperationImpl : public pyIAsyncOperation
         {
             winrt::Windows::Foundation::AsyncOperationCompletedHandler<TResult> return_value = obj.Completed();
             
-            return py::convert(return_value);
+            PyObject* out_return_value = py::convert(return_value);
+            if (!out_return_value) 
+            { 
+                return nullptr;
+            }
+            
+            return out_return_value;
         }
         catch (...)
         {
@@ -784,7 +862,13 @@ struct pyIAsyncOperationImpl : public pyIAsyncOperation
         {
             winrt::hresult return_value = obj.ErrorCode();
             
-            return py::convert(return_value);
+            PyObject* out_return_value = py::convert(return_value);
+            if (!out_return_value) 
+            { 
+                return nullptr;
+            }
+            
+            return out_return_value;
         }
         catch (...)
         {
@@ -798,7 +882,13 @@ struct pyIAsyncOperationImpl : public pyIAsyncOperation
         {
             uint32_t return_value = obj.Id();
             
-            return py::convert(return_value);
+            PyObject* out_return_value = py::convert(return_value);
+            if (!out_return_value) 
+            { 
+                return nullptr;
+            }
+            
+            return out_return_value;
         }
         catch (...)
         {
@@ -812,7 +902,13 @@ struct pyIAsyncOperationImpl : public pyIAsyncOperation
         {
             winrt::Windows::Foundation::AsyncStatus return_value = obj.Status();
             
-            return py::convert(return_value);
+            PyObject* out_return_value = py::convert(return_value);
+            if (!out_return_value) 
+            { 
+                return nullptr;
+            }
+            
+            return out_return_value;
         }
         catch (...)
         {
@@ -824,7 +920,7 @@ struct pyIAsyncOperationImpl : public pyIAsyncOperation
     {
         try
         {
-            auto param0 = py::converter<winrt::Windows::Foundation::AsyncOperationCompletedHandler<TResult>>::convert_to(arg);
+            auto param0 = py::convert_to<winrt::Windows::Foundation::AsyncOperationCompletedHandler<TResult>>(arg);
             
             obj.Completed(param0);
             
@@ -905,7 +1001,13 @@ struct pyIReferenceArrayImpl : public pyIReferenceArray
             {
                 bool return_value = obj.GetBoolean();
                 
-                return py::convert(return_value);
+                PyObject* out_return_value = py::convert(return_value);
+                if (!out_return_value) 
+                { 
+                    return nullptr;
+                }
+                
+                return out_return_value;
             }
             catch (...)
             {
@@ -928,12 +1030,17 @@ struct pyIReferenceArrayImpl : public pyIReferenceArray
         {
             try
             {
-                /*r*/ winrt::com_array<bool> param0 { };
+                winrt::com_array<bool> param0 { };
                 
                 obj.GetBooleanArray(param0);
                 
-                PyObject* out_param0 = nullptr; // TODO: receive array impl
-                return PyTuple_Pack(1, out_param0);
+                PyObject* out0 = py::convert(param0);
+                if (!out0) 
+                {
+                    return nullptr;
+                }
+                
+                return out0;
             }
             catch (...)
             {
@@ -958,7 +1065,13 @@ struct pyIReferenceArrayImpl : public pyIReferenceArray
             {
                 char16_t return_value = obj.GetChar16();
                 
-                return py::convert(return_value);
+                PyObject* out_return_value = py::convert(return_value);
+                if (!out_return_value) 
+                { 
+                    return nullptr;
+                }
+                
+                return out_return_value;
             }
             catch (...)
             {
@@ -981,12 +1094,17 @@ struct pyIReferenceArrayImpl : public pyIReferenceArray
         {
             try
             {
-                /*r*/ winrt::com_array<char16_t> param0 { };
+                winrt::com_array<char16_t> param0 { };
                 
                 obj.GetChar16Array(param0);
                 
-                PyObject* out_param0 = nullptr; // TODO: receive array impl
-                return PyTuple_Pack(1, out_param0);
+                PyObject* out0 = py::convert(param0);
+                if (!out0) 
+                {
+                    return nullptr;
+                }
+                
+                return out0;
             }
             catch (...)
             {
@@ -1011,7 +1129,13 @@ struct pyIReferenceArrayImpl : public pyIReferenceArray
             {
                 winrt::Windows::Foundation::DateTime return_value = obj.GetDateTime();
                 
-                return py::convert(return_value);
+                PyObject* out_return_value = py::convert(return_value);
+                if (!out_return_value) 
+                { 
+                    return nullptr;
+                }
+                
+                return out_return_value;
             }
             catch (...)
             {
@@ -1034,12 +1158,17 @@ struct pyIReferenceArrayImpl : public pyIReferenceArray
         {
             try
             {
-                /*r*/ winrt::com_array<winrt::Windows::Foundation::DateTime> param0 { };
+                winrt::com_array<winrt::Windows::Foundation::DateTime> param0 { };
                 
                 obj.GetDateTimeArray(param0);
                 
-                PyObject* out_param0 = nullptr; // TODO: receive array impl
-                return PyTuple_Pack(1, out_param0);
+                PyObject* out0 = py::convert(param0);
+                if (!out0) 
+                {
+                    return nullptr;
+                }
+                
+                return out0;
             }
             catch (...)
             {
@@ -1064,7 +1193,13 @@ struct pyIReferenceArrayImpl : public pyIReferenceArray
             {
                 double return_value = obj.GetDouble();
                 
-                return py::convert(return_value);
+                PyObject* out_return_value = py::convert(return_value);
+                if (!out_return_value) 
+                { 
+                    return nullptr;
+                }
+                
+                return out_return_value;
             }
             catch (...)
             {
@@ -1087,12 +1222,17 @@ struct pyIReferenceArrayImpl : public pyIReferenceArray
         {
             try
             {
-                /*r*/ winrt::com_array<double> param0 { };
+                winrt::com_array<double> param0 { };
                 
                 obj.GetDoubleArray(param0);
                 
-                PyObject* out_param0 = nullptr; // TODO: receive array impl
-                return PyTuple_Pack(1, out_param0);
+                PyObject* out0 = py::convert(param0);
+                if (!out0) 
+                {
+                    return nullptr;
+                }
+                
+                return out0;
             }
             catch (...)
             {
@@ -1117,7 +1257,13 @@ struct pyIReferenceArrayImpl : public pyIReferenceArray
             {
                 winrt::guid return_value = obj.GetGuid();
                 
-                return py::convert(return_value);
+                PyObject* out_return_value = py::convert(return_value);
+                if (!out_return_value) 
+                { 
+                    return nullptr;
+                }
+                
+                return out_return_value;
             }
             catch (...)
             {
@@ -1140,12 +1286,17 @@ struct pyIReferenceArrayImpl : public pyIReferenceArray
         {
             try
             {
-                /*r*/ winrt::com_array<winrt::guid> param0 { };
+                winrt::com_array<winrt::guid> param0 { };
                 
                 obj.GetGuidArray(param0);
                 
-                PyObject* out_param0 = nullptr; // TODO: receive array impl
-                return PyTuple_Pack(1, out_param0);
+                PyObject* out0 = py::convert(param0);
+                if (!out0) 
+                {
+                    return nullptr;
+                }
+                
+                return out0;
             }
             catch (...)
             {
@@ -1168,12 +1319,17 @@ struct pyIReferenceArrayImpl : public pyIReferenceArray
         {
             try
             {
-                /*r*/ winrt::com_array<winrt::Windows::Foundation::IInspectable> param0 { };
+                winrt::com_array<winrt::Windows::Foundation::IInspectable> param0 { };
                 
                 obj.GetInspectableArray(param0);
                 
-                PyObject* out_param0 = nullptr; // TODO: receive array impl
-                return PyTuple_Pack(1, out_param0);
+                PyObject* out0 = py::convert(param0);
+                if (!out0) 
+                {
+                    return nullptr;
+                }
+                
+                return out0;
             }
             catch (...)
             {
@@ -1198,7 +1354,13 @@ struct pyIReferenceArrayImpl : public pyIReferenceArray
             {
                 int16_t return_value = obj.GetInt16();
                 
-                return py::convert(return_value);
+                PyObject* out_return_value = py::convert(return_value);
+                if (!out_return_value) 
+                { 
+                    return nullptr;
+                }
+                
+                return out_return_value;
             }
             catch (...)
             {
@@ -1221,12 +1383,17 @@ struct pyIReferenceArrayImpl : public pyIReferenceArray
         {
             try
             {
-                /*r*/ winrt::com_array<int16_t> param0 { };
+                winrt::com_array<int16_t> param0 { };
                 
                 obj.GetInt16Array(param0);
                 
-                PyObject* out_param0 = nullptr; // TODO: receive array impl
-                return PyTuple_Pack(1, out_param0);
+                PyObject* out0 = py::convert(param0);
+                if (!out0) 
+                {
+                    return nullptr;
+                }
+                
+                return out0;
             }
             catch (...)
             {
@@ -1251,7 +1418,13 @@ struct pyIReferenceArrayImpl : public pyIReferenceArray
             {
                 int32_t return_value = obj.GetInt32();
                 
-                return py::convert(return_value);
+                PyObject* out_return_value = py::convert(return_value);
+                if (!out_return_value) 
+                { 
+                    return nullptr;
+                }
+                
+                return out_return_value;
             }
             catch (...)
             {
@@ -1274,12 +1447,17 @@ struct pyIReferenceArrayImpl : public pyIReferenceArray
         {
             try
             {
-                /*r*/ winrt::com_array<int32_t> param0 { };
+                winrt::com_array<int32_t> param0 { };
                 
                 obj.GetInt32Array(param0);
                 
-                PyObject* out_param0 = nullptr; // TODO: receive array impl
-                return PyTuple_Pack(1, out_param0);
+                PyObject* out0 = py::convert(param0);
+                if (!out0) 
+                {
+                    return nullptr;
+                }
+                
+                return out0;
             }
             catch (...)
             {
@@ -1304,7 +1482,13 @@ struct pyIReferenceArrayImpl : public pyIReferenceArray
             {
                 int64_t return_value = obj.GetInt64();
                 
-                return py::convert(return_value);
+                PyObject* out_return_value = py::convert(return_value);
+                if (!out_return_value) 
+                { 
+                    return nullptr;
+                }
+                
+                return out_return_value;
             }
             catch (...)
             {
@@ -1327,12 +1511,17 @@ struct pyIReferenceArrayImpl : public pyIReferenceArray
         {
             try
             {
-                /*r*/ winrt::com_array<int64_t> param0 { };
+                winrt::com_array<int64_t> param0 { };
                 
                 obj.GetInt64Array(param0);
                 
-                PyObject* out_param0 = nullptr; // TODO: receive array impl
-                return PyTuple_Pack(1, out_param0);
+                PyObject* out0 = py::convert(param0);
+                if (!out0) 
+                {
+                    return nullptr;
+                }
+                
+                return out0;
             }
             catch (...)
             {
@@ -1357,7 +1546,13 @@ struct pyIReferenceArrayImpl : public pyIReferenceArray
             {
                 winrt::Windows::Foundation::Point return_value = obj.GetPoint();
                 
-                return py::convert(return_value);
+                PyObject* out_return_value = py::convert(return_value);
+                if (!out_return_value) 
+                { 
+                    return nullptr;
+                }
+                
+                return out_return_value;
             }
             catch (...)
             {
@@ -1380,12 +1575,17 @@ struct pyIReferenceArrayImpl : public pyIReferenceArray
         {
             try
             {
-                /*r*/ winrt::com_array<winrt::Windows::Foundation::Point> param0 { };
+                winrt::com_array<winrt::Windows::Foundation::Point> param0 { };
                 
                 obj.GetPointArray(param0);
                 
-                PyObject* out_param0 = nullptr; // TODO: receive array impl
-                return PyTuple_Pack(1, out_param0);
+                PyObject* out0 = py::convert(param0);
+                if (!out0) 
+                {
+                    return nullptr;
+                }
+                
+                return out0;
             }
             catch (...)
             {
@@ -1410,7 +1610,13 @@ struct pyIReferenceArrayImpl : public pyIReferenceArray
             {
                 winrt::Windows::Foundation::Rect return_value = obj.GetRect();
                 
-                return py::convert(return_value);
+                PyObject* out_return_value = py::convert(return_value);
+                if (!out_return_value) 
+                { 
+                    return nullptr;
+                }
+                
+                return out_return_value;
             }
             catch (...)
             {
@@ -1433,12 +1639,17 @@ struct pyIReferenceArrayImpl : public pyIReferenceArray
         {
             try
             {
-                /*r*/ winrt::com_array<winrt::Windows::Foundation::Rect> param0 { };
+                winrt::com_array<winrt::Windows::Foundation::Rect> param0 { };
                 
                 obj.GetRectArray(param0);
                 
-                PyObject* out_param0 = nullptr; // TODO: receive array impl
-                return PyTuple_Pack(1, out_param0);
+                PyObject* out0 = py::convert(param0);
+                if (!out0) 
+                {
+                    return nullptr;
+                }
+                
+                return out0;
             }
             catch (...)
             {
@@ -1463,7 +1674,13 @@ struct pyIReferenceArrayImpl : public pyIReferenceArray
             {
                 float return_value = obj.GetSingle();
                 
-                return py::convert(return_value);
+                PyObject* out_return_value = py::convert(return_value);
+                if (!out_return_value) 
+                { 
+                    return nullptr;
+                }
+                
+                return out_return_value;
             }
             catch (...)
             {
@@ -1486,12 +1703,17 @@ struct pyIReferenceArrayImpl : public pyIReferenceArray
         {
             try
             {
-                /*r*/ winrt::com_array<float> param0 { };
+                winrt::com_array<float> param0 { };
                 
                 obj.GetSingleArray(param0);
                 
-                PyObject* out_param0 = nullptr; // TODO: receive array impl
-                return PyTuple_Pack(1, out_param0);
+                PyObject* out0 = py::convert(param0);
+                if (!out0) 
+                {
+                    return nullptr;
+                }
+                
+                return out0;
             }
             catch (...)
             {
@@ -1516,7 +1738,13 @@ struct pyIReferenceArrayImpl : public pyIReferenceArray
             {
                 winrt::Windows::Foundation::Size return_value = obj.GetSize();
                 
-                return py::convert(return_value);
+                PyObject* out_return_value = py::convert(return_value);
+                if (!out_return_value) 
+                { 
+                    return nullptr;
+                }
+                
+                return out_return_value;
             }
             catch (...)
             {
@@ -1539,12 +1767,17 @@ struct pyIReferenceArrayImpl : public pyIReferenceArray
         {
             try
             {
-                /*r*/ winrt::com_array<winrt::Windows::Foundation::Size> param0 { };
+                winrt::com_array<winrt::Windows::Foundation::Size> param0 { };
                 
                 obj.GetSizeArray(param0);
                 
-                PyObject* out_param0 = nullptr; // TODO: receive array impl
-                return PyTuple_Pack(1, out_param0);
+                PyObject* out0 = py::convert(param0);
+                if (!out0) 
+                {
+                    return nullptr;
+                }
+                
+                return out0;
             }
             catch (...)
             {
@@ -1569,7 +1802,13 @@ struct pyIReferenceArrayImpl : public pyIReferenceArray
             {
                 winrt::hstring return_value = obj.GetString();
                 
-                return py::convert(return_value);
+                PyObject* out_return_value = py::convert(return_value);
+                if (!out_return_value) 
+                { 
+                    return nullptr;
+                }
+                
+                return out_return_value;
             }
             catch (...)
             {
@@ -1592,12 +1831,17 @@ struct pyIReferenceArrayImpl : public pyIReferenceArray
         {
             try
             {
-                /*r*/ winrt::com_array<winrt::hstring> param0 { };
+                winrt::com_array<winrt::hstring> param0 { };
                 
                 obj.GetStringArray(param0);
                 
-                PyObject* out_param0 = nullptr; // TODO: receive array impl
-                return PyTuple_Pack(1, out_param0);
+                PyObject* out0 = py::convert(param0);
+                if (!out0) 
+                {
+                    return nullptr;
+                }
+                
+                return out0;
             }
             catch (...)
             {
@@ -1622,7 +1866,13 @@ struct pyIReferenceArrayImpl : public pyIReferenceArray
             {
                 winrt::Windows::Foundation::TimeSpan return_value = obj.GetTimeSpan();
                 
-                return py::convert(return_value);
+                PyObject* out_return_value = py::convert(return_value);
+                if (!out_return_value) 
+                { 
+                    return nullptr;
+                }
+                
+                return out_return_value;
             }
             catch (...)
             {
@@ -1645,12 +1895,17 @@ struct pyIReferenceArrayImpl : public pyIReferenceArray
         {
             try
             {
-                /*r*/ winrt::com_array<winrt::Windows::Foundation::TimeSpan> param0 { };
+                winrt::com_array<winrt::Windows::Foundation::TimeSpan> param0 { };
                 
                 obj.GetTimeSpanArray(param0);
                 
-                PyObject* out_param0 = nullptr; // TODO: receive array impl
-                return PyTuple_Pack(1, out_param0);
+                PyObject* out0 = py::convert(param0);
+                if (!out0) 
+                {
+                    return nullptr;
+                }
+                
+                return out0;
             }
             catch (...)
             {
@@ -1675,7 +1930,13 @@ struct pyIReferenceArrayImpl : public pyIReferenceArray
             {
                 uint16_t return_value = obj.GetUInt16();
                 
-                return py::convert(return_value);
+                PyObject* out_return_value = py::convert(return_value);
+                if (!out_return_value) 
+                { 
+                    return nullptr;
+                }
+                
+                return out_return_value;
             }
             catch (...)
             {
@@ -1698,12 +1959,17 @@ struct pyIReferenceArrayImpl : public pyIReferenceArray
         {
             try
             {
-                /*r*/ winrt::com_array<uint16_t> param0 { };
+                winrt::com_array<uint16_t> param0 { };
                 
                 obj.GetUInt16Array(param0);
                 
-                PyObject* out_param0 = nullptr; // TODO: receive array impl
-                return PyTuple_Pack(1, out_param0);
+                PyObject* out0 = py::convert(param0);
+                if (!out0) 
+                {
+                    return nullptr;
+                }
+                
+                return out0;
             }
             catch (...)
             {
@@ -1728,7 +1994,13 @@ struct pyIReferenceArrayImpl : public pyIReferenceArray
             {
                 uint32_t return_value = obj.GetUInt32();
                 
-                return py::convert(return_value);
+                PyObject* out_return_value = py::convert(return_value);
+                if (!out_return_value) 
+                { 
+                    return nullptr;
+                }
+                
+                return out_return_value;
             }
             catch (...)
             {
@@ -1751,12 +2023,17 @@ struct pyIReferenceArrayImpl : public pyIReferenceArray
         {
             try
             {
-                /*r*/ winrt::com_array<uint32_t> param0 { };
+                winrt::com_array<uint32_t> param0 { };
                 
                 obj.GetUInt32Array(param0);
                 
-                PyObject* out_param0 = nullptr; // TODO: receive array impl
-                return PyTuple_Pack(1, out_param0);
+                PyObject* out0 = py::convert(param0);
+                if (!out0) 
+                {
+                    return nullptr;
+                }
+                
+                return out0;
             }
             catch (...)
             {
@@ -1781,7 +2058,13 @@ struct pyIReferenceArrayImpl : public pyIReferenceArray
             {
                 uint64_t return_value = obj.GetUInt64();
                 
-                return py::convert(return_value);
+                PyObject* out_return_value = py::convert(return_value);
+                if (!out_return_value) 
+                { 
+                    return nullptr;
+                }
+                
+                return out_return_value;
             }
             catch (...)
             {
@@ -1804,12 +2087,17 @@ struct pyIReferenceArrayImpl : public pyIReferenceArray
         {
             try
             {
-                /*r*/ winrt::com_array<uint64_t> param0 { };
+                winrt::com_array<uint64_t> param0 { };
                 
                 obj.GetUInt64Array(param0);
                 
-                PyObject* out_param0 = nullptr; // TODO: receive array impl
-                return PyTuple_Pack(1, out_param0);
+                PyObject* out0 = py::convert(param0);
+                if (!out0) 
+                {
+                    return nullptr;
+                }
+                
+                return out0;
             }
             catch (...)
             {
@@ -1834,7 +2122,13 @@ struct pyIReferenceArrayImpl : public pyIReferenceArray
             {
                 uint8_t return_value = obj.GetUInt8();
                 
-                return py::convert(return_value);
+                PyObject* out_return_value = py::convert(return_value);
+                if (!out_return_value) 
+                { 
+                    return nullptr;
+                }
+                
+                return out_return_value;
             }
             catch (...)
             {
@@ -1857,12 +2151,17 @@ struct pyIReferenceArrayImpl : public pyIReferenceArray
         {
             try
             {
-                /*r*/ winrt::com_array<uint8_t> param0 { };
+                winrt::com_array<uint8_t> param0 { };
                 
                 obj.GetUInt8Array(param0);
                 
-                PyObject* out_param0 = nullptr; // TODO: receive array impl
-                return PyTuple_Pack(1, out_param0);
+                PyObject* out0 = py::convert(param0);
+                if (!out0) 
+                {
+                    return nullptr;
+                }
+                
+                return out0;
             }
             catch (...)
             {
@@ -1883,7 +2182,13 @@ struct pyIReferenceArrayImpl : public pyIReferenceArray
         {
             bool return_value = obj.IsNumericScalar();
             
-            return py::convert(return_value);
+            PyObject* out_return_value = py::convert(return_value);
+            if (!out_return_value) 
+            { 
+                return nullptr;
+            }
+            
+            return out_return_value;
         }
         catch (...)
         {
@@ -1897,7 +2202,13 @@ struct pyIReferenceArrayImpl : public pyIReferenceArray
         {
             winrt::Windows::Foundation::PropertyType return_value = obj.Type();
             
-            return py::convert(return_value);
+            PyObject* out_return_value = py::convert(return_value);
+            if (!out_return_value) 
+            { 
+                return nullptr;
+            }
+            
+            return out_return_value;
         }
         catch (...)
         {
@@ -1909,8 +2220,15 @@ struct pyIReferenceArrayImpl : public pyIReferenceArray
     {
         try
         {
-            // returning a ReceiveArray not impl
-            return nullptr;
+            T return_value = obj.Value();
+            
+            PyObject* out_return_value = py::convert(return_value);
+            if (!out_return_value) 
+            { 
+                return nullptr;
+            }
+            
+            return out_return_value;
         }
         catch (...)
         {
@@ -1987,7 +2305,13 @@ struct pyIReferenceImpl : public pyIReference
             {
                 bool return_value = obj.GetBoolean();
                 
-                return py::convert(return_value);
+                PyObject* out_return_value = py::convert(return_value);
+                if (!out_return_value) 
+                { 
+                    return nullptr;
+                }
+                
+                return out_return_value;
             }
             catch (...)
             {
@@ -2010,12 +2334,17 @@ struct pyIReferenceImpl : public pyIReference
         {
             try
             {
-                /*r*/ winrt::com_array<bool> param0 { };
+                winrt::com_array<bool> param0 { };
                 
                 obj.GetBooleanArray(param0);
                 
-                PyObject* out_param0 = nullptr; // TODO: receive array impl
-                return PyTuple_Pack(1, out_param0);
+                PyObject* out0 = py::convert(param0);
+                if (!out0) 
+                {
+                    return nullptr;
+                }
+                
+                return out0;
             }
             catch (...)
             {
@@ -2040,7 +2369,13 @@ struct pyIReferenceImpl : public pyIReference
             {
                 char16_t return_value = obj.GetChar16();
                 
-                return py::convert(return_value);
+                PyObject* out_return_value = py::convert(return_value);
+                if (!out_return_value) 
+                { 
+                    return nullptr;
+                }
+                
+                return out_return_value;
             }
             catch (...)
             {
@@ -2063,12 +2398,17 @@ struct pyIReferenceImpl : public pyIReference
         {
             try
             {
-                /*r*/ winrt::com_array<char16_t> param0 { };
+                winrt::com_array<char16_t> param0 { };
                 
                 obj.GetChar16Array(param0);
                 
-                PyObject* out_param0 = nullptr; // TODO: receive array impl
-                return PyTuple_Pack(1, out_param0);
+                PyObject* out0 = py::convert(param0);
+                if (!out0) 
+                {
+                    return nullptr;
+                }
+                
+                return out0;
             }
             catch (...)
             {
@@ -2093,7 +2433,13 @@ struct pyIReferenceImpl : public pyIReference
             {
                 winrt::Windows::Foundation::DateTime return_value = obj.GetDateTime();
                 
-                return py::convert(return_value);
+                PyObject* out_return_value = py::convert(return_value);
+                if (!out_return_value) 
+                { 
+                    return nullptr;
+                }
+                
+                return out_return_value;
             }
             catch (...)
             {
@@ -2116,12 +2462,17 @@ struct pyIReferenceImpl : public pyIReference
         {
             try
             {
-                /*r*/ winrt::com_array<winrt::Windows::Foundation::DateTime> param0 { };
+                winrt::com_array<winrt::Windows::Foundation::DateTime> param0 { };
                 
                 obj.GetDateTimeArray(param0);
                 
-                PyObject* out_param0 = nullptr; // TODO: receive array impl
-                return PyTuple_Pack(1, out_param0);
+                PyObject* out0 = py::convert(param0);
+                if (!out0) 
+                {
+                    return nullptr;
+                }
+                
+                return out0;
             }
             catch (...)
             {
@@ -2146,7 +2497,13 @@ struct pyIReferenceImpl : public pyIReference
             {
                 double return_value = obj.GetDouble();
                 
-                return py::convert(return_value);
+                PyObject* out_return_value = py::convert(return_value);
+                if (!out_return_value) 
+                { 
+                    return nullptr;
+                }
+                
+                return out_return_value;
             }
             catch (...)
             {
@@ -2169,12 +2526,17 @@ struct pyIReferenceImpl : public pyIReference
         {
             try
             {
-                /*r*/ winrt::com_array<double> param0 { };
+                winrt::com_array<double> param0 { };
                 
                 obj.GetDoubleArray(param0);
                 
-                PyObject* out_param0 = nullptr; // TODO: receive array impl
-                return PyTuple_Pack(1, out_param0);
+                PyObject* out0 = py::convert(param0);
+                if (!out0) 
+                {
+                    return nullptr;
+                }
+                
+                return out0;
             }
             catch (...)
             {
@@ -2199,7 +2561,13 @@ struct pyIReferenceImpl : public pyIReference
             {
                 winrt::guid return_value = obj.GetGuid();
                 
-                return py::convert(return_value);
+                PyObject* out_return_value = py::convert(return_value);
+                if (!out_return_value) 
+                { 
+                    return nullptr;
+                }
+                
+                return out_return_value;
             }
             catch (...)
             {
@@ -2222,12 +2590,17 @@ struct pyIReferenceImpl : public pyIReference
         {
             try
             {
-                /*r*/ winrt::com_array<winrt::guid> param0 { };
+                winrt::com_array<winrt::guid> param0 { };
                 
                 obj.GetGuidArray(param0);
                 
-                PyObject* out_param0 = nullptr; // TODO: receive array impl
-                return PyTuple_Pack(1, out_param0);
+                PyObject* out0 = py::convert(param0);
+                if (!out0) 
+                {
+                    return nullptr;
+                }
+                
+                return out0;
             }
             catch (...)
             {
@@ -2250,12 +2623,17 @@ struct pyIReferenceImpl : public pyIReference
         {
             try
             {
-                /*r*/ winrt::com_array<winrt::Windows::Foundation::IInspectable> param0 { };
+                winrt::com_array<winrt::Windows::Foundation::IInspectable> param0 { };
                 
                 obj.GetInspectableArray(param0);
                 
-                PyObject* out_param0 = nullptr; // TODO: receive array impl
-                return PyTuple_Pack(1, out_param0);
+                PyObject* out0 = py::convert(param0);
+                if (!out0) 
+                {
+                    return nullptr;
+                }
+                
+                return out0;
             }
             catch (...)
             {
@@ -2280,7 +2658,13 @@ struct pyIReferenceImpl : public pyIReference
             {
                 int16_t return_value = obj.GetInt16();
                 
-                return py::convert(return_value);
+                PyObject* out_return_value = py::convert(return_value);
+                if (!out_return_value) 
+                { 
+                    return nullptr;
+                }
+                
+                return out_return_value;
             }
             catch (...)
             {
@@ -2303,12 +2687,17 @@ struct pyIReferenceImpl : public pyIReference
         {
             try
             {
-                /*r*/ winrt::com_array<int16_t> param0 { };
+                winrt::com_array<int16_t> param0 { };
                 
                 obj.GetInt16Array(param0);
                 
-                PyObject* out_param0 = nullptr; // TODO: receive array impl
-                return PyTuple_Pack(1, out_param0);
+                PyObject* out0 = py::convert(param0);
+                if (!out0) 
+                {
+                    return nullptr;
+                }
+                
+                return out0;
             }
             catch (...)
             {
@@ -2333,7 +2722,13 @@ struct pyIReferenceImpl : public pyIReference
             {
                 int32_t return_value = obj.GetInt32();
                 
-                return py::convert(return_value);
+                PyObject* out_return_value = py::convert(return_value);
+                if (!out_return_value) 
+                { 
+                    return nullptr;
+                }
+                
+                return out_return_value;
             }
             catch (...)
             {
@@ -2356,12 +2751,17 @@ struct pyIReferenceImpl : public pyIReference
         {
             try
             {
-                /*r*/ winrt::com_array<int32_t> param0 { };
+                winrt::com_array<int32_t> param0 { };
                 
                 obj.GetInt32Array(param0);
                 
-                PyObject* out_param0 = nullptr; // TODO: receive array impl
-                return PyTuple_Pack(1, out_param0);
+                PyObject* out0 = py::convert(param0);
+                if (!out0) 
+                {
+                    return nullptr;
+                }
+                
+                return out0;
             }
             catch (...)
             {
@@ -2386,7 +2786,13 @@ struct pyIReferenceImpl : public pyIReference
             {
                 int64_t return_value = obj.GetInt64();
                 
-                return py::convert(return_value);
+                PyObject* out_return_value = py::convert(return_value);
+                if (!out_return_value) 
+                { 
+                    return nullptr;
+                }
+                
+                return out_return_value;
             }
             catch (...)
             {
@@ -2409,12 +2815,17 @@ struct pyIReferenceImpl : public pyIReference
         {
             try
             {
-                /*r*/ winrt::com_array<int64_t> param0 { };
+                winrt::com_array<int64_t> param0 { };
                 
                 obj.GetInt64Array(param0);
                 
-                PyObject* out_param0 = nullptr; // TODO: receive array impl
-                return PyTuple_Pack(1, out_param0);
+                PyObject* out0 = py::convert(param0);
+                if (!out0) 
+                {
+                    return nullptr;
+                }
+                
+                return out0;
             }
             catch (...)
             {
@@ -2439,7 +2850,13 @@ struct pyIReferenceImpl : public pyIReference
             {
                 winrt::Windows::Foundation::Point return_value = obj.GetPoint();
                 
-                return py::convert(return_value);
+                PyObject* out_return_value = py::convert(return_value);
+                if (!out_return_value) 
+                { 
+                    return nullptr;
+                }
+                
+                return out_return_value;
             }
             catch (...)
             {
@@ -2462,12 +2879,17 @@ struct pyIReferenceImpl : public pyIReference
         {
             try
             {
-                /*r*/ winrt::com_array<winrt::Windows::Foundation::Point> param0 { };
+                winrt::com_array<winrt::Windows::Foundation::Point> param0 { };
                 
                 obj.GetPointArray(param0);
                 
-                PyObject* out_param0 = nullptr; // TODO: receive array impl
-                return PyTuple_Pack(1, out_param0);
+                PyObject* out0 = py::convert(param0);
+                if (!out0) 
+                {
+                    return nullptr;
+                }
+                
+                return out0;
             }
             catch (...)
             {
@@ -2492,7 +2914,13 @@ struct pyIReferenceImpl : public pyIReference
             {
                 winrt::Windows::Foundation::Rect return_value = obj.GetRect();
                 
-                return py::convert(return_value);
+                PyObject* out_return_value = py::convert(return_value);
+                if (!out_return_value) 
+                { 
+                    return nullptr;
+                }
+                
+                return out_return_value;
             }
             catch (...)
             {
@@ -2515,12 +2943,17 @@ struct pyIReferenceImpl : public pyIReference
         {
             try
             {
-                /*r*/ winrt::com_array<winrt::Windows::Foundation::Rect> param0 { };
+                winrt::com_array<winrt::Windows::Foundation::Rect> param0 { };
                 
                 obj.GetRectArray(param0);
                 
-                PyObject* out_param0 = nullptr; // TODO: receive array impl
-                return PyTuple_Pack(1, out_param0);
+                PyObject* out0 = py::convert(param0);
+                if (!out0) 
+                {
+                    return nullptr;
+                }
+                
+                return out0;
             }
             catch (...)
             {
@@ -2545,7 +2978,13 @@ struct pyIReferenceImpl : public pyIReference
             {
                 float return_value = obj.GetSingle();
                 
-                return py::convert(return_value);
+                PyObject* out_return_value = py::convert(return_value);
+                if (!out_return_value) 
+                { 
+                    return nullptr;
+                }
+                
+                return out_return_value;
             }
             catch (...)
             {
@@ -2568,12 +3007,17 @@ struct pyIReferenceImpl : public pyIReference
         {
             try
             {
-                /*r*/ winrt::com_array<float> param0 { };
+                winrt::com_array<float> param0 { };
                 
                 obj.GetSingleArray(param0);
                 
-                PyObject* out_param0 = nullptr; // TODO: receive array impl
-                return PyTuple_Pack(1, out_param0);
+                PyObject* out0 = py::convert(param0);
+                if (!out0) 
+                {
+                    return nullptr;
+                }
+                
+                return out0;
             }
             catch (...)
             {
@@ -2598,7 +3042,13 @@ struct pyIReferenceImpl : public pyIReference
             {
                 winrt::Windows::Foundation::Size return_value = obj.GetSize();
                 
-                return py::convert(return_value);
+                PyObject* out_return_value = py::convert(return_value);
+                if (!out_return_value) 
+                { 
+                    return nullptr;
+                }
+                
+                return out_return_value;
             }
             catch (...)
             {
@@ -2621,12 +3071,17 @@ struct pyIReferenceImpl : public pyIReference
         {
             try
             {
-                /*r*/ winrt::com_array<winrt::Windows::Foundation::Size> param0 { };
+                winrt::com_array<winrt::Windows::Foundation::Size> param0 { };
                 
                 obj.GetSizeArray(param0);
                 
-                PyObject* out_param0 = nullptr; // TODO: receive array impl
-                return PyTuple_Pack(1, out_param0);
+                PyObject* out0 = py::convert(param0);
+                if (!out0) 
+                {
+                    return nullptr;
+                }
+                
+                return out0;
             }
             catch (...)
             {
@@ -2651,7 +3106,13 @@ struct pyIReferenceImpl : public pyIReference
             {
                 winrt::hstring return_value = obj.GetString();
                 
-                return py::convert(return_value);
+                PyObject* out_return_value = py::convert(return_value);
+                if (!out_return_value) 
+                { 
+                    return nullptr;
+                }
+                
+                return out_return_value;
             }
             catch (...)
             {
@@ -2674,12 +3135,17 @@ struct pyIReferenceImpl : public pyIReference
         {
             try
             {
-                /*r*/ winrt::com_array<winrt::hstring> param0 { };
+                winrt::com_array<winrt::hstring> param0 { };
                 
                 obj.GetStringArray(param0);
                 
-                PyObject* out_param0 = nullptr; // TODO: receive array impl
-                return PyTuple_Pack(1, out_param0);
+                PyObject* out0 = py::convert(param0);
+                if (!out0) 
+                {
+                    return nullptr;
+                }
+                
+                return out0;
             }
             catch (...)
             {
@@ -2704,7 +3170,13 @@ struct pyIReferenceImpl : public pyIReference
             {
                 winrt::Windows::Foundation::TimeSpan return_value = obj.GetTimeSpan();
                 
-                return py::convert(return_value);
+                PyObject* out_return_value = py::convert(return_value);
+                if (!out_return_value) 
+                { 
+                    return nullptr;
+                }
+                
+                return out_return_value;
             }
             catch (...)
             {
@@ -2727,12 +3199,17 @@ struct pyIReferenceImpl : public pyIReference
         {
             try
             {
-                /*r*/ winrt::com_array<winrt::Windows::Foundation::TimeSpan> param0 { };
+                winrt::com_array<winrt::Windows::Foundation::TimeSpan> param0 { };
                 
                 obj.GetTimeSpanArray(param0);
                 
-                PyObject* out_param0 = nullptr; // TODO: receive array impl
-                return PyTuple_Pack(1, out_param0);
+                PyObject* out0 = py::convert(param0);
+                if (!out0) 
+                {
+                    return nullptr;
+                }
+                
+                return out0;
             }
             catch (...)
             {
@@ -2757,7 +3234,13 @@ struct pyIReferenceImpl : public pyIReference
             {
                 uint16_t return_value = obj.GetUInt16();
                 
-                return py::convert(return_value);
+                PyObject* out_return_value = py::convert(return_value);
+                if (!out_return_value) 
+                { 
+                    return nullptr;
+                }
+                
+                return out_return_value;
             }
             catch (...)
             {
@@ -2780,12 +3263,17 @@ struct pyIReferenceImpl : public pyIReference
         {
             try
             {
-                /*r*/ winrt::com_array<uint16_t> param0 { };
+                winrt::com_array<uint16_t> param0 { };
                 
                 obj.GetUInt16Array(param0);
                 
-                PyObject* out_param0 = nullptr; // TODO: receive array impl
-                return PyTuple_Pack(1, out_param0);
+                PyObject* out0 = py::convert(param0);
+                if (!out0) 
+                {
+                    return nullptr;
+                }
+                
+                return out0;
             }
             catch (...)
             {
@@ -2810,7 +3298,13 @@ struct pyIReferenceImpl : public pyIReference
             {
                 uint32_t return_value = obj.GetUInt32();
                 
-                return py::convert(return_value);
+                PyObject* out_return_value = py::convert(return_value);
+                if (!out_return_value) 
+                { 
+                    return nullptr;
+                }
+                
+                return out_return_value;
             }
             catch (...)
             {
@@ -2833,12 +3327,17 @@ struct pyIReferenceImpl : public pyIReference
         {
             try
             {
-                /*r*/ winrt::com_array<uint32_t> param0 { };
+                winrt::com_array<uint32_t> param0 { };
                 
                 obj.GetUInt32Array(param0);
                 
-                PyObject* out_param0 = nullptr; // TODO: receive array impl
-                return PyTuple_Pack(1, out_param0);
+                PyObject* out0 = py::convert(param0);
+                if (!out0) 
+                {
+                    return nullptr;
+                }
+                
+                return out0;
             }
             catch (...)
             {
@@ -2863,7 +3362,13 @@ struct pyIReferenceImpl : public pyIReference
             {
                 uint64_t return_value = obj.GetUInt64();
                 
-                return py::convert(return_value);
+                PyObject* out_return_value = py::convert(return_value);
+                if (!out_return_value) 
+                { 
+                    return nullptr;
+                }
+                
+                return out_return_value;
             }
             catch (...)
             {
@@ -2886,12 +3391,17 @@ struct pyIReferenceImpl : public pyIReference
         {
             try
             {
-                /*r*/ winrt::com_array<uint64_t> param0 { };
+                winrt::com_array<uint64_t> param0 { };
                 
                 obj.GetUInt64Array(param0);
                 
-                PyObject* out_param0 = nullptr; // TODO: receive array impl
-                return PyTuple_Pack(1, out_param0);
+                PyObject* out0 = py::convert(param0);
+                if (!out0) 
+                {
+                    return nullptr;
+                }
+                
+                return out0;
             }
             catch (...)
             {
@@ -2916,7 +3426,13 @@ struct pyIReferenceImpl : public pyIReference
             {
                 uint8_t return_value = obj.GetUInt8();
                 
-                return py::convert(return_value);
+                PyObject* out_return_value = py::convert(return_value);
+                if (!out_return_value) 
+                { 
+                    return nullptr;
+                }
+                
+                return out_return_value;
             }
             catch (...)
             {
@@ -2939,12 +3455,17 @@ struct pyIReferenceImpl : public pyIReference
         {
             try
             {
-                /*r*/ winrt::com_array<uint8_t> param0 { };
+                winrt::com_array<uint8_t> param0 { };
                 
                 obj.GetUInt8Array(param0);
                 
-                PyObject* out_param0 = nullptr; // TODO: receive array impl
-                return PyTuple_Pack(1, out_param0);
+                PyObject* out0 = py::convert(param0);
+                if (!out0) 
+                {
+                    return nullptr;
+                }
+                
+                return out0;
             }
             catch (...)
             {
@@ -2965,7 +3486,13 @@ struct pyIReferenceImpl : public pyIReference
         {
             bool return_value = obj.IsNumericScalar();
             
-            return py::convert(return_value);
+            PyObject* out_return_value = py::convert(return_value);
+            if (!out_return_value) 
+            { 
+                return nullptr;
+            }
+            
+            return out_return_value;
         }
         catch (...)
         {
@@ -2979,7 +3506,13 @@ struct pyIReferenceImpl : public pyIReference
         {
             winrt::Windows::Foundation::PropertyType return_value = obj.Type();
             
-            return py::convert(return_value);
+            PyObject* out_return_value = py::convert(return_value);
+            if (!out_return_value) 
+            { 
+                return nullptr;
+            }
+            
+            return out_return_value;
         }
         catch (...)
         {
@@ -2993,7 +3526,13 @@ struct pyIReferenceImpl : public pyIReference
         {
             T return_value = obj.Value();
             
-            return py::convert(return_value);
+            PyObject* out_return_value = py::convert(return_value);
+            if (!out_return_value) 
+            { 
+                return nullptr;
+            }
+            
+            return out_return_value;
         }
         catch (...)
         {

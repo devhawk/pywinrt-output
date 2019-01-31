@@ -180,7 +180,13 @@ static PyObject* IDirect3DSurface_get_Description(py::winrt_wrapper<winrt::Windo
     {
         winrt::Windows::Graphics::DirectX::Direct3D11::Direct3DSurfaceDescription return_value = self->obj.Description();
         
-        return py::convert(return_value);
+        PyObject* out_return_value = py::convert(return_value);
+        if (!out_return_value) 
+        { 
+            return nullptr;
+        }
+        
+        return out_return_value;
     }
     catch (...)
     {

@@ -107,7 +107,13 @@ static PyObject* Geofence_get_Duration(py::winrt_wrapper<winrt::Windows::Devices
     {
         winrt::Windows::Foundation::TimeSpan return_value = self->obj.Duration();
         
-        return py::convert(return_value);
+        PyObject* out_return_value = py::convert(return_value);
+        if (!out_return_value) 
+        { 
+            return nullptr;
+        }
+        
+        return out_return_value;
     }
     catch (...)
     {
@@ -121,7 +127,13 @@ static PyObject* Geofence_get_DwellTime(py::winrt_wrapper<winrt::Windows::Device
     {
         winrt::Windows::Foundation::TimeSpan return_value = self->obj.DwellTime();
         
-        return py::convert(return_value);
+        PyObject* out_return_value = py::convert(return_value);
+        if (!out_return_value) 
+        { 
+            return nullptr;
+        }
+        
+        return out_return_value;
     }
     catch (...)
     {
@@ -135,7 +147,13 @@ static PyObject* Geofence_get_Geoshape(py::winrt_wrapper<winrt::Windows::Devices
     {
         winrt::Windows::Devices::Geolocation::IGeoshape return_value = self->obj.Geoshape();
         
-        return py::convert(return_value);
+        PyObject* out_return_value = py::convert(return_value);
+        if (!out_return_value) 
+        { 
+            return nullptr;
+        }
+        
+        return out_return_value;
     }
     catch (...)
     {
@@ -149,7 +167,13 @@ static PyObject* Geofence_get_Id(py::winrt_wrapper<winrt::Windows::Devices::Geol
     {
         winrt::hstring return_value = self->obj.Id();
         
-        return py::convert(return_value);
+        PyObject* out_return_value = py::convert(return_value);
+        if (!out_return_value) 
+        { 
+            return nullptr;
+        }
+        
+        return out_return_value;
     }
     catch (...)
     {
@@ -163,7 +187,13 @@ static PyObject* Geofence_get_MonitoredStates(py::winrt_wrapper<winrt::Windows::
     {
         winrt::Windows::Devices::Geolocation::Geofencing::MonitoredGeofenceStates return_value = self->obj.MonitoredStates();
         
-        return py::convert(return_value);
+        PyObject* out_return_value = py::convert(return_value);
+        if (!out_return_value) 
+        { 
+            return nullptr;
+        }
+        
+        return out_return_value;
     }
     catch (...)
     {
@@ -177,7 +207,13 @@ static PyObject* Geofence_get_SingleUse(py::winrt_wrapper<winrt::Windows::Device
     {
         bool return_value = self->obj.SingleUse();
         
-        return py::convert(return_value);
+        PyObject* out_return_value = py::convert(return_value);
+        if (!out_return_value) 
+        { 
+            return nullptr;
+        }
+        
+        return out_return_value;
     }
     catch (...)
     {
@@ -191,7 +227,13 @@ static PyObject* Geofence_get_StartTime(py::winrt_wrapper<winrt::Windows::Device
     {
         winrt::Windows::Foundation::DateTime return_value = self->obj.StartTime();
         
-        return py::convert(return_value);
+        PyObject* out_return_value = py::convert(return_value);
+        if (!out_return_value) 
+        { 
+            return nullptr;
+        }
+        
+        return out_return_value;
     }
     catch (...)
     {
@@ -273,7 +315,13 @@ static PyObject* GeofenceMonitor_ReadReports(py::winrt_wrapper<winrt::Windows::D
         {
             winrt::Windows::Foundation::Collections::IVectorView<winrt::Windows::Devices::Geolocation::Geofencing::GeofenceStateChangeReport> return_value = self->obj.ReadReports();
             
-            return py::convert(return_value);
+            PyObject* out_return_value = py::convert(return_value);
+            if (!out_return_value) 
+            { 
+                return nullptr;
+            }
+            
+            return out_return_value;
         }
         catch (...)
         {
@@ -294,7 +342,13 @@ static PyObject* GeofenceMonitor_get_Geofences(py::winrt_wrapper<winrt::Windows:
     {
         winrt::Windows::Foundation::Collections::IVector<winrt::Windows::Devices::Geolocation::Geofencing::Geofence> return_value = self->obj.Geofences();
         
-        return py::convert(return_value);
+        PyObject* out_return_value = py::convert(return_value);
+        if (!out_return_value) 
+        { 
+            return nullptr;
+        }
+        
+        return out_return_value;
     }
     catch (...)
     {
@@ -308,7 +362,13 @@ static PyObject* GeofenceMonitor_get_LastKnownGeoposition(py::winrt_wrapper<winr
     {
         winrt::Windows::Devices::Geolocation::Geoposition return_value = self->obj.LastKnownGeoposition();
         
-        return py::convert(return_value);
+        PyObject* out_return_value = py::convert(return_value);
+        if (!out_return_value) 
+        { 
+            return nullptr;
+        }
+        
+        return out_return_value;
     }
     catch (...)
     {
@@ -322,7 +382,13 @@ static PyObject* GeofenceMonitor_get_Status(py::winrt_wrapper<winrt::Windows::De
     {
         winrt::Windows::Devices::Geolocation::Geofencing::GeofenceMonitorStatus return_value = self->obj.Status();
         
-        return py::convert(return_value);
+        PyObject* out_return_value = py::convert(return_value);
+        if (!out_return_value) 
+        { 
+            return nullptr;
+        }
+        
+        return out_return_value;
     }
     catch (...)
     {
@@ -336,7 +402,13 @@ static PyObject* GeofenceMonitor_get_Current(PyObject* /*unused*/, PyObject* /*u
     {
         winrt::Windows::Devices::Geolocation::Geofencing::GeofenceMonitor return_value = winrt::Windows::Devices::Geolocation::Geofencing::GeofenceMonitor::Current();
         
-        return py::convert(return_value);
+        PyObject* out_return_value = py::convert(return_value);
+        if (!out_return_value) 
+        { 
+            return nullptr;
+        }
+        
+        return out_return_value;
     }
     catch (...)
     {
@@ -348,11 +420,17 @@ static PyObject* GeofenceMonitor_add_GeofenceStateChanged(py::winrt_wrapper<winr
 {
     try
     {
-        auto param0 = py::converter<winrt::Windows::Foundation::TypedEventHandler<winrt::Windows::Devices::Geolocation::Geofencing::GeofenceMonitor, winrt::Windows::Foundation::IInspectable>>::convert_to(arg);
+        auto param0 = py::convert_to<winrt::Windows::Foundation::TypedEventHandler<winrt::Windows::Devices::Geolocation::Geofencing::GeofenceMonitor, winrt::Windows::Foundation::IInspectable>>(arg);
         
         winrt::event_token return_value = self->obj.GeofenceStateChanged(param0);
         
-        return py::convert(return_value);
+        PyObject* out_return_value = py::convert(return_value);
+        if (!out_return_value) 
+        { 
+            return nullptr;
+        }
+        
+        return out_return_value;
     }
     catch (...)
     {
@@ -364,7 +442,7 @@ static PyObject* GeofenceMonitor_remove_GeofenceStateChanged(py::winrt_wrapper<w
 {
     try
     {
-        auto param0 = py::converter<winrt::event_token>::convert_to(arg);
+        auto param0 = py::convert_to<winrt::event_token>(arg);
         
         self->obj.GeofenceStateChanged(param0);
         
@@ -380,11 +458,17 @@ static PyObject* GeofenceMonitor_add_StatusChanged(py::winrt_wrapper<winrt::Wind
 {
     try
     {
-        auto param0 = py::converter<winrt::Windows::Foundation::TypedEventHandler<winrt::Windows::Devices::Geolocation::Geofencing::GeofenceMonitor, winrt::Windows::Foundation::IInspectable>>::convert_to(arg);
+        auto param0 = py::convert_to<winrt::Windows::Foundation::TypedEventHandler<winrt::Windows::Devices::Geolocation::Geofencing::GeofenceMonitor, winrt::Windows::Foundation::IInspectable>>(arg);
         
         winrt::event_token return_value = self->obj.StatusChanged(param0);
         
-        return py::convert(return_value);
+        PyObject* out_return_value = py::convert(return_value);
+        if (!out_return_value) 
+        { 
+            return nullptr;
+        }
+        
+        return out_return_value;
     }
     catch (...)
     {
@@ -396,7 +480,7 @@ static PyObject* GeofenceMonitor_remove_StatusChanged(py::winrt_wrapper<winrt::W
 {
     try
     {
-        auto param0 = py::converter<winrt::event_token>::convert_to(arg);
+        auto param0 = py::convert_to<winrt::event_token>(arg);
         
         self->obj.StatusChanged(param0);
         
@@ -480,7 +564,13 @@ static PyObject* GeofenceStateChangeReport_get_Geofence(py::winrt_wrapper<winrt:
     {
         winrt::Windows::Devices::Geolocation::Geofencing::Geofence return_value = self->obj.Geofence();
         
-        return py::convert(return_value);
+        PyObject* out_return_value = py::convert(return_value);
+        if (!out_return_value) 
+        { 
+            return nullptr;
+        }
+        
+        return out_return_value;
     }
     catch (...)
     {
@@ -494,7 +584,13 @@ static PyObject* GeofenceStateChangeReport_get_Geoposition(py::winrt_wrapper<win
     {
         winrt::Windows::Devices::Geolocation::Geoposition return_value = self->obj.Geoposition();
         
-        return py::convert(return_value);
+        PyObject* out_return_value = py::convert(return_value);
+        if (!out_return_value) 
+        { 
+            return nullptr;
+        }
+        
+        return out_return_value;
     }
     catch (...)
     {
@@ -508,7 +604,13 @@ static PyObject* GeofenceStateChangeReport_get_NewState(py::winrt_wrapper<winrt:
     {
         winrt::Windows::Devices::Geolocation::Geofencing::GeofenceState return_value = self->obj.NewState();
         
-        return py::convert(return_value);
+        PyObject* out_return_value = py::convert(return_value);
+        if (!out_return_value) 
+        { 
+            return nullptr;
+        }
+        
+        return out_return_value;
     }
     catch (...)
     {
@@ -522,7 +624,13 @@ static PyObject* GeofenceStateChangeReport_get_RemovalReason(py::winrt_wrapper<w
     {
         winrt::Windows::Devices::Geolocation::Geofencing::GeofenceRemovalReason return_value = self->obj.RemovalReason();
         
-        return py::convert(return_value);
+        PyObject* out_return_value = py::convert(return_value);
+        if (!out_return_value) 
+        { 
+            return nullptr;
+        }
+        
+        return out_return_value;
     }
     catch (...)
     {
