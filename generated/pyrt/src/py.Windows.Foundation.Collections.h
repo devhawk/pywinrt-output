@@ -101,7 +101,7 @@ struct pyIIterableImpl : public pyIIterable
         {
             try
             {
-                winrt::Windows::Foundation::Collections::IIterator<T> return_value = obj.First();
+                auto return_value = obj.First();
                 
                 PyObject* out_return_value = py::convert(return_value);
                 if (!out_return_value) 
@@ -180,9 +180,9 @@ struct pyIIteratorImpl : public pyIIterator
             try
             {
                 auto param0_count = py::convert_to<winrt::com_array<T>::size_type>(args, 0);
-                winrt::com_array<T> param0 { param0_count, py::empty_instance<T>::get() };
+                winrt::com_array<T> param0 ( param0_count, py::empty_instance<T>::get() );
                 
-                uint32_t return_value = obj.GetMany(param0);
+                auto return_value = obj.GetMany(param0);
                 
                 PyObject* out_return_value = py::convert(return_value);
                 if (!out_return_value) 
@@ -219,7 +219,7 @@ struct pyIIteratorImpl : public pyIIterator
         {
             try
             {
-                bool return_value = obj.MoveNext();
+                auto return_value = obj.MoveNext();
                 
                 PyObject* out_return_value = py::convert(return_value);
                 if (!out_return_value) 
@@ -246,7 +246,7 @@ struct pyIIteratorImpl : public pyIIterator
     {
         try
         {
-            T return_value = obj.Current();
+            auto return_value = obj.Current();
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -266,7 +266,7 @@ struct pyIIteratorImpl : public pyIIterator
     {
         try
         {
-            bool return_value = obj.HasCurrent();
+            auto return_value = obj.HasCurrent();
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -307,7 +307,7 @@ struct pyIKeyValuePairImpl : public pyIKeyValuePair
     {
         try
         {
-            K return_value = obj.Key();
+            auto return_value = obj.Key();
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -327,7 +327,7 @@ struct pyIKeyValuePairImpl : public pyIKeyValuePair
     {
         try
         {
-            V return_value = obj.Value();
+            auto return_value = obj.Value();
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -368,7 +368,7 @@ struct pyIMapChangedEventArgsImpl : public pyIMapChangedEventArgs
     {
         try
         {
-            winrt::Windows::Foundation::Collections::CollectionChange return_value = obj.CollectionChange();
+            auto return_value = obj.CollectionChange();
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -388,7 +388,7 @@ struct pyIMapChangedEventArgsImpl : public pyIMapChangedEventArgs
     {
         try
         {
-            K return_value = obj.Key();
+            auto return_value = obj.Key();
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -476,7 +476,7 @@ struct pyIMapViewImpl : public pyIMapView
         {
             try
             {
-                winrt::Windows::Foundation::Collections::IIterator<winrt::Windows::Foundation::Collections::IKeyValuePair<K, V>> return_value = obj.First();
+                auto return_value = obj.First();
                 
                 PyObject* out_return_value = py::convert(return_value);
                 if (!out_return_value) 
@@ -509,7 +509,7 @@ struct pyIMapViewImpl : public pyIMapView
             {
                 auto param0 = py::convert_to<K>(args, 0);
                 
-                bool return_value = obj.HasKey(param0);
+                auto return_value = obj.HasKey(param0);
                 
                 PyObject* out_return_value = py::convert(return_value);
                 if (!out_return_value) 
@@ -542,7 +542,7 @@ struct pyIMapViewImpl : public pyIMapView
             {
                 auto param0 = py::convert_to<K>(args, 0);
                 
-                V return_value = obj.Lookup(param0);
+                auto return_value = obj.Lookup(param0);
                 
                 PyObject* out_return_value = py::convert(return_value);
                 if (!out_return_value) 
@@ -609,7 +609,7 @@ struct pyIMapViewImpl : public pyIMapView
     {
         try
         {
-            uint32_t return_value = obj.Size();
+            auto return_value = obj.Size();
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -741,7 +741,7 @@ struct pyIMapImpl : public pyIMap
         {
             try
             {
-                winrt::Windows::Foundation::Collections::IIterator<winrt::Windows::Foundation::Collections::IKeyValuePair<K, V>> return_value = obj.First();
+                auto return_value = obj.First();
                 
                 PyObject* out_return_value = py::convert(return_value);
                 if (!out_return_value) 
@@ -772,7 +772,7 @@ struct pyIMapImpl : public pyIMap
         {
             try
             {
-                winrt::Windows::Foundation::Collections::IMapView<K, V> return_value = obj.GetView();
+                auto return_value = obj.GetView();
                 
                 PyObject* out_return_value = py::convert(return_value);
                 if (!out_return_value) 
@@ -805,7 +805,7 @@ struct pyIMapImpl : public pyIMap
             {
                 auto param0 = py::convert_to<K>(args, 0);
                 
-                bool return_value = obj.HasKey(param0);
+                auto return_value = obj.HasKey(param0);
                 
                 PyObject* out_return_value = py::convert(return_value);
                 if (!out_return_value) 
@@ -839,7 +839,7 @@ struct pyIMapImpl : public pyIMap
                 auto param0 = py::convert_to<K>(args, 0);
                 auto param1 = py::convert_to<V>(args, 1);
                 
-                bool return_value = obj.Insert(param0, param1);
+                auto return_value = obj.Insert(param0, param1);
                 
                 PyObject* out_return_value = py::convert(return_value);
                 if (!out_return_value) 
@@ -872,7 +872,7 @@ struct pyIMapImpl : public pyIMap
             {
                 auto param0 = py::convert_to<K>(args, 0);
                 
-                V return_value = obj.Lookup(param0);
+                auto return_value = obj.Lookup(param0);
                 
                 PyObject* out_return_value = py::convert(return_value);
                 if (!out_return_value) 
@@ -926,7 +926,7 @@ struct pyIMapImpl : public pyIMap
     {
         try
         {
-            uint32_t return_value = obj.Size();
+            auto return_value = obj.Size();
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -1060,7 +1060,7 @@ struct pyIObservableMapImpl : public pyIObservableMap
         {
             try
             {
-                winrt::Windows::Foundation::Collections::IIterator<winrt::Windows::Foundation::Collections::IKeyValuePair<K, V>> return_value = obj.First();
+                auto return_value = obj.First();
                 
                 PyObject* out_return_value = py::convert(return_value);
                 if (!out_return_value) 
@@ -1091,7 +1091,7 @@ struct pyIObservableMapImpl : public pyIObservableMap
         {
             try
             {
-                winrt::Windows::Foundation::Collections::IMapView<K, V> return_value = obj.GetView();
+                auto return_value = obj.GetView();
                 
                 PyObject* out_return_value = py::convert(return_value);
                 if (!out_return_value) 
@@ -1124,7 +1124,7 @@ struct pyIObservableMapImpl : public pyIObservableMap
             {
                 auto param0 = py::convert_to<K>(args, 0);
                 
-                bool return_value = obj.HasKey(param0);
+                auto return_value = obj.HasKey(param0);
                 
                 PyObject* out_return_value = py::convert(return_value);
                 if (!out_return_value) 
@@ -1158,7 +1158,7 @@ struct pyIObservableMapImpl : public pyIObservableMap
                 auto param0 = py::convert_to<K>(args, 0);
                 auto param1 = py::convert_to<V>(args, 1);
                 
-                bool return_value = obj.Insert(param0, param1);
+                auto return_value = obj.Insert(param0, param1);
                 
                 PyObject* out_return_value = py::convert(return_value);
                 if (!out_return_value) 
@@ -1191,7 +1191,7 @@ struct pyIObservableMapImpl : public pyIObservableMap
             {
                 auto param0 = py::convert_to<K>(args, 0);
                 
-                V return_value = obj.Lookup(param0);
+                auto return_value = obj.Lookup(param0);
                 
                 PyObject* out_return_value = py::convert(return_value);
                 if (!out_return_value) 
@@ -1247,7 +1247,7 @@ struct pyIObservableMapImpl : public pyIObservableMap
         {
             auto param0 = py::convert_to<winrt::Windows::Foundation::Collections::MapChangedEventHandler<K, V>>(arg);
             
-            winrt::event_token return_value = obj.MapChanged(param0);
+            auto return_value = obj.MapChanged(param0);
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -1267,7 +1267,7 @@ struct pyIObservableMapImpl : public pyIObservableMap
     {
         try
         {
-            uint32_t return_value = obj.Size();
+            auto return_value = obj.Size();
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -1449,7 +1449,7 @@ struct pyIObservableVectorImpl : public pyIObservableVector
         {
             try
             {
-                winrt::Windows::Foundation::Collections::IIterator<T> return_value = obj.First();
+                auto return_value = obj.First();
                 
                 PyObject* out_return_value = py::convert(return_value);
                 if (!out_return_value) 
@@ -1482,7 +1482,7 @@ struct pyIObservableVectorImpl : public pyIObservableVector
             {
                 auto param0 = py::convert_to<uint32_t>(args, 0);
                 
-                T return_value = obj.GetAt(param0);
+                auto return_value = obj.GetAt(param0);
                 
                 PyObject* out_return_value = py::convert(return_value);
                 if (!out_return_value) 
@@ -1515,9 +1515,9 @@ struct pyIObservableVectorImpl : public pyIObservableVector
             {
                 auto param0 = py::convert_to<uint32_t>(args, 0);
                 auto param1_count = py::convert_to<winrt::com_array<T>::size_type>(args, 1);
-                winrt::com_array<T> param1 { param1_count, py::empty_instance<T>::get() };
+                winrt::com_array<T> param1 ( param1_count, py::empty_instance<T>::get() );
                 
-                uint32_t return_value = obj.GetMany(param0, param1);
+                auto return_value = obj.GetMany(param0, param1);
                 
                 PyObject* out_return_value = py::convert(return_value);
                 if (!out_return_value) 
@@ -1554,7 +1554,7 @@ struct pyIObservableVectorImpl : public pyIObservableVector
         {
             try
             {
-                winrt::Windows::Foundation::Collections::IVectorView<T> return_value = obj.GetView();
+                auto return_value = obj.GetView();
                 
                 PyObject* out_return_value = py::convert(return_value);
                 if (!out_return_value) 
@@ -1588,7 +1588,7 @@ struct pyIObservableVectorImpl : public pyIObservableVector
                 auto param0 = py::convert_to<T>(args, 0);
                 uint32_t param1 {  };
                 
-                bool return_value = obj.IndexOf(param0, param1);
+                auto return_value = obj.IndexOf(param0, param1);
                 
                 PyObject* out_return_value = py::convert(return_value);
                 if (!out_return_value) 
@@ -1759,7 +1759,7 @@ struct pyIObservableVectorImpl : public pyIObservableVector
         {
             auto param0 = py::convert_to<winrt::Windows::Foundation::Collections::VectorChangedEventHandler<T>>(arg);
             
-            winrt::event_token return_value = obj.VectorChanged(param0);
+            auto return_value = obj.VectorChanged(param0);
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -1779,7 +1779,7 @@ struct pyIObservableVectorImpl : public pyIObservableVector
     {
         try
         {
-            uint32_t return_value = obj.Size();
+            auto return_value = obj.Size();
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -1883,7 +1883,7 @@ struct pyIVectorViewImpl : public pyIVectorView
         {
             try
             {
-                winrt::Windows::Foundation::Collections::IIterator<T> return_value = obj.First();
+                auto return_value = obj.First();
                 
                 PyObject* out_return_value = py::convert(return_value);
                 if (!out_return_value) 
@@ -1916,7 +1916,7 @@ struct pyIVectorViewImpl : public pyIVectorView
             {
                 auto param0 = py::convert_to<uint32_t>(args, 0);
                 
-                T return_value = obj.GetAt(param0);
+                auto return_value = obj.GetAt(param0);
                 
                 PyObject* out_return_value = py::convert(return_value);
                 if (!out_return_value) 
@@ -1949,9 +1949,9 @@ struct pyIVectorViewImpl : public pyIVectorView
             {
                 auto param0 = py::convert_to<uint32_t>(args, 0);
                 auto param1_count = py::convert_to<winrt::com_array<T>::size_type>(args, 1);
-                winrt::com_array<T> param1 { param1_count, py::empty_instance<T>::get() };
+                winrt::com_array<T> param1 ( param1_count, py::empty_instance<T>::get() );
                 
-                uint32_t return_value = obj.GetMany(param0, param1);
+                auto return_value = obj.GetMany(param0, param1);
                 
                 PyObject* out_return_value = py::convert(return_value);
                 if (!out_return_value) 
@@ -1991,7 +1991,7 @@ struct pyIVectorViewImpl : public pyIVectorView
                 auto param0 = py::convert_to<T>(args, 0);
                 uint32_t param1 {  };
                 
-                bool return_value = obj.IndexOf(param0, param1);
+                auto return_value = obj.IndexOf(param0, param1);
                 
                 PyObject* out_return_value = py::convert(return_value);
                 if (!out_return_value) 
@@ -2024,7 +2024,7 @@ struct pyIVectorViewImpl : public pyIVectorView
     {
         try
         {
-            uint32_t return_value = obj.Size();
+            auto return_value = obj.Size();
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -2188,7 +2188,7 @@ struct pyIVectorImpl : public pyIVector
         {
             try
             {
-                winrt::Windows::Foundation::Collections::IIterator<T> return_value = obj.First();
+                auto return_value = obj.First();
                 
                 PyObject* out_return_value = py::convert(return_value);
                 if (!out_return_value) 
@@ -2221,7 +2221,7 @@ struct pyIVectorImpl : public pyIVector
             {
                 auto param0 = py::convert_to<uint32_t>(args, 0);
                 
-                T return_value = obj.GetAt(param0);
+                auto return_value = obj.GetAt(param0);
                 
                 PyObject* out_return_value = py::convert(return_value);
                 if (!out_return_value) 
@@ -2254,9 +2254,9 @@ struct pyIVectorImpl : public pyIVector
             {
                 auto param0 = py::convert_to<uint32_t>(args, 0);
                 auto param1_count = py::convert_to<winrt::com_array<T>::size_type>(args, 1);
-                winrt::com_array<T> param1 { param1_count, py::empty_instance<T>::get() };
+                winrt::com_array<T> param1 ( param1_count, py::empty_instance<T>::get() );
                 
-                uint32_t return_value = obj.GetMany(param0, param1);
+                auto return_value = obj.GetMany(param0, param1);
                 
                 PyObject* out_return_value = py::convert(return_value);
                 if (!out_return_value) 
@@ -2293,7 +2293,7 @@ struct pyIVectorImpl : public pyIVector
         {
             try
             {
-                winrt::Windows::Foundation::Collections::IVectorView<T> return_value = obj.GetView();
+                auto return_value = obj.GetView();
                 
                 PyObject* out_return_value = py::convert(return_value);
                 if (!out_return_value) 
@@ -2327,7 +2327,7 @@ struct pyIVectorImpl : public pyIVector
                 auto param0 = py::convert_to<T>(args, 0);
                 uint32_t param1 {  };
                 
-                bool return_value = obj.IndexOf(param0, param1);
+                auto return_value = obj.IndexOf(param0, param1);
                 
                 PyObject* out_return_value = py::convert(return_value);
                 if (!out_return_value) 
@@ -2496,7 +2496,7 @@ struct pyIVectorImpl : public pyIVector
     {
         try
         {
-            uint32_t return_value = obj.Size();
+            auto return_value = obj.Size();
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 

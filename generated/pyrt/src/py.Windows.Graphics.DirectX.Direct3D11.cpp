@@ -178,7 +178,7 @@ static PyObject* IDirect3DSurface_get_Description(py::winrt_wrapper<winrt::Windo
 {
     try
     {
-        winrt::Windows::Graphics::DirectX::Direct3D11::Direct3DSurfaceDescription return_value = self->obj.Description();
+        auto return_value = self->obj.Description();
         
         PyObject* out_return_value = py::convert(return_value);
         if (!out_return_value) 

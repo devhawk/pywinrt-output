@@ -76,7 +76,7 @@ static PyObject* PropertySet_First(py::winrt_wrapper<winrt::Windows::Foundation:
     {
         try
         {
-            winrt::Windows::Foundation::Collections::IIterator<winrt::Windows::Foundation::Collections::IKeyValuePair<winrt::hstring, winrt::Windows::Foundation::IInspectable>> return_value = self->obj.First();
+            auto return_value = self->obj.First();
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -107,7 +107,7 @@ static PyObject* PropertySet_GetView(py::winrt_wrapper<winrt::Windows::Foundatio
     {
         try
         {
-            winrt::Windows::Foundation::Collections::IMapView<winrt::hstring, winrt::Windows::Foundation::IInspectable> return_value = self->obj.GetView();
+            auto return_value = self->obj.GetView();
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -140,7 +140,7 @@ static PyObject* PropertySet_HasKey(py::winrt_wrapper<winrt::Windows::Foundation
         {
             auto param0 = py::convert_to<winrt::hstring>(args, 0);
             
-            bool return_value = self->obj.HasKey(param0);
+            auto return_value = self->obj.HasKey(param0);
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -174,7 +174,7 @@ static PyObject* PropertySet_Insert(py::winrt_wrapper<winrt::Windows::Foundation
             auto param0 = py::convert_to<winrt::hstring>(args, 0);
             auto param1 = py::convert_to<winrt::Windows::Foundation::IInspectable>(args, 1);
             
-            bool return_value = self->obj.Insert(param0, param1);
+            auto return_value = self->obj.Insert(param0, param1);
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -207,7 +207,7 @@ static PyObject* PropertySet_Lookup(py::winrt_wrapper<winrt::Windows::Foundation
         {
             auto param0 = py::convert_to<winrt::hstring>(args, 0);
             
-            winrt::Windows::Foundation::IInspectable return_value = self->obj.Lookup(param0);
+            auto return_value = self->obj.Lookup(param0);
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -261,7 +261,7 @@ static PyObject* PropertySet_get_Size(py::winrt_wrapper<winrt::Windows::Foundati
 {
     try
     {
-        uint32_t return_value = self->obj.Size();
+        auto return_value = self->obj.Size();
         
         PyObject* out_return_value = py::convert(return_value);
         if (!out_return_value) 
@@ -283,7 +283,7 @@ static PyObject* PropertySet_add_MapChanged(py::winrt_wrapper<winrt::Windows::Fo
     {
         auto param0 = py::convert_to<winrt::Windows::Foundation::Collections::MapChangedEventHandler<winrt::hstring, winrt::Windows::Foundation::IInspectable>>(arg);
         
-        winrt::event_token return_value = self->obj.MapChanged(param0);
+        auto return_value = self->obj.MapChanged(param0);
         
         PyObject* out_return_value = py::convert(return_value);
         if (!out_return_value) 
@@ -495,7 +495,7 @@ static PyObject* StringMap_First(py::winrt_wrapper<winrt::Windows::Foundation::C
     {
         try
         {
-            winrt::Windows::Foundation::Collections::IIterator<winrt::Windows::Foundation::Collections::IKeyValuePair<winrt::hstring, winrt::hstring>> return_value = self->obj.First();
+            auto return_value = self->obj.First();
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -526,7 +526,7 @@ static PyObject* StringMap_GetView(py::winrt_wrapper<winrt::Windows::Foundation:
     {
         try
         {
-            winrt::Windows::Foundation::Collections::IMapView<winrt::hstring, winrt::hstring> return_value = self->obj.GetView();
+            auto return_value = self->obj.GetView();
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -559,7 +559,7 @@ static PyObject* StringMap_HasKey(py::winrt_wrapper<winrt::Windows::Foundation::
         {
             auto param0 = py::convert_to<winrt::hstring>(args, 0);
             
-            bool return_value = self->obj.HasKey(param0);
+            auto return_value = self->obj.HasKey(param0);
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -593,7 +593,7 @@ static PyObject* StringMap_Insert(py::winrt_wrapper<winrt::Windows::Foundation::
             auto param0 = py::convert_to<winrt::hstring>(args, 0);
             auto param1 = py::convert_to<winrt::hstring>(args, 1);
             
-            bool return_value = self->obj.Insert(param0, param1);
+            auto return_value = self->obj.Insert(param0, param1);
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -626,7 +626,7 @@ static PyObject* StringMap_Lookup(py::winrt_wrapper<winrt::Windows::Foundation::
         {
             auto param0 = py::convert_to<winrt::hstring>(args, 0);
             
-            winrt::hstring return_value = self->obj.Lookup(param0);
+            auto return_value = self->obj.Lookup(param0);
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -680,7 +680,7 @@ static PyObject* StringMap_get_Size(py::winrt_wrapper<winrt::Windows::Foundation
 {
     try
     {
-        uint32_t return_value = self->obj.Size();
+        auto return_value = self->obj.Size();
         
         PyObject* out_return_value = py::convert(return_value);
         if (!out_return_value) 
@@ -702,7 +702,7 @@ static PyObject* StringMap_add_MapChanged(py::winrt_wrapper<winrt::Windows::Foun
     {
         auto param0 = py::convert_to<winrt::Windows::Foundation::Collections::MapChangedEventHandler<winrt::hstring, winrt::hstring>>(arg);
         
-        winrt::event_token return_value = self->obj.MapChanged(param0);
+        auto return_value = self->obj.MapChanged(param0);
         
         PyObject* out_return_value = py::convert(return_value);
         if (!out_return_value) 
@@ -914,7 +914,7 @@ static PyObject* ValueSet_First(py::winrt_wrapper<winrt::Windows::Foundation::Co
     {
         try
         {
-            winrt::Windows::Foundation::Collections::IIterator<winrt::Windows::Foundation::Collections::IKeyValuePair<winrt::hstring, winrt::Windows::Foundation::IInspectable>> return_value = self->obj.First();
+            auto return_value = self->obj.First();
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -945,7 +945,7 @@ static PyObject* ValueSet_GetView(py::winrt_wrapper<winrt::Windows::Foundation::
     {
         try
         {
-            winrt::Windows::Foundation::Collections::IMapView<winrt::hstring, winrt::Windows::Foundation::IInspectable> return_value = self->obj.GetView();
+            auto return_value = self->obj.GetView();
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -978,7 +978,7 @@ static PyObject* ValueSet_HasKey(py::winrt_wrapper<winrt::Windows::Foundation::C
         {
             auto param0 = py::convert_to<winrt::hstring>(args, 0);
             
-            bool return_value = self->obj.HasKey(param0);
+            auto return_value = self->obj.HasKey(param0);
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -1012,7 +1012,7 @@ static PyObject* ValueSet_Insert(py::winrt_wrapper<winrt::Windows::Foundation::C
             auto param0 = py::convert_to<winrt::hstring>(args, 0);
             auto param1 = py::convert_to<winrt::Windows::Foundation::IInspectable>(args, 1);
             
-            bool return_value = self->obj.Insert(param0, param1);
+            auto return_value = self->obj.Insert(param0, param1);
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -1045,7 +1045,7 @@ static PyObject* ValueSet_Lookup(py::winrt_wrapper<winrt::Windows::Foundation::C
         {
             auto param0 = py::convert_to<winrt::hstring>(args, 0);
             
-            winrt::Windows::Foundation::IInspectable return_value = self->obj.Lookup(param0);
+            auto return_value = self->obj.Lookup(param0);
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -1099,7 +1099,7 @@ static PyObject* ValueSet_get_Size(py::winrt_wrapper<winrt::Windows::Foundation:
 {
     try
     {
-        uint32_t return_value = self->obj.Size();
+        auto return_value = self->obj.Size();
         
         PyObject* out_return_value = py::convert(return_value);
         if (!out_return_value) 
@@ -1121,7 +1121,7 @@ static PyObject* ValueSet_add_MapChanged(py::winrt_wrapper<winrt::Windows::Found
     {
         auto param0 = py::convert_to<winrt::Windows::Foundation::Collections::MapChangedEventHandler<winrt::hstring, winrt::Windows::Foundation::IInspectable>>(arg);
         
-        winrt::event_token return_value = self->obj.MapChanged(param0);
+        auto return_value = self->obj.MapChanged(param0);
         
         PyObject* out_return_value = py::convert(return_value);
         if (!out_return_value) 
@@ -2050,7 +2050,7 @@ static PyObject* IPropertySet_First(py::winrt_wrapper<winrt::Windows::Foundation
     {
         try
         {
-            winrt::Windows::Foundation::Collections::IIterator<winrt::Windows::Foundation::Collections::IKeyValuePair<winrt::hstring, winrt::Windows::Foundation::IInspectable>> return_value = self->obj.First();
+            auto return_value = self->obj.First();
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -2081,7 +2081,7 @@ static PyObject* IPropertySet_GetView(py::winrt_wrapper<winrt::Windows::Foundati
     {
         try
         {
-            winrt::Windows::Foundation::Collections::IMapView<winrt::hstring, winrt::Windows::Foundation::IInspectable> return_value = self->obj.GetView();
+            auto return_value = self->obj.GetView();
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -2114,7 +2114,7 @@ static PyObject* IPropertySet_HasKey(py::winrt_wrapper<winrt::Windows::Foundatio
         {
             auto param0 = py::convert_to<winrt::hstring>(args, 0);
             
-            bool return_value = self->obj.HasKey(param0);
+            auto return_value = self->obj.HasKey(param0);
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -2148,7 +2148,7 @@ static PyObject* IPropertySet_Insert(py::winrt_wrapper<winrt::Windows::Foundatio
             auto param0 = py::convert_to<winrt::hstring>(args, 0);
             auto param1 = py::convert_to<winrt::Windows::Foundation::IInspectable>(args, 1);
             
-            bool return_value = self->obj.Insert(param0, param1);
+            auto return_value = self->obj.Insert(param0, param1);
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -2181,7 +2181,7 @@ static PyObject* IPropertySet_Lookup(py::winrt_wrapper<winrt::Windows::Foundatio
         {
             auto param0 = py::convert_to<winrt::hstring>(args, 0);
             
-            winrt::Windows::Foundation::IInspectable return_value = self->obj.Lookup(param0);
+            auto return_value = self->obj.Lookup(param0);
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -2235,7 +2235,7 @@ static PyObject* IPropertySet_get_Size(py::winrt_wrapper<winrt::Windows::Foundat
 {
     try
     {
-        uint32_t return_value = self->obj.Size();
+        auto return_value = self->obj.Size();
         
         PyObject* out_return_value = py::convert(return_value);
         if (!out_return_value) 
@@ -2257,7 +2257,7 @@ static PyObject* IPropertySet_add_MapChanged(py::winrt_wrapper<winrt::Windows::F
     {
         auto param0 = py::convert_to<winrt::Windows::Foundation::Collections::MapChangedEventHandler<winrt::hstring, winrt::Windows::Foundation::IInspectable>>(arg);
         
-        winrt::event_token return_value = self->obj.MapChanged(param0);
+        auto return_value = self->obj.MapChanged(param0);
         
         PyObject* out_return_value = py::convert(return_value);
         if (!out_return_value) 
@@ -2416,7 +2416,7 @@ static PyObject* IVectorChangedEventArgs_get_CollectionChange(py::winrt_wrapper<
 {
     try
     {
-        winrt::Windows::Foundation::Collections::CollectionChange return_value = self->obj.CollectionChange();
+        auto return_value = self->obj.CollectionChange();
         
         PyObject* out_return_value = py::convert(return_value);
         if (!out_return_value) 
@@ -2436,7 +2436,7 @@ static PyObject* IVectorChangedEventArgs_get_Index(py::winrt_wrapper<winrt::Wind
 {
     try
     {
-        uint32_t return_value = self->obj.Index();
+        auto return_value = self->obj.Index();
         
         PyObject* out_return_value = py::convert(return_value);
         if (!out_return_value) 

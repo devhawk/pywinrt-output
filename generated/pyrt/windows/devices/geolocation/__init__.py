@@ -16,6 +16,55 @@ try:
 except:
     pass
 
+class AltitudeReferenceSystem(enum.IntEnum):
+    Unspecified = 0
+    Terrain = 1
+    Ellipsoid = 2
+    Geoid = 3
+    Surface = 4
+
+class GeolocationAccessStatus(enum.IntEnum):
+    Unspecified = 0
+    Allowed = 1
+    Denied = 2
+
+class GeoshapeType(enum.IntEnum):
+    Geopoint = 0
+    Geocircle = 1
+    Geopath = 2
+    GeoboundingBox = 3
+
+class PositionAccuracy(enum.IntEnum):
+    Default = 0
+    High = 1
+
+class PositionSource(enum.IntEnum):
+    Cellular = 0
+    Satellite = 1
+    WiFi = 2
+    IPAddress = 3
+    Unknown = 4
+    Default = 5
+    Obfuscated = 6
+
+class PositionStatus(enum.IntEnum):
+    Ready = 0
+    Initializing = 1
+    NoData = 2
+    Disabled = 3
+    NotInitialized = 4
+    NotAvailable = 5
+
+class VisitMonitoringScope(enum.IntEnum):
+    Venue = 0
+    City = 1
+
+class VisitStateChange(enum.IntEnum):
+    TrackingLost = 0
+    Arrived = 1
+    Departed = 2
+    OtherMovement = 3
+
 CivicAddress = __ns__.CivicAddress
 GeoboundingBox = __ns__.GeoboundingBox
 Geocircle = __ns__.Geocircle

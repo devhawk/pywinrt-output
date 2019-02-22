@@ -11,6 +11,21 @@ try:
 except:
     pass
 
+class JsonErrorStatus(enum.IntEnum):
+    Unknown = 0
+    InvalidJsonString = 1
+    InvalidJsonNumber = 2
+    JsonValueNotFound = 3
+    ImplementationLimit = 4
+
+class JsonValueType(enum.IntEnum):
+    Null = 0
+    Boolean = 1
+    Number = 2
+    String = 3
+    Array = 4
+    Object = 5
+
 JsonArray = __ns__.JsonArray
 JsonError = __ns__.JsonError
 JsonObject = __ns__.JsonObject

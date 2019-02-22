@@ -103,7 +103,7 @@ static PyObject* JsonArray_First(py::winrt_wrapper<winrt::Windows::Data::Json::J
     {
         try
         {
-            winrt::Windows::Foundation::Collections::IIterator<winrt::Windows::Data::Json::IJsonValue> return_value = self->obj.First();
+            auto return_value = self->obj.First();
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -134,7 +134,7 @@ static PyObject* JsonArray_GetArray(py::winrt_wrapper<winrt::Windows::Data::Json
     {
         try
         {
-            winrt::Windows::Data::Json::JsonArray return_value = self->obj.GetArray();
+            auto return_value = self->obj.GetArray();
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -167,7 +167,7 @@ static PyObject* JsonArray_GetArrayAt(py::winrt_wrapper<winrt::Windows::Data::Js
         {
             auto param0 = py::convert_to<uint32_t>(args, 0);
             
-            winrt::Windows::Data::Json::JsonArray return_value = self->obj.GetArrayAt(param0);
+            auto return_value = self->obj.GetArrayAt(param0);
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -200,7 +200,7 @@ static PyObject* JsonArray_GetAt(py::winrt_wrapper<winrt::Windows::Data::Json::J
         {
             auto param0 = py::convert_to<uint32_t>(args, 0);
             
-            winrt::Windows::Data::Json::IJsonValue return_value = self->obj.GetAt(param0);
+            auto return_value = self->obj.GetAt(param0);
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -231,7 +231,7 @@ static PyObject* JsonArray_GetBoolean(py::winrt_wrapper<winrt::Windows::Data::Js
     {
         try
         {
-            bool return_value = self->obj.GetBoolean();
+            auto return_value = self->obj.GetBoolean();
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -264,7 +264,7 @@ static PyObject* JsonArray_GetBooleanAt(py::winrt_wrapper<winrt::Windows::Data::
         {
             auto param0 = py::convert_to<uint32_t>(args, 0);
             
-            bool return_value = self->obj.GetBooleanAt(param0);
+            auto return_value = self->obj.GetBooleanAt(param0);
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -297,9 +297,9 @@ static PyObject* JsonArray_GetMany(py::winrt_wrapper<winrt::Windows::Data::Json:
         {
             auto param0 = py::convert_to<uint32_t>(args, 0);
             auto param1_count = py::convert_to<winrt::com_array<winrt::Windows::Data::Json::IJsonValue>::size_type>(args, 1);
-            winrt::com_array<winrt::Windows::Data::Json::IJsonValue> param1 { param1_count, py::empty_instance<winrt::Windows::Data::Json::IJsonValue>::get() };
+            winrt::com_array<winrt::Windows::Data::Json::IJsonValue> param1 ( param1_count, py::empty_instance<winrt::Windows::Data::Json::IJsonValue>::get() );
             
-            uint32_t return_value = self->obj.GetMany(param0, param1);
+            auto return_value = self->obj.GetMany(param0, param1);
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -336,7 +336,7 @@ static PyObject* JsonArray_GetNumber(py::winrt_wrapper<winrt::Windows::Data::Jso
     {
         try
         {
-            double return_value = self->obj.GetNumber();
+            auto return_value = self->obj.GetNumber();
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -369,7 +369,7 @@ static PyObject* JsonArray_GetNumberAt(py::winrt_wrapper<winrt::Windows::Data::J
         {
             auto param0 = py::convert_to<uint32_t>(args, 0);
             
-            double return_value = self->obj.GetNumberAt(param0);
+            auto return_value = self->obj.GetNumberAt(param0);
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -400,7 +400,7 @@ static PyObject* JsonArray_GetObject(py::winrt_wrapper<winrt::Windows::Data::Jso
     {
         try
         {
-            winrt::Windows::Data::Json::JsonObject return_value = self->obj.GetObject();
+            auto return_value = self->obj.GetObject();
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -433,7 +433,7 @@ static PyObject* JsonArray_GetObjectAt(py::winrt_wrapper<winrt::Windows::Data::J
         {
             auto param0 = py::convert_to<uint32_t>(args, 0);
             
-            winrt::Windows::Data::Json::JsonObject return_value = self->obj.GetObjectAt(param0);
+            auto return_value = self->obj.GetObjectAt(param0);
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -464,7 +464,7 @@ static PyObject* JsonArray_GetString(py::winrt_wrapper<winrt::Windows::Data::Jso
     {
         try
         {
-            winrt::hstring return_value = self->obj.GetString();
+            auto return_value = self->obj.GetString();
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -497,7 +497,7 @@ static PyObject* JsonArray_GetStringAt(py::winrt_wrapper<winrt::Windows::Data::J
         {
             auto param0 = py::convert_to<uint32_t>(args, 0);
             
-            winrt::hstring return_value = self->obj.GetStringAt(param0);
+            auto return_value = self->obj.GetStringAt(param0);
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -528,7 +528,7 @@ static PyObject* JsonArray_GetView(py::winrt_wrapper<winrt::Windows::Data::Json:
     {
         try
         {
-            winrt::Windows::Foundation::Collections::IVectorView<winrt::Windows::Data::Json::IJsonValue> return_value = self->obj.GetView();
+            auto return_value = self->obj.GetView();
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -562,7 +562,7 @@ static PyObject* JsonArray_IndexOf(py::winrt_wrapper<winrt::Windows::Data::Json:
             auto param0 = py::convert_to<winrt::Windows::Data::Json::IJsonValue>(args, 0);
             uint32_t param1 {  };
             
-            bool return_value = self->obj.IndexOf(param0, param1);
+            auto return_value = self->obj.IndexOf(param0, param1);
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -629,7 +629,7 @@ static PyObject* JsonArray_Parse(PyObject* /*unused*/, PyObject* args)
         {
             auto param0 = py::convert_to<winrt::hstring>(args, 0);
             
-            winrt::Windows::Data::Json::JsonArray return_value = winrt::Windows::Data::Json::JsonArray::Parse(param0);
+            auto return_value = winrt::Windows::Data::Json::JsonArray::Parse(param0);
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -768,7 +768,7 @@ static PyObject* JsonArray_Stringify(py::winrt_wrapper<winrt::Windows::Data::Jso
     {
         try
         {
-            winrt::hstring return_value = self->obj.Stringify();
+            auto return_value = self->obj.Stringify();
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -799,7 +799,7 @@ static PyObject* JsonArray_ToString(py::winrt_wrapper<winrt::Windows::Data::Json
     {
         try
         {
-            winrt::hstring return_value = self->obj.ToString();
+            auto return_value = self->obj.ToString();
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -833,7 +833,7 @@ static PyObject* JsonArray_TryParse(PyObject* /*unused*/, PyObject* args)
             auto param0 = py::convert_to<winrt::hstring>(args, 0);
             winrt::Windows::Data::Json::JsonArray param1 { nullptr };
             
-            bool return_value = winrt::Windows::Data::Json::JsonArray::TryParse(param0, param1);
+            auto return_value = winrt::Windows::Data::Json::JsonArray::TryParse(param0, param1);
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -866,7 +866,7 @@ static PyObject* JsonArray_get_ValueType(py::winrt_wrapper<winrt::Windows::Data:
 {
     try
     {
-        winrt::Windows::Data::Json::JsonValueType return_value = self->obj.ValueType();
+        auto return_value = self->obj.ValueType();
         
         PyObject* out_return_value = py::convert(return_value);
         if (!out_return_value) 
@@ -886,7 +886,7 @@ static PyObject* JsonArray_get_Size(py::winrt_wrapper<winrt::Windows::Data::Json
 {
     try
     {
-        uint32_t return_value = self->obj.Size();
+        auto return_value = self->obj.Size();
         
         PyObject* out_return_value = py::convert(return_value);
         if (!out_return_value) 
@@ -1059,7 +1059,7 @@ static PyObject* JsonError_GetJsonStatus(PyObject* /*unused*/, PyObject* args)
         {
             auto param0 = py::convert_to<int32_t>(args, 0);
             
-            winrt::Windows::Data::Json::JsonErrorStatus return_value = winrt::Windows::Data::Json::JsonError::GetJsonStatus(param0);
+            auto return_value = winrt::Windows::Data::Json::JsonError::GetJsonStatus(param0);
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -1182,7 +1182,7 @@ static PyObject* JsonObject_First(py::winrt_wrapper<winrt::Windows::Data::Json::
     {
         try
         {
-            winrt::Windows::Foundation::Collections::IIterator<winrt::Windows::Foundation::Collections::IKeyValuePair<winrt::hstring, winrt::Windows::Data::Json::IJsonValue>> return_value = self->obj.First();
+            auto return_value = self->obj.First();
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -1213,7 +1213,7 @@ static PyObject* JsonObject_GetArray(py::winrt_wrapper<winrt::Windows::Data::Jso
     {
         try
         {
-            winrt::Windows::Data::Json::JsonArray return_value = self->obj.GetArray();
+            auto return_value = self->obj.GetArray();
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -1244,7 +1244,7 @@ static PyObject* JsonObject_GetBoolean(py::winrt_wrapper<winrt::Windows::Data::J
     {
         try
         {
-            bool return_value = self->obj.GetBoolean();
+            auto return_value = self->obj.GetBoolean();
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -1277,7 +1277,7 @@ static PyObject* JsonObject_GetNamedArray(py::winrt_wrapper<winrt::Windows::Data
         {
             auto param0 = py::convert_to<winrt::hstring>(args, 0);
             
-            winrt::Windows::Data::Json::JsonArray return_value = self->obj.GetNamedArray(param0);
+            auto return_value = self->obj.GetNamedArray(param0);
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -1299,7 +1299,7 @@ static PyObject* JsonObject_GetNamedArray(py::winrt_wrapper<winrt::Windows::Data
             auto param0 = py::convert_to<winrt::hstring>(args, 0);
             auto param1 = py::convert_to<winrt::Windows::Data::Json::JsonArray>(args, 1);
             
-            winrt::Windows::Data::Json::JsonArray return_value = self->obj.GetNamedArray(param0, param1);
+            auto return_value = self->obj.GetNamedArray(param0, param1);
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -1332,7 +1332,7 @@ static PyObject* JsonObject_GetNamedBoolean(py::winrt_wrapper<winrt::Windows::Da
         {
             auto param0 = py::convert_to<winrt::hstring>(args, 0);
             
-            bool return_value = self->obj.GetNamedBoolean(param0);
+            auto return_value = self->obj.GetNamedBoolean(param0);
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -1354,7 +1354,7 @@ static PyObject* JsonObject_GetNamedBoolean(py::winrt_wrapper<winrt::Windows::Da
             auto param0 = py::convert_to<winrt::hstring>(args, 0);
             auto param1 = py::convert_to<bool>(args, 1);
             
-            bool return_value = self->obj.GetNamedBoolean(param0, param1);
+            auto return_value = self->obj.GetNamedBoolean(param0, param1);
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -1387,7 +1387,7 @@ static PyObject* JsonObject_GetNamedNumber(py::winrt_wrapper<winrt::Windows::Dat
         {
             auto param0 = py::convert_to<winrt::hstring>(args, 0);
             
-            double return_value = self->obj.GetNamedNumber(param0);
+            auto return_value = self->obj.GetNamedNumber(param0);
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -1409,7 +1409,7 @@ static PyObject* JsonObject_GetNamedNumber(py::winrt_wrapper<winrt::Windows::Dat
             auto param0 = py::convert_to<winrt::hstring>(args, 0);
             auto param1 = py::convert_to<double>(args, 1);
             
-            double return_value = self->obj.GetNamedNumber(param0, param1);
+            auto return_value = self->obj.GetNamedNumber(param0, param1);
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -1442,7 +1442,7 @@ static PyObject* JsonObject_GetNamedObject(py::winrt_wrapper<winrt::Windows::Dat
         {
             auto param0 = py::convert_to<winrt::hstring>(args, 0);
             
-            winrt::Windows::Data::Json::JsonObject return_value = self->obj.GetNamedObject(param0);
+            auto return_value = self->obj.GetNamedObject(param0);
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -1464,7 +1464,7 @@ static PyObject* JsonObject_GetNamedObject(py::winrt_wrapper<winrt::Windows::Dat
             auto param0 = py::convert_to<winrt::hstring>(args, 0);
             auto param1 = py::convert_to<winrt::Windows::Data::Json::JsonObject>(args, 1);
             
-            winrt::Windows::Data::Json::JsonObject return_value = self->obj.GetNamedObject(param0, param1);
+            auto return_value = self->obj.GetNamedObject(param0, param1);
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -1497,7 +1497,7 @@ static PyObject* JsonObject_GetNamedString(py::winrt_wrapper<winrt::Windows::Dat
         {
             auto param0 = py::convert_to<winrt::hstring>(args, 0);
             
-            winrt::hstring return_value = self->obj.GetNamedString(param0);
+            auto return_value = self->obj.GetNamedString(param0);
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -1519,7 +1519,7 @@ static PyObject* JsonObject_GetNamedString(py::winrt_wrapper<winrt::Windows::Dat
             auto param0 = py::convert_to<winrt::hstring>(args, 0);
             auto param1 = py::convert_to<winrt::hstring>(args, 1);
             
-            winrt::hstring return_value = self->obj.GetNamedString(param0, param1);
+            auto return_value = self->obj.GetNamedString(param0, param1);
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -1552,7 +1552,7 @@ static PyObject* JsonObject_GetNamedValue(py::winrt_wrapper<winrt::Windows::Data
         {
             auto param0 = py::convert_to<winrt::hstring>(args, 0);
             
-            winrt::Windows::Data::Json::JsonValue return_value = self->obj.GetNamedValue(param0);
+            auto return_value = self->obj.GetNamedValue(param0);
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -1574,7 +1574,7 @@ static PyObject* JsonObject_GetNamedValue(py::winrt_wrapper<winrt::Windows::Data
             auto param0 = py::convert_to<winrt::hstring>(args, 0);
             auto param1 = py::convert_to<winrt::Windows::Data::Json::JsonValue>(args, 1);
             
-            winrt::Windows::Data::Json::JsonValue return_value = self->obj.GetNamedValue(param0, param1);
+            auto return_value = self->obj.GetNamedValue(param0, param1);
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -1605,7 +1605,7 @@ static PyObject* JsonObject_GetNumber(py::winrt_wrapper<winrt::Windows::Data::Js
     {
         try
         {
-            double return_value = self->obj.GetNumber();
+            auto return_value = self->obj.GetNumber();
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -1636,7 +1636,7 @@ static PyObject* JsonObject_GetObject(py::winrt_wrapper<winrt::Windows::Data::Js
     {
         try
         {
-            winrt::Windows::Data::Json::JsonObject return_value = self->obj.GetObject();
+            auto return_value = self->obj.GetObject();
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -1667,7 +1667,7 @@ static PyObject* JsonObject_GetString(py::winrt_wrapper<winrt::Windows::Data::Js
     {
         try
         {
-            winrt::hstring return_value = self->obj.GetString();
+            auto return_value = self->obj.GetString();
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -1698,7 +1698,7 @@ static PyObject* JsonObject_GetView(py::winrt_wrapper<winrt::Windows::Data::Json
     {
         try
         {
-            winrt::Windows::Foundation::Collections::IMapView<winrt::hstring, winrt::Windows::Data::Json::IJsonValue> return_value = self->obj.GetView();
+            auto return_value = self->obj.GetView();
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -1731,7 +1731,7 @@ static PyObject* JsonObject_HasKey(py::winrt_wrapper<winrt::Windows::Data::Json:
         {
             auto param0 = py::convert_to<winrt::hstring>(args, 0);
             
-            bool return_value = self->obj.HasKey(param0);
+            auto return_value = self->obj.HasKey(param0);
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -1765,7 +1765,7 @@ static PyObject* JsonObject_Insert(py::winrt_wrapper<winrt::Windows::Data::Json:
             auto param0 = py::convert_to<winrt::hstring>(args, 0);
             auto param1 = py::convert_to<winrt::Windows::Data::Json::IJsonValue>(args, 1);
             
-            bool return_value = self->obj.Insert(param0, param1);
+            auto return_value = self->obj.Insert(param0, param1);
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -1798,7 +1798,7 @@ static PyObject* JsonObject_Lookup(py::winrt_wrapper<winrt::Windows::Data::Json:
         {
             auto param0 = py::convert_to<winrt::hstring>(args, 0);
             
-            winrt::Windows::Data::Json::IJsonValue return_value = self->obj.Lookup(param0);
+            auto return_value = self->obj.Lookup(param0);
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -1831,7 +1831,7 @@ static PyObject* JsonObject_Parse(PyObject* /*unused*/, PyObject* args)
         {
             auto param0 = py::convert_to<winrt::hstring>(args, 0);
             
-            winrt::Windows::Data::Json::JsonObject return_value = winrt::Windows::Data::Json::JsonObject::Parse(param0);
+            auto return_value = winrt::Windows::Data::Json::JsonObject::Parse(param0);
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -1917,7 +1917,7 @@ static PyObject* JsonObject_Stringify(py::winrt_wrapper<winrt::Windows::Data::Js
     {
         try
         {
-            winrt::hstring return_value = self->obj.Stringify();
+            auto return_value = self->obj.Stringify();
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -1948,7 +1948,7 @@ static PyObject* JsonObject_ToString(py::winrt_wrapper<winrt::Windows::Data::Jso
     {
         try
         {
-            winrt::hstring return_value = self->obj.ToString();
+            auto return_value = self->obj.ToString();
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -1982,7 +1982,7 @@ static PyObject* JsonObject_TryParse(PyObject* /*unused*/, PyObject* args)
             auto param0 = py::convert_to<winrt::hstring>(args, 0);
             winrt::Windows::Data::Json::JsonObject param1 { nullptr };
             
-            bool return_value = winrt::Windows::Data::Json::JsonObject::TryParse(param0, param1);
+            auto return_value = winrt::Windows::Data::Json::JsonObject::TryParse(param0, param1);
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -2015,7 +2015,7 @@ static PyObject* JsonObject_get_ValueType(py::winrt_wrapper<winrt::Windows::Data
 {
     try
     {
-        winrt::Windows::Data::Json::JsonValueType return_value = self->obj.ValueType();
+        auto return_value = self->obj.ValueType();
         
         PyObject* out_return_value = py::convert(return_value);
         if (!out_return_value) 
@@ -2035,7 +2035,7 @@ static PyObject* JsonObject_get_Size(py::winrt_wrapper<winrt::Windows::Data::Jso
 {
     try
     {
-        uint32_t return_value = self->obj.Size();
+        auto return_value = self->obj.Size();
         
         PyObject* out_return_value = py::convert(return_value);
         if (!out_return_value) 
@@ -2212,7 +2212,7 @@ static PyObject* JsonValue_CreateBooleanValue(PyObject* /*unused*/, PyObject* ar
         {
             auto param0 = py::convert_to<bool>(args, 0);
             
-            winrt::Windows::Data::Json::JsonValue return_value = winrt::Windows::Data::Json::JsonValue::CreateBooleanValue(param0);
+            auto return_value = winrt::Windows::Data::Json::JsonValue::CreateBooleanValue(param0);
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -2243,7 +2243,7 @@ static PyObject* JsonValue_CreateNullValue(PyObject* /*unused*/, PyObject* args)
     {
         try
         {
-            winrt::Windows::Data::Json::JsonValue return_value = winrt::Windows::Data::Json::JsonValue::CreateNullValue();
+            auto return_value = winrt::Windows::Data::Json::JsonValue::CreateNullValue();
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -2276,7 +2276,7 @@ static PyObject* JsonValue_CreateNumberValue(PyObject* /*unused*/, PyObject* arg
         {
             auto param0 = py::convert_to<double>(args, 0);
             
-            winrt::Windows::Data::Json::JsonValue return_value = winrt::Windows::Data::Json::JsonValue::CreateNumberValue(param0);
+            auto return_value = winrt::Windows::Data::Json::JsonValue::CreateNumberValue(param0);
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -2309,7 +2309,7 @@ static PyObject* JsonValue_CreateStringValue(PyObject* /*unused*/, PyObject* arg
         {
             auto param0 = py::convert_to<winrt::hstring>(args, 0);
             
-            winrt::Windows::Data::Json::JsonValue return_value = winrt::Windows::Data::Json::JsonValue::CreateStringValue(param0);
+            auto return_value = winrt::Windows::Data::Json::JsonValue::CreateStringValue(param0);
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -2340,7 +2340,7 @@ static PyObject* JsonValue_GetArray(py::winrt_wrapper<winrt::Windows::Data::Json
     {
         try
         {
-            winrt::Windows::Data::Json::JsonArray return_value = self->obj.GetArray();
+            auto return_value = self->obj.GetArray();
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -2371,7 +2371,7 @@ static PyObject* JsonValue_GetBoolean(py::winrt_wrapper<winrt::Windows::Data::Js
     {
         try
         {
-            bool return_value = self->obj.GetBoolean();
+            auto return_value = self->obj.GetBoolean();
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -2402,7 +2402,7 @@ static PyObject* JsonValue_GetNumber(py::winrt_wrapper<winrt::Windows::Data::Jso
     {
         try
         {
-            double return_value = self->obj.GetNumber();
+            auto return_value = self->obj.GetNumber();
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -2433,7 +2433,7 @@ static PyObject* JsonValue_GetObject(py::winrt_wrapper<winrt::Windows::Data::Jso
     {
         try
         {
-            winrt::Windows::Data::Json::JsonObject return_value = self->obj.GetObject();
+            auto return_value = self->obj.GetObject();
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -2464,7 +2464,7 @@ static PyObject* JsonValue_GetString(py::winrt_wrapper<winrt::Windows::Data::Jso
     {
         try
         {
-            winrt::hstring return_value = self->obj.GetString();
+            auto return_value = self->obj.GetString();
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -2497,7 +2497,7 @@ static PyObject* JsonValue_Parse(PyObject* /*unused*/, PyObject* args)
         {
             auto param0 = py::convert_to<winrt::hstring>(args, 0);
             
-            winrt::Windows::Data::Json::JsonValue return_value = winrt::Windows::Data::Json::JsonValue::Parse(param0);
+            auto return_value = winrt::Windows::Data::Json::JsonValue::Parse(param0);
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -2528,7 +2528,7 @@ static PyObject* JsonValue_Stringify(py::winrt_wrapper<winrt::Windows::Data::Jso
     {
         try
         {
-            winrt::hstring return_value = self->obj.Stringify();
+            auto return_value = self->obj.Stringify();
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -2559,7 +2559,7 @@ static PyObject* JsonValue_ToString(py::winrt_wrapper<winrt::Windows::Data::Json
     {
         try
         {
-            winrt::hstring return_value = self->obj.ToString();
+            auto return_value = self->obj.ToString();
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -2593,7 +2593,7 @@ static PyObject* JsonValue_TryParse(PyObject* /*unused*/, PyObject* args)
             auto param0 = py::convert_to<winrt::hstring>(args, 0);
             winrt::Windows::Data::Json::JsonValue param1 { nullptr };
             
-            bool return_value = winrt::Windows::Data::Json::JsonValue::TryParse(param0, param1);
+            auto return_value = winrt::Windows::Data::Json::JsonValue::TryParse(param0, param1);
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -2626,7 +2626,7 @@ static PyObject* JsonValue_get_ValueType(py::winrt_wrapper<winrt::Windows::Data:
 {
     try
     {
-        winrt::Windows::Data::Json::JsonValueType return_value = self->obj.ValueType();
+        auto return_value = self->obj.ValueType();
         
         PyObject* out_return_value = py::convert(return_value);
         if (!out_return_value) 
@@ -2734,7 +2734,7 @@ static PyObject* IJsonValue_GetArray(py::winrt_wrapper<winrt::Windows::Data::Jso
     {
         try
         {
-            winrt::Windows::Data::Json::JsonArray return_value = self->obj.GetArray();
+            auto return_value = self->obj.GetArray();
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -2765,7 +2765,7 @@ static PyObject* IJsonValue_GetBoolean(py::winrt_wrapper<winrt::Windows::Data::J
     {
         try
         {
-            bool return_value = self->obj.GetBoolean();
+            auto return_value = self->obj.GetBoolean();
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -2796,7 +2796,7 @@ static PyObject* IJsonValue_GetNumber(py::winrt_wrapper<winrt::Windows::Data::Js
     {
         try
         {
-            double return_value = self->obj.GetNumber();
+            auto return_value = self->obj.GetNumber();
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -2827,7 +2827,7 @@ static PyObject* IJsonValue_GetObject(py::winrt_wrapper<winrt::Windows::Data::Js
     {
         try
         {
-            winrt::Windows::Data::Json::JsonObject return_value = self->obj.GetObject();
+            auto return_value = self->obj.GetObject();
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -2858,7 +2858,7 @@ static PyObject* IJsonValue_GetString(py::winrt_wrapper<winrt::Windows::Data::Js
     {
         try
         {
-            winrt::hstring return_value = self->obj.GetString();
+            auto return_value = self->obj.GetString();
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -2889,7 +2889,7 @@ static PyObject* IJsonValue_Stringify(py::winrt_wrapper<winrt::Windows::Data::Js
     {
         try
         {
-            winrt::hstring return_value = self->obj.Stringify();
+            auto return_value = self->obj.Stringify();
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -2916,7 +2916,7 @@ static PyObject* IJsonValue_get_ValueType(py::winrt_wrapper<winrt::Windows::Data
 {
     try
     {
-        winrt::Windows::Data::Json::JsonValueType return_value = self->obj.ValueType();
+        auto return_value = self->obj.ValueType();
         
         PyObject* out_return_value = py::convert(return_value);
         if (!out_return_value) 

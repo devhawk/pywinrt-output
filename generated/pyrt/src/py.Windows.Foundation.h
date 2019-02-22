@@ -354,7 +354,7 @@ struct pyIAsyncActionWithProgressImpl : public pyIAsyncActionWithProgress
     {
         try
         {
-            winrt::Windows::Foundation::AsyncActionWithProgressCompletedHandler<TProgress> return_value = obj.Completed();
+            auto return_value = obj.Completed();
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -374,7 +374,7 @@ struct pyIAsyncActionWithProgressImpl : public pyIAsyncActionWithProgress
     {
         try
         {
-            winrt::hresult return_value = obj.ErrorCode();
+            auto return_value = obj.ErrorCode();
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -394,7 +394,7 @@ struct pyIAsyncActionWithProgressImpl : public pyIAsyncActionWithProgress
     {
         try
         {
-            uint32_t return_value = obj.Id();
+            auto return_value = obj.Id();
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -414,7 +414,7 @@ struct pyIAsyncActionWithProgressImpl : public pyIAsyncActionWithProgress
     {
         try
         {
-            winrt::Windows::Foundation::AsyncActionProgressHandler<TProgress> return_value = obj.Progress();
+            auto return_value = obj.Progress();
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -434,7 +434,7 @@ struct pyIAsyncActionWithProgressImpl : public pyIAsyncActionWithProgress
     {
         try
         {
-            winrt::Windows::Foundation::AsyncStatus return_value = obj.Status();
+            auto return_value = obj.Status();
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -571,7 +571,7 @@ struct pyIAsyncOperationWithProgressImpl : public pyIAsyncOperationWithProgress
         {
             try
             {
-                TResult return_value = obj.GetResults();
+                auto return_value = obj.GetResults();
                 
                 PyObject* out_return_value = py::convert(return_value);
                 if (!out_return_value) 
@@ -598,7 +598,7 @@ struct pyIAsyncOperationWithProgressImpl : public pyIAsyncOperationWithProgress
     {
         try
         {
-            winrt::Windows::Foundation::AsyncOperationWithProgressCompletedHandler<TResult, TProgress> return_value = obj.Completed();
+            auto return_value = obj.Completed();
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -618,7 +618,7 @@ struct pyIAsyncOperationWithProgressImpl : public pyIAsyncOperationWithProgress
     {
         try
         {
-            winrt::hresult return_value = obj.ErrorCode();
+            auto return_value = obj.ErrorCode();
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -638,7 +638,7 @@ struct pyIAsyncOperationWithProgressImpl : public pyIAsyncOperationWithProgress
     {
         try
         {
-            uint32_t return_value = obj.Id();
+            auto return_value = obj.Id();
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -658,7 +658,7 @@ struct pyIAsyncOperationWithProgressImpl : public pyIAsyncOperationWithProgress
     {
         try
         {
-            winrt::Windows::Foundation::AsyncOperationProgressHandler<TResult, TProgress> return_value = obj.Progress();
+            auto return_value = obj.Progress();
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -678,7 +678,7 @@ struct pyIAsyncOperationWithProgressImpl : public pyIAsyncOperationWithProgress
     {
         try
         {
-            winrt::Windows::Foundation::AsyncStatus return_value = obj.Status();
+            auto return_value = obj.Status();
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -813,7 +813,7 @@ struct pyIAsyncOperationImpl : public pyIAsyncOperation
         {
             try
             {
-                TResult return_value = obj.GetResults();
+                auto return_value = obj.GetResults();
                 
                 PyObject* out_return_value = py::convert(return_value);
                 if (!out_return_value) 
@@ -840,7 +840,7 @@ struct pyIAsyncOperationImpl : public pyIAsyncOperation
     {
         try
         {
-            winrt::Windows::Foundation::AsyncOperationCompletedHandler<TResult> return_value = obj.Completed();
+            auto return_value = obj.Completed();
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -860,7 +860,7 @@ struct pyIAsyncOperationImpl : public pyIAsyncOperation
     {
         try
         {
-            winrt::hresult return_value = obj.ErrorCode();
+            auto return_value = obj.ErrorCode();
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -880,7 +880,7 @@ struct pyIAsyncOperationImpl : public pyIAsyncOperation
     {
         try
         {
-            uint32_t return_value = obj.Id();
+            auto return_value = obj.Id();
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -900,7 +900,7 @@ struct pyIAsyncOperationImpl : public pyIAsyncOperation
     {
         try
         {
-            winrt::Windows::Foundation::AsyncStatus return_value = obj.Status();
+            auto return_value = obj.Status();
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -999,7 +999,7 @@ struct pyIReferenceArrayImpl : public pyIReferenceArray
         {
             try
             {
-                bool return_value = obj.GetBoolean();
+                auto return_value = obj.GetBoolean();
                 
                 PyObject* out_return_value = py::convert(return_value);
                 if (!out_return_value) 
@@ -1063,7 +1063,7 @@ struct pyIReferenceArrayImpl : public pyIReferenceArray
         {
             try
             {
-                char16_t return_value = obj.GetChar16();
+                auto return_value = obj.GetChar16();
                 
                 PyObject* out_return_value = py::convert(return_value);
                 if (!out_return_value) 
@@ -1127,7 +1127,7 @@ struct pyIReferenceArrayImpl : public pyIReferenceArray
         {
             try
             {
-                winrt::Windows::Foundation::DateTime return_value = obj.GetDateTime();
+                auto return_value = obj.GetDateTime();
                 
                 PyObject* out_return_value = py::convert(return_value);
                 if (!out_return_value) 
@@ -1191,7 +1191,7 @@ struct pyIReferenceArrayImpl : public pyIReferenceArray
         {
             try
             {
-                double return_value = obj.GetDouble();
+                auto return_value = obj.GetDouble();
                 
                 PyObject* out_return_value = py::convert(return_value);
                 if (!out_return_value) 
@@ -1255,7 +1255,7 @@ struct pyIReferenceArrayImpl : public pyIReferenceArray
         {
             try
             {
-                winrt::guid return_value = obj.GetGuid();
+                auto return_value = obj.GetGuid();
                 
                 PyObject* out_return_value = py::convert(return_value);
                 if (!out_return_value) 
@@ -1352,7 +1352,7 @@ struct pyIReferenceArrayImpl : public pyIReferenceArray
         {
             try
             {
-                int16_t return_value = obj.GetInt16();
+                auto return_value = obj.GetInt16();
                 
                 PyObject* out_return_value = py::convert(return_value);
                 if (!out_return_value) 
@@ -1416,7 +1416,7 @@ struct pyIReferenceArrayImpl : public pyIReferenceArray
         {
             try
             {
-                int32_t return_value = obj.GetInt32();
+                auto return_value = obj.GetInt32();
                 
                 PyObject* out_return_value = py::convert(return_value);
                 if (!out_return_value) 
@@ -1480,7 +1480,7 @@ struct pyIReferenceArrayImpl : public pyIReferenceArray
         {
             try
             {
-                int64_t return_value = obj.GetInt64();
+                auto return_value = obj.GetInt64();
                 
                 PyObject* out_return_value = py::convert(return_value);
                 if (!out_return_value) 
@@ -1544,7 +1544,7 @@ struct pyIReferenceArrayImpl : public pyIReferenceArray
         {
             try
             {
-                winrt::Windows::Foundation::Point return_value = obj.GetPoint();
+                auto return_value = obj.GetPoint();
                 
                 PyObject* out_return_value = py::convert(return_value);
                 if (!out_return_value) 
@@ -1608,7 +1608,7 @@ struct pyIReferenceArrayImpl : public pyIReferenceArray
         {
             try
             {
-                winrt::Windows::Foundation::Rect return_value = obj.GetRect();
+                auto return_value = obj.GetRect();
                 
                 PyObject* out_return_value = py::convert(return_value);
                 if (!out_return_value) 
@@ -1672,7 +1672,7 @@ struct pyIReferenceArrayImpl : public pyIReferenceArray
         {
             try
             {
-                float return_value = obj.GetSingle();
+                auto return_value = obj.GetSingle();
                 
                 PyObject* out_return_value = py::convert(return_value);
                 if (!out_return_value) 
@@ -1736,7 +1736,7 @@ struct pyIReferenceArrayImpl : public pyIReferenceArray
         {
             try
             {
-                winrt::Windows::Foundation::Size return_value = obj.GetSize();
+                auto return_value = obj.GetSize();
                 
                 PyObject* out_return_value = py::convert(return_value);
                 if (!out_return_value) 
@@ -1800,7 +1800,7 @@ struct pyIReferenceArrayImpl : public pyIReferenceArray
         {
             try
             {
-                winrt::hstring return_value = obj.GetString();
+                auto return_value = obj.GetString();
                 
                 PyObject* out_return_value = py::convert(return_value);
                 if (!out_return_value) 
@@ -1864,7 +1864,7 @@ struct pyIReferenceArrayImpl : public pyIReferenceArray
         {
             try
             {
-                winrt::Windows::Foundation::TimeSpan return_value = obj.GetTimeSpan();
+                auto return_value = obj.GetTimeSpan();
                 
                 PyObject* out_return_value = py::convert(return_value);
                 if (!out_return_value) 
@@ -1928,7 +1928,7 @@ struct pyIReferenceArrayImpl : public pyIReferenceArray
         {
             try
             {
-                uint16_t return_value = obj.GetUInt16();
+                auto return_value = obj.GetUInt16();
                 
                 PyObject* out_return_value = py::convert(return_value);
                 if (!out_return_value) 
@@ -1992,7 +1992,7 @@ struct pyIReferenceArrayImpl : public pyIReferenceArray
         {
             try
             {
-                uint32_t return_value = obj.GetUInt32();
+                auto return_value = obj.GetUInt32();
                 
                 PyObject* out_return_value = py::convert(return_value);
                 if (!out_return_value) 
@@ -2056,7 +2056,7 @@ struct pyIReferenceArrayImpl : public pyIReferenceArray
         {
             try
             {
-                uint64_t return_value = obj.GetUInt64();
+                auto return_value = obj.GetUInt64();
                 
                 PyObject* out_return_value = py::convert(return_value);
                 if (!out_return_value) 
@@ -2120,7 +2120,7 @@ struct pyIReferenceArrayImpl : public pyIReferenceArray
         {
             try
             {
-                uint8_t return_value = obj.GetUInt8();
+                auto return_value = obj.GetUInt8();
                 
                 PyObject* out_return_value = py::convert(return_value);
                 if (!out_return_value) 
@@ -2180,7 +2180,7 @@ struct pyIReferenceArrayImpl : public pyIReferenceArray
     {
         try
         {
-            bool return_value = obj.IsNumericScalar();
+            auto return_value = obj.IsNumericScalar();
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -2200,7 +2200,7 @@ struct pyIReferenceArrayImpl : public pyIReferenceArray
     {
         try
         {
-            winrt::Windows::Foundation::PropertyType return_value = obj.Type();
+            auto return_value = obj.Type();
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -2220,7 +2220,7 @@ struct pyIReferenceArrayImpl : public pyIReferenceArray
     {
         try
         {
-            T return_value = obj.Value();
+            auto return_value = obj.Value();
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -2303,7 +2303,7 @@ struct pyIReferenceImpl : public pyIReference
         {
             try
             {
-                bool return_value = obj.GetBoolean();
+                auto return_value = obj.GetBoolean();
                 
                 PyObject* out_return_value = py::convert(return_value);
                 if (!out_return_value) 
@@ -2367,7 +2367,7 @@ struct pyIReferenceImpl : public pyIReference
         {
             try
             {
-                char16_t return_value = obj.GetChar16();
+                auto return_value = obj.GetChar16();
                 
                 PyObject* out_return_value = py::convert(return_value);
                 if (!out_return_value) 
@@ -2431,7 +2431,7 @@ struct pyIReferenceImpl : public pyIReference
         {
             try
             {
-                winrt::Windows::Foundation::DateTime return_value = obj.GetDateTime();
+                auto return_value = obj.GetDateTime();
                 
                 PyObject* out_return_value = py::convert(return_value);
                 if (!out_return_value) 
@@ -2495,7 +2495,7 @@ struct pyIReferenceImpl : public pyIReference
         {
             try
             {
-                double return_value = obj.GetDouble();
+                auto return_value = obj.GetDouble();
                 
                 PyObject* out_return_value = py::convert(return_value);
                 if (!out_return_value) 
@@ -2559,7 +2559,7 @@ struct pyIReferenceImpl : public pyIReference
         {
             try
             {
-                winrt::guid return_value = obj.GetGuid();
+                auto return_value = obj.GetGuid();
                 
                 PyObject* out_return_value = py::convert(return_value);
                 if (!out_return_value) 
@@ -2656,7 +2656,7 @@ struct pyIReferenceImpl : public pyIReference
         {
             try
             {
-                int16_t return_value = obj.GetInt16();
+                auto return_value = obj.GetInt16();
                 
                 PyObject* out_return_value = py::convert(return_value);
                 if (!out_return_value) 
@@ -2720,7 +2720,7 @@ struct pyIReferenceImpl : public pyIReference
         {
             try
             {
-                int32_t return_value = obj.GetInt32();
+                auto return_value = obj.GetInt32();
                 
                 PyObject* out_return_value = py::convert(return_value);
                 if (!out_return_value) 
@@ -2784,7 +2784,7 @@ struct pyIReferenceImpl : public pyIReference
         {
             try
             {
-                int64_t return_value = obj.GetInt64();
+                auto return_value = obj.GetInt64();
                 
                 PyObject* out_return_value = py::convert(return_value);
                 if (!out_return_value) 
@@ -2848,7 +2848,7 @@ struct pyIReferenceImpl : public pyIReference
         {
             try
             {
-                winrt::Windows::Foundation::Point return_value = obj.GetPoint();
+                auto return_value = obj.GetPoint();
                 
                 PyObject* out_return_value = py::convert(return_value);
                 if (!out_return_value) 
@@ -2912,7 +2912,7 @@ struct pyIReferenceImpl : public pyIReference
         {
             try
             {
-                winrt::Windows::Foundation::Rect return_value = obj.GetRect();
+                auto return_value = obj.GetRect();
                 
                 PyObject* out_return_value = py::convert(return_value);
                 if (!out_return_value) 
@@ -2976,7 +2976,7 @@ struct pyIReferenceImpl : public pyIReference
         {
             try
             {
-                float return_value = obj.GetSingle();
+                auto return_value = obj.GetSingle();
                 
                 PyObject* out_return_value = py::convert(return_value);
                 if (!out_return_value) 
@@ -3040,7 +3040,7 @@ struct pyIReferenceImpl : public pyIReference
         {
             try
             {
-                winrt::Windows::Foundation::Size return_value = obj.GetSize();
+                auto return_value = obj.GetSize();
                 
                 PyObject* out_return_value = py::convert(return_value);
                 if (!out_return_value) 
@@ -3104,7 +3104,7 @@ struct pyIReferenceImpl : public pyIReference
         {
             try
             {
-                winrt::hstring return_value = obj.GetString();
+                auto return_value = obj.GetString();
                 
                 PyObject* out_return_value = py::convert(return_value);
                 if (!out_return_value) 
@@ -3168,7 +3168,7 @@ struct pyIReferenceImpl : public pyIReference
         {
             try
             {
-                winrt::Windows::Foundation::TimeSpan return_value = obj.GetTimeSpan();
+                auto return_value = obj.GetTimeSpan();
                 
                 PyObject* out_return_value = py::convert(return_value);
                 if (!out_return_value) 
@@ -3232,7 +3232,7 @@ struct pyIReferenceImpl : public pyIReference
         {
             try
             {
-                uint16_t return_value = obj.GetUInt16();
+                auto return_value = obj.GetUInt16();
                 
                 PyObject* out_return_value = py::convert(return_value);
                 if (!out_return_value) 
@@ -3296,7 +3296,7 @@ struct pyIReferenceImpl : public pyIReference
         {
             try
             {
-                uint32_t return_value = obj.GetUInt32();
+                auto return_value = obj.GetUInt32();
                 
                 PyObject* out_return_value = py::convert(return_value);
                 if (!out_return_value) 
@@ -3360,7 +3360,7 @@ struct pyIReferenceImpl : public pyIReference
         {
             try
             {
-                uint64_t return_value = obj.GetUInt64();
+                auto return_value = obj.GetUInt64();
                 
                 PyObject* out_return_value = py::convert(return_value);
                 if (!out_return_value) 
@@ -3424,7 +3424,7 @@ struct pyIReferenceImpl : public pyIReference
         {
             try
             {
-                uint8_t return_value = obj.GetUInt8();
+                auto return_value = obj.GetUInt8();
                 
                 PyObject* out_return_value = py::convert(return_value);
                 if (!out_return_value) 
@@ -3484,7 +3484,7 @@ struct pyIReferenceImpl : public pyIReference
     {
         try
         {
-            bool return_value = obj.IsNumericScalar();
+            auto return_value = obj.IsNumericScalar();
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -3504,7 +3504,7 @@ struct pyIReferenceImpl : public pyIReference
     {
         try
         {
-            winrt::Windows::Foundation::PropertyType return_value = obj.Type();
+            auto return_value = obj.Type();
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -3524,7 +3524,7 @@ struct pyIReferenceImpl : public pyIReference
     {
         try
         {
-            T return_value = obj.Value();
+            auto return_value = obj.Value();
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 

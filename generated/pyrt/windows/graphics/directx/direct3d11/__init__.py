@@ -11,6 +11,24 @@ try:
 except:
     pass
 
+class Direct3DBindings(enum.IntFlag):
+    VertexBuffer = 0x1
+    IndexBuffer = 0x2
+    ConstantBuffer = 0x4
+    ShaderResource = 0x8
+    StreamOutput = 0x10
+    RenderTarget = 0x20
+    DepthStencil = 0x40
+    UnorderedAccess = 0x80
+    Decoder = 0x200
+    VideoEncoder = 0x400
+
+class Direct3DUsage(enum.IntEnum):
+    Default = 0
+    Immutable = 1
+    Dynamic = 2
+    Staging = 3
+
 IDirect3DDevice = __ns__.IDirect3DDevice
 IDirect3DSurface = __ns__.IDirect3DSurface
 Direct3DMultisampleDescription = __ns__.Direct3DMultisampleDescription

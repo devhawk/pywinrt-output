@@ -11,6 +11,12 @@ try:
 except:
     pass
 
+class CollectionChange(enum.IntEnum):
+    Reset = 0
+    ItemInserted = 1
+    ItemRemoved = 2
+    ItemChanged = 3
+
 PropertySet = __ns__.PropertySet
 StringMap = __ns__.StringMap
 ValueSet = __ns__.ValueSet

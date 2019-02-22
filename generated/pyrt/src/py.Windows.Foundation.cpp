@@ -176,7 +176,7 @@ static PyObject* GuidHelper_CreateNewGuid(PyObject* /*unused*/, PyObject* args)
     {
         try
         {
-            winrt::guid return_value = winrt::Windows::Foundation::GuidHelper::CreateNewGuid();
+            auto return_value = winrt::Windows::Foundation::GuidHelper::CreateNewGuid();
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -210,7 +210,7 @@ static PyObject* GuidHelper_Equals(PyObject* /*unused*/, PyObject* args)
             auto param0 = py::convert_to<winrt::guid>(args, 0);
             auto param1 = py::convert_to<winrt::guid>(args, 1);
             
-            bool return_value = winrt::Windows::Foundation::GuidHelper::Equals(param0, param1);
+            auto return_value = winrt::Windows::Foundation::GuidHelper::Equals(param0, param1);
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -237,7 +237,7 @@ static PyObject* GuidHelper_get_Empty(PyObject* /*unused*/, PyObject* /*unused*/
 {
     try
     {
-        winrt::guid return_value = winrt::Windows::Foundation::GuidHelper::Empty();
+        auto return_value = winrt::Windows::Foundation::GuidHelper::Empty();
         
         PyObject* out_return_value = py::convert(return_value);
         if (!out_return_value) 
@@ -357,7 +357,7 @@ static PyObject* MemoryBuffer_CreateReference(py::winrt_wrapper<winrt::Windows::
     {
         try
         {
-            winrt::Windows::Foundation::IMemoryBufferReference return_value = self->obj.CreateReference();
+            auto return_value = self->obj.CreateReference();
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -463,7 +463,7 @@ static PyObject* PropertyValue_CreateBoolean(PyObject* /*unused*/, PyObject* arg
         {
             auto param0 = py::convert_to<bool>(args, 0);
             
-            winrt::Windows::Foundation::IInspectable return_value = winrt::Windows::Foundation::PropertyValue::CreateBoolean(param0);
+            auto return_value = winrt::Windows::Foundation::PropertyValue::CreateBoolean(param0);
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -497,7 +497,7 @@ static PyObject* PropertyValue_CreateBooleanArray(PyObject* /*unused*/, PyObject
             auto _param0 = py::convert_to<winrt::com_array<bool>>(args, 0);
             auto param0 = winrt::array_view<const bool>(_param0.begin(), _param0.end());
             
-            winrt::Windows::Foundation::IInspectable return_value = winrt::Windows::Foundation::PropertyValue::CreateBooleanArray(param0);
+            auto return_value = winrt::Windows::Foundation::PropertyValue::CreateBooleanArray(param0);
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -530,7 +530,7 @@ static PyObject* PropertyValue_CreateChar16(PyObject* /*unused*/, PyObject* args
         {
             auto param0 = py::convert_to<char16_t>(args, 0);
             
-            winrt::Windows::Foundation::IInspectable return_value = winrt::Windows::Foundation::PropertyValue::CreateChar16(param0);
+            auto return_value = winrt::Windows::Foundation::PropertyValue::CreateChar16(param0);
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -564,7 +564,7 @@ static PyObject* PropertyValue_CreateChar16Array(PyObject* /*unused*/, PyObject*
             auto _param0 = py::convert_to<winrt::com_array<char16_t>>(args, 0);
             auto param0 = winrt::array_view<const char16_t>(_param0.begin(), _param0.end());
             
-            winrt::Windows::Foundation::IInspectable return_value = winrt::Windows::Foundation::PropertyValue::CreateChar16Array(param0);
+            auto return_value = winrt::Windows::Foundation::PropertyValue::CreateChar16Array(param0);
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -597,7 +597,7 @@ static PyObject* PropertyValue_CreateDateTime(PyObject* /*unused*/, PyObject* ar
         {
             auto param0 = py::convert_to<winrt::Windows::Foundation::DateTime>(args, 0);
             
-            winrt::Windows::Foundation::IInspectable return_value = winrt::Windows::Foundation::PropertyValue::CreateDateTime(param0);
+            auto return_value = winrt::Windows::Foundation::PropertyValue::CreateDateTime(param0);
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -631,7 +631,7 @@ static PyObject* PropertyValue_CreateDateTimeArray(PyObject* /*unused*/, PyObjec
             auto _param0 = py::convert_to<winrt::com_array<winrt::Windows::Foundation::DateTime>>(args, 0);
             auto param0 = winrt::array_view<const winrt::Windows::Foundation::DateTime>(_param0.begin(), _param0.end());
             
-            winrt::Windows::Foundation::IInspectable return_value = winrt::Windows::Foundation::PropertyValue::CreateDateTimeArray(param0);
+            auto return_value = winrt::Windows::Foundation::PropertyValue::CreateDateTimeArray(param0);
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -664,7 +664,7 @@ static PyObject* PropertyValue_CreateDouble(PyObject* /*unused*/, PyObject* args
         {
             auto param0 = py::convert_to<double>(args, 0);
             
-            winrt::Windows::Foundation::IInspectable return_value = winrt::Windows::Foundation::PropertyValue::CreateDouble(param0);
+            auto return_value = winrt::Windows::Foundation::PropertyValue::CreateDouble(param0);
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -698,7 +698,7 @@ static PyObject* PropertyValue_CreateDoubleArray(PyObject* /*unused*/, PyObject*
             auto _param0 = py::convert_to<winrt::com_array<double>>(args, 0);
             auto param0 = winrt::array_view<const double>(_param0.begin(), _param0.end());
             
-            winrt::Windows::Foundation::IInspectable return_value = winrt::Windows::Foundation::PropertyValue::CreateDoubleArray(param0);
+            auto return_value = winrt::Windows::Foundation::PropertyValue::CreateDoubleArray(param0);
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -729,7 +729,7 @@ static PyObject* PropertyValue_CreateEmpty(PyObject* /*unused*/, PyObject* args)
     {
         try
         {
-            winrt::Windows::Foundation::IInspectable return_value = winrt::Windows::Foundation::PropertyValue::CreateEmpty();
+            auto return_value = winrt::Windows::Foundation::PropertyValue::CreateEmpty();
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -762,7 +762,7 @@ static PyObject* PropertyValue_CreateGuid(PyObject* /*unused*/, PyObject* args)
         {
             auto param0 = py::convert_to<winrt::guid>(args, 0);
             
-            winrt::Windows::Foundation::IInspectable return_value = winrt::Windows::Foundation::PropertyValue::CreateGuid(param0);
+            auto return_value = winrt::Windows::Foundation::PropertyValue::CreateGuid(param0);
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -796,7 +796,7 @@ static PyObject* PropertyValue_CreateGuidArray(PyObject* /*unused*/, PyObject* a
             auto _param0 = py::convert_to<winrt::com_array<winrt::guid>>(args, 0);
             auto param0 = winrt::array_view<const winrt::guid>(_param0.begin(), _param0.end());
             
-            winrt::Windows::Foundation::IInspectable return_value = winrt::Windows::Foundation::PropertyValue::CreateGuidArray(param0);
+            auto return_value = winrt::Windows::Foundation::PropertyValue::CreateGuidArray(param0);
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -829,7 +829,7 @@ static PyObject* PropertyValue_CreateInspectable(PyObject* /*unused*/, PyObject*
         {
             auto param0 = py::convert_to<winrt::Windows::Foundation::IInspectable>(args, 0);
             
-            winrt::Windows::Foundation::IInspectable return_value = winrt::Windows::Foundation::PropertyValue::CreateInspectable(param0);
+            auto return_value = winrt::Windows::Foundation::PropertyValue::CreateInspectable(param0);
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -863,7 +863,7 @@ static PyObject* PropertyValue_CreateInspectableArray(PyObject* /*unused*/, PyOb
             auto _param0 = py::convert_to<winrt::com_array<winrt::Windows::Foundation::IInspectable>>(args, 0);
             auto param0 = winrt::array_view<const winrt::Windows::Foundation::IInspectable>(_param0.begin(), _param0.end());
             
-            winrt::Windows::Foundation::IInspectable return_value = winrt::Windows::Foundation::PropertyValue::CreateInspectableArray(param0);
+            auto return_value = winrt::Windows::Foundation::PropertyValue::CreateInspectableArray(param0);
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -896,7 +896,7 @@ static PyObject* PropertyValue_CreateInt16(PyObject* /*unused*/, PyObject* args)
         {
             auto param0 = py::convert_to<int16_t>(args, 0);
             
-            winrt::Windows::Foundation::IInspectable return_value = winrt::Windows::Foundation::PropertyValue::CreateInt16(param0);
+            auto return_value = winrt::Windows::Foundation::PropertyValue::CreateInt16(param0);
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -930,7 +930,7 @@ static PyObject* PropertyValue_CreateInt16Array(PyObject* /*unused*/, PyObject* 
             auto _param0 = py::convert_to<winrt::com_array<int16_t>>(args, 0);
             auto param0 = winrt::array_view<const int16_t>(_param0.begin(), _param0.end());
             
-            winrt::Windows::Foundation::IInspectable return_value = winrt::Windows::Foundation::PropertyValue::CreateInt16Array(param0);
+            auto return_value = winrt::Windows::Foundation::PropertyValue::CreateInt16Array(param0);
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -963,7 +963,7 @@ static PyObject* PropertyValue_CreateInt32(PyObject* /*unused*/, PyObject* args)
         {
             auto param0 = py::convert_to<int32_t>(args, 0);
             
-            winrt::Windows::Foundation::IInspectable return_value = winrt::Windows::Foundation::PropertyValue::CreateInt32(param0);
+            auto return_value = winrt::Windows::Foundation::PropertyValue::CreateInt32(param0);
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -997,7 +997,7 @@ static PyObject* PropertyValue_CreateInt32Array(PyObject* /*unused*/, PyObject* 
             auto _param0 = py::convert_to<winrt::com_array<int32_t>>(args, 0);
             auto param0 = winrt::array_view<const int32_t>(_param0.begin(), _param0.end());
             
-            winrt::Windows::Foundation::IInspectable return_value = winrt::Windows::Foundation::PropertyValue::CreateInt32Array(param0);
+            auto return_value = winrt::Windows::Foundation::PropertyValue::CreateInt32Array(param0);
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -1030,7 +1030,7 @@ static PyObject* PropertyValue_CreateInt64(PyObject* /*unused*/, PyObject* args)
         {
             auto param0 = py::convert_to<int64_t>(args, 0);
             
-            winrt::Windows::Foundation::IInspectable return_value = winrt::Windows::Foundation::PropertyValue::CreateInt64(param0);
+            auto return_value = winrt::Windows::Foundation::PropertyValue::CreateInt64(param0);
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -1064,7 +1064,7 @@ static PyObject* PropertyValue_CreateInt64Array(PyObject* /*unused*/, PyObject* 
             auto _param0 = py::convert_to<winrt::com_array<int64_t>>(args, 0);
             auto param0 = winrt::array_view<const int64_t>(_param0.begin(), _param0.end());
             
-            winrt::Windows::Foundation::IInspectable return_value = winrt::Windows::Foundation::PropertyValue::CreateInt64Array(param0);
+            auto return_value = winrt::Windows::Foundation::PropertyValue::CreateInt64Array(param0);
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -1097,7 +1097,7 @@ static PyObject* PropertyValue_CreatePoint(PyObject* /*unused*/, PyObject* args)
         {
             auto param0 = py::convert_to<winrt::Windows::Foundation::Point>(args, 0);
             
-            winrt::Windows::Foundation::IInspectable return_value = winrt::Windows::Foundation::PropertyValue::CreatePoint(param0);
+            auto return_value = winrt::Windows::Foundation::PropertyValue::CreatePoint(param0);
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -1131,7 +1131,7 @@ static PyObject* PropertyValue_CreatePointArray(PyObject* /*unused*/, PyObject* 
             auto _param0 = py::convert_to<winrt::com_array<winrt::Windows::Foundation::Point>>(args, 0);
             auto param0 = winrt::array_view<const winrt::Windows::Foundation::Point>(_param0.begin(), _param0.end());
             
-            winrt::Windows::Foundation::IInspectable return_value = winrt::Windows::Foundation::PropertyValue::CreatePointArray(param0);
+            auto return_value = winrt::Windows::Foundation::PropertyValue::CreatePointArray(param0);
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -1164,7 +1164,7 @@ static PyObject* PropertyValue_CreateRect(PyObject* /*unused*/, PyObject* args)
         {
             auto param0 = py::convert_to<winrt::Windows::Foundation::Rect>(args, 0);
             
-            winrt::Windows::Foundation::IInspectable return_value = winrt::Windows::Foundation::PropertyValue::CreateRect(param0);
+            auto return_value = winrt::Windows::Foundation::PropertyValue::CreateRect(param0);
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -1198,7 +1198,7 @@ static PyObject* PropertyValue_CreateRectArray(PyObject* /*unused*/, PyObject* a
             auto _param0 = py::convert_to<winrt::com_array<winrt::Windows::Foundation::Rect>>(args, 0);
             auto param0 = winrt::array_view<const winrt::Windows::Foundation::Rect>(_param0.begin(), _param0.end());
             
-            winrt::Windows::Foundation::IInspectable return_value = winrt::Windows::Foundation::PropertyValue::CreateRectArray(param0);
+            auto return_value = winrt::Windows::Foundation::PropertyValue::CreateRectArray(param0);
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -1231,7 +1231,7 @@ static PyObject* PropertyValue_CreateSingle(PyObject* /*unused*/, PyObject* args
         {
             auto param0 = py::convert_to<float>(args, 0);
             
-            winrt::Windows::Foundation::IInspectable return_value = winrt::Windows::Foundation::PropertyValue::CreateSingle(param0);
+            auto return_value = winrt::Windows::Foundation::PropertyValue::CreateSingle(param0);
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -1265,7 +1265,7 @@ static PyObject* PropertyValue_CreateSingleArray(PyObject* /*unused*/, PyObject*
             auto _param0 = py::convert_to<winrt::com_array<float>>(args, 0);
             auto param0 = winrt::array_view<const float>(_param0.begin(), _param0.end());
             
-            winrt::Windows::Foundation::IInspectable return_value = winrt::Windows::Foundation::PropertyValue::CreateSingleArray(param0);
+            auto return_value = winrt::Windows::Foundation::PropertyValue::CreateSingleArray(param0);
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -1298,7 +1298,7 @@ static PyObject* PropertyValue_CreateSize(PyObject* /*unused*/, PyObject* args)
         {
             auto param0 = py::convert_to<winrt::Windows::Foundation::Size>(args, 0);
             
-            winrt::Windows::Foundation::IInspectable return_value = winrt::Windows::Foundation::PropertyValue::CreateSize(param0);
+            auto return_value = winrt::Windows::Foundation::PropertyValue::CreateSize(param0);
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -1332,7 +1332,7 @@ static PyObject* PropertyValue_CreateSizeArray(PyObject* /*unused*/, PyObject* a
             auto _param0 = py::convert_to<winrt::com_array<winrt::Windows::Foundation::Size>>(args, 0);
             auto param0 = winrt::array_view<const winrt::Windows::Foundation::Size>(_param0.begin(), _param0.end());
             
-            winrt::Windows::Foundation::IInspectable return_value = winrt::Windows::Foundation::PropertyValue::CreateSizeArray(param0);
+            auto return_value = winrt::Windows::Foundation::PropertyValue::CreateSizeArray(param0);
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -1365,7 +1365,7 @@ static PyObject* PropertyValue_CreateString(PyObject* /*unused*/, PyObject* args
         {
             auto param0 = py::convert_to<winrt::hstring>(args, 0);
             
-            winrt::Windows::Foundation::IInspectable return_value = winrt::Windows::Foundation::PropertyValue::CreateString(param0);
+            auto return_value = winrt::Windows::Foundation::PropertyValue::CreateString(param0);
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -1399,7 +1399,7 @@ static PyObject* PropertyValue_CreateStringArray(PyObject* /*unused*/, PyObject*
             auto _param0 = py::convert_to<winrt::com_array<winrt::hstring>>(args, 0);
             auto param0 = winrt::array_view<const winrt::hstring>(_param0.begin(), _param0.end());
             
-            winrt::Windows::Foundation::IInspectable return_value = winrt::Windows::Foundation::PropertyValue::CreateStringArray(param0);
+            auto return_value = winrt::Windows::Foundation::PropertyValue::CreateStringArray(param0);
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -1432,7 +1432,7 @@ static PyObject* PropertyValue_CreateTimeSpan(PyObject* /*unused*/, PyObject* ar
         {
             auto param0 = py::convert_to<winrt::Windows::Foundation::TimeSpan>(args, 0);
             
-            winrt::Windows::Foundation::IInspectable return_value = winrt::Windows::Foundation::PropertyValue::CreateTimeSpan(param0);
+            auto return_value = winrt::Windows::Foundation::PropertyValue::CreateTimeSpan(param0);
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -1466,7 +1466,7 @@ static PyObject* PropertyValue_CreateTimeSpanArray(PyObject* /*unused*/, PyObjec
             auto _param0 = py::convert_to<winrt::com_array<winrt::Windows::Foundation::TimeSpan>>(args, 0);
             auto param0 = winrt::array_view<const winrt::Windows::Foundation::TimeSpan>(_param0.begin(), _param0.end());
             
-            winrt::Windows::Foundation::IInspectable return_value = winrt::Windows::Foundation::PropertyValue::CreateTimeSpanArray(param0);
+            auto return_value = winrt::Windows::Foundation::PropertyValue::CreateTimeSpanArray(param0);
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -1499,7 +1499,7 @@ static PyObject* PropertyValue_CreateUInt16(PyObject* /*unused*/, PyObject* args
         {
             auto param0 = py::convert_to<uint16_t>(args, 0);
             
-            winrt::Windows::Foundation::IInspectable return_value = winrt::Windows::Foundation::PropertyValue::CreateUInt16(param0);
+            auto return_value = winrt::Windows::Foundation::PropertyValue::CreateUInt16(param0);
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -1533,7 +1533,7 @@ static PyObject* PropertyValue_CreateUInt16Array(PyObject* /*unused*/, PyObject*
             auto _param0 = py::convert_to<winrt::com_array<uint16_t>>(args, 0);
             auto param0 = winrt::array_view<const uint16_t>(_param0.begin(), _param0.end());
             
-            winrt::Windows::Foundation::IInspectable return_value = winrt::Windows::Foundation::PropertyValue::CreateUInt16Array(param0);
+            auto return_value = winrt::Windows::Foundation::PropertyValue::CreateUInt16Array(param0);
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -1566,7 +1566,7 @@ static PyObject* PropertyValue_CreateUInt32(PyObject* /*unused*/, PyObject* args
         {
             auto param0 = py::convert_to<uint32_t>(args, 0);
             
-            winrt::Windows::Foundation::IInspectable return_value = winrt::Windows::Foundation::PropertyValue::CreateUInt32(param0);
+            auto return_value = winrt::Windows::Foundation::PropertyValue::CreateUInt32(param0);
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -1600,7 +1600,7 @@ static PyObject* PropertyValue_CreateUInt32Array(PyObject* /*unused*/, PyObject*
             auto _param0 = py::convert_to<winrt::com_array<uint32_t>>(args, 0);
             auto param0 = winrt::array_view<const uint32_t>(_param0.begin(), _param0.end());
             
-            winrt::Windows::Foundation::IInspectable return_value = winrt::Windows::Foundation::PropertyValue::CreateUInt32Array(param0);
+            auto return_value = winrt::Windows::Foundation::PropertyValue::CreateUInt32Array(param0);
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -1633,7 +1633,7 @@ static PyObject* PropertyValue_CreateUInt64(PyObject* /*unused*/, PyObject* args
         {
             auto param0 = py::convert_to<uint64_t>(args, 0);
             
-            winrt::Windows::Foundation::IInspectable return_value = winrt::Windows::Foundation::PropertyValue::CreateUInt64(param0);
+            auto return_value = winrt::Windows::Foundation::PropertyValue::CreateUInt64(param0);
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -1667,7 +1667,7 @@ static PyObject* PropertyValue_CreateUInt64Array(PyObject* /*unused*/, PyObject*
             auto _param0 = py::convert_to<winrt::com_array<uint64_t>>(args, 0);
             auto param0 = winrt::array_view<const uint64_t>(_param0.begin(), _param0.end());
             
-            winrt::Windows::Foundation::IInspectable return_value = winrt::Windows::Foundation::PropertyValue::CreateUInt64Array(param0);
+            auto return_value = winrt::Windows::Foundation::PropertyValue::CreateUInt64Array(param0);
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -1700,7 +1700,7 @@ static PyObject* PropertyValue_CreateUInt8(PyObject* /*unused*/, PyObject* args)
         {
             auto param0 = py::convert_to<uint8_t>(args, 0);
             
-            winrt::Windows::Foundation::IInspectable return_value = winrt::Windows::Foundation::PropertyValue::CreateUInt8(param0);
+            auto return_value = winrt::Windows::Foundation::PropertyValue::CreateUInt8(param0);
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -1734,7 +1734,7 @@ static PyObject* PropertyValue_CreateUInt8Array(PyObject* /*unused*/, PyObject* 
             auto _param0 = py::convert_to<winrt::com_array<uint8_t>>(args, 0);
             auto param0 = winrt::array_view<const uint8_t>(_param0.begin(), _param0.end());
             
-            winrt::Windows::Foundation::IInspectable return_value = winrt::Windows::Foundation::PropertyValue::CreateUInt8Array(param0);
+            auto return_value = winrt::Windows::Foundation::PropertyValue::CreateUInt8Array(param0);
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -1889,7 +1889,7 @@ static PyObject* Uri_CombineUri(py::winrt_wrapper<winrt::Windows::Foundation::Ur
         {
             auto param0 = py::convert_to<winrt::hstring>(args, 0);
             
-            winrt::Windows::Foundation::Uri return_value = self->obj.CombineUri(param0);
+            auto return_value = self->obj.CombineUri(param0);
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -1922,7 +1922,7 @@ static PyObject* Uri_Equals(py::winrt_wrapper<winrt::Windows::Foundation::Uri>* 
         {
             auto param0 = py::convert_to<winrt::Windows::Foundation::Uri>(args, 0);
             
-            bool return_value = self->obj.Equals(param0);
+            auto return_value = self->obj.Equals(param0);
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -1955,7 +1955,7 @@ static PyObject* Uri_EscapeComponent(PyObject* /*unused*/, PyObject* args)
         {
             auto param0 = py::convert_to<winrt::hstring>(args, 0);
             
-            winrt::hstring return_value = winrt::Windows::Foundation::Uri::EscapeComponent(param0);
+            auto return_value = winrt::Windows::Foundation::Uri::EscapeComponent(param0);
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -1986,7 +1986,7 @@ static PyObject* Uri_ToString(py::winrt_wrapper<winrt::Windows::Foundation::Uri>
     {
         try
         {
-            winrt::hstring return_value = self->obj.ToString();
+            auto return_value = self->obj.ToString();
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -2019,7 +2019,7 @@ static PyObject* Uri_UnescapeComponent(PyObject* /*unused*/, PyObject* args)
         {
             auto param0 = py::convert_to<winrt::hstring>(args, 0);
             
-            winrt::hstring return_value = winrt::Windows::Foundation::Uri::UnescapeComponent(param0);
+            auto return_value = winrt::Windows::Foundation::Uri::UnescapeComponent(param0);
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -2046,7 +2046,7 @@ static PyObject* Uri_get_AbsoluteUri(py::winrt_wrapper<winrt::Windows::Foundatio
 {
     try
     {
-        winrt::hstring return_value = self->obj.AbsoluteUri();
+        auto return_value = self->obj.AbsoluteUri();
         
         PyObject* out_return_value = py::convert(return_value);
         if (!out_return_value) 
@@ -2066,7 +2066,7 @@ static PyObject* Uri_get_DisplayUri(py::winrt_wrapper<winrt::Windows::Foundation
 {
     try
     {
-        winrt::hstring return_value = self->obj.DisplayUri();
+        auto return_value = self->obj.DisplayUri();
         
         PyObject* out_return_value = py::convert(return_value);
         if (!out_return_value) 
@@ -2086,7 +2086,7 @@ static PyObject* Uri_get_Domain(py::winrt_wrapper<winrt::Windows::Foundation::Ur
 {
     try
     {
-        winrt::hstring return_value = self->obj.Domain();
+        auto return_value = self->obj.Domain();
         
         PyObject* out_return_value = py::convert(return_value);
         if (!out_return_value) 
@@ -2106,7 +2106,7 @@ static PyObject* Uri_get_Extension(py::winrt_wrapper<winrt::Windows::Foundation:
 {
     try
     {
-        winrt::hstring return_value = self->obj.Extension();
+        auto return_value = self->obj.Extension();
         
         PyObject* out_return_value = py::convert(return_value);
         if (!out_return_value) 
@@ -2126,7 +2126,7 @@ static PyObject* Uri_get_Fragment(py::winrt_wrapper<winrt::Windows::Foundation::
 {
     try
     {
-        winrt::hstring return_value = self->obj.Fragment();
+        auto return_value = self->obj.Fragment();
         
         PyObject* out_return_value = py::convert(return_value);
         if (!out_return_value) 
@@ -2146,7 +2146,7 @@ static PyObject* Uri_get_Host(py::winrt_wrapper<winrt::Windows::Foundation::Uri>
 {
     try
     {
-        winrt::hstring return_value = self->obj.Host();
+        auto return_value = self->obj.Host();
         
         PyObject* out_return_value = py::convert(return_value);
         if (!out_return_value) 
@@ -2166,7 +2166,7 @@ static PyObject* Uri_get_Password(py::winrt_wrapper<winrt::Windows::Foundation::
 {
     try
     {
-        winrt::hstring return_value = self->obj.Password();
+        auto return_value = self->obj.Password();
         
         PyObject* out_return_value = py::convert(return_value);
         if (!out_return_value) 
@@ -2186,7 +2186,7 @@ static PyObject* Uri_get_Path(py::winrt_wrapper<winrt::Windows::Foundation::Uri>
 {
     try
     {
-        winrt::hstring return_value = self->obj.Path();
+        auto return_value = self->obj.Path();
         
         PyObject* out_return_value = py::convert(return_value);
         if (!out_return_value) 
@@ -2206,7 +2206,7 @@ static PyObject* Uri_get_Port(py::winrt_wrapper<winrt::Windows::Foundation::Uri>
 {
     try
     {
-        int32_t return_value = self->obj.Port();
+        auto return_value = self->obj.Port();
         
         PyObject* out_return_value = py::convert(return_value);
         if (!out_return_value) 
@@ -2226,7 +2226,7 @@ static PyObject* Uri_get_Query(py::winrt_wrapper<winrt::Windows::Foundation::Uri
 {
     try
     {
-        winrt::hstring return_value = self->obj.Query();
+        auto return_value = self->obj.Query();
         
         PyObject* out_return_value = py::convert(return_value);
         if (!out_return_value) 
@@ -2246,7 +2246,7 @@ static PyObject* Uri_get_QueryParsed(py::winrt_wrapper<winrt::Windows::Foundatio
 {
     try
     {
-        winrt::Windows::Foundation::WwwFormUrlDecoder return_value = self->obj.QueryParsed();
+        auto return_value = self->obj.QueryParsed();
         
         PyObject* out_return_value = py::convert(return_value);
         if (!out_return_value) 
@@ -2266,7 +2266,7 @@ static PyObject* Uri_get_RawUri(py::winrt_wrapper<winrt::Windows::Foundation::Ur
 {
     try
     {
-        winrt::hstring return_value = self->obj.RawUri();
+        auto return_value = self->obj.RawUri();
         
         PyObject* out_return_value = py::convert(return_value);
         if (!out_return_value) 
@@ -2286,7 +2286,7 @@ static PyObject* Uri_get_SchemeName(py::winrt_wrapper<winrt::Windows::Foundation
 {
     try
     {
-        winrt::hstring return_value = self->obj.SchemeName();
+        auto return_value = self->obj.SchemeName();
         
         PyObject* out_return_value = py::convert(return_value);
         if (!out_return_value) 
@@ -2306,7 +2306,7 @@ static PyObject* Uri_get_Suspicious(py::winrt_wrapper<winrt::Windows::Foundation
 {
     try
     {
-        bool return_value = self->obj.Suspicious();
+        auto return_value = self->obj.Suspicious();
         
         PyObject* out_return_value = py::convert(return_value);
         if (!out_return_value) 
@@ -2326,7 +2326,7 @@ static PyObject* Uri_get_UserName(py::winrt_wrapper<winrt::Windows::Foundation::
 {
     try
     {
-        winrt::hstring return_value = self->obj.UserName();
+        auto return_value = self->obj.UserName();
         
         PyObject* out_return_value = py::convert(return_value);
         if (!out_return_value) 
@@ -2346,7 +2346,7 @@ static PyObject* Uri_get_AbsoluteCanonicalUri(py::winrt_wrapper<winrt::Windows::
 {
     try
     {
-        winrt::hstring return_value = self->obj.AbsoluteCanonicalUri();
+        auto return_value = self->obj.AbsoluteCanonicalUri();
         
         PyObject* out_return_value = py::convert(return_value);
         if (!out_return_value) 
@@ -2366,7 +2366,7 @@ static PyObject* Uri_get_DisplayIri(py::winrt_wrapper<winrt::Windows::Foundation
 {
     try
     {
-        winrt::hstring return_value = self->obj.DisplayIri();
+        auto return_value = self->obj.DisplayIri();
         
         PyObject* out_return_value = py::convert(return_value);
         if (!out_return_value) 
@@ -2508,7 +2508,7 @@ static PyObject* WwwFormUrlDecoder_First(py::winrt_wrapper<winrt::Windows::Found
     {
         try
         {
-            winrt::Windows::Foundation::Collections::IIterator<winrt::Windows::Foundation::IWwwFormUrlDecoderEntry> return_value = self->obj.First();
+            auto return_value = self->obj.First();
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -2541,7 +2541,7 @@ static PyObject* WwwFormUrlDecoder_GetAt(py::winrt_wrapper<winrt::Windows::Found
         {
             auto param0 = py::convert_to<uint32_t>(args, 0);
             
-            winrt::Windows::Foundation::IWwwFormUrlDecoderEntry return_value = self->obj.GetAt(param0);
+            auto return_value = self->obj.GetAt(param0);
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -2574,7 +2574,7 @@ static PyObject* WwwFormUrlDecoder_GetFirstValueByName(py::winrt_wrapper<winrt::
         {
             auto param0 = py::convert_to<winrt::hstring>(args, 0);
             
-            winrt::hstring return_value = self->obj.GetFirstValueByName(param0);
+            auto return_value = self->obj.GetFirstValueByName(param0);
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -2607,9 +2607,9 @@ static PyObject* WwwFormUrlDecoder_GetMany(py::winrt_wrapper<winrt::Windows::Fou
         {
             auto param0 = py::convert_to<uint32_t>(args, 0);
             auto param1_count = py::convert_to<winrt::com_array<winrt::Windows::Foundation::IWwwFormUrlDecoderEntry>::size_type>(args, 1);
-            winrt::com_array<winrt::Windows::Foundation::IWwwFormUrlDecoderEntry> param1 { param1_count, py::empty_instance<winrt::Windows::Foundation::IWwwFormUrlDecoderEntry>::get() };
+            winrt::com_array<winrt::Windows::Foundation::IWwwFormUrlDecoderEntry> param1 ( param1_count, py::empty_instance<winrt::Windows::Foundation::IWwwFormUrlDecoderEntry>::get() );
             
-            uint32_t return_value = self->obj.GetMany(param0, param1);
+            auto return_value = self->obj.GetMany(param0, param1);
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -2649,7 +2649,7 @@ static PyObject* WwwFormUrlDecoder_IndexOf(py::winrt_wrapper<winrt::Windows::Fou
             auto param0 = py::convert_to<winrt::Windows::Foundation::IWwwFormUrlDecoderEntry>(args, 0);
             uint32_t param1 {  };
             
-            bool return_value = self->obj.IndexOf(param0, param1);
+            auto return_value = self->obj.IndexOf(param0, param1);
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -2682,7 +2682,7 @@ static PyObject* WwwFormUrlDecoder_get_Size(py::winrt_wrapper<winrt::Windows::Fo
 {
     try
     {
-        uint32_t return_value = self->obj.Size();
+        auto return_value = self->obj.Size();
         
         PyObject* out_return_value = py::convert(return_value);
         if (!out_return_value) 
@@ -2805,7 +2805,7 @@ static PyObject* WwwFormUrlDecoderEntry_get_Name(py::winrt_wrapper<winrt::Window
 {
     try
     {
-        winrt::hstring return_value = self->obj.Name();
+        auto return_value = self->obj.Name();
         
         PyObject* out_return_value = py::convert(return_value);
         if (!out_return_value) 
@@ -2825,7 +2825,7 @@ static PyObject* WwwFormUrlDecoderEntry_get_Value(py::winrt_wrapper<winrt::Windo
 {
     try
     {
-        winrt::hstring return_value = self->obj.Value();
+        auto return_value = self->obj.Value();
         
         PyObject* out_return_value = py::convert(return_value);
         if (!out_return_value) 
@@ -2979,7 +2979,7 @@ static PyObject* IAsyncAction_get_Completed(py::winrt_wrapper<winrt::Windows::Fo
 {
     try
     {
-        winrt::Windows::Foundation::AsyncActionCompletedHandler return_value = self->obj.Completed();
+        auto return_value = self->obj.Completed();
         
         PyObject* out_return_value = py::convert(return_value);
         if (!out_return_value) 
@@ -3021,7 +3021,7 @@ static PyObject* IAsyncAction_get_ErrorCode(py::winrt_wrapper<winrt::Windows::Fo
 {
     try
     {
-        winrt::hresult return_value = self->obj.ErrorCode();
+        auto return_value = self->obj.ErrorCode();
         
         PyObject* out_return_value = py::convert(return_value);
         if (!out_return_value) 
@@ -3041,7 +3041,7 @@ static PyObject* IAsyncAction_get_Id(py::winrt_wrapper<winrt::Windows::Foundatio
 {
     try
     {
-        uint32_t return_value = self->obj.Id();
+        auto return_value = self->obj.Id();
         
         PyObject* out_return_value = py::convert(return_value);
         if (!out_return_value) 
@@ -3061,7 +3061,7 @@ static PyObject* IAsyncAction_get_Status(py::winrt_wrapper<winrt::Windows::Found
 {
     try
     {
-        winrt::Windows::Foundation::AsyncStatus return_value = self->obj.Status();
+        auto return_value = self->obj.Status();
         
         PyObject* out_return_value = py::convert(return_value);
         if (!out_return_value) 
@@ -3320,7 +3320,7 @@ static PyObject* IAsyncInfo_get_ErrorCode(py::winrt_wrapper<winrt::Windows::Foun
 {
     try
     {
-        winrt::hresult return_value = self->obj.ErrorCode();
+        auto return_value = self->obj.ErrorCode();
         
         PyObject* out_return_value = py::convert(return_value);
         if (!out_return_value) 
@@ -3340,7 +3340,7 @@ static PyObject* IAsyncInfo_get_Id(py::winrt_wrapper<winrt::Windows::Foundation:
 {
     try
     {
-        uint32_t return_value = self->obj.Id();
+        auto return_value = self->obj.Id();
         
         PyObject* out_return_value = py::convert(return_value);
         if (!out_return_value) 
@@ -3360,7 +3360,7 @@ static PyObject* IAsyncInfo_get_Status(py::winrt_wrapper<winrt::Windows::Foundat
 {
     try
     {
-        winrt::Windows::Foundation::AsyncStatus return_value = self->obj.Status();
+        auto return_value = self->obj.Status();
         
         PyObject* out_return_value = py::convert(return_value);
         if (!out_return_value) 
@@ -3773,7 +3773,7 @@ static PyObject* IGetActivationFactory_GetActivationFactory(py::winrt_wrapper<wi
         {
             auto param0 = py::convert_to<winrt::hstring>(args, 0);
             
-            winrt::Windows::Foundation::IInspectable return_value = self->obj.GetActivationFactory(param0);
+            auto return_value = self->obj.GetActivationFactory(param0);
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -3887,7 +3887,7 @@ static PyObject* IMemoryBuffer_CreateReference(py::winrt_wrapper<winrt::Windows:
     {
         try
         {
-            winrt::Windows::Foundation::IMemoryBufferReference return_value = self->obj.CreateReference();
+            auto return_value = self->obj.CreateReference();
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -4019,7 +4019,7 @@ static PyObject* IMemoryBufferReference_get_Capacity(py::winrt_wrapper<winrt::Wi
 {
     try
     {
-        uint32_t return_value = self->obj.Capacity();
+        auto return_value = self->obj.Capacity();
         
         PyObject* out_return_value = py::convert(return_value);
         if (!out_return_value) 
@@ -4041,7 +4041,7 @@ static PyObject* IMemoryBufferReference_add_Closed(py::winrt_wrapper<winrt::Wind
     {
         auto param0 = py::convert_to<winrt::Windows::Foundation::TypedEventHandler<winrt::Windows::Foundation::IMemoryBufferReference, winrt::Windows::Foundation::IInspectable>>(arg);
         
-        winrt::event_token return_value = self->obj.Closed(param0);
+        auto return_value = self->obj.Closed(param0);
         
         PyObject* out_return_value = py::convert(return_value);
         if (!out_return_value) 
@@ -4163,7 +4163,7 @@ static PyObject* IPropertyValue_GetBoolean(py::winrt_wrapper<winrt::Windows::Fou
     {
         try
         {
-            bool return_value = self->obj.GetBoolean();
+            auto return_value = self->obj.GetBoolean();
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -4227,7 +4227,7 @@ static PyObject* IPropertyValue_GetChar16(py::winrt_wrapper<winrt::Windows::Foun
     {
         try
         {
-            char16_t return_value = self->obj.GetChar16();
+            auto return_value = self->obj.GetChar16();
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -4291,7 +4291,7 @@ static PyObject* IPropertyValue_GetDateTime(py::winrt_wrapper<winrt::Windows::Fo
     {
         try
         {
-            winrt::Windows::Foundation::DateTime return_value = self->obj.GetDateTime();
+            auto return_value = self->obj.GetDateTime();
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -4355,7 +4355,7 @@ static PyObject* IPropertyValue_GetDouble(py::winrt_wrapper<winrt::Windows::Foun
     {
         try
         {
-            double return_value = self->obj.GetDouble();
+            auto return_value = self->obj.GetDouble();
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -4419,7 +4419,7 @@ static PyObject* IPropertyValue_GetGuid(py::winrt_wrapper<winrt::Windows::Founda
     {
         try
         {
-            winrt::guid return_value = self->obj.GetGuid();
+            auto return_value = self->obj.GetGuid();
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -4516,7 +4516,7 @@ static PyObject* IPropertyValue_GetInt16(py::winrt_wrapper<winrt::Windows::Found
     {
         try
         {
-            int16_t return_value = self->obj.GetInt16();
+            auto return_value = self->obj.GetInt16();
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -4580,7 +4580,7 @@ static PyObject* IPropertyValue_GetInt32(py::winrt_wrapper<winrt::Windows::Found
     {
         try
         {
-            int32_t return_value = self->obj.GetInt32();
+            auto return_value = self->obj.GetInt32();
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -4644,7 +4644,7 @@ static PyObject* IPropertyValue_GetInt64(py::winrt_wrapper<winrt::Windows::Found
     {
         try
         {
-            int64_t return_value = self->obj.GetInt64();
+            auto return_value = self->obj.GetInt64();
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -4708,7 +4708,7 @@ static PyObject* IPropertyValue_GetPoint(py::winrt_wrapper<winrt::Windows::Found
     {
         try
         {
-            winrt::Windows::Foundation::Point return_value = self->obj.GetPoint();
+            auto return_value = self->obj.GetPoint();
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -4772,7 +4772,7 @@ static PyObject* IPropertyValue_GetRect(py::winrt_wrapper<winrt::Windows::Founda
     {
         try
         {
-            winrt::Windows::Foundation::Rect return_value = self->obj.GetRect();
+            auto return_value = self->obj.GetRect();
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -4836,7 +4836,7 @@ static PyObject* IPropertyValue_GetSingle(py::winrt_wrapper<winrt::Windows::Foun
     {
         try
         {
-            float return_value = self->obj.GetSingle();
+            auto return_value = self->obj.GetSingle();
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -4900,7 +4900,7 @@ static PyObject* IPropertyValue_GetSize(py::winrt_wrapper<winrt::Windows::Founda
     {
         try
         {
-            winrt::Windows::Foundation::Size return_value = self->obj.GetSize();
+            auto return_value = self->obj.GetSize();
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -4964,7 +4964,7 @@ static PyObject* IPropertyValue_GetString(py::winrt_wrapper<winrt::Windows::Foun
     {
         try
         {
-            winrt::hstring return_value = self->obj.GetString();
+            auto return_value = self->obj.GetString();
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -5028,7 +5028,7 @@ static PyObject* IPropertyValue_GetTimeSpan(py::winrt_wrapper<winrt::Windows::Fo
     {
         try
         {
-            winrt::Windows::Foundation::TimeSpan return_value = self->obj.GetTimeSpan();
+            auto return_value = self->obj.GetTimeSpan();
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -5092,7 +5092,7 @@ static PyObject* IPropertyValue_GetUInt16(py::winrt_wrapper<winrt::Windows::Foun
     {
         try
         {
-            uint16_t return_value = self->obj.GetUInt16();
+            auto return_value = self->obj.GetUInt16();
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -5156,7 +5156,7 @@ static PyObject* IPropertyValue_GetUInt32(py::winrt_wrapper<winrt::Windows::Foun
     {
         try
         {
-            uint32_t return_value = self->obj.GetUInt32();
+            auto return_value = self->obj.GetUInt32();
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -5220,7 +5220,7 @@ static PyObject* IPropertyValue_GetUInt64(py::winrt_wrapper<winrt::Windows::Foun
     {
         try
         {
-            uint64_t return_value = self->obj.GetUInt64();
+            auto return_value = self->obj.GetUInt64();
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -5284,7 +5284,7 @@ static PyObject* IPropertyValue_GetUInt8(py::winrt_wrapper<winrt::Windows::Found
     {
         try
         {
-            uint8_t return_value = self->obj.GetUInt8();
+            auto return_value = self->obj.GetUInt8();
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -5344,7 +5344,7 @@ static PyObject* IPropertyValue_get_IsNumericScalar(py::winrt_wrapper<winrt::Win
 {
     try
     {
-        bool return_value = self->obj.IsNumericScalar();
+        auto return_value = self->obj.IsNumericScalar();
         
         PyObject* out_return_value = py::convert(return_value);
         if (!out_return_value) 
@@ -5364,7 +5364,7 @@ static PyObject* IPropertyValue_get_Type(py::winrt_wrapper<winrt::Windows::Found
 {
     try
     {
-        winrt::Windows::Foundation::PropertyType return_value = self->obj.Type();
+        auto return_value = self->obj.Type();
         
         PyObject* out_return_value = py::convert(return_value);
         if (!out_return_value) 
@@ -6050,7 +6050,7 @@ static PyObject* IStringable_ToString(py::winrt_wrapper<winrt::Windows::Foundati
     {
         try
         {
-            winrt::hstring return_value = self->obj.ToString();
+            auto return_value = self->obj.ToString();
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -6148,7 +6148,7 @@ static PyObject* IWwwFormUrlDecoderEntry_get_Name(py::winrt_wrapper<winrt::Windo
 {
     try
     {
-        winrt::hstring return_value = self->obj.Name();
+        auto return_value = self->obj.Name();
         
         PyObject* out_return_value = py::convert(return_value);
         if (!out_return_value) 
@@ -6168,7 +6168,7 @@ static PyObject* IWwwFormUrlDecoderEntry_get_Value(py::winrt_wrapper<winrt::Wind
 {
     try
     {
-        winrt::hstring return_value = self->obj.Value();
+        auto return_value = self->obj.Value();
         
         PyObject* out_return_value = py::convert(return_value);
         if (!out_return_value) 

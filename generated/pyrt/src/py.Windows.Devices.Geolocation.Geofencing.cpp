@@ -105,7 +105,7 @@ static PyObject* Geofence_get_Duration(py::winrt_wrapper<winrt::Windows::Devices
 {
     try
     {
-        winrt::Windows::Foundation::TimeSpan return_value = self->obj.Duration();
+        auto return_value = self->obj.Duration();
         
         PyObject* out_return_value = py::convert(return_value);
         if (!out_return_value) 
@@ -125,7 +125,7 @@ static PyObject* Geofence_get_DwellTime(py::winrt_wrapper<winrt::Windows::Device
 {
     try
     {
-        winrt::Windows::Foundation::TimeSpan return_value = self->obj.DwellTime();
+        auto return_value = self->obj.DwellTime();
         
         PyObject* out_return_value = py::convert(return_value);
         if (!out_return_value) 
@@ -145,7 +145,7 @@ static PyObject* Geofence_get_Geoshape(py::winrt_wrapper<winrt::Windows::Devices
 {
     try
     {
-        winrt::Windows::Devices::Geolocation::IGeoshape return_value = self->obj.Geoshape();
+        auto return_value = self->obj.Geoshape();
         
         PyObject* out_return_value = py::convert(return_value);
         if (!out_return_value) 
@@ -165,7 +165,7 @@ static PyObject* Geofence_get_Id(py::winrt_wrapper<winrt::Windows::Devices::Geol
 {
     try
     {
-        winrt::hstring return_value = self->obj.Id();
+        auto return_value = self->obj.Id();
         
         PyObject* out_return_value = py::convert(return_value);
         if (!out_return_value) 
@@ -185,7 +185,7 @@ static PyObject* Geofence_get_MonitoredStates(py::winrt_wrapper<winrt::Windows::
 {
     try
     {
-        winrt::Windows::Devices::Geolocation::Geofencing::MonitoredGeofenceStates return_value = self->obj.MonitoredStates();
+        auto return_value = self->obj.MonitoredStates();
         
         PyObject* out_return_value = py::convert(return_value);
         if (!out_return_value) 
@@ -205,7 +205,7 @@ static PyObject* Geofence_get_SingleUse(py::winrt_wrapper<winrt::Windows::Device
 {
     try
     {
-        bool return_value = self->obj.SingleUse();
+        auto return_value = self->obj.SingleUse();
         
         PyObject* out_return_value = py::convert(return_value);
         if (!out_return_value) 
@@ -225,7 +225,7 @@ static PyObject* Geofence_get_StartTime(py::winrt_wrapper<winrt::Windows::Device
 {
     try
     {
-        winrt::Windows::Foundation::DateTime return_value = self->obj.StartTime();
+        auto return_value = self->obj.StartTime();
         
         PyObject* out_return_value = py::convert(return_value);
         if (!out_return_value) 
@@ -313,7 +313,7 @@ static PyObject* GeofenceMonitor_ReadReports(py::winrt_wrapper<winrt::Windows::D
     {
         try
         {
-            winrt::Windows::Foundation::Collections::IVectorView<winrt::Windows::Devices::Geolocation::Geofencing::GeofenceStateChangeReport> return_value = self->obj.ReadReports();
+            auto return_value = self->obj.ReadReports();
             
             PyObject* out_return_value = py::convert(return_value);
             if (!out_return_value) 
@@ -340,7 +340,7 @@ static PyObject* GeofenceMonitor_get_Geofences(py::winrt_wrapper<winrt::Windows:
 {
     try
     {
-        winrt::Windows::Foundation::Collections::IVector<winrt::Windows::Devices::Geolocation::Geofencing::Geofence> return_value = self->obj.Geofences();
+        auto return_value = self->obj.Geofences();
         
         PyObject* out_return_value = py::convert(return_value);
         if (!out_return_value) 
@@ -360,7 +360,7 @@ static PyObject* GeofenceMonitor_get_LastKnownGeoposition(py::winrt_wrapper<winr
 {
     try
     {
-        winrt::Windows::Devices::Geolocation::Geoposition return_value = self->obj.LastKnownGeoposition();
+        auto return_value = self->obj.LastKnownGeoposition();
         
         PyObject* out_return_value = py::convert(return_value);
         if (!out_return_value) 
@@ -380,7 +380,7 @@ static PyObject* GeofenceMonitor_get_Status(py::winrt_wrapper<winrt::Windows::De
 {
     try
     {
-        winrt::Windows::Devices::Geolocation::Geofencing::GeofenceMonitorStatus return_value = self->obj.Status();
+        auto return_value = self->obj.Status();
         
         PyObject* out_return_value = py::convert(return_value);
         if (!out_return_value) 
@@ -400,7 +400,7 @@ static PyObject* GeofenceMonitor_get_Current(PyObject* /*unused*/, PyObject* /*u
 {
     try
     {
-        winrt::Windows::Devices::Geolocation::Geofencing::GeofenceMonitor return_value = winrt::Windows::Devices::Geolocation::Geofencing::GeofenceMonitor::Current();
+        auto return_value = winrt::Windows::Devices::Geolocation::Geofencing::GeofenceMonitor::Current();
         
         PyObject* out_return_value = py::convert(return_value);
         if (!out_return_value) 
@@ -422,7 +422,7 @@ static PyObject* GeofenceMonitor_add_GeofenceStateChanged(py::winrt_wrapper<winr
     {
         auto param0 = py::convert_to<winrt::Windows::Foundation::TypedEventHandler<winrt::Windows::Devices::Geolocation::Geofencing::GeofenceMonitor, winrt::Windows::Foundation::IInspectable>>(arg);
         
-        winrt::event_token return_value = self->obj.GeofenceStateChanged(param0);
+        auto return_value = self->obj.GeofenceStateChanged(param0);
         
         PyObject* out_return_value = py::convert(return_value);
         if (!out_return_value) 
@@ -460,7 +460,7 @@ static PyObject* GeofenceMonitor_add_StatusChanged(py::winrt_wrapper<winrt::Wind
     {
         auto param0 = py::convert_to<winrt::Windows::Foundation::TypedEventHandler<winrt::Windows::Devices::Geolocation::Geofencing::GeofenceMonitor, winrt::Windows::Foundation::IInspectable>>(arg);
         
-        winrt::event_token return_value = self->obj.StatusChanged(param0);
+        auto return_value = self->obj.StatusChanged(param0);
         
         PyObject* out_return_value = py::convert(return_value);
         if (!out_return_value) 
@@ -562,7 +562,7 @@ static PyObject* GeofenceStateChangeReport_get_Geofence(py::winrt_wrapper<winrt:
 {
     try
     {
-        winrt::Windows::Devices::Geolocation::Geofencing::Geofence return_value = self->obj.Geofence();
+        auto return_value = self->obj.Geofence();
         
         PyObject* out_return_value = py::convert(return_value);
         if (!out_return_value) 
@@ -582,7 +582,7 @@ static PyObject* GeofenceStateChangeReport_get_Geoposition(py::winrt_wrapper<win
 {
     try
     {
-        winrt::Windows::Devices::Geolocation::Geoposition return_value = self->obj.Geoposition();
+        auto return_value = self->obj.Geoposition();
         
         PyObject* out_return_value = py::convert(return_value);
         if (!out_return_value) 
@@ -602,7 +602,7 @@ static PyObject* GeofenceStateChangeReport_get_NewState(py::winrt_wrapper<winrt:
 {
     try
     {
-        winrt::Windows::Devices::Geolocation::Geofencing::GeofenceState return_value = self->obj.NewState();
+        auto return_value = self->obj.NewState();
         
         PyObject* out_return_value = py::convert(return_value);
         if (!out_return_value) 
@@ -622,7 +622,7 @@ static PyObject* GeofenceStateChangeReport_get_RemovalReason(py::winrt_wrapper<w
 {
     try
     {
-        winrt::Windows::Devices::Geolocation::Geofencing::GeofenceRemovalReason return_value = self->obj.RemovalReason();
+        auto return_value = self->obj.RemovalReason();
         
         PyObject* out_return_value = py::convert(return_value);
         if (!out_return_value) 
