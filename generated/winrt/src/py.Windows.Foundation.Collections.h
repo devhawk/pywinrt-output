@@ -15,161 +15,161 @@ namespace py::proj::Windows::Foundation::Collections
     struct IIterable
     {
         virtual ~IIterable() {};
-        virtual winrt::Windows::Foundation::IUnknown const& get_unknown() = 0;
-        virtual std::size_t hash() = 0;
-        virtual PyObject* First(PyObject*) = 0;
-        virtual PyObject* dunder_iter() = 0;
+        virtual winrt::Windows::Foundation::IUnknown const& get_unknown() noexcept = 0;
+        virtual std::size_t hash() noexcept = 0;
+        virtual PyObject* First(PyObject*) noexcept = 0;
+        virtual PyObject* dunder_iter() noexcept = 0;
     };
     
     struct IIterator
     {
         virtual ~IIterator() {};
-        virtual winrt::Windows::Foundation::IUnknown const& get_unknown() = 0;
-        virtual std::size_t hash() = 0;
-        virtual PyObject* MoveNext(PyObject*) = 0;
-        virtual PyObject* GetMany(PyObject*) = 0;
-        virtual PyObject* get_Current() = 0;
-        virtual PyObject* get_HasCurrent() = 0;
-        virtual PyObject* dunder_iter() = 0;
-        virtual PyObject* dunder_iternext() = 0;
+        virtual winrt::Windows::Foundation::IUnknown const& get_unknown() noexcept = 0;
+        virtual std::size_t hash() noexcept = 0;
+        virtual PyObject* MoveNext(PyObject*) noexcept = 0;
+        virtual PyObject* GetMany(PyObject*) noexcept = 0;
+        virtual PyObject* get_Current() noexcept = 0;
+        virtual PyObject* get_HasCurrent() noexcept = 0;
+        virtual PyObject* dunder_iter() noexcept = 0;
+        virtual PyObject* dunder_iternext() noexcept = 0;
     };
     
     struct IKeyValuePair
     {
         virtual ~IKeyValuePair() {};
-        virtual winrt::Windows::Foundation::IUnknown const& get_unknown() = 0;
-        virtual std::size_t hash() = 0;
-        virtual PyObject* get_Key() = 0;
-        virtual PyObject* get_Value() = 0;
+        virtual winrt::Windows::Foundation::IUnknown const& get_unknown() noexcept = 0;
+        virtual std::size_t hash() noexcept = 0;
+        virtual PyObject* get_Key() noexcept = 0;
+        virtual PyObject* get_Value() noexcept = 0;
     };
     
     struct IMapChangedEventArgs
     {
         virtual ~IMapChangedEventArgs() {};
-        virtual winrt::Windows::Foundation::IUnknown const& get_unknown() = 0;
-        virtual std::size_t hash() = 0;
-        virtual PyObject* get_CollectionChange() = 0;
-        virtual PyObject* get_Key() = 0;
+        virtual winrt::Windows::Foundation::IUnknown const& get_unknown() noexcept = 0;
+        virtual std::size_t hash() noexcept = 0;
+        virtual PyObject* get_CollectionChange() noexcept = 0;
+        virtual PyObject* get_Key() noexcept = 0;
     };
     
     struct IMapView
     {
         virtual ~IMapView() {};
-        virtual winrt::Windows::Foundation::IUnknown const& get_unknown() = 0;
-        virtual std::size_t hash() = 0;
-        virtual PyObject* Lookup(PyObject*) = 0;
-        virtual PyObject* HasKey(PyObject*) = 0;
-        virtual PyObject* Split(PyObject*) = 0;
-        virtual PyObject* First(PyObject*) = 0;
-        virtual PyObject* get_Size() = 0;
-        virtual PyObject* dunder_iter() = 0;
-        virtual Py_ssize_t map_length() = 0;
-        virtual PyObject* map_subscript(PyObject* key) = 0;
+        virtual winrt::Windows::Foundation::IUnknown const& get_unknown() noexcept = 0;
+        virtual std::size_t hash() noexcept = 0;
+        virtual PyObject* Lookup(PyObject*) noexcept = 0;
+        virtual PyObject* HasKey(PyObject*) noexcept = 0;
+        virtual PyObject* Split(PyObject*) noexcept = 0;
+        virtual PyObject* First(PyObject*) noexcept = 0;
+        virtual PyObject* get_Size() noexcept = 0;
+        virtual PyObject* dunder_iter() noexcept = 0;
+        virtual Py_ssize_t map_length() noexcept = 0;
+        virtual PyObject* map_subscript(PyObject* key) noexcept = 0;
     };
     
     struct IMap
     {
         virtual ~IMap() {};
-        virtual winrt::Windows::Foundation::IUnknown const& get_unknown() = 0;
-        virtual std::size_t hash() = 0;
-        virtual PyObject* Lookup(PyObject*) = 0;
-        virtual PyObject* HasKey(PyObject*) = 0;
-        virtual PyObject* GetView(PyObject*) = 0;
-        virtual PyObject* Insert(PyObject*) = 0;
-        virtual PyObject* Remove(PyObject*) = 0;
-        virtual PyObject* Clear(PyObject*) = 0;
-        virtual PyObject* First(PyObject*) = 0;
-        virtual PyObject* get_Size() = 0;
-        virtual PyObject* dunder_iter() = 0;
-        virtual Py_ssize_t map_length() = 0;
-        virtual PyObject* map_subscript(PyObject* key) = 0;
-        virtual int map_assign(PyObject* key, PyObject* value) = 0;
+        virtual winrt::Windows::Foundation::IUnknown const& get_unknown() noexcept = 0;
+        virtual std::size_t hash() noexcept = 0;
+        virtual PyObject* Lookup(PyObject*) noexcept = 0;
+        virtual PyObject* HasKey(PyObject*) noexcept = 0;
+        virtual PyObject* GetView(PyObject*) noexcept = 0;
+        virtual PyObject* Insert(PyObject*) noexcept = 0;
+        virtual PyObject* Remove(PyObject*) noexcept = 0;
+        virtual PyObject* Clear(PyObject*) noexcept = 0;
+        virtual PyObject* First(PyObject*) noexcept = 0;
+        virtual PyObject* get_Size() noexcept = 0;
+        virtual PyObject* dunder_iter() noexcept = 0;
+        virtual Py_ssize_t map_length() noexcept = 0;
+        virtual PyObject* map_subscript(PyObject* key) noexcept = 0;
+        virtual int map_assign(PyObject* key, PyObject* value) noexcept = 0;
     };
     
     struct IObservableMap
     {
         virtual ~IObservableMap() {};
-        virtual winrt::Windows::Foundation::IUnknown const& get_unknown() = 0;
-        virtual std::size_t hash() = 0;
-        virtual PyObject* Lookup(PyObject*) = 0;
-        virtual PyObject* HasKey(PyObject*) = 0;
-        virtual PyObject* GetView(PyObject*) = 0;
-        virtual PyObject* Insert(PyObject*) = 0;
-        virtual PyObject* Remove(PyObject*) = 0;
-        virtual PyObject* Clear(PyObject*) = 0;
-        virtual PyObject* First(PyObject*) = 0;
-        virtual PyObject* get_Size() = 0;
-        virtual PyObject* add_MapChanged(PyObject*) = 0;
-        virtual PyObject* remove_MapChanged(PyObject*) = 0;
-        virtual PyObject* dunder_iter() = 0;
-        virtual Py_ssize_t map_length() = 0;
-        virtual PyObject* map_subscript(PyObject* key) = 0;
-        virtual int map_assign(PyObject* key, PyObject* value) = 0;
+        virtual winrt::Windows::Foundation::IUnknown const& get_unknown() noexcept = 0;
+        virtual std::size_t hash() noexcept = 0;
+        virtual PyObject* Lookup(PyObject*) noexcept = 0;
+        virtual PyObject* HasKey(PyObject*) noexcept = 0;
+        virtual PyObject* GetView(PyObject*) noexcept = 0;
+        virtual PyObject* Insert(PyObject*) noexcept = 0;
+        virtual PyObject* Remove(PyObject*) noexcept = 0;
+        virtual PyObject* Clear(PyObject*) noexcept = 0;
+        virtual PyObject* First(PyObject*) noexcept = 0;
+        virtual PyObject* get_Size() noexcept = 0;
+        virtual PyObject* add_MapChanged(PyObject*) noexcept = 0;
+        virtual PyObject* remove_MapChanged(PyObject*) noexcept = 0;
+        virtual PyObject* dunder_iter() noexcept = 0;
+        virtual Py_ssize_t map_length() noexcept = 0;
+        virtual PyObject* map_subscript(PyObject* key) noexcept = 0;
+        virtual int map_assign(PyObject* key, PyObject* value) noexcept = 0;
     };
     
     struct IObservableVector
     {
         virtual ~IObservableVector() {};
-        virtual winrt::Windows::Foundation::IUnknown const& get_unknown() = 0;
-        virtual std::size_t hash() = 0;
-        virtual PyObject* GetAt(PyObject*) = 0;
-        virtual PyObject* GetView(PyObject*) = 0;
-        virtual PyObject* IndexOf(PyObject*) = 0;
-        virtual PyObject* SetAt(PyObject*) = 0;
-        virtual PyObject* InsertAt(PyObject*) = 0;
-        virtual PyObject* RemoveAt(PyObject*) = 0;
-        virtual PyObject* Append(PyObject*) = 0;
-        virtual PyObject* RemoveAtEnd(PyObject*) = 0;
-        virtual PyObject* Clear(PyObject*) = 0;
-        virtual PyObject* GetMany(PyObject*) = 0;
-        virtual PyObject* ReplaceAll(PyObject*) = 0;
-        virtual PyObject* First(PyObject*) = 0;
-        virtual PyObject* get_Size() = 0;
-        virtual PyObject* add_VectorChanged(PyObject*) = 0;
-        virtual PyObject* remove_VectorChanged(PyObject*) = 0;
-        virtual PyObject* dunder_iter() = 0;
-        virtual Py_ssize_t seq_length() = 0;
-        virtual PyObject* seq_item(Py_ssize_t i) = 0;
-        virtual int seq_assign(Py_ssize_t i, PyObject* value) = 0;
+        virtual winrt::Windows::Foundation::IUnknown const& get_unknown() noexcept = 0;
+        virtual std::size_t hash() noexcept = 0;
+        virtual PyObject* GetAt(PyObject*) noexcept = 0;
+        virtual PyObject* GetView(PyObject*) noexcept = 0;
+        virtual PyObject* IndexOf(PyObject*) noexcept = 0;
+        virtual PyObject* SetAt(PyObject*) noexcept = 0;
+        virtual PyObject* InsertAt(PyObject*) noexcept = 0;
+        virtual PyObject* RemoveAt(PyObject*) noexcept = 0;
+        virtual PyObject* Append(PyObject*) noexcept = 0;
+        virtual PyObject* RemoveAtEnd(PyObject*) noexcept = 0;
+        virtual PyObject* Clear(PyObject*) noexcept = 0;
+        virtual PyObject* GetMany(PyObject*) noexcept = 0;
+        virtual PyObject* ReplaceAll(PyObject*) noexcept = 0;
+        virtual PyObject* First(PyObject*) noexcept = 0;
+        virtual PyObject* get_Size() noexcept = 0;
+        virtual PyObject* add_VectorChanged(PyObject*) noexcept = 0;
+        virtual PyObject* remove_VectorChanged(PyObject*) noexcept = 0;
+        virtual PyObject* dunder_iter() noexcept = 0;
+        virtual Py_ssize_t seq_length() noexcept = 0;
+        virtual PyObject* seq_item(Py_ssize_t i) noexcept = 0;
+        virtual int seq_assign(Py_ssize_t i, PyObject* value) noexcept = 0;
     };
     
     struct IVectorView
     {
         virtual ~IVectorView() {};
-        virtual winrt::Windows::Foundation::IUnknown const& get_unknown() = 0;
-        virtual std::size_t hash() = 0;
-        virtual PyObject* GetAt(PyObject*) = 0;
-        virtual PyObject* IndexOf(PyObject*) = 0;
-        virtual PyObject* GetMany(PyObject*) = 0;
-        virtual PyObject* First(PyObject*) = 0;
-        virtual PyObject* get_Size() = 0;
-        virtual PyObject* dunder_iter() = 0;
-        virtual Py_ssize_t seq_length() = 0;
-        virtual PyObject* seq_item(Py_ssize_t i) = 0;
+        virtual winrt::Windows::Foundation::IUnknown const& get_unknown() noexcept = 0;
+        virtual std::size_t hash() noexcept = 0;
+        virtual PyObject* GetAt(PyObject*) noexcept = 0;
+        virtual PyObject* IndexOf(PyObject*) noexcept = 0;
+        virtual PyObject* GetMany(PyObject*) noexcept = 0;
+        virtual PyObject* First(PyObject*) noexcept = 0;
+        virtual PyObject* get_Size() noexcept = 0;
+        virtual PyObject* dunder_iter() noexcept = 0;
+        virtual Py_ssize_t seq_length() noexcept = 0;
+        virtual PyObject* seq_item(Py_ssize_t i) noexcept = 0;
     };
     
     struct IVector
     {
         virtual ~IVector() {};
-        virtual winrt::Windows::Foundation::IUnknown const& get_unknown() = 0;
-        virtual std::size_t hash() = 0;
-        virtual PyObject* GetAt(PyObject*) = 0;
-        virtual PyObject* GetView(PyObject*) = 0;
-        virtual PyObject* IndexOf(PyObject*) = 0;
-        virtual PyObject* SetAt(PyObject*) = 0;
-        virtual PyObject* InsertAt(PyObject*) = 0;
-        virtual PyObject* RemoveAt(PyObject*) = 0;
-        virtual PyObject* Append(PyObject*) = 0;
-        virtual PyObject* RemoveAtEnd(PyObject*) = 0;
-        virtual PyObject* Clear(PyObject*) = 0;
-        virtual PyObject* GetMany(PyObject*) = 0;
-        virtual PyObject* ReplaceAll(PyObject*) = 0;
-        virtual PyObject* First(PyObject*) = 0;
-        virtual PyObject* get_Size() = 0;
-        virtual PyObject* dunder_iter() = 0;
-        virtual Py_ssize_t seq_length() = 0;
-        virtual PyObject* seq_item(Py_ssize_t i) = 0;
-        virtual int seq_assign(Py_ssize_t i, PyObject* value) = 0;
+        virtual winrt::Windows::Foundation::IUnknown const& get_unknown() noexcept = 0;
+        virtual std::size_t hash() noexcept = 0;
+        virtual PyObject* GetAt(PyObject*) noexcept = 0;
+        virtual PyObject* GetView(PyObject*) noexcept = 0;
+        virtual PyObject* IndexOf(PyObject*) noexcept = 0;
+        virtual PyObject* SetAt(PyObject*) noexcept = 0;
+        virtual PyObject* InsertAt(PyObject*) noexcept = 0;
+        virtual PyObject* RemoveAt(PyObject*) noexcept = 0;
+        virtual PyObject* Append(PyObject*) noexcept = 0;
+        virtual PyObject* RemoveAtEnd(PyObject*) noexcept = 0;
+        virtual PyObject* Clear(PyObject*) noexcept = 0;
+        virtual PyObject* GetMany(PyObject*) noexcept = 0;
+        virtual PyObject* ReplaceAll(PyObject*) noexcept = 0;
+        virtual PyObject* First(PyObject*) noexcept = 0;
+        virtual PyObject* get_Size() noexcept = 0;
+        virtual PyObject* dunder_iter() noexcept = 0;
+        virtual Py_ssize_t seq_length() noexcept = 0;
+        virtual PyObject* seq_item(Py_ssize_t i) noexcept = 0;
+        virtual int seq_assign(Py_ssize_t i, PyObject* value) noexcept = 0;
     };
 }
 
@@ -231,38 +231,41 @@ namespace py::impl::Windows::Foundation::Collections
     struct IIterable : public py::proj::Windows::Foundation::Collections::IIterable
     {
         IIterable(winrt::Windows::Foundation::Collections::IIterable<T> o) : _obj(o) {}
-        winrt::Windows::Foundation::IUnknown const& get_unknown() override { return _obj; }
-        std::size_t hash() override { return py::get_instance_hash(_obj); }
-        PyObject* First(PyObject* args) override
+        winrt::Windows::Foundation::IUnknown const& get_unknown() noexcept override { return _obj; }
+        std::size_t hash() noexcept override { return py::get_instance_hash(_obj); }
+        PyObject* First(PyObject* args) noexcept override
         {
             Py_ssize_t arg_count = PyTuple_Size(args);
             
             if (arg_count == 0)
             {
-                return py::trycatch_invoker([=]() -> PyObject*
+                try
                 {
-                    auto return_value = _obj.First();
-                    
-                    py::pyobj_handle out_return_value{ py::convert(return_value) };
-                    if (!out_return_value) 
-                    { 
-                        return nullptr;
-                    }
-                    return out_return_value.detach();
-                }, nullptr);
+                    return py::convert(_obj.First());
+                }
+                catch (...)
+                {
+                    py::to_PyErr();
+                    return nullptr;
+                }
             }
-            else if (arg_count != -1)
+            else
             {
-                PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+                py::set_invalid_arg_count_error(arg_count);
+                return nullptr;
             }
-            return nullptr;
         }
-        PyObject* dunder_iter() override
+        PyObject* dunder_iter() noexcept override
         {
-            return py::trycatch_invoker([=]() -> PyObject*
+            try
             {
                 return py::convert(_obj.First());
-            }, nullptr);
+            }
+            catch (...)
+            {
+                py::to_PyErr();
+                return nullptr;
+            }
         }
         
         winrt::Windows::Foundation::Collections::IIterable<T> _obj{ nullptr };
@@ -272,15 +275,15 @@ namespace py::impl::Windows::Foundation::Collections
     struct IIterator : public py::proj::Windows::Foundation::Collections::IIterator
     {
         IIterator(winrt::Windows::Foundation::Collections::IIterator<T> o) : _obj(o) {}
-        winrt::Windows::Foundation::IUnknown const& get_unknown() override { return _obj; }
-        std::size_t hash() override { return py::get_instance_hash(_obj); }
-        PyObject* GetMany(PyObject* args) override
+        winrt::Windows::Foundation::IUnknown const& get_unknown() noexcept override { return _obj; }
+        std::size_t hash() noexcept override { return py::get_instance_hash(_obj); }
+        PyObject* GetMany(PyObject* args) noexcept override
         {
             Py_ssize_t arg_count = PyTuple_Size(args);
             
             if (arg_count == 1)
             {
-                return py::trycatch_invoker([=]() -> PyObject*
+                try
                 {
                     auto param0_count = py::convert_to<winrt::com_array<T>::size_type>(args, 0);
                     winrt::com_array<T> param0 ( param0_count, py::empty_instance<T>::get() );
@@ -298,73 +301,72 @@ namespace py::impl::Windows::Foundation::Collections
                         return nullptr;
                     }
                     return PyTuple_Pack(2, out_return_value.detach(), out0.detach());
-                }, nullptr);
+                }
+                catch (...)
+                {
+                    py::to_PyErr();
+                    return nullptr;
+                }
             }
-            else if (arg_count != -1)
+            else
             {
-                PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+                py::set_invalid_arg_count_error(arg_count);
+                return nullptr;
             }
-            return nullptr;
         }
-        PyObject* MoveNext(PyObject* args) override
+        PyObject* MoveNext(PyObject* args) noexcept override
         {
             Py_ssize_t arg_count = PyTuple_Size(args);
             
             if (arg_count == 0)
             {
-                return py::trycatch_invoker([=]() -> PyObject*
+                try
                 {
-                    auto return_value = _obj.MoveNext();
-                    
-                    py::pyobj_handle out_return_value{ py::convert(return_value) };
-                    if (!out_return_value) 
-                    { 
-                        return nullptr;
-                    }
-                    return out_return_value.detach();
-                }, nullptr);
-            }
-            else if (arg_count != -1)
-            {
-                PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-            }
-            return nullptr;
-        }
-        PyObject* get_Current() override
-        {
-            return py::trycatch_invoker([=]() -> PyObject*
-            {
-                auto return_value = _obj.Current();
-                
-                py::pyobj_handle out_return_value{ py::convert(return_value) };
-                if (!out_return_value) 
-                { 
+                    return py::convert(_obj.MoveNext());
+                }
+                catch (...)
+                {
+                    py::to_PyErr();
                     return nullptr;
                 }
-                return out_return_value.detach();
-            }, nullptr);
-        }
-        PyObject* get_HasCurrent() override
-        {
-            return py::trycatch_invoker([=]() -> PyObject*
+            }
+            else
             {
-                auto return_value = _obj.HasCurrent();
-                
-                py::pyobj_handle out_return_value{ py::convert(return_value) };
-                if (!out_return_value) 
-                { 
-                    return nullptr;
-                }
-                return out_return_value.detach();
-            }, nullptr);
+                py::set_invalid_arg_count_error(arg_count);
+                return nullptr;
+            }
         }
-        PyObject* dunder_iter() override
+        PyObject* get_Current() noexcept override
+        {
+            try
+            {
+                return py::convert(_obj.Current());
+            }
+            catch (...)
+            {
+                py::to_PyErr();
+                return nullptr;
+            }
+        }
+        PyObject* get_HasCurrent() noexcept override
+        {
+            try
+            {
+                return py::convert(_obj.HasCurrent());
+            }
+            catch (...)
+            {
+                py::to_PyErr();
+                return nullptr;
+            }
+        }
+        PyObject* dunder_iter() noexcept override
         {
             return reinterpret_cast<PyObject*>(this);
         }
-        PyObject* dunder_iternext() override
+        PyObject* dunder_iternext() noexcept override
         {
-            return py::trycatch_invoker([=]() -> PyObject*
+            try
             {
                 if (_obj.HasCurrent())
                 {
@@ -375,7 +377,12 @@ namespace py::impl::Windows::Foundation::Collections
                 else
                 {
                     return nullptr;
-                }}, nullptr);
+                }}
+            catch (...)
+            {
+                py::to_PyErr();
+                return nullptr;
+            }
         }
         
         winrt::Windows::Foundation::Collections::IIterator<T> _obj{ nullptr };
@@ -385,35 +392,31 @@ namespace py::impl::Windows::Foundation::Collections
     struct IKeyValuePair : public py::proj::Windows::Foundation::Collections::IKeyValuePair
     {
         IKeyValuePair(winrt::Windows::Foundation::Collections::IKeyValuePair<K, V> o) : _obj(o) {}
-        winrt::Windows::Foundation::IUnknown const& get_unknown() override { return _obj; }
-        std::size_t hash() override { return py::get_instance_hash(_obj); }
-        PyObject* get_Key() override
+        winrt::Windows::Foundation::IUnknown const& get_unknown() noexcept override { return _obj; }
+        std::size_t hash() noexcept override { return py::get_instance_hash(_obj); }
+        PyObject* get_Key() noexcept override
         {
-            return py::trycatch_invoker([=]() -> PyObject*
+            try
             {
-                auto return_value = _obj.Key();
-                
-                py::pyobj_handle out_return_value{ py::convert(return_value) };
-                if (!out_return_value) 
-                { 
-                    return nullptr;
-                }
-                return out_return_value.detach();
-            }, nullptr);
+                return py::convert(_obj.Key());
+            }
+            catch (...)
+            {
+                py::to_PyErr();
+                return nullptr;
+            }
         }
-        PyObject* get_Value() override
+        PyObject* get_Value() noexcept override
         {
-            return py::trycatch_invoker([=]() -> PyObject*
+            try
             {
-                auto return_value = _obj.Value();
-                
-                py::pyobj_handle out_return_value{ py::convert(return_value) };
-                if (!out_return_value) 
-                { 
-                    return nullptr;
-                }
-                return out_return_value.detach();
-            }, nullptr);
+                return py::convert(_obj.Value());
+            }
+            catch (...)
+            {
+                py::to_PyErr();
+                return nullptr;
+            }
         }
         
         winrt::Windows::Foundation::Collections::IKeyValuePair<K, V> _obj{ nullptr };
@@ -423,35 +426,31 @@ namespace py::impl::Windows::Foundation::Collections
     struct IMapChangedEventArgs : public py::proj::Windows::Foundation::Collections::IMapChangedEventArgs
     {
         IMapChangedEventArgs(winrt::Windows::Foundation::Collections::IMapChangedEventArgs<K> o) : _obj(o) {}
-        winrt::Windows::Foundation::IUnknown const& get_unknown() override { return _obj; }
-        std::size_t hash() override { return py::get_instance_hash(_obj); }
-        PyObject* get_CollectionChange() override
+        winrt::Windows::Foundation::IUnknown const& get_unknown() noexcept override { return _obj; }
+        std::size_t hash() noexcept override { return py::get_instance_hash(_obj); }
+        PyObject* get_CollectionChange() noexcept override
         {
-            return py::trycatch_invoker([=]() -> PyObject*
+            try
             {
-                auto return_value = _obj.CollectionChange();
-                
-                py::pyobj_handle out_return_value{ py::convert(return_value) };
-                if (!out_return_value) 
-                { 
-                    return nullptr;
-                }
-                return out_return_value.detach();
-            }, nullptr);
+                return py::convert(_obj.CollectionChange());
+            }
+            catch (...)
+            {
+                py::to_PyErr();
+                return nullptr;
+            }
         }
-        PyObject* get_Key() override
+        PyObject* get_Key() noexcept override
         {
-            return py::trycatch_invoker([=]() -> PyObject*
+            try
             {
-                auto return_value = _obj.Key();
-                
-                py::pyobj_handle out_return_value{ py::convert(return_value) };
-                if (!out_return_value) 
-                { 
-                    return nullptr;
-                }
-                return out_return_value.detach();
-            }, nullptr);
+                return py::convert(_obj.Key());
+            }
+            catch (...)
+            {
+                py::to_PyErr();
+                return nullptr;
+            }
         }
         
         winrt::Windows::Foundation::Collections::IMapChangedEventArgs<K> _obj{ nullptr };
@@ -461,91 +460,85 @@ namespace py::impl::Windows::Foundation::Collections
     struct IMapView : public py::proj::Windows::Foundation::Collections::IMapView
     {
         IMapView(winrt::Windows::Foundation::Collections::IMapView<K, V> o) : _obj(o) {}
-        winrt::Windows::Foundation::IUnknown const& get_unknown() override { return _obj; }
-        std::size_t hash() override { return py::get_instance_hash(_obj); }
-        PyObject* First(PyObject* args) override
+        winrt::Windows::Foundation::IUnknown const& get_unknown() noexcept override { return _obj; }
+        std::size_t hash() noexcept override { return py::get_instance_hash(_obj); }
+        PyObject* First(PyObject* args) noexcept override
         {
             Py_ssize_t arg_count = PyTuple_Size(args);
             
             if (arg_count == 0)
             {
-                return py::trycatch_invoker([=]() -> PyObject*
+                try
                 {
-                    auto return_value = _obj.First();
-                    
-                    py::pyobj_handle out_return_value{ py::convert(return_value) };
-                    if (!out_return_value) 
-                    { 
-                        return nullptr;
-                    }
-                    return out_return_value.detach();
-                }, nullptr);
+                    return py::convert(_obj.First());
+                }
+                catch (...)
+                {
+                    py::to_PyErr();
+                    return nullptr;
+                }
             }
-            else if (arg_count != -1)
+            else
             {
-                PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+                py::set_invalid_arg_count_error(arg_count);
+                return nullptr;
             }
-            return nullptr;
         }
-        PyObject* HasKey(PyObject* args) override
+        PyObject* HasKey(PyObject* args) noexcept override
         {
             Py_ssize_t arg_count = PyTuple_Size(args);
             
             if (arg_count == 1)
             {
-                return py::trycatch_invoker([=]() -> PyObject*
+                try
                 {
                     auto param0 = py::convert_to<K>(args, 0);
                     
-                    auto return_value = _obj.HasKey(param0);
-                    
-                    py::pyobj_handle out_return_value{ py::convert(return_value) };
-                    if (!out_return_value) 
-                    { 
-                        return nullptr;
-                    }
-                    return out_return_value.detach();
-                }, nullptr);
+                    return py::convert(_obj.HasKey(param0));
+                }
+                catch (...)
+                {
+                    py::to_PyErr();
+                    return nullptr;
+                }
             }
-            else if (arg_count != -1)
+            else
             {
-                PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+                py::set_invalid_arg_count_error(arg_count);
+                return nullptr;
             }
-            return nullptr;
         }
-        PyObject* Lookup(PyObject* args) override
+        PyObject* Lookup(PyObject* args) noexcept override
         {
             Py_ssize_t arg_count = PyTuple_Size(args);
             
             if (arg_count == 1)
             {
-                return py::trycatch_invoker([=]() -> PyObject*
+                try
                 {
                     auto param0 = py::convert_to<K>(args, 0);
                     
-                    auto return_value = _obj.Lookup(param0);
-                    
-                    py::pyobj_handle out_return_value{ py::convert(return_value) };
-                    if (!out_return_value) 
-                    { 
-                        return nullptr;
-                    }
-                    return out_return_value.detach();
-                }, nullptr);
+                    return py::convert(_obj.Lookup(param0));
+                }
+                catch (...)
+                {
+                    py::to_PyErr();
+                    return nullptr;
+                }
             }
-            else if (arg_count != -1)
+            else
             {
-                PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+                py::set_invalid_arg_count_error(arg_count);
+                return nullptr;
             }
-            return nullptr;
         }
-        PyObject* Split(PyObject* args) override
+        PyObject* Split(PyObject* args) noexcept override
         {
             Py_ssize_t arg_count = PyTuple_Size(args);
             
             if (arg_count == 0)
             {
-                return py::trycatch_invoker([=]() -> PyObject*
+                try
                 {
                     winrt::Windows::Foundation::Collections::IMapView<K, V> param0 { nullptr };
                     winrt::Windows::Foundation::Collections::IMapView<K, V> param1 { nullptr };
@@ -563,48 +556,66 @@ namespace py::impl::Windows::Foundation::Collections
                         return nullptr;
                     }
                     return PyTuple_Pack(2, out0.detach(), out1.detach());
-                }, nullptr);
-            }
-            else if (arg_count != -1)
-            {
-                PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-            }
-            return nullptr;
-        }
-        PyObject* get_Size() override
-        {
-            return py::trycatch_invoker([=]() -> PyObject*
-            {
-                auto return_value = _obj.Size();
-                
-                py::pyobj_handle out_return_value{ py::convert(return_value) };
-                if (!out_return_value) 
-                { 
+                }
+                catch (...)
+                {
+                    py::to_PyErr();
                     return nullptr;
                 }
-                return out_return_value.detach();
-            }, nullptr);
+            }
+            else
+            {
+                py::set_invalid_arg_count_error(arg_count);
+                return nullptr;
+            }
         }
-        PyObject* dunder_iter() override
+        PyObject* get_Size() noexcept override
         {
-            return py::trycatch_invoker([=]() -> PyObject*
+            try
+            {
+                return py::convert(_obj.Size());
+            }
+            catch (...)
+            {
+                py::to_PyErr();
+                return nullptr;
+            }
+        }
+        PyObject* dunder_iter() noexcept override
+        {
+            try
             {
                 return py::convert(_obj.First());
-            }, nullptr);
+            }
+            catch (...)
+            {
+                py::to_PyErr();
+                return nullptr;
+            }
         }
-        Py_ssize_t map_length() override
+        Py_ssize_t map_length() noexcept override
         {
-            return py::trycatch_invoker([=]() -> Py_ssize_t
+            try
             {
                 return static_cast<Py_ssize_t>(_obj.Size());
-            }, -1);
+            }
+            catch (...)
+            {
+                py::to_PyErr();
+                return -1;
+            }
         }
-        PyObject* map_subscript(PyObject* key) override
+        PyObject* map_subscript(PyObject* key) noexcept override
         {
-            return py::trycatch_invoker([=]() -> PyObject*
+            try
             {
                 return py::convert(_obj.Lookup(py::convert_to<K>(key)));
-            }, nullptr);
+            }
+            catch (...)
+            {
+                py::to_PyErr();
+                return nullptr;
+            }
         }
         
         winrt::Windows::Foundation::Collections::IMapView<K, V> _obj{ nullptr };
@@ -614,219 +625,235 @@ namespace py::impl::Windows::Foundation::Collections
     struct IMap : public py::proj::Windows::Foundation::Collections::IMap
     {
         IMap(winrt::Windows::Foundation::Collections::IMap<K, V> o) : _obj(o) {}
-        winrt::Windows::Foundation::IUnknown const& get_unknown() override { return _obj; }
-        std::size_t hash() override { return py::get_instance_hash(_obj); }
-        PyObject* Clear(PyObject* args) override
+        winrt::Windows::Foundation::IUnknown const& get_unknown() noexcept override { return _obj; }
+        std::size_t hash() noexcept override { return py::get_instance_hash(_obj); }
+        PyObject* Clear(PyObject* args) noexcept override
         {
             Py_ssize_t arg_count = PyTuple_Size(args);
             
             if (arg_count == 0)
             {
-                return py::trycatch_invoker([=]() -> PyObject*
+                try
                 {
                     _obj.Clear();
-                    
                     Py_RETURN_NONE;
-                }, nullptr);
+                }
+                catch (...)
+                {
+                    py::to_PyErr();
+                    return nullptr;
+                }
             }
-            else if (arg_count != -1)
+            else
             {
-                PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+                py::set_invalid_arg_count_error(arg_count);
+                return nullptr;
             }
-            return nullptr;
         }
-        PyObject* First(PyObject* args) override
+        PyObject* First(PyObject* args) noexcept override
         {
             Py_ssize_t arg_count = PyTuple_Size(args);
             
             if (arg_count == 0)
             {
-                return py::trycatch_invoker([=]() -> PyObject*
+                try
                 {
-                    auto return_value = _obj.First();
-                    
-                    py::pyobj_handle out_return_value{ py::convert(return_value) };
-                    if (!out_return_value) 
-                    { 
-                        return nullptr;
-                    }
-                    return out_return_value.detach();
-                }, nullptr);
+                    return py::convert(_obj.First());
+                }
+                catch (...)
+                {
+                    py::to_PyErr();
+                    return nullptr;
+                }
             }
-            else if (arg_count != -1)
+            else
             {
-                PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+                py::set_invalid_arg_count_error(arg_count);
+                return nullptr;
             }
-            return nullptr;
         }
-        PyObject* GetView(PyObject* args) override
+        PyObject* GetView(PyObject* args) noexcept override
         {
             Py_ssize_t arg_count = PyTuple_Size(args);
             
             if (arg_count == 0)
             {
-                return py::trycatch_invoker([=]() -> PyObject*
+                try
                 {
-                    auto return_value = _obj.GetView();
-                    
-                    py::pyobj_handle out_return_value{ py::convert(return_value) };
-                    if (!out_return_value) 
-                    { 
-                        return nullptr;
-                    }
-                    return out_return_value.detach();
-                }, nullptr);
+                    return py::convert(_obj.GetView());
+                }
+                catch (...)
+                {
+                    py::to_PyErr();
+                    return nullptr;
+                }
             }
-            else if (arg_count != -1)
+            else
             {
-                PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+                py::set_invalid_arg_count_error(arg_count);
+                return nullptr;
             }
-            return nullptr;
         }
-        PyObject* HasKey(PyObject* args) override
+        PyObject* HasKey(PyObject* args) noexcept override
         {
             Py_ssize_t arg_count = PyTuple_Size(args);
             
             if (arg_count == 1)
             {
-                return py::trycatch_invoker([=]() -> PyObject*
+                try
                 {
                     auto param0 = py::convert_to<K>(args, 0);
                     
-                    auto return_value = _obj.HasKey(param0);
-                    
-                    py::pyobj_handle out_return_value{ py::convert(return_value) };
-                    if (!out_return_value) 
-                    { 
-                        return nullptr;
-                    }
-                    return out_return_value.detach();
-                }, nullptr);
+                    return py::convert(_obj.HasKey(param0));
+                }
+                catch (...)
+                {
+                    py::to_PyErr();
+                    return nullptr;
+                }
             }
-            else if (arg_count != -1)
+            else
             {
-                PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+                py::set_invalid_arg_count_error(arg_count);
+                return nullptr;
             }
-            return nullptr;
         }
-        PyObject* Insert(PyObject* args) override
+        PyObject* Insert(PyObject* args) noexcept override
         {
             Py_ssize_t arg_count = PyTuple_Size(args);
             
             if (arg_count == 2)
             {
-                return py::trycatch_invoker([=]() -> PyObject*
+                try
                 {
                     auto param0 = py::convert_to<K>(args, 0);
                     auto param1 = py::convert_to<V>(args, 1);
                     
-                    auto return_value = _obj.Insert(param0, param1);
-                    
-                    py::pyobj_handle out_return_value{ py::convert(return_value) };
-                    if (!out_return_value) 
-                    { 
-                        return nullptr;
-                    }
-                    return out_return_value.detach();
-                }, nullptr);
+                    return py::convert(_obj.Insert(param0, param1));
+                }
+                catch (...)
+                {
+                    py::to_PyErr();
+                    return nullptr;
+                }
             }
-            else if (arg_count != -1)
+            else
             {
-                PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+                py::set_invalid_arg_count_error(arg_count);
+                return nullptr;
             }
-            return nullptr;
         }
-        PyObject* Lookup(PyObject* args) override
+        PyObject* Lookup(PyObject* args) noexcept override
         {
             Py_ssize_t arg_count = PyTuple_Size(args);
             
             if (arg_count == 1)
             {
-                return py::trycatch_invoker([=]() -> PyObject*
+                try
                 {
                     auto param0 = py::convert_to<K>(args, 0);
                     
-                    auto return_value = _obj.Lookup(param0);
-                    
-                    py::pyobj_handle out_return_value{ py::convert(return_value) };
-                    if (!out_return_value) 
-                    { 
-                        return nullptr;
-                    }
-                    return out_return_value.detach();
-                }, nullptr);
+                    return py::convert(_obj.Lookup(param0));
+                }
+                catch (...)
+                {
+                    py::to_PyErr();
+                    return nullptr;
+                }
             }
-            else if (arg_count != -1)
+            else
             {
-                PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+                py::set_invalid_arg_count_error(arg_count);
+                return nullptr;
             }
-            return nullptr;
         }
-        PyObject* Remove(PyObject* args) override
+        PyObject* Remove(PyObject* args) noexcept override
         {
             Py_ssize_t arg_count = PyTuple_Size(args);
             
             if (arg_count == 1)
             {
-                return py::trycatch_invoker([=]() -> PyObject*
+                try
                 {
                     auto param0 = py::convert_to<K>(args, 0);
                     
                     _obj.Remove(param0);
-                    
                     Py_RETURN_NONE;
-                }, nullptr);
-            }
-            else if (arg_count != -1)
-            {
-                PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-            }
-            return nullptr;
-        }
-        PyObject* get_Size() override
-        {
-            return py::trycatch_invoker([=]() -> PyObject*
-            {
-                auto return_value = _obj.Size();
-                
-                py::pyobj_handle out_return_value{ py::convert(return_value) };
-                if (!out_return_value) 
-                { 
+                }
+                catch (...)
+                {
+                    py::to_PyErr();
                     return nullptr;
                 }
-                return out_return_value.detach();
-            }, nullptr);
+            }
+            else
+            {
+                py::set_invalid_arg_count_error(arg_count);
+                return nullptr;
+            }
         }
-        PyObject* dunder_iter() override
+        PyObject* get_Size() noexcept override
         {
-            return py::trycatch_invoker([=]() -> PyObject*
+            try
+            {
+                return py::convert(_obj.Size());
+            }
+            catch (...)
+            {
+                py::to_PyErr();
+                return nullptr;
+            }
+        }
+        PyObject* dunder_iter() noexcept override
+        {
+            try
             {
                 return py::convert(_obj.First());
-            }, nullptr);
+            }
+            catch (...)
+            {
+                py::to_PyErr();
+                return nullptr;
+            }
         }
-        Py_ssize_t map_length() override
+        Py_ssize_t map_length() noexcept override
         {
-            return py::trycatch_invoker([=]() -> Py_ssize_t
+            try
             {
                 return static_cast<Py_ssize_t>(_obj.Size());
-            }, -1);
+            }
+            catch (...)
+            {
+                py::to_PyErr();
+                return -1;
+            }
         }
-        PyObject* map_subscript(PyObject* key) override
+        PyObject* map_subscript(PyObject* key) noexcept override
         {
-            return py::trycatch_invoker([=]() -> PyObject*
+            try
             {
                 return py::convert(_obj.Lookup(py::convert_to<K>(key)));
-            }, nullptr);
+            }
+            catch (...)
+            {
+                py::to_PyErr();
+                return nullptr;
+            }
         }
-        int map_assign(PyObject* key, PyObject* value) override
+        int map_assign(PyObject* key, PyObject* value) noexcept override
         {
-            return py::trycatch_invoker([=]() -> int
+            try
             {
                 auto _key = py::convert_to<K>(key);
                 if (value == nullptr) { _obj.Remove(_key); }
                 else { _obj.Insert(_key, py::convert_to<V>(value)); }
                 return 0;
-            }, -1);
+            }
+            catch (...)
+            {
+                py::to_PyErr();
+                return -1;
+            }
         }
         
         winrt::Windows::Foundation::Collections::IMap<K, V> _obj{ nullptr };
@@ -836,246 +863,264 @@ namespace py::impl::Windows::Foundation::Collections
     struct IObservableMap : public py::proj::Windows::Foundation::Collections::IObservableMap
     {
         IObservableMap(winrt::Windows::Foundation::Collections::IObservableMap<K, V> o) : _obj(o) {}
-        winrt::Windows::Foundation::IUnknown const& get_unknown() override { return _obj; }
-        std::size_t hash() override { return py::get_instance_hash(_obj); }
-        PyObject* Clear(PyObject* args) override
+        winrt::Windows::Foundation::IUnknown const& get_unknown() noexcept override { return _obj; }
+        std::size_t hash() noexcept override { return py::get_instance_hash(_obj); }
+        PyObject* Clear(PyObject* args) noexcept override
         {
             Py_ssize_t arg_count = PyTuple_Size(args);
             
             if (arg_count == 0)
             {
-                return py::trycatch_invoker([=]() -> PyObject*
+                try
                 {
                     _obj.Clear();
-                    
                     Py_RETURN_NONE;
-                }, nullptr);
+                }
+                catch (...)
+                {
+                    py::to_PyErr();
+                    return nullptr;
+                }
             }
-            else if (arg_count != -1)
+            else
             {
-                PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+                py::set_invalid_arg_count_error(arg_count);
+                return nullptr;
             }
-            return nullptr;
         }
-        PyObject* First(PyObject* args) override
+        PyObject* First(PyObject* args) noexcept override
         {
             Py_ssize_t arg_count = PyTuple_Size(args);
             
             if (arg_count == 0)
             {
-                return py::trycatch_invoker([=]() -> PyObject*
+                try
                 {
-                    auto return_value = _obj.First();
-                    
-                    py::pyobj_handle out_return_value{ py::convert(return_value) };
-                    if (!out_return_value) 
-                    { 
-                        return nullptr;
-                    }
-                    return out_return_value.detach();
-                }, nullptr);
+                    return py::convert(_obj.First());
+                }
+                catch (...)
+                {
+                    py::to_PyErr();
+                    return nullptr;
+                }
             }
-            else if (arg_count != -1)
+            else
             {
-                PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+                py::set_invalid_arg_count_error(arg_count);
+                return nullptr;
             }
-            return nullptr;
         }
-        PyObject* GetView(PyObject* args) override
+        PyObject* GetView(PyObject* args) noexcept override
         {
             Py_ssize_t arg_count = PyTuple_Size(args);
             
             if (arg_count == 0)
             {
-                return py::trycatch_invoker([=]() -> PyObject*
+                try
                 {
-                    auto return_value = _obj.GetView();
-                    
-                    py::pyobj_handle out_return_value{ py::convert(return_value) };
-                    if (!out_return_value) 
-                    { 
-                        return nullptr;
-                    }
-                    return out_return_value.detach();
-                }, nullptr);
+                    return py::convert(_obj.GetView());
+                }
+                catch (...)
+                {
+                    py::to_PyErr();
+                    return nullptr;
+                }
             }
-            else if (arg_count != -1)
+            else
             {
-                PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+                py::set_invalid_arg_count_error(arg_count);
+                return nullptr;
             }
-            return nullptr;
         }
-        PyObject* HasKey(PyObject* args) override
+        PyObject* HasKey(PyObject* args) noexcept override
         {
             Py_ssize_t arg_count = PyTuple_Size(args);
             
             if (arg_count == 1)
             {
-                return py::trycatch_invoker([=]() -> PyObject*
+                try
                 {
                     auto param0 = py::convert_to<K>(args, 0);
                     
-                    auto return_value = _obj.HasKey(param0);
-                    
-                    py::pyobj_handle out_return_value{ py::convert(return_value) };
-                    if (!out_return_value) 
-                    { 
-                        return nullptr;
-                    }
-                    return out_return_value.detach();
-                }, nullptr);
+                    return py::convert(_obj.HasKey(param0));
+                }
+                catch (...)
+                {
+                    py::to_PyErr();
+                    return nullptr;
+                }
             }
-            else if (arg_count != -1)
+            else
             {
-                PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+                py::set_invalid_arg_count_error(arg_count);
+                return nullptr;
             }
-            return nullptr;
         }
-        PyObject* Insert(PyObject* args) override
+        PyObject* Insert(PyObject* args) noexcept override
         {
             Py_ssize_t arg_count = PyTuple_Size(args);
             
             if (arg_count == 2)
             {
-                return py::trycatch_invoker([=]() -> PyObject*
+                try
                 {
                     auto param0 = py::convert_to<K>(args, 0);
                     auto param1 = py::convert_to<V>(args, 1);
                     
-                    auto return_value = _obj.Insert(param0, param1);
-                    
-                    py::pyobj_handle out_return_value{ py::convert(return_value) };
-                    if (!out_return_value) 
-                    { 
-                        return nullptr;
-                    }
-                    return out_return_value.detach();
-                }, nullptr);
+                    return py::convert(_obj.Insert(param0, param1));
+                }
+                catch (...)
+                {
+                    py::to_PyErr();
+                    return nullptr;
+                }
             }
-            else if (arg_count != -1)
+            else
             {
-                PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+                py::set_invalid_arg_count_error(arg_count);
+                return nullptr;
             }
-            return nullptr;
         }
-        PyObject* Lookup(PyObject* args) override
+        PyObject* Lookup(PyObject* args) noexcept override
         {
             Py_ssize_t arg_count = PyTuple_Size(args);
             
             if (arg_count == 1)
             {
-                return py::trycatch_invoker([=]() -> PyObject*
+                try
                 {
                     auto param0 = py::convert_to<K>(args, 0);
                     
-                    auto return_value = _obj.Lookup(param0);
-                    
-                    py::pyobj_handle out_return_value{ py::convert(return_value) };
-                    if (!out_return_value) 
-                    { 
-                        return nullptr;
-                    }
-                    return out_return_value.detach();
-                }, nullptr);
+                    return py::convert(_obj.Lookup(param0));
+                }
+                catch (...)
+                {
+                    py::to_PyErr();
+                    return nullptr;
+                }
             }
-            else if (arg_count != -1)
+            else
             {
-                PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+                py::set_invalid_arg_count_error(arg_count);
+                return nullptr;
             }
-            return nullptr;
         }
-        PyObject* Remove(PyObject* args) override
+        PyObject* Remove(PyObject* args) noexcept override
         {
             Py_ssize_t arg_count = PyTuple_Size(args);
             
             if (arg_count == 1)
             {
-                return py::trycatch_invoker([=]() -> PyObject*
+                try
                 {
                     auto param0 = py::convert_to<K>(args, 0);
                     
                     _obj.Remove(param0);
-                    
                     Py_RETURN_NONE;
-                }, nullptr);
-            }
-            else if (arg_count != -1)
-            {
-                PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-            }
-            return nullptr;
-        }
-        PyObject* get_Size() override
-        {
-            return py::trycatch_invoker([=]() -> PyObject*
-            {
-                auto return_value = _obj.Size();
-                
-                py::pyobj_handle out_return_value{ py::convert(return_value) };
-                if (!out_return_value) 
-                { 
+                }
+                catch (...)
+                {
+                    py::to_PyErr();
                     return nullptr;
                 }
-                return out_return_value.detach();
-            }, nullptr);
+            }
+            else
+            {
+                py::set_invalid_arg_count_error(arg_count);
+                return nullptr;
+            }
         }
-        PyObject* add_MapChanged(PyObject* arg) override
+        PyObject* get_Size() noexcept override
         {
-            return py::trycatch_invoker([=]() -> PyObject*
+            try
+            {
+                return py::convert(_obj.Size());
+            }
+            catch (...)
+            {
+                py::to_PyErr();
+                return nullptr;
+            }
+        }
+        PyObject* add_MapChanged(PyObject* arg) noexcept override
+        {
+            try
             {
                 auto param0 = py::convert_to<winrt::Windows::Foundation::Collections::MapChangedEventHandler<K, V>>(arg);
                 
-                auto return_value = _obj.MapChanged(param0);
-                
-                py::pyobj_handle out_return_value{ py::convert(return_value) };
-                if (!out_return_value) 
-                { 
-                    return nullptr;
-                }
-                return out_return_value.detach();
-            }, nullptr);
+                return py::convert(_obj.MapChanged(param0));
+            }
+            catch (...)
+            {
+                py::to_PyErr();
+                return nullptr;
+            }
         }
-        PyObject* remove_MapChanged(PyObject* arg) override
+        PyObject* remove_MapChanged(PyObject* arg) noexcept override
         {
-            return py::trycatch_invoker([=]() -> PyObject*
+            try
             {
                 auto param0 = py::convert_to<winrt::event_token>(arg);
                 
                 _obj.MapChanged(param0);
-                
                 Py_RETURN_NONE;
-            }, nullptr);
+            }
+            catch (...)
+            {
+                py::to_PyErr();
+                return nullptr;
+            }
         }
-        PyObject* dunder_iter() override
+        PyObject* dunder_iter() noexcept override
         {
-            return py::trycatch_invoker([=]() -> PyObject*
+            try
             {
                 return py::convert(_obj.First());
-            }, nullptr);
+            }
+            catch (...)
+            {
+                py::to_PyErr();
+                return nullptr;
+            }
         }
-        Py_ssize_t map_length() override
+        Py_ssize_t map_length() noexcept override
         {
-            return py::trycatch_invoker([=]() -> Py_ssize_t
+            try
             {
                 return static_cast<Py_ssize_t>(_obj.Size());
-            }, -1);
+            }
+            catch (...)
+            {
+                py::to_PyErr();
+                return -1;
+            }
         }
-        PyObject* map_subscript(PyObject* key) override
+        PyObject* map_subscript(PyObject* key) noexcept override
         {
-            return py::trycatch_invoker([=]() -> PyObject*
+            try
             {
                 return py::convert(_obj.Lookup(py::convert_to<K>(key)));
-            }, nullptr);
+            }
+            catch (...)
+            {
+                py::to_PyErr();
+                return nullptr;
+            }
         }
-        int map_assign(PyObject* key, PyObject* value) override
+        int map_assign(PyObject* key, PyObject* value) noexcept override
         {
-            return py::trycatch_invoker([=]() -> int
+            try
             {
                 auto _key = py::convert_to<K>(key);
                 if (value == nullptr) { _obj.Remove(_key); }
                 else { _obj.Insert(_key, py::convert_to<V>(value)); }
                 return 0;
-            }, -1);
+            }
+            catch (...)
+            {
+                py::to_PyErr();
+                return -1;
+            }
         }
         
         winrt::Windows::Foundation::Collections::IObservableMap<K, V> _obj{ nullptr };
@@ -1085,105 +1130,109 @@ namespace py::impl::Windows::Foundation::Collections
     struct IObservableVector : public py::proj::Windows::Foundation::Collections::IObservableVector
     {
         IObservableVector(winrt::Windows::Foundation::Collections::IObservableVector<T> o) : _obj(o) {}
-        winrt::Windows::Foundation::IUnknown const& get_unknown() override { return _obj; }
-        std::size_t hash() override { return py::get_instance_hash(_obj); }
-        PyObject* Append(PyObject* args) override
+        winrt::Windows::Foundation::IUnknown const& get_unknown() noexcept override { return _obj; }
+        std::size_t hash() noexcept override { return py::get_instance_hash(_obj); }
+        PyObject* Append(PyObject* args) noexcept override
         {
             Py_ssize_t arg_count = PyTuple_Size(args);
             
             if (arg_count == 1)
             {
-                return py::trycatch_invoker([=]() -> PyObject*
+                try
                 {
                     auto param0 = py::convert_to<T>(args, 0);
                     
                     _obj.Append(param0);
-                    
                     Py_RETURN_NONE;
-                }, nullptr);
+                }
+                catch (...)
+                {
+                    py::to_PyErr();
+                    return nullptr;
+                }
             }
-            else if (arg_count != -1)
+            else
             {
-                PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+                py::set_invalid_arg_count_error(arg_count);
+                return nullptr;
             }
-            return nullptr;
         }
-        PyObject* Clear(PyObject* args) override
+        PyObject* Clear(PyObject* args) noexcept override
         {
             Py_ssize_t arg_count = PyTuple_Size(args);
             
             if (arg_count == 0)
             {
-                return py::trycatch_invoker([=]() -> PyObject*
+                try
                 {
                     _obj.Clear();
-                    
                     Py_RETURN_NONE;
-                }, nullptr);
+                }
+                catch (...)
+                {
+                    py::to_PyErr();
+                    return nullptr;
+                }
             }
-            else if (arg_count != -1)
+            else
             {
-                PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+                py::set_invalid_arg_count_error(arg_count);
+                return nullptr;
             }
-            return nullptr;
         }
-        PyObject* First(PyObject* args) override
+        PyObject* First(PyObject* args) noexcept override
         {
             Py_ssize_t arg_count = PyTuple_Size(args);
             
             if (arg_count == 0)
             {
-                return py::trycatch_invoker([=]() -> PyObject*
+                try
                 {
-                    auto return_value = _obj.First();
-                    
-                    py::pyobj_handle out_return_value{ py::convert(return_value) };
-                    if (!out_return_value) 
-                    { 
-                        return nullptr;
-                    }
-                    return out_return_value.detach();
-                }, nullptr);
+                    return py::convert(_obj.First());
+                }
+                catch (...)
+                {
+                    py::to_PyErr();
+                    return nullptr;
+                }
             }
-            else if (arg_count != -1)
+            else
             {
-                PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+                py::set_invalid_arg_count_error(arg_count);
+                return nullptr;
             }
-            return nullptr;
         }
-        PyObject* GetAt(PyObject* args) override
+        PyObject* GetAt(PyObject* args) noexcept override
         {
             Py_ssize_t arg_count = PyTuple_Size(args);
             
             if (arg_count == 1)
             {
-                return py::trycatch_invoker([=]() -> PyObject*
+                try
                 {
                     auto param0 = py::convert_to<uint32_t>(args, 0);
                     
-                    auto return_value = _obj.GetAt(param0);
-                    
-                    py::pyobj_handle out_return_value{ py::convert(return_value) };
-                    if (!out_return_value) 
-                    { 
-                        return nullptr;
-                    }
-                    return out_return_value.detach();
-                }, nullptr);
+                    return py::convert(_obj.GetAt(param0));
+                }
+                catch (...)
+                {
+                    py::to_PyErr();
+                    return nullptr;
+                }
             }
-            else if (arg_count != -1)
+            else
             {
-                PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+                py::set_invalid_arg_count_error(arg_count);
+                return nullptr;
             }
-            return nullptr;
         }
-        PyObject* GetMany(PyObject* args) override
+        PyObject* GetMany(PyObject* args) noexcept override
         {
             Py_ssize_t arg_count = PyTuple_Size(args);
             
             if (arg_count == 2)
             {
-                return py::trycatch_invoker([=]() -> PyObject*
+                try
                 {
                     auto param0 = py::convert_to<uint32_t>(args, 0);
                     auto param1_count = py::convert_to<winrt::com_array<T>::size_type>(args, 1);
@@ -1202,45 +1251,48 @@ namespace py::impl::Windows::Foundation::Collections
                         return nullptr;
                     }
                     return PyTuple_Pack(2, out_return_value.detach(), out1.detach());
-                }, nullptr);
+                }
+                catch (...)
+                {
+                    py::to_PyErr();
+                    return nullptr;
+                }
             }
-            else if (arg_count != -1)
+            else
             {
-                PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+                py::set_invalid_arg_count_error(arg_count);
+                return nullptr;
             }
-            return nullptr;
         }
-        PyObject* GetView(PyObject* args) override
+        PyObject* GetView(PyObject* args) noexcept override
         {
             Py_ssize_t arg_count = PyTuple_Size(args);
             
             if (arg_count == 0)
             {
-                return py::trycatch_invoker([=]() -> PyObject*
+                try
                 {
-                    auto return_value = _obj.GetView();
-                    
-                    py::pyobj_handle out_return_value{ py::convert(return_value) };
-                    if (!out_return_value) 
-                    { 
-                        return nullptr;
-                    }
-                    return out_return_value.detach();
-                }, nullptr);
+                    return py::convert(_obj.GetView());
+                }
+                catch (...)
+                {
+                    py::to_PyErr();
+                    return nullptr;
+                }
             }
-            else if (arg_count != -1)
+            else
             {
-                PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+                py::set_invalid_arg_count_error(arg_count);
+                return nullptr;
             }
-            return nullptr;
         }
-        PyObject* IndexOf(PyObject* args) override
+        PyObject* IndexOf(PyObject* args) noexcept override
         {
             Py_ssize_t arg_count = PyTuple_Size(args);
             
             if (arg_count == 1)
             {
-                return py::trycatch_invoker([=]() -> PyObject*
+                try
                 {
                     auto param0 = py::convert_to<T>(args, 0);
                     uint32_t param1 {  };
@@ -1258,190 +1310,235 @@ namespace py::impl::Windows::Foundation::Collections
                         return nullptr;
                     }
                     return PyTuple_Pack(2, out_return_value.detach(), out1.detach());
-                }, nullptr);
+                }
+                catch (...)
+                {
+                    py::to_PyErr();
+                    return nullptr;
+                }
             }
-            else if (arg_count != -1)
+            else
             {
-                PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+                py::set_invalid_arg_count_error(arg_count);
+                return nullptr;
             }
-            return nullptr;
         }
-        PyObject* InsertAt(PyObject* args) override
+        PyObject* InsertAt(PyObject* args) noexcept override
         {
             Py_ssize_t arg_count = PyTuple_Size(args);
             
             if (arg_count == 2)
             {
-                return py::trycatch_invoker([=]() -> PyObject*
+                try
                 {
                     auto param0 = py::convert_to<uint32_t>(args, 0);
                     auto param1 = py::convert_to<T>(args, 1);
                     
                     _obj.InsertAt(param0, param1);
-                    
                     Py_RETURN_NONE;
-                }, nullptr);
+                }
+                catch (...)
+                {
+                    py::to_PyErr();
+                    return nullptr;
+                }
             }
-            else if (arg_count != -1)
+            else
             {
-                PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+                py::set_invalid_arg_count_error(arg_count);
+                return nullptr;
             }
-            return nullptr;
         }
-        PyObject* RemoveAt(PyObject* args) override
+        PyObject* RemoveAt(PyObject* args) noexcept override
         {
             Py_ssize_t arg_count = PyTuple_Size(args);
             
             if (arg_count == 1)
             {
-                return py::trycatch_invoker([=]() -> PyObject*
+                try
                 {
                     auto param0 = py::convert_to<uint32_t>(args, 0);
                     
                     _obj.RemoveAt(param0);
-                    
                     Py_RETURN_NONE;
-                }, nullptr);
+                }
+                catch (...)
+                {
+                    py::to_PyErr();
+                    return nullptr;
+                }
             }
-            else if (arg_count != -1)
+            else
             {
-                PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+                py::set_invalid_arg_count_error(arg_count);
+                return nullptr;
             }
-            return nullptr;
         }
-        PyObject* RemoveAtEnd(PyObject* args) override
+        PyObject* RemoveAtEnd(PyObject* args) noexcept override
         {
             Py_ssize_t arg_count = PyTuple_Size(args);
             
             if (arg_count == 0)
             {
-                return py::trycatch_invoker([=]() -> PyObject*
+                try
                 {
                     _obj.RemoveAtEnd();
-                    
                     Py_RETURN_NONE;
-                }, nullptr);
+                }
+                catch (...)
+                {
+                    py::to_PyErr();
+                    return nullptr;
+                }
             }
-            else if (arg_count != -1)
+            else
             {
-                PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+                py::set_invalid_arg_count_error(arg_count);
+                return nullptr;
             }
-            return nullptr;
         }
-        PyObject* ReplaceAll(PyObject* args) override
+        PyObject* ReplaceAll(PyObject* args) noexcept override
         {
             Py_ssize_t arg_count = PyTuple_Size(args);
             
             if (arg_count == 1)
             {
-                return py::trycatch_invoker([=]() -> PyObject*
+                try
                 {
                     auto _param0 = py::convert_to<winrt::com_array<T>>(args, 0);
                     auto param0 = winrt::array_view<const T>(_param0.data(), _param0.data() + _param0.size());
                     
                     _obj.ReplaceAll(param0);
-                    
                     Py_RETURN_NONE;
-                }, nullptr);
+                }
+                catch (...)
+                {
+                    py::to_PyErr();
+                    return nullptr;
+                }
             }
-            else if (arg_count != -1)
+            else
             {
-                PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+                py::set_invalid_arg_count_error(arg_count);
+                return nullptr;
             }
-            return nullptr;
         }
-        PyObject* SetAt(PyObject* args) override
+        PyObject* SetAt(PyObject* args) noexcept override
         {
             Py_ssize_t arg_count = PyTuple_Size(args);
             
             if (arg_count == 2)
             {
-                return py::trycatch_invoker([=]() -> PyObject*
+                try
                 {
                     auto param0 = py::convert_to<uint32_t>(args, 0);
                     auto param1 = py::convert_to<T>(args, 1);
                     
                     _obj.SetAt(param0, param1);
-                    
                     Py_RETURN_NONE;
-                }, nullptr);
-            }
-            else if (arg_count != -1)
-            {
-                PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-            }
-            return nullptr;
-        }
-        PyObject* get_Size() override
-        {
-            return py::trycatch_invoker([=]() -> PyObject*
-            {
-                auto return_value = _obj.Size();
-                
-                py::pyobj_handle out_return_value{ py::convert(return_value) };
-                if (!out_return_value) 
-                { 
+                }
+                catch (...)
+                {
+                    py::to_PyErr();
                     return nullptr;
                 }
-                return out_return_value.detach();
-            }, nullptr);
+            }
+            else
+            {
+                py::set_invalid_arg_count_error(arg_count);
+                return nullptr;
+            }
         }
-        PyObject* add_VectorChanged(PyObject* arg) override
+        PyObject* get_Size() noexcept override
         {
-            return py::trycatch_invoker([=]() -> PyObject*
+            try
+            {
+                return py::convert(_obj.Size());
+            }
+            catch (...)
+            {
+                py::to_PyErr();
+                return nullptr;
+            }
+        }
+        PyObject* add_VectorChanged(PyObject* arg) noexcept override
+        {
+            try
             {
                 auto param0 = py::convert_to<winrt::Windows::Foundation::Collections::VectorChangedEventHandler<T>>(arg);
                 
-                auto return_value = _obj.VectorChanged(param0);
-                
-                py::pyobj_handle out_return_value{ py::convert(return_value) };
-                if (!out_return_value) 
-                { 
-                    return nullptr;
-                }
-                return out_return_value.detach();
-            }, nullptr);
+                return py::convert(_obj.VectorChanged(param0));
+            }
+            catch (...)
+            {
+                py::to_PyErr();
+                return nullptr;
+            }
         }
-        PyObject* remove_VectorChanged(PyObject* arg) override
+        PyObject* remove_VectorChanged(PyObject* arg) noexcept override
         {
-            return py::trycatch_invoker([=]() -> PyObject*
+            try
             {
                 auto param0 = py::convert_to<winrt::event_token>(arg);
                 
                 _obj.VectorChanged(param0);
-                
                 Py_RETURN_NONE;
-            }, nullptr);
+            }
+            catch (...)
+            {
+                py::to_PyErr();
+                return nullptr;
+            }
         }
-        PyObject* dunder_iter() override
+        PyObject* dunder_iter() noexcept override
         {
-            return py::trycatch_invoker([=]() -> PyObject*
+            try
             {
                 return py::convert(_obj.First());
-            }, nullptr);
+            }
+            catch (...)
+            {
+                py::to_PyErr();
+                return nullptr;
+            }
         }
-        Py_ssize_t seq_length() override
+        Py_ssize_t seq_length() noexcept override
         {
-            return py::trycatch_invoker([=]() -> Py_ssize_t
+            try
             {
                 return static_cast<Py_ssize_t>(_obj.Size());
-            }, -1);
+            }
+            catch (...)
+            {
+                py::to_PyErr();
+                return -1;
+            }
         }
-        PyObject* seq_item(Py_ssize_t i) override
+        PyObject* seq_item(Py_ssize_t i) noexcept override
         {
-            return py::trycatch_invoker([=]() -> PyObject*
+            try
             {
                 return py::convert(_obj.GetAt(static_cast<uint32_t>(i)));
-            }, nullptr);
+            }
+            catch (...)
+            {
+                py::to_PyErr();
+                return nullptr;
+            }
         }
-        int seq_assign(Py_ssize_t i, PyObject* value) override
+        int seq_assign(Py_ssize_t i, PyObject* value) noexcept override
         {
-            return py::trycatch_invoker([=]() -> int
+            try
             {
                 if (value == nullptr) { _obj.RemoveAt(static_cast<uint32_t>(i)); }
                 else { _obj.SetAt(static_cast<uint32_t>(i), py::convert_to<T>(value)); }
                 return 0;
-            }, -1);
+            }
+            catch (...)
+            {
+                py::to_PyErr();
+                return -1;
+            }
         }
         
         winrt::Windows::Foundation::Collections::IObservableVector<T> _obj{ nullptr };
@@ -1451,65 +1548,61 @@ namespace py::impl::Windows::Foundation::Collections
     struct IVectorView : public py::proj::Windows::Foundation::Collections::IVectorView
     {
         IVectorView(winrt::Windows::Foundation::Collections::IVectorView<T> o) : _obj(o) {}
-        winrt::Windows::Foundation::IUnknown const& get_unknown() override { return _obj; }
-        std::size_t hash() override { return py::get_instance_hash(_obj); }
-        PyObject* First(PyObject* args) override
+        winrt::Windows::Foundation::IUnknown const& get_unknown() noexcept override { return _obj; }
+        std::size_t hash() noexcept override { return py::get_instance_hash(_obj); }
+        PyObject* First(PyObject* args) noexcept override
         {
             Py_ssize_t arg_count = PyTuple_Size(args);
             
             if (arg_count == 0)
             {
-                return py::trycatch_invoker([=]() -> PyObject*
+                try
                 {
-                    auto return_value = _obj.First();
-                    
-                    py::pyobj_handle out_return_value{ py::convert(return_value) };
-                    if (!out_return_value) 
-                    { 
-                        return nullptr;
-                    }
-                    return out_return_value.detach();
-                }, nullptr);
+                    return py::convert(_obj.First());
+                }
+                catch (...)
+                {
+                    py::to_PyErr();
+                    return nullptr;
+                }
             }
-            else if (arg_count != -1)
+            else
             {
-                PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+                py::set_invalid_arg_count_error(arg_count);
+                return nullptr;
             }
-            return nullptr;
         }
-        PyObject* GetAt(PyObject* args) override
+        PyObject* GetAt(PyObject* args) noexcept override
         {
             Py_ssize_t arg_count = PyTuple_Size(args);
             
             if (arg_count == 1)
             {
-                return py::trycatch_invoker([=]() -> PyObject*
+                try
                 {
                     auto param0 = py::convert_to<uint32_t>(args, 0);
                     
-                    auto return_value = _obj.GetAt(param0);
-                    
-                    py::pyobj_handle out_return_value{ py::convert(return_value) };
-                    if (!out_return_value) 
-                    { 
-                        return nullptr;
-                    }
-                    return out_return_value.detach();
-                }, nullptr);
+                    return py::convert(_obj.GetAt(param0));
+                }
+                catch (...)
+                {
+                    py::to_PyErr();
+                    return nullptr;
+                }
             }
-            else if (arg_count != -1)
+            else
             {
-                PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+                py::set_invalid_arg_count_error(arg_count);
+                return nullptr;
             }
-            return nullptr;
         }
-        PyObject* GetMany(PyObject* args) override
+        PyObject* GetMany(PyObject* args) noexcept override
         {
             Py_ssize_t arg_count = PyTuple_Size(args);
             
             if (arg_count == 2)
             {
-                return py::trycatch_invoker([=]() -> PyObject*
+                try
                 {
                     auto param0 = py::convert_to<uint32_t>(args, 0);
                     auto param1_count = py::convert_to<winrt::com_array<T>::size_type>(args, 1);
@@ -1528,21 +1621,26 @@ namespace py::impl::Windows::Foundation::Collections
                         return nullptr;
                     }
                     return PyTuple_Pack(2, out_return_value.detach(), out1.detach());
-                }, nullptr);
+                }
+                catch (...)
+                {
+                    py::to_PyErr();
+                    return nullptr;
+                }
             }
-            else if (arg_count != -1)
+            else
             {
-                PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+                py::set_invalid_arg_count_error(arg_count);
+                return nullptr;
             }
-            return nullptr;
         }
-        PyObject* IndexOf(PyObject* args) override
+        PyObject* IndexOf(PyObject* args) noexcept override
         {
             Py_ssize_t arg_count = PyTuple_Size(args);
             
             if (arg_count == 1)
             {
-                return py::trycatch_invoker([=]() -> PyObject*
+                try
                 {
                     auto param0 = py::convert_to<T>(args, 0);
                     uint32_t param1 {  };
@@ -1560,48 +1658,66 @@ namespace py::impl::Windows::Foundation::Collections
                         return nullptr;
                     }
                     return PyTuple_Pack(2, out_return_value.detach(), out1.detach());
-                }, nullptr);
-            }
-            else if (arg_count != -1)
-            {
-                PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-            }
-            return nullptr;
-        }
-        PyObject* get_Size() override
-        {
-            return py::trycatch_invoker([=]() -> PyObject*
-            {
-                auto return_value = _obj.Size();
-                
-                py::pyobj_handle out_return_value{ py::convert(return_value) };
-                if (!out_return_value) 
-                { 
+                }
+                catch (...)
+                {
+                    py::to_PyErr();
                     return nullptr;
                 }
-                return out_return_value.detach();
-            }, nullptr);
+            }
+            else
+            {
+                py::set_invalid_arg_count_error(arg_count);
+                return nullptr;
+            }
         }
-        PyObject* dunder_iter() override
+        PyObject* get_Size() noexcept override
         {
-            return py::trycatch_invoker([=]() -> PyObject*
+            try
+            {
+                return py::convert(_obj.Size());
+            }
+            catch (...)
+            {
+                py::to_PyErr();
+                return nullptr;
+            }
+        }
+        PyObject* dunder_iter() noexcept override
+        {
+            try
             {
                 return py::convert(_obj.First());
-            }, nullptr);
+            }
+            catch (...)
+            {
+                py::to_PyErr();
+                return nullptr;
+            }
         }
-        Py_ssize_t seq_length() override
+        Py_ssize_t seq_length() noexcept override
         {
-            return py::trycatch_invoker([=]() -> Py_ssize_t
+            try
             {
                 return static_cast<Py_ssize_t>(_obj.Size());
-            }, -1);
+            }
+            catch (...)
+            {
+                py::to_PyErr();
+                return -1;
+            }
         }
-        PyObject* seq_item(Py_ssize_t i) override
+        PyObject* seq_item(Py_ssize_t i) noexcept override
         {
-            return py::trycatch_invoker([=]() -> PyObject*
+            try
             {
                 return py::convert(_obj.GetAt(static_cast<uint32_t>(i)));
-            }, nullptr);
+            }
+            catch (...)
+            {
+                py::to_PyErr();
+                return nullptr;
+            }
         }
         
         winrt::Windows::Foundation::Collections::IVectorView<T> _obj{ nullptr };
@@ -1611,105 +1727,109 @@ namespace py::impl::Windows::Foundation::Collections
     struct IVector : public py::proj::Windows::Foundation::Collections::IVector
     {
         IVector(winrt::Windows::Foundation::Collections::IVector<T> o) : _obj(o) {}
-        winrt::Windows::Foundation::IUnknown const& get_unknown() override { return _obj; }
-        std::size_t hash() override { return py::get_instance_hash(_obj); }
-        PyObject* Append(PyObject* args) override
+        winrt::Windows::Foundation::IUnknown const& get_unknown() noexcept override { return _obj; }
+        std::size_t hash() noexcept override { return py::get_instance_hash(_obj); }
+        PyObject* Append(PyObject* args) noexcept override
         {
             Py_ssize_t arg_count = PyTuple_Size(args);
             
             if (arg_count == 1)
             {
-                return py::trycatch_invoker([=]() -> PyObject*
+                try
                 {
                     auto param0 = py::convert_to<T>(args, 0);
                     
                     _obj.Append(param0);
-                    
                     Py_RETURN_NONE;
-                }, nullptr);
+                }
+                catch (...)
+                {
+                    py::to_PyErr();
+                    return nullptr;
+                }
             }
-            else if (arg_count != -1)
+            else
             {
-                PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+                py::set_invalid_arg_count_error(arg_count);
+                return nullptr;
             }
-            return nullptr;
         }
-        PyObject* Clear(PyObject* args) override
+        PyObject* Clear(PyObject* args) noexcept override
         {
             Py_ssize_t arg_count = PyTuple_Size(args);
             
             if (arg_count == 0)
             {
-                return py::trycatch_invoker([=]() -> PyObject*
+                try
                 {
                     _obj.Clear();
-                    
                     Py_RETURN_NONE;
-                }, nullptr);
+                }
+                catch (...)
+                {
+                    py::to_PyErr();
+                    return nullptr;
+                }
             }
-            else if (arg_count != -1)
+            else
             {
-                PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+                py::set_invalid_arg_count_error(arg_count);
+                return nullptr;
             }
-            return nullptr;
         }
-        PyObject* First(PyObject* args) override
+        PyObject* First(PyObject* args) noexcept override
         {
             Py_ssize_t arg_count = PyTuple_Size(args);
             
             if (arg_count == 0)
             {
-                return py::trycatch_invoker([=]() -> PyObject*
+                try
                 {
-                    auto return_value = _obj.First();
-                    
-                    py::pyobj_handle out_return_value{ py::convert(return_value) };
-                    if (!out_return_value) 
-                    { 
-                        return nullptr;
-                    }
-                    return out_return_value.detach();
-                }, nullptr);
+                    return py::convert(_obj.First());
+                }
+                catch (...)
+                {
+                    py::to_PyErr();
+                    return nullptr;
+                }
             }
-            else if (arg_count != -1)
+            else
             {
-                PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+                py::set_invalid_arg_count_error(arg_count);
+                return nullptr;
             }
-            return nullptr;
         }
-        PyObject* GetAt(PyObject* args) override
+        PyObject* GetAt(PyObject* args) noexcept override
         {
             Py_ssize_t arg_count = PyTuple_Size(args);
             
             if (arg_count == 1)
             {
-                return py::trycatch_invoker([=]() -> PyObject*
+                try
                 {
                     auto param0 = py::convert_to<uint32_t>(args, 0);
                     
-                    auto return_value = _obj.GetAt(param0);
-                    
-                    py::pyobj_handle out_return_value{ py::convert(return_value) };
-                    if (!out_return_value) 
-                    { 
-                        return nullptr;
-                    }
-                    return out_return_value.detach();
-                }, nullptr);
+                    return py::convert(_obj.GetAt(param0));
+                }
+                catch (...)
+                {
+                    py::to_PyErr();
+                    return nullptr;
+                }
             }
-            else if (arg_count != -1)
+            else
             {
-                PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+                py::set_invalid_arg_count_error(arg_count);
+                return nullptr;
             }
-            return nullptr;
         }
-        PyObject* GetMany(PyObject* args) override
+        PyObject* GetMany(PyObject* args) noexcept override
         {
             Py_ssize_t arg_count = PyTuple_Size(args);
             
             if (arg_count == 2)
             {
-                return py::trycatch_invoker([=]() -> PyObject*
+                try
                 {
                     auto param0 = py::convert_to<uint32_t>(args, 0);
                     auto param1_count = py::convert_to<winrt::com_array<T>::size_type>(args, 1);
@@ -1728,45 +1848,48 @@ namespace py::impl::Windows::Foundation::Collections
                         return nullptr;
                     }
                     return PyTuple_Pack(2, out_return_value.detach(), out1.detach());
-                }, nullptr);
+                }
+                catch (...)
+                {
+                    py::to_PyErr();
+                    return nullptr;
+                }
             }
-            else if (arg_count != -1)
+            else
             {
-                PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+                py::set_invalid_arg_count_error(arg_count);
+                return nullptr;
             }
-            return nullptr;
         }
-        PyObject* GetView(PyObject* args) override
+        PyObject* GetView(PyObject* args) noexcept override
         {
             Py_ssize_t arg_count = PyTuple_Size(args);
             
             if (arg_count == 0)
             {
-                return py::trycatch_invoker([=]() -> PyObject*
+                try
                 {
-                    auto return_value = _obj.GetView();
-                    
-                    py::pyobj_handle out_return_value{ py::convert(return_value) };
-                    if (!out_return_value) 
-                    { 
-                        return nullptr;
-                    }
-                    return out_return_value.detach();
-                }, nullptr);
+                    return py::convert(_obj.GetView());
+                }
+                catch (...)
+                {
+                    py::to_PyErr();
+                    return nullptr;
+                }
             }
-            else if (arg_count != -1)
+            else
             {
-                PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+                py::set_invalid_arg_count_error(arg_count);
+                return nullptr;
             }
-            return nullptr;
         }
-        PyObject* IndexOf(PyObject* args) override
+        PyObject* IndexOf(PyObject* args) noexcept override
         {
             Py_ssize_t arg_count = PyTuple_Size(args);
             
             if (arg_count == 1)
             {
-                return py::trycatch_invoker([=]() -> PyObject*
+                try
                 {
                     auto param0 = py::convert_to<T>(args, 0);
                     uint32_t param1 {  };
@@ -1784,163 +1907,206 @@ namespace py::impl::Windows::Foundation::Collections
                         return nullptr;
                     }
                     return PyTuple_Pack(2, out_return_value.detach(), out1.detach());
-                }, nullptr);
+                }
+                catch (...)
+                {
+                    py::to_PyErr();
+                    return nullptr;
+                }
             }
-            else if (arg_count != -1)
+            else
             {
-                PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+                py::set_invalid_arg_count_error(arg_count);
+                return nullptr;
             }
-            return nullptr;
         }
-        PyObject* InsertAt(PyObject* args) override
+        PyObject* InsertAt(PyObject* args) noexcept override
         {
             Py_ssize_t arg_count = PyTuple_Size(args);
             
             if (arg_count == 2)
             {
-                return py::trycatch_invoker([=]() -> PyObject*
+                try
                 {
                     auto param0 = py::convert_to<uint32_t>(args, 0);
                     auto param1 = py::convert_to<T>(args, 1);
                     
                     _obj.InsertAt(param0, param1);
-                    
                     Py_RETURN_NONE;
-                }, nullptr);
+                }
+                catch (...)
+                {
+                    py::to_PyErr();
+                    return nullptr;
+                }
             }
-            else if (arg_count != -1)
+            else
             {
-                PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+                py::set_invalid_arg_count_error(arg_count);
+                return nullptr;
             }
-            return nullptr;
         }
-        PyObject* RemoveAt(PyObject* args) override
+        PyObject* RemoveAt(PyObject* args) noexcept override
         {
             Py_ssize_t arg_count = PyTuple_Size(args);
             
             if (arg_count == 1)
             {
-                return py::trycatch_invoker([=]() -> PyObject*
+                try
                 {
                     auto param0 = py::convert_to<uint32_t>(args, 0);
                     
                     _obj.RemoveAt(param0);
-                    
                     Py_RETURN_NONE;
-                }, nullptr);
+                }
+                catch (...)
+                {
+                    py::to_PyErr();
+                    return nullptr;
+                }
             }
-            else if (arg_count != -1)
+            else
             {
-                PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+                py::set_invalid_arg_count_error(arg_count);
+                return nullptr;
             }
-            return nullptr;
         }
-        PyObject* RemoveAtEnd(PyObject* args) override
+        PyObject* RemoveAtEnd(PyObject* args) noexcept override
         {
             Py_ssize_t arg_count = PyTuple_Size(args);
             
             if (arg_count == 0)
             {
-                return py::trycatch_invoker([=]() -> PyObject*
+                try
                 {
                     _obj.RemoveAtEnd();
-                    
                     Py_RETURN_NONE;
-                }, nullptr);
+                }
+                catch (...)
+                {
+                    py::to_PyErr();
+                    return nullptr;
+                }
             }
-            else if (arg_count != -1)
+            else
             {
-                PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+                py::set_invalid_arg_count_error(arg_count);
+                return nullptr;
             }
-            return nullptr;
         }
-        PyObject* ReplaceAll(PyObject* args) override
+        PyObject* ReplaceAll(PyObject* args) noexcept override
         {
             Py_ssize_t arg_count = PyTuple_Size(args);
             
             if (arg_count == 1)
             {
-                return py::trycatch_invoker([=]() -> PyObject*
+                try
                 {
                     auto _param0 = py::convert_to<winrt::com_array<T>>(args, 0);
                     auto param0 = winrt::array_view<const T>(_param0.data(), _param0.data() + _param0.size());
                     
                     _obj.ReplaceAll(param0);
-                    
                     Py_RETURN_NONE;
-                }, nullptr);
+                }
+                catch (...)
+                {
+                    py::to_PyErr();
+                    return nullptr;
+                }
             }
-            else if (arg_count != -1)
+            else
             {
-                PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+                py::set_invalid_arg_count_error(arg_count);
+                return nullptr;
             }
-            return nullptr;
         }
-        PyObject* SetAt(PyObject* args) override
+        PyObject* SetAt(PyObject* args) noexcept override
         {
             Py_ssize_t arg_count = PyTuple_Size(args);
             
             if (arg_count == 2)
             {
-                return py::trycatch_invoker([=]() -> PyObject*
+                try
                 {
                     auto param0 = py::convert_to<uint32_t>(args, 0);
                     auto param1 = py::convert_to<T>(args, 1);
                     
                     _obj.SetAt(param0, param1);
-                    
                     Py_RETURN_NONE;
-                }, nullptr);
-            }
-            else if (arg_count != -1)
-            {
-                PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-            }
-            return nullptr;
-        }
-        PyObject* get_Size() override
-        {
-            return py::trycatch_invoker([=]() -> PyObject*
-            {
-                auto return_value = _obj.Size();
-                
-                py::pyobj_handle out_return_value{ py::convert(return_value) };
-                if (!out_return_value) 
-                { 
+                }
+                catch (...)
+                {
+                    py::to_PyErr();
                     return nullptr;
                 }
-                return out_return_value.detach();
-            }, nullptr);
+            }
+            else
+            {
+                py::set_invalid_arg_count_error(arg_count);
+                return nullptr;
+            }
         }
-        PyObject* dunder_iter() override
+        PyObject* get_Size() noexcept override
         {
-            return py::trycatch_invoker([=]() -> PyObject*
+            try
+            {
+                return py::convert(_obj.Size());
+            }
+            catch (...)
+            {
+                py::to_PyErr();
+                return nullptr;
+            }
+        }
+        PyObject* dunder_iter() noexcept override
+        {
+            try
             {
                 return py::convert(_obj.First());
-            }, nullptr);
+            }
+            catch (...)
+            {
+                py::to_PyErr();
+                return nullptr;
+            }
         }
-        Py_ssize_t seq_length() override
+        Py_ssize_t seq_length() noexcept override
         {
-            return py::trycatch_invoker([=]() -> Py_ssize_t
+            try
             {
                 return static_cast<Py_ssize_t>(_obj.Size());
-            }, -1);
+            }
+            catch (...)
+            {
+                py::to_PyErr();
+                return -1;
+            }
         }
-        PyObject* seq_item(Py_ssize_t i) override
+        PyObject* seq_item(Py_ssize_t i) noexcept override
         {
-            return py::trycatch_invoker([=]() -> PyObject*
+            try
             {
                 return py::convert(_obj.GetAt(static_cast<uint32_t>(i)));
-            }, nullptr);
+            }
+            catch (...)
+            {
+                py::to_PyErr();
+                return nullptr;
+            }
         }
-        int seq_assign(Py_ssize_t i, PyObject* value) override
+        int seq_assign(Py_ssize_t i, PyObject* value) noexcept override
         {
-            return py::trycatch_invoker([=]() -> int
+            try
             {
                 if (value == nullptr) { _obj.RemoveAt(static_cast<uint32_t>(i)); }
                 else { _obj.SetAt(static_cast<uint32_t>(i), py::convert_to<T>(value)); }
                 return 0;
-            }, -1);
+            }
+            catch (...)
+            {
+                py::to_PyErr();
+                return -1;
+            }
         }
         
         winrt::Windows::Foundation::Collections::IVector<T> _obj{ nullptr };

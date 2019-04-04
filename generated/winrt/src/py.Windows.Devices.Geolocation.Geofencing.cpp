@@ -5,31 +5,36 @@
 // ----- Geofence class --------------------
 
 PyTypeObject* py::winrt_type<winrt::Windows::Devices::Geolocation::Geofencing::Geofence>::python_type;
-static const char* _type_name_Geofence = "Geofence";
+constexpr const char* const _type_name_Geofence = "Geofence";
 
-static PyObject* _new_Geofence(PyTypeObject* type, PyObject* args, PyObject* kwds)
+static PyObject* _new_Geofence(PyTypeObject* type, PyObject* args, PyObject* kwds) noexcept
 {
     if (kwds != nullptr)
     {
-        PyErr_SetString(PyExc_TypeError, "keyword arguments not supported");
+        py::set_invalid_kwd_args_error();
         return nullptr;
     }
     
     Py_ssize_t arg_count = PyTuple_Size(args);
     if (arg_count == 2)
     {
-        return py::trycatch_invoker([=]() -> PyObject*
+        try
         {
             auto param0 = py::convert_to<winrt::hstring>(args, 0);
             auto param1 = py::convert_to<winrt::Windows::Devices::Geolocation::IGeoshape>(args, 1);
             
             winrt::Windows::Devices::Geolocation::Geofencing::Geofence instance{ param0, param1 };
             return py::wrap(instance, type);
-        }, nullptr);
+        }
+        catch (...)
+        {
+            py::to_PyErr();
+            return nullptr;
+        }
     }
     else if (arg_count == 4)
     {
-        return py::trycatch_invoker([=]() -> PyObject*
+        try
         {
             auto param0 = py::convert_to<winrt::hstring>(args, 0);
             auto param1 = py::convert_to<winrt::Windows::Devices::Geolocation::IGeoshape>(args, 1);
@@ -38,11 +43,16 @@ static PyObject* _new_Geofence(PyTypeObject* type, PyObject* args, PyObject* kwd
             
             winrt::Windows::Devices::Geolocation::Geofencing::Geofence instance{ param0, param1, param2, param3 };
             return py::wrap(instance, type);
-        }, nullptr);
+        }
+        catch (...)
+        {
+            py::to_PyErr();
+            return nullptr;
+        }
     }
     else if (arg_count == 5)
     {
-        return py::trycatch_invoker([=]() -> PyObject*
+        try
         {
             auto param0 = py::convert_to<winrt::hstring>(args, 0);
             auto param1 = py::convert_to<winrt::Windows::Devices::Geolocation::IGeoshape>(args, 1);
@@ -52,11 +62,16 @@ static PyObject* _new_Geofence(PyTypeObject* type, PyObject* args, PyObject* kwd
             
             winrt::Windows::Devices::Geolocation::Geofencing::Geofence instance{ param0, param1, param2, param3, param4 };
             return py::wrap(instance, type);
-        }, nullptr);
+        }
+        catch (...)
+        {
+            py::to_PyErr();
+            return nullptr;
+        }
     }
     else if (arg_count == 7)
     {
-        return py::trycatch_invoker([=]() -> PyObject*
+        try
         {
             auto param0 = py::convert_to<winrt::hstring>(args, 0);
             auto param1 = py::convert_to<winrt::Windows::Devices::Geolocation::IGeoshape>(args, 1);
@@ -68,13 +83,18 @@ static PyObject* _new_Geofence(PyTypeObject* type, PyObject* args, PyObject* kwd
             
             winrt::Windows::Devices::Geolocation::Geofencing::Geofence instance{ param0, param1, param2, param3, param4, param5, param6 };
             return py::wrap(instance, type);
-        }, nullptr);
+        }
+        catch (...)
+        {
+            py::to_PyErr();
+            return nullptr;
+        }
     }
-    else if (arg_count != -1)
+    else
     {
-        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+        py::set_invalid_arg_count_error(arg_count);
+        return nullptr;
     }
-    return nullptr;
 }
 
 static void _dealloc_Geofence(py::wrapper::Windows::Devices::Geolocation::Geofencing::Geofence* self)
@@ -84,118 +104,109 @@ static void _dealloc_Geofence(py::wrapper::Windows::Devices::Geolocation::Geofen
     self->obj = nullptr;
 }
 
-static PyObject* Geofence_get_Duration(py::wrapper::Windows::Devices::Geolocation::Geofencing::Geofence* self, void* /*unused*/)
+static PyObject* Geofence_get_Duration(py::wrapper::Windows::Devices::Geolocation::Geofencing::Geofence* self, void* /*unused*/) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
-        auto return_value = self->obj.Duration();
-        
-        py::pyobj_handle out_return_value{ py::convert(return_value) };
-        if (!out_return_value) 
-        { 
-            return nullptr;
-        }
-        return out_return_value.detach();
-    }, nullptr);
+        return py::convert(self->obj.Duration());
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
-static PyObject* Geofence_get_DwellTime(py::wrapper::Windows::Devices::Geolocation::Geofencing::Geofence* self, void* /*unused*/)
+static PyObject* Geofence_get_DwellTime(py::wrapper::Windows::Devices::Geolocation::Geofencing::Geofence* self, void* /*unused*/) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
-        auto return_value = self->obj.DwellTime();
-        
-        py::pyobj_handle out_return_value{ py::convert(return_value) };
-        if (!out_return_value) 
-        { 
-            return nullptr;
-        }
-        return out_return_value.detach();
-    }, nullptr);
+        return py::convert(self->obj.DwellTime());
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
-static PyObject* Geofence_get_Geoshape(py::wrapper::Windows::Devices::Geolocation::Geofencing::Geofence* self, void* /*unused*/)
+static PyObject* Geofence_get_Geoshape(py::wrapper::Windows::Devices::Geolocation::Geofencing::Geofence* self, void* /*unused*/) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
-        auto return_value = self->obj.Geoshape();
-        
-        py::pyobj_handle out_return_value{ py::convert(return_value) };
-        if (!out_return_value) 
-        { 
-            return nullptr;
-        }
-        return out_return_value.detach();
-    }, nullptr);
+        return py::convert(self->obj.Geoshape());
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
-static PyObject* Geofence_get_Id(py::wrapper::Windows::Devices::Geolocation::Geofencing::Geofence* self, void* /*unused*/)
+static PyObject* Geofence_get_Id(py::wrapper::Windows::Devices::Geolocation::Geofencing::Geofence* self, void* /*unused*/) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
-        auto return_value = self->obj.Id();
-        
-        py::pyobj_handle out_return_value{ py::convert(return_value) };
-        if (!out_return_value) 
-        { 
-            return nullptr;
-        }
-        return out_return_value.detach();
-    }, nullptr);
+        return py::convert(self->obj.Id());
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
-static PyObject* Geofence_get_MonitoredStates(py::wrapper::Windows::Devices::Geolocation::Geofencing::Geofence* self, void* /*unused*/)
+static PyObject* Geofence_get_MonitoredStates(py::wrapper::Windows::Devices::Geolocation::Geofencing::Geofence* self, void* /*unused*/) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
-        auto return_value = self->obj.MonitoredStates();
-        
-        py::pyobj_handle out_return_value{ py::convert(return_value) };
-        if (!out_return_value) 
-        { 
-            return nullptr;
-        }
-        return out_return_value.detach();
-    }, nullptr);
+        return py::convert(self->obj.MonitoredStates());
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
-static PyObject* Geofence_get_SingleUse(py::wrapper::Windows::Devices::Geolocation::Geofencing::Geofence* self, void* /*unused*/)
+static PyObject* Geofence_get_SingleUse(py::wrapper::Windows::Devices::Geolocation::Geofencing::Geofence* self, void* /*unused*/) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
-        auto return_value = self->obj.SingleUse();
-        
-        py::pyobj_handle out_return_value{ py::convert(return_value) };
-        if (!out_return_value) 
-        { 
-            return nullptr;
-        }
-        return out_return_value.detach();
-    }, nullptr);
+        return py::convert(self->obj.SingleUse());
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
-static PyObject* Geofence_get_StartTime(py::wrapper::Windows::Devices::Geolocation::Geofencing::Geofence* self, void* /*unused*/)
+static PyObject* Geofence_get_StartTime(py::wrapper::Windows::Devices::Geolocation::Geofencing::Geofence* self, void* /*unused*/) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
-        auto return_value = self->obj.StartTime();
-        
-        py::pyobj_handle out_return_value{ py::convert(return_value) };
-        if (!out_return_value) 
-        { 
-            return nullptr;
-        }
-        return out_return_value.detach();
-    }, nullptr);
+        return py::convert(self->obj.StartTime());
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
-static PyObject* _from_Geofence(PyObject* /*unused*/, PyObject* arg)
+static PyObject* _from_Geofence(PyObject* /*unused*/, PyObject* arg) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
         auto return_value = py::convert_to<winrt::Windows::Foundation::IInspectable>(arg);
         return py::convert(return_value.as<winrt::Windows::Devices::Geolocation::Geofencing::Geofence>());
-    }, nullptr);
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
 static PyMethodDef _methods_Geofence[] = {
@@ -235,13 +246,11 @@ static PyType_Spec _type_spec_Geofence =
 // ----- GeofenceMonitor class --------------------
 
 PyTypeObject* py::winrt_type<winrt::Windows::Devices::Geolocation::Geofencing::GeofenceMonitor>::python_type;
-static const char* _type_name_GeofenceMonitor = "GeofenceMonitor";
+constexpr const char* const _type_name_GeofenceMonitor = "GeofenceMonitor";
 
-static PyObject* _new_GeofenceMonitor(PyTypeObject* type, PyObject* args, PyObject* kwds)
+static PyObject* _new_GeofenceMonitor(PyTypeObject* type, PyObject* args, PyObject* kwds) noexcept
 {
-    std::string msg{ _type_name_GeofenceMonitor };
-    msg.append(" is not activatable");
-    PyErr_SetString(PyExc_TypeError, msg.c_str());
+    py::set_invalid_activation_error(_type_name_GeofenceMonitor);
     return nullptr;
 }
 
@@ -252,156 +261,155 @@ static void _dealloc_GeofenceMonitor(py::wrapper::Windows::Devices::Geolocation:
     self->obj = nullptr;
 }
 
-static PyObject* GeofenceMonitor_ReadReports(py::wrapper::Windows::Devices::Geolocation::Geofencing::GeofenceMonitor* self, PyObject* args)
+static PyObject* GeofenceMonitor_ReadReports(py::wrapper::Windows::Devices::Geolocation::Geofencing::GeofenceMonitor* self, PyObject* args) noexcept
 {
     Py_ssize_t arg_count = PyTuple_Size(args);
     
     if (arg_count == 0)
     {
-        return py::trycatch_invoker([=]() -> PyObject*
+        try
         {
-            auto return_value = self->obj.ReadReports();
-            
-            py::pyobj_handle out_return_value{ py::convert(return_value) };
-            if (!out_return_value) 
-            { 
-                return nullptr;
-            }
-            return out_return_value.detach();
-        }, nullptr);
+            return py::convert(self->obj.ReadReports());
+        }
+        catch (...)
+        {
+            py::to_PyErr();
+            return nullptr;
+        }
     }
-    else if (arg_count != -1)
+    else
     {
-        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+        py::set_invalid_arg_count_error(arg_count);
+        return nullptr;
     }
-    return nullptr;
 }
 
-static PyObject* GeofenceMonitor_get_Geofences(py::wrapper::Windows::Devices::Geolocation::Geofencing::GeofenceMonitor* self, void* /*unused*/)
+static PyObject* GeofenceMonitor_get_Geofences(py::wrapper::Windows::Devices::Geolocation::Geofencing::GeofenceMonitor* self, void* /*unused*/) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
-        auto return_value = self->obj.Geofences();
-        
-        py::pyobj_handle out_return_value{ py::convert(return_value) };
-        if (!out_return_value) 
-        { 
-            return nullptr;
-        }
-        return out_return_value.detach();
-    }, nullptr);
-}
-
-static PyObject* GeofenceMonitor_get_LastKnownGeoposition(py::wrapper::Windows::Devices::Geolocation::Geofencing::GeofenceMonitor* self, void* /*unused*/)
-{
-    return py::trycatch_invoker([=]() -> PyObject*
+        return py::convert(self->obj.Geofences());
+    }
+    catch (...)
     {
-        auto return_value = self->obj.LastKnownGeoposition();
-        
-        py::pyobj_handle out_return_value{ py::convert(return_value) };
-        if (!out_return_value) 
-        { 
-            return nullptr;
-        }
-        return out_return_value.detach();
-    }, nullptr);
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
-static PyObject* GeofenceMonitor_get_Status(py::wrapper::Windows::Devices::Geolocation::Geofencing::GeofenceMonitor* self, void* /*unused*/)
+static PyObject* GeofenceMonitor_get_LastKnownGeoposition(py::wrapper::Windows::Devices::Geolocation::Geofencing::GeofenceMonitor* self, void* /*unused*/) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
-        auto return_value = self->obj.Status();
-        
-        py::pyobj_handle out_return_value{ py::convert(return_value) };
-        if (!out_return_value) 
-        { 
-            return nullptr;
-        }
-        return out_return_value.detach();
-    }, nullptr);
-}
-
-static PyObject* GeofenceMonitor_get_Current(PyObject* /*unused*/, void* /*unused*/)
-{
-    return py::trycatch_invoker([=]() -> PyObject*
+        return py::convert(self->obj.LastKnownGeoposition());
+    }
+    catch (...)
     {
-        auto return_value = winrt::Windows::Devices::Geolocation::Geofencing::GeofenceMonitor::Current();
-        
-        py::pyobj_handle out_return_value{ py::convert(return_value) };
-        if (!out_return_value) 
-        { 
-            return nullptr;
-        }
-        return out_return_value.detach();
-    }, nullptr);
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
-static PyObject* GeofenceMonitor_add_GeofenceStateChanged(py::wrapper::Windows::Devices::Geolocation::Geofencing::GeofenceMonitor* self, PyObject* arg)
+static PyObject* GeofenceMonitor_get_Status(py::wrapper::Windows::Devices::Geolocation::Geofencing::GeofenceMonitor* self, void* /*unused*/) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
+    {
+        return py::convert(self->obj.Status());
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
+}
+
+static PyObject* GeofenceMonitor_get_Current(PyObject* /*unused*/, void* /*unused*/) noexcept
+{
+    try
+    {
+        return py::convert(winrt::Windows::Devices::Geolocation::Geofencing::GeofenceMonitor::Current());
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
+}
+
+static PyObject* GeofenceMonitor_add_GeofenceStateChanged(py::wrapper::Windows::Devices::Geolocation::Geofencing::GeofenceMonitor* self, PyObject* arg) noexcept
+{
+    try
     {
         auto param0 = py::convert_to<winrt::Windows::Foundation::TypedEventHandler<winrt::Windows::Devices::Geolocation::Geofencing::GeofenceMonitor, winrt::Windows::Foundation::IInspectable>>(arg);
         
-        auto return_value = self->obj.GeofenceStateChanged(param0);
-        
-        py::pyobj_handle out_return_value{ py::convert(return_value) };
-        if (!out_return_value) 
-        { 
-            return nullptr;
-        }
-        return out_return_value.detach();
-    }, nullptr);
+        return py::convert(self->obj.GeofenceStateChanged(param0));
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
-static PyObject* GeofenceMonitor_remove_GeofenceStateChanged(py::wrapper::Windows::Devices::Geolocation::Geofencing::GeofenceMonitor* self, PyObject* arg)
+static PyObject* GeofenceMonitor_remove_GeofenceStateChanged(py::wrapper::Windows::Devices::Geolocation::Geofencing::GeofenceMonitor* self, PyObject* arg) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
         auto param0 = py::convert_to<winrt::event_token>(arg);
         
         self->obj.GeofenceStateChanged(param0);
-        
         Py_RETURN_NONE;
-    }, nullptr);
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
-static PyObject* GeofenceMonitor_add_StatusChanged(py::wrapper::Windows::Devices::Geolocation::Geofencing::GeofenceMonitor* self, PyObject* arg)
+static PyObject* GeofenceMonitor_add_StatusChanged(py::wrapper::Windows::Devices::Geolocation::Geofencing::GeofenceMonitor* self, PyObject* arg) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
         auto param0 = py::convert_to<winrt::Windows::Foundation::TypedEventHandler<winrt::Windows::Devices::Geolocation::Geofencing::GeofenceMonitor, winrt::Windows::Foundation::IInspectable>>(arg);
         
-        auto return_value = self->obj.StatusChanged(param0);
-        
-        py::pyobj_handle out_return_value{ py::convert(return_value) };
-        if (!out_return_value) 
-        { 
-            return nullptr;
-        }
-        return out_return_value.detach();
-    }, nullptr);
+        return py::convert(self->obj.StatusChanged(param0));
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
-static PyObject* GeofenceMonitor_remove_StatusChanged(py::wrapper::Windows::Devices::Geolocation::Geofencing::GeofenceMonitor* self, PyObject* arg)
+static PyObject* GeofenceMonitor_remove_StatusChanged(py::wrapper::Windows::Devices::Geolocation::Geofencing::GeofenceMonitor* self, PyObject* arg) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
         auto param0 = py::convert_to<winrt::event_token>(arg);
         
         self->obj.StatusChanged(param0);
-        
         Py_RETURN_NONE;
-    }, nullptr);
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
-static PyObject* _from_GeofenceMonitor(PyObject* /*unused*/, PyObject* arg)
+static PyObject* _from_GeofenceMonitor(PyObject* /*unused*/, PyObject* arg) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
         auto return_value = py::convert_to<winrt::Windows::Foundation::IInspectable>(arg);
         return py::convert(return_value.as<winrt::Windows::Devices::Geolocation::Geofencing::GeofenceMonitor>());
-    }, nullptr);
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
 static PyMethodDef _methods_GeofenceMonitor[] = {
@@ -443,13 +451,11 @@ static PyType_Spec _type_spec_GeofenceMonitor =
 // ----- GeofenceStateChangeReport class --------------------
 
 PyTypeObject* py::winrt_type<winrt::Windows::Devices::Geolocation::Geofencing::GeofenceStateChangeReport>::python_type;
-static const char* _type_name_GeofenceStateChangeReport = "GeofenceStateChangeReport";
+constexpr const char* const _type_name_GeofenceStateChangeReport = "GeofenceStateChangeReport";
 
-static PyObject* _new_GeofenceStateChangeReport(PyTypeObject* type, PyObject* args, PyObject* kwds)
+static PyObject* _new_GeofenceStateChangeReport(PyTypeObject* type, PyObject* args, PyObject* kwds) noexcept
 {
-    std::string msg{ _type_name_GeofenceStateChangeReport };
-    msg.append(" is not activatable");
-    PyErr_SetString(PyExc_TypeError, msg.c_str());
+    py::set_invalid_activation_error(_type_name_GeofenceStateChangeReport);
     return nullptr;
 }
 
@@ -460,73 +466,70 @@ static void _dealloc_GeofenceStateChangeReport(py::wrapper::Windows::Devices::Ge
     self->obj = nullptr;
 }
 
-static PyObject* GeofenceStateChangeReport_get_Geofence(py::wrapper::Windows::Devices::Geolocation::Geofencing::GeofenceStateChangeReport* self, void* /*unused*/)
+static PyObject* GeofenceStateChangeReport_get_Geofence(py::wrapper::Windows::Devices::Geolocation::Geofencing::GeofenceStateChangeReport* self, void* /*unused*/) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
-        auto return_value = self->obj.Geofence();
-        
-        py::pyobj_handle out_return_value{ py::convert(return_value) };
-        if (!out_return_value) 
-        { 
-            return nullptr;
-        }
-        return out_return_value.detach();
-    }, nullptr);
+        return py::convert(self->obj.Geofence());
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
-static PyObject* GeofenceStateChangeReport_get_Geoposition(py::wrapper::Windows::Devices::Geolocation::Geofencing::GeofenceStateChangeReport* self, void* /*unused*/)
+static PyObject* GeofenceStateChangeReport_get_Geoposition(py::wrapper::Windows::Devices::Geolocation::Geofencing::GeofenceStateChangeReport* self, void* /*unused*/) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
-        auto return_value = self->obj.Geoposition();
-        
-        py::pyobj_handle out_return_value{ py::convert(return_value) };
-        if (!out_return_value) 
-        { 
-            return nullptr;
-        }
-        return out_return_value.detach();
-    }, nullptr);
+        return py::convert(self->obj.Geoposition());
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
-static PyObject* GeofenceStateChangeReport_get_NewState(py::wrapper::Windows::Devices::Geolocation::Geofencing::GeofenceStateChangeReport* self, void* /*unused*/)
+static PyObject* GeofenceStateChangeReport_get_NewState(py::wrapper::Windows::Devices::Geolocation::Geofencing::GeofenceStateChangeReport* self, void* /*unused*/) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
-        auto return_value = self->obj.NewState();
-        
-        py::pyobj_handle out_return_value{ py::convert(return_value) };
-        if (!out_return_value) 
-        { 
-            return nullptr;
-        }
-        return out_return_value.detach();
-    }, nullptr);
+        return py::convert(self->obj.NewState());
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
-static PyObject* GeofenceStateChangeReport_get_RemovalReason(py::wrapper::Windows::Devices::Geolocation::Geofencing::GeofenceStateChangeReport* self, void* /*unused*/)
+static PyObject* GeofenceStateChangeReport_get_RemovalReason(py::wrapper::Windows::Devices::Geolocation::Geofencing::GeofenceStateChangeReport* self, void* /*unused*/) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
-        auto return_value = self->obj.RemovalReason();
-        
-        py::pyobj_handle out_return_value{ py::convert(return_value) };
-        if (!out_return_value) 
-        { 
-            return nullptr;
-        }
-        return out_return_value.detach();
-    }, nullptr);
+        return py::convert(self->obj.RemovalReason());
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
-static PyObject* _from_GeofenceStateChangeReport(PyObject* /*unused*/, PyObject* arg)
+static PyObject* _from_GeofenceStateChangeReport(PyObject* /*unused*/, PyObject* arg) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
         auto return_value = py::convert_to<winrt::Windows::Foundation::IInspectable>(arg);
         return py::convert(return_value.as<winrt::Windows::Devices::Geolocation::Geofencing::GeofenceStateChangeReport>());
-    }, nullptr);
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
 static PyMethodDef _methods_GeofenceStateChangeReport[] = {
@@ -561,23 +564,23 @@ static PyType_Spec _type_spec_GeofenceStateChangeReport =
 };
 
 // ----- Windows.Devices.Geolocation.Geofencing Initialization --------------------
-static int module_exec(PyObject* module)
+static int module_exec(PyObject* module) noexcept
 {
-    py::pyobj_handle bases { PyTuple_Pack(1, py::winrt_type<py::winrt_base>::python_type) };
-    
     try
     {
-        py::winrt_type<winrt::Windows::Devices::Geolocation::Geofencing::Geofence>::python_type = reinterpret_cast<PyTypeObject*>(py::register_python_type(module, _type_name_Geofence, &_type_spec_Geofence, bases.get()).detach());
-        py::winrt_type<winrt::Windows::Devices::Geolocation::Geofencing::GeofenceMonitor>::python_type = reinterpret_cast<PyTypeObject*>(py::register_python_type(module, _type_name_GeofenceMonitor, &_type_spec_GeofenceMonitor, bases.get()).detach());
-        py::winrt_type<winrt::Windows::Devices::Geolocation::Geofencing::GeofenceStateChangeReport>::python_type = reinterpret_cast<PyTypeObject*>(py::register_python_type(module, _type_name_GeofenceStateChangeReport, &_type_spec_GeofenceStateChangeReport, bases.get()).detach());
+        py::pyobj_handle bases { PyTuple_Pack(1, py::winrt_type<py::winrt_base>::python_type) };
+        
+        py::winrt_type<winrt::Windows::Devices::Geolocation::Geofencing::Geofence>::python_type = py::register_python_type(module, _type_name_Geofence, &_type_spec_Geofence, bases.get());
+        py::winrt_type<winrt::Windows::Devices::Geolocation::Geofencing::GeofenceMonitor>::python_type = py::register_python_type(module, _type_name_GeofenceMonitor, &_type_spec_GeofenceMonitor, bases.get());
+        py::winrt_type<winrt::Windows::Devices::Geolocation::Geofencing::GeofenceStateChangeReport>::python_type = py::register_python_type(module, _type_name_GeofenceStateChangeReport, &_type_spec_GeofenceStateChangeReport, bases.get());
+        
+        return 0;
     }
-    catch(...)
+    catch (...)
     {
         py::to_PyErr();
         return -1;
     }
-    
-    return 0;
 }
 
 static PyModuleDef_Slot module_slots[] = {
@@ -600,7 +603,7 @@ static PyModuleDef module_def = {
 };
 
 PyMODINIT_FUNC
-PyInit__winrt_Windows_Devices_Geolocation_Geofencing (void)
+PyInit__winrt_Windows_Devices_Geolocation_Geofencing (void) noexcept
 {
     return PyModuleDef_Init(&module_def);
 }

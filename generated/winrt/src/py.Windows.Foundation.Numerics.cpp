@@ -5,7 +5,7 @@
 // ----- Matrix3x2 struct --------------------
 
 PyTypeObject* py::winrt_type<winrt::Windows::Foundation::Numerics::float3x2>::python_type;
-static const char* _type_name_Matrix3x2 = "Matrix3x2";
+constexpr const char* const _type_name_Matrix3x2 = "Matrix3x2";
 
 PyObject* py::converter<winrt::Windows::Foundation::Numerics::float3x2>::convert(winrt::Windows::Foundation::Numerics::float3x2 instance) noexcept
 {
@@ -61,11 +61,16 @@ PyObject* _new_Matrix3x2(PyTypeObject* type, PyObject* args, PyObject* kwds)
     
     if ((tuple_size == 0) && (kwds == nullptr))
     {
-        return py::trycatch_invoker([=]() -> PyObject*
+        try
         {
             winrt::Windows::Foundation::Numerics::float3x2 return_value{};
             return py::convert(return_value);
-        }, nullptr);
+        }
+        catch (...)
+        {
+            py::to_PyErr();
+            return nullptr;
+        }
     }
     
     if ((tuple_size == 1) && (kwds == nullptr))
@@ -73,11 +78,16 @@ PyObject* _new_Matrix3x2(PyTypeObject* type, PyObject* args, PyObject* kwds)
         auto arg = PyTuple_GetItem(args, 0);
         if (PyDict_Check(arg))
         {
-            return py::trycatch_invoker([=]() -> PyObject*
+            try
             {
                 auto return_value = py::convert_to<winrt::Windows::Foundation::Numerics::float3x2>(arg);
                 return py::convert(return_value);
-            }, nullptr);
+            }
+            catch (...)
+            {
+                py::to_PyErr();
+                return nullptr;
+            }
         }
     }
     
@@ -94,117 +104,218 @@ PyObject* _new_Matrix3x2(PyTypeObject* type, PyObject* args, PyObject* kwds)
         return nullptr;
     }
     
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
         winrt::Windows::Foundation::Numerics::float3x2 return_value{ _M11, _M12, _M21, _M22, _M31, _M32 };
         return py::convert(return_value);
-    }, nullptr);
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
 static void _dealloc_Matrix3x2(py::wrapper::Windows::Foundation::Numerics::Matrix3x2* self)
 {
 }
 
-static PyObject* Matrix3x2_get_M11(py::wrapper::Windows::Foundation::Numerics::Matrix3x2* self, void* /*unused*/)
+static PyObject* Matrix3x2_get_M11(py::wrapper::Windows::Foundation::Numerics::Matrix3x2* self, void* /*unused*/) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
         return py::convert(self->obj.m11);
-    }, nullptr);
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
-static int Matrix3x2_set_M11(py::wrapper::Windows::Foundation::Numerics::Matrix3x2* self, PyObject* arg, void* /*unused*/)
+static int Matrix3x2_set_M11(py::wrapper::Windows::Foundation::Numerics::Matrix3x2* self, PyObject* arg, void* /*unused*/) noexcept
 {
-    return py::setter_trycatch_invoker(arg, [=]() -> int
+    if (arg == nullptr)
+    {
+        PyErr_SetString(PyExc_TypeError, "property delete not supported");
+        return -1;
+    }
+    
+    try
     {
         self->obj.m11 = py::converter<float>::convert_to(arg);
         return 0;
-    });
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return -1;
+    }
 }
 
-static PyObject* Matrix3x2_get_M12(py::wrapper::Windows::Foundation::Numerics::Matrix3x2* self, void* /*unused*/)
+static PyObject* Matrix3x2_get_M12(py::wrapper::Windows::Foundation::Numerics::Matrix3x2* self, void* /*unused*/) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
         return py::convert(self->obj.m12);
-    }, nullptr);
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
-static int Matrix3x2_set_M12(py::wrapper::Windows::Foundation::Numerics::Matrix3x2* self, PyObject* arg, void* /*unused*/)
+static int Matrix3x2_set_M12(py::wrapper::Windows::Foundation::Numerics::Matrix3x2* self, PyObject* arg, void* /*unused*/) noexcept
 {
-    return py::setter_trycatch_invoker(arg, [=]() -> int
+    if (arg == nullptr)
+    {
+        PyErr_SetString(PyExc_TypeError, "property delete not supported");
+        return -1;
+    }
+    
+    try
     {
         self->obj.m12 = py::converter<float>::convert_to(arg);
         return 0;
-    });
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return -1;
+    }
 }
 
-static PyObject* Matrix3x2_get_M21(py::wrapper::Windows::Foundation::Numerics::Matrix3x2* self, void* /*unused*/)
+static PyObject* Matrix3x2_get_M21(py::wrapper::Windows::Foundation::Numerics::Matrix3x2* self, void* /*unused*/) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
         return py::convert(self->obj.m21);
-    }, nullptr);
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
-static int Matrix3x2_set_M21(py::wrapper::Windows::Foundation::Numerics::Matrix3x2* self, PyObject* arg, void* /*unused*/)
+static int Matrix3x2_set_M21(py::wrapper::Windows::Foundation::Numerics::Matrix3x2* self, PyObject* arg, void* /*unused*/) noexcept
 {
-    return py::setter_trycatch_invoker(arg, [=]() -> int
+    if (arg == nullptr)
+    {
+        PyErr_SetString(PyExc_TypeError, "property delete not supported");
+        return -1;
+    }
+    
+    try
     {
         self->obj.m21 = py::converter<float>::convert_to(arg);
         return 0;
-    });
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return -1;
+    }
 }
 
-static PyObject* Matrix3x2_get_M22(py::wrapper::Windows::Foundation::Numerics::Matrix3x2* self, void* /*unused*/)
+static PyObject* Matrix3x2_get_M22(py::wrapper::Windows::Foundation::Numerics::Matrix3x2* self, void* /*unused*/) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
         return py::convert(self->obj.m22);
-    }, nullptr);
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
-static int Matrix3x2_set_M22(py::wrapper::Windows::Foundation::Numerics::Matrix3x2* self, PyObject* arg, void* /*unused*/)
+static int Matrix3x2_set_M22(py::wrapper::Windows::Foundation::Numerics::Matrix3x2* self, PyObject* arg, void* /*unused*/) noexcept
 {
-    return py::setter_trycatch_invoker(arg, [=]() -> int
+    if (arg == nullptr)
+    {
+        PyErr_SetString(PyExc_TypeError, "property delete not supported");
+        return -1;
+    }
+    
+    try
     {
         self->obj.m22 = py::converter<float>::convert_to(arg);
         return 0;
-    });
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return -1;
+    }
 }
 
-static PyObject* Matrix3x2_get_M31(py::wrapper::Windows::Foundation::Numerics::Matrix3x2* self, void* /*unused*/)
+static PyObject* Matrix3x2_get_M31(py::wrapper::Windows::Foundation::Numerics::Matrix3x2* self, void* /*unused*/) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
         return py::convert(self->obj.m31);
-    }, nullptr);
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
-static int Matrix3x2_set_M31(py::wrapper::Windows::Foundation::Numerics::Matrix3x2* self, PyObject* arg, void* /*unused*/)
+static int Matrix3x2_set_M31(py::wrapper::Windows::Foundation::Numerics::Matrix3x2* self, PyObject* arg, void* /*unused*/) noexcept
 {
-    return py::setter_trycatch_invoker(arg, [=]() -> int
+    if (arg == nullptr)
+    {
+        PyErr_SetString(PyExc_TypeError, "property delete not supported");
+        return -1;
+    }
+    
+    try
     {
         self->obj.m31 = py::converter<float>::convert_to(arg);
         return 0;
-    });
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return -1;
+    }
 }
 
-static PyObject* Matrix3x2_get_M32(py::wrapper::Windows::Foundation::Numerics::Matrix3x2* self, void* /*unused*/)
+static PyObject* Matrix3x2_get_M32(py::wrapper::Windows::Foundation::Numerics::Matrix3x2* self, void* /*unused*/) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
         return py::convert(self->obj.m32);
-    }, nullptr);
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
-static int Matrix3x2_set_M32(py::wrapper::Windows::Foundation::Numerics::Matrix3x2* self, PyObject* arg, void* /*unused*/)
+static int Matrix3x2_set_M32(py::wrapper::Windows::Foundation::Numerics::Matrix3x2* self, PyObject* arg, void* /*unused*/) noexcept
 {
-    return py::setter_trycatch_invoker(arg, [=]() -> int
+    if (arg == nullptr)
+    {
+        PyErr_SetString(PyExc_TypeError, "property delete not supported");
+        return -1;
+    }
+    
+    try
     {
         self->obj.m32 = py::converter<float>::convert_to(arg);
         return 0;
-    });
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return -1;
+    }
 }
 
 static PyGetSetDef _getset_Matrix3x2[] = {
@@ -237,7 +348,7 @@ static PyType_Spec _type_spec_Matrix3x2 =
 // ----- Matrix4x4 struct --------------------
 
 PyTypeObject* py::winrt_type<winrt::Windows::Foundation::Numerics::float4x4>::python_type;
-static const char* _type_name_Matrix4x4 = "Matrix4x4";
+constexpr const char* const _type_name_Matrix4x4 = "Matrix4x4";
 
 PyObject* py::converter<winrt::Windows::Foundation::Numerics::float4x4>::convert(winrt::Windows::Foundation::Numerics::float4x4 instance) noexcept
 {
@@ -333,11 +444,16 @@ PyObject* _new_Matrix4x4(PyTypeObject* type, PyObject* args, PyObject* kwds)
     
     if ((tuple_size == 0) && (kwds == nullptr))
     {
-        return py::trycatch_invoker([=]() -> PyObject*
+        try
         {
             winrt::Windows::Foundation::Numerics::float4x4 return_value{};
             return py::convert(return_value);
-        }, nullptr);
+        }
+        catch (...)
+        {
+            py::to_PyErr();
+            return nullptr;
+        }
     }
     
     if ((tuple_size == 1) && (kwds == nullptr))
@@ -345,11 +461,16 @@ PyObject* _new_Matrix4x4(PyTypeObject* type, PyObject* args, PyObject* kwds)
         auto arg = PyTuple_GetItem(args, 0);
         if (PyDict_Check(arg))
         {
-            return py::trycatch_invoker([=]() -> PyObject*
+            try
             {
                 auto return_value = py::convert_to<winrt::Windows::Foundation::Numerics::float4x4>(arg);
                 return py::convert(return_value);
-            }, nullptr);
+            }
+            catch (...)
+            {
+                py::to_PyErr();
+                return nullptr;
+            }
         }
     }
     
@@ -376,287 +497,548 @@ PyObject* _new_Matrix4x4(PyTypeObject* type, PyObject* args, PyObject* kwds)
         return nullptr;
     }
     
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
         winrt::Windows::Foundation::Numerics::float4x4 return_value{ _M11, _M12, _M13, _M14, _M21, _M22, _M23, _M24, _M31, _M32, _M33, _M34, _M41, _M42, _M43, _M44 };
         return py::convert(return_value);
-    }, nullptr);
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
 static void _dealloc_Matrix4x4(py::wrapper::Windows::Foundation::Numerics::Matrix4x4* self)
 {
 }
 
-static PyObject* Matrix4x4_get_M11(py::wrapper::Windows::Foundation::Numerics::Matrix4x4* self, void* /*unused*/)
+static PyObject* Matrix4x4_get_M11(py::wrapper::Windows::Foundation::Numerics::Matrix4x4* self, void* /*unused*/) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
         return py::convert(self->obj.m11);
-    }, nullptr);
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
-static int Matrix4x4_set_M11(py::wrapper::Windows::Foundation::Numerics::Matrix4x4* self, PyObject* arg, void* /*unused*/)
+static int Matrix4x4_set_M11(py::wrapper::Windows::Foundation::Numerics::Matrix4x4* self, PyObject* arg, void* /*unused*/) noexcept
 {
-    return py::setter_trycatch_invoker(arg, [=]() -> int
+    if (arg == nullptr)
+    {
+        PyErr_SetString(PyExc_TypeError, "property delete not supported");
+        return -1;
+    }
+    
+    try
     {
         self->obj.m11 = py::converter<float>::convert_to(arg);
         return 0;
-    });
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return -1;
+    }
 }
 
-static PyObject* Matrix4x4_get_M12(py::wrapper::Windows::Foundation::Numerics::Matrix4x4* self, void* /*unused*/)
+static PyObject* Matrix4x4_get_M12(py::wrapper::Windows::Foundation::Numerics::Matrix4x4* self, void* /*unused*/) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
         return py::convert(self->obj.m12);
-    }, nullptr);
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
-static int Matrix4x4_set_M12(py::wrapper::Windows::Foundation::Numerics::Matrix4x4* self, PyObject* arg, void* /*unused*/)
+static int Matrix4x4_set_M12(py::wrapper::Windows::Foundation::Numerics::Matrix4x4* self, PyObject* arg, void* /*unused*/) noexcept
 {
-    return py::setter_trycatch_invoker(arg, [=]() -> int
+    if (arg == nullptr)
+    {
+        PyErr_SetString(PyExc_TypeError, "property delete not supported");
+        return -1;
+    }
+    
+    try
     {
         self->obj.m12 = py::converter<float>::convert_to(arg);
         return 0;
-    });
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return -1;
+    }
 }
 
-static PyObject* Matrix4x4_get_M13(py::wrapper::Windows::Foundation::Numerics::Matrix4x4* self, void* /*unused*/)
+static PyObject* Matrix4x4_get_M13(py::wrapper::Windows::Foundation::Numerics::Matrix4x4* self, void* /*unused*/) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
         return py::convert(self->obj.m13);
-    }, nullptr);
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
-static int Matrix4x4_set_M13(py::wrapper::Windows::Foundation::Numerics::Matrix4x4* self, PyObject* arg, void* /*unused*/)
+static int Matrix4x4_set_M13(py::wrapper::Windows::Foundation::Numerics::Matrix4x4* self, PyObject* arg, void* /*unused*/) noexcept
 {
-    return py::setter_trycatch_invoker(arg, [=]() -> int
+    if (arg == nullptr)
+    {
+        PyErr_SetString(PyExc_TypeError, "property delete not supported");
+        return -1;
+    }
+    
+    try
     {
         self->obj.m13 = py::converter<float>::convert_to(arg);
         return 0;
-    });
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return -1;
+    }
 }
 
-static PyObject* Matrix4x4_get_M14(py::wrapper::Windows::Foundation::Numerics::Matrix4x4* self, void* /*unused*/)
+static PyObject* Matrix4x4_get_M14(py::wrapper::Windows::Foundation::Numerics::Matrix4x4* self, void* /*unused*/) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
         return py::convert(self->obj.m14);
-    }, nullptr);
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
-static int Matrix4x4_set_M14(py::wrapper::Windows::Foundation::Numerics::Matrix4x4* self, PyObject* arg, void* /*unused*/)
+static int Matrix4x4_set_M14(py::wrapper::Windows::Foundation::Numerics::Matrix4x4* self, PyObject* arg, void* /*unused*/) noexcept
 {
-    return py::setter_trycatch_invoker(arg, [=]() -> int
+    if (arg == nullptr)
+    {
+        PyErr_SetString(PyExc_TypeError, "property delete not supported");
+        return -1;
+    }
+    
+    try
     {
         self->obj.m14 = py::converter<float>::convert_to(arg);
         return 0;
-    });
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return -1;
+    }
 }
 
-static PyObject* Matrix4x4_get_M21(py::wrapper::Windows::Foundation::Numerics::Matrix4x4* self, void* /*unused*/)
+static PyObject* Matrix4x4_get_M21(py::wrapper::Windows::Foundation::Numerics::Matrix4x4* self, void* /*unused*/) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
         return py::convert(self->obj.m21);
-    }, nullptr);
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
-static int Matrix4x4_set_M21(py::wrapper::Windows::Foundation::Numerics::Matrix4x4* self, PyObject* arg, void* /*unused*/)
+static int Matrix4x4_set_M21(py::wrapper::Windows::Foundation::Numerics::Matrix4x4* self, PyObject* arg, void* /*unused*/) noexcept
 {
-    return py::setter_trycatch_invoker(arg, [=]() -> int
+    if (arg == nullptr)
+    {
+        PyErr_SetString(PyExc_TypeError, "property delete not supported");
+        return -1;
+    }
+    
+    try
     {
         self->obj.m21 = py::converter<float>::convert_to(arg);
         return 0;
-    });
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return -1;
+    }
 }
 
-static PyObject* Matrix4x4_get_M22(py::wrapper::Windows::Foundation::Numerics::Matrix4x4* self, void* /*unused*/)
+static PyObject* Matrix4x4_get_M22(py::wrapper::Windows::Foundation::Numerics::Matrix4x4* self, void* /*unused*/) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
         return py::convert(self->obj.m22);
-    }, nullptr);
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
-static int Matrix4x4_set_M22(py::wrapper::Windows::Foundation::Numerics::Matrix4x4* self, PyObject* arg, void* /*unused*/)
+static int Matrix4x4_set_M22(py::wrapper::Windows::Foundation::Numerics::Matrix4x4* self, PyObject* arg, void* /*unused*/) noexcept
 {
-    return py::setter_trycatch_invoker(arg, [=]() -> int
+    if (arg == nullptr)
+    {
+        PyErr_SetString(PyExc_TypeError, "property delete not supported");
+        return -1;
+    }
+    
+    try
     {
         self->obj.m22 = py::converter<float>::convert_to(arg);
         return 0;
-    });
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return -1;
+    }
 }
 
-static PyObject* Matrix4x4_get_M23(py::wrapper::Windows::Foundation::Numerics::Matrix4x4* self, void* /*unused*/)
+static PyObject* Matrix4x4_get_M23(py::wrapper::Windows::Foundation::Numerics::Matrix4x4* self, void* /*unused*/) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
         return py::convert(self->obj.m23);
-    }, nullptr);
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
-static int Matrix4x4_set_M23(py::wrapper::Windows::Foundation::Numerics::Matrix4x4* self, PyObject* arg, void* /*unused*/)
+static int Matrix4x4_set_M23(py::wrapper::Windows::Foundation::Numerics::Matrix4x4* self, PyObject* arg, void* /*unused*/) noexcept
 {
-    return py::setter_trycatch_invoker(arg, [=]() -> int
+    if (arg == nullptr)
+    {
+        PyErr_SetString(PyExc_TypeError, "property delete not supported");
+        return -1;
+    }
+    
+    try
     {
         self->obj.m23 = py::converter<float>::convert_to(arg);
         return 0;
-    });
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return -1;
+    }
 }
 
-static PyObject* Matrix4x4_get_M24(py::wrapper::Windows::Foundation::Numerics::Matrix4x4* self, void* /*unused*/)
+static PyObject* Matrix4x4_get_M24(py::wrapper::Windows::Foundation::Numerics::Matrix4x4* self, void* /*unused*/) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
         return py::convert(self->obj.m24);
-    }, nullptr);
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
-static int Matrix4x4_set_M24(py::wrapper::Windows::Foundation::Numerics::Matrix4x4* self, PyObject* arg, void* /*unused*/)
+static int Matrix4x4_set_M24(py::wrapper::Windows::Foundation::Numerics::Matrix4x4* self, PyObject* arg, void* /*unused*/) noexcept
 {
-    return py::setter_trycatch_invoker(arg, [=]() -> int
+    if (arg == nullptr)
+    {
+        PyErr_SetString(PyExc_TypeError, "property delete not supported");
+        return -1;
+    }
+    
+    try
     {
         self->obj.m24 = py::converter<float>::convert_to(arg);
         return 0;
-    });
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return -1;
+    }
 }
 
-static PyObject* Matrix4x4_get_M31(py::wrapper::Windows::Foundation::Numerics::Matrix4x4* self, void* /*unused*/)
+static PyObject* Matrix4x4_get_M31(py::wrapper::Windows::Foundation::Numerics::Matrix4x4* self, void* /*unused*/) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
         return py::convert(self->obj.m31);
-    }, nullptr);
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
-static int Matrix4x4_set_M31(py::wrapper::Windows::Foundation::Numerics::Matrix4x4* self, PyObject* arg, void* /*unused*/)
+static int Matrix4x4_set_M31(py::wrapper::Windows::Foundation::Numerics::Matrix4x4* self, PyObject* arg, void* /*unused*/) noexcept
 {
-    return py::setter_trycatch_invoker(arg, [=]() -> int
+    if (arg == nullptr)
+    {
+        PyErr_SetString(PyExc_TypeError, "property delete not supported");
+        return -1;
+    }
+    
+    try
     {
         self->obj.m31 = py::converter<float>::convert_to(arg);
         return 0;
-    });
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return -1;
+    }
 }
 
-static PyObject* Matrix4x4_get_M32(py::wrapper::Windows::Foundation::Numerics::Matrix4x4* self, void* /*unused*/)
+static PyObject* Matrix4x4_get_M32(py::wrapper::Windows::Foundation::Numerics::Matrix4x4* self, void* /*unused*/) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
         return py::convert(self->obj.m32);
-    }, nullptr);
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
-static int Matrix4x4_set_M32(py::wrapper::Windows::Foundation::Numerics::Matrix4x4* self, PyObject* arg, void* /*unused*/)
+static int Matrix4x4_set_M32(py::wrapper::Windows::Foundation::Numerics::Matrix4x4* self, PyObject* arg, void* /*unused*/) noexcept
 {
-    return py::setter_trycatch_invoker(arg, [=]() -> int
+    if (arg == nullptr)
+    {
+        PyErr_SetString(PyExc_TypeError, "property delete not supported");
+        return -1;
+    }
+    
+    try
     {
         self->obj.m32 = py::converter<float>::convert_to(arg);
         return 0;
-    });
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return -1;
+    }
 }
 
-static PyObject* Matrix4x4_get_M33(py::wrapper::Windows::Foundation::Numerics::Matrix4x4* self, void* /*unused*/)
+static PyObject* Matrix4x4_get_M33(py::wrapper::Windows::Foundation::Numerics::Matrix4x4* self, void* /*unused*/) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
         return py::convert(self->obj.m33);
-    }, nullptr);
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
-static int Matrix4x4_set_M33(py::wrapper::Windows::Foundation::Numerics::Matrix4x4* self, PyObject* arg, void* /*unused*/)
+static int Matrix4x4_set_M33(py::wrapper::Windows::Foundation::Numerics::Matrix4x4* self, PyObject* arg, void* /*unused*/) noexcept
 {
-    return py::setter_trycatch_invoker(arg, [=]() -> int
+    if (arg == nullptr)
+    {
+        PyErr_SetString(PyExc_TypeError, "property delete not supported");
+        return -1;
+    }
+    
+    try
     {
         self->obj.m33 = py::converter<float>::convert_to(arg);
         return 0;
-    });
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return -1;
+    }
 }
 
-static PyObject* Matrix4x4_get_M34(py::wrapper::Windows::Foundation::Numerics::Matrix4x4* self, void* /*unused*/)
+static PyObject* Matrix4x4_get_M34(py::wrapper::Windows::Foundation::Numerics::Matrix4x4* self, void* /*unused*/) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
         return py::convert(self->obj.m34);
-    }, nullptr);
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
-static int Matrix4x4_set_M34(py::wrapper::Windows::Foundation::Numerics::Matrix4x4* self, PyObject* arg, void* /*unused*/)
+static int Matrix4x4_set_M34(py::wrapper::Windows::Foundation::Numerics::Matrix4x4* self, PyObject* arg, void* /*unused*/) noexcept
 {
-    return py::setter_trycatch_invoker(arg, [=]() -> int
+    if (arg == nullptr)
+    {
+        PyErr_SetString(PyExc_TypeError, "property delete not supported");
+        return -1;
+    }
+    
+    try
     {
         self->obj.m34 = py::converter<float>::convert_to(arg);
         return 0;
-    });
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return -1;
+    }
 }
 
-static PyObject* Matrix4x4_get_M41(py::wrapper::Windows::Foundation::Numerics::Matrix4x4* self, void* /*unused*/)
+static PyObject* Matrix4x4_get_M41(py::wrapper::Windows::Foundation::Numerics::Matrix4x4* self, void* /*unused*/) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
         return py::convert(self->obj.m41);
-    }, nullptr);
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
-static int Matrix4x4_set_M41(py::wrapper::Windows::Foundation::Numerics::Matrix4x4* self, PyObject* arg, void* /*unused*/)
+static int Matrix4x4_set_M41(py::wrapper::Windows::Foundation::Numerics::Matrix4x4* self, PyObject* arg, void* /*unused*/) noexcept
 {
-    return py::setter_trycatch_invoker(arg, [=]() -> int
+    if (arg == nullptr)
+    {
+        PyErr_SetString(PyExc_TypeError, "property delete not supported");
+        return -1;
+    }
+    
+    try
     {
         self->obj.m41 = py::converter<float>::convert_to(arg);
         return 0;
-    });
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return -1;
+    }
 }
 
-static PyObject* Matrix4x4_get_M42(py::wrapper::Windows::Foundation::Numerics::Matrix4x4* self, void* /*unused*/)
+static PyObject* Matrix4x4_get_M42(py::wrapper::Windows::Foundation::Numerics::Matrix4x4* self, void* /*unused*/) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
         return py::convert(self->obj.m42);
-    }, nullptr);
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
-static int Matrix4x4_set_M42(py::wrapper::Windows::Foundation::Numerics::Matrix4x4* self, PyObject* arg, void* /*unused*/)
+static int Matrix4x4_set_M42(py::wrapper::Windows::Foundation::Numerics::Matrix4x4* self, PyObject* arg, void* /*unused*/) noexcept
 {
-    return py::setter_trycatch_invoker(arg, [=]() -> int
+    if (arg == nullptr)
+    {
+        PyErr_SetString(PyExc_TypeError, "property delete not supported");
+        return -1;
+    }
+    
+    try
     {
         self->obj.m42 = py::converter<float>::convert_to(arg);
         return 0;
-    });
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return -1;
+    }
 }
 
-static PyObject* Matrix4x4_get_M43(py::wrapper::Windows::Foundation::Numerics::Matrix4x4* self, void* /*unused*/)
+static PyObject* Matrix4x4_get_M43(py::wrapper::Windows::Foundation::Numerics::Matrix4x4* self, void* /*unused*/) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
         return py::convert(self->obj.m43);
-    }, nullptr);
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
-static int Matrix4x4_set_M43(py::wrapper::Windows::Foundation::Numerics::Matrix4x4* self, PyObject* arg, void* /*unused*/)
+static int Matrix4x4_set_M43(py::wrapper::Windows::Foundation::Numerics::Matrix4x4* self, PyObject* arg, void* /*unused*/) noexcept
 {
-    return py::setter_trycatch_invoker(arg, [=]() -> int
+    if (arg == nullptr)
+    {
+        PyErr_SetString(PyExc_TypeError, "property delete not supported");
+        return -1;
+    }
+    
+    try
     {
         self->obj.m43 = py::converter<float>::convert_to(arg);
         return 0;
-    });
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return -1;
+    }
 }
 
-static PyObject* Matrix4x4_get_M44(py::wrapper::Windows::Foundation::Numerics::Matrix4x4* self, void* /*unused*/)
+static PyObject* Matrix4x4_get_M44(py::wrapper::Windows::Foundation::Numerics::Matrix4x4* self, void* /*unused*/) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
         return py::convert(self->obj.m44);
-    }, nullptr);
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
-static int Matrix4x4_set_M44(py::wrapper::Windows::Foundation::Numerics::Matrix4x4* self, PyObject* arg, void* /*unused*/)
+static int Matrix4x4_set_M44(py::wrapper::Windows::Foundation::Numerics::Matrix4x4* self, PyObject* arg, void* /*unused*/) noexcept
 {
-    return py::setter_trycatch_invoker(arg, [=]() -> int
+    if (arg == nullptr)
+    {
+        PyErr_SetString(PyExc_TypeError, "property delete not supported");
+        return -1;
+    }
+    
+    try
     {
         self->obj.m44 = py::converter<float>::convert_to(arg);
         return 0;
-    });
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return -1;
+    }
 }
 
 static PyGetSetDef _getset_Matrix4x4[] = {
@@ -699,7 +1081,7 @@ static PyType_Spec _type_spec_Matrix4x4 =
 // ----- Plane struct --------------------
 
 PyTypeObject* py::winrt_type<winrt::Windows::Foundation::Numerics::plane>::python_type;
-static const char* _type_name_Plane = "Plane";
+constexpr const char* const _type_name_Plane = "Plane";
 
 PyObject* py::converter<winrt::Windows::Foundation::Numerics::plane>::convert(winrt::Windows::Foundation::Numerics::plane instance) noexcept
 {
@@ -739,11 +1121,16 @@ PyObject* _new_Plane(PyTypeObject* type, PyObject* args, PyObject* kwds)
     
     if ((tuple_size == 0) && (kwds == nullptr))
     {
-        return py::trycatch_invoker([=]() -> PyObject*
+        try
         {
             winrt::Windows::Foundation::Numerics::plane return_value{};
             return py::convert(return_value);
-        }, nullptr);
+        }
+        catch (...)
+        {
+            py::to_PyErr();
+            return nullptr;
+        }
     }
     
     if ((tuple_size == 1) && (kwds == nullptr))
@@ -751,11 +1138,16 @@ PyObject* _new_Plane(PyTypeObject* type, PyObject* args, PyObject* kwds)
         auto arg = PyTuple_GetItem(args, 0);
         if (PyDict_Check(arg))
         {
-            return py::trycatch_invoker([=]() -> PyObject*
+            try
             {
                 auto return_value = py::convert_to<winrt::Windows::Foundation::Numerics::plane>(arg);
                 return py::convert(return_value);
-            }, nullptr);
+            }
+            catch (...)
+            {
+                py::to_PyErr();
+                return nullptr;
+            }
         }
     }
     
@@ -768,49 +1160,86 @@ PyObject* _new_Plane(PyTypeObject* type, PyObject* args, PyObject* kwds)
         return nullptr;
     }
     
-    return py::trycatch_invoker([=, &_Normal]() -> PyObject*
+    try
     {
         winrt::Windows::Foundation::Numerics::plane return_value{ py::converter<winrt::Windows::Foundation::Numerics::float3>::convert_to(_Normal.get()), _D };
         return py::convert(return_value);
-    }, nullptr);
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
 static void _dealloc_Plane(py::wrapper::Windows::Foundation::Numerics::Plane* self)
 {
 }
 
-static PyObject* Plane_get_Normal(py::wrapper::Windows::Foundation::Numerics::Plane* self, void* /*unused*/)
+static PyObject* Plane_get_Normal(py::wrapper::Windows::Foundation::Numerics::Plane* self, void* /*unused*/) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
         return py::convert(self->obj.normal);
-    }, nullptr);
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
-static int Plane_set_Normal(py::wrapper::Windows::Foundation::Numerics::Plane* self, PyObject* arg, void* /*unused*/)
+static int Plane_set_Normal(py::wrapper::Windows::Foundation::Numerics::Plane* self, PyObject* arg, void* /*unused*/) noexcept
 {
-    return py::setter_trycatch_invoker(arg, [=]() -> int
+    if (arg == nullptr)
+    {
+        PyErr_SetString(PyExc_TypeError, "property delete not supported");
+        return -1;
+    }
+    
+    try
     {
         self->obj.normal = py::converter<winrt::Windows::Foundation::Numerics::float3>::convert_to(arg);
         return 0;
-    });
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return -1;
+    }
 }
 
-static PyObject* Plane_get_D(py::wrapper::Windows::Foundation::Numerics::Plane* self, void* /*unused*/)
+static PyObject* Plane_get_D(py::wrapper::Windows::Foundation::Numerics::Plane* self, void* /*unused*/) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
         return py::convert(self->obj.d);
-    }, nullptr);
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
-static int Plane_set_D(py::wrapper::Windows::Foundation::Numerics::Plane* self, PyObject* arg, void* /*unused*/)
+static int Plane_set_D(py::wrapper::Windows::Foundation::Numerics::Plane* self, PyObject* arg, void* /*unused*/) noexcept
 {
-    return py::setter_trycatch_invoker(arg, [=]() -> int
+    if (arg == nullptr)
+    {
+        PyErr_SetString(PyExc_TypeError, "property delete not supported");
+        return -1;
+    }
+    
+    try
     {
         self->obj.d = py::converter<float>::convert_to(arg);
         return 0;
-    });
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return -1;
+    }
 }
 
 static PyGetSetDef _getset_Plane[] = {
@@ -839,7 +1268,7 @@ static PyType_Spec _type_spec_Plane =
 // ----- Quaternion struct --------------------
 
 PyTypeObject* py::winrt_type<winrt::Windows::Foundation::Numerics::quaternion>::python_type;
-static const char* _type_name_Quaternion = "Quaternion";
+constexpr const char* const _type_name_Quaternion = "Quaternion";
 
 PyObject* py::converter<winrt::Windows::Foundation::Numerics::quaternion>::convert(winrt::Windows::Foundation::Numerics::quaternion instance) noexcept
 {
@@ -887,11 +1316,16 @@ PyObject* _new_Quaternion(PyTypeObject* type, PyObject* args, PyObject* kwds)
     
     if ((tuple_size == 0) && (kwds == nullptr))
     {
-        return py::trycatch_invoker([=]() -> PyObject*
+        try
         {
             winrt::Windows::Foundation::Numerics::quaternion return_value{};
             return py::convert(return_value);
-        }, nullptr);
+        }
+        catch (...)
+        {
+            py::to_PyErr();
+            return nullptr;
+        }
     }
     
     if ((tuple_size == 1) && (kwds == nullptr))
@@ -899,11 +1333,16 @@ PyObject* _new_Quaternion(PyTypeObject* type, PyObject* args, PyObject* kwds)
         auto arg = PyTuple_GetItem(args, 0);
         if (PyDict_Check(arg))
         {
-            return py::trycatch_invoker([=]() -> PyObject*
+            try
             {
                 auto return_value = py::convert_to<winrt::Windows::Foundation::Numerics::quaternion>(arg);
                 return py::convert(return_value);
-            }, nullptr);
+            }
+            catch (...)
+            {
+                py::to_PyErr();
+                return nullptr;
+            }
         }
     }
     
@@ -918,83 +1357,152 @@ PyObject* _new_Quaternion(PyTypeObject* type, PyObject* args, PyObject* kwds)
         return nullptr;
     }
     
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
         winrt::Windows::Foundation::Numerics::quaternion return_value{ _X, _Y, _Z, _W };
         return py::convert(return_value);
-    }, nullptr);
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
 static void _dealloc_Quaternion(py::wrapper::Windows::Foundation::Numerics::Quaternion* self)
 {
 }
 
-static PyObject* Quaternion_get_X(py::wrapper::Windows::Foundation::Numerics::Quaternion* self, void* /*unused*/)
+static PyObject* Quaternion_get_X(py::wrapper::Windows::Foundation::Numerics::Quaternion* self, void* /*unused*/) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
         return py::convert(self->obj.x);
-    }, nullptr);
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
-static int Quaternion_set_X(py::wrapper::Windows::Foundation::Numerics::Quaternion* self, PyObject* arg, void* /*unused*/)
+static int Quaternion_set_X(py::wrapper::Windows::Foundation::Numerics::Quaternion* self, PyObject* arg, void* /*unused*/) noexcept
 {
-    return py::setter_trycatch_invoker(arg, [=]() -> int
+    if (arg == nullptr)
+    {
+        PyErr_SetString(PyExc_TypeError, "property delete not supported");
+        return -1;
+    }
+    
+    try
     {
         self->obj.x = py::converter<float>::convert_to(arg);
         return 0;
-    });
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return -1;
+    }
 }
 
-static PyObject* Quaternion_get_Y(py::wrapper::Windows::Foundation::Numerics::Quaternion* self, void* /*unused*/)
+static PyObject* Quaternion_get_Y(py::wrapper::Windows::Foundation::Numerics::Quaternion* self, void* /*unused*/) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
         return py::convert(self->obj.y);
-    }, nullptr);
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
-static int Quaternion_set_Y(py::wrapper::Windows::Foundation::Numerics::Quaternion* self, PyObject* arg, void* /*unused*/)
+static int Quaternion_set_Y(py::wrapper::Windows::Foundation::Numerics::Quaternion* self, PyObject* arg, void* /*unused*/) noexcept
 {
-    return py::setter_trycatch_invoker(arg, [=]() -> int
+    if (arg == nullptr)
+    {
+        PyErr_SetString(PyExc_TypeError, "property delete not supported");
+        return -1;
+    }
+    
+    try
     {
         self->obj.y = py::converter<float>::convert_to(arg);
         return 0;
-    });
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return -1;
+    }
 }
 
-static PyObject* Quaternion_get_Z(py::wrapper::Windows::Foundation::Numerics::Quaternion* self, void* /*unused*/)
+static PyObject* Quaternion_get_Z(py::wrapper::Windows::Foundation::Numerics::Quaternion* self, void* /*unused*/) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
         return py::convert(self->obj.z);
-    }, nullptr);
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
-static int Quaternion_set_Z(py::wrapper::Windows::Foundation::Numerics::Quaternion* self, PyObject* arg, void* /*unused*/)
+static int Quaternion_set_Z(py::wrapper::Windows::Foundation::Numerics::Quaternion* self, PyObject* arg, void* /*unused*/) noexcept
 {
-    return py::setter_trycatch_invoker(arg, [=]() -> int
+    if (arg == nullptr)
+    {
+        PyErr_SetString(PyExc_TypeError, "property delete not supported");
+        return -1;
+    }
+    
+    try
     {
         self->obj.z = py::converter<float>::convert_to(arg);
         return 0;
-    });
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return -1;
+    }
 }
 
-static PyObject* Quaternion_get_W(py::wrapper::Windows::Foundation::Numerics::Quaternion* self, void* /*unused*/)
+static PyObject* Quaternion_get_W(py::wrapper::Windows::Foundation::Numerics::Quaternion* self, void* /*unused*/) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
         return py::convert(self->obj.w);
-    }, nullptr);
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
-static int Quaternion_set_W(py::wrapper::Windows::Foundation::Numerics::Quaternion* self, PyObject* arg, void* /*unused*/)
+static int Quaternion_set_W(py::wrapper::Windows::Foundation::Numerics::Quaternion* self, PyObject* arg, void* /*unused*/) noexcept
 {
-    return py::setter_trycatch_invoker(arg, [=]() -> int
+    if (arg == nullptr)
+    {
+        PyErr_SetString(PyExc_TypeError, "property delete not supported");
+        return -1;
+    }
+    
+    try
     {
         self->obj.w = py::converter<float>::convert_to(arg);
         return 0;
-    });
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return -1;
+    }
 }
 
 static PyGetSetDef _getset_Quaternion[] = {
@@ -1025,7 +1533,7 @@ static PyType_Spec _type_spec_Quaternion =
 // ----- Rational struct --------------------
 
 PyTypeObject* py::winrt_type<winrt::Windows::Foundation::Numerics::Rational>::python_type;
-static const char* _type_name_Rational = "Rational";
+constexpr const char* const _type_name_Rational = "Rational";
 
 PyObject* py::converter<winrt::Windows::Foundation::Numerics::Rational>::convert(winrt::Windows::Foundation::Numerics::Rational instance) noexcept
 {
@@ -1065,11 +1573,16 @@ PyObject* _new_Rational(PyTypeObject* type, PyObject* args, PyObject* kwds)
     
     if ((tuple_size == 0) && (kwds == nullptr))
     {
-        return py::trycatch_invoker([=]() -> PyObject*
+        try
         {
             winrt::Windows::Foundation::Numerics::Rational return_value{};
             return py::convert(return_value);
-        }, nullptr);
+        }
+        catch (...)
+        {
+            py::to_PyErr();
+            return nullptr;
+        }
     }
     
     if ((tuple_size == 1) && (kwds == nullptr))
@@ -1077,11 +1590,16 @@ PyObject* _new_Rational(PyTypeObject* type, PyObject* args, PyObject* kwds)
         auto arg = PyTuple_GetItem(args, 0);
         if (PyDict_Check(arg))
         {
-            return py::trycatch_invoker([=]() -> PyObject*
+            try
             {
                 auto return_value = py::convert_to<winrt::Windows::Foundation::Numerics::Rational>(arg);
                 return py::convert(return_value);
-            }, nullptr);
+            }
+            catch (...)
+            {
+                py::to_PyErr();
+                return nullptr;
+            }
         }
     }
     
@@ -1094,49 +1612,86 @@ PyObject* _new_Rational(PyTypeObject* type, PyObject* args, PyObject* kwds)
         return nullptr;
     }
     
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
         winrt::Windows::Foundation::Numerics::Rational return_value{ _Numerator, _Denominator };
         return py::convert(return_value);
-    }, nullptr);
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
 static void _dealloc_Rational(py::wrapper::Windows::Foundation::Numerics::Rational* self)
 {
 }
 
-static PyObject* Rational_get_Numerator(py::wrapper::Windows::Foundation::Numerics::Rational* self, void* /*unused*/)
+static PyObject* Rational_get_Numerator(py::wrapper::Windows::Foundation::Numerics::Rational* self, void* /*unused*/) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
         return py::convert(self->obj.Numerator);
-    }, nullptr);
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
-static int Rational_set_Numerator(py::wrapper::Windows::Foundation::Numerics::Rational* self, PyObject* arg, void* /*unused*/)
+static int Rational_set_Numerator(py::wrapper::Windows::Foundation::Numerics::Rational* self, PyObject* arg, void* /*unused*/) noexcept
 {
-    return py::setter_trycatch_invoker(arg, [=]() -> int
+    if (arg == nullptr)
+    {
+        PyErr_SetString(PyExc_TypeError, "property delete not supported");
+        return -1;
+    }
+    
+    try
     {
         self->obj.Numerator = py::converter<uint32_t>::convert_to(arg);
         return 0;
-    });
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return -1;
+    }
 }
 
-static PyObject* Rational_get_Denominator(py::wrapper::Windows::Foundation::Numerics::Rational* self, void* /*unused*/)
+static PyObject* Rational_get_Denominator(py::wrapper::Windows::Foundation::Numerics::Rational* self, void* /*unused*/) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
         return py::convert(self->obj.Denominator);
-    }, nullptr);
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
-static int Rational_set_Denominator(py::wrapper::Windows::Foundation::Numerics::Rational* self, PyObject* arg, void* /*unused*/)
+static int Rational_set_Denominator(py::wrapper::Windows::Foundation::Numerics::Rational* self, PyObject* arg, void* /*unused*/) noexcept
 {
-    return py::setter_trycatch_invoker(arg, [=]() -> int
+    if (arg == nullptr)
+    {
+        PyErr_SetString(PyExc_TypeError, "property delete not supported");
+        return -1;
+    }
+    
+    try
     {
         self->obj.Denominator = py::converter<uint32_t>::convert_to(arg);
         return 0;
-    });
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return -1;
+    }
 }
 
 static PyGetSetDef _getset_Rational[] = {
@@ -1165,7 +1720,7 @@ static PyType_Spec _type_spec_Rational =
 // ----- Vector2 struct --------------------
 
 PyTypeObject* py::winrt_type<winrt::Windows::Foundation::Numerics::float2>::python_type;
-static const char* _type_name_Vector2 = "Vector2";
+constexpr const char* const _type_name_Vector2 = "Vector2";
 
 PyObject* py::converter<winrt::Windows::Foundation::Numerics::float2>::convert(winrt::Windows::Foundation::Numerics::float2 instance) noexcept
 {
@@ -1205,11 +1760,16 @@ PyObject* _new_Vector2(PyTypeObject* type, PyObject* args, PyObject* kwds)
     
     if ((tuple_size == 0) && (kwds == nullptr))
     {
-        return py::trycatch_invoker([=]() -> PyObject*
+        try
         {
             winrt::Windows::Foundation::Numerics::float2 return_value{};
             return py::convert(return_value);
-        }, nullptr);
+        }
+        catch (...)
+        {
+            py::to_PyErr();
+            return nullptr;
+        }
     }
     
     if ((tuple_size == 1) && (kwds == nullptr))
@@ -1217,11 +1777,16 @@ PyObject* _new_Vector2(PyTypeObject* type, PyObject* args, PyObject* kwds)
         auto arg = PyTuple_GetItem(args, 0);
         if (PyDict_Check(arg))
         {
-            return py::trycatch_invoker([=]() -> PyObject*
+            try
             {
                 auto return_value = py::convert_to<winrt::Windows::Foundation::Numerics::float2>(arg);
                 return py::convert(return_value);
-            }, nullptr);
+            }
+            catch (...)
+            {
+                py::to_PyErr();
+                return nullptr;
+            }
         }
     }
     
@@ -1234,49 +1799,86 @@ PyObject* _new_Vector2(PyTypeObject* type, PyObject* args, PyObject* kwds)
         return nullptr;
     }
     
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
         winrt::Windows::Foundation::Numerics::float2 return_value{ _X, _Y };
         return py::convert(return_value);
-    }, nullptr);
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
 static void _dealloc_Vector2(py::wrapper::Windows::Foundation::Numerics::Vector2* self)
 {
 }
 
-static PyObject* Vector2_get_X(py::wrapper::Windows::Foundation::Numerics::Vector2* self, void* /*unused*/)
+static PyObject* Vector2_get_X(py::wrapper::Windows::Foundation::Numerics::Vector2* self, void* /*unused*/) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
         return py::convert(self->obj.x);
-    }, nullptr);
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
-static int Vector2_set_X(py::wrapper::Windows::Foundation::Numerics::Vector2* self, PyObject* arg, void* /*unused*/)
+static int Vector2_set_X(py::wrapper::Windows::Foundation::Numerics::Vector2* self, PyObject* arg, void* /*unused*/) noexcept
 {
-    return py::setter_trycatch_invoker(arg, [=]() -> int
+    if (arg == nullptr)
+    {
+        PyErr_SetString(PyExc_TypeError, "property delete not supported");
+        return -1;
+    }
+    
+    try
     {
         self->obj.x = py::converter<float>::convert_to(arg);
         return 0;
-    });
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return -1;
+    }
 }
 
-static PyObject* Vector2_get_Y(py::wrapper::Windows::Foundation::Numerics::Vector2* self, void* /*unused*/)
+static PyObject* Vector2_get_Y(py::wrapper::Windows::Foundation::Numerics::Vector2* self, void* /*unused*/) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
         return py::convert(self->obj.y);
-    }, nullptr);
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
-static int Vector2_set_Y(py::wrapper::Windows::Foundation::Numerics::Vector2* self, PyObject* arg, void* /*unused*/)
+static int Vector2_set_Y(py::wrapper::Windows::Foundation::Numerics::Vector2* self, PyObject* arg, void* /*unused*/) noexcept
 {
-    return py::setter_trycatch_invoker(arg, [=]() -> int
+    if (arg == nullptr)
+    {
+        PyErr_SetString(PyExc_TypeError, "property delete not supported");
+        return -1;
+    }
+    
+    try
     {
         self->obj.y = py::converter<float>::convert_to(arg);
         return 0;
-    });
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return -1;
+    }
 }
 
 static PyGetSetDef _getset_Vector2[] = {
@@ -1305,7 +1907,7 @@ static PyType_Spec _type_spec_Vector2 =
 // ----- Vector3 struct --------------------
 
 PyTypeObject* py::winrt_type<winrt::Windows::Foundation::Numerics::float3>::python_type;
-static const char* _type_name_Vector3 = "Vector3";
+constexpr const char* const _type_name_Vector3 = "Vector3";
 
 PyObject* py::converter<winrt::Windows::Foundation::Numerics::float3>::convert(winrt::Windows::Foundation::Numerics::float3 instance) noexcept
 {
@@ -1349,11 +1951,16 @@ PyObject* _new_Vector3(PyTypeObject* type, PyObject* args, PyObject* kwds)
     
     if ((tuple_size == 0) && (kwds == nullptr))
     {
-        return py::trycatch_invoker([=]() -> PyObject*
+        try
         {
             winrt::Windows::Foundation::Numerics::float3 return_value{};
             return py::convert(return_value);
-        }, nullptr);
+        }
+        catch (...)
+        {
+            py::to_PyErr();
+            return nullptr;
+        }
     }
     
     if ((tuple_size == 1) && (kwds == nullptr))
@@ -1361,11 +1968,16 @@ PyObject* _new_Vector3(PyTypeObject* type, PyObject* args, PyObject* kwds)
         auto arg = PyTuple_GetItem(args, 0);
         if (PyDict_Check(arg))
         {
-            return py::trycatch_invoker([=]() -> PyObject*
+            try
             {
                 auto return_value = py::convert_to<winrt::Windows::Foundation::Numerics::float3>(arg);
                 return py::convert(return_value);
-            }, nullptr);
+            }
+            catch (...)
+            {
+                py::to_PyErr();
+                return nullptr;
+            }
         }
     }
     
@@ -1379,66 +1991,119 @@ PyObject* _new_Vector3(PyTypeObject* type, PyObject* args, PyObject* kwds)
         return nullptr;
     }
     
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
         winrt::Windows::Foundation::Numerics::float3 return_value{ _X, _Y, _Z };
         return py::convert(return_value);
-    }, nullptr);
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
 static void _dealloc_Vector3(py::wrapper::Windows::Foundation::Numerics::Vector3* self)
 {
 }
 
-static PyObject* Vector3_get_X(py::wrapper::Windows::Foundation::Numerics::Vector3* self, void* /*unused*/)
+static PyObject* Vector3_get_X(py::wrapper::Windows::Foundation::Numerics::Vector3* self, void* /*unused*/) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
         return py::convert(self->obj.x);
-    }, nullptr);
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
-static int Vector3_set_X(py::wrapper::Windows::Foundation::Numerics::Vector3* self, PyObject* arg, void* /*unused*/)
+static int Vector3_set_X(py::wrapper::Windows::Foundation::Numerics::Vector3* self, PyObject* arg, void* /*unused*/) noexcept
 {
-    return py::setter_trycatch_invoker(arg, [=]() -> int
+    if (arg == nullptr)
+    {
+        PyErr_SetString(PyExc_TypeError, "property delete not supported");
+        return -1;
+    }
+    
+    try
     {
         self->obj.x = py::converter<float>::convert_to(arg);
         return 0;
-    });
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return -1;
+    }
 }
 
-static PyObject* Vector3_get_Y(py::wrapper::Windows::Foundation::Numerics::Vector3* self, void* /*unused*/)
+static PyObject* Vector3_get_Y(py::wrapper::Windows::Foundation::Numerics::Vector3* self, void* /*unused*/) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
         return py::convert(self->obj.y);
-    }, nullptr);
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
-static int Vector3_set_Y(py::wrapper::Windows::Foundation::Numerics::Vector3* self, PyObject* arg, void* /*unused*/)
+static int Vector3_set_Y(py::wrapper::Windows::Foundation::Numerics::Vector3* self, PyObject* arg, void* /*unused*/) noexcept
 {
-    return py::setter_trycatch_invoker(arg, [=]() -> int
+    if (arg == nullptr)
+    {
+        PyErr_SetString(PyExc_TypeError, "property delete not supported");
+        return -1;
+    }
+    
+    try
     {
         self->obj.y = py::converter<float>::convert_to(arg);
         return 0;
-    });
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return -1;
+    }
 }
 
-static PyObject* Vector3_get_Z(py::wrapper::Windows::Foundation::Numerics::Vector3* self, void* /*unused*/)
+static PyObject* Vector3_get_Z(py::wrapper::Windows::Foundation::Numerics::Vector3* self, void* /*unused*/) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
         return py::convert(self->obj.z);
-    }, nullptr);
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
-static int Vector3_set_Z(py::wrapper::Windows::Foundation::Numerics::Vector3* self, PyObject* arg, void* /*unused*/)
+static int Vector3_set_Z(py::wrapper::Windows::Foundation::Numerics::Vector3* self, PyObject* arg, void* /*unused*/) noexcept
 {
-    return py::setter_trycatch_invoker(arg, [=]() -> int
+    if (arg == nullptr)
+    {
+        PyErr_SetString(PyExc_TypeError, "property delete not supported");
+        return -1;
+    }
+    
+    try
     {
         self->obj.z = py::converter<float>::convert_to(arg);
         return 0;
-    });
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return -1;
+    }
 }
 
 static PyGetSetDef _getset_Vector3[] = {
@@ -1468,7 +2133,7 @@ static PyType_Spec _type_spec_Vector3 =
 // ----- Vector4 struct --------------------
 
 PyTypeObject* py::winrt_type<winrt::Windows::Foundation::Numerics::float4>::python_type;
-static const char* _type_name_Vector4 = "Vector4";
+constexpr const char* const _type_name_Vector4 = "Vector4";
 
 PyObject* py::converter<winrt::Windows::Foundation::Numerics::float4>::convert(winrt::Windows::Foundation::Numerics::float4 instance) noexcept
 {
@@ -1516,11 +2181,16 @@ PyObject* _new_Vector4(PyTypeObject* type, PyObject* args, PyObject* kwds)
     
     if ((tuple_size == 0) && (kwds == nullptr))
     {
-        return py::trycatch_invoker([=]() -> PyObject*
+        try
         {
             winrt::Windows::Foundation::Numerics::float4 return_value{};
             return py::convert(return_value);
-        }, nullptr);
+        }
+        catch (...)
+        {
+            py::to_PyErr();
+            return nullptr;
+        }
     }
     
     if ((tuple_size == 1) && (kwds == nullptr))
@@ -1528,11 +2198,16 @@ PyObject* _new_Vector4(PyTypeObject* type, PyObject* args, PyObject* kwds)
         auto arg = PyTuple_GetItem(args, 0);
         if (PyDict_Check(arg))
         {
-            return py::trycatch_invoker([=]() -> PyObject*
+            try
             {
                 auto return_value = py::convert_to<winrt::Windows::Foundation::Numerics::float4>(arg);
                 return py::convert(return_value);
-            }, nullptr);
+            }
+            catch (...)
+            {
+                py::to_PyErr();
+                return nullptr;
+            }
         }
     }
     
@@ -1547,83 +2222,152 @@ PyObject* _new_Vector4(PyTypeObject* type, PyObject* args, PyObject* kwds)
         return nullptr;
     }
     
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
         winrt::Windows::Foundation::Numerics::float4 return_value{ _X, _Y, _Z, _W };
         return py::convert(return_value);
-    }, nullptr);
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
 static void _dealloc_Vector4(py::wrapper::Windows::Foundation::Numerics::Vector4* self)
 {
 }
 
-static PyObject* Vector4_get_X(py::wrapper::Windows::Foundation::Numerics::Vector4* self, void* /*unused*/)
+static PyObject* Vector4_get_X(py::wrapper::Windows::Foundation::Numerics::Vector4* self, void* /*unused*/) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
         return py::convert(self->obj.x);
-    }, nullptr);
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
-static int Vector4_set_X(py::wrapper::Windows::Foundation::Numerics::Vector4* self, PyObject* arg, void* /*unused*/)
+static int Vector4_set_X(py::wrapper::Windows::Foundation::Numerics::Vector4* self, PyObject* arg, void* /*unused*/) noexcept
 {
-    return py::setter_trycatch_invoker(arg, [=]() -> int
+    if (arg == nullptr)
+    {
+        PyErr_SetString(PyExc_TypeError, "property delete not supported");
+        return -1;
+    }
+    
+    try
     {
         self->obj.x = py::converter<float>::convert_to(arg);
         return 0;
-    });
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return -1;
+    }
 }
 
-static PyObject* Vector4_get_Y(py::wrapper::Windows::Foundation::Numerics::Vector4* self, void* /*unused*/)
+static PyObject* Vector4_get_Y(py::wrapper::Windows::Foundation::Numerics::Vector4* self, void* /*unused*/) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
         return py::convert(self->obj.y);
-    }, nullptr);
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
-static int Vector4_set_Y(py::wrapper::Windows::Foundation::Numerics::Vector4* self, PyObject* arg, void* /*unused*/)
+static int Vector4_set_Y(py::wrapper::Windows::Foundation::Numerics::Vector4* self, PyObject* arg, void* /*unused*/) noexcept
 {
-    return py::setter_trycatch_invoker(arg, [=]() -> int
+    if (arg == nullptr)
+    {
+        PyErr_SetString(PyExc_TypeError, "property delete not supported");
+        return -1;
+    }
+    
+    try
     {
         self->obj.y = py::converter<float>::convert_to(arg);
         return 0;
-    });
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return -1;
+    }
 }
 
-static PyObject* Vector4_get_Z(py::wrapper::Windows::Foundation::Numerics::Vector4* self, void* /*unused*/)
+static PyObject* Vector4_get_Z(py::wrapper::Windows::Foundation::Numerics::Vector4* self, void* /*unused*/) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
         return py::convert(self->obj.z);
-    }, nullptr);
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
-static int Vector4_set_Z(py::wrapper::Windows::Foundation::Numerics::Vector4* self, PyObject* arg, void* /*unused*/)
+static int Vector4_set_Z(py::wrapper::Windows::Foundation::Numerics::Vector4* self, PyObject* arg, void* /*unused*/) noexcept
 {
-    return py::setter_trycatch_invoker(arg, [=]() -> int
+    if (arg == nullptr)
+    {
+        PyErr_SetString(PyExc_TypeError, "property delete not supported");
+        return -1;
+    }
+    
+    try
     {
         self->obj.z = py::converter<float>::convert_to(arg);
         return 0;
-    });
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return -1;
+    }
 }
 
-static PyObject* Vector4_get_W(py::wrapper::Windows::Foundation::Numerics::Vector4* self, void* /*unused*/)
+static PyObject* Vector4_get_W(py::wrapper::Windows::Foundation::Numerics::Vector4* self, void* /*unused*/) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
         return py::convert(self->obj.w);
-    }, nullptr);
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
-static int Vector4_set_W(py::wrapper::Windows::Foundation::Numerics::Vector4* self, PyObject* arg, void* /*unused*/)
+static int Vector4_set_W(py::wrapper::Windows::Foundation::Numerics::Vector4* self, PyObject* arg, void* /*unused*/) noexcept
 {
-    return py::setter_trycatch_invoker(arg, [=]() -> int
+    if (arg == nullptr)
+    {
+        PyErr_SetString(PyExc_TypeError, "property delete not supported");
+        return -1;
+    }
+    
+    try
     {
         self->obj.w = py::converter<float>::convert_to(arg);
         return 0;
-    });
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return -1;
+    }
 }
 
 static PyGetSetDef _getset_Vector4[] = {
@@ -1652,28 +2396,28 @@ static PyType_Spec _type_spec_Vector4 =
 };
 
 // ----- Windows.Foundation.Numerics Initialization --------------------
-static int module_exec(PyObject* module)
+static int module_exec(PyObject* module) noexcept
 {
-    py::pyobj_handle bases { PyTuple_Pack(1, py::winrt_type<py::winrt_base>::python_type) };
-    
     try
     {
-        py::winrt_type<winrt::Windows::Foundation::Numerics::float3x2>::python_type = reinterpret_cast<PyTypeObject*>(py::register_python_type(module, _type_name_Matrix3x2, &_type_spec_Matrix3x2, bases.get()).detach());
-        py::winrt_type<winrt::Windows::Foundation::Numerics::float4x4>::python_type = reinterpret_cast<PyTypeObject*>(py::register_python_type(module, _type_name_Matrix4x4, &_type_spec_Matrix4x4, bases.get()).detach());
-        py::winrt_type<winrt::Windows::Foundation::Numerics::plane>::python_type = reinterpret_cast<PyTypeObject*>(py::register_python_type(module, _type_name_Plane, &_type_spec_Plane, bases.get()).detach());
-        py::winrt_type<winrt::Windows::Foundation::Numerics::quaternion>::python_type = reinterpret_cast<PyTypeObject*>(py::register_python_type(module, _type_name_Quaternion, &_type_spec_Quaternion, bases.get()).detach());
-        py::winrt_type<winrt::Windows::Foundation::Numerics::Rational>::python_type = reinterpret_cast<PyTypeObject*>(py::register_python_type(module, _type_name_Rational, &_type_spec_Rational, bases.get()).detach());
-        py::winrt_type<winrt::Windows::Foundation::Numerics::float2>::python_type = reinterpret_cast<PyTypeObject*>(py::register_python_type(module, _type_name_Vector2, &_type_spec_Vector2, bases.get()).detach());
-        py::winrt_type<winrt::Windows::Foundation::Numerics::float3>::python_type = reinterpret_cast<PyTypeObject*>(py::register_python_type(module, _type_name_Vector3, &_type_spec_Vector3, bases.get()).detach());
-        py::winrt_type<winrt::Windows::Foundation::Numerics::float4>::python_type = reinterpret_cast<PyTypeObject*>(py::register_python_type(module, _type_name_Vector4, &_type_spec_Vector4, bases.get()).detach());
+        py::pyobj_handle bases { PyTuple_Pack(1, py::winrt_type<py::winrt_base>::python_type) };
+        
+        py::winrt_type<winrt::Windows::Foundation::Numerics::float3x2>::python_type = py::register_python_type(module, _type_name_Matrix3x2, &_type_spec_Matrix3x2, bases.get());
+        py::winrt_type<winrt::Windows::Foundation::Numerics::float4x4>::python_type = py::register_python_type(module, _type_name_Matrix4x4, &_type_spec_Matrix4x4, bases.get());
+        py::winrt_type<winrt::Windows::Foundation::Numerics::plane>::python_type = py::register_python_type(module, _type_name_Plane, &_type_spec_Plane, bases.get());
+        py::winrt_type<winrt::Windows::Foundation::Numerics::quaternion>::python_type = py::register_python_type(module, _type_name_Quaternion, &_type_spec_Quaternion, bases.get());
+        py::winrt_type<winrt::Windows::Foundation::Numerics::Rational>::python_type = py::register_python_type(module, _type_name_Rational, &_type_spec_Rational, bases.get());
+        py::winrt_type<winrt::Windows::Foundation::Numerics::float2>::python_type = py::register_python_type(module, _type_name_Vector2, &_type_spec_Vector2, bases.get());
+        py::winrt_type<winrt::Windows::Foundation::Numerics::float3>::python_type = py::register_python_type(module, _type_name_Vector3, &_type_spec_Vector3, bases.get());
+        py::winrt_type<winrt::Windows::Foundation::Numerics::float4>::python_type = py::register_python_type(module, _type_name_Vector4, &_type_spec_Vector4, bases.get());
+        
+        return 0;
     }
-    catch(...)
+    catch (...)
     {
         py::to_PyErr();
         return -1;
     }
-    
-    return 0;
 }
 
 static PyModuleDef_Slot module_slots[] = {
@@ -1696,7 +2440,7 @@ static PyModuleDef module_def = {
 };
 
 PyMODINIT_FUNC
-PyInit__winrt_Windows_Foundation_Numerics (void)
+PyInit__winrt_Windows_Foundation_Numerics (void) noexcept
 {
     return PyModuleDef_Init(&module_def);
 }

@@ -45,32 +45,37 @@ inline void custom_set(winrt::hresult& instance, int32_t value)
 // ----- Deferral class --------------------
 
 PyTypeObject* py::winrt_type<winrt::Windows::Foundation::Deferral>::python_type;
-static const char* _type_name_Deferral = "Deferral";
+constexpr const char* const _type_name_Deferral = "Deferral";
 
-static PyObject* _new_Deferral(PyTypeObject* type, PyObject* args, PyObject* kwds)
+static PyObject* _new_Deferral(PyTypeObject* type, PyObject* args, PyObject* kwds) noexcept
 {
     if (kwds != nullptr)
     {
-        PyErr_SetString(PyExc_TypeError, "keyword arguments not supported");
+        py::set_invalid_kwd_args_error();
         return nullptr;
     }
     
     Py_ssize_t arg_count = PyTuple_Size(args);
     if (arg_count == 1)
     {
-        return py::trycatch_invoker([=]() -> PyObject*
+        try
         {
             auto param0 = py::convert_to<winrt::Windows::Foundation::DeferralCompletedHandler>(args, 0);
             
             winrt::Windows::Foundation::Deferral instance{ param0 };
             return py::wrap(instance, type);
-        }, nullptr);
+        }
+        catch (...)
+        {
+            py::to_PyErr();
+            return nullptr;
+        }
     }
-    else if (arg_count != -1)
+    else
     {
-        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+        py::set_invalid_arg_count_error(arg_count);
+        return nullptr;
     }
-    return nullptr;
 }
 
 static void _dealloc_Deferral(py::wrapper::Windows::Foundation::Deferral* self)
@@ -80,68 +85,86 @@ static void _dealloc_Deferral(py::wrapper::Windows::Foundation::Deferral* self)
     self->obj = nullptr;
 }
 
-static PyObject* Deferral_Close(py::wrapper::Windows::Foundation::Deferral* self, PyObject* args)
+static PyObject* Deferral_Close(py::wrapper::Windows::Foundation::Deferral* self, PyObject* args) noexcept
 {
     Py_ssize_t arg_count = PyTuple_Size(args);
     
     if (arg_count == 0)
     {
-        return py::trycatch_invoker([=]() -> PyObject*
+        try
         {
             self->obj.Close();
-            
             Py_RETURN_NONE;
-        }, nullptr);
+        }
+        catch (...)
+        {
+            py::to_PyErr();
+            return nullptr;
+        }
     }
-    else if (arg_count != -1)
+    else
     {
-        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+        py::set_invalid_arg_count_error(arg_count);
+        return nullptr;
     }
-    return nullptr;
 }
 
-static PyObject* Deferral_Complete(py::wrapper::Windows::Foundation::Deferral* self, PyObject* args)
+static PyObject* Deferral_Complete(py::wrapper::Windows::Foundation::Deferral* self, PyObject* args) noexcept
 {
     Py_ssize_t arg_count = PyTuple_Size(args);
     
     if (arg_count == 0)
     {
-        return py::trycatch_invoker([=]() -> PyObject*
+        try
         {
             self->obj.Complete();
-            
             Py_RETURN_NONE;
-        }, nullptr);
+        }
+        catch (...)
+        {
+            py::to_PyErr();
+            return nullptr;
+        }
     }
-    else if (arg_count != -1)
+    else
     {
-        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+        py::set_invalid_arg_count_error(arg_count);
+        return nullptr;
     }
-    return nullptr;
 }
 
-static PyObject* _from_Deferral(PyObject* /*unused*/, PyObject* arg)
+static PyObject* _from_Deferral(PyObject* /*unused*/, PyObject* arg) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
         auto return_value = py::convert_to<winrt::Windows::Foundation::IInspectable>(arg);
         return py::convert(return_value.as<winrt::Windows::Foundation::Deferral>());
-    }, nullptr);
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
-static PyObject* _enter_Deferral(py::wrapper::Windows::Foundation::Deferral* self)
+static PyObject* _enter_Deferral(py::wrapper::Windows::Foundation::Deferral* self) noexcept
 {
     Py_INCREF(self);
     return (PyObject*)self;
 }
 
-static PyObject* _exit_Deferral(py::wrapper::Windows::Foundation::Deferral* self)
+static PyObject* _exit_Deferral(py::wrapper::Windows::Foundation::Deferral* self) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
         self->obj.Close();
         Py_RETURN_FALSE;
-    }, nullptr);
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
 static PyMethodDef _methods_Deferral[] = {
@@ -178,82 +201,74 @@ static PyType_Spec _type_spec_Deferral =
 // ----- GuidHelper class --------------------
 
 PyTypeObject* py::winrt_type<winrt::Windows::Foundation::GuidHelper>::python_type;
-static const char* _type_name_GuidHelper = "GuidHelper";
+constexpr const char* const _type_name_GuidHelper = "GuidHelper";
 
-static PyObject* _new_GuidHelper(PyTypeObject* type, PyObject* args, PyObject* kwds)
+static PyObject* _new_GuidHelper(PyTypeObject* type, PyObject* args, PyObject* kwds) noexcept
 {
-    std::string msg{ _type_name_GuidHelper };
-    msg.append(" is not activatable");
-    PyErr_SetString(PyExc_TypeError, msg.c_str());
+    py::set_invalid_activation_error(_type_name_GuidHelper);
     return nullptr;
 }
 
-static PyObject* GuidHelper_CreateNewGuid(PyObject* /*unused*/, PyObject* args)
+static PyObject* GuidHelper_CreateNewGuid(PyObject* /*unused*/, PyObject* args) noexcept
 {
     Py_ssize_t arg_count = PyTuple_Size(args);
     
     if (arg_count == 0)
     {
-        return py::trycatch_invoker([=]() -> PyObject*
+        try
         {
-            auto return_value = winrt::Windows::Foundation::GuidHelper::CreateNewGuid();
-            
-            py::pyobj_handle out_return_value{ py::convert(return_value) };
-            if (!out_return_value) 
-            { 
-                return nullptr;
-            }
-            return out_return_value.detach();
-        }, nullptr);
+            return py::convert(winrt::Windows::Foundation::GuidHelper::CreateNewGuid());
+        }
+        catch (...)
+        {
+            py::to_PyErr();
+            return nullptr;
+        }
     }
-    else if (arg_count != -1)
+    else
     {
-        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+        py::set_invalid_arg_count_error(arg_count);
+        return nullptr;
     }
-    return nullptr;
 }
 
-static PyObject* GuidHelper_Equals(PyObject* /*unused*/, PyObject* args)
+static PyObject* GuidHelper_Equals(PyObject* /*unused*/, PyObject* args) noexcept
 {
     Py_ssize_t arg_count = PyTuple_Size(args);
     
     if (arg_count == 2)
     {
-        return py::trycatch_invoker([=]() -> PyObject*
+        try
         {
             auto param0 = py::convert_to<winrt::guid>(args, 0);
             auto param1 = py::convert_to<winrt::guid>(args, 1);
             
-            auto return_value = winrt::Windows::Foundation::GuidHelper::Equals(param0, param1);
-            
-            py::pyobj_handle out_return_value{ py::convert(return_value) };
-            if (!out_return_value) 
-            { 
-                return nullptr;
-            }
-            return out_return_value.detach();
-        }, nullptr);
-    }
-    else if (arg_count != -1)
-    {
-        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-    }
-    return nullptr;
-}
-
-static PyObject* GuidHelper_get_Empty(PyObject* /*unused*/, void* /*unused*/)
-{
-    return py::trycatch_invoker([=]() -> PyObject*
-    {
-        auto return_value = winrt::Windows::Foundation::GuidHelper::Empty();
-        
-        py::pyobj_handle out_return_value{ py::convert(return_value) };
-        if (!out_return_value) 
-        { 
+            return py::convert(winrt::Windows::Foundation::GuidHelper::Equals(param0, param1));
+        }
+        catch (...)
+        {
+            py::to_PyErr();
             return nullptr;
         }
-        return out_return_value.detach();
-    }, nullptr);
+    }
+    else
+    {
+        py::set_invalid_arg_count_error(arg_count);
+        return nullptr;
+    }
+}
+
+static PyObject* GuidHelper_get_Empty(PyObject* /*unused*/, void* /*unused*/) noexcept
+{
+    try
+    {
+        return py::convert(winrt::Windows::Foundation::GuidHelper::Empty());
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
 static PyMethodDef _methods_GuidHelper[] = {
@@ -287,32 +302,37 @@ static PyType_Spec _type_spec_GuidHelper =
 // ----- MemoryBuffer class --------------------
 
 PyTypeObject* py::winrt_type<winrt::Windows::Foundation::MemoryBuffer>::python_type;
-static const char* _type_name_MemoryBuffer = "MemoryBuffer";
+constexpr const char* const _type_name_MemoryBuffer = "MemoryBuffer";
 
-static PyObject* _new_MemoryBuffer(PyTypeObject* type, PyObject* args, PyObject* kwds)
+static PyObject* _new_MemoryBuffer(PyTypeObject* type, PyObject* args, PyObject* kwds) noexcept
 {
     if (kwds != nullptr)
     {
-        PyErr_SetString(PyExc_TypeError, "keyword arguments not supported");
+        py::set_invalid_kwd_args_error();
         return nullptr;
     }
     
     Py_ssize_t arg_count = PyTuple_Size(args);
     if (arg_count == 1)
     {
-        return py::trycatch_invoker([=]() -> PyObject*
+        try
         {
             auto param0 = py::convert_to<uint32_t>(args, 0);
             
             winrt::Windows::Foundation::MemoryBuffer instance{ param0 };
             return py::wrap(instance, type);
-        }, nullptr);
+        }
+        catch (...)
+        {
+            py::to_PyErr();
+            return nullptr;
+        }
     }
-    else if (arg_count != -1)
+    else
     {
-        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+        py::set_invalid_arg_count_error(arg_count);
+        return nullptr;
     }
-    return nullptr;
 }
 
 static void _dealloc_MemoryBuffer(py::wrapper::Windows::Foundation::MemoryBuffer* self)
@@ -322,73 +342,85 @@ static void _dealloc_MemoryBuffer(py::wrapper::Windows::Foundation::MemoryBuffer
     self->obj = nullptr;
 }
 
-static PyObject* MemoryBuffer_Close(py::wrapper::Windows::Foundation::MemoryBuffer* self, PyObject* args)
+static PyObject* MemoryBuffer_Close(py::wrapper::Windows::Foundation::MemoryBuffer* self, PyObject* args) noexcept
 {
     Py_ssize_t arg_count = PyTuple_Size(args);
     
     if (arg_count == 0)
     {
-        return py::trycatch_invoker([=]() -> PyObject*
+        try
         {
             self->obj.Close();
-            
             Py_RETURN_NONE;
-        }, nullptr);
+        }
+        catch (...)
+        {
+            py::to_PyErr();
+            return nullptr;
+        }
     }
-    else if (arg_count != -1)
+    else
     {
-        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+        py::set_invalid_arg_count_error(arg_count);
+        return nullptr;
     }
-    return nullptr;
 }
 
-static PyObject* MemoryBuffer_CreateReference(py::wrapper::Windows::Foundation::MemoryBuffer* self, PyObject* args)
+static PyObject* MemoryBuffer_CreateReference(py::wrapper::Windows::Foundation::MemoryBuffer* self, PyObject* args) noexcept
 {
     Py_ssize_t arg_count = PyTuple_Size(args);
     
     if (arg_count == 0)
     {
-        return py::trycatch_invoker([=]() -> PyObject*
+        try
         {
-            auto return_value = self->obj.CreateReference();
-            
-            py::pyobj_handle out_return_value{ py::convert(return_value) };
-            if (!out_return_value) 
-            { 
-                return nullptr;
-            }
-            return out_return_value.detach();
-        }, nullptr);
+            return py::convert(self->obj.CreateReference());
+        }
+        catch (...)
+        {
+            py::to_PyErr();
+            return nullptr;
+        }
     }
-    else if (arg_count != -1)
+    else
     {
-        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+        py::set_invalid_arg_count_error(arg_count);
+        return nullptr;
     }
-    return nullptr;
 }
 
-static PyObject* _from_MemoryBuffer(PyObject* /*unused*/, PyObject* arg)
+static PyObject* _from_MemoryBuffer(PyObject* /*unused*/, PyObject* arg) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
         auto return_value = py::convert_to<winrt::Windows::Foundation::IInspectable>(arg);
         return py::convert(return_value.as<winrt::Windows::Foundation::MemoryBuffer>());
-    }, nullptr);
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
-static PyObject* _enter_MemoryBuffer(py::wrapper::Windows::Foundation::MemoryBuffer* self)
+static PyObject* _enter_MemoryBuffer(py::wrapper::Windows::Foundation::MemoryBuffer* self) noexcept
 {
     Py_INCREF(self);
     return (PyObject*)self;
 }
 
-static PyObject* _exit_MemoryBuffer(py::wrapper::Windows::Foundation::MemoryBuffer* self)
+static PyObject* _exit_MemoryBuffer(py::wrapper::Windows::Foundation::MemoryBuffer* self) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
         self->obj.Close();
         Py_RETURN_FALSE;
-    }, nullptr);
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
 static PyMethodDef _methods_MemoryBuffer[] = {
@@ -425,1084 +457,1004 @@ static PyType_Spec _type_spec_MemoryBuffer =
 // ----- PropertyValue class --------------------
 
 PyTypeObject* py::winrt_type<winrt::Windows::Foundation::PropertyValue>::python_type;
-static const char* _type_name_PropertyValue = "PropertyValue";
+constexpr const char* const _type_name_PropertyValue = "PropertyValue";
 
-static PyObject* _new_PropertyValue(PyTypeObject* type, PyObject* args, PyObject* kwds)
+static PyObject* _new_PropertyValue(PyTypeObject* type, PyObject* args, PyObject* kwds) noexcept
 {
-    std::string msg{ _type_name_PropertyValue };
-    msg.append(" is not activatable");
-    PyErr_SetString(PyExc_TypeError, msg.c_str());
+    py::set_invalid_activation_error(_type_name_PropertyValue);
     return nullptr;
 }
 
-static PyObject* PropertyValue_CreateBoolean(PyObject* /*unused*/, PyObject* args)
+static PyObject* PropertyValue_CreateBoolean(PyObject* /*unused*/, PyObject* args) noexcept
 {
     Py_ssize_t arg_count = PyTuple_Size(args);
     
     if (arg_count == 1)
     {
-        return py::trycatch_invoker([=]() -> PyObject*
+        try
         {
             auto param0 = py::convert_to<bool>(args, 0);
             
-            auto return_value = winrt::Windows::Foundation::PropertyValue::CreateBoolean(param0);
-            
-            py::pyobj_handle out_return_value{ py::convert(return_value) };
-            if (!out_return_value) 
-            { 
-                return nullptr;
-            }
-            return out_return_value.detach();
-        }, nullptr);
+            return py::convert(winrt::Windows::Foundation::PropertyValue::CreateBoolean(param0));
+        }
+        catch (...)
+        {
+            py::to_PyErr();
+            return nullptr;
+        }
     }
-    else if (arg_count != -1)
+    else
     {
-        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+        py::set_invalid_arg_count_error(arg_count);
+        return nullptr;
     }
-    return nullptr;
 }
 
-static PyObject* PropertyValue_CreateBooleanArray(PyObject* /*unused*/, PyObject* args)
+static PyObject* PropertyValue_CreateBooleanArray(PyObject* /*unused*/, PyObject* args) noexcept
 {
     Py_ssize_t arg_count = PyTuple_Size(args);
     
     if (arg_count == 1)
     {
-        return py::trycatch_invoker([=]() -> PyObject*
+        try
         {
             auto _param0 = py::convert_to<winrt::com_array<bool>>(args, 0);
             auto param0 = winrt::array_view<const bool>(_param0.data(), _param0.data() + _param0.size());
             
-            auto return_value = winrt::Windows::Foundation::PropertyValue::CreateBooleanArray(param0);
-            
-            py::pyobj_handle out_return_value{ py::convert(return_value) };
-            if (!out_return_value) 
-            { 
-                return nullptr;
-            }
-            return out_return_value.detach();
-        }, nullptr);
+            return py::convert(winrt::Windows::Foundation::PropertyValue::CreateBooleanArray(param0));
+        }
+        catch (...)
+        {
+            py::to_PyErr();
+            return nullptr;
+        }
     }
-    else if (arg_count != -1)
+    else
     {
-        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+        py::set_invalid_arg_count_error(arg_count);
+        return nullptr;
     }
-    return nullptr;
 }
 
-static PyObject* PropertyValue_CreateChar16(PyObject* /*unused*/, PyObject* args)
+static PyObject* PropertyValue_CreateChar16(PyObject* /*unused*/, PyObject* args) noexcept
 {
     Py_ssize_t arg_count = PyTuple_Size(args);
     
     if (arg_count == 1)
     {
-        return py::trycatch_invoker([=]() -> PyObject*
+        try
         {
             auto param0 = py::convert_to<char16_t>(args, 0);
             
-            auto return_value = winrt::Windows::Foundation::PropertyValue::CreateChar16(param0);
-            
-            py::pyobj_handle out_return_value{ py::convert(return_value) };
-            if (!out_return_value) 
-            { 
-                return nullptr;
-            }
-            return out_return_value.detach();
-        }, nullptr);
+            return py::convert(winrt::Windows::Foundation::PropertyValue::CreateChar16(param0));
+        }
+        catch (...)
+        {
+            py::to_PyErr();
+            return nullptr;
+        }
     }
-    else if (arg_count != -1)
+    else
     {
-        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+        py::set_invalid_arg_count_error(arg_count);
+        return nullptr;
     }
-    return nullptr;
 }
 
-static PyObject* PropertyValue_CreateChar16Array(PyObject* /*unused*/, PyObject* args)
+static PyObject* PropertyValue_CreateChar16Array(PyObject* /*unused*/, PyObject* args) noexcept
 {
     Py_ssize_t arg_count = PyTuple_Size(args);
     
     if (arg_count == 1)
     {
-        return py::trycatch_invoker([=]() -> PyObject*
+        try
         {
             auto _param0 = py::convert_to<winrt::com_array<char16_t>>(args, 0);
             auto param0 = winrt::array_view<const char16_t>(_param0.data(), _param0.data() + _param0.size());
             
-            auto return_value = winrt::Windows::Foundation::PropertyValue::CreateChar16Array(param0);
-            
-            py::pyobj_handle out_return_value{ py::convert(return_value) };
-            if (!out_return_value) 
-            { 
-                return nullptr;
-            }
-            return out_return_value.detach();
-        }, nullptr);
+            return py::convert(winrt::Windows::Foundation::PropertyValue::CreateChar16Array(param0));
+        }
+        catch (...)
+        {
+            py::to_PyErr();
+            return nullptr;
+        }
     }
-    else if (arg_count != -1)
+    else
     {
-        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+        py::set_invalid_arg_count_error(arg_count);
+        return nullptr;
     }
-    return nullptr;
 }
 
-static PyObject* PropertyValue_CreateDateTime(PyObject* /*unused*/, PyObject* args)
+static PyObject* PropertyValue_CreateDateTime(PyObject* /*unused*/, PyObject* args) noexcept
 {
     Py_ssize_t arg_count = PyTuple_Size(args);
     
     if (arg_count == 1)
     {
-        return py::trycatch_invoker([=]() -> PyObject*
+        try
         {
             auto param0 = py::convert_to<winrt::Windows::Foundation::DateTime>(args, 0);
             
-            auto return_value = winrt::Windows::Foundation::PropertyValue::CreateDateTime(param0);
-            
-            py::pyobj_handle out_return_value{ py::convert(return_value) };
-            if (!out_return_value) 
-            { 
-                return nullptr;
-            }
-            return out_return_value.detach();
-        }, nullptr);
+            return py::convert(winrt::Windows::Foundation::PropertyValue::CreateDateTime(param0));
+        }
+        catch (...)
+        {
+            py::to_PyErr();
+            return nullptr;
+        }
     }
-    else if (arg_count != -1)
+    else
     {
-        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+        py::set_invalid_arg_count_error(arg_count);
+        return nullptr;
     }
-    return nullptr;
 }
 
-static PyObject* PropertyValue_CreateDateTimeArray(PyObject* /*unused*/, PyObject* args)
+static PyObject* PropertyValue_CreateDateTimeArray(PyObject* /*unused*/, PyObject* args) noexcept
 {
     Py_ssize_t arg_count = PyTuple_Size(args);
     
     if (arg_count == 1)
     {
-        return py::trycatch_invoker([=]() -> PyObject*
+        try
         {
             auto _param0 = py::convert_to<winrt::com_array<winrt::Windows::Foundation::DateTime>>(args, 0);
             auto param0 = winrt::array_view<const winrt::Windows::Foundation::DateTime>(_param0.data(), _param0.data() + _param0.size());
             
-            auto return_value = winrt::Windows::Foundation::PropertyValue::CreateDateTimeArray(param0);
-            
-            py::pyobj_handle out_return_value{ py::convert(return_value) };
-            if (!out_return_value) 
-            { 
-                return nullptr;
-            }
-            return out_return_value.detach();
-        }, nullptr);
+            return py::convert(winrt::Windows::Foundation::PropertyValue::CreateDateTimeArray(param0));
+        }
+        catch (...)
+        {
+            py::to_PyErr();
+            return nullptr;
+        }
     }
-    else if (arg_count != -1)
+    else
     {
-        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+        py::set_invalid_arg_count_error(arg_count);
+        return nullptr;
     }
-    return nullptr;
 }
 
-static PyObject* PropertyValue_CreateDouble(PyObject* /*unused*/, PyObject* args)
+static PyObject* PropertyValue_CreateDouble(PyObject* /*unused*/, PyObject* args) noexcept
 {
     Py_ssize_t arg_count = PyTuple_Size(args);
     
     if (arg_count == 1)
     {
-        return py::trycatch_invoker([=]() -> PyObject*
+        try
         {
             auto param0 = py::convert_to<double>(args, 0);
             
-            auto return_value = winrt::Windows::Foundation::PropertyValue::CreateDouble(param0);
-            
-            py::pyobj_handle out_return_value{ py::convert(return_value) };
-            if (!out_return_value) 
-            { 
-                return nullptr;
-            }
-            return out_return_value.detach();
-        }, nullptr);
+            return py::convert(winrt::Windows::Foundation::PropertyValue::CreateDouble(param0));
+        }
+        catch (...)
+        {
+            py::to_PyErr();
+            return nullptr;
+        }
     }
-    else if (arg_count != -1)
+    else
     {
-        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+        py::set_invalid_arg_count_error(arg_count);
+        return nullptr;
     }
-    return nullptr;
 }
 
-static PyObject* PropertyValue_CreateDoubleArray(PyObject* /*unused*/, PyObject* args)
+static PyObject* PropertyValue_CreateDoubleArray(PyObject* /*unused*/, PyObject* args) noexcept
 {
     Py_ssize_t arg_count = PyTuple_Size(args);
     
     if (arg_count == 1)
     {
-        return py::trycatch_invoker([=]() -> PyObject*
+        try
         {
             auto _param0 = py::convert_to<winrt::com_array<double>>(args, 0);
             auto param0 = winrt::array_view<const double>(_param0.data(), _param0.data() + _param0.size());
             
-            auto return_value = winrt::Windows::Foundation::PropertyValue::CreateDoubleArray(param0);
-            
-            py::pyobj_handle out_return_value{ py::convert(return_value) };
-            if (!out_return_value) 
-            { 
-                return nullptr;
-            }
-            return out_return_value.detach();
-        }, nullptr);
+            return py::convert(winrt::Windows::Foundation::PropertyValue::CreateDoubleArray(param0));
+        }
+        catch (...)
+        {
+            py::to_PyErr();
+            return nullptr;
+        }
     }
-    else if (arg_count != -1)
+    else
     {
-        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+        py::set_invalid_arg_count_error(arg_count);
+        return nullptr;
     }
-    return nullptr;
 }
 
-static PyObject* PropertyValue_CreateEmpty(PyObject* /*unused*/, PyObject* args)
+static PyObject* PropertyValue_CreateEmpty(PyObject* /*unused*/, PyObject* args) noexcept
 {
     Py_ssize_t arg_count = PyTuple_Size(args);
     
     if (arg_count == 0)
     {
-        return py::trycatch_invoker([=]() -> PyObject*
+        try
         {
-            auto return_value = winrt::Windows::Foundation::PropertyValue::CreateEmpty();
-            
-            py::pyobj_handle out_return_value{ py::convert(return_value) };
-            if (!out_return_value) 
-            { 
-                return nullptr;
-            }
-            return out_return_value.detach();
-        }, nullptr);
+            return py::convert(winrt::Windows::Foundation::PropertyValue::CreateEmpty());
+        }
+        catch (...)
+        {
+            py::to_PyErr();
+            return nullptr;
+        }
     }
-    else if (arg_count != -1)
+    else
     {
-        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+        py::set_invalid_arg_count_error(arg_count);
+        return nullptr;
     }
-    return nullptr;
 }
 
-static PyObject* PropertyValue_CreateGuid(PyObject* /*unused*/, PyObject* args)
+static PyObject* PropertyValue_CreateGuid(PyObject* /*unused*/, PyObject* args) noexcept
 {
     Py_ssize_t arg_count = PyTuple_Size(args);
     
     if (arg_count == 1)
     {
-        return py::trycatch_invoker([=]() -> PyObject*
+        try
         {
             auto param0 = py::convert_to<winrt::guid>(args, 0);
             
-            auto return_value = winrt::Windows::Foundation::PropertyValue::CreateGuid(param0);
-            
-            py::pyobj_handle out_return_value{ py::convert(return_value) };
-            if (!out_return_value) 
-            { 
-                return nullptr;
-            }
-            return out_return_value.detach();
-        }, nullptr);
+            return py::convert(winrt::Windows::Foundation::PropertyValue::CreateGuid(param0));
+        }
+        catch (...)
+        {
+            py::to_PyErr();
+            return nullptr;
+        }
     }
-    else if (arg_count != -1)
+    else
     {
-        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+        py::set_invalid_arg_count_error(arg_count);
+        return nullptr;
     }
-    return nullptr;
 }
 
-static PyObject* PropertyValue_CreateGuidArray(PyObject* /*unused*/, PyObject* args)
+static PyObject* PropertyValue_CreateGuidArray(PyObject* /*unused*/, PyObject* args) noexcept
 {
     Py_ssize_t arg_count = PyTuple_Size(args);
     
     if (arg_count == 1)
     {
-        return py::trycatch_invoker([=]() -> PyObject*
+        try
         {
             auto _param0 = py::convert_to<winrt::com_array<winrt::guid>>(args, 0);
             auto param0 = winrt::array_view<const winrt::guid>(_param0.data(), _param0.data() + _param0.size());
             
-            auto return_value = winrt::Windows::Foundation::PropertyValue::CreateGuidArray(param0);
-            
-            py::pyobj_handle out_return_value{ py::convert(return_value) };
-            if (!out_return_value) 
-            { 
-                return nullptr;
-            }
-            return out_return_value.detach();
-        }, nullptr);
+            return py::convert(winrt::Windows::Foundation::PropertyValue::CreateGuidArray(param0));
+        }
+        catch (...)
+        {
+            py::to_PyErr();
+            return nullptr;
+        }
     }
-    else if (arg_count != -1)
+    else
     {
-        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+        py::set_invalid_arg_count_error(arg_count);
+        return nullptr;
     }
-    return nullptr;
 }
 
-static PyObject* PropertyValue_CreateInspectable(PyObject* /*unused*/, PyObject* args)
+static PyObject* PropertyValue_CreateInspectable(PyObject* /*unused*/, PyObject* args) noexcept
 {
     Py_ssize_t arg_count = PyTuple_Size(args);
     
     if (arg_count == 1)
     {
-        return py::trycatch_invoker([=]() -> PyObject*
+        try
         {
             auto param0 = py::convert_to<winrt::Windows::Foundation::IInspectable>(args, 0);
             
-            auto return_value = winrt::Windows::Foundation::PropertyValue::CreateInspectable(param0);
-            
-            py::pyobj_handle out_return_value{ py::convert(return_value) };
-            if (!out_return_value) 
-            { 
-                return nullptr;
-            }
-            return out_return_value.detach();
-        }, nullptr);
+            return py::convert(winrt::Windows::Foundation::PropertyValue::CreateInspectable(param0));
+        }
+        catch (...)
+        {
+            py::to_PyErr();
+            return nullptr;
+        }
     }
-    else if (arg_count != -1)
+    else
     {
-        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+        py::set_invalid_arg_count_error(arg_count);
+        return nullptr;
     }
-    return nullptr;
 }
 
-static PyObject* PropertyValue_CreateInspectableArray(PyObject* /*unused*/, PyObject* args)
+static PyObject* PropertyValue_CreateInspectableArray(PyObject* /*unused*/, PyObject* args) noexcept
 {
     Py_ssize_t arg_count = PyTuple_Size(args);
     
     if (arg_count == 1)
     {
-        return py::trycatch_invoker([=]() -> PyObject*
+        try
         {
             auto _param0 = py::convert_to<winrt::com_array<winrt::Windows::Foundation::IInspectable>>(args, 0);
             auto param0 = winrt::array_view<const winrt::Windows::Foundation::IInspectable>(_param0.data(), _param0.data() + _param0.size());
             
-            auto return_value = winrt::Windows::Foundation::PropertyValue::CreateInspectableArray(param0);
-            
-            py::pyobj_handle out_return_value{ py::convert(return_value) };
-            if (!out_return_value) 
-            { 
-                return nullptr;
-            }
-            return out_return_value.detach();
-        }, nullptr);
+            return py::convert(winrt::Windows::Foundation::PropertyValue::CreateInspectableArray(param0));
+        }
+        catch (...)
+        {
+            py::to_PyErr();
+            return nullptr;
+        }
     }
-    else if (arg_count != -1)
+    else
     {
-        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+        py::set_invalid_arg_count_error(arg_count);
+        return nullptr;
     }
-    return nullptr;
 }
 
-static PyObject* PropertyValue_CreateInt16(PyObject* /*unused*/, PyObject* args)
+static PyObject* PropertyValue_CreateInt16(PyObject* /*unused*/, PyObject* args) noexcept
 {
     Py_ssize_t arg_count = PyTuple_Size(args);
     
     if (arg_count == 1)
     {
-        return py::trycatch_invoker([=]() -> PyObject*
+        try
         {
             auto param0 = py::convert_to<int16_t>(args, 0);
             
-            auto return_value = winrt::Windows::Foundation::PropertyValue::CreateInt16(param0);
-            
-            py::pyobj_handle out_return_value{ py::convert(return_value) };
-            if (!out_return_value) 
-            { 
-                return nullptr;
-            }
-            return out_return_value.detach();
-        }, nullptr);
+            return py::convert(winrt::Windows::Foundation::PropertyValue::CreateInt16(param0));
+        }
+        catch (...)
+        {
+            py::to_PyErr();
+            return nullptr;
+        }
     }
-    else if (arg_count != -1)
+    else
     {
-        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+        py::set_invalid_arg_count_error(arg_count);
+        return nullptr;
     }
-    return nullptr;
 }
 
-static PyObject* PropertyValue_CreateInt16Array(PyObject* /*unused*/, PyObject* args)
+static PyObject* PropertyValue_CreateInt16Array(PyObject* /*unused*/, PyObject* args) noexcept
 {
     Py_ssize_t arg_count = PyTuple_Size(args);
     
     if (arg_count == 1)
     {
-        return py::trycatch_invoker([=]() -> PyObject*
+        try
         {
             auto _param0 = py::convert_to<winrt::com_array<int16_t>>(args, 0);
             auto param0 = winrt::array_view<const int16_t>(_param0.data(), _param0.data() + _param0.size());
             
-            auto return_value = winrt::Windows::Foundation::PropertyValue::CreateInt16Array(param0);
-            
-            py::pyobj_handle out_return_value{ py::convert(return_value) };
-            if (!out_return_value) 
-            { 
-                return nullptr;
-            }
-            return out_return_value.detach();
-        }, nullptr);
+            return py::convert(winrt::Windows::Foundation::PropertyValue::CreateInt16Array(param0));
+        }
+        catch (...)
+        {
+            py::to_PyErr();
+            return nullptr;
+        }
     }
-    else if (arg_count != -1)
+    else
     {
-        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+        py::set_invalid_arg_count_error(arg_count);
+        return nullptr;
     }
-    return nullptr;
 }
 
-static PyObject* PropertyValue_CreateInt32(PyObject* /*unused*/, PyObject* args)
+static PyObject* PropertyValue_CreateInt32(PyObject* /*unused*/, PyObject* args) noexcept
 {
     Py_ssize_t arg_count = PyTuple_Size(args);
     
     if (arg_count == 1)
     {
-        return py::trycatch_invoker([=]() -> PyObject*
+        try
         {
             auto param0 = py::convert_to<int32_t>(args, 0);
             
-            auto return_value = winrt::Windows::Foundation::PropertyValue::CreateInt32(param0);
-            
-            py::pyobj_handle out_return_value{ py::convert(return_value) };
-            if (!out_return_value) 
-            { 
-                return nullptr;
-            }
-            return out_return_value.detach();
-        }, nullptr);
+            return py::convert(winrt::Windows::Foundation::PropertyValue::CreateInt32(param0));
+        }
+        catch (...)
+        {
+            py::to_PyErr();
+            return nullptr;
+        }
     }
-    else if (arg_count != -1)
+    else
     {
-        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+        py::set_invalid_arg_count_error(arg_count);
+        return nullptr;
     }
-    return nullptr;
 }
 
-static PyObject* PropertyValue_CreateInt32Array(PyObject* /*unused*/, PyObject* args)
+static PyObject* PropertyValue_CreateInt32Array(PyObject* /*unused*/, PyObject* args) noexcept
 {
     Py_ssize_t arg_count = PyTuple_Size(args);
     
     if (arg_count == 1)
     {
-        return py::trycatch_invoker([=]() -> PyObject*
+        try
         {
             auto _param0 = py::convert_to<winrt::com_array<int32_t>>(args, 0);
             auto param0 = winrt::array_view<const int32_t>(_param0.data(), _param0.data() + _param0.size());
             
-            auto return_value = winrt::Windows::Foundation::PropertyValue::CreateInt32Array(param0);
-            
-            py::pyobj_handle out_return_value{ py::convert(return_value) };
-            if (!out_return_value) 
-            { 
-                return nullptr;
-            }
-            return out_return_value.detach();
-        }, nullptr);
+            return py::convert(winrt::Windows::Foundation::PropertyValue::CreateInt32Array(param0));
+        }
+        catch (...)
+        {
+            py::to_PyErr();
+            return nullptr;
+        }
     }
-    else if (arg_count != -1)
+    else
     {
-        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+        py::set_invalid_arg_count_error(arg_count);
+        return nullptr;
     }
-    return nullptr;
 }
 
-static PyObject* PropertyValue_CreateInt64(PyObject* /*unused*/, PyObject* args)
+static PyObject* PropertyValue_CreateInt64(PyObject* /*unused*/, PyObject* args) noexcept
 {
     Py_ssize_t arg_count = PyTuple_Size(args);
     
     if (arg_count == 1)
     {
-        return py::trycatch_invoker([=]() -> PyObject*
+        try
         {
             auto param0 = py::convert_to<int64_t>(args, 0);
             
-            auto return_value = winrt::Windows::Foundation::PropertyValue::CreateInt64(param0);
-            
-            py::pyobj_handle out_return_value{ py::convert(return_value) };
-            if (!out_return_value) 
-            { 
-                return nullptr;
-            }
-            return out_return_value.detach();
-        }, nullptr);
+            return py::convert(winrt::Windows::Foundation::PropertyValue::CreateInt64(param0));
+        }
+        catch (...)
+        {
+            py::to_PyErr();
+            return nullptr;
+        }
     }
-    else if (arg_count != -1)
+    else
     {
-        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+        py::set_invalid_arg_count_error(arg_count);
+        return nullptr;
     }
-    return nullptr;
 }
 
-static PyObject* PropertyValue_CreateInt64Array(PyObject* /*unused*/, PyObject* args)
+static PyObject* PropertyValue_CreateInt64Array(PyObject* /*unused*/, PyObject* args) noexcept
 {
     Py_ssize_t arg_count = PyTuple_Size(args);
     
     if (arg_count == 1)
     {
-        return py::trycatch_invoker([=]() -> PyObject*
+        try
         {
             auto _param0 = py::convert_to<winrt::com_array<int64_t>>(args, 0);
             auto param0 = winrt::array_view<const int64_t>(_param0.data(), _param0.data() + _param0.size());
             
-            auto return_value = winrt::Windows::Foundation::PropertyValue::CreateInt64Array(param0);
-            
-            py::pyobj_handle out_return_value{ py::convert(return_value) };
-            if (!out_return_value) 
-            { 
-                return nullptr;
-            }
-            return out_return_value.detach();
-        }, nullptr);
+            return py::convert(winrt::Windows::Foundation::PropertyValue::CreateInt64Array(param0));
+        }
+        catch (...)
+        {
+            py::to_PyErr();
+            return nullptr;
+        }
     }
-    else if (arg_count != -1)
+    else
     {
-        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+        py::set_invalid_arg_count_error(arg_count);
+        return nullptr;
     }
-    return nullptr;
 }
 
-static PyObject* PropertyValue_CreatePoint(PyObject* /*unused*/, PyObject* args)
+static PyObject* PropertyValue_CreatePoint(PyObject* /*unused*/, PyObject* args) noexcept
 {
     Py_ssize_t arg_count = PyTuple_Size(args);
     
     if (arg_count == 1)
     {
-        return py::trycatch_invoker([=]() -> PyObject*
+        try
         {
             auto param0 = py::convert_to<winrt::Windows::Foundation::Point>(args, 0);
             
-            auto return_value = winrt::Windows::Foundation::PropertyValue::CreatePoint(param0);
-            
-            py::pyobj_handle out_return_value{ py::convert(return_value) };
-            if (!out_return_value) 
-            { 
-                return nullptr;
-            }
-            return out_return_value.detach();
-        }, nullptr);
+            return py::convert(winrt::Windows::Foundation::PropertyValue::CreatePoint(param0));
+        }
+        catch (...)
+        {
+            py::to_PyErr();
+            return nullptr;
+        }
     }
-    else if (arg_count != -1)
+    else
     {
-        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+        py::set_invalid_arg_count_error(arg_count);
+        return nullptr;
     }
-    return nullptr;
 }
 
-static PyObject* PropertyValue_CreatePointArray(PyObject* /*unused*/, PyObject* args)
+static PyObject* PropertyValue_CreatePointArray(PyObject* /*unused*/, PyObject* args) noexcept
 {
     Py_ssize_t arg_count = PyTuple_Size(args);
     
     if (arg_count == 1)
     {
-        return py::trycatch_invoker([=]() -> PyObject*
+        try
         {
             auto _param0 = py::convert_to<winrt::com_array<winrt::Windows::Foundation::Point>>(args, 0);
             auto param0 = winrt::array_view<const winrt::Windows::Foundation::Point>(_param0.data(), _param0.data() + _param0.size());
             
-            auto return_value = winrt::Windows::Foundation::PropertyValue::CreatePointArray(param0);
-            
-            py::pyobj_handle out_return_value{ py::convert(return_value) };
-            if (!out_return_value) 
-            { 
-                return nullptr;
-            }
-            return out_return_value.detach();
-        }, nullptr);
+            return py::convert(winrt::Windows::Foundation::PropertyValue::CreatePointArray(param0));
+        }
+        catch (...)
+        {
+            py::to_PyErr();
+            return nullptr;
+        }
     }
-    else if (arg_count != -1)
+    else
     {
-        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+        py::set_invalid_arg_count_error(arg_count);
+        return nullptr;
     }
-    return nullptr;
 }
 
-static PyObject* PropertyValue_CreateRect(PyObject* /*unused*/, PyObject* args)
+static PyObject* PropertyValue_CreateRect(PyObject* /*unused*/, PyObject* args) noexcept
 {
     Py_ssize_t arg_count = PyTuple_Size(args);
     
     if (arg_count == 1)
     {
-        return py::trycatch_invoker([=]() -> PyObject*
+        try
         {
             auto param0 = py::convert_to<winrt::Windows::Foundation::Rect>(args, 0);
             
-            auto return_value = winrt::Windows::Foundation::PropertyValue::CreateRect(param0);
-            
-            py::pyobj_handle out_return_value{ py::convert(return_value) };
-            if (!out_return_value) 
-            { 
-                return nullptr;
-            }
-            return out_return_value.detach();
-        }, nullptr);
+            return py::convert(winrt::Windows::Foundation::PropertyValue::CreateRect(param0));
+        }
+        catch (...)
+        {
+            py::to_PyErr();
+            return nullptr;
+        }
     }
-    else if (arg_count != -1)
+    else
     {
-        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+        py::set_invalid_arg_count_error(arg_count);
+        return nullptr;
     }
-    return nullptr;
 }
 
-static PyObject* PropertyValue_CreateRectArray(PyObject* /*unused*/, PyObject* args)
+static PyObject* PropertyValue_CreateRectArray(PyObject* /*unused*/, PyObject* args) noexcept
 {
     Py_ssize_t arg_count = PyTuple_Size(args);
     
     if (arg_count == 1)
     {
-        return py::trycatch_invoker([=]() -> PyObject*
+        try
         {
             auto _param0 = py::convert_to<winrt::com_array<winrt::Windows::Foundation::Rect>>(args, 0);
             auto param0 = winrt::array_view<const winrt::Windows::Foundation::Rect>(_param0.data(), _param0.data() + _param0.size());
             
-            auto return_value = winrt::Windows::Foundation::PropertyValue::CreateRectArray(param0);
-            
-            py::pyobj_handle out_return_value{ py::convert(return_value) };
-            if (!out_return_value) 
-            { 
-                return nullptr;
-            }
-            return out_return_value.detach();
-        }, nullptr);
+            return py::convert(winrt::Windows::Foundation::PropertyValue::CreateRectArray(param0));
+        }
+        catch (...)
+        {
+            py::to_PyErr();
+            return nullptr;
+        }
     }
-    else if (arg_count != -1)
+    else
     {
-        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+        py::set_invalid_arg_count_error(arg_count);
+        return nullptr;
     }
-    return nullptr;
 }
 
-static PyObject* PropertyValue_CreateSingle(PyObject* /*unused*/, PyObject* args)
+static PyObject* PropertyValue_CreateSingle(PyObject* /*unused*/, PyObject* args) noexcept
 {
     Py_ssize_t arg_count = PyTuple_Size(args);
     
     if (arg_count == 1)
     {
-        return py::trycatch_invoker([=]() -> PyObject*
+        try
         {
             auto param0 = py::convert_to<float>(args, 0);
             
-            auto return_value = winrt::Windows::Foundation::PropertyValue::CreateSingle(param0);
-            
-            py::pyobj_handle out_return_value{ py::convert(return_value) };
-            if (!out_return_value) 
-            { 
-                return nullptr;
-            }
-            return out_return_value.detach();
-        }, nullptr);
+            return py::convert(winrt::Windows::Foundation::PropertyValue::CreateSingle(param0));
+        }
+        catch (...)
+        {
+            py::to_PyErr();
+            return nullptr;
+        }
     }
-    else if (arg_count != -1)
+    else
     {
-        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+        py::set_invalid_arg_count_error(arg_count);
+        return nullptr;
     }
-    return nullptr;
 }
 
-static PyObject* PropertyValue_CreateSingleArray(PyObject* /*unused*/, PyObject* args)
+static PyObject* PropertyValue_CreateSingleArray(PyObject* /*unused*/, PyObject* args) noexcept
 {
     Py_ssize_t arg_count = PyTuple_Size(args);
     
     if (arg_count == 1)
     {
-        return py::trycatch_invoker([=]() -> PyObject*
+        try
         {
             auto _param0 = py::convert_to<winrt::com_array<float>>(args, 0);
             auto param0 = winrt::array_view<const float>(_param0.data(), _param0.data() + _param0.size());
             
-            auto return_value = winrt::Windows::Foundation::PropertyValue::CreateSingleArray(param0);
-            
-            py::pyobj_handle out_return_value{ py::convert(return_value) };
-            if (!out_return_value) 
-            { 
-                return nullptr;
-            }
-            return out_return_value.detach();
-        }, nullptr);
+            return py::convert(winrt::Windows::Foundation::PropertyValue::CreateSingleArray(param0));
+        }
+        catch (...)
+        {
+            py::to_PyErr();
+            return nullptr;
+        }
     }
-    else if (arg_count != -1)
+    else
     {
-        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+        py::set_invalid_arg_count_error(arg_count);
+        return nullptr;
     }
-    return nullptr;
 }
 
-static PyObject* PropertyValue_CreateSize(PyObject* /*unused*/, PyObject* args)
+static PyObject* PropertyValue_CreateSize(PyObject* /*unused*/, PyObject* args) noexcept
 {
     Py_ssize_t arg_count = PyTuple_Size(args);
     
     if (arg_count == 1)
     {
-        return py::trycatch_invoker([=]() -> PyObject*
+        try
         {
             auto param0 = py::convert_to<winrt::Windows::Foundation::Size>(args, 0);
             
-            auto return_value = winrt::Windows::Foundation::PropertyValue::CreateSize(param0);
-            
-            py::pyobj_handle out_return_value{ py::convert(return_value) };
-            if (!out_return_value) 
-            { 
-                return nullptr;
-            }
-            return out_return_value.detach();
-        }, nullptr);
+            return py::convert(winrt::Windows::Foundation::PropertyValue::CreateSize(param0));
+        }
+        catch (...)
+        {
+            py::to_PyErr();
+            return nullptr;
+        }
     }
-    else if (arg_count != -1)
+    else
     {
-        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+        py::set_invalid_arg_count_error(arg_count);
+        return nullptr;
     }
-    return nullptr;
 }
 
-static PyObject* PropertyValue_CreateSizeArray(PyObject* /*unused*/, PyObject* args)
+static PyObject* PropertyValue_CreateSizeArray(PyObject* /*unused*/, PyObject* args) noexcept
 {
     Py_ssize_t arg_count = PyTuple_Size(args);
     
     if (arg_count == 1)
     {
-        return py::trycatch_invoker([=]() -> PyObject*
+        try
         {
             auto _param0 = py::convert_to<winrt::com_array<winrt::Windows::Foundation::Size>>(args, 0);
             auto param0 = winrt::array_view<const winrt::Windows::Foundation::Size>(_param0.data(), _param0.data() + _param0.size());
             
-            auto return_value = winrt::Windows::Foundation::PropertyValue::CreateSizeArray(param0);
-            
-            py::pyobj_handle out_return_value{ py::convert(return_value) };
-            if (!out_return_value) 
-            { 
-                return nullptr;
-            }
-            return out_return_value.detach();
-        }, nullptr);
+            return py::convert(winrt::Windows::Foundation::PropertyValue::CreateSizeArray(param0));
+        }
+        catch (...)
+        {
+            py::to_PyErr();
+            return nullptr;
+        }
     }
-    else if (arg_count != -1)
+    else
     {
-        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+        py::set_invalid_arg_count_error(arg_count);
+        return nullptr;
     }
-    return nullptr;
 }
 
-static PyObject* PropertyValue_CreateString(PyObject* /*unused*/, PyObject* args)
+static PyObject* PropertyValue_CreateString(PyObject* /*unused*/, PyObject* args) noexcept
 {
     Py_ssize_t arg_count = PyTuple_Size(args);
     
     if (arg_count == 1)
     {
-        return py::trycatch_invoker([=]() -> PyObject*
+        try
         {
             auto param0 = py::convert_to<winrt::hstring>(args, 0);
             
-            auto return_value = winrt::Windows::Foundation::PropertyValue::CreateString(param0);
-            
-            py::pyobj_handle out_return_value{ py::convert(return_value) };
-            if (!out_return_value) 
-            { 
-                return nullptr;
-            }
-            return out_return_value.detach();
-        }, nullptr);
+            return py::convert(winrt::Windows::Foundation::PropertyValue::CreateString(param0));
+        }
+        catch (...)
+        {
+            py::to_PyErr();
+            return nullptr;
+        }
     }
-    else if (arg_count != -1)
+    else
     {
-        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+        py::set_invalid_arg_count_error(arg_count);
+        return nullptr;
     }
-    return nullptr;
 }
 
-static PyObject* PropertyValue_CreateStringArray(PyObject* /*unused*/, PyObject* args)
+static PyObject* PropertyValue_CreateStringArray(PyObject* /*unused*/, PyObject* args) noexcept
 {
     Py_ssize_t arg_count = PyTuple_Size(args);
     
     if (arg_count == 1)
     {
-        return py::trycatch_invoker([=]() -> PyObject*
+        try
         {
             auto _param0 = py::convert_to<winrt::com_array<winrt::hstring>>(args, 0);
             auto param0 = winrt::array_view<const winrt::hstring>(_param0.data(), _param0.data() + _param0.size());
             
-            auto return_value = winrt::Windows::Foundation::PropertyValue::CreateStringArray(param0);
-            
-            py::pyobj_handle out_return_value{ py::convert(return_value) };
-            if (!out_return_value) 
-            { 
-                return nullptr;
-            }
-            return out_return_value.detach();
-        }, nullptr);
+            return py::convert(winrt::Windows::Foundation::PropertyValue::CreateStringArray(param0));
+        }
+        catch (...)
+        {
+            py::to_PyErr();
+            return nullptr;
+        }
     }
-    else if (arg_count != -1)
+    else
     {
-        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+        py::set_invalid_arg_count_error(arg_count);
+        return nullptr;
     }
-    return nullptr;
 }
 
-static PyObject* PropertyValue_CreateTimeSpan(PyObject* /*unused*/, PyObject* args)
+static PyObject* PropertyValue_CreateTimeSpan(PyObject* /*unused*/, PyObject* args) noexcept
 {
     Py_ssize_t arg_count = PyTuple_Size(args);
     
     if (arg_count == 1)
     {
-        return py::trycatch_invoker([=]() -> PyObject*
+        try
         {
             auto param0 = py::convert_to<winrt::Windows::Foundation::TimeSpan>(args, 0);
             
-            auto return_value = winrt::Windows::Foundation::PropertyValue::CreateTimeSpan(param0);
-            
-            py::pyobj_handle out_return_value{ py::convert(return_value) };
-            if (!out_return_value) 
-            { 
-                return nullptr;
-            }
-            return out_return_value.detach();
-        }, nullptr);
+            return py::convert(winrt::Windows::Foundation::PropertyValue::CreateTimeSpan(param0));
+        }
+        catch (...)
+        {
+            py::to_PyErr();
+            return nullptr;
+        }
     }
-    else if (arg_count != -1)
+    else
     {
-        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+        py::set_invalid_arg_count_error(arg_count);
+        return nullptr;
     }
-    return nullptr;
 }
 
-static PyObject* PropertyValue_CreateTimeSpanArray(PyObject* /*unused*/, PyObject* args)
+static PyObject* PropertyValue_CreateTimeSpanArray(PyObject* /*unused*/, PyObject* args) noexcept
 {
     Py_ssize_t arg_count = PyTuple_Size(args);
     
     if (arg_count == 1)
     {
-        return py::trycatch_invoker([=]() -> PyObject*
+        try
         {
             auto _param0 = py::convert_to<winrt::com_array<winrt::Windows::Foundation::TimeSpan>>(args, 0);
             auto param0 = winrt::array_view<const winrt::Windows::Foundation::TimeSpan>(_param0.data(), _param0.data() + _param0.size());
             
-            auto return_value = winrt::Windows::Foundation::PropertyValue::CreateTimeSpanArray(param0);
-            
-            py::pyobj_handle out_return_value{ py::convert(return_value) };
-            if (!out_return_value) 
-            { 
-                return nullptr;
-            }
-            return out_return_value.detach();
-        }, nullptr);
+            return py::convert(winrt::Windows::Foundation::PropertyValue::CreateTimeSpanArray(param0));
+        }
+        catch (...)
+        {
+            py::to_PyErr();
+            return nullptr;
+        }
     }
-    else if (arg_count != -1)
+    else
     {
-        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+        py::set_invalid_arg_count_error(arg_count);
+        return nullptr;
     }
-    return nullptr;
 }
 
-static PyObject* PropertyValue_CreateUInt16(PyObject* /*unused*/, PyObject* args)
+static PyObject* PropertyValue_CreateUInt16(PyObject* /*unused*/, PyObject* args) noexcept
 {
     Py_ssize_t arg_count = PyTuple_Size(args);
     
     if (arg_count == 1)
     {
-        return py::trycatch_invoker([=]() -> PyObject*
+        try
         {
             auto param0 = py::convert_to<uint16_t>(args, 0);
             
-            auto return_value = winrt::Windows::Foundation::PropertyValue::CreateUInt16(param0);
-            
-            py::pyobj_handle out_return_value{ py::convert(return_value) };
-            if (!out_return_value) 
-            { 
-                return nullptr;
-            }
-            return out_return_value.detach();
-        }, nullptr);
+            return py::convert(winrt::Windows::Foundation::PropertyValue::CreateUInt16(param0));
+        }
+        catch (...)
+        {
+            py::to_PyErr();
+            return nullptr;
+        }
     }
-    else if (arg_count != -1)
+    else
     {
-        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+        py::set_invalid_arg_count_error(arg_count);
+        return nullptr;
     }
-    return nullptr;
 }
 
-static PyObject* PropertyValue_CreateUInt16Array(PyObject* /*unused*/, PyObject* args)
+static PyObject* PropertyValue_CreateUInt16Array(PyObject* /*unused*/, PyObject* args) noexcept
 {
     Py_ssize_t arg_count = PyTuple_Size(args);
     
     if (arg_count == 1)
     {
-        return py::trycatch_invoker([=]() -> PyObject*
+        try
         {
             auto _param0 = py::convert_to<winrt::com_array<uint16_t>>(args, 0);
             auto param0 = winrt::array_view<const uint16_t>(_param0.data(), _param0.data() + _param0.size());
             
-            auto return_value = winrt::Windows::Foundation::PropertyValue::CreateUInt16Array(param0);
-            
-            py::pyobj_handle out_return_value{ py::convert(return_value) };
-            if (!out_return_value) 
-            { 
-                return nullptr;
-            }
-            return out_return_value.detach();
-        }, nullptr);
+            return py::convert(winrt::Windows::Foundation::PropertyValue::CreateUInt16Array(param0));
+        }
+        catch (...)
+        {
+            py::to_PyErr();
+            return nullptr;
+        }
     }
-    else if (arg_count != -1)
+    else
     {
-        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+        py::set_invalid_arg_count_error(arg_count);
+        return nullptr;
     }
-    return nullptr;
 }
 
-static PyObject* PropertyValue_CreateUInt32(PyObject* /*unused*/, PyObject* args)
+static PyObject* PropertyValue_CreateUInt32(PyObject* /*unused*/, PyObject* args) noexcept
 {
     Py_ssize_t arg_count = PyTuple_Size(args);
     
     if (arg_count == 1)
     {
-        return py::trycatch_invoker([=]() -> PyObject*
+        try
         {
             auto param0 = py::convert_to<uint32_t>(args, 0);
             
-            auto return_value = winrt::Windows::Foundation::PropertyValue::CreateUInt32(param0);
-            
-            py::pyobj_handle out_return_value{ py::convert(return_value) };
-            if (!out_return_value) 
-            { 
-                return nullptr;
-            }
-            return out_return_value.detach();
-        }, nullptr);
+            return py::convert(winrt::Windows::Foundation::PropertyValue::CreateUInt32(param0));
+        }
+        catch (...)
+        {
+            py::to_PyErr();
+            return nullptr;
+        }
     }
-    else if (arg_count != -1)
+    else
     {
-        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+        py::set_invalid_arg_count_error(arg_count);
+        return nullptr;
     }
-    return nullptr;
 }
 
-static PyObject* PropertyValue_CreateUInt32Array(PyObject* /*unused*/, PyObject* args)
+static PyObject* PropertyValue_CreateUInt32Array(PyObject* /*unused*/, PyObject* args) noexcept
 {
     Py_ssize_t arg_count = PyTuple_Size(args);
     
     if (arg_count == 1)
     {
-        return py::trycatch_invoker([=]() -> PyObject*
+        try
         {
             auto _param0 = py::convert_to<winrt::com_array<uint32_t>>(args, 0);
             auto param0 = winrt::array_view<const uint32_t>(_param0.data(), _param0.data() + _param0.size());
             
-            auto return_value = winrt::Windows::Foundation::PropertyValue::CreateUInt32Array(param0);
-            
-            py::pyobj_handle out_return_value{ py::convert(return_value) };
-            if (!out_return_value) 
-            { 
-                return nullptr;
-            }
-            return out_return_value.detach();
-        }, nullptr);
+            return py::convert(winrt::Windows::Foundation::PropertyValue::CreateUInt32Array(param0));
+        }
+        catch (...)
+        {
+            py::to_PyErr();
+            return nullptr;
+        }
     }
-    else if (arg_count != -1)
+    else
     {
-        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+        py::set_invalid_arg_count_error(arg_count);
+        return nullptr;
     }
-    return nullptr;
 }
 
-static PyObject* PropertyValue_CreateUInt64(PyObject* /*unused*/, PyObject* args)
+static PyObject* PropertyValue_CreateUInt64(PyObject* /*unused*/, PyObject* args) noexcept
 {
     Py_ssize_t arg_count = PyTuple_Size(args);
     
     if (arg_count == 1)
     {
-        return py::trycatch_invoker([=]() -> PyObject*
+        try
         {
             auto param0 = py::convert_to<uint64_t>(args, 0);
             
-            auto return_value = winrt::Windows::Foundation::PropertyValue::CreateUInt64(param0);
-            
-            py::pyobj_handle out_return_value{ py::convert(return_value) };
-            if (!out_return_value) 
-            { 
-                return nullptr;
-            }
-            return out_return_value.detach();
-        }, nullptr);
+            return py::convert(winrt::Windows::Foundation::PropertyValue::CreateUInt64(param0));
+        }
+        catch (...)
+        {
+            py::to_PyErr();
+            return nullptr;
+        }
     }
-    else if (arg_count != -1)
+    else
     {
-        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+        py::set_invalid_arg_count_error(arg_count);
+        return nullptr;
     }
-    return nullptr;
 }
 
-static PyObject* PropertyValue_CreateUInt64Array(PyObject* /*unused*/, PyObject* args)
+static PyObject* PropertyValue_CreateUInt64Array(PyObject* /*unused*/, PyObject* args) noexcept
 {
     Py_ssize_t arg_count = PyTuple_Size(args);
     
     if (arg_count == 1)
     {
-        return py::trycatch_invoker([=]() -> PyObject*
+        try
         {
             auto _param0 = py::convert_to<winrt::com_array<uint64_t>>(args, 0);
             auto param0 = winrt::array_view<const uint64_t>(_param0.data(), _param0.data() + _param0.size());
             
-            auto return_value = winrt::Windows::Foundation::PropertyValue::CreateUInt64Array(param0);
-            
-            py::pyobj_handle out_return_value{ py::convert(return_value) };
-            if (!out_return_value) 
-            { 
-                return nullptr;
-            }
-            return out_return_value.detach();
-        }, nullptr);
+            return py::convert(winrt::Windows::Foundation::PropertyValue::CreateUInt64Array(param0));
+        }
+        catch (...)
+        {
+            py::to_PyErr();
+            return nullptr;
+        }
     }
-    else if (arg_count != -1)
+    else
     {
-        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+        py::set_invalid_arg_count_error(arg_count);
+        return nullptr;
     }
-    return nullptr;
 }
 
-static PyObject* PropertyValue_CreateUInt8(PyObject* /*unused*/, PyObject* args)
+static PyObject* PropertyValue_CreateUInt8(PyObject* /*unused*/, PyObject* args) noexcept
 {
     Py_ssize_t arg_count = PyTuple_Size(args);
     
     if (arg_count == 1)
     {
-        return py::trycatch_invoker([=]() -> PyObject*
+        try
         {
             auto param0 = py::convert_to<uint8_t>(args, 0);
             
-            auto return_value = winrt::Windows::Foundation::PropertyValue::CreateUInt8(param0);
-            
-            py::pyobj_handle out_return_value{ py::convert(return_value) };
-            if (!out_return_value) 
-            { 
-                return nullptr;
-            }
-            return out_return_value.detach();
-        }, nullptr);
+            return py::convert(winrt::Windows::Foundation::PropertyValue::CreateUInt8(param0));
+        }
+        catch (...)
+        {
+            py::to_PyErr();
+            return nullptr;
+        }
     }
-    else if (arg_count != -1)
+    else
     {
-        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+        py::set_invalid_arg_count_error(arg_count);
+        return nullptr;
     }
-    return nullptr;
 }
 
-static PyObject* PropertyValue_CreateUInt8Array(PyObject* /*unused*/, PyObject* args)
+static PyObject* PropertyValue_CreateUInt8Array(PyObject* /*unused*/, PyObject* args) noexcept
 {
     Py_ssize_t arg_count = PyTuple_Size(args);
     
     if (arg_count == 1)
     {
-        return py::trycatch_invoker([=]() -> PyObject*
+        try
         {
             auto _param0 = py::convert_to<winrt::com_array<uint8_t>>(args, 0);
             auto param0 = winrt::array_view<const uint8_t>(_param0.data(), _param0.data() + _param0.size());
             
-            auto return_value = winrt::Windows::Foundation::PropertyValue::CreateUInt8Array(param0);
-            
-            py::pyobj_handle out_return_value{ py::convert(return_value) };
-            if (!out_return_value) 
-            { 
-                return nullptr;
-            }
-            return out_return_value.detach();
-        }, nullptr);
+            return py::convert(winrt::Windows::Foundation::PropertyValue::CreateUInt8Array(param0));
+        }
+        catch (...)
+        {
+            py::to_PyErr();
+            return nullptr;
+        }
     }
-    else if (arg_count != -1)
+    else
     {
-        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+        py::set_invalid_arg_count_error(arg_count);
+        return nullptr;
     }
-    return nullptr;
 }
 
 static PyMethodDef _methods_PropertyValue[] = {
@@ -1572,43 +1524,53 @@ static PyType_Spec _type_spec_PropertyValue =
 // ----- Uri class --------------------
 
 PyTypeObject* py::winrt_type<winrt::Windows::Foundation::Uri>::python_type;
-static const char* _type_name_Uri = "Uri";
+constexpr const char* const _type_name_Uri = "Uri";
 
-static PyObject* _new_Uri(PyTypeObject* type, PyObject* args, PyObject* kwds)
+static PyObject* _new_Uri(PyTypeObject* type, PyObject* args, PyObject* kwds) noexcept
 {
     if (kwds != nullptr)
     {
-        PyErr_SetString(PyExc_TypeError, "keyword arguments not supported");
+        py::set_invalid_kwd_args_error();
         return nullptr;
     }
     
     Py_ssize_t arg_count = PyTuple_Size(args);
     if (arg_count == 1)
     {
-        return py::trycatch_invoker([=]() -> PyObject*
+        try
         {
             auto param0 = py::convert_to<winrt::hstring>(args, 0);
             
             winrt::Windows::Foundation::Uri instance{ param0 };
             return py::wrap(instance, type);
-        }, nullptr);
+        }
+        catch (...)
+        {
+            py::to_PyErr();
+            return nullptr;
+        }
     }
     else if (arg_count == 2)
     {
-        return py::trycatch_invoker([=]() -> PyObject*
+        try
         {
             auto param0 = py::convert_to<winrt::hstring>(args, 0);
             auto param1 = py::convert_to<winrt::hstring>(args, 1);
             
             winrt::Windows::Foundation::Uri instance{ param0, param1 };
             return py::wrap(instance, type);
-        }, nullptr);
+        }
+        catch (...)
+        {
+            py::to_PyErr();
+            return nullptr;
+        }
     }
-    else if (arg_count != -1)
+    else
     {
-        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+        py::set_invalid_arg_count_error(arg_count);
+        return nullptr;
     }
-    return nullptr;
 }
 
 static void _dealloc_Uri(py::wrapper::Windows::Foundation::Uri* self)
@@ -1618,409 +1580,375 @@ static void _dealloc_Uri(py::wrapper::Windows::Foundation::Uri* self)
     self->obj = nullptr;
 }
 
-static PyObject* Uri_CombineUri(py::wrapper::Windows::Foundation::Uri* self, PyObject* args)
+static PyObject* Uri_CombineUri(py::wrapper::Windows::Foundation::Uri* self, PyObject* args) noexcept
 {
     Py_ssize_t arg_count = PyTuple_Size(args);
     
     if (arg_count == 1)
     {
-        return py::trycatch_invoker([=]() -> PyObject*
+        try
         {
             auto param0 = py::convert_to<winrt::hstring>(args, 0);
             
-            auto return_value = self->obj.CombineUri(param0);
-            
-            py::pyobj_handle out_return_value{ py::convert(return_value) };
-            if (!out_return_value) 
-            { 
-                return nullptr;
-            }
-            return out_return_value.detach();
-        }, nullptr);
+            return py::convert(self->obj.CombineUri(param0));
+        }
+        catch (...)
+        {
+            py::to_PyErr();
+            return nullptr;
+        }
     }
-    else if (arg_count != -1)
+    else
     {
-        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+        py::set_invalid_arg_count_error(arg_count);
+        return nullptr;
     }
-    return nullptr;
 }
 
-static PyObject* Uri_Equals(py::wrapper::Windows::Foundation::Uri* self, PyObject* args)
+static PyObject* Uri_Equals(py::wrapper::Windows::Foundation::Uri* self, PyObject* args) noexcept
 {
     Py_ssize_t arg_count = PyTuple_Size(args);
     
     if (arg_count == 1)
     {
-        return py::trycatch_invoker([=]() -> PyObject*
+        try
         {
             auto param0 = py::convert_to<winrt::Windows::Foundation::Uri>(args, 0);
             
-            auto return_value = self->obj.Equals(param0);
-            
-            py::pyobj_handle out_return_value{ py::convert(return_value) };
-            if (!out_return_value) 
-            { 
-                return nullptr;
-            }
-            return out_return_value.detach();
-        }, nullptr);
+            return py::convert(self->obj.Equals(param0));
+        }
+        catch (...)
+        {
+            py::to_PyErr();
+            return nullptr;
+        }
     }
-    else if (arg_count != -1)
+    else
     {
-        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+        py::set_invalid_arg_count_error(arg_count);
+        return nullptr;
     }
-    return nullptr;
 }
 
-static PyObject* Uri_EscapeComponent(PyObject* /*unused*/, PyObject* args)
+static PyObject* Uri_EscapeComponent(PyObject* /*unused*/, PyObject* args) noexcept
 {
     Py_ssize_t arg_count = PyTuple_Size(args);
     
     if (arg_count == 1)
     {
-        return py::trycatch_invoker([=]() -> PyObject*
+        try
         {
             auto param0 = py::convert_to<winrt::hstring>(args, 0);
             
-            auto return_value = winrt::Windows::Foundation::Uri::EscapeComponent(param0);
-            
-            py::pyobj_handle out_return_value{ py::convert(return_value) };
-            if (!out_return_value) 
-            { 
-                return nullptr;
-            }
-            return out_return_value.detach();
-        }, nullptr);
+            return py::convert(winrt::Windows::Foundation::Uri::EscapeComponent(param0));
+        }
+        catch (...)
+        {
+            py::to_PyErr();
+            return nullptr;
+        }
     }
-    else if (arg_count != -1)
+    else
     {
-        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+        py::set_invalid_arg_count_error(arg_count);
+        return nullptr;
     }
-    return nullptr;
 }
 
-static PyObject* Uri_ToString(py::wrapper::Windows::Foundation::Uri* self, PyObject* args)
+static PyObject* Uri_ToString(py::wrapper::Windows::Foundation::Uri* self, PyObject* args) noexcept
 {
     Py_ssize_t arg_count = PyTuple_Size(args);
     
     if (arg_count == 0)
     {
-        return py::trycatch_invoker([=]() -> PyObject*
+        try
         {
-            auto return_value = self->obj.ToString();
-            
-            py::pyobj_handle out_return_value{ py::convert(return_value) };
-            if (!out_return_value) 
-            { 
-                return nullptr;
-            }
-            return out_return_value.detach();
-        }, nullptr);
+            return py::convert(self->obj.ToString());
+        }
+        catch (...)
+        {
+            py::to_PyErr();
+            return nullptr;
+        }
     }
-    else if (arg_count != -1)
+    else
     {
-        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+        py::set_invalid_arg_count_error(arg_count);
+        return nullptr;
     }
-    return nullptr;
 }
 
-static PyObject* Uri_UnescapeComponent(PyObject* /*unused*/, PyObject* args)
+static PyObject* Uri_UnescapeComponent(PyObject* /*unused*/, PyObject* args) noexcept
 {
     Py_ssize_t arg_count = PyTuple_Size(args);
     
     if (arg_count == 1)
     {
-        return py::trycatch_invoker([=]() -> PyObject*
+        try
         {
             auto param0 = py::convert_to<winrt::hstring>(args, 0);
             
-            auto return_value = winrt::Windows::Foundation::Uri::UnescapeComponent(param0);
-            
-            py::pyobj_handle out_return_value{ py::convert(return_value) };
-            if (!out_return_value) 
-            { 
-                return nullptr;
-            }
-            return out_return_value.detach();
-        }, nullptr);
+            return py::convert(winrt::Windows::Foundation::Uri::UnescapeComponent(param0));
+        }
+        catch (...)
+        {
+            py::to_PyErr();
+            return nullptr;
+        }
     }
-    else if (arg_count != -1)
+    else
     {
-        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+        py::set_invalid_arg_count_error(arg_count);
+        return nullptr;
     }
-    return nullptr;
 }
 
-static PyObject* Uri_get_AbsoluteUri(py::wrapper::Windows::Foundation::Uri* self, void* /*unused*/)
+static PyObject* Uri_get_AbsoluteUri(py::wrapper::Windows::Foundation::Uri* self, void* /*unused*/) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
-        auto return_value = self->obj.AbsoluteUri();
-        
-        py::pyobj_handle out_return_value{ py::convert(return_value) };
-        if (!out_return_value) 
-        { 
-            return nullptr;
-        }
-        return out_return_value.detach();
-    }, nullptr);
-}
-
-static PyObject* Uri_get_DisplayUri(py::wrapper::Windows::Foundation::Uri* self, void* /*unused*/)
-{
-    return py::trycatch_invoker([=]() -> PyObject*
+        return py::convert(self->obj.AbsoluteUri());
+    }
+    catch (...)
     {
-        auto return_value = self->obj.DisplayUri();
-        
-        py::pyobj_handle out_return_value{ py::convert(return_value) };
-        if (!out_return_value) 
-        { 
-            return nullptr;
-        }
-        return out_return_value.detach();
-    }, nullptr);
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
-static PyObject* Uri_get_Domain(py::wrapper::Windows::Foundation::Uri* self, void* /*unused*/)
+static PyObject* Uri_get_DisplayUri(py::wrapper::Windows::Foundation::Uri* self, void* /*unused*/) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
-        auto return_value = self->obj.Domain();
-        
-        py::pyobj_handle out_return_value{ py::convert(return_value) };
-        if (!out_return_value) 
-        { 
-            return nullptr;
-        }
-        return out_return_value.detach();
-    }, nullptr);
-}
-
-static PyObject* Uri_get_Extension(py::wrapper::Windows::Foundation::Uri* self, void* /*unused*/)
-{
-    return py::trycatch_invoker([=]() -> PyObject*
+        return py::convert(self->obj.DisplayUri());
+    }
+    catch (...)
     {
-        auto return_value = self->obj.Extension();
-        
-        py::pyobj_handle out_return_value{ py::convert(return_value) };
-        if (!out_return_value) 
-        { 
-            return nullptr;
-        }
-        return out_return_value.detach();
-    }, nullptr);
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
-static PyObject* Uri_get_Fragment(py::wrapper::Windows::Foundation::Uri* self, void* /*unused*/)
+static PyObject* Uri_get_Domain(py::wrapper::Windows::Foundation::Uri* self, void* /*unused*/) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
-        auto return_value = self->obj.Fragment();
-        
-        py::pyobj_handle out_return_value{ py::convert(return_value) };
-        if (!out_return_value) 
-        { 
-            return nullptr;
-        }
-        return out_return_value.detach();
-    }, nullptr);
-}
-
-static PyObject* Uri_get_Host(py::wrapper::Windows::Foundation::Uri* self, void* /*unused*/)
-{
-    return py::trycatch_invoker([=]() -> PyObject*
+        return py::convert(self->obj.Domain());
+    }
+    catch (...)
     {
-        auto return_value = self->obj.Host();
-        
-        py::pyobj_handle out_return_value{ py::convert(return_value) };
-        if (!out_return_value) 
-        { 
-            return nullptr;
-        }
-        return out_return_value.detach();
-    }, nullptr);
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
-static PyObject* Uri_get_Password(py::wrapper::Windows::Foundation::Uri* self, void* /*unused*/)
+static PyObject* Uri_get_Extension(py::wrapper::Windows::Foundation::Uri* self, void* /*unused*/) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
-        auto return_value = self->obj.Password();
-        
-        py::pyobj_handle out_return_value{ py::convert(return_value) };
-        if (!out_return_value) 
-        { 
-            return nullptr;
-        }
-        return out_return_value.detach();
-    }, nullptr);
-}
-
-static PyObject* Uri_get_Path(py::wrapper::Windows::Foundation::Uri* self, void* /*unused*/)
-{
-    return py::trycatch_invoker([=]() -> PyObject*
+        return py::convert(self->obj.Extension());
+    }
+    catch (...)
     {
-        auto return_value = self->obj.Path();
-        
-        py::pyobj_handle out_return_value{ py::convert(return_value) };
-        if (!out_return_value) 
-        { 
-            return nullptr;
-        }
-        return out_return_value.detach();
-    }, nullptr);
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
-static PyObject* Uri_get_Port(py::wrapper::Windows::Foundation::Uri* self, void* /*unused*/)
+static PyObject* Uri_get_Fragment(py::wrapper::Windows::Foundation::Uri* self, void* /*unused*/) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
-        auto return_value = self->obj.Port();
-        
-        py::pyobj_handle out_return_value{ py::convert(return_value) };
-        if (!out_return_value) 
-        { 
-            return nullptr;
-        }
-        return out_return_value.detach();
-    }, nullptr);
-}
-
-static PyObject* Uri_get_Query(py::wrapper::Windows::Foundation::Uri* self, void* /*unused*/)
-{
-    return py::trycatch_invoker([=]() -> PyObject*
+        return py::convert(self->obj.Fragment());
+    }
+    catch (...)
     {
-        auto return_value = self->obj.Query();
-        
-        py::pyobj_handle out_return_value{ py::convert(return_value) };
-        if (!out_return_value) 
-        { 
-            return nullptr;
-        }
-        return out_return_value.detach();
-    }, nullptr);
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
-static PyObject* Uri_get_QueryParsed(py::wrapper::Windows::Foundation::Uri* self, void* /*unused*/)
+static PyObject* Uri_get_Host(py::wrapper::Windows::Foundation::Uri* self, void* /*unused*/) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
-        auto return_value = self->obj.QueryParsed();
-        
-        py::pyobj_handle out_return_value{ py::convert(return_value) };
-        if (!out_return_value) 
-        { 
-            return nullptr;
-        }
-        return out_return_value.detach();
-    }, nullptr);
-}
-
-static PyObject* Uri_get_RawUri(py::wrapper::Windows::Foundation::Uri* self, void* /*unused*/)
-{
-    return py::trycatch_invoker([=]() -> PyObject*
+        return py::convert(self->obj.Host());
+    }
+    catch (...)
     {
-        auto return_value = self->obj.RawUri();
-        
-        py::pyobj_handle out_return_value{ py::convert(return_value) };
-        if (!out_return_value) 
-        { 
-            return nullptr;
-        }
-        return out_return_value.detach();
-    }, nullptr);
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
-static PyObject* Uri_get_SchemeName(py::wrapper::Windows::Foundation::Uri* self, void* /*unused*/)
+static PyObject* Uri_get_Password(py::wrapper::Windows::Foundation::Uri* self, void* /*unused*/) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
-        auto return_value = self->obj.SchemeName();
-        
-        py::pyobj_handle out_return_value{ py::convert(return_value) };
-        if (!out_return_value) 
-        { 
-            return nullptr;
-        }
-        return out_return_value.detach();
-    }, nullptr);
-}
-
-static PyObject* Uri_get_Suspicious(py::wrapper::Windows::Foundation::Uri* self, void* /*unused*/)
-{
-    return py::trycatch_invoker([=]() -> PyObject*
+        return py::convert(self->obj.Password());
+    }
+    catch (...)
     {
-        auto return_value = self->obj.Suspicious();
-        
-        py::pyobj_handle out_return_value{ py::convert(return_value) };
-        if (!out_return_value) 
-        { 
-            return nullptr;
-        }
-        return out_return_value.detach();
-    }, nullptr);
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
-static PyObject* Uri_get_UserName(py::wrapper::Windows::Foundation::Uri* self, void* /*unused*/)
+static PyObject* Uri_get_Path(py::wrapper::Windows::Foundation::Uri* self, void* /*unused*/) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
-        auto return_value = self->obj.UserName();
-        
-        py::pyobj_handle out_return_value{ py::convert(return_value) };
-        if (!out_return_value) 
-        { 
-            return nullptr;
-        }
-        return out_return_value.detach();
-    }, nullptr);
-}
-
-static PyObject* Uri_get_AbsoluteCanonicalUri(py::wrapper::Windows::Foundation::Uri* self, void* /*unused*/)
-{
-    return py::trycatch_invoker([=]() -> PyObject*
+        return py::convert(self->obj.Path());
+    }
+    catch (...)
     {
-        auto return_value = self->obj.AbsoluteCanonicalUri();
-        
-        py::pyobj_handle out_return_value{ py::convert(return_value) };
-        if (!out_return_value) 
-        { 
-            return nullptr;
-        }
-        return out_return_value.detach();
-    }, nullptr);
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
-static PyObject* Uri_get_DisplayIri(py::wrapper::Windows::Foundation::Uri* self, void* /*unused*/)
+static PyObject* Uri_get_Port(py::wrapper::Windows::Foundation::Uri* self, void* /*unused*/) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
-        auto return_value = self->obj.DisplayIri();
-        
-        py::pyobj_handle out_return_value{ py::convert(return_value) };
-        if (!out_return_value) 
-        { 
-            return nullptr;
-        }
-        return out_return_value.detach();
-    }, nullptr);
+        return py::convert(self->obj.Port());
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
-static PyObject* _from_Uri(PyObject* /*unused*/, PyObject* arg)
+static PyObject* Uri_get_Query(py::wrapper::Windows::Foundation::Uri* self, void* /*unused*/) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
+    {
+        return py::convert(self->obj.Query());
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
+}
+
+static PyObject* Uri_get_QueryParsed(py::wrapper::Windows::Foundation::Uri* self, void* /*unused*/) noexcept
+{
+    try
+    {
+        return py::convert(self->obj.QueryParsed());
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
+}
+
+static PyObject* Uri_get_RawUri(py::wrapper::Windows::Foundation::Uri* self, void* /*unused*/) noexcept
+{
+    try
+    {
+        return py::convert(self->obj.RawUri());
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
+}
+
+static PyObject* Uri_get_SchemeName(py::wrapper::Windows::Foundation::Uri* self, void* /*unused*/) noexcept
+{
+    try
+    {
+        return py::convert(self->obj.SchemeName());
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
+}
+
+static PyObject* Uri_get_Suspicious(py::wrapper::Windows::Foundation::Uri* self, void* /*unused*/) noexcept
+{
+    try
+    {
+        return py::convert(self->obj.Suspicious());
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
+}
+
+static PyObject* Uri_get_UserName(py::wrapper::Windows::Foundation::Uri* self, void* /*unused*/) noexcept
+{
+    try
+    {
+        return py::convert(self->obj.UserName());
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
+}
+
+static PyObject* Uri_get_AbsoluteCanonicalUri(py::wrapper::Windows::Foundation::Uri* self, void* /*unused*/) noexcept
+{
+    try
+    {
+        return py::convert(self->obj.AbsoluteCanonicalUri());
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
+}
+
+static PyObject* Uri_get_DisplayIri(py::wrapper::Windows::Foundation::Uri* self, void* /*unused*/) noexcept
+{
+    try
+    {
+        return py::convert(self->obj.DisplayIri());
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
+}
+
+static PyObject* _from_Uri(PyObject* /*unused*/, PyObject* arg) noexcept
+{
+    try
     {
         auto return_value = py::convert_to<winrt::Windows::Foundation::IInspectable>(arg);
         return py::convert(return_value.as<winrt::Windows::Foundation::Uri>());
-    }, nullptr);
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
-static PyObject* _str_Uri(py::wrapper::Windows::Foundation::Uri* self)
+static PyObject* _str_Uri(py::wrapper::Windows::Foundation::Uri* self) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
         return py::convert(self->obj.ToString());
-    }, nullptr);
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
 static PyMethodDef _methods_Uri[] = {
@@ -2076,32 +2004,37 @@ static PyType_Spec _type_spec_Uri =
 // ----- WwwFormUrlDecoder class --------------------
 
 PyTypeObject* py::winrt_type<winrt::Windows::Foundation::WwwFormUrlDecoder>::python_type;
-static const char* _type_name_WwwFormUrlDecoder = "WwwFormUrlDecoder";
+constexpr const char* const _type_name_WwwFormUrlDecoder = "WwwFormUrlDecoder";
 
-static PyObject* _new_WwwFormUrlDecoder(PyTypeObject* type, PyObject* args, PyObject* kwds)
+static PyObject* _new_WwwFormUrlDecoder(PyTypeObject* type, PyObject* args, PyObject* kwds) noexcept
 {
     if (kwds != nullptr)
     {
-        PyErr_SetString(PyExc_TypeError, "keyword arguments not supported");
+        py::set_invalid_kwd_args_error();
         return nullptr;
     }
     
     Py_ssize_t arg_count = PyTuple_Size(args);
     if (arg_count == 1)
     {
-        return py::trycatch_invoker([=]() -> PyObject*
+        try
         {
             auto param0 = py::convert_to<winrt::hstring>(args, 0);
             
             winrt::Windows::Foundation::WwwFormUrlDecoder instance{ param0 };
             return py::wrap(instance, type);
-        }, nullptr);
+        }
+        catch (...)
+        {
+            py::to_PyErr();
+            return nullptr;
+        }
     }
-    else if (arg_count != -1)
+    else
     {
-        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+        py::set_invalid_arg_count_error(arg_count);
+        return nullptr;
     }
-    return nullptr;
 }
 
 static void _dealloc_WwwFormUrlDecoder(py::wrapper::Windows::Foundation::WwwFormUrlDecoder* self)
@@ -2111,92 +2044,86 @@ static void _dealloc_WwwFormUrlDecoder(py::wrapper::Windows::Foundation::WwwForm
     self->obj = nullptr;
 }
 
-static PyObject* WwwFormUrlDecoder_First(py::wrapper::Windows::Foundation::WwwFormUrlDecoder* self, PyObject* args)
+static PyObject* WwwFormUrlDecoder_First(py::wrapper::Windows::Foundation::WwwFormUrlDecoder* self, PyObject* args) noexcept
 {
     Py_ssize_t arg_count = PyTuple_Size(args);
     
     if (arg_count == 0)
     {
-        return py::trycatch_invoker([=]() -> PyObject*
+        try
         {
-            auto return_value = self->obj.First();
-            
-            py::pyobj_handle out_return_value{ py::convert(return_value) };
-            if (!out_return_value) 
-            { 
-                return nullptr;
-            }
-            return out_return_value.detach();
-        }, nullptr);
+            return py::convert(self->obj.First());
+        }
+        catch (...)
+        {
+            py::to_PyErr();
+            return nullptr;
+        }
     }
-    else if (arg_count != -1)
+    else
     {
-        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+        py::set_invalid_arg_count_error(arg_count);
+        return nullptr;
     }
-    return nullptr;
 }
 
-static PyObject* WwwFormUrlDecoder_GetAt(py::wrapper::Windows::Foundation::WwwFormUrlDecoder* self, PyObject* args)
+static PyObject* WwwFormUrlDecoder_GetAt(py::wrapper::Windows::Foundation::WwwFormUrlDecoder* self, PyObject* args) noexcept
 {
     Py_ssize_t arg_count = PyTuple_Size(args);
     
     if (arg_count == 1)
     {
-        return py::trycatch_invoker([=]() -> PyObject*
+        try
         {
             auto param0 = py::convert_to<uint32_t>(args, 0);
             
-            auto return_value = self->obj.GetAt(param0);
-            
-            py::pyobj_handle out_return_value{ py::convert(return_value) };
-            if (!out_return_value) 
-            { 
-                return nullptr;
-            }
-            return out_return_value.detach();
-        }, nullptr);
+            return py::convert(self->obj.GetAt(param0));
+        }
+        catch (...)
+        {
+            py::to_PyErr();
+            return nullptr;
+        }
     }
-    else if (arg_count != -1)
+    else
     {
-        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+        py::set_invalid_arg_count_error(arg_count);
+        return nullptr;
     }
-    return nullptr;
 }
 
-static PyObject* WwwFormUrlDecoder_GetFirstValueByName(py::wrapper::Windows::Foundation::WwwFormUrlDecoder* self, PyObject* args)
+static PyObject* WwwFormUrlDecoder_GetFirstValueByName(py::wrapper::Windows::Foundation::WwwFormUrlDecoder* self, PyObject* args) noexcept
 {
     Py_ssize_t arg_count = PyTuple_Size(args);
     
     if (arg_count == 1)
     {
-        return py::trycatch_invoker([=]() -> PyObject*
+        try
         {
             auto param0 = py::convert_to<winrt::hstring>(args, 0);
             
-            auto return_value = self->obj.GetFirstValueByName(param0);
-            
-            py::pyobj_handle out_return_value{ py::convert(return_value) };
-            if (!out_return_value) 
-            { 
-                return nullptr;
-            }
-            return out_return_value.detach();
-        }, nullptr);
+            return py::convert(self->obj.GetFirstValueByName(param0));
+        }
+        catch (...)
+        {
+            py::to_PyErr();
+            return nullptr;
+        }
     }
-    else if (arg_count != -1)
+    else
     {
-        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+        py::set_invalid_arg_count_error(arg_count);
+        return nullptr;
     }
-    return nullptr;
 }
 
-static PyObject* WwwFormUrlDecoder_GetMany(py::wrapper::Windows::Foundation::WwwFormUrlDecoder* self, PyObject* args)
+static PyObject* WwwFormUrlDecoder_GetMany(py::wrapper::Windows::Foundation::WwwFormUrlDecoder* self, PyObject* args) noexcept
 {
     Py_ssize_t arg_count = PyTuple_Size(args);
     
     if (arg_count == 2)
     {
-        return py::trycatch_invoker([=]() -> PyObject*
+        try
         {
             auto param0 = py::convert_to<uint32_t>(args, 0);
             auto param1_count = py::convert_to<winrt::com_array<winrt::Windows::Foundation::IWwwFormUrlDecoderEntry>::size_type>(args, 1);
@@ -2215,22 +2142,27 @@ static PyObject* WwwFormUrlDecoder_GetMany(py::wrapper::Windows::Foundation::Www
                 return nullptr;
             }
             return PyTuple_Pack(2, out_return_value.detach(), out1.detach());
-        }, nullptr);
+        }
+        catch (...)
+        {
+            py::to_PyErr();
+            return nullptr;
+        }
     }
-    else if (arg_count != -1)
+    else
     {
-        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+        py::set_invalid_arg_count_error(arg_count);
+        return nullptr;
     }
-    return nullptr;
 }
 
-static PyObject* WwwFormUrlDecoder_IndexOf(py::wrapper::Windows::Foundation::WwwFormUrlDecoder* self, PyObject* args)
+static PyObject* WwwFormUrlDecoder_IndexOf(py::wrapper::Windows::Foundation::WwwFormUrlDecoder* self, PyObject* args) noexcept
 {
     Py_ssize_t arg_count = PyTuple_Size(args);
     
     if (arg_count == 1)
     {
-        return py::trycatch_invoker([=]() -> PyObject*
+        try
         {
             auto param0 = py::convert_to<winrt::Windows::Foundation::IWwwFormUrlDecoderEntry>(args, 0);
             uint32_t param1 {  };
@@ -2248,61 +2180,84 @@ static PyObject* WwwFormUrlDecoder_IndexOf(py::wrapper::Windows::Foundation::Www
                 return nullptr;
             }
             return PyTuple_Pack(2, out_return_value.detach(), out1.detach());
-        }, nullptr);
-    }
-    else if (arg_count != -1)
-    {
-        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-    }
-    return nullptr;
-}
-
-static PyObject* WwwFormUrlDecoder_get_Size(py::wrapper::Windows::Foundation::WwwFormUrlDecoder* self, void* /*unused*/)
-{
-    return py::trycatch_invoker([=]() -> PyObject*
-    {
-        auto return_value = self->obj.Size();
-        
-        py::pyobj_handle out_return_value{ py::convert(return_value) };
-        if (!out_return_value) 
-        { 
+        }
+        catch (...)
+        {
+            py::to_PyErr();
             return nullptr;
         }
-        return out_return_value.detach();
-    }, nullptr);
+    }
+    else
+    {
+        py::set_invalid_arg_count_error(arg_count);
+        return nullptr;
+    }
 }
 
-static PyObject* _from_WwwFormUrlDecoder(PyObject* /*unused*/, PyObject* arg)
+static PyObject* WwwFormUrlDecoder_get_Size(py::wrapper::Windows::Foundation::WwwFormUrlDecoder* self, void* /*unused*/) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
+    {
+        return py::convert(self->obj.Size());
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
+}
+
+static PyObject* _from_WwwFormUrlDecoder(PyObject* /*unused*/, PyObject* arg) noexcept
+{
+    try
     {
         auto return_value = py::convert_to<winrt::Windows::Foundation::IInspectable>(arg);
         return py::convert(return_value.as<winrt::Windows::Foundation::WwwFormUrlDecoder>());
-    }, nullptr);
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
-static PyObject* _iterator_WwwFormUrlDecoder(py::wrapper::Windows::Foundation::WwwFormUrlDecoder* self)
+static PyObject* _iterator_WwwFormUrlDecoder(py::wrapper::Windows::Foundation::WwwFormUrlDecoder* self) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
         return py::convert(self->obj.First());
-    }, nullptr);
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
-static Py_ssize_t _seq_length_WwwFormUrlDecoder(py::wrapper::Windows::Foundation::WwwFormUrlDecoder* self)
+static Py_ssize_t _seq_length_WwwFormUrlDecoder(py::wrapper::Windows::Foundation::WwwFormUrlDecoder* self) noexcept
 {
-    return py::trycatch_invoker([=]() -> Py_ssize_t
+    try
     {
         return static_cast<Py_ssize_t>(self->obj.Size());
-    }, -1);
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return -1;
+    }
 }
 
-static PyObject* _seq_item_WwwFormUrlDecoder(py::wrapper::Windows::Foundation::WwwFormUrlDecoder* self, Py_ssize_t i)
+static PyObject* _seq_item_WwwFormUrlDecoder(py::wrapper::Windows::Foundation::WwwFormUrlDecoder* self, Py_ssize_t i) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
         return py::convert(self->obj.GetAt(static_cast<uint32_t>(i)));
-    }, nullptr);
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
 static PyMethodDef _methods_WwwFormUrlDecoder[] = {
@@ -2344,13 +2299,11 @@ static PyType_Spec _type_spec_WwwFormUrlDecoder =
 // ----- WwwFormUrlDecoderEntry class --------------------
 
 PyTypeObject* py::winrt_type<winrt::Windows::Foundation::WwwFormUrlDecoderEntry>::python_type;
-static const char* _type_name_WwwFormUrlDecoderEntry = "WwwFormUrlDecoderEntry";
+constexpr const char* const _type_name_WwwFormUrlDecoderEntry = "WwwFormUrlDecoderEntry";
 
-static PyObject* _new_WwwFormUrlDecoderEntry(PyTypeObject* type, PyObject* args, PyObject* kwds)
+static PyObject* _new_WwwFormUrlDecoderEntry(PyTypeObject* type, PyObject* args, PyObject* kwds) noexcept
 {
-    std::string msg{ _type_name_WwwFormUrlDecoderEntry };
-    msg.append(" is not activatable");
-    PyErr_SetString(PyExc_TypeError, msg.c_str());
+    py::set_invalid_activation_error(_type_name_WwwFormUrlDecoderEntry);
     return nullptr;
 }
 
@@ -2361,43 +2314,44 @@ static void _dealloc_WwwFormUrlDecoderEntry(py::wrapper::Windows::Foundation::Ww
     self->obj = nullptr;
 }
 
-static PyObject* WwwFormUrlDecoderEntry_get_Name(py::wrapper::Windows::Foundation::WwwFormUrlDecoderEntry* self, void* /*unused*/)
+static PyObject* WwwFormUrlDecoderEntry_get_Name(py::wrapper::Windows::Foundation::WwwFormUrlDecoderEntry* self, void* /*unused*/) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
-        auto return_value = self->obj.Name();
-        
-        py::pyobj_handle out_return_value{ py::convert(return_value) };
-        if (!out_return_value) 
-        { 
-            return nullptr;
-        }
-        return out_return_value.detach();
-    }, nullptr);
+        return py::convert(self->obj.Name());
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
-static PyObject* WwwFormUrlDecoderEntry_get_Value(py::wrapper::Windows::Foundation::WwwFormUrlDecoderEntry* self, void* /*unused*/)
+static PyObject* WwwFormUrlDecoderEntry_get_Value(py::wrapper::Windows::Foundation::WwwFormUrlDecoderEntry* self, void* /*unused*/) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
-        auto return_value = self->obj.Value();
-        
-        py::pyobj_handle out_return_value{ py::convert(return_value) };
-        if (!out_return_value) 
-        { 
-            return nullptr;
-        }
-        return out_return_value.detach();
-    }, nullptr);
+        return py::convert(self->obj.Value());
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
-static PyObject* _from_WwwFormUrlDecoderEntry(PyObject* /*unused*/, PyObject* arg)
+static PyObject* _from_WwwFormUrlDecoderEntry(PyObject* /*unused*/, PyObject* arg) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
         auto return_value = py::convert_to<winrt::Windows::Foundation::IInspectable>(arg);
         return py::convert(return_value.as<winrt::Windows::Foundation::WwwFormUrlDecoderEntry>());
-    }, nullptr);
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
 static PyMethodDef _methods_WwwFormUrlDecoderEntry[] = {
@@ -2432,13 +2386,11 @@ static PyType_Spec _type_spec_WwwFormUrlDecoderEntry =
 // ----- IAsyncAction interface --------------------
 
 PyTypeObject* py::winrt_type<winrt::Windows::Foundation::IAsyncAction>::python_type;
-static const char* _type_name_IAsyncAction = "IAsyncAction";
+constexpr const char* const _type_name_IAsyncAction = "IAsyncAction";
 
 static PyObject* _new_IAsyncAction(PyTypeObject* /* unused */, PyObject* /* unused */, PyObject* /* unused */)
 {
-    std::string msg{ _type_name_IAsyncAction };
-    msg.append(" interface is not activatable");
-    PyErr_SetString(PyExc_TypeError, msg.c_str());
+    py::set_invalid_activation_error(_type_name_IAsyncAction);
     return nullptr;
 }
 
@@ -2449,147 +2401,167 @@ static void _dealloc_IAsyncAction(py::wrapper::Windows::Foundation::IAsyncAction
     self->obj = nullptr;
 }
 
-static PyObject* IAsyncAction_Cancel(py::wrapper::Windows::Foundation::IAsyncAction* self, PyObject* args)
+static PyObject* IAsyncAction_Cancel(py::wrapper::Windows::Foundation::IAsyncAction* self, PyObject* args) noexcept
 {
     Py_ssize_t arg_count = PyTuple_Size(args);
     
     if (arg_count == 0)
     {
-        return py::trycatch_invoker([=]() -> PyObject*
+        try
         {
             self->obj.Cancel();
-            
             Py_RETURN_NONE;
-        }, nullptr);
-    }
-    else if (arg_count != -1)
-    {
-        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-    }
-    return nullptr;
-}
-
-static PyObject* IAsyncAction_Close(py::wrapper::Windows::Foundation::IAsyncAction* self, PyObject* args)
-{
-    Py_ssize_t arg_count = PyTuple_Size(args);
-    
-    if (arg_count == 0)
-    {
-        return py::trycatch_invoker([=]() -> PyObject*
+        }
+        catch (...)
         {
-            self->obj.Close();
-            
-            Py_RETURN_NONE;
-        }, nullptr);
-    }
-    else if (arg_count != -1)
-    {
-        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-    }
-    return nullptr;
-}
-
-static PyObject* IAsyncAction_GetResults(py::wrapper::Windows::Foundation::IAsyncAction* self, PyObject* args)
-{
-    Py_ssize_t arg_count = PyTuple_Size(args);
-    
-    if (arg_count == 0)
-    {
-        return py::trycatch_invoker([=]() -> PyObject*
-        {
-            self->obj.GetResults();
-            
-            Py_RETURN_NONE;
-        }, nullptr);
-    }
-    else if (arg_count != -1)
-    {
-        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-    }
-    return nullptr;
-}
-
-static PyObject* IAsyncAction_get_Completed(py::wrapper::Windows::Foundation::IAsyncAction* self, void* /*unused*/)
-{
-    return py::trycatch_invoker([=]() -> PyObject*
-    {
-        auto return_value = self->obj.Completed();
-        
-        py::pyobj_handle out_return_value{ py::convert(return_value) };
-        if (!out_return_value) 
-        { 
+            py::to_PyErr();
             return nullptr;
         }
-        return out_return_value.detach();
-    }, nullptr);
+    }
+    else
+    {
+        py::set_invalid_arg_count_error(arg_count);
+        return nullptr;
+    }
 }
 
-static int IAsyncAction_put_Completed(py::wrapper::Windows::Foundation::IAsyncAction* self, PyObject* arg, void* /*unused*/)
+static PyObject* IAsyncAction_Close(py::wrapper::Windows::Foundation::IAsyncAction* self, PyObject* args) noexcept
 {
-    return py::setter_trycatch_invoker(arg, [=]() -> int
+    Py_ssize_t arg_count = PyTuple_Size(args);
+    
+    if (arg_count == 0)
+    {
+        try
+        {
+            self->obj.Close();
+            Py_RETURN_NONE;
+        }
+        catch (...)
+        {
+            py::to_PyErr();
+            return nullptr;
+        }
+    }
+    else
+    {
+        py::set_invalid_arg_count_error(arg_count);
+        return nullptr;
+    }
+}
+
+static PyObject* IAsyncAction_GetResults(py::wrapper::Windows::Foundation::IAsyncAction* self, PyObject* args) noexcept
+{
+    Py_ssize_t arg_count = PyTuple_Size(args);
+    
+    if (arg_count == 0)
+    {
+        try
+        {
+            self->obj.GetResults();
+            Py_RETURN_NONE;
+        }
+        catch (...)
+        {
+            py::to_PyErr();
+            return nullptr;
+        }
+    }
+    else
+    {
+        py::set_invalid_arg_count_error(arg_count);
+        return nullptr;
+    }
+}
+
+static PyObject* IAsyncAction_get_Completed(py::wrapper::Windows::Foundation::IAsyncAction* self, void* /*unused*/) noexcept
+{
+    try
+    {
+        return py::convert(self->obj.Completed());
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
+}
+
+static int IAsyncAction_put_Completed(py::wrapper::Windows::Foundation::IAsyncAction* self, PyObject* arg, void* /*unused*/) noexcept
+{
+    if (arg == nullptr)
+    {
+        PyErr_SetString(PyExc_TypeError, "property delete not supported");
+        return -1;
+    }
+    
+    try
     {
         auto param0 = py::convert_to<winrt::Windows::Foundation::AsyncActionCompletedHandler>(arg);
         
         self->obj.Completed(param0);
         return 0;
-    });
-}
-
-static PyObject* IAsyncAction_get_ErrorCode(py::wrapper::Windows::Foundation::IAsyncAction* self, void* /*unused*/)
-{
-    return py::trycatch_invoker([=]() -> PyObject*
+    }
+    catch (...)
     {
-        auto return_value = self->obj.ErrorCode();
-        
-        py::pyobj_handle out_return_value{ py::convert(return_value) };
-        if (!out_return_value) 
-        { 
-            return nullptr;
-        }
-        return out_return_value.detach();
-    }, nullptr);
+        py::to_PyErr();
+        return -1;
+    }
 }
 
-static PyObject* IAsyncAction_get_Id(py::wrapper::Windows::Foundation::IAsyncAction* self, void* /*unused*/)
+static PyObject* IAsyncAction_get_ErrorCode(py::wrapper::Windows::Foundation::IAsyncAction* self, void* /*unused*/) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
-        auto return_value = self->obj.Id();
-        
-        py::pyobj_handle out_return_value{ py::convert(return_value) };
-        if (!out_return_value) 
-        { 
-            return nullptr;
-        }
-        return out_return_value.detach();
-    }, nullptr);
-}
-
-static PyObject* IAsyncAction_get_Status(py::wrapper::Windows::Foundation::IAsyncAction* self, void* /*unused*/)
-{
-    return py::trycatch_invoker([=]() -> PyObject*
+        return py::convert(self->obj.ErrorCode());
+    }
+    catch (...)
     {
-        auto return_value = self->obj.Status();
-        
-        py::pyobj_handle out_return_value{ py::convert(return_value) };
-        if (!out_return_value) 
-        { 
-            return nullptr;
-        }
-        return out_return_value.detach();
-    }, nullptr);
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
-static PyObject* _from_IAsyncAction(PyObject* /*unused*/, PyObject* arg)
+static PyObject* IAsyncAction_get_Id(py::wrapper::Windows::Foundation::IAsyncAction* self, void* /*unused*/) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
+    {
+        return py::convert(self->obj.Id());
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
+}
+
+static PyObject* IAsyncAction_get_Status(py::wrapper::Windows::Foundation::IAsyncAction* self, void* /*unused*/) noexcept
+{
+    try
+    {
+        return py::convert(self->obj.Status());
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
+}
+
+static PyObject* _from_IAsyncAction(PyObject* /*unused*/, PyObject* arg) noexcept
+{
+    try
     {
         auto return_value = py::convert_to<winrt::Windows::Foundation::IInspectable>(arg);
         return py::convert(return_value.as<winrt::Windows::Foundation::IAsyncAction>());
-    }, nullptr);
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
-static PyObject* _await_IAsyncAction(py::wrapper::Windows::Foundation::IAsyncAction* self)
+static PyObject* _await_IAsyncAction(py::wrapper::Windows::Foundation::IAsyncAction* self) noexcept
 {
     return py::dunder_await(self->obj);
 }
@@ -2632,13 +2604,11 @@ static PyType_Spec _type_spec_IAsyncAction =
 // ----- IAsyncActionWithProgress interface --------------------
 
 PyTypeObject* py::winrt_type<py::proj::Windows::Foundation::IAsyncActionWithProgress>::python_type;
-static const char* _type_name_IAsyncActionWithProgress = "IAsyncActionWithProgress";
+constexpr const char* const _type_name_IAsyncActionWithProgress = "IAsyncActionWithProgress";
 
 static PyObject* _new_IAsyncActionWithProgress(PyTypeObject* /* unused */, PyObject* /* unused */, PyObject* /* unused */)
 {
-    std::string msg{ _type_name_IAsyncActionWithProgress };
-    msg.append(" interface is not activatable");
-    PyErr_SetString(PyExc_TypeError, msg.c_str());
+    py::set_invalid_activation_error(_type_name_IAsyncActionWithProgress);
     return nullptr;
 }
 
@@ -2649,57 +2619,57 @@ static void _dealloc_IAsyncActionWithProgress(py::wrapper::Windows::Foundation::
     self->obj.release();
 }
 
-static PyObject* IAsyncActionWithProgress_Cancel(py::wrapper::Windows::Foundation::IAsyncActionWithProgress* self, PyObject* args)
+static PyObject* IAsyncActionWithProgress_Cancel(py::wrapper::Windows::Foundation::IAsyncActionWithProgress* self, PyObject* args) noexcept
 {
     return self->obj->Cancel(args);
 }
 
-static PyObject* IAsyncActionWithProgress_Close(py::wrapper::Windows::Foundation::IAsyncActionWithProgress* self, PyObject* args)
+static PyObject* IAsyncActionWithProgress_Close(py::wrapper::Windows::Foundation::IAsyncActionWithProgress* self, PyObject* args) noexcept
 {
     return self->obj->Close(args);
 }
 
-static PyObject* IAsyncActionWithProgress_GetResults(py::wrapper::Windows::Foundation::IAsyncActionWithProgress* self, PyObject* args)
+static PyObject* IAsyncActionWithProgress_GetResults(py::wrapper::Windows::Foundation::IAsyncActionWithProgress* self, PyObject* args) noexcept
 {
     return self->obj->GetResults(args);
 }
 
-static PyObject* IAsyncActionWithProgress_get_Progress(py::wrapper::Windows::Foundation::IAsyncActionWithProgress* self, void* /*unused*/)
+static PyObject* IAsyncActionWithProgress_get_Progress(py::wrapper::Windows::Foundation::IAsyncActionWithProgress* self, void* /*unused*/) noexcept
 {
     return self->obj->get_Progress();
 }
 
-static int IAsyncActionWithProgress_put_Progress(py::wrapper::Windows::Foundation::IAsyncActionWithProgress* self, PyObject* arg, void* /*unused*/)
+static int IAsyncActionWithProgress_put_Progress(py::wrapper::Windows::Foundation::IAsyncActionWithProgress* self, PyObject* arg, void* /*unused*/) noexcept
 {
     return self->obj->put_Progress(arg);
 }
 
-static PyObject* IAsyncActionWithProgress_get_Completed(py::wrapper::Windows::Foundation::IAsyncActionWithProgress* self, void* /*unused*/)
+static PyObject* IAsyncActionWithProgress_get_Completed(py::wrapper::Windows::Foundation::IAsyncActionWithProgress* self, void* /*unused*/) noexcept
 {
     return self->obj->get_Completed();
 }
 
-static int IAsyncActionWithProgress_put_Completed(py::wrapper::Windows::Foundation::IAsyncActionWithProgress* self, PyObject* arg, void* /*unused*/)
+static int IAsyncActionWithProgress_put_Completed(py::wrapper::Windows::Foundation::IAsyncActionWithProgress* self, PyObject* arg, void* /*unused*/) noexcept
 {
     return self->obj->put_Completed(arg);
 }
 
-static PyObject* IAsyncActionWithProgress_get_ErrorCode(py::wrapper::Windows::Foundation::IAsyncActionWithProgress* self, void* /*unused*/)
+static PyObject* IAsyncActionWithProgress_get_ErrorCode(py::wrapper::Windows::Foundation::IAsyncActionWithProgress* self, void* /*unused*/) noexcept
 {
     return self->obj->get_ErrorCode();
 }
 
-static PyObject* IAsyncActionWithProgress_get_Id(py::wrapper::Windows::Foundation::IAsyncActionWithProgress* self, void* /*unused*/)
+static PyObject* IAsyncActionWithProgress_get_Id(py::wrapper::Windows::Foundation::IAsyncActionWithProgress* self, void* /*unused*/) noexcept
 {
     return self->obj->get_Id();
 }
 
-static PyObject* IAsyncActionWithProgress_get_Status(py::wrapper::Windows::Foundation::IAsyncActionWithProgress* self, void* /*unused*/)
+static PyObject* IAsyncActionWithProgress_get_Status(py::wrapper::Windows::Foundation::IAsyncActionWithProgress* self, void* /*unused*/) noexcept
 {
     return self->obj->get_Status();
 }
 
-static PyObject* _await_IAsyncActionWithProgress(py::wrapper::Windows::Foundation::IAsyncActionWithProgress* self)
+static PyObject* _await_IAsyncActionWithProgress(py::wrapper::Windows::Foundation::IAsyncActionWithProgress* self) noexcept
 {
     return self->obj->dunder_await();
 }
@@ -2742,13 +2712,11 @@ static PyType_Spec _type_spec_IAsyncActionWithProgress =
 // ----- IAsyncInfo interface --------------------
 
 PyTypeObject* py::winrt_type<winrt::Windows::Foundation::IAsyncInfo>::python_type;
-static const char* _type_name_IAsyncInfo = "IAsyncInfo";
+constexpr const char* const _type_name_IAsyncInfo = "IAsyncInfo";
 
 static PyObject* _new_IAsyncInfo(PyTypeObject* /* unused */, PyObject* /* unused */, PyObject* /* unused */)
 {
-    std::string msg{ _type_name_IAsyncInfo };
-    msg.append(" interface is not activatable");
-    PyErr_SetString(PyExc_TypeError, msg.c_str());
+    py::set_invalid_activation_error(_type_name_IAsyncInfo);
     return nullptr;
 }
 
@@ -2759,98 +2727,105 @@ static void _dealloc_IAsyncInfo(py::wrapper::Windows::Foundation::IAsyncInfo* se
     self->obj = nullptr;
 }
 
-static PyObject* IAsyncInfo_Cancel(py::wrapper::Windows::Foundation::IAsyncInfo* self, PyObject* args)
+static PyObject* IAsyncInfo_Cancel(py::wrapper::Windows::Foundation::IAsyncInfo* self, PyObject* args) noexcept
 {
     Py_ssize_t arg_count = PyTuple_Size(args);
     
     if (arg_count == 0)
     {
-        return py::trycatch_invoker([=]() -> PyObject*
+        try
         {
             self->obj.Cancel();
-            
             Py_RETURN_NONE;
-        }, nullptr);
+        }
+        catch (...)
+        {
+            py::to_PyErr();
+            return nullptr;
+        }
     }
-    else if (arg_count != -1)
+    else
     {
-        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+        py::set_invalid_arg_count_error(arg_count);
+        return nullptr;
     }
-    return nullptr;
 }
 
-static PyObject* IAsyncInfo_Close(py::wrapper::Windows::Foundation::IAsyncInfo* self, PyObject* args)
+static PyObject* IAsyncInfo_Close(py::wrapper::Windows::Foundation::IAsyncInfo* self, PyObject* args) noexcept
 {
     Py_ssize_t arg_count = PyTuple_Size(args);
     
     if (arg_count == 0)
     {
-        return py::trycatch_invoker([=]() -> PyObject*
+        try
         {
             self->obj.Close();
-            
             Py_RETURN_NONE;
-        }, nullptr);
+        }
+        catch (...)
+        {
+            py::to_PyErr();
+            return nullptr;
+        }
     }
-    else if (arg_count != -1)
+    else
     {
-        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+        py::set_invalid_arg_count_error(arg_count);
+        return nullptr;
     }
-    return nullptr;
 }
 
-static PyObject* IAsyncInfo_get_ErrorCode(py::wrapper::Windows::Foundation::IAsyncInfo* self, void* /*unused*/)
+static PyObject* IAsyncInfo_get_ErrorCode(py::wrapper::Windows::Foundation::IAsyncInfo* self, void* /*unused*/) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
-        auto return_value = self->obj.ErrorCode();
-        
-        py::pyobj_handle out_return_value{ py::convert(return_value) };
-        if (!out_return_value) 
-        { 
-            return nullptr;
-        }
-        return out_return_value.detach();
-    }, nullptr);
-}
-
-static PyObject* IAsyncInfo_get_Id(py::wrapper::Windows::Foundation::IAsyncInfo* self, void* /*unused*/)
-{
-    return py::trycatch_invoker([=]() -> PyObject*
+        return py::convert(self->obj.ErrorCode());
+    }
+    catch (...)
     {
-        auto return_value = self->obj.Id();
-        
-        py::pyobj_handle out_return_value{ py::convert(return_value) };
-        if (!out_return_value) 
-        { 
-            return nullptr;
-        }
-        return out_return_value.detach();
-    }, nullptr);
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
-static PyObject* IAsyncInfo_get_Status(py::wrapper::Windows::Foundation::IAsyncInfo* self, void* /*unused*/)
+static PyObject* IAsyncInfo_get_Id(py::wrapper::Windows::Foundation::IAsyncInfo* self, void* /*unused*/) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
-        auto return_value = self->obj.Status();
-        
-        py::pyobj_handle out_return_value{ py::convert(return_value) };
-        if (!out_return_value) 
-        { 
-            return nullptr;
-        }
-        return out_return_value.detach();
-    }, nullptr);
+        return py::convert(self->obj.Id());
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
-static PyObject* _from_IAsyncInfo(PyObject* /*unused*/, PyObject* arg)
+static PyObject* IAsyncInfo_get_Status(py::wrapper::Windows::Foundation::IAsyncInfo* self, void* /*unused*/) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
+    {
+        return py::convert(self->obj.Status());
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
+}
+
+static PyObject* _from_IAsyncInfo(PyObject* /*unused*/, PyObject* arg) noexcept
+{
+    try
     {
         auto return_value = py::convert_to<winrt::Windows::Foundation::IInspectable>(arg);
         return py::convert(return_value.as<winrt::Windows::Foundation::IAsyncInfo>());
-    }, nullptr);
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
 static PyMethodDef _methods_IAsyncInfo[] = {
@@ -2888,13 +2863,11 @@ static PyType_Spec _type_spec_IAsyncInfo =
 // ----- IAsyncOperationWithProgress interface --------------------
 
 PyTypeObject* py::winrt_type<py::proj::Windows::Foundation::IAsyncOperationWithProgress>::python_type;
-static const char* _type_name_IAsyncOperationWithProgress = "IAsyncOperationWithProgress";
+constexpr const char* const _type_name_IAsyncOperationWithProgress = "IAsyncOperationWithProgress";
 
 static PyObject* _new_IAsyncOperationWithProgress(PyTypeObject* /* unused */, PyObject* /* unused */, PyObject* /* unused */)
 {
-    std::string msg{ _type_name_IAsyncOperationWithProgress };
-    msg.append(" interface is not activatable");
-    PyErr_SetString(PyExc_TypeError, msg.c_str());
+    py::set_invalid_activation_error(_type_name_IAsyncOperationWithProgress);
     return nullptr;
 }
 
@@ -2905,57 +2878,57 @@ static void _dealloc_IAsyncOperationWithProgress(py::wrapper::Windows::Foundatio
     self->obj.release();
 }
 
-static PyObject* IAsyncOperationWithProgress_Cancel(py::wrapper::Windows::Foundation::IAsyncOperationWithProgress* self, PyObject* args)
+static PyObject* IAsyncOperationWithProgress_Cancel(py::wrapper::Windows::Foundation::IAsyncOperationWithProgress* self, PyObject* args) noexcept
 {
     return self->obj->Cancel(args);
 }
 
-static PyObject* IAsyncOperationWithProgress_Close(py::wrapper::Windows::Foundation::IAsyncOperationWithProgress* self, PyObject* args)
+static PyObject* IAsyncOperationWithProgress_Close(py::wrapper::Windows::Foundation::IAsyncOperationWithProgress* self, PyObject* args) noexcept
 {
     return self->obj->Close(args);
 }
 
-static PyObject* IAsyncOperationWithProgress_GetResults(py::wrapper::Windows::Foundation::IAsyncOperationWithProgress* self, PyObject* args)
+static PyObject* IAsyncOperationWithProgress_GetResults(py::wrapper::Windows::Foundation::IAsyncOperationWithProgress* self, PyObject* args) noexcept
 {
     return self->obj->GetResults(args);
 }
 
-static PyObject* IAsyncOperationWithProgress_get_Progress(py::wrapper::Windows::Foundation::IAsyncOperationWithProgress* self, void* /*unused*/)
+static PyObject* IAsyncOperationWithProgress_get_Progress(py::wrapper::Windows::Foundation::IAsyncOperationWithProgress* self, void* /*unused*/) noexcept
 {
     return self->obj->get_Progress();
 }
 
-static int IAsyncOperationWithProgress_put_Progress(py::wrapper::Windows::Foundation::IAsyncOperationWithProgress* self, PyObject* arg, void* /*unused*/)
+static int IAsyncOperationWithProgress_put_Progress(py::wrapper::Windows::Foundation::IAsyncOperationWithProgress* self, PyObject* arg, void* /*unused*/) noexcept
 {
     return self->obj->put_Progress(arg);
 }
 
-static PyObject* IAsyncOperationWithProgress_get_Completed(py::wrapper::Windows::Foundation::IAsyncOperationWithProgress* self, void* /*unused*/)
+static PyObject* IAsyncOperationWithProgress_get_Completed(py::wrapper::Windows::Foundation::IAsyncOperationWithProgress* self, void* /*unused*/) noexcept
 {
     return self->obj->get_Completed();
 }
 
-static int IAsyncOperationWithProgress_put_Completed(py::wrapper::Windows::Foundation::IAsyncOperationWithProgress* self, PyObject* arg, void* /*unused*/)
+static int IAsyncOperationWithProgress_put_Completed(py::wrapper::Windows::Foundation::IAsyncOperationWithProgress* self, PyObject* arg, void* /*unused*/) noexcept
 {
     return self->obj->put_Completed(arg);
 }
 
-static PyObject* IAsyncOperationWithProgress_get_ErrorCode(py::wrapper::Windows::Foundation::IAsyncOperationWithProgress* self, void* /*unused*/)
+static PyObject* IAsyncOperationWithProgress_get_ErrorCode(py::wrapper::Windows::Foundation::IAsyncOperationWithProgress* self, void* /*unused*/) noexcept
 {
     return self->obj->get_ErrorCode();
 }
 
-static PyObject* IAsyncOperationWithProgress_get_Id(py::wrapper::Windows::Foundation::IAsyncOperationWithProgress* self, void* /*unused*/)
+static PyObject* IAsyncOperationWithProgress_get_Id(py::wrapper::Windows::Foundation::IAsyncOperationWithProgress* self, void* /*unused*/) noexcept
 {
     return self->obj->get_Id();
 }
 
-static PyObject* IAsyncOperationWithProgress_get_Status(py::wrapper::Windows::Foundation::IAsyncOperationWithProgress* self, void* /*unused*/)
+static PyObject* IAsyncOperationWithProgress_get_Status(py::wrapper::Windows::Foundation::IAsyncOperationWithProgress* self, void* /*unused*/) noexcept
 {
     return self->obj->get_Status();
 }
 
-static PyObject* _await_IAsyncOperationWithProgress(py::wrapper::Windows::Foundation::IAsyncOperationWithProgress* self)
+static PyObject* _await_IAsyncOperationWithProgress(py::wrapper::Windows::Foundation::IAsyncOperationWithProgress* self) noexcept
 {
     return self->obj->dunder_await();
 }
@@ -2998,13 +2971,11 @@ static PyType_Spec _type_spec_IAsyncOperationWithProgress =
 // ----- IAsyncOperation interface --------------------
 
 PyTypeObject* py::winrt_type<py::proj::Windows::Foundation::IAsyncOperation>::python_type;
-static const char* _type_name_IAsyncOperation = "IAsyncOperation";
+constexpr const char* const _type_name_IAsyncOperation = "IAsyncOperation";
 
 static PyObject* _new_IAsyncOperation(PyTypeObject* /* unused */, PyObject* /* unused */, PyObject* /* unused */)
 {
-    std::string msg{ _type_name_IAsyncOperation };
-    msg.append(" interface is not activatable");
-    PyErr_SetString(PyExc_TypeError, msg.c_str());
+    py::set_invalid_activation_error(_type_name_IAsyncOperation);
     return nullptr;
 }
 
@@ -3015,47 +2986,47 @@ static void _dealloc_IAsyncOperation(py::wrapper::Windows::Foundation::IAsyncOpe
     self->obj.release();
 }
 
-static PyObject* IAsyncOperation_Cancel(py::wrapper::Windows::Foundation::IAsyncOperation* self, PyObject* args)
+static PyObject* IAsyncOperation_Cancel(py::wrapper::Windows::Foundation::IAsyncOperation* self, PyObject* args) noexcept
 {
     return self->obj->Cancel(args);
 }
 
-static PyObject* IAsyncOperation_Close(py::wrapper::Windows::Foundation::IAsyncOperation* self, PyObject* args)
+static PyObject* IAsyncOperation_Close(py::wrapper::Windows::Foundation::IAsyncOperation* self, PyObject* args) noexcept
 {
     return self->obj->Close(args);
 }
 
-static PyObject* IAsyncOperation_GetResults(py::wrapper::Windows::Foundation::IAsyncOperation* self, PyObject* args)
+static PyObject* IAsyncOperation_GetResults(py::wrapper::Windows::Foundation::IAsyncOperation* self, PyObject* args) noexcept
 {
     return self->obj->GetResults(args);
 }
 
-static PyObject* IAsyncOperation_get_Completed(py::wrapper::Windows::Foundation::IAsyncOperation* self, void* /*unused*/)
+static PyObject* IAsyncOperation_get_Completed(py::wrapper::Windows::Foundation::IAsyncOperation* self, void* /*unused*/) noexcept
 {
     return self->obj->get_Completed();
 }
 
-static int IAsyncOperation_put_Completed(py::wrapper::Windows::Foundation::IAsyncOperation* self, PyObject* arg, void* /*unused*/)
+static int IAsyncOperation_put_Completed(py::wrapper::Windows::Foundation::IAsyncOperation* self, PyObject* arg, void* /*unused*/) noexcept
 {
     return self->obj->put_Completed(arg);
 }
 
-static PyObject* IAsyncOperation_get_ErrorCode(py::wrapper::Windows::Foundation::IAsyncOperation* self, void* /*unused*/)
+static PyObject* IAsyncOperation_get_ErrorCode(py::wrapper::Windows::Foundation::IAsyncOperation* self, void* /*unused*/) noexcept
 {
     return self->obj->get_ErrorCode();
 }
 
-static PyObject* IAsyncOperation_get_Id(py::wrapper::Windows::Foundation::IAsyncOperation* self, void* /*unused*/)
+static PyObject* IAsyncOperation_get_Id(py::wrapper::Windows::Foundation::IAsyncOperation* self, void* /*unused*/) noexcept
 {
     return self->obj->get_Id();
 }
 
-static PyObject* IAsyncOperation_get_Status(py::wrapper::Windows::Foundation::IAsyncOperation* self, void* /*unused*/)
+static PyObject* IAsyncOperation_get_Status(py::wrapper::Windows::Foundation::IAsyncOperation* self, void* /*unused*/) noexcept
 {
     return self->obj->get_Status();
 }
 
-static PyObject* _await_IAsyncOperation(py::wrapper::Windows::Foundation::IAsyncOperation* self)
+static PyObject* _await_IAsyncOperation(py::wrapper::Windows::Foundation::IAsyncOperation* self) noexcept
 {
     return self->obj->dunder_await();
 }
@@ -3097,13 +3068,11 @@ static PyType_Spec _type_spec_IAsyncOperation =
 // ----- IClosable interface --------------------
 
 PyTypeObject* py::winrt_type<winrt::Windows::Foundation::IClosable>::python_type;
-static const char* _type_name_IClosable = "IClosable";
+constexpr const char* const _type_name_IClosable = "IClosable";
 
 static PyObject* _new_IClosable(PyTypeObject* /* unused */, PyObject* /* unused */, PyObject* /* unused */)
 {
-    std::string msg{ _type_name_IClosable };
-    msg.append(" interface is not activatable");
-    PyErr_SetString(PyExc_TypeError, msg.c_str());
+    py::set_invalid_activation_error(_type_name_IClosable);
     return nullptr;
 }
 
@@ -3114,48 +3083,62 @@ static void _dealloc_IClosable(py::wrapper::Windows::Foundation::IClosable* self
     self->obj = nullptr;
 }
 
-static PyObject* IClosable_Close(py::wrapper::Windows::Foundation::IClosable* self, PyObject* args)
+static PyObject* IClosable_Close(py::wrapper::Windows::Foundation::IClosable* self, PyObject* args) noexcept
 {
     Py_ssize_t arg_count = PyTuple_Size(args);
     
     if (arg_count == 0)
     {
-        return py::trycatch_invoker([=]() -> PyObject*
+        try
         {
             self->obj.Close();
-            
             Py_RETURN_NONE;
-        }, nullptr);
+        }
+        catch (...)
+        {
+            py::to_PyErr();
+            return nullptr;
+        }
     }
-    else if (arg_count != -1)
+    else
     {
-        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+        py::set_invalid_arg_count_error(arg_count);
+        return nullptr;
     }
-    return nullptr;
 }
 
-static PyObject* _from_IClosable(PyObject* /*unused*/, PyObject* arg)
+static PyObject* _from_IClosable(PyObject* /*unused*/, PyObject* arg) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
         auto return_value = py::convert_to<winrt::Windows::Foundation::IInspectable>(arg);
         return py::convert(return_value.as<winrt::Windows::Foundation::IClosable>());
-    }, nullptr);
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
-static PyObject* _enter_IClosable(py::wrapper::Windows::Foundation::IClosable* self)
+static PyObject* _enter_IClosable(py::wrapper::Windows::Foundation::IClosable* self) noexcept
 {
     Py_INCREF(self);
     return (PyObject*)self;
 }
 
-static PyObject* _exit_IClosable(py::wrapper::Windows::Foundation::IClosable* self)
+static PyObject* _exit_IClosable(py::wrapper::Windows::Foundation::IClosable* self) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
         self->obj.Close();
         Py_RETURN_FALSE;
-    }, nullptr);
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
 static PyMethodDef _methods_IClosable[] = {
@@ -3191,13 +3174,11 @@ static PyType_Spec _type_spec_IClosable =
 // ----- IGetActivationFactory interface --------------------
 
 PyTypeObject* py::winrt_type<winrt::Windows::Foundation::IGetActivationFactory>::python_type;
-static const char* _type_name_IGetActivationFactory = "IGetActivationFactory";
+constexpr const char* const _type_name_IGetActivationFactory = "IGetActivationFactory";
 
 static PyObject* _new_IGetActivationFactory(PyTypeObject* /* unused */, PyObject* /* unused */, PyObject* /* unused */)
 {
-    std::string msg{ _type_name_IGetActivationFactory };
-    msg.append(" interface is not activatable");
-    PyErr_SetString(PyExc_TypeError, msg.c_str());
+    py::set_invalid_activation_error(_type_name_IGetActivationFactory);
     return nullptr;
 }
 
@@ -3208,40 +3189,43 @@ static void _dealloc_IGetActivationFactory(py::wrapper::Windows::Foundation::IGe
     self->obj = nullptr;
 }
 
-static PyObject* IGetActivationFactory_GetActivationFactory(py::wrapper::Windows::Foundation::IGetActivationFactory* self, PyObject* args)
+static PyObject* IGetActivationFactory_GetActivationFactory(py::wrapper::Windows::Foundation::IGetActivationFactory* self, PyObject* args) noexcept
 {
     Py_ssize_t arg_count = PyTuple_Size(args);
     
     if (arg_count == 1)
     {
-        return py::trycatch_invoker([=]() -> PyObject*
+        try
         {
             auto param0 = py::convert_to<winrt::hstring>(args, 0);
             
-            auto return_value = self->obj.GetActivationFactory(param0);
-            
-            py::pyobj_handle out_return_value{ py::convert(return_value) };
-            if (!out_return_value) 
-            { 
-                return nullptr;
-            }
-            return out_return_value.detach();
-        }, nullptr);
+            return py::convert(self->obj.GetActivationFactory(param0));
+        }
+        catch (...)
+        {
+            py::to_PyErr();
+            return nullptr;
+        }
     }
-    else if (arg_count != -1)
+    else
     {
-        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+        py::set_invalid_arg_count_error(arg_count);
+        return nullptr;
     }
-    return nullptr;
 }
 
-static PyObject* _from_IGetActivationFactory(PyObject* /*unused*/, PyObject* arg)
+static PyObject* _from_IGetActivationFactory(PyObject* /*unused*/, PyObject* arg) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
         auto return_value = py::convert_to<winrt::Windows::Foundation::IInspectable>(arg);
         return py::convert(return_value.as<winrt::Windows::Foundation::IGetActivationFactory>());
-    }, nullptr);
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
 static PyMethodDef _methods_IGetActivationFactory[] = {
@@ -3275,13 +3259,11 @@ static PyType_Spec _type_spec_IGetActivationFactory =
 // ----- IMemoryBuffer interface --------------------
 
 PyTypeObject* py::winrt_type<winrt::Windows::Foundation::IMemoryBuffer>::python_type;
-static const char* _type_name_IMemoryBuffer = "IMemoryBuffer";
+constexpr const char* const _type_name_IMemoryBuffer = "IMemoryBuffer";
 
 static PyObject* _new_IMemoryBuffer(PyTypeObject* /* unused */, PyObject* /* unused */, PyObject* /* unused */)
 {
-    std::string msg{ _type_name_IMemoryBuffer };
-    msg.append(" interface is not activatable");
-    PyErr_SetString(PyExc_TypeError, msg.c_str());
+    py::set_invalid_activation_error(_type_name_IMemoryBuffer);
     return nullptr;
 }
 
@@ -3292,73 +3274,85 @@ static void _dealloc_IMemoryBuffer(py::wrapper::Windows::Foundation::IMemoryBuff
     self->obj = nullptr;
 }
 
-static PyObject* IMemoryBuffer_Close(py::wrapper::Windows::Foundation::IMemoryBuffer* self, PyObject* args)
+static PyObject* IMemoryBuffer_Close(py::wrapper::Windows::Foundation::IMemoryBuffer* self, PyObject* args) noexcept
 {
     Py_ssize_t arg_count = PyTuple_Size(args);
     
     if (arg_count == 0)
     {
-        return py::trycatch_invoker([=]() -> PyObject*
+        try
         {
             self->obj.Close();
-            
             Py_RETURN_NONE;
-        }, nullptr);
+        }
+        catch (...)
+        {
+            py::to_PyErr();
+            return nullptr;
+        }
     }
-    else if (arg_count != -1)
+    else
     {
-        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+        py::set_invalid_arg_count_error(arg_count);
+        return nullptr;
     }
-    return nullptr;
 }
 
-static PyObject* IMemoryBuffer_CreateReference(py::wrapper::Windows::Foundation::IMemoryBuffer* self, PyObject* args)
+static PyObject* IMemoryBuffer_CreateReference(py::wrapper::Windows::Foundation::IMemoryBuffer* self, PyObject* args) noexcept
 {
     Py_ssize_t arg_count = PyTuple_Size(args);
     
     if (arg_count == 0)
     {
-        return py::trycatch_invoker([=]() -> PyObject*
+        try
         {
-            auto return_value = self->obj.CreateReference();
-            
-            py::pyobj_handle out_return_value{ py::convert(return_value) };
-            if (!out_return_value) 
-            { 
-                return nullptr;
-            }
-            return out_return_value.detach();
-        }, nullptr);
+            return py::convert(self->obj.CreateReference());
+        }
+        catch (...)
+        {
+            py::to_PyErr();
+            return nullptr;
+        }
     }
-    else if (arg_count != -1)
+    else
     {
-        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+        py::set_invalid_arg_count_error(arg_count);
+        return nullptr;
     }
-    return nullptr;
 }
 
-static PyObject* _from_IMemoryBuffer(PyObject* /*unused*/, PyObject* arg)
+static PyObject* _from_IMemoryBuffer(PyObject* /*unused*/, PyObject* arg) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
         auto return_value = py::convert_to<winrt::Windows::Foundation::IInspectable>(arg);
         return py::convert(return_value.as<winrt::Windows::Foundation::IMemoryBuffer>());
-    }, nullptr);
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
-static PyObject* _enter_IMemoryBuffer(py::wrapper::Windows::Foundation::IMemoryBuffer* self)
+static PyObject* _enter_IMemoryBuffer(py::wrapper::Windows::Foundation::IMemoryBuffer* self) noexcept
 {
     Py_INCREF(self);
     return (PyObject*)self;
 }
 
-static PyObject* _exit_IMemoryBuffer(py::wrapper::Windows::Foundation::IMemoryBuffer* self)
+static PyObject* _exit_IMemoryBuffer(py::wrapper::Windows::Foundation::IMemoryBuffer* self) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
         self->obj.Close();
         Py_RETURN_FALSE;
-    }, nullptr);
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
 static PyMethodDef _methods_IMemoryBuffer[] = {
@@ -3395,13 +3389,11 @@ static PyType_Spec _type_spec_IMemoryBuffer =
 // ----- IMemoryBufferReference interface --------------------
 
 PyTypeObject* py::winrt_type<winrt::Windows::Foundation::IMemoryBufferReference>::python_type;
-static const char* _type_name_IMemoryBufferReference = "IMemoryBufferReference";
+constexpr const char* const _type_name_IMemoryBufferReference = "IMemoryBufferReference";
 
 static PyObject* _new_IMemoryBufferReference(PyTypeObject* /* unused */, PyObject* /* unused */, PyObject* /* unused */)
 {
-    std::string msg{ _type_name_IMemoryBufferReference };
-    msg.append(" interface is not activatable");
-    PyErr_SetString(PyExc_TypeError, msg.c_str());
+    py::set_invalid_activation_error(_type_name_IMemoryBufferReference);
     return nullptr;
 }
 
@@ -3412,92 +3404,106 @@ static void _dealloc_IMemoryBufferReference(py::wrapper::Windows::Foundation::IM
     self->obj = nullptr;
 }
 
-static PyObject* IMemoryBufferReference_Close(py::wrapper::Windows::Foundation::IMemoryBufferReference* self, PyObject* args)
+static PyObject* IMemoryBufferReference_Close(py::wrapper::Windows::Foundation::IMemoryBufferReference* self, PyObject* args) noexcept
 {
     Py_ssize_t arg_count = PyTuple_Size(args);
     
     if (arg_count == 0)
     {
-        return py::trycatch_invoker([=]() -> PyObject*
+        try
         {
             self->obj.Close();
-            
             Py_RETURN_NONE;
-        }, nullptr);
-    }
-    else if (arg_count != -1)
-    {
-        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-    }
-    return nullptr;
-}
-
-static PyObject* IMemoryBufferReference_get_Capacity(py::wrapper::Windows::Foundation::IMemoryBufferReference* self, void* /*unused*/)
-{
-    return py::trycatch_invoker([=]() -> PyObject*
-    {
-        auto return_value = self->obj.Capacity();
-        
-        py::pyobj_handle out_return_value{ py::convert(return_value) };
-        if (!out_return_value) 
-        { 
+        }
+        catch (...)
+        {
+            py::to_PyErr();
             return nullptr;
         }
-        return out_return_value.detach();
-    }, nullptr);
+    }
+    else
+    {
+        py::set_invalid_arg_count_error(arg_count);
+        return nullptr;
+    }
 }
 
-static PyObject* IMemoryBufferReference_add_Closed(py::wrapper::Windows::Foundation::IMemoryBufferReference* self, PyObject* arg)
+static PyObject* IMemoryBufferReference_get_Capacity(py::wrapper::Windows::Foundation::IMemoryBufferReference* self, void* /*unused*/) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
+    {
+        return py::convert(self->obj.Capacity());
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
+}
+
+static PyObject* IMemoryBufferReference_add_Closed(py::wrapper::Windows::Foundation::IMemoryBufferReference* self, PyObject* arg) noexcept
+{
+    try
     {
         auto param0 = py::convert_to<winrt::Windows::Foundation::TypedEventHandler<winrt::Windows::Foundation::IMemoryBufferReference, winrt::Windows::Foundation::IInspectable>>(arg);
         
-        auto return_value = self->obj.Closed(param0);
-        
-        py::pyobj_handle out_return_value{ py::convert(return_value) };
-        if (!out_return_value) 
-        { 
-            return nullptr;
-        }
-        return out_return_value.detach();
-    }, nullptr);
+        return py::convert(self->obj.Closed(param0));
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
-static PyObject* IMemoryBufferReference_remove_Closed(py::wrapper::Windows::Foundation::IMemoryBufferReference* self, PyObject* arg)
+static PyObject* IMemoryBufferReference_remove_Closed(py::wrapper::Windows::Foundation::IMemoryBufferReference* self, PyObject* arg) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
         auto param0 = py::convert_to<winrt::event_token>(arg);
         
         self->obj.Closed(param0);
-        
         Py_RETURN_NONE;
-    }, nullptr);
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
-static PyObject* _from_IMemoryBufferReference(PyObject* /*unused*/, PyObject* arg)
+static PyObject* _from_IMemoryBufferReference(PyObject* /*unused*/, PyObject* arg) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
         auto return_value = py::convert_to<winrt::Windows::Foundation::IInspectable>(arg);
         return py::convert(return_value.as<winrt::Windows::Foundation::IMemoryBufferReference>());
-    }, nullptr);
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
-static PyObject* _enter_IMemoryBufferReference(py::wrapper::Windows::Foundation::IMemoryBufferReference* self)
+static PyObject* _enter_IMemoryBufferReference(py::wrapper::Windows::Foundation::IMemoryBufferReference* self) noexcept
 {
     Py_INCREF(self);
     return (PyObject*)self;
 }
 
-static PyObject* _exit_IMemoryBufferReference(py::wrapper::Windows::Foundation::IMemoryBufferReference* self)
+static PyObject* _exit_IMemoryBufferReference(py::wrapper::Windows::Foundation::IMemoryBufferReference* self) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
         self->obj.Close();
         Py_RETURN_FALSE;
-    }, nullptr);
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
 static PyMethodDef _methods_IMemoryBufferReference[] = {
@@ -3536,13 +3542,11 @@ static PyType_Spec _type_spec_IMemoryBufferReference =
 // ----- IPropertyValue interface --------------------
 
 PyTypeObject* py::winrt_type<winrt::Windows::Foundation::IPropertyValue>::python_type;
-static const char* _type_name_IPropertyValue = "IPropertyValue";
+constexpr const char* const _type_name_IPropertyValue = "IPropertyValue";
 
 static PyObject* _new_IPropertyValue(PyTypeObject* /* unused */, PyObject* /* unused */, PyObject* /* unused */)
 {
-    std::string msg{ _type_name_IPropertyValue };
-    msg.append(" interface is not activatable");
-    PyErr_SetString(PyExc_TypeError, msg.c_str());
+    py::set_invalid_activation_error(_type_name_IPropertyValue);
     return nullptr;
 }
 
@@ -3553,38 +3557,36 @@ static void _dealloc_IPropertyValue(py::wrapper::Windows::Foundation::IPropertyV
     self->obj = nullptr;
 }
 
-static PyObject* IPropertyValue_GetBoolean(py::wrapper::Windows::Foundation::IPropertyValue* self, PyObject* args)
+static PyObject* IPropertyValue_GetBoolean(py::wrapper::Windows::Foundation::IPropertyValue* self, PyObject* args) noexcept
 {
     Py_ssize_t arg_count = PyTuple_Size(args);
     
     if (arg_count == 0)
     {
-        return py::trycatch_invoker([=]() -> PyObject*
+        try
         {
-            auto return_value = self->obj.GetBoolean();
-            
-            py::pyobj_handle out_return_value{ py::convert(return_value) };
-            if (!out_return_value) 
-            { 
-                return nullptr;
-            }
-            return out_return_value.detach();
-        }, nullptr);
+            return py::convert(self->obj.GetBoolean());
+        }
+        catch (...)
+        {
+            py::to_PyErr();
+            return nullptr;
+        }
     }
-    else if (arg_count != -1)
+    else
     {
-        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+        py::set_invalid_arg_count_error(arg_count);
+        return nullptr;
     }
-    return nullptr;
 }
 
-static PyObject* IPropertyValue_GetBooleanArray(py::wrapper::Windows::Foundation::IPropertyValue* self, PyObject* args)
+static PyObject* IPropertyValue_GetBooleanArray(py::wrapper::Windows::Foundation::IPropertyValue* self, PyObject* args) noexcept
 {
     Py_ssize_t arg_count = PyTuple_Size(args);
     
     if (arg_count == 0)
     {
-        return py::trycatch_invoker([=]() -> PyObject*
+        try
         {
             winrt::com_array<bool> param0 { };
             
@@ -3596,47 +3598,50 @@ static PyObject* IPropertyValue_GetBooleanArray(py::wrapper::Windows::Foundation
                 return nullptr;
             }
             return out0.detach();
-        }, nullptr);
-    }
-    else if (arg_count != -1)
-    {
-        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-    }
-    return nullptr;
-}
-
-static PyObject* IPropertyValue_GetChar16(py::wrapper::Windows::Foundation::IPropertyValue* self, PyObject* args)
-{
-    Py_ssize_t arg_count = PyTuple_Size(args);
-    
-    if (arg_count == 0)
-    {
-        return py::trycatch_invoker([=]() -> PyObject*
+        }
+        catch (...)
         {
-            auto return_value = self->obj.GetChar16();
-            
-            py::pyobj_handle out_return_value{ py::convert(return_value) };
-            if (!out_return_value) 
-            { 
-                return nullptr;
-            }
-            return out_return_value.detach();
-        }, nullptr);
+            py::to_PyErr();
+            return nullptr;
+        }
     }
-    else if (arg_count != -1)
+    else
     {
-        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+        py::set_invalid_arg_count_error(arg_count);
+        return nullptr;
     }
-    return nullptr;
 }
 
-static PyObject* IPropertyValue_GetChar16Array(py::wrapper::Windows::Foundation::IPropertyValue* self, PyObject* args)
+static PyObject* IPropertyValue_GetChar16(py::wrapper::Windows::Foundation::IPropertyValue* self, PyObject* args) noexcept
 {
     Py_ssize_t arg_count = PyTuple_Size(args);
     
     if (arg_count == 0)
     {
-        return py::trycatch_invoker([=]() -> PyObject*
+        try
+        {
+            return py::convert(self->obj.GetChar16());
+        }
+        catch (...)
+        {
+            py::to_PyErr();
+            return nullptr;
+        }
+    }
+    else
+    {
+        py::set_invalid_arg_count_error(arg_count);
+        return nullptr;
+    }
+}
+
+static PyObject* IPropertyValue_GetChar16Array(py::wrapper::Windows::Foundation::IPropertyValue* self, PyObject* args) noexcept
+{
+    Py_ssize_t arg_count = PyTuple_Size(args);
+    
+    if (arg_count == 0)
+    {
+        try
         {
             winrt::com_array<char16_t> param0 { };
             
@@ -3648,47 +3653,50 @@ static PyObject* IPropertyValue_GetChar16Array(py::wrapper::Windows::Foundation:
                 return nullptr;
             }
             return out0.detach();
-        }, nullptr);
-    }
-    else if (arg_count != -1)
-    {
-        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-    }
-    return nullptr;
-}
-
-static PyObject* IPropertyValue_GetDateTime(py::wrapper::Windows::Foundation::IPropertyValue* self, PyObject* args)
-{
-    Py_ssize_t arg_count = PyTuple_Size(args);
-    
-    if (arg_count == 0)
-    {
-        return py::trycatch_invoker([=]() -> PyObject*
+        }
+        catch (...)
         {
-            auto return_value = self->obj.GetDateTime();
-            
-            py::pyobj_handle out_return_value{ py::convert(return_value) };
-            if (!out_return_value) 
-            { 
-                return nullptr;
-            }
-            return out_return_value.detach();
-        }, nullptr);
+            py::to_PyErr();
+            return nullptr;
+        }
     }
-    else if (arg_count != -1)
+    else
     {
-        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+        py::set_invalid_arg_count_error(arg_count);
+        return nullptr;
     }
-    return nullptr;
 }
 
-static PyObject* IPropertyValue_GetDateTimeArray(py::wrapper::Windows::Foundation::IPropertyValue* self, PyObject* args)
+static PyObject* IPropertyValue_GetDateTime(py::wrapper::Windows::Foundation::IPropertyValue* self, PyObject* args) noexcept
 {
     Py_ssize_t arg_count = PyTuple_Size(args);
     
     if (arg_count == 0)
     {
-        return py::trycatch_invoker([=]() -> PyObject*
+        try
+        {
+            return py::convert(self->obj.GetDateTime());
+        }
+        catch (...)
+        {
+            py::to_PyErr();
+            return nullptr;
+        }
+    }
+    else
+    {
+        py::set_invalid_arg_count_error(arg_count);
+        return nullptr;
+    }
+}
+
+static PyObject* IPropertyValue_GetDateTimeArray(py::wrapper::Windows::Foundation::IPropertyValue* self, PyObject* args) noexcept
+{
+    Py_ssize_t arg_count = PyTuple_Size(args);
+    
+    if (arg_count == 0)
+    {
+        try
         {
             winrt::com_array<winrt::Windows::Foundation::DateTime> param0 { };
             
@@ -3700,47 +3708,50 @@ static PyObject* IPropertyValue_GetDateTimeArray(py::wrapper::Windows::Foundatio
                 return nullptr;
             }
             return out0.detach();
-        }, nullptr);
-    }
-    else if (arg_count != -1)
-    {
-        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-    }
-    return nullptr;
-}
-
-static PyObject* IPropertyValue_GetDouble(py::wrapper::Windows::Foundation::IPropertyValue* self, PyObject* args)
-{
-    Py_ssize_t arg_count = PyTuple_Size(args);
-    
-    if (arg_count == 0)
-    {
-        return py::trycatch_invoker([=]() -> PyObject*
+        }
+        catch (...)
         {
-            auto return_value = self->obj.GetDouble();
-            
-            py::pyobj_handle out_return_value{ py::convert(return_value) };
-            if (!out_return_value) 
-            { 
-                return nullptr;
-            }
-            return out_return_value.detach();
-        }, nullptr);
+            py::to_PyErr();
+            return nullptr;
+        }
     }
-    else if (arg_count != -1)
+    else
     {
-        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+        py::set_invalid_arg_count_error(arg_count);
+        return nullptr;
     }
-    return nullptr;
 }
 
-static PyObject* IPropertyValue_GetDoubleArray(py::wrapper::Windows::Foundation::IPropertyValue* self, PyObject* args)
+static PyObject* IPropertyValue_GetDouble(py::wrapper::Windows::Foundation::IPropertyValue* self, PyObject* args) noexcept
 {
     Py_ssize_t arg_count = PyTuple_Size(args);
     
     if (arg_count == 0)
     {
-        return py::trycatch_invoker([=]() -> PyObject*
+        try
+        {
+            return py::convert(self->obj.GetDouble());
+        }
+        catch (...)
+        {
+            py::to_PyErr();
+            return nullptr;
+        }
+    }
+    else
+    {
+        py::set_invalid_arg_count_error(arg_count);
+        return nullptr;
+    }
+}
+
+static PyObject* IPropertyValue_GetDoubleArray(py::wrapper::Windows::Foundation::IPropertyValue* self, PyObject* args) noexcept
+{
+    Py_ssize_t arg_count = PyTuple_Size(args);
+    
+    if (arg_count == 0)
+    {
+        try
         {
             winrt::com_array<double> param0 { };
             
@@ -3752,47 +3763,50 @@ static PyObject* IPropertyValue_GetDoubleArray(py::wrapper::Windows::Foundation:
                 return nullptr;
             }
             return out0.detach();
-        }, nullptr);
-    }
-    else if (arg_count != -1)
-    {
-        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-    }
-    return nullptr;
-}
-
-static PyObject* IPropertyValue_GetGuid(py::wrapper::Windows::Foundation::IPropertyValue* self, PyObject* args)
-{
-    Py_ssize_t arg_count = PyTuple_Size(args);
-    
-    if (arg_count == 0)
-    {
-        return py::trycatch_invoker([=]() -> PyObject*
+        }
+        catch (...)
         {
-            auto return_value = self->obj.GetGuid();
-            
-            py::pyobj_handle out_return_value{ py::convert(return_value) };
-            if (!out_return_value) 
-            { 
-                return nullptr;
-            }
-            return out_return_value.detach();
-        }, nullptr);
+            py::to_PyErr();
+            return nullptr;
+        }
     }
-    else if (arg_count != -1)
+    else
     {
-        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+        py::set_invalid_arg_count_error(arg_count);
+        return nullptr;
     }
-    return nullptr;
 }
 
-static PyObject* IPropertyValue_GetGuidArray(py::wrapper::Windows::Foundation::IPropertyValue* self, PyObject* args)
+static PyObject* IPropertyValue_GetGuid(py::wrapper::Windows::Foundation::IPropertyValue* self, PyObject* args) noexcept
 {
     Py_ssize_t arg_count = PyTuple_Size(args);
     
     if (arg_count == 0)
     {
-        return py::trycatch_invoker([=]() -> PyObject*
+        try
+        {
+            return py::convert(self->obj.GetGuid());
+        }
+        catch (...)
+        {
+            py::to_PyErr();
+            return nullptr;
+        }
+    }
+    else
+    {
+        py::set_invalid_arg_count_error(arg_count);
+        return nullptr;
+    }
+}
+
+static PyObject* IPropertyValue_GetGuidArray(py::wrapper::Windows::Foundation::IPropertyValue* self, PyObject* args) noexcept
+{
+    Py_ssize_t arg_count = PyTuple_Size(args);
+    
+    if (arg_count == 0)
+    {
+        try
         {
             winrt::com_array<winrt::guid> param0 { };
             
@@ -3804,22 +3818,27 @@ static PyObject* IPropertyValue_GetGuidArray(py::wrapper::Windows::Foundation::I
                 return nullptr;
             }
             return out0.detach();
-        }, nullptr);
+        }
+        catch (...)
+        {
+            py::to_PyErr();
+            return nullptr;
+        }
     }
-    else if (arg_count != -1)
+    else
     {
-        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+        py::set_invalid_arg_count_error(arg_count);
+        return nullptr;
     }
-    return nullptr;
 }
 
-static PyObject* IPropertyValue_GetInspectableArray(py::wrapper::Windows::Foundation::IPropertyValue* self, PyObject* args)
+static PyObject* IPropertyValue_GetInspectableArray(py::wrapper::Windows::Foundation::IPropertyValue* self, PyObject* args) noexcept
 {
     Py_ssize_t arg_count = PyTuple_Size(args);
     
     if (arg_count == 0)
     {
-        return py::trycatch_invoker([=]() -> PyObject*
+        try
         {
             winrt::com_array<winrt::Windows::Foundation::IInspectable> param0 { };
             
@@ -3831,47 +3850,50 @@ static PyObject* IPropertyValue_GetInspectableArray(py::wrapper::Windows::Founda
                 return nullptr;
             }
             return out0.detach();
-        }, nullptr);
-    }
-    else if (arg_count != -1)
-    {
-        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-    }
-    return nullptr;
-}
-
-static PyObject* IPropertyValue_GetInt16(py::wrapper::Windows::Foundation::IPropertyValue* self, PyObject* args)
-{
-    Py_ssize_t arg_count = PyTuple_Size(args);
-    
-    if (arg_count == 0)
-    {
-        return py::trycatch_invoker([=]() -> PyObject*
+        }
+        catch (...)
         {
-            auto return_value = self->obj.GetInt16();
-            
-            py::pyobj_handle out_return_value{ py::convert(return_value) };
-            if (!out_return_value) 
-            { 
-                return nullptr;
-            }
-            return out_return_value.detach();
-        }, nullptr);
+            py::to_PyErr();
+            return nullptr;
+        }
     }
-    else if (arg_count != -1)
+    else
     {
-        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+        py::set_invalid_arg_count_error(arg_count);
+        return nullptr;
     }
-    return nullptr;
 }
 
-static PyObject* IPropertyValue_GetInt16Array(py::wrapper::Windows::Foundation::IPropertyValue* self, PyObject* args)
+static PyObject* IPropertyValue_GetInt16(py::wrapper::Windows::Foundation::IPropertyValue* self, PyObject* args) noexcept
 {
     Py_ssize_t arg_count = PyTuple_Size(args);
     
     if (arg_count == 0)
     {
-        return py::trycatch_invoker([=]() -> PyObject*
+        try
+        {
+            return py::convert(self->obj.GetInt16());
+        }
+        catch (...)
+        {
+            py::to_PyErr();
+            return nullptr;
+        }
+    }
+    else
+    {
+        py::set_invalid_arg_count_error(arg_count);
+        return nullptr;
+    }
+}
+
+static PyObject* IPropertyValue_GetInt16Array(py::wrapper::Windows::Foundation::IPropertyValue* self, PyObject* args) noexcept
+{
+    Py_ssize_t arg_count = PyTuple_Size(args);
+    
+    if (arg_count == 0)
+    {
+        try
         {
             winrt::com_array<int16_t> param0 { };
             
@@ -3883,47 +3905,50 @@ static PyObject* IPropertyValue_GetInt16Array(py::wrapper::Windows::Foundation::
                 return nullptr;
             }
             return out0.detach();
-        }, nullptr);
-    }
-    else if (arg_count != -1)
-    {
-        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-    }
-    return nullptr;
-}
-
-static PyObject* IPropertyValue_GetInt32(py::wrapper::Windows::Foundation::IPropertyValue* self, PyObject* args)
-{
-    Py_ssize_t arg_count = PyTuple_Size(args);
-    
-    if (arg_count == 0)
-    {
-        return py::trycatch_invoker([=]() -> PyObject*
+        }
+        catch (...)
         {
-            auto return_value = self->obj.GetInt32();
-            
-            py::pyobj_handle out_return_value{ py::convert(return_value) };
-            if (!out_return_value) 
-            { 
-                return nullptr;
-            }
-            return out_return_value.detach();
-        }, nullptr);
+            py::to_PyErr();
+            return nullptr;
+        }
     }
-    else if (arg_count != -1)
+    else
     {
-        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+        py::set_invalid_arg_count_error(arg_count);
+        return nullptr;
     }
-    return nullptr;
 }
 
-static PyObject* IPropertyValue_GetInt32Array(py::wrapper::Windows::Foundation::IPropertyValue* self, PyObject* args)
+static PyObject* IPropertyValue_GetInt32(py::wrapper::Windows::Foundation::IPropertyValue* self, PyObject* args) noexcept
 {
     Py_ssize_t arg_count = PyTuple_Size(args);
     
     if (arg_count == 0)
     {
-        return py::trycatch_invoker([=]() -> PyObject*
+        try
+        {
+            return py::convert(self->obj.GetInt32());
+        }
+        catch (...)
+        {
+            py::to_PyErr();
+            return nullptr;
+        }
+    }
+    else
+    {
+        py::set_invalid_arg_count_error(arg_count);
+        return nullptr;
+    }
+}
+
+static PyObject* IPropertyValue_GetInt32Array(py::wrapper::Windows::Foundation::IPropertyValue* self, PyObject* args) noexcept
+{
+    Py_ssize_t arg_count = PyTuple_Size(args);
+    
+    if (arg_count == 0)
+    {
+        try
         {
             winrt::com_array<int32_t> param0 { };
             
@@ -3935,47 +3960,50 @@ static PyObject* IPropertyValue_GetInt32Array(py::wrapper::Windows::Foundation::
                 return nullptr;
             }
             return out0.detach();
-        }, nullptr);
-    }
-    else if (arg_count != -1)
-    {
-        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-    }
-    return nullptr;
-}
-
-static PyObject* IPropertyValue_GetInt64(py::wrapper::Windows::Foundation::IPropertyValue* self, PyObject* args)
-{
-    Py_ssize_t arg_count = PyTuple_Size(args);
-    
-    if (arg_count == 0)
-    {
-        return py::trycatch_invoker([=]() -> PyObject*
+        }
+        catch (...)
         {
-            auto return_value = self->obj.GetInt64();
-            
-            py::pyobj_handle out_return_value{ py::convert(return_value) };
-            if (!out_return_value) 
-            { 
-                return nullptr;
-            }
-            return out_return_value.detach();
-        }, nullptr);
+            py::to_PyErr();
+            return nullptr;
+        }
     }
-    else if (arg_count != -1)
+    else
     {
-        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+        py::set_invalid_arg_count_error(arg_count);
+        return nullptr;
     }
-    return nullptr;
 }
 
-static PyObject* IPropertyValue_GetInt64Array(py::wrapper::Windows::Foundation::IPropertyValue* self, PyObject* args)
+static PyObject* IPropertyValue_GetInt64(py::wrapper::Windows::Foundation::IPropertyValue* self, PyObject* args) noexcept
 {
     Py_ssize_t arg_count = PyTuple_Size(args);
     
     if (arg_count == 0)
     {
-        return py::trycatch_invoker([=]() -> PyObject*
+        try
+        {
+            return py::convert(self->obj.GetInt64());
+        }
+        catch (...)
+        {
+            py::to_PyErr();
+            return nullptr;
+        }
+    }
+    else
+    {
+        py::set_invalid_arg_count_error(arg_count);
+        return nullptr;
+    }
+}
+
+static PyObject* IPropertyValue_GetInt64Array(py::wrapper::Windows::Foundation::IPropertyValue* self, PyObject* args) noexcept
+{
+    Py_ssize_t arg_count = PyTuple_Size(args);
+    
+    if (arg_count == 0)
+    {
+        try
         {
             winrt::com_array<int64_t> param0 { };
             
@@ -3987,47 +4015,50 @@ static PyObject* IPropertyValue_GetInt64Array(py::wrapper::Windows::Foundation::
                 return nullptr;
             }
             return out0.detach();
-        }, nullptr);
-    }
-    else if (arg_count != -1)
-    {
-        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-    }
-    return nullptr;
-}
-
-static PyObject* IPropertyValue_GetPoint(py::wrapper::Windows::Foundation::IPropertyValue* self, PyObject* args)
-{
-    Py_ssize_t arg_count = PyTuple_Size(args);
-    
-    if (arg_count == 0)
-    {
-        return py::trycatch_invoker([=]() -> PyObject*
+        }
+        catch (...)
         {
-            auto return_value = self->obj.GetPoint();
-            
-            py::pyobj_handle out_return_value{ py::convert(return_value) };
-            if (!out_return_value) 
-            { 
-                return nullptr;
-            }
-            return out_return_value.detach();
-        }, nullptr);
+            py::to_PyErr();
+            return nullptr;
+        }
     }
-    else if (arg_count != -1)
+    else
     {
-        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+        py::set_invalid_arg_count_error(arg_count);
+        return nullptr;
     }
-    return nullptr;
 }
 
-static PyObject* IPropertyValue_GetPointArray(py::wrapper::Windows::Foundation::IPropertyValue* self, PyObject* args)
+static PyObject* IPropertyValue_GetPoint(py::wrapper::Windows::Foundation::IPropertyValue* self, PyObject* args) noexcept
 {
     Py_ssize_t arg_count = PyTuple_Size(args);
     
     if (arg_count == 0)
     {
-        return py::trycatch_invoker([=]() -> PyObject*
+        try
+        {
+            return py::convert(self->obj.GetPoint());
+        }
+        catch (...)
+        {
+            py::to_PyErr();
+            return nullptr;
+        }
+    }
+    else
+    {
+        py::set_invalid_arg_count_error(arg_count);
+        return nullptr;
+    }
+}
+
+static PyObject* IPropertyValue_GetPointArray(py::wrapper::Windows::Foundation::IPropertyValue* self, PyObject* args) noexcept
+{
+    Py_ssize_t arg_count = PyTuple_Size(args);
+    
+    if (arg_count == 0)
+    {
+        try
         {
             winrt::com_array<winrt::Windows::Foundation::Point> param0 { };
             
@@ -4039,47 +4070,50 @@ static PyObject* IPropertyValue_GetPointArray(py::wrapper::Windows::Foundation::
                 return nullptr;
             }
             return out0.detach();
-        }, nullptr);
-    }
-    else if (arg_count != -1)
-    {
-        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-    }
-    return nullptr;
-}
-
-static PyObject* IPropertyValue_GetRect(py::wrapper::Windows::Foundation::IPropertyValue* self, PyObject* args)
-{
-    Py_ssize_t arg_count = PyTuple_Size(args);
-    
-    if (arg_count == 0)
-    {
-        return py::trycatch_invoker([=]() -> PyObject*
+        }
+        catch (...)
         {
-            auto return_value = self->obj.GetRect();
-            
-            py::pyobj_handle out_return_value{ py::convert(return_value) };
-            if (!out_return_value) 
-            { 
-                return nullptr;
-            }
-            return out_return_value.detach();
-        }, nullptr);
+            py::to_PyErr();
+            return nullptr;
+        }
     }
-    else if (arg_count != -1)
+    else
     {
-        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+        py::set_invalid_arg_count_error(arg_count);
+        return nullptr;
     }
-    return nullptr;
 }
 
-static PyObject* IPropertyValue_GetRectArray(py::wrapper::Windows::Foundation::IPropertyValue* self, PyObject* args)
+static PyObject* IPropertyValue_GetRect(py::wrapper::Windows::Foundation::IPropertyValue* self, PyObject* args) noexcept
 {
     Py_ssize_t arg_count = PyTuple_Size(args);
     
     if (arg_count == 0)
     {
-        return py::trycatch_invoker([=]() -> PyObject*
+        try
+        {
+            return py::convert(self->obj.GetRect());
+        }
+        catch (...)
+        {
+            py::to_PyErr();
+            return nullptr;
+        }
+    }
+    else
+    {
+        py::set_invalid_arg_count_error(arg_count);
+        return nullptr;
+    }
+}
+
+static PyObject* IPropertyValue_GetRectArray(py::wrapper::Windows::Foundation::IPropertyValue* self, PyObject* args) noexcept
+{
+    Py_ssize_t arg_count = PyTuple_Size(args);
+    
+    if (arg_count == 0)
+    {
+        try
         {
             winrt::com_array<winrt::Windows::Foundation::Rect> param0 { };
             
@@ -4091,47 +4125,50 @@ static PyObject* IPropertyValue_GetRectArray(py::wrapper::Windows::Foundation::I
                 return nullptr;
             }
             return out0.detach();
-        }, nullptr);
-    }
-    else if (arg_count != -1)
-    {
-        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-    }
-    return nullptr;
-}
-
-static PyObject* IPropertyValue_GetSingle(py::wrapper::Windows::Foundation::IPropertyValue* self, PyObject* args)
-{
-    Py_ssize_t arg_count = PyTuple_Size(args);
-    
-    if (arg_count == 0)
-    {
-        return py::trycatch_invoker([=]() -> PyObject*
+        }
+        catch (...)
         {
-            auto return_value = self->obj.GetSingle();
-            
-            py::pyobj_handle out_return_value{ py::convert(return_value) };
-            if (!out_return_value) 
-            { 
-                return nullptr;
-            }
-            return out_return_value.detach();
-        }, nullptr);
+            py::to_PyErr();
+            return nullptr;
+        }
     }
-    else if (arg_count != -1)
+    else
     {
-        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+        py::set_invalid_arg_count_error(arg_count);
+        return nullptr;
     }
-    return nullptr;
 }
 
-static PyObject* IPropertyValue_GetSingleArray(py::wrapper::Windows::Foundation::IPropertyValue* self, PyObject* args)
+static PyObject* IPropertyValue_GetSingle(py::wrapper::Windows::Foundation::IPropertyValue* self, PyObject* args) noexcept
 {
     Py_ssize_t arg_count = PyTuple_Size(args);
     
     if (arg_count == 0)
     {
-        return py::trycatch_invoker([=]() -> PyObject*
+        try
+        {
+            return py::convert(self->obj.GetSingle());
+        }
+        catch (...)
+        {
+            py::to_PyErr();
+            return nullptr;
+        }
+    }
+    else
+    {
+        py::set_invalid_arg_count_error(arg_count);
+        return nullptr;
+    }
+}
+
+static PyObject* IPropertyValue_GetSingleArray(py::wrapper::Windows::Foundation::IPropertyValue* self, PyObject* args) noexcept
+{
+    Py_ssize_t arg_count = PyTuple_Size(args);
+    
+    if (arg_count == 0)
+    {
+        try
         {
             winrt::com_array<float> param0 { };
             
@@ -4143,47 +4180,50 @@ static PyObject* IPropertyValue_GetSingleArray(py::wrapper::Windows::Foundation:
                 return nullptr;
             }
             return out0.detach();
-        }, nullptr);
-    }
-    else if (arg_count != -1)
-    {
-        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-    }
-    return nullptr;
-}
-
-static PyObject* IPropertyValue_GetSize(py::wrapper::Windows::Foundation::IPropertyValue* self, PyObject* args)
-{
-    Py_ssize_t arg_count = PyTuple_Size(args);
-    
-    if (arg_count == 0)
-    {
-        return py::trycatch_invoker([=]() -> PyObject*
+        }
+        catch (...)
         {
-            auto return_value = self->obj.GetSize();
-            
-            py::pyobj_handle out_return_value{ py::convert(return_value) };
-            if (!out_return_value) 
-            { 
-                return nullptr;
-            }
-            return out_return_value.detach();
-        }, nullptr);
+            py::to_PyErr();
+            return nullptr;
+        }
     }
-    else if (arg_count != -1)
+    else
     {
-        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+        py::set_invalid_arg_count_error(arg_count);
+        return nullptr;
     }
-    return nullptr;
 }
 
-static PyObject* IPropertyValue_GetSizeArray(py::wrapper::Windows::Foundation::IPropertyValue* self, PyObject* args)
+static PyObject* IPropertyValue_GetSize(py::wrapper::Windows::Foundation::IPropertyValue* self, PyObject* args) noexcept
 {
     Py_ssize_t arg_count = PyTuple_Size(args);
     
     if (arg_count == 0)
     {
-        return py::trycatch_invoker([=]() -> PyObject*
+        try
+        {
+            return py::convert(self->obj.GetSize());
+        }
+        catch (...)
+        {
+            py::to_PyErr();
+            return nullptr;
+        }
+    }
+    else
+    {
+        py::set_invalid_arg_count_error(arg_count);
+        return nullptr;
+    }
+}
+
+static PyObject* IPropertyValue_GetSizeArray(py::wrapper::Windows::Foundation::IPropertyValue* self, PyObject* args) noexcept
+{
+    Py_ssize_t arg_count = PyTuple_Size(args);
+    
+    if (arg_count == 0)
+    {
+        try
         {
             winrt::com_array<winrt::Windows::Foundation::Size> param0 { };
             
@@ -4195,47 +4235,50 @@ static PyObject* IPropertyValue_GetSizeArray(py::wrapper::Windows::Foundation::I
                 return nullptr;
             }
             return out0.detach();
-        }, nullptr);
-    }
-    else if (arg_count != -1)
-    {
-        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-    }
-    return nullptr;
-}
-
-static PyObject* IPropertyValue_GetString(py::wrapper::Windows::Foundation::IPropertyValue* self, PyObject* args)
-{
-    Py_ssize_t arg_count = PyTuple_Size(args);
-    
-    if (arg_count == 0)
-    {
-        return py::trycatch_invoker([=]() -> PyObject*
+        }
+        catch (...)
         {
-            auto return_value = self->obj.GetString();
-            
-            py::pyobj_handle out_return_value{ py::convert(return_value) };
-            if (!out_return_value) 
-            { 
-                return nullptr;
-            }
-            return out_return_value.detach();
-        }, nullptr);
+            py::to_PyErr();
+            return nullptr;
+        }
     }
-    else if (arg_count != -1)
+    else
     {
-        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+        py::set_invalid_arg_count_error(arg_count);
+        return nullptr;
     }
-    return nullptr;
 }
 
-static PyObject* IPropertyValue_GetStringArray(py::wrapper::Windows::Foundation::IPropertyValue* self, PyObject* args)
+static PyObject* IPropertyValue_GetString(py::wrapper::Windows::Foundation::IPropertyValue* self, PyObject* args) noexcept
 {
     Py_ssize_t arg_count = PyTuple_Size(args);
     
     if (arg_count == 0)
     {
-        return py::trycatch_invoker([=]() -> PyObject*
+        try
+        {
+            return py::convert(self->obj.GetString());
+        }
+        catch (...)
+        {
+            py::to_PyErr();
+            return nullptr;
+        }
+    }
+    else
+    {
+        py::set_invalid_arg_count_error(arg_count);
+        return nullptr;
+    }
+}
+
+static PyObject* IPropertyValue_GetStringArray(py::wrapper::Windows::Foundation::IPropertyValue* self, PyObject* args) noexcept
+{
+    Py_ssize_t arg_count = PyTuple_Size(args);
+    
+    if (arg_count == 0)
+    {
+        try
         {
             winrt::com_array<winrt::hstring> param0 { };
             
@@ -4247,47 +4290,50 @@ static PyObject* IPropertyValue_GetStringArray(py::wrapper::Windows::Foundation:
                 return nullptr;
             }
             return out0.detach();
-        }, nullptr);
-    }
-    else if (arg_count != -1)
-    {
-        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-    }
-    return nullptr;
-}
-
-static PyObject* IPropertyValue_GetTimeSpan(py::wrapper::Windows::Foundation::IPropertyValue* self, PyObject* args)
-{
-    Py_ssize_t arg_count = PyTuple_Size(args);
-    
-    if (arg_count == 0)
-    {
-        return py::trycatch_invoker([=]() -> PyObject*
+        }
+        catch (...)
         {
-            auto return_value = self->obj.GetTimeSpan();
-            
-            py::pyobj_handle out_return_value{ py::convert(return_value) };
-            if (!out_return_value) 
-            { 
-                return nullptr;
-            }
-            return out_return_value.detach();
-        }, nullptr);
+            py::to_PyErr();
+            return nullptr;
+        }
     }
-    else if (arg_count != -1)
+    else
     {
-        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+        py::set_invalid_arg_count_error(arg_count);
+        return nullptr;
     }
-    return nullptr;
 }
 
-static PyObject* IPropertyValue_GetTimeSpanArray(py::wrapper::Windows::Foundation::IPropertyValue* self, PyObject* args)
+static PyObject* IPropertyValue_GetTimeSpan(py::wrapper::Windows::Foundation::IPropertyValue* self, PyObject* args) noexcept
 {
     Py_ssize_t arg_count = PyTuple_Size(args);
     
     if (arg_count == 0)
     {
-        return py::trycatch_invoker([=]() -> PyObject*
+        try
+        {
+            return py::convert(self->obj.GetTimeSpan());
+        }
+        catch (...)
+        {
+            py::to_PyErr();
+            return nullptr;
+        }
+    }
+    else
+    {
+        py::set_invalid_arg_count_error(arg_count);
+        return nullptr;
+    }
+}
+
+static PyObject* IPropertyValue_GetTimeSpanArray(py::wrapper::Windows::Foundation::IPropertyValue* self, PyObject* args) noexcept
+{
+    Py_ssize_t arg_count = PyTuple_Size(args);
+    
+    if (arg_count == 0)
+    {
+        try
         {
             winrt::com_array<winrt::Windows::Foundation::TimeSpan> param0 { };
             
@@ -4299,47 +4345,50 @@ static PyObject* IPropertyValue_GetTimeSpanArray(py::wrapper::Windows::Foundatio
                 return nullptr;
             }
             return out0.detach();
-        }, nullptr);
-    }
-    else if (arg_count != -1)
-    {
-        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-    }
-    return nullptr;
-}
-
-static PyObject* IPropertyValue_GetUInt16(py::wrapper::Windows::Foundation::IPropertyValue* self, PyObject* args)
-{
-    Py_ssize_t arg_count = PyTuple_Size(args);
-    
-    if (arg_count == 0)
-    {
-        return py::trycatch_invoker([=]() -> PyObject*
+        }
+        catch (...)
         {
-            auto return_value = self->obj.GetUInt16();
-            
-            py::pyobj_handle out_return_value{ py::convert(return_value) };
-            if (!out_return_value) 
-            { 
-                return nullptr;
-            }
-            return out_return_value.detach();
-        }, nullptr);
+            py::to_PyErr();
+            return nullptr;
+        }
     }
-    else if (arg_count != -1)
+    else
     {
-        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+        py::set_invalid_arg_count_error(arg_count);
+        return nullptr;
     }
-    return nullptr;
 }
 
-static PyObject* IPropertyValue_GetUInt16Array(py::wrapper::Windows::Foundation::IPropertyValue* self, PyObject* args)
+static PyObject* IPropertyValue_GetUInt16(py::wrapper::Windows::Foundation::IPropertyValue* self, PyObject* args) noexcept
 {
     Py_ssize_t arg_count = PyTuple_Size(args);
     
     if (arg_count == 0)
     {
-        return py::trycatch_invoker([=]() -> PyObject*
+        try
+        {
+            return py::convert(self->obj.GetUInt16());
+        }
+        catch (...)
+        {
+            py::to_PyErr();
+            return nullptr;
+        }
+    }
+    else
+    {
+        py::set_invalid_arg_count_error(arg_count);
+        return nullptr;
+    }
+}
+
+static PyObject* IPropertyValue_GetUInt16Array(py::wrapper::Windows::Foundation::IPropertyValue* self, PyObject* args) noexcept
+{
+    Py_ssize_t arg_count = PyTuple_Size(args);
+    
+    if (arg_count == 0)
+    {
+        try
         {
             winrt::com_array<uint16_t> param0 { };
             
@@ -4351,47 +4400,50 @@ static PyObject* IPropertyValue_GetUInt16Array(py::wrapper::Windows::Foundation:
                 return nullptr;
             }
             return out0.detach();
-        }, nullptr);
-    }
-    else if (arg_count != -1)
-    {
-        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-    }
-    return nullptr;
-}
-
-static PyObject* IPropertyValue_GetUInt32(py::wrapper::Windows::Foundation::IPropertyValue* self, PyObject* args)
-{
-    Py_ssize_t arg_count = PyTuple_Size(args);
-    
-    if (arg_count == 0)
-    {
-        return py::trycatch_invoker([=]() -> PyObject*
+        }
+        catch (...)
         {
-            auto return_value = self->obj.GetUInt32();
-            
-            py::pyobj_handle out_return_value{ py::convert(return_value) };
-            if (!out_return_value) 
-            { 
-                return nullptr;
-            }
-            return out_return_value.detach();
-        }, nullptr);
+            py::to_PyErr();
+            return nullptr;
+        }
     }
-    else if (arg_count != -1)
+    else
     {
-        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+        py::set_invalid_arg_count_error(arg_count);
+        return nullptr;
     }
-    return nullptr;
 }
 
-static PyObject* IPropertyValue_GetUInt32Array(py::wrapper::Windows::Foundation::IPropertyValue* self, PyObject* args)
+static PyObject* IPropertyValue_GetUInt32(py::wrapper::Windows::Foundation::IPropertyValue* self, PyObject* args) noexcept
 {
     Py_ssize_t arg_count = PyTuple_Size(args);
     
     if (arg_count == 0)
     {
-        return py::trycatch_invoker([=]() -> PyObject*
+        try
+        {
+            return py::convert(self->obj.GetUInt32());
+        }
+        catch (...)
+        {
+            py::to_PyErr();
+            return nullptr;
+        }
+    }
+    else
+    {
+        py::set_invalid_arg_count_error(arg_count);
+        return nullptr;
+    }
+}
+
+static PyObject* IPropertyValue_GetUInt32Array(py::wrapper::Windows::Foundation::IPropertyValue* self, PyObject* args) noexcept
+{
+    Py_ssize_t arg_count = PyTuple_Size(args);
+    
+    if (arg_count == 0)
+    {
+        try
         {
             winrt::com_array<uint32_t> param0 { };
             
@@ -4403,47 +4455,50 @@ static PyObject* IPropertyValue_GetUInt32Array(py::wrapper::Windows::Foundation:
                 return nullptr;
             }
             return out0.detach();
-        }, nullptr);
-    }
-    else if (arg_count != -1)
-    {
-        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-    }
-    return nullptr;
-}
-
-static PyObject* IPropertyValue_GetUInt64(py::wrapper::Windows::Foundation::IPropertyValue* self, PyObject* args)
-{
-    Py_ssize_t arg_count = PyTuple_Size(args);
-    
-    if (arg_count == 0)
-    {
-        return py::trycatch_invoker([=]() -> PyObject*
+        }
+        catch (...)
         {
-            auto return_value = self->obj.GetUInt64();
-            
-            py::pyobj_handle out_return_value{ py::convert(return_value) };
-            if (!out_return_value) 
-            { 
-                return nullptr;
-            }
-            return out_return_value.detach();
-        }, nullptr);
+            py::to_PyErr();
+            return nullptr;
+        }
     }
-    else if (arg_count != -1)
+    else
     {
-        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+        py::set_invalid_arg_count_error(arg_count);
+        return nullptr;
     }
-    return nullptr;
 }
 
-static PyObject* IPropertyValue_GetUInt64Array(py::wrapper::Windows::Foundation::IPropertyValue* self, PyObject* args)
+static PyObject* IPropertyValue_GetUInt64(py::wrapper::Windows::Foundation::IPropertyValue* self, PyObject* args) noexcept
 {
     Py_ssize_t arg_count = PyTuple_Size(args);
     
     if (arg_count == 0)
     {
-        return py::trycatch_invoker([=]() -> PyObject*
+        try
+        {
+            return py::convert(self->obj.GetUInt64());
+        }
+        catch (...)
+        {
+            py::to_PyErr();
+            return nullptr;
+        }
+    }
+    else
+    {
+        py::set_invalid_arg_count_error(arg_count);
+        return nullptr;
+    }
+}
+
+static PyObject* IPropertyValue_GetUInt64Array(py::wrapper::Windows::Foundation::IPropertyValue* self, PyObject* args) noexcept
+{
+    Py_ssize_t arg_count = PyTuple_Size(args);
+    
+    if (arg_count == 0)
+    {
+        try
         {
             winrt::com_array<uint64_t> param0 { };
             
@@ -4455,47 +4510,50 @@ static PyObject* IPropertyValue_GetUInt64Array(py::wrapper::Windows::Foundation:
                 return nullptr;
             }
             return out0.detach();
-        }, nullptr);
-    }
-    else if (arg_count != -1)
-    {
-        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-    }
-    return nullptr;
-}
-
-static PyObject* IPropertyValue_GetUInt8(py::wrapper::Windows::Foundation::IPropertyValue* self, PyObject* args)
-{
-    Py_ssize_t arg_count = PyTuple_Size(args);
-    
-    if (arg_count == 0)
-    {
-        return py::trycatch_invoker([=]() -> PyObject*
+        }
+        catch (...)
         {
-            auto return_value = self->obj.GetUInt8();
-            
-            py::pyobj_handle out_return_value{ py::convert(return_value) };
-            if (!out_return_value) 
-            { 
-                return nullptr;
-            }
-            return out_return_value.detach();
-        }, nullptr);
+            py::to_PyErr();
+            return nullptr;
+        }
     }
-    else if (arg_count != -1)
+    else
     {
-        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+        py::set_invalid_arg_count_error(arg_count);
+        return nullptr;
     }
-    return nullptr;
 }
 
-static PyObject* IPropertyValue_GetUInt8Array(py::wrapper::Windows::Foundation::IPropertyValue* self, PyObject* args)
+static PyObject* IPropertyValue_GetUInt8(py::wrapper::Windows::Foundation::IPropertyValue* self, PyObject* args) noexcept
 {
     Py_ssize_t arg_count = PyTuple_Size(args);
     
     if (arg_count == 0)
     {
-        return py::trycatch_invoker([=]() -> PyObject*
+        try
+        {
+            return py::convert(self->obj.GetUInt8());
+        }
+        catch (...)
+        {
+            py::to_PyErr();
+            return nullptr;
+        }
+    }
+    else
+    {
+        py::set_invalid_arg_count_error(arg_count);
+        return nullptr;
+    }
+}
+
+static PyObject* IPropertyValue_GetUInt8Array(py::wrapper::Windows::Foundation::IPropertyValue* self, PyObject* args) noexcept
+{
+    Py_ssize_t arg_count = PyTuple_Size(args);
+    
+    if (arg_count == 0)
+    {
+        try
         {
             winrt::com_array<uint8_t> param0 { };
             
@@ -4507,52 +4565,58 @@ static PyObject* IPropertyValue_GetUInt8Array(py::wrapper::Windows::Foundation::
                 return nullptr;
             }
             return out0.detach();
-        }, nullptr);
-    }
-    else if (arg_count != -1)
-    {
-        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-    }
-    return nullptr;
-}
-
-static PyObject* IPropertyValue_get_IsNumericScalar(py::wrapper::Windows::Foundation::IPropertyValue* self, void* /*unused*/)
-{
-    return py::trycatch_invoker([=]() -> PyObject*
-    {
-        auto return_value = self->obj.IsNumericScalar();
-        
-        py::pyobj_handle out_return_value{ py::convert(return_value) };
-        if (!out_return_value) 
-        { 
+        }
+        catch (...)
+        {
+            py::to_PyErr();
             return nullptr;
         }
-        return out_return_value.detach();
-    }, nullptr);
-}
-
-static PyObject* IPropertyValue_get_Type(py::wrapper::Windows::Foundation::IPropertyValue* self, void* /*unused*/)
-{
-    return py::trycatch_invoker([=]() -> PyObject*
+    }
+    else
     {
-        auto return_value = self->obj.Type();
-        
-        py::pyobj_handle out_return_value{ py::convert(return_value) };
-        if (!out_return_value) 
-        { 
-            return nullptr;
-        }
-        return out_return_value.detach();
-    }, nullptr);
+        py::set_invalid_arg_count_error(arg_count);
+        return nullptr;
+    }
 }
 
-static PyObject* _from_IPropertyValue(PyObject* /*unused*/, PyObject* arg)
+static PyObject* IPropertyValue_get_IsNumericScalar(py::wrapper::Windows::Foundation::IPropertyValue* self, void* /*unused*/) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
+    {
+        return py::convert(self->obj.IsNumericScalar());
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
+}
+
+static PyObject* IPropertyValue_get_Type(py::wrapper::Windows::Foundation::IPropertyValue* self, void* /*unused*/) noexcept
+{
+    try
+    {
+        return py::convert(self->obj.Type());
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
+}
+
+static PyObject* _from_IPropertyValue(PyObject* /*unused*/, PyObject* arg) noexcept
+{
+    try
     {
         auto return_value = py::convert_to<winrt::Windows::Foundation::IInspectable>(arg);
         return py::convert(return_value.as<winrt::Windows::Foundation::IPropertyValue>());
-    }, nullptr);
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
 static PyMethodDef _methods_IPropertyValue[] = {
@@ -4624,13 +4688,11 @@ static PyType_Spec _type_spec_IPropertyValue =
 // ----- IReferenceArray interface --------------------
 
 PyTypeObject* py::winrt_type<py::proj::Windows::Foundation::IReferenceArray>::python_type;
-static const char* _type_name_IReferenceArray = "IReferenceArray";
+constexpr const char* const _type_name_IReferenceArray = "IReferenceArray";
 
 static PyObject* _new_IReferenceArray(PyTypeObject* /* unused */, PyObject* /* unused */, PyObject* /* unused */)
 {
-    std::string msg{ _type_name_IReferenceArray };
-    msg.append(" interface is not activatable");
-    PyErr_SetString(PyExc_TypeError, msg.c_str());
+    py::set_invalid_activation_error(_type_name_IReferenceArray);
     return nullptr;
 }
 
@@ -4641,202 +4703,202 @@ static void _dealloc_IReferenceArray(py::wrapper::Windows::Foundation::IReferenc
     self->obj.release();
 }
 
-static PyObject* IReferenceArray_GetBoolean(py::wrapper::Windows::Foundation::IReferenceArray* self, PyObject* args)
+static PyObject* IReferenceArray_GetBoolean(py::wrapper::Windows::Foundation::IReferenceArray* self, PyObject* args) noexcept
 {
     return self->obj->GetBoolean(args);
 }
 
-static PyObject* IReferenceArray_GetBooleanArray(py::wrapper::Windows::Foundation::IReferenceArray* self, PyObject* args)
+static PyObject* IReferenceArray_GetBooleanArray(py::wrapper::Windows::Foundation::IReferenceArray* self, PyObject* args) noexcept
 {
     return self->obj->GetBooleanArray(args);
 }
 
-static PyObject* IReferenceArray_GetChar16(py::wrapper::Windows::Foundation::IReferenceArray* self, PyObject* args)
+static PyObject* IReferenceArray_GetChar16(py::wrapper::Windows::Foundation::IReferenceArray* self, PyObject* args) noexcept
 {
     return self->obj->GetChar16(args);
 }
 
-static PyObject* IReferenceArray_GetChar16Array(py::wrapper::Windows::Foundation::IReferenceArray* self, PyObject* args)
+static PyObject* IReferenceArray_GetChar16Array(py::wrapper::Windows::Foundation::IReferenceArray* self, PyObject* args) noexcept
 {
     return self->obj->GetChar16Array(args);
 }
 
-static PyObject* IReferenceArray_GetDateTime(py::wrapper::Windows::Foundation::IReferenceArray* self, PyObject* args)
+static PyObject* IReferenceArray_GetDateTime(py::wrapper::Windows::Foundation::IReferenceArray* self, PyObject* args) noexcept
 {
     return self->obj->GetDateTime(args);
 }
 
-static PyObject* IReferenceArray_GetDateTimeArray(py::wrapper::Windows::Foundation::IReferenceArray* self, PyObject* args)
+static PyObject* IReferenceArray_GetDateTimeArray(py::wrapper::Windows::Foundation::IReferenceArray* self, PyObject* args) noexcept
 {
     return self->obj->GetDateTimeArray(args);
 }
 
-static PyObject* IReferenceArray_GetDouble(py::wrapper::Windows::Foundation::IReferenceArray* self, PyObject* args)
+static PyObject* IReferenceArray_GetDouble(py::wrapper::Windows::Foundation::IReferenceArray* self, PyObject* args) noexcept
 {
     return self->obj->GetDouble(args);
 }
 
-static PyObject* IReferenceArray_GetDoubleArray(py::wrapper::Windows::Foundation::IReferenceArray* self, PyObject* args)
+static PyObject* IReferenceArray_GetDoubleArray(py::wrapper::Windows::Foundation::IReferenceArray* self, PyObject* args) noexcept
 {
     return self->obj->GetDoubleArray(args);
 }
 
-static PyObject* IReferenceArray_GetGuid(py::wrapper::Windows::Foundation::IReferenceArray* self, PyObject* args)
+static PyObject* IReferenceArray_GetGuid(py::wrapper::Windows::Foundation::IReferenceArray* self, PyObject* args) noexcept
 {
     return self->obj->GetGuid(args);
 }
 
-static PyObject* IReferenceArray_GetGuidArray(py::wrapper::Windows::Foundation::IReferenceArray* self, PyObject* args)
+static PyObject* IReferenceArray_GetGuidArray(py::wrapper::Windows::Foundation::IReferenceArray* self, PyObject* args) noexcept
 {
     return self->obj->GetGuidArray(args);
 }
 
-static PyObject* IReferenceArray_GetInspectableArray(py::wrapper::Windows::Foundation::IReferenceArray* self, PyObject* args)
+static PyObject* IReferenceArray_GetInspectableArray(py::wrapper::Windows::Foundation::IReferenceArray* self, PyObject* args) noexcept
 {
     return self->obj->GetInspectableArray(args);
 }
 
-static PyObject* IReferenceArray_GetInt16(py::wrapper::Windows::Foundation::IReferenceArray* self, PyObject* args)
+static PyObject* IReferenceArray_GetInt16(py::wrapper::Windows::Foundation::IReferenceArray* self, PyObject* args) noexcept
 {
     return self->obj->GetInt16(args);
 }
 
-static PyObject* IReferenceArray_GetInt16Array(py::wrapper::Windows::Foundation::IReferenceArray* self, PyObject* args)
+static PyObject* IReferenceArray_GetInt16Array(py::wrapper::Windows::Foundation::IReferenceArray* self, PyObject* args) noexcept
 {
     return self->obj->GetInt16Array(args);
 }
 
-static PyObject* IReferenceArray_GetInt32(py::wrapper::Windows::Foundation::IReferenceArray* self, PyObject* args)
+static PyObject* IReferenceArray_GetInt32(py::wrapper::Windows::Foundation::IReferenceArray* self, PyObject* args) noexcept
 {
     return self->obj->GetInt32(args);
 }
 
-static PyObject* IReferenceArray_GetInt32Array(py::wrapper::Windows::Foundation::IReferenceArray* self, PyObject* args)
+static PyObject* IReferenceArray_GetInt32Array(py::wrapper::Windows::Foundation::IReferenceArray* self, PyObject* args) noexcept
 {
     return self->obj->GetInt32Array(args);
 }
 
-static PyObject* IReferenceArray_GetInt64(py::wrapper::Windows::Foundation::IReferenceArray* self, PyObject* args)
+static PyObject* IReferenceArray_GetInt64(py::wrapper::Windows::Foundation::IReferenceArray* self, PyObject* args) noexcept
 {
     return self->obj->GetInt64(args);
 }
 
-static PyObject* IReferenceArray_GetInt64Array(py::wrapper::Windows::Foundation::IReferenceArray* self, PyObject* args)
+static PyObject* IReferenceArray_GetInt64Array(py::wrapper::Windows::Foundation::IReferenceArray* self, PyObject* args) noexcept
 {
     return self->obj->GetInt64Array(args);
 }
 
-static PyObject* IReferenceArray_GetPoint(py::wrapper::Windows::Foundation::IReferenceArray* self, PyObject* args)
+static PyObject* IReferenceArray_GetPoint(py::wrapper::Windows::Foundation::IReferenceArray* self, PyObject* args) noexcept
 {
     return self->obj->GetPoint(args);
 }
 
-static PyObject* IReferenceArray_GetPointArray(py::wrapper::Windows::Foundation::IReferenceArray* self, PyObject* args)
+static PyObject* IReferenceArray_GetPointArray(py::wrapper::Windows::Foundation::IReferenceArray* self, PyObject* args) noexcept
 {
     return self->obj->GetPointArray(args);
 }
 
-static PyObject* IReferenceArray_GetRect(py::wrapper::Windows::Foundation::IReferenceArray* self, PyObject* args)
+static PyObject* IReferenceArray_GetRect(py::wrapper::Windows::Foundation::IReferenceArray* self, PyObject* args) noexcept
 {
     return self->obj->GetRect(args);
 }
 
-static PyObject* IReferenceArray_GetRectArray(py::wrapper::Windows::Foundation::IReferenceArray* self, PyObject* args)
+static PyObject* IReferenceArray_GetRectArray(py::wrapper::Windows::Foundation::IReferenceArray* self, PyObject* args) noexcept
 {
     return self->obj->GetRectArray(args);
 }
 
-static PyObject* IReferenceArray_GetSingle(py::wrapper::Windows::Foundation::IReferenceArray* self, PyObject* args)
+static PyObject* IReferenceArray_GetSingle(py::wrapper::Windows::Foundation::IReferenceArray* self, PyObject* args) noexcept
 {
     return self->obj->GetSingle(args);
 }
 
-static PyObject* IReferenceArray_GetSingleArray(py::wrapper::Windows::Foundation::IReferenceArray* self, PyObject* args)
+static PyObject* IReferenceArray_GetSingleArray(py::wrapper::Windows::Foundation::IReferenceArray* self, PyObject* args) noexcept
 {
     return self->obj->GetSingleArray(args);
 }
 
-static PyObject* IReferenceArray_GetSize(py::wrapper::Windows::Foundation::IReferenceArray* self, PyObject* args)
+static PyObject* IReferenceArray_GetSize(py::wrapper::Windows::Foundation::IReferenceArray* self, PyObject* args) noexcept
 {
     return self->obj->GetSize(args);
 }
 
-static PyObject* IReferenceArray_GetSizeArray(py::wrapper::Windows::Foundation::IReferenceArray* self, PyObject* args)
+static PyObject* IReferenceArray_GetSizeArray(py::wrapper::Windows::Foundation::IReferenceArray* self, PyObject* args) noexcept
 {
     return self->obj->GetSizeArray(args);
 }
 
-static PyObject* IReferenceArray_GetString(py::wrapper::Windows::Foundation::IReferenceArray* self, PyObject* args)
+static PyObject* IReferenceArray_GetString(py::wrapper::Windows::Foundation::IReferenceArray* self, PyObject* args) noexcept
 {
     return self->obj->GetString(args);
 }
 
-static PyObject* IReferenceArray_GetStringArray(py::wrapper::Windows::Foundation::IReferenceArray* self, PyObject* args)
+static PyObject* IReferenceArray_GetStringArray(py::wrapper::Windows::Foundation::IReferenceArray* self, PyObject* args) noexcept
 {
     return self->obj->GetStringArray(args);
 }
 
-static PyObject* IReferenceArray_GetTimeSpan(py::wrapper::Windows::Foundation::IReferenceArray* self, PyObject* args)
+static PyObject* IReferenceArray_GetTimeSpan(py::wrapper::Windows::Foundation::IReferenceArray* self, PyObject* args) noexcept
 {
     return self->obj->GetTimeSpan(args);
 }
 
-static PyObject* IReferenceArray_GetTimeSpanArray(py::wrapper::Windows::Foundation::IReferenceArray* self, PyObject* args)
+static PyObject* IReferenceArray_GetTimeSpanArray(py::wrapper::Windows::Foundation::IReferenceArray* self, PyObject* args) noexcept
 {
     return self->obj->GetTimeSpanArray(args);
 }
 
-static PyObject* IReferenceArray_GetUInt16(py::wrapper::Windows::Foundation::IReferenceArray* self, PyObject* args)
+static PyObject* IReferenceArray_GetUInt16(py::wrapper::Windows::Foundation::IReferenceArray* self, PyObject* args) noexcept
 {
     return self->obj->GetUInt16(args);
 }
 
-static PyObject* IReferenceArray_GetUInt16Array(py::wrapper::Windows::Foundation::IReferenceArray* self, PyObject* args)
+static PyObject* IReferenceArray_GetUInt16Array(py::wrapper::Windows::Foundation::IReferenceArray* self, PyObject* args) noexcept
 {
     return self->obj->GetUInt16Array(args);
 }
 
-static PyObject* IReferenceArray_GetUInt32(py::wrapper::Windows::Foundation::IReferenceArray* self, PyObject* args)
+static PyObject* IReferenceArray_GetUInt32(py::wrapper::Windows::Foundation::IReferenceArray* self, PyObject* args) noexcept
 {
     return self->obj->GetUInt32(args);
 }
 
-static PyObject* IReferenceArray_GetUInt32Array(py::wrapper::Windows::Foundation::IReferenceArray* self, PyObject* args)
+static PyObject* IReferenceArray_GetUInt32Array(py::wrapper::Windows::Foundation::IReferenceArray* self, PyObject* args) noexcept
 {
     return self->obj->GetUInt32Array(args);
 }
 
-static PyObject* IReferenceArray_GetUInt64(py::wrapper::Windows::Foundation::IReferenceArray* self, PyObject* args)
+static PyObject* IReferenceArray_GetUInt64(py::wrapper::Windows::Foundation::IReferenceArray* self, PyObject* args) noexcept
 {
     return self->obj->GetUInt64(args);
 }
 
-static PyObject* IReferenceArray_GetUInt64Array(py::wrapper::Windows::Foundation::IReferenceArray* self, PyObject* args)
+static PyObject* IReferenceArray_GetUInt64Array(py::wrapper::Windows::Foundation::IReferenceArray* self, PyObject* args) noexcept
 {
     return self->obj->GetUInt64Array(args);
 }
 
-static PyObject* IReferenceArray_GetUInt8(py::wrapper::Windows::Foundation::IReferenceArray* self, PyObject* args)
+static PyObject* IReferenceArray_GetUInt8(py::wrapper::Windows::Foundation::IReferenceArray* self, PyObject* args) noexcept
 {
     return self->obj->GetUInt8(args);
 }
 
-static PyObject* IReferenceArray_GetUInt8Array(py::wrapper::Windows::Foundation::IReferenceArray* self, PyObject* args)
+static PyObject* IReferenceArray_GetUInt8Array(py::wrapper::Windows::Foundation::IReferenceArray* self, PyObject* args) noexcept
 {
     return self->obj->GetUInt8Array(args);
 }
 
-static PyObject* IReferenceArray_get_Value(py::wrapper::Windows::Foundation::IReferenceArray* self, void* /*unused*/)
+static PyObject* IReferenceArray_get_Value(py::wrapper::Windows::Foundation::IReferenceArray* self, void* /*unused*/) noexcept
 {
     return self->obj->get_Value();
 }
 
-static PyObject* IReferenceArray_get_IsNumericScalar(py::wrapper::Windows::Foundation::IReferenceArray* self, void* /*unused*/)
+static PyObject* IReferenceArray_get_IsNumericScalar(py::wrapper::Windows::Foundation::IReferenceArray* self, void* /*unused*/) noexcept
 {
     return self->obj->get_IsNumericScalar();
 }
 
-static PyObject* IReferenceArray_get_Type(py::wrapper::Windows::Foundation::IReferenceArray* self, void* /*unused*/)
+static PyObject* IReferenceArray_get_Type(py::wrapper::Windows::Foundation::IReferenceArray* self, void* /*unused*/) noexcept
 {
     return self->obj->get_Type();
 }
@@ -4910,13 +4972,11 @@ static PyType_Spec _type_spec_IReferenceArray =
 // ----- IReference interface --------------------
 
 PyTypeObject* py::winrt_type<py::proj::Windows::Foundation::IReference>::python_type;
-static const char* _type_name_IReference = "IReference";
+constexpr const char* const _type_name_IReference = "IReference";
 
 static PyObject* _new_IReference(PyTypeObject* /* unused */, PyObject* /* unused */, PyObject* /* unused */)
 {
-    std::string msg{ _type_name_IReference };
-    msg.append(" interface is not activatable");
-    PyErr_SetString(PyExc_TypeError, msg.c_str());
+    py::set_invalid_activation_error(_type_name_IReference);
     return nullptr;
 }
 
@@ -4927,202 +4987,202 @@ static void _dealloc_IReference(py::wrapper::Windows::Foundation::IReference* se
     self->obj.release();
 }
 
-static PyObject* IReference_GetBoolean(py::wrapper::Windows::Foundation::IReference* self, PyObject* args)
+static PyObject* IReference_GetBoolean(py::wrapper::Windows::Foundation::IReference* self, PyObject* args) noexcept
 {
     return self->obj->GetBoolean(args);
 }
 
-static PyObject* IReference_GetBooleanArray(py::wrapper::Windows::Foundation::IReference* self, PyObject* args)
+static PyObject* IReference_GetBooleanArray(py::wrapper::Windows::Foundation::IReference* self, PyObject* args) noexcept
 {
     return self->obj->GetBooleanArray(args);
 }
 
-static PyObject* IReference_GetChar16(py::wrapper::Windows::Foundation::IReference* self, PyObject* args)
+static PyObject* IReference_GetChar16(py::wrapper::Windows::Foundation::IReference* self, PyObject* args) noexcept
 {
     return self->obj->GetChar16(args);
 }
 
-static PyObject* IReference_GetChar16Array(py::wrapper::Windows::Foundation::IReference* self, PyObject* args)
+static PyObject* IReference_GetChar16Array(py::wrapper::Windows::Foundation::IReference* self, PyObject* args) noexcept
 {
     return self->obj->GetChar16Array(args);
 }
 
-static PyObject* IReference_GetDateTime(py::wrapper::Windows::Foundation::IReference* self, PyObject* args)
+static PyObject* IReference_GetDateTime(py::wrapper::Windows::Foundation::IReference* self, PyObject* args) noexcept
 {
     return self->obj->GetDateTime(args);
 }
 
-static PyObject* IReference_GetDateTimeArray(py::wrapper::Windows::Foundation::IReference* self, PyObject* args)
+static PyObject* IReference_GetDateTimeArray(py::wrapper::Windows::Foundation::IReference* self, PyObject* args) noexcept
 {
     return self->obj->GetDateTimeArray(args);
 }
 
-static PyObject* IReference_GetDouble(py::wrapper::Windows::Foundation::IReference* self, PyObject* args)
+static PyObject* IReference_GetDouble(py::wrapper::Windows::Foundation::IReference* self, PyObject* args) noexcept
 {
     return self->obj->GetDouble(args);
 }
 
-static PyObject* IReference_GetDoubleArray(py::wrapper::Windows::Foundation::IReference* self, PyObject* args)
+static PyObject* IReference_GetDoubleArray(py::wrapper::Windows::Foundation::IReference* self, PyObject* args) noexcept
 {
     return self->obj->GetDoubleArray(args);
 }
 
-static PyObject* IReference_GetGuid(py::wrapper::Windows::Foundation::IReference* self, PyObject* args)
+static PyObject* IReference_GetGuid(py::wrapper::Windows::Foundation::IReference* self, PyObject* args) noexcept
 {
     return self->obj->GetGuid(args);
 }
 
-static PyObject* IReference_GetGuidArray(py::wrapper::Windows::Foundation::IReference* self, PyObject* args)
+static PyObject* IReference_GetGuidArray(py::wrapper::Windows::Foundation::IReference* self, PyObject* args) noexcept
 {
     return self->obj->GetGuidArray(args);
 }
 
-static PyObject* IReference_GetInspectableArray(py::wrapper::Windows::Foundation::IReference* self, PyObject* args)
+static PyObject* IReference_GetInspectableArray(py::wrapper::Windows::Foundation::IReference* self, PyObject* args) noexcept
 {
     return self->obj->GetInspectableArray(args);
 }
 
-static PyObject* IReference_GetInt16(py::wrapper::Windows::Foundation::IReference* self, PyObject* args)
+static PyObject* IReference_GetInt16(py::wrapper::Windows::Foundation::IReference* self, PyObject* args) noexcept
 {
     return self->obj->GetInt16(args);
 }
 
-static PyObject* IReference_GetInt16Array(py::wrapper::Windows::Foundation::IReference* self, PyObject* args)
+static PyObject* IReference_GetInt16Array(py::wrapper::Windows::Foundation::IReference* self, PyObject* args) noexcept
 {
     return self->obj->GetInt16Array(args);
 }
 
-static PyObject* IReference_GetInt32(py::wrapper::Windows::Foundation::IReference* self, PyObject* args)
+static PyObject* IReference_GetInt32(py::wrapper::Windows::Foundation::IReference* self, PyObject* args) noexcept
 {
     return self->obj->GetInt32(args);
 }
 
-static PyObject* IReference_GetInt32Array(py::wrapper::Windows::Foundation::IReference* self, PyObject* args)
+static PyObject* IReference_GetInt32Array(py::wrapper::Windows::Foundation::IReference* self, PyObject* args) noexcept
 {
     return self->obj->GetInt32Array(args);
 }
 
-static PyObject* IReference_GetInt64(py::wrapper::Windows::Foundation::IReference* self, PyObject* args)
+static PyObject* IReference_GetInt64(py::wrapper::Windows::Foundation::IReference* self, PyObject* args) noexcept
 {
     return self->obj->GetInt64(args);
 }
 
-static PyObject* IReference_GetInt64Array(py::wrapper::Windows::Foundation::IReference* self, PyObject* args)
+static PyObject* IReference_GetInt64Array(py::wrapper::Windows::Foundation::IReference* self, PyObject* args) noexcept
 {
     return self->obj->GetInt64Array(args);
 }
 
-static PyObject* IReference_GetPoint(py::wrapper::Windows::Foundation::IReference* self, PyObject* args)
+static PyObject* IReference_GetPoint(py::wrapper::Windows::Foundation::IReference* self, PyObject* args) noexcept
 {
     return self->obj->GetPoint(args);
 }
 
-static PyObject* IReference_GetPointArray(py::wrapper::Windows::Foundation::IReference* self, PyObject* args)
+static PyObject* IReference_GetPointArray(py::wrapper::Windows::Foundation::IReference* self, PyObject* args) noexcept
 {
     return self->obj->GetPointArray(args);
 }
 
-static PyObject* IReference_GetRect(py::wrapper::Windows::Foundation::IReference* self, PyObject* args)
+static PyObject* IReference_GetRect(py::wrapper::Windows::Foundation::IReference* self, PyObject* args) noexcept
 {
     return self->obj->GetRect(args);
 }
 
-static PyObject* IReference_GetRectArray(py::wrapper::Windows::Foundation::IReference* self, PyObject* args)
+static PyObject* IReference_GetRectArray(py::wrapper::Windows::Foundation::IReference* self, PyObject* args) noexcept
 {
     return self->obj->GetRectArray(args);
 }
 
-static PyObject* IReference_GetSingle(py::wrapper::Windows::Foundation::IReference* self, PyObject* args)
+static PyObject* IReference_GetSingle(py::wrapper::Windows::Foundation::IReference* self, PyObject* args) noexcept
 {
     return self->obj->GetSingle(args);
 }
 
-static PyObject* IReference_GetSingleArray(py::wrapper::Windows::Foundation::IReference* self, PyObject* args)
+static PyObject* IReference_GetSingleArray(py::wrapper::Windows::Foundation::IReference* self, PyObject* args) noexcept
 {
     return self->obj->GetSingleArray(args);
 }
 
-static PyObject* IReference_GetSize(py::wrapper::Windows::Foundation::IReference* self, PyObject* args)
+static PyObject* IReference_GetSize(py::wrapper::Windows::Foundation::IReference* self, PyObject* args) noexcept
 {
     return self->obj->GetSize(args);
 }
 
-static PyObject* IReference_GetSizeArray(py::wrapper::Windows::Foundation::IReference* self, PyObject* args)
+static PyObject* IReference_GetSizeArray(py::wrapper::Windows::Foundation::IReference* self, PyObject* args) noexcept
 {
     return self->obj->GetSizeArray(args);
 }
 
-static PyObject* IReference_GetString(py::wrapper::Windows::Foundation::IReference* self, PyObject* args)
+static PyObject* IReference_GetString(py::wrapper::Windows::Foundation::IReference* self, PyObject* args) noexcept
 {
     return self->obj->GetString(args);
 }
 
-static PyObject* IReference_GetStringArray(py::wrapper::Windows::Foundation::IReference* self, PyObject* args)
+static PyObject* IReference_GetStringArray(py::wrapper::Windows::Foundation::IReference* self, PyObject* args) noexcept
 {
     return self->obj->GetStringArray(args);
 }
 
-static PyObject* IReference_GetTimeSpan(py::wrapper::Windows::Foundation::IReference* self, PyObject* args)
+static PyObject* IReference_GetTimeSpan(py::wrapper::Windows::Foundation::IReference* self, PyObject* args) noexcept
 {
     return self->obj->GetTimeSpan(args);
 }
 
-static PyObject* IReference_GetTimeSpanArray(py::wrapper::Windows::Foundation::IReference* self, PyObject* args)
+static PyObject* IReference_GetTimeSpanArray(py::wrapper::Windows::Foundation::IReference* self, PyObject* args) noexcept
 {
     return self->obj->GetTimeSpanArray(args);
 }
 
-static PyObject* IReference_GetUInt16(py::wrapper::Windows::Foundation::IReference* self, PyObject* args)
+static PyObject* IReference_GetUInt16(py::wrapper::Windows::Foundation::IReference* self, PyObject* args) noexcept
 {
     return self->obj->GetUInt16(args);
 }
 
-static PyObject* IReference_GetUInt16Array(py::wrapper::Windows::Foundation::IReference* self, PyObject* args)
+static PyObject* IReference_GetUInt16Array(py::wrapper::Windows::Foundation::IReference* self, PyObject* args) noexcept
 {
     return self->obj->GetUInt16Array(args);
 }
 
-static PyObject* IReference_GetUInt32(py::wrapper::Windows::Foundation::IReference* self, PyObject* args)
+static PyObject* IReference_GetUInt32(py::wrapper::Windows::Foundation::IReference* self, PyObject* args) noexcept
 {
     return self->obj->GetUInt32(args);
 }
 
-static PyObject* IReference_GetUInt32Array(py::wrapper::Windows::Foundation::IReference* self, PyObject* args)
+static PyObject* IReference_GetUInt32Array(py::wrapper::Windows::Foundation::IReference* self, PyObject* args) noexcept
 {
     return self->obj->GetUInt32Array(args);
 }
 
-static PyObject* IReference_GetUInt64(py::wrapper::Windows::Foundation::IReference* self, PyObject* args)
+static PyObject* IReference_GetUInt64(py::wrapper::Windows::Foundation::IReference* self, PyObject* args) noexcept
 {
     return self->obj->GetUInt64(args);
 }
 
-static PyObject* IReference_GetUInt64Array(py::wrapper::Windows::Foundation::IReference* self, PyObject* args)
+static PyObject* IReference_GetUInt64Array(py::wrapper::Windows::Foundation::IReference* self, PyObject* args) noexcept
 {
     return self->obj->GetUInt64Array(args);
 }
 
-static PyObject* IReference_GetUInt8(py::wrapper::Windows::Foundation::IReference* self, PyObject* args)
+static PyObject* IReference_GetUInt8(py::wrapper::Windows::Foundation::IReference* self, PyObject* args) noexcept
 {
     return self->obj->GetUInt8(args);
 }
 
-static PyObject* IReference_GetUInt8Array(py::wrapper::Windows::Foundation::IReference* self, PyObject* args)
+static PyObject* IReference_GetUInt8Array(py::wrapper::Windows::Foundation::IReference* self, PyObject* args) noexcept
 {
     return self->obj->GetUInt8Array(args);
 }
 
-static PyObject* IReference_get_Value(py::wrapper::Windows::Foundation::IReference* self, void* /*unused*/)
+static PyObject* IReference_get_Value(py::wrapper::Windows::Foundation::IReference* self, void* /*unused*/) noexcept
 {
     return self->obj->get_Value();
 }
 
-static PyObject* IReference_get_IsNumericScalar(py::wrapper::Windows::Foundation::IReference* self, void* /*unused*/)
+static PyObject* IReference_get_IsNumericScalar(py::wrapper::Windows::Foundation::IReference* self, void* /*unused*/) noexcept
 {
     return self->obj->get_IsNumericScalar();
 }
 
-static PyObject* IReference_get_Type(py::wrapper::Windows::Foundation::IReference* self, void* /*unused*/)
+static PyObject* IReference_get_Type(py::wrapper::Windows::Foundation::IReference* self, void* /*unused*/) noexcept
 {
     return self->obj->get_Type();
 }
@@ -5196,13 +5256,11 @@ static PyType_Spec _type_spec_IReference =
 // ----- IStringable interface --------------------
 
 PyTypeObject* py::winrt_type<winrt::Windows::Foundation::IStringable>::python_type;
-static const char* _type_name_IStringable = "IStringable";
+constexpr const char* const _type_name_IStringable = "IStringable";
 
 static PyObject* _new_IStringable(PyTypeObject* /* unused */, PyObject* /* unused */, PyObject* /* unused */)
 {
-    std::string msg{ _type_name_IStringable };
-    msg.append(" interface is not activatable");
-    PyErr_SetString(PyExc_TypeError, msg.c_str());
+    py::set_invalid_activation_error(_type_name_IStringable);
     return nullptr;
 }
 
@@ -5213,46 +5271,54 @@ static void _dealloc_IStringable(py::wrapper::Windows::Foundation::IStringable* 
     self->obj = nullptr;
 }
 
-static PyObject* IStringable_ToString(py::wrapper::Windows::Foundation::IStringable* self, PyObject* args)
+static PyObject* IStringable_ToString(py::wrapper::Windows::Foundation::IStringable* self, PyObject* args) noexcept
 {
     Py_ssize_t arg_count = PyTuple_Size(args);
     
     if (arg_count == 0)
     {
-        return py::trycatch_invoker([=]() -> PyObject*
+        try
         {
-            auto return_value = self->obj.ToString();
-            
-            py::pyobj_handle out_return_value{ py::convert(return_value) };
-            if (!out_return_value) 
-            { 
-                return nullptr;
-            }
-            return out_return_value.detach();
-        }, nullptr);
+            return py::convert(self->obj.ToString());
+        }
+        catch (...)
+        {
+            py::to_PyErr();
+            return nullptr;
+        }
     }
-    else if (arg_count != -1)
+    else
     {
-        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+        py::set_invalid_arg_count_error(arg_count);
+        return nullptr;
     }
-    return nullptr;
 }
 
-static PyObject* _from_IStringable(PyObject* /*unused*/, PyObject* arg)
+static PyObject* _from_IStringable(PyObject* /*unused*/, PyObject* arg) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
         auto return_value = py::convert_to<winrt::Windows::Foundation::IInspectable>(arg);
         return py::convert(return_value.as<winrt::Windows::Foundation::IStringable>());
-    }, nullptr);
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
-static PyObject* _str_IStringable(py::wrapper::Windows::Foundation::IStringable* self)
+static PyObject* _str_IStringable(py::wrapper::Windows::Foundation::IStringable* self) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
         return py::convert(self->obj.ToString());
-    }, nullptr);
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
 static PyMethodDef _methods_IStringable[] = {
@@ -5287,13 +5353,11 @@ static PyType_Spec _type_spec_IStringable =
 // ----- IWwwFormUrlDecoderEntry interface --------------------
 
 PyTypeObject* py::winrt_type<winrt::Windows::Foundation::IWwwFormUrlDecoderEntry>::python_type;
-static const char* _type_name_IWwwFormUrlDecoderEntry = "IWwwFormUrlDecoderEntry";
+constexpr const char* const _type_name_IWwwFormUrlDecoderEntry = "IWwwFormUrlDecoderEntry";
 
 static PyObject* _new_IWwwFormUrlDecoderEntry(PyTypeObject* /* unused */, PyObject* /* unused */, PyObject* /* unused */)
 {
-    std::string msg{ _type_name_IWwwFormUrlDecoderEntry };
-    msg.append(" interface is not activatable");
-    PyErr_SetString(PyExc_TypeError, msg.c_str());
+    py::set_invalid_activation_error(_type_name_IWwwFormUrlDecoderEntry);
     return nullptr;
 }
 
@@ -5304,43 +5368,44 @@ static void _dealloc_IWwwFormUrlDecoderEntry(py::wrapper::Windows::Foundation::I
     self->obj = nullptr;
 }
 
-static PyObject* IWwwFormUrlDecoderEntry_get_Name(py::wrapper::Windows::Foundation::IWwwFormUrlDecoderEntry* self, void* /*unused*/)
+static PyObject* IWwwFormUrlDecoderEntry_get_Name(py::wrapper::Windows::Foundation::IWwwFormUrlDecoderEntry* self, void* /*unused*/) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
-        auto return_value = self->obj.Name();
-        
-        py::pyobj_handle out_return_value{ py::convert(return_value) };
-        if (!out_return_value) 
-        { 
-            return nullptr;
-        }
-        return out_return_value.detach();
-    }, nullptr);
+        return py::convert(self->obj.Name());
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
-static PyObject* IWwwFormUrlDecoderEntry_get_Value(py::wrapper::Windows::Foundation::IWwwFormUrlDecoderEntry* self, void* /*unused*/)
+static PyObject* IWwwFormUrlDecoderEntry_get_Value(py::wrapper::Windows::Foundation::IWwwFormUrlDecoderEntry* self, void* /*unused*/) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
-        auto return_value = self->obj.Value();
-        
-        py::pyobj_handle out_return_value{ py::convert(return_value) };
-        if (!out_return_value) 
-        { 
-            return nullptr;
-        }
-        return out_return_value.detach();
-    }, nullptr);
+        return py::convert(self->obj.Value());
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
-static PyObject* _from_IWwwFormUrlDecoderEntry(PyObject* /*unused*/, PyObject* arg)
+static PyObject* _from_IWwwFormUrlDecoderEntry(PyObject* /*unused*/, PyObject* arg) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
         auto return_value = py::convert_to<winrt::Windows::Foundation::IInspectable>(arg);
         return py::convert(return_value.as<winrt::Windows::Foundation::IWwwFormUrlDecoderEntry>());
-    }, nullptr);
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
 static PyMethodDef _methods_IWwwFormUrlDecoderEntry[] = {
@@ -5375,7 +5440,7 @@ static PyType_Spec _type_spec_IWwwFormUrlDecoderEntry =
 // ----- DateTime struct --------------------
 
 PyTypeObject* py::winrt_type<winrt::Windows::Foundation::DateTime>::python_type;
-static const char* _type_name_DateTime = "DateTime";
+constexpr const char* const _type_name_DateTime = "DateTime";
 
 PyObject* py::converter<winrt::Windows::Foundation::DateTime>::convert(winrt::Windows::Foundation::DateTime instance) noexcept
 {
@@ -5411,11 +5476,16 @@ PyObject* _new_DateTime(PyTypeObject* type, PyObject* args, PyObject* kwds)
     
     if ((tuple_size == 0) && (kwds == nullptr))
     {
-        return py::trycatch_invoker([=]() -> PyObject*
+        try
         {
             winrt::Windows::Foundation::DateTime return_value{};
             return py::convert(return_value);
-        }, nullptr);
+        }
+        catch (...)
+        {
+            py::to_PyErr();
+            return nullptr;
+        }
     }
     
     if ((tuple_size == 1) && (kwds == nullptr))
@@ -5423,11 +5493,16 @@ PyObject* _new_DateTime(PyTypeObject* type, PyObject* args, PyObject* kwds)
         auto arg = PyTuple_GetItem(args, 0);
         if (PyDict_Check(arg))
         {
-            return py::trycatch_invoker([=]() -> PyObject*
+            try
             {
                 auto return_value = py::convert_to<winrt::Windows::Foundation::DateTime>(arg);
                 return py::convert(return_value);
-            }, nullptr);
+            }
+            catch (...)
+            {
+                py::to_PyErr();
+                return nullptr;
+            }
         }
     }
     
@@ -5439,33 +5514,54 @@ PyObject* _new_DateTime(PyTypeObject* type, PyObject* args, PyObject* kwds)
         return nullptr;
     }
     
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
         winrt::Windows::Foundation::DateTime return_value{ };
         custom_set(return_value, _UniversalTime);
         return py::convert(return_value);
-    }, nullptr);
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
 static void _dealloc_DateTime(py::wrapper::Windows::Foundation::DateTime* self)
 {
 }
 
-static PyObject* DateTime_get_UniversalTime(py::wrapper::Windows::Foundation::DateTime* self, void* /*unused*/)
+static PyObject* DateTime_get_UniversalTime(py::wrapper::Windows::Foundation::DateTime* self, void* /*unused*/) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
         return py::convert(custom_get(self->obj));
-    }, nullptr);
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
-static int DateTime_set_UniversalTime(py::wrapper::Windows::Foundation::DateTime* self, PyObject* arg, void* /*unused*/)
+static int DateTime_set_UniversalTime(py::wrapper::Windows::Foundation::DateTime* self, PyObject* arg, void* /*unused*/) noexcept
 {
-    return py::setter_trycatch_invoker(arg, [=]() -> int
+    if (arg == nullptr)
+    {
+        PyErr_SetString(PyExc_TypeError, "property delete not supported");
+        return -1;
+    }
+    
+    try
     {
         custom_set(self->obj, py::converter<int64_t>::convert_to(arg));
         return 0;
-    });
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return -1;
+    }
 }
 
 static PyGetSetDef _getset_DateTime[] = {
@@ -5493,7 +5589,7 @@ static PyType_Spec _type_spec_DateTime =
 // ----- EventRegistrationToken struct --------------------
 
 PyTypeObject* py::winrt_type<winrt::event_token>::python_type;
-static const char* _type_name_EventRegistrationToken = "EventRegistrationToken";
+constexpr const char* const _type_name_EventRegistrationToken = "EventRegistrationToken";
 
 PyObject* py::converter<winrt::event_token>::convert(winrt::event_token instance) noexcept
 {
@@ -5529,11 +5625,16 @@ PyObject* _new_EventRegistrationToken(PyTypeObject* type, PyObject* args, PyObje
     
     if ((tuple_size == 0) && (kwds == nullptr))
     {
-        return py::trycatch_invoker([=]() -> PyObject*
+        try
         {
             winrt::event_token return_value{};
             return py::convert(return_value);
-        }, nullptr);
+        }
+        catch (...)
+        {
+            py::to_PyErr();
+            return nullptr;
+        }
     }
     
     if ((tuple_size == 1) && (kwds == nullptr))
@@ -5541,11 +5642,16 @@ PyObject* _new_EventRegistrationToken(PyTypeObject* type, PyObject* args, PyObje
         auto arg = PyTuple_GetItem(args, 0);
         if (PyDict_Check(arg))
         {
-            return py::trycatch_invoker([=]() -> PyObject*
+            try
             {
                 auto return_value = py::convert_to<winrt::event_token>(arg);
                 return py::convert(return_value);
-            }, nullptr);
+            }
+            catch (...)
+            {
+                py::to_PyErr();
+                return nullptr;
+            }
         }
     }
     
@@ -5557,33 +5663,54 @@ PyObject* _new_EventRegistrationToken(PyTypeObject* type, PyObject* args, PyObje
         return nullptr;
     }
     
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
         winrt::event_token return_value{ };
         custom_set(return_value, _Value);
         return py::convert(return_value);
-    }, nullptr);
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
 static void _dealloc_EventRegistrationToken(py::wrapper::Windows::Foundation::EventRegistrationToken* self)
 {
 }
 
-static PyObject* EventRegistrationToken_get_Value(py::wrapper::Windows::Foundation::EventRegistrationToken* self, void* /*unused*/)
+static PyObject* EventRegistrationToken_get_Value(py::wrapper::Windows::Foundation::EventRegistrationToken* self, void* /*unused*/) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
         return py::convert(custom_get(self->obj));
-    }, nullptr);
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
-static int EventRegistrationToken_set_Value(py::wrapper::Windows::Foundation::EventRegistrationToken* self, PyObject* arg, void* /*unused*/)
+static int EventRegistrationToken_set_Value(py::wrapper::Windows::Foundation::EventRegistrationToken* self, PyObject* arg, void* /*unused*/) noexcept
 {
-    return py::setter_trycatch_invoker(arg, [=]() -> int
+    if (arg == nullptr)
+    {
+        PyErr_SetString(PyExc_TypeError, "property delete not supported");
+        return -1;
+    }
+    
+    try
     {
         custom_set(self->obj, py::converter<int64_t>::convert_to(arg));
         return 0;
-    });
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return -1;
+    }
 }
 
 static PyGetSetDef _getset_EventRegistrationToken[] = {
@@ -5611,7 +5738,7 @@ static PyType_Spec _type_spec_EventRegistrationToken =
 // ----- HResult struct --------------------
 
 PyTypeObject* py::winrt_type<winrt::hresult>::python_type;
-static const char* _type_name_HResult = "HResult";
+constexpr const char* const _type_name_HResult = "HResult";
 
 PyObject* py::converter<winrt::hresult>::convert(winrt::hresult instance) noexcept
 {
@@ -5647,11 +5774,16 @@ PyObject* _new_HResult(PyTypeObject* type, PyObject* args, PyObject* kwds)
     
     if ((tuple_size == 0) && (kwds == nullptr))
     {
-        return py::trycatch_invoker([=]() -> PyObject*
+        try
         {
             winrt::hresult return_value{};
             return py::convert(return_value);
-        }, nullptr);
+        }
+        catch (...)
+        {
+            py::to_PyErr();
+            return nullptr;
+        }
     }
     
     if ((tuple_size == 1) && (kwds == nullptr))
@@ -5659,11 +5791,16 @@ PyObject* _new_HResult(PyTypeObject* type, PyObject* args, PyObject* kwds)
         auto arg = PyTuple_GetItem(args, 0);
         if (PyDict_Check(arg))
         {
-            return py::trycatch_invoker([=]() -> PyObject*
+            try
             {
                 auto return_value = py::convert_to<winrt::hresult>(arg);
                 return py::convert(return_value);
-            }, nullptr);
+            }
+            catch (...)
+            {
+                py::to_PyErr();
+                return nullptr;
+            }
         }
     }
     
@@ -5675,33 +5812,54 @@ PyObject* _new_HResult(PyTypeObject* type, PyObject* args, PyObject* kwds)
         return nullptr;
     }
     
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
         winrt::hresult return_value{ };
         custom_set(return_value, _Value);
         return py::convert(return_value);
-    }, nullptr);
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
 static void _dealloc_HResult(py::wrapper::Windows::Foundation::HResult* self)
 {
 }
 
-static PyObject* HResult_get_Value(py::wrapper::Windows::Foundation::HResult* self, void* /*unused*/)
+static PyObject* HResult_get_Value(py::wrapper::Windows::Foundation::HResult* self, void* /*unused*/) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
         return py::convert(custom_get(self->obj));
-    }, nullptr);
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
-static int HResult_set_Value(py::wrapper::Windows::Foundation::HResult* self, PyObject* arg, void* /*unused*/)
+static int HResult_set_Value(py::wrapper::Windows::Foundation::HResult* self, PyObject* arg, void* /*unused*/) noexcept
 {
-    return py::setter_trycatch_invoker(arg, [=]() -> int
+    if (arg == nullptr)
+    {
+        PyErr_SetString(PyExc_TypeError, "property delete not supported");
+        return -1;
+    }
+    
+    try
     {
         custom_set(self->obj, py::converter<int32_t>::convert_to(arg));
         return 0;
-    });
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return -1;
+    }
 }
 
 static PyGetSetDef _getset_HResult[] = {
@@ -5729,7 +5887,7 @@ static PyType_Spec _type_spec_HResult =
 // ----- Point struct --------------------
 
 PyTypeObject* py::winrt_type<winrt::Windows::Foundation::Point>::python_type;
-static const char* _type_name_Point = "Point";
+constexpr const char* const _type_name_Point = "Point";
 
 PyObject* py::converter<winrt::Windows::Foundation::Point>::convert(winrt::Windows::Foundation::Point instance) noexcept
 {
@@ -5769,11 +5927,16 @@ PyObject* _new_Point(PyTypeObject* type, PyObject* args, PyObject* kwds)
     
     if ((tuple_size == 0) && (kwds == nullptr))
     {
-        return py::trycatch_invoker([=]() -> PyObject*
+        try
         {
             winrt::Windows::Foundation::Point return_value{};
             return py::convert(return_value);
-        }, nullptr);
+        }
+        catch (...)
+        {
+            py::to_PyErr();
+            return nullptr;
+        }
     }
     
     if ((tuple_size == 1) && (kwds == nullptr))
@@ -5781,11 +5944,16 @@ PyObject* _new_Point(PyTypeObject* type, PyObject* args, PyObject* kwds)
         auto arg = PyTuple_GetItem(args, 0);
         if (PyDict_Check(arg))
         {
-            return py::trycatch_invoker([=]() -> PyObject*
+            try
             {
                 auto return_value = py::convert_to<winrt::Windows::Foundation::Point>(arg);
                 return py::convert(return_value);
-            }, nullptr);
+            }
+            catch (...)
+            {
+                py::to_PyErr();
+                return nullptr;
+            }
         }
     }
     
@@ -5798,49 +5966,86 @@ PyObject* _new_Point(PyTypeObject* type, PyObject* args, PyObject* kwds)
         return nullptr;
     }
     
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
         winrt::Windows::Foundation::Point return_value{ _X, _Y };
         return py::convert(return_value);
-    }, nullptr);
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
 static void _dealloc_Point(py::wrapper::Windows::Foundation::Point* self)
 {
 }
 
-static PyObject* Point_get_X(py::wrapper::Windows::Foundation::Point* self, void* /*unused*/)
+static PyObject* Point_get_X(py::wrapper::Windows::Foundation::Point* self, void* /*unused*/) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
         return py::convert(self->obj.X);
-    }, nullptr);
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
-static int Point_set_X(py::wrapper::Windows::Foundation::Point* self, PyObject* arg, void* /*unused*/)
+static int Point_set_X(py::wrapper::Windows::Foundation::Point* self, PyObject* arg, void* /*unused*/) noexcept
 {
-    return py::setter_trycatch_invoker(arg, [=]() -> int
+    if (arg == nullptr)
+    {
+        PyErr_SetString(PyExc_TypeError, "property delete not supported");
+        return -1;
+    }
+    
+    try
     {
         self->obj.X = py::converter<float>::convert_to(arg);
         return 0;
-    });
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return -1;
+    }
 }
 
-static PyObject* Point_get_Y(py::wrapper::Windows::Foundation::Point* self, void* /*unused*/)
+static PyObject* Point_get_Y(py::wrapper::Windows::Foundation::Point* self, void* /*unused*/) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
         return py::convert(self->obj.Y);
-    }, nullptr);
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
-static int Point_set_Y(py::wrapper::Windows::Foundation::Point* self, PyObject* arg, void* /*unused*/)
+static int Point_set_Y(py::wrapper::Windows::Foundation::Point* self, PyObject* arg, void* /*unused*/) noexcept
 {
-    return py::setter_trycatch_invoker(arg, [=]() -> int
+    if (arg == nullptr)
+    {
+        PyErr_SetString(PyExc_TypeError, "property delete not supported");
+        return -1;
+    }
+    
+    try
     {
         self->obj.Y = py::converter<float>::convert_to(arg);
         return 0;
-    });
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return -1;
+    }
 }
 
 static PyGetSetDef _getset_Point[] = {
@@ -5869,7 +6074,7 @@ static PyType_Spec _type_spec_Point =
 // ----- Rect struct --------------------
 
 PyTypeObject* py::winrt_type<winrt::Windows::Foundation::Rect>::python_type;
-static const char* _type_name_Rect = "Rect";
+constexpr const char* const _type_name_Rect = "Rect";
 
 PyObject* py::converter<winrt::Windows::Foundation::Rect>::convert(winrt::Windows::Foundation::Rect instance) noexcept
 {
@@ -5917,11 +6122,16 @@ PyObject* _new_Rect(PyTypeObject* type, PyObject* args, PyObject* kwds)
     
     if ((tuple_size == 0) && (kwds == nullptr))
     {
-        return py::trycatch_invoker([=]() -> PyObject*
+        try
         {
             winrt::Windows::Foundation::Rect return_value{};
             return py::convert(return_value);
-        }, nullptr);
+        }
+        catch (...)
+        {
+            py::to_PyErr();
+            return nullptr;
+        }
     }
     
     if ((tuple_size == 1) && (kwds == nullptr))
@@ -5929,11 +6139,16 @@ PyObject* _new_Rect(PyTypeObject* type, PyObject* args, PyObject* kwds)
         auto arg = PyTuple_GetItem(args, 0);
         if (PyDict_Check(arg))
         {
-            return py::trycatch_invoker([=]() -> PyObject*
+            try
             {
                 auto return_value = py::convert_to<winrt::Windows::Foundation::Rect>(arg);
                 return py::convert(return_value);
-            }, nullptr);
+            }
+            catch (...)
+            {
+                py::to_PyErr();
+                return nullptr;
+            }
         }
     }
     
@@ -5948,83 +6163,152 @@ PyObject* _new_Rect(PyTypeObject* type, PyObject* args, PyObject* kwds)
         return nullptr;
     }
     
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
         winrt::Windows::Foundation::Rect return_value{ _X, _Y, _Width, _Height };
         return py::convert(return_value);
-    }, nullptr);
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
 static void _dealloc_Rect(py::wrapper::Windows::Foundation::Rect* self)
 {
 }
 
-static PyObject* Rect_get_X(py::wrapper::Windows::Foundation::Rect* self, void* /*unused*/)
+static PyObject* Rect_get_X(py::wrapper::Windows::Foundation::Rect* self, void* /*unused*/) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
         return py::convert(self->obj.X);
-    }, nullptr);
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
-static int Rect_set_X(py::wrapper::Windows::Foundation::Rect* self, PyObject* arg, void* /*unused*/)
+static int Rect_set_X(py::wrapper::Windows::Foundation::Rect* self, PyObject* arg, void* /*unused*/) noexcept
 {
-    return py::setter_trycatch_invoker(arg, [=]() -> int
+    if (arg == nullptr)
+    {
+        PyErr_SetString(PyExc_TypeError, "property delete not supported");
+        return -1;
+    }
+    
+    try
     {
         self->obj.X = py::converter<float>::convert_to(arg);
         return 0;
-    });
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return -1;
+    }
 }
 
-static PyObject* Rect_get_Y(py::wrapper::Windows::Foundation::Rect* self, void* /*unused*/)
+static PyObject* Rect_get_Y(py::wrapper::Windows::Foundation::Rect* self, void* /*unused*/) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
         return py::convert(self->obj.Y);
-    }, nullptr);
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
-static int Rect_set_Y(py::wrapper::Windows::Foundation::Rect* self, PyObject* arg, void* /*unused*/)
+static int Rect_set_Y(py::wrapper::Windows::Foundation::Rect* self, PyObject* arg, void* /*unused*/) noexcept
 {
-    return py::setter_trycatch_invoker(arg, [=]() -> int
+    if (arg == nullptr)
+    {
+        PyErr_SetString(PyExc_TypeError, "property delete not supported");
+        return -1;
+    }
+    
+    try
     {
         self->obj.Y = py::converter<float>::convert_to(arg);
         return 0;
-    });
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return -1;
+    }
 }
 
-static PyObject* Rect_get_Width(py::wrapper::Windows::Foundation::Rect* self, void* /*unused*/)
+static PyObject* Rect_get_Width(py::wrapper::Windows::Foundation::Rect* self, void* /*unused*/) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
         return py::convert(self->obj.Width);
-    }, nullptr);
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
-static int Rect_set_Width(py::wrapper::Windows::Foundation::Rect* self, PyObject* arg, void* /*unused*/)
+static int Rect_set_Width(py::wrapper::Windows::Foundation::Rect* self, PyObject* arg, void* /*unused*/) noexcept
 {
-    return py::setter_trycatch_invoker(arg, [=]() -> int
+    if (arg == nullptr)
+    {
+        PyErr_SetString(PyExc_TypeError, "property delete not supported");
+        return -1;
+    }
+    
+    try
     {
         self->obj.Width = py::converter<float>::convert_to(arg);
         return 0;
-    });
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return -1;
+    }
 }
 
-static PyObject* Rect_get_Height(py::wrapper::Windows::Foundation::Rect* self, void* /*unused*/)
+static PyObject* Rect_get_Height(py::wrapper::Windows::Foundation::Rect* self, void* /*unused*/) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
         return py::convert(self->obj.Height);
-    }, nullptr);
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
-static int Rect_set_Height(py::wrapper::Windows::Foundation::Rect* self, PyObject* arg, void* /*unused*/)
+static int Rect_set_Height(py::wrapper::Windows::Foundation::Rect* self, PyObject* arg, void* /*unused*/) noexcept
 {
-    return py::setter_trycatch_invoker(arg, [=]() -> int
+    if (arg == nullptr)
+    {
+        PyErr_SetString(PyExc_TypeError, "property delete not supported");
+        return -1;
+    }
+    
+    try
     {
         self->obj.Height = py::converter<float>::convert_to(arg);
         return 0;
-    });
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return -1;
+    }
 }
 
 static PyGetSetDef _getset_Rect[] = {
@@ -6055,7 +6339,7 @@ static PyType_Spec _type_spec_Rect =
 // ----- Size struct --------------------
 
 PyTypeObject* py::winrt_type<winrt::Windows::Foundation::Size>::python_type;
-static const char* _type_name_Size = "Size";
+constexpr const char* const _type_name_Size = "Size";
 
 PyObject* py::converter<winrt::Windows::Foundation::Size>::convert(winrt::Windows::Foundation::Size instance) noexcept
 {
@@ -6095,11 +6379,16 @@ PyObject* _new_Size(PyTypeObject* type, PyObject* args, PyObject* kwds)
     
     if ((tuple_size == 0) && (kwds == nullptr))
     {
-        return py::trycatch_invoker([=]() -> PyObject*
+        try
         {
             winrt::Windows::Foundation::Size return_value{};
             return py::convert(return_value);
-        }, nullptr);
+        }
+        catch (...)
+        {
+            py::to_PyErr();
+            return nullptr;
+        }
     }
     
     if ((tuple_size == 1) && (kwds == nullptr))
@@ -6107,11 +6396,16 @@ PyObject* _new_Size(PyTypeObject* type, PyObject* args, PyObject* kwds)
         auto arg = PyTuple_GetItem(args, 0);
         if (PyDict_Check(arg))
         {
-            return py::trycatch_invoker([=]() -> PyObject*
+            try
             {
                 auto return_value = py::convert_to<winrt::Windows::Foundation::Size>(arg);
                 return py::convert(return_value);
-            }, nullptr);
+            }
+            catch (...)
+            {
+                py::to_PyErr();
+                return nullptr;
+            }
         }
     }
     
@@ -6124,49 +6418,86 @@ PyObject* _new_Size(PyTypeObject* type, PyObject* args, PyObject* kwds)
         return nullptr;
     }
     
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
         winrt::Windows::Foundation::Size return_value{ _Width, _Height };
         return py::convert(return_value);
-    }, nullptr);
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
 static void _dealloc_Size(py::wrapper::Windows::Foundation::Size* self)
 {
 }
 
-static PyObject* Size_get_Width(py::wrapper::Windows::Foundation::Size* self, void* /*unused*/)
+static PyObject* Size_get_Width(py::wrapper::Windows::Foundation::Size* self, void* /*unused*/) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
         return py::convert(self->obj.Width);
-    }, nullptr);
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
-static int Size_set_Width(py::wrapper::Windows::Foundation::Size* self, PyObject* arg, void* /*unused*/)
+static int Size_set_Width(py::wrapper::Windows::Foundation::Size* self, PyObject* arg, void* /*unused*/) noexcept
 {
-    return py::setter_trycatch_invoker(arg, [=]() -> int
+    if (arg == nullptr)
+    {
+        PyErr_SetString(PyExc_TypeError, "property delete not supported");
+        return -1;
+    }
+    
+    try
     {
         self->obj.Width = py::converter<float>::convert_to(arg);
         return 0;
-    });
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return -1;
+    }
 }
 
-static PyObject* Size_get_Height(py::wrapper::Windows::Foundation::Size* self, void* /*unused*/)
+static PyObject* Size_get_Height(py::wrapper::Windows::Foundation::Size* self, void* /*unused*/) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
         return py::convert(self->obj.Height);
-    }, nullptr);
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
-static int Size_set_Height(py::wrapper::Windows::Foundation::Size* self, PyObject* arg, void* /*unused*/)
+static int Size_set_Height(py::wrapper::Windows::Foundation::Size* self, PyObject* arg, void* /*unused*/) noexcept
 {
-    return py::setter_trycatch_invoker(arg, [=]() -> int
+    if (arg == nullptr)
+    {
+        PyErr_SetString(PyExc_TypeError, "property delete not supported");
+        return -1;
+    }
+    
+    try
     {
         self->obj.Height = py::converter<float>::convert_to(arg);
         return 0;
-    });
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return -1;
+    }
 }
 
 static PyGetSetDef _getset_Size[] = {
@@ -6195,7 +6526,7 @@ static PyType_Spec _type_spec_Size =
 // ----- TimeSpan struct --------------------
 
 PyTypeObject* py::winrt_type<winrt::Windows::Foundation::TimeSpan>::python_type;
-static const char* _type_name_TimeSpan = "TimeSpan";
+constexpr const char* const _type_name_TimeSpan = "TimeSpan";
 
 PyObject* py::converter<winrt::Windows::Foundation::TimeSpan>::convert(winrt::Windows::Foundation::TimeSpan instance) noexcept
 {
@@ -6231,11 +6562,16 @@ PyObject* _new_TimeSpan(PyTypeObject* type, PyObject* args, PyObject* kwds)
     
     if ((tuple_size == 0) && (kwds == nullptr))
     {
-        return py::trycatch_invoker([=]() -> PyObject*
+        try
         {
             winrt::Windows::Foundation::TimeSpan return_value{};
             return py::convert(return_value);
-        }, nullptr);
+        }
+        catch (...)
+        {
+            py::to_PyErr();
+            return nullptr;
+        }
     }
     
     if ((tuple_size == 1) && (kwds == nullptr))
@@ -6243,11 +6579,16 @@ PyObject* _new_TimeSpan(PyTypeObject* type, PyObject* args, PyObject* kwds)
         auto arg = PyTuple_GetItem(args, 0);
         if (PyDict_Check(arg))
         {
-            return py::trycatch_invoker([=]() -> PyObject*
+            try
             {
                 auto return_value = py::convert_to<winrt::Windows::Foundation::TimeSpan>(arg);
                 return py::convert(return_value);
-            }, nullptr);
+            }
+            catch (...)
+            {
+                py::to_PyErr();
+                return nullptr;
+            }
         }
     }
     
@@ -6259,33 +6600,54 @@ PyObject* _new_TimeSpan(PyTypeObject* type, PyObject* args, PyObject* kwds)
         return nullptr;
     }
     
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
         winrt::Windows::Foundation::TimeSpan return_value{ };
         custom_set(return_value, _Duration);
         return py::convert(return_value);
-    }, nullptr);
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
 static void _dealloc_TimeSpan(py::wrapper::Windows::Foundation::TimeSpan* self)
 {
 }
 
-static PyObject* TimeSpan_get_Duration(py::wrapper::Windows::Foundation::TimeSpan* self, void* /*unused*/)
+static PyObject* TimeSpan_get_Duration(py::wrapper::Windows::Foundation::TimeSpan* self, void* /*unused*/) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
         return py::convert(custom_get(self->obj));
-    }, nullptr);
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
-static int TimeSpan_set_Duration(py::wrapper::Windows::Foundation::TimeSpan* self, PyObject* arg, void* /*unused*/)
+static int TimeSpan_set_Duration(py::wrapper::Windows::Foundation::TimeSpan* self, PyObject* arg, void* /*unused*/) noexcept
 {
-    return py::setter_trycatch_invoker(arg, [=]() -> int
+    if (arg == nullptr)
+    {
+        PyErr_SetString(PyExc_TypeError, "property delete not supported");
+        return -1;
+    }
+    
+    try
     {
         custom_set(self->obj, py::converter<int64_t>::convert_to(arg));
         return 0;
-    });
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return -1;
+    }
 }
 
 static PyGetSetDef _getset_TimeSpan[] = {
@@ -6311,48 +6673,48 @@ static PyType_Spec _type_spec_TimeSpan =
 };
 
 // ----- Windows.Foundation Initialization --------------------
-static int module_exec(PyObject* module)
+static int module_exec(PyObject* module) noexcept
 {
-    py::pyobj_handle bases { PyTuple_Pack(1, py::winrt_type<py::winrt_base>::python_type) };
-    
     try
     {
-        py::winrt_type<winrt::Windows::Foundation::Deferral>::python_type = reinterpret_cast<PyTypeObject*>(py::register_python_type(module, _type_name_Deferral, &_type_spec_Deferral, bases.get()).detach());
-        py::winrt_type<winrt::Windows::Foundation::GuidHelper>::python_type = reinterpret_cast<PyTypeObject*>(py::register_python_type(module, _type_name_GuidHelper, &_type_spec_GuidHelper, nullptr).detach());
-        py::winrt_type<winrt::Windows::Foundation::MemoryBuffer>::python_type = reinterpret_cast<PyTypeObject*>(py::register_python_type(module, _type_name_MemoryBuffer, &_type_spec_MemoryBuffer, bases.get()).detach());
-        py::winrt_type<winrt::Windows::Foundation::PropertyValue>::python_type = reinterpret_cast<PyTypeObject*>(py::register_python_type(module, _type_name_PropertyValue, &_type_spec_PropertyValue, nullptr).detach());
-        py::winrt_type<winrt::Windows::Foundation::Uri>::python_type = reinterpret_cast<PyTypeObject*>(py::register_python_type(module, _type_name_Uri, &_type_spec_Uri, bases.get()).detach());
-        py::winrt_type<winrt::Windows::Foundation::WwwFormUrlDecoder>::python_type = reinterpret_cast<PyTypeObject*>(py::register_python_type(module, _type_name_WwwFormUrlDecoder, &_type_spec_WwwFormUrlDecoder, bases.get()).detach());
-        py::winrt_type<winrt::Windows::Foundation::WwwFormUrlDecoderEntry>::python_type = reinterpret_cast<PyTypeObject*>(py::register_python_type(module, _type_name_WwwFormUrlDecoderEntry, &_type_spec_WwwFormUrlDecoderEntry, bases.get()).detach());
-        py::winrt_type<winrt::Windows::Foundation::IAsyncAction>::python_type = reinterpret_cast<PyTypeObject*>(py::register_python_type(module, _type_name_IAsyncAction, &_type_spec_IAsyncAction, bases.get()).detach());
-        py::winrt_type<py::proj::Windows::Foundation::IAsyncActionWithProgress>::python_type = reinterpret_cast<PyTypeObject*>(py::register_python_type(module, _type_name_IAsyncActionWithProgress, &_type_spec_IAsyncActionWithProgress, bases.get()).detach());
-        py::winrt_type<winrt::Windows::Foundation::IAsyncInfo>::python_type = reinterpret_cast<PyTypeObject*>(py::register_python_type(module, _type_name_IAsyncInfo, &_type_spec_IAsyncInfo, bases.get()).detach());
-        py::winrt_type<py::proj::Windows::Foundation::IAsyncOperationWithProgress>::python_type = reinterpret_cast<PyTypeObject*>(py::register_python_type(module, _type_name_IAsyncOperationWithProgress, &_type_spec_IAsyncOperationWithProgress, bases.get()).detach());
-        py::winrt_type<py::proj::Windows::Foundation::IAsyncOperation>::python_type = reinterpret_cast<PyTypeObject*>(py::register_python_type(module, _type_name_IAsyncOperation, &_type_spec_IAsyncOperation, bases.get()).detach());
-        py::winrt_type<winrt::Windows::Foundation::IClosable>::python_type = reinterpret_cast<PyTypeObject*>(py::register_python_type(module, _type_name_IClosable, &_type_spec_IClosable, bases.get()).detach());
-        py::winrt_type<winrt::Windows::Foundation::IGetActivationFactory>::python_type = reinterpret_cast<PyTypeObject*>(py::register_python_type(module, _type_name_IGetActivationFactory, &_type_spec_IGetActivationFactory, bases.get()).detach());
-        py::winrt_type<winrt::Windows::Foundation::IMemoryBuffer>::python_type = reinterpret_cast<PyTypeObject*>(py::register_python_type(module, _type_name_IMemoryBuffer, &_type_spec_IMemoryBuffer, bases.get()).detach());
-        py::winrt_type<winrt::Windows::Foundation::IMemoryBufferReference>::python_type = reinterpret_cast<PyTypeObject*>(py::register_python_type(module, _type_name_IMemoryBufferReference, &_type_spec_IMemoryBufferReference, bases.get()).detach());
-        py::winrt_type<winrt::Windows::Foundation::IPropertyValue>::python_type = reinterpret_cast<PyTypeObject*>(py::register_python_type(module, _type_name_IPropertyValue, &_type_spec_IPropertyValue, bases.get()).detach());
-        py::winrt_type<py::proj::Windows::Foundation::IReferenceArray>::python_type = reinterpret_cast<PyTypeObject*>(py::register_python_type(module, _type_name_IReferenceArray, &_type_spec_IReferenceArray, bases.get()).detach());
-        py::winrt_type<py::proj::Windows::Foundation::IReference>::python_type = reinterpret_cast<PyTypeObject*>(py::register_python_type(module, _type_name_IReference, &_type_spec_IReference, bases.get()).detach());
-        py::winrt_type<winrt::Windows::Foundation::IStringable>::python_type = reinterpret_cast<PyTypeObject*>(py::register_python_type(module, _type_name_IStringable, &_type_spec_IStringable, bases.get()).detach());
-        py::winrt_type<winrt::Windows::Foundation::IWwwFormUrlDecoderEntry>::python_type = reinterpret_cast<PyTypeObject*>(py::register_python_type(module, _type_name_IWwwFormUrlDecoderEntry, &_type_spec_IWwwFormUrlDecoderEntry, bases.get()).detach());
-        py::winrt_type<winrt::Windows::Foundation::DateTime>::python_type = reinterpret_cast<PyTypeObject*>(py::register_python_type(module, _type_name_DateTime, &_type_spec_DateTime, bases.get()).detach());
-        py::winrt_type<winrt::event_token>::python_type = reinterpret_cast<PyTypeObject*>(py::register_python_type(module, _type_name_EventRegistrationToken, &_type_spec_EventRegistrationToken, bases.get()).detach());
-        py::winrt_type<winrt::hresult>::python_type = reinterpret_cast<PyTypeObject*>(py::register_python_type(module, _type_name_HResult, &_type_spec_HResult, bases.get()).detach());
-        py::winrt_type<winrt::Windows::Foundation::Point>::python_type = reinterpret_cast<PyTypeObject*>(py::register_python_type(module, _type_name_Point, &_type_spec_Point, bases.get()).detach());
-        py::winrt_type<winrt::Windows::Foundation::Rect>::python_type = reinterpret_cast<PyTypeObject*>(py::register_python_type(module, _type_name_Rect, &_type_spec_Rect, bases.get()).detach());
-        py::winrt_type<winrt::Windows::Foundation::Size>::python_type = reinterpret_cast<PyTypeObject*>(py::register_python_type(module, _type_name_Size, &_type_spec_Size, bases.get()).detach());
-        py::winrt_type<winrt::Windows::Foundation::TimeSpan>::python_type = reinterpret_cast<PyTypeObject*>(py::register_python_type(module, _type_name_TimeSpan, &_type_spec_TimeSpan, bases.get()).detach());
+        py::pyobj_handle bases { PyTuple_Pack(1, py::winrt_type<py::winrt_base>::python_type) };
+        
+        py::winrt_type<winrt::Windows::Foundation::Deferral>::python_type = py::register_python_type(module, _type_name_Deferral, &_type_spec_Deferral, bases.get());
+        py::winrt_type<winrt::Windows::Foundation::GuidHelper>::python_type = py::register_python_type(module, _type_name_GuidHelper, &_type_spec_GuidHelper, nullptr);
+        py::winrt_type<winrt::Windows::Foundation::MemoryBuffer>::python_type = py::register_python_type(module, _type_name_MemoryBuffer, &_type_spec_MemoryBuffer, bases.get());
+        py::winrt_type<winrt::Windows::Foundation::PropertyValue>::python_type = py::register_python_type(module, _type_name_PropertyValue, &_type_spec_PropertyValue, nullptr);
+        py::winrt_type<winrt::Windows::Foundation::Uri>::python_type = py::register_python_type(module, _type_name_Uri, &_type_spec_Uri, bases.get());
+        py::winrt_type<winrt::Windows::Foundation::WwwFormUrlDecoder>::python_type = py::register_python_type(module, _type_name_WwwFormUrlDecoder, &_type_spec_WwwFormUrlDecoder, bases.get());
+        py::winrt_type<winrt::Windows::Foundation::WwwFormUrlDecoderEntry>::python_type = py::register_python_type(module, _type_name_WwwFormUrlDecoderEntry, &_type_spec_WwwFormUrlDecoderEntry, bases.get());
+        py::winrt_type<winrt::Windows::Foundation::IAsyncAction>::python_type = py::register_python_type(module, _type_name_IAsyncAction, &_type_spec_IAsyncAction, bases.get());
+        py::winrt_type<py::proj::Windows::Foundation::IAsyncActionWithProgress>::python_type = py::register_python_type(module, _type_name_IAsyncActionWithProgress, &_type_spec_IAsyncActionWithProgress, bases.get());
+        py::winrt_type<winrt::Windows::Foundation::IAsyncInfo>::python_type = py::register_python_type(module, _type_name_IAsyncInfo, &_type_spec_IAsyncInfo, bases.get());
+        py::winrt_type<py::proj::Windows::Foundation::IAsyncOperationWithProgress>::python_type = py::register_python_type(module, _type_name_IAsyncOperationWithProgress, &_type_spec_IAsyncOperationWithProgress, bases.get());
+        py::winrt_type<py::proj::Windows::Foundation::IAsyncOperation>::python_type = py::register_python_type(module, _type_name_IAsyncOperation, &_type_spec_IAsyncOperation, bases.get());
+        py::winrt_type<winrt::Windows::Foundation::IClosable>::python_type = py::register_python_type(module, _type_name_IClosable, &_type_spec_IClosable, bases.get());
+        py::winrt_type<winrt::Windows::Foundation::IGetActivationFactory>::python_type = py::register_python_type(module, _type_name_IGetActivationFactory, &_type_spec_IGetActivationFactory, bases.get());
+        py::winrt_type<winrt::Windows::Foundation::IMemoryBuffer>::python_type = py::register_python_type(module, _type_name_IMemoryBuffer, &_type_spec_IMemoryBuffer, bases.get());
+        py::winrt_type<winrt::Windows::Foundation::IMemoryBufferReference>::python_type = py::register_python_type(module, _type_name_IMemoryBufferReference, &_type_spec_IMemoryBufferReference, bases.get());
+        py::winrt_type<winrt::Windows::Foundation::IPropertyValue>::python_type = py::register_python_type(module, _type_name_IPropertyValue, &_type_spec_IPropertyValue, bases.get());
+        py::winrt_type<py::proj::Windows::Foundation::IReferenceArray>::python_type = py::register_python_type(module, _type_name_IReferenceArray, &_type_spec_IReferenceArray, bases.get());
+        py::winrt_type<py::proj::Windows::Foundation::IReference>::python_type = py::register_python_type(module, _type_name_IReference, &_type_spec_IReference, bases.get());
+        py::winrt_type<winrt::Windows::Foundation::IStringable>::python_type = py::register_python_type(module, _type_name_IStringable, &_type_spec_IStringable, bases.get());
+        py::winrt_type<winrt::Windows::Foundation::IWwwFormUrlDecoderEntry>::python_type = py::register_python_type(module, _type_name_IWwwFormUrlDecoderEntry, &_type_spec_IWwwFormUrlDecoderEntry, bases.get());
+        py::winrt_type<winrt::Windows::Foundation::DateTime>::python_type = py::register_python_type(module, _type_name_DateTime, &_type_spec_DateTime, bases.get());
+        py::winrt_type<winrt::event_token>::python_type = py::register_python_type(module, _type_name_EventRegistrationToken, &_type_spec_EventRegistrationToken, bases.get());
+        py::winrt_type<winrt::hresult>::python_type = py::register_python_type(module, _type_name_HResult, &_type_spec_HResult, bases.get());
+        py::winrt_type<winrt::Windows::Foundation::Point>::python_type = py::register_python_type(module, _type_name_Point, &_type_spec_Point, bases.get());
+        py::winrt_type<winrt::Windows::Foundation::Rect>::python_type = py::register_python_type(module, _type_name_Rect, &_type_spec_Rect, bases.get());
+        py::winrt_type<winrt::Windows::Foundation::Size>::python_type = py::register_python_type(module, _type_name_Size, &_type_spec_Size, bases.get());
+        py::winrt_type<winrt::Windows::Foundation::TimeSpan>::python_type = py::register_python_type(module, _type_name_TimeSpan, &_type_spec_TimeSpan, bases.get());
+        
+        return 0;
     }
-    catch(...)
+    catch (...)
     {
         py::to_PyErr();
         return -1;
     }
-    
-    return 0;
 }
 
 static PyModuleDef_Slot module_slots[] = {
@@ -6375,7 +6737,7 @@ static PyModuleDef module_def = {
 };
 
 PyMODINIT_FUNC
-PyInit__winrt_Windows_Foundation (void)
+PyInit__winrt_Windows_Foundation (void) noexcept
 {
     return PyModuleDef_Init(&module_def);
 }

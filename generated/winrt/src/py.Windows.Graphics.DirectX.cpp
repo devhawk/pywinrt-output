@@ -3,20 +3,20 @@
 #include "py.Windows.Graphics.DirectX.h"
 
 // ----- Windows.Graphics.DirectX Initialization --------------------
-static int module_exec(PyObject* module)
+static int module_exec(PyObject* module) noexcept
 {
-    py::pyobj_handle bases { PyTuple_Pack(1, py::winrt_type<py::winrt_base>::python_type) };
-    
     try
     {
+        py::pyobj_handle bases { PyTuple_Pack(1, py::winrt_type<py::winrt_base>::python_type) };
+        
+        
+        return 0;
     }
-    catch(...)
+    catch (...)
     {
         py::to_PyErr();
         return -1;
     }
-    
-    return 0;
 }
 
 static PyModuleDef_Slot module_slots[] = {
@@ -39,7 +39,7 @@ static PyModuleDef module_def = {
 };
 
 PyMODINIT_FUNC
-PyInit__winrt_Windows_Graphics_DirectX (void)
+PyInit__winrt_Windows_Graphics_DirectX (void) noexcept
 {
     return PyModuleDef_Init(&module_def);
 }

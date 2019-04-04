@@ -5,13 +5,11 @@
 // ----- CivicAddress class --------------------
 
 PyTypeObject* py::winrt_type<winrt::Windows::Devices::Geolocation::CivicAddress>::python_type;
-static const char* _type_name_CivicAddress = "CivicAddress";
+constexpr const char* const _type_name_CivicAddress = "CivicAddress";
 
-static PyObject* _new_CivicAddress(PyTypeObject* type, PyObject* args, PyObject* kwds)
+static PyObject* _new_CivicAddress(PyTypeObject* type, PyObject* args, PyObject* kwds) noexcept
 {
-    std::string msg{ _type_name_CivicAddress };
-    msg.append(" is not activatable");
-    PyErr_SetString(PyExc_TypeError, msg.c_str());
+    py::set_invalid_activation_error(_type_name_CivicAddress);
     return nullptr;
 }
 
@@ -22,88 +20,83 @@ static void _dealloc_CivicAddress(py::wrapper::Windows::Devices::Geolocation::Ci
     self->obj = nullptr;
 }
 
-static PyObject* CivicAddress_get_City(py::wrapper::Windows::Devices::Geolocation::CivicAddress* self, void* /*unused*/)
+static PyObject* CivicAddress_get_City(py::wrapper::Windows::Devices::Geolocation::CivicAddress* self, void* /*unused*/) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
-        auto return_value = self->obj.City();
-        
-        py::pyobj_handle out_return_value{ py::convert(return_value) };
-        if (!out_return_value) 
-        { 
-            return nullptr;
-        }
-        return out_return_value.detach();
-    }, nullptr);
+        return py::convert(self->obj.City());
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
-static PyObject* CivicAddress_get_Country(py::wrapper::Windows::Devices::Geolocation::CivicAddress* self, void* /*unused*/)
+static PyObject* CivicAddress_get_Country(py::wrapper::Windows::Devices::Geolocation::CivicAddress* self, void* /*unused*/) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
-        auto return_value = self->obj.Country();
-        
-        py::pyobj_handle out_return_value{ py::convert(return_value) };
-        if (!out_return_value) 
-        { 
-            return nullptr;
-        }
-        return out_return_value.detach();
-    }, nullptr);
+        return py::convert(self->obj.Country());
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
-static PyObject* CivicAddress_get_PostalCode(py::wrapper::Windows::Devices::Geolocation::CivicAddress* self, void* /*unused*/)
+static PyObject* CivicAddress_get_PostalCode(py::wrapper::Windows::Devices::Geolocation::CivicAddress* self, void* /*unused*/) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
-        auto return_value = self->obj.PostalCode();
-        
-        py::pyobj_handle out_return_value{ py::convert(return_value) };
-        if (!out_return_value) 
-        { 
-            return nullptr;
-        }
-        return out_return_value.detach();
-    }, nullptr);
+        return py::convert(self->obj.PostalCode());
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
-static PyObject* CivicAddress_get_State(py::wrapper::Windows::Devices::Geolocation::CivicAddress* self, void* /*unused*/)
+static PyObject* CivicAddress_get_State(py::wrapper::Windows::Devices::Geolocation::CivicAddress* self, void* /*unused*/) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
-        auto return_value = self->obj.State();
-        
-        py::pyobj_handle out_return_value{ py::convert(return_value) };
-        if (!out_return_value) 
-        { 
-            return nullptr;
-        }
-        return out_return_value.detach();
-    }, nullptr);
+        return py::convert(self->obj.State());
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
-static PyObject* CivicAddress_get_Timestamp(py::wrapper::Windows::Devices::Geolocation::CivicAddress* self, void* /*unused*/)
+static PyObject* CivicAddress_get_Timestamp(py::wrapper::Windows::Devices::Geolocation::CivicAddress* self, void* /*unused*/) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
-        auto return_value = self->obj.Timestamp();
-        
-        py::pyobj_handle out_return_value{ py::convert(return_value) };
-        if (!out_return_value) 
-        { 
-            return nullptr;
-        }
-        return out_return_value.detach();
-    }, nullptr);
+        return py::convert(self->obj.Timestamp());
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
-static PyObject* _from_CivicAddress(PyObject* /*unused*/, PyObject* arg)
+static PyObject* _from_CivicAddress(PyObject* /*unused*/, PyObject* arg) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
         auto return_value = py::convert_to<winrt::Windows::Foundation::IInspectable>(arg);
         return py::convert(return_value.as<winrt::Windows::Devices::Geolocation::CivicAddress>());
-    }, nullptr);
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
 static PyMethodDef _methods_CivicAddress[] = {
@@ -141,31 +134,36 @@ static PyType_Spec _type_spec_CivicAddress =
 // ----- GeoboundingBox class --------------------
 
 PyTypeObject* py::winrt_type<winrt::Windows::Devices::Geolocation::GeoboundingBox>::python_type;
-static const char* _type_name_GeoboundingBox = "GeoboundingBox";
+constexpr const char* const _type_name_GeoboundingBox = "GeoboundingBox";
 
-static PyObject* _new_GeoboundingBox(PyTypeObject* type, PyObject* args, PyObject* kwds)
+static PyObject* _new_GeoboundingBox(PyTypeObject* type, PyObject* args, PyObject* kwds) noexcept
 {
     if (kwds != nullptr)
     {
-        PyErr_SetString(PyExc_TypeError, "keyword arguments not supported");
+        py::set_invalid_kwd_args_error();
         return nullptr;
     }
     
     Py_ssize_t arg_count = PyTuple_Size(args);
     if (arg_count == 2)
     {
-        return py::trycatch_invoker([=]() -> PyObject*
+        try
         {
             auto param0 = py::convert_to<winrt::Windows::Devices::Geolocation::BasicGeoposition>(args, 0);
             auto param1 = py::convert_to<winrt::Windows::Devices::Geolocation::BasicGeoposition>(args, 1);
             
             winrt::Windows::Devices::Geolocation::GeoboundingBox instance{ param0, param1 };
             return py::wrap(instance, type);
-        }, nullptr);
+        }
+        catch (...)
+        {
+            py::to_PyErr();
+            return nullptr;
+        }
     }
     else if (arg_count == 3)
     {
-        return py::trycatch_invoker([=]() -> PyObject*
+        try
         {
             auto param0 = py::convert_to<winrt::Windows::Devices::Geolocation::BasicGeoposition>(args, 0);
             auto param1 = py::convert_to<winrt::Windows::Devices::Geolocation::BasicGeoposition>(args, 1);
@@ -173,11 +171,16 @@ static PyObject* _new_GeoboundingBox(PyTypeObject* type, PyObject* args, PyObjec
             
             winrt::Windows::Devices::Geolocation::GeoboundingBox instance{ param0, param1, param2 };
             return py::wrap(instance, type);
-        }, nullptr);
+        }
+        catch (...)
+        {
+            py::to_PyErr();
+            return nullptr;
+        }
     }
     else if (arg_count == 4)
     {
-        return py::trycatch_invoker([=]() -> PyObject*
+        try
         {
             auto param0 = py::convert_to<winrt::Windows::Devices::Geolocation::BasicGeoposition>(args, 0);
             auto param1 = py::convert_to<winrt::Windows::Devices::Geolocation::BasicGeoposition>(args, 1);
@@ -186,13 +189,18 @@ static PyObject* _new_GeoboundingBox(PyTypeObject* type, PyObject* args, PyObjec
             
             winrt::Windows::Devices::Geolocation::GeoboundingBox instance{ param0, param1, param2, param3 };
             return py::wrap(instance, type);
-        }, nullptr);
+        }
+        catch (...)
+        {
+            py::to_PyErr();
+            return nullptr;
+        }
     }
-    else if (arg_count != -1)
+    else
     {
-        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+        py::set_invalid_arg_count_error(arg_count);
+        return nullptr;
     }
-    return nullptr;
 }
 
 static void _dealloc_GeoboundingBox(py::wrapper::Windows::Devices::Geolocation::GeoboundingBox* self)
@@ -202,195 +210,178 @@ static void _dealloc_GeoboundingBox(py::wrapper::Windows::Devices::Geolocation::
     self->obj = nullptr;
 }
 
-static PyObject* GeoboundingBox_TryCompute(PyObject* /*unused*/, PyObject* args)
+static PyObject* GeoboundingBox_TryCompute(PyObject* /*unused*/, PyObject* args) noexcept
 {
     Py_ssize_t arg_count = PyTuple_Size(args);
     
     if (arg_count == 1)
     {
-        return py::trycatch_invoker([=]() -> PyObject*
+        try
         {
             auto param0 = py::convert_to<winrt::Windows::Foundation::Collections::IIterable<winrt::Windows::Devices::Geolocation::BasicGeoposition>>(args, 0);
             
-            auto return_value = winrt::Windows::Devices::Geolocation::GeoboundingBox::TryCompute(param0);
-            
-            py::pyobj_handle out_return_value{ py::convert(return_value) };
-            if (!out_return_value) 
-            { 
-                return nullptr;
-            }
-            return out_return_value.detach();
-        }, nullptr);
+            return py::convert(winrt::Windows::Devices::Geolocation::GeoboundingBox::TryCompute(param0));
+        }
+        catch (...)
+        {
+            py::to_PyErr();
+            return nullptr;
+        }
     }
     else if (arg_count == 2)
     {
-        return py::trycatch_invoker([=]() -> PyObject*
+        try
         {
             auto param0 = py::convert_to<winrt::Windows::Foundation::Collections::IIterable<winrt::Windows::Devices::Geolocation::BasicGeoposition>>(args, 0);
             auto param1 = py::convert_to<winrt::Windows::Devices::Geolocation::AltitudeReferenceSystem>(args, 1);
             
-            auto return_value = winrt::Windows::Devices::Geolocation::GeoboundingBox::TryCompute(param0, param1);
-            
-            py::pyobj_handle out_return_value{ py::convert(return_value) };
-            if (!out_return_value) 
-            { 
-                return nullptr;
-            }
-            return out_return_value.detach();
-        }, nullptr);
+            return py::convert(winrt::Windows::Devices::Geolocation::GeoboundingBox::TryCompute(param0, param1));
+        }
+        catch (...)
+        {
+            py::to_PyErr();
+            return nullptr;
+        }
     }
     else if (arg_count == 3)
     {
-        return py::trycatch_invoker([=]() -> PyObject*
+        try
         {
             auto param0 = py::convert_to<winrt::Windows::Foundation::Collections::IIterable<winrt::Windows::Devices::Geolocation::BasicGeoposition>>(args, 0);
             auto param1 = py::convert_to<winrt::Windows::Devices::Geolocation::AltitudeReferenceSystem>(args, 1);
             auto param2 = py::convert_to<uint32_t>(args, 2);
             
-            auto return_value = winrt::Windows::Devices::Geolocation::GeoboundingBox::TryCompute(param0, param1, param2);
-            
-            py::pyobj_handle out_return_value{ py::convert(return_value) };
-            if (!out_return_value) 
-            { 
-                return nullptr;
-            }
-            return out_return_value.detach();
-        }, nullptr);
+            return py::convert(winrt::Windows::Devices::Geolocation::GeoboundingBox::TryCompute(param0, param1, param2));
+        }
+        catch (...)
+        {
+            py::to_PyErr();
+            return nullptr;
+        }
     }
-    else if (arg_count != -1)
+    else
     {
-        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+        py::set_invalid_arg_count_error(arg_count);
+        return nullptr;
     }
-    return nullptr;
 }
 
-static PyObject* GeoboundingBox_get_Center(py::wrapper::Windows::Devices::Geolocation::GeoboundingBox* self, void* /*unused*/)
+static PyObject* GeoboundingBox_get_Center(py::wrapper::Windows::Devices::Geolocation::GeoboundingBox* self, void* /*unused*/) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
-        auto return_value = self->obj.Center();
-        
-        py::pyobj_handle out_return_value{ py::convert(return_value) };
-        if (!out_return_value) 
-        { 
-            return nullptr;
-        }
-        return out_return_value.detach();
-    }, nullptr);
-}
-
-static PyObject* GeoboundingBox_get_MaxAltitude(py::wrapper::Windows::Devices::Geolocation::GeoboundingBox* self, void* /*unused*/)
-{
-    return py::trycatch_invoker([=]() -> PyObject*
+        return py::convert(self->obj.Center());
+    }
+    catch (...)
     {
-        auto return_value = self->obj.MaxAltitude();
-        
-        py::pyobj_handle out_return_value{ py::convert(return_value) };
-        if (!out_return_value) 
-        { 
-            return nullptr;
-        }
-        return out_return_value.detach();
-    }, nullptr);
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
-static PyObject* GeoboundingBox_get_MinAltitude(py::wrapper::Windows::Devices::Geolocation::GeoboundingBox* self, void* /*unused*/)
+static PyObject* GeoboundingBox_get_MaxAltitude(py::wrapper::Windows::Devices::Geolocation::GeoboundingBox* self, void* /*unused*/) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
-        auto return_value = self->obj.MinAltitude();
-        
-        py::pyobj_handle out_return_value{ py::convert(return_value) };
-        if (!out_return_value) 
-        { 
-            return nullptr;
-        }
-        return out_return_value.detach();
-    }, nullptr);
-}
-
-static PyObject* GeoboundingBox_get_NorthwestCorner(py::wrapper::Windows::Devices::Geolocation::GeoboundingBox* self, void* /*unused*/)
-{
-    return py::trycatch_invoker([=]() -> PyObject*
+        return py::convert(self->obj.MaxAltitude());
+    }
+    catch (...)
     {
-        auto return_value = self->obj.NorthwestCorner();
-        
-        py::pyobj_handle out_return_value{ py::convert(return_value) };
-        if (!out_return_value) 
-        { 
-            return nullptr;
-        }
-        return out_return_value.detach();
-    }, nullptr);
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
-static PyObject* GeoboundingBox_get_SoutheastCorner(py::wrapper::Windows::Devices::Geolocation::GeoboundingBox* self, void* /*unused*/)
+static PyObject* GeoboundingBox_get_MinAltitude(py::wrapper::Windows::Devices::Geolocation::GeoboundingBox* self, void* /*unused*/) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
-        auto return_value = self->obj.SoutheastCorner();
-        
-        py::pyobj_handle out_return_value{ py::convert(return_value) };
-        if (!out_return_value) 
-        { 
-            return nullptr;
-        }
-        return out_return_value.detach();
-    }, nullptr);
-}
-
-static PyObject* GeoboundingBox_get_AltitudeReferenceSystem(py::wrapper::Windows::Devices::Geolocation::GeoboundingBox* self, void* /*unused*/)
-{
-    return py::trycatch_invoker([=]() -> PyObject*
+        return py::convert(self->obj.MinAltitude());
+    }
+    catch (...)
     {
-        auto return_value = self->obj.AltitudeReferenceSystem();
-        
-        py::pyobj_handle out_return_value{ py::convert(return_value) };
-        if (!out_return_value) 
-        { 
-            return nullptr;
-        }
-        return out_return_value.detach();
-    }, nullptr);
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
-static PyObject* GeoboundingBox_get_GeoshapeType(py::wrapper::Windows::Devices::Geolocation::GeoboundingBox* self, void* /*unused*/)
+static PyObject* GeoboundingBox_get_NorthwestCorner(py::wrapper::Windows::Devices::Geolocation::GeoboundingBox* self, void* /*unused*/) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
-        auto return_value = self->obj.GeoshapeType();
-        
-        py::pyobj_handle out_return_value{ py::convert(return_value) };
-        if (!out_return_value) 
-        { 
-            return nullptr;
-        }
-        return out_return_value.detach();
-    }, nullptr);
-}
-
-static PyObject* GeoboundingBox_get_SpatialReferenceId(py::wrapper::Windows::Devices::Geolocation::GeoboundingBox* self, void* /*unused*/)
-{
-    return py::trycatch_invoker([=]() -> PyObject*
+        return py::convert(self->obj.NorthwestCorner());
+    }
+    catch (...)
     {
-        auto return_value = self->obj.SpatialReferenceId();
-        
-        py::pyobj_handle out_return_value{ py::convert(return_value) };
-        if (!out_return_value) 
-        { 
-            return nullptr;
-        }
-        return out_return_value.detach();
-    }, nullptr);
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
-static PyObject* _from_GeoboundingBox(PyObject* /*unused*/, PyObject* arg)
+static PyObject* GeoboundingBox_get_SoutheastCorner(py::wrapper::Windows::Devices::Geolocation::GeoboundingBox* self, void* /*unused*/) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
+    {
+        return py::convert(self->obj.SoutheastCorner());
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
+}
+
+static PyObject* GeoboundingBox_get_AltitudeReferenceSystem(py::wrapper::Windows::Devices::Geolocation::GeoboundingBox* self, void* /*unused*/) noexcept
+{
+    try
+    {
+        return py::convert(self->obj.AltitudeReferenceSystem());
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
+}
+
+static PyObject* GeoboundingBox_get_GeoshapeType(py::wrapper::Windows::Devices::Geolocation::GeoboundingBox* self, void* /*unused*/) noexcept
+{
+    try
+    {
+        return py::convert(self->obj.GeoshapeType());
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
+}
+
+static PyObject* GeoboundingBox_get_SpatialReferenceId(py::wrapper::Windows::Devices::Geolocation::GeoboundingBox* self, void* /*unused*/) noexcept
+{
+    try
+    {
+        return py::convert(self->obj.SpatialReferenceId());
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
+}
+
+static PyObject* _from_GeoboundingBox(PyObject* /*unused*/, PyObject* arg) noexcept
+{
+    try
     {
         auto return_value = py::convert_to<winrt::Windows::Foundation::IInspectable>(arg);
         return py::convert(return_value.as<winrt::Windows::Devices::Geolocation::GeoboundingBox>());
-    }, nullptr);
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
 static PyMethodDef _methods_GeoboundingBox[] = {
@@ -432,31 +423,36 @@ static PyType_Spec _type_spec_GeoboundingBox =
 // ----- Geocircle class --------------------
 
 PyTypeObject* py::winrt_type<winrt::Windows::Devices::Geolocation::Geocircle>::python_type;
-static const char* _type_name_Geocircle = "Geocircle";
+constexpr const char* const _type_name_Geocircle = "Geocircle";
 
-static PyObject* _new_Geocircle(PyTypeObject* type, PyObject* args, PyObject* kwds)
+static PyObject* _new_Geocircle(PyTypeObject* type, PyObject* args, PyObject* kwds) noexcept
 {
     if (kwds != nullptr)
     {
-        PyErr_SetString(PyExc_TypeError, "keyword arguments not supported");
+        py::set_invalid_kwd_args_error();
         return nullptr;
     }
     
     Py_ssize_t arg_count = PyTuple_Size(args);
     if (arg_count == 2)
     {
-        return py::trycatch_invoker([=]() -> PyObject*
+        try
         {
             auto param0 = py::convert_to<winrt::Windows::Devices::Geolocation::BasicGeoposition>(args, 0);
             auto param1 = py::convert_to<double>(args, 1);
             
             winrt::Windows::Devices::Geolocation::Geocircle instance{ param0, param1 };
             return py::wrap(instance, type);
-        }, nullptr);
+        }
+        catch (...)
+        {
+            py::to_PyErr();
+            return nullptr;
+        }
     }
     else if (arg_count == 3)
     {
-        return py::trycatch_invoker([=]() -> PyObject*
+        try
         {
             auto param0 = py::convert_to<winrt::Windows::Devices::Geolocation::BasicGeoposition>(args, 0);
             auto param1 = py::convert_to<double>(args, 1);
@@ -464,11 +460,16 @@ static PyObject* _new_Geocircle(PyTypeObject* type, PyObject* args, PyObject* kw
             
             winrt::Windows::Devices::Geolocation::Geocircle instance{ param0, param1, param2 };
             return py::wrap(instance, type);
-        }, nullptr);
+        }
+        catch (...)
+        {
+            py::to_PyErr();
+            return nullptr;
+        }
     }
     else if (arg_count == 4)
     {
-        return py::trycatch_invoker([=]() -> PyObject*
+        try
         {
             auto param0 = py::convert_to<winrt::Windows::Devices::Geolocation::BasicGeoposition>(args, 0);
             auto param1 = py::convert_to<double>(args, 1);
@@ -477,13 +478,18 @@ static PyObject* _new_Geocircle(PyTypeObject* type, PyObject* args, PyObject* kw
             
             winrt::Windows::Devices::Geolocation::Geocircle instance{ param0, param1, param2, param3 };
             return py::wrap(instance, type);
-        }, nullptr);
+        }
+        catch (...)
+        {
+            py::to_PyErr();
+            return nullptr;
+        }
     }
-    else if (arg_count != -1)
+    else
     {
-        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+        py::set_invalid_arg_count_error(arg_count);
+        return nullptr;
     }
-    return nullptr;
 }
 
 static void _dealloc_Geocircle(py::wrapper::Windows::Devices::Geolocation::Geocircle* self)
@@ -493,88 +499,83 @@ static void _dealloc_Geocircle(py::wrapper::Windows::Devices::Geolocation::Geoci
     self->obj = nullptr;
 }
 
-static PyObject* Geocircle_get_Center(py::wrapper::Windows::Devices::Geolocation::Geocircle* self, void* /*unused*/)
+static PyObject* Geocircle_get_Center(py::wrapper::Windows::Devices::Geolocation::Geocircle* self, void* /*unused*/) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
-        auto return_value = self->obj.Center();
-        
-        py::pyobj_handle out_return_value{ py::convert(return_value) };
-        if (!out_return_value) 
-        { 
-            return nullptr;
-        }
-        return out_return_value.detach();
-    }, nullptr);
+        return py::convert(self->obj.Center());
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
-static PyObject* Geocircle_get_Radius(py::wrapper::Windows::Devices::Geolocation::Geocircle* self, void* /*unused*/)
+static PyObject* Geocircle_get_Radius(py::wrapper::Windows::Devices::Geolocation::Geocircle* self, void* /*unused*/) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
-        auto return_value = self->obj.Radius();
-        
-        py::pyobj_handle out_return_value{ py::convert(return_value) };
-        if (!out_return_value) 
-        { 
-            return nullptr;
-        }
-        return out_return_value.detach();
-    }, nullptr);
+        return py::convert(self->obj.Radius());
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
-static PyObject* Geocircle_get_AltitudeReferenceSystem(py::wrapper::Windows::Devices::Geolocation::Geocircle* self, void* /*unused*/)
+static PyObject* Geocircle_get_AltitudeReferenceSystem(py::wrapper::Windows::Devices::Geolocation::Geocircle* self, void* /*unused*/) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
-        auto return_value = self->obj.AltitudeReferenceSystem();
-        
-        py::pyobj_handle out_return_value{ py::convert(return_value) };
-        if (!out_return_value) 
-        { 
-            return nullptr;
-        }
-        return out_return_value.detach();
-    }, nullptr);
+        return py::convert(self->obj.AltitudeReferenceSystem());
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
-static PyObject* Geocircle_get_GeoshapeType(py::wrapper::Windows::Devices::Geolocation::Geocircle* self, void* /*unused*/)
+static PyObject* Geocircle_get_GeoshapeType(py::wrapper::Windows::Devices::Geolocation::Geocircle* self, void* /*unused*/) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
-        auto return_value = self->obj.GeoshapeType();
-        
-        py::pyobj_handle out_return_value{ py::convert(return_value) };
-        if (!out_return_value) 
-        { 
-            return nullptr;
-        }
-        return out_return_value.detach();
-    }, nullptr);
+        return py::convert(self->obj.GeoshapeType());
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
-static PyObject* Geocircle_get_SpatialReferenceId(py::wrapper::Windows::Devices::Geolocation::Geocircle* self, void* /*unused*/)
+static PyObject* Geocircle_get_SpatialReferenceId(py::wrapper::Windows::Devices::Geolocation::Geocircle* self, void* /*unused*/) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
-        auto return_value = self->obj.SpatialReferenceId();
-        
-        py::pyobj_handle out_return_value{ py::convert(return_value) };
-        if (!out_return_value) 
-        { 
-            return nullptr;
-        }
-        return out_return_value.detach();
-    }, nullptr);
+        return py::convert(self->obj.SpatialReferenceId());
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
-static PyObject* _from_Geocircle(PyObject* /*unused*/, PyObject* arg)
+static PyObject* _from_Geocircle(PyObject* /*unused*/, PyObject* arg) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
         auto return_value = py::convert_to<winrt::Windows::Foundation::IInspectable>(arg);
         return py::convert(return_value.as<winrt::Windows::Devices::Geolocation::Geocircle>());
-    }, nullptr);
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
 static PyMethodDef _methods_Geocircle[] = {
@@ -612,13 +613,11 @@ static PyType_Spec _type_spec_Geocircle =
 // ----- Geocoordinate class --------------------
 
 PyTypeObject* py::winrt_type<winrt::Windows::Devices::Geolocation::Geocoordinate>::python_type;
-static const char* _type_name_Geocoordinate = "Geocoordinate";
+constexpr const char* const _type_name_Geocoordinate = "Geocoordinate";
 
-static PyObject* _new_Geocoordinate(PyTypeObject* type, PyObject* args, PyObject* kwds)
+static PyObject* _new_Geocoordinate(PyTypeObject* type, PyObject* args, PyObject* kwds) noexcept
 {
-    std::string msg{ _type_name_Geocoordinate };
-    msg.append(" is not activatable");
-    PyErr_SetString(PyExc_TypeError, msg.c_str());
+    py::set_invalid_activation_error(_type_name_Geocoordinate);
     return nullptr;
 }
 
@@ -629,193 +628,174 @@ static void _dealloc_Geocoordinate(py::wrapper::Windows::Devices::Geolocation::G
     self->obj = nullptr;
 }
 
-static PyObject* Geocoordinate_get_Accuracy(py::wrapper::Windows::Devices::Geolocation::Geocoordinate* self, void* /*unused*/)
+static PyObject* Geocoordinate_get_Accuracy(py::wrapper::Windows::Devices::Geolocation::Geocoordinate* self, void* /*unused*/) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
-        auto return_value = self->obj.Accuracy();
-        
-        py::pyobj_handle out_return_value{ py::convert(return_value) };
-        if (!out_return_value) 
-        { 
-            return nullptr;
-        }
-        return out_return_value.detach();
-    }, nullptr);
+        return py::convert(self->obj.Accuracy());
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
-static PyObject* Geocoordinate_get_Altitude(py::wrapper::Windows::Devices::Geolocation::Geocoordinate* self, void* /*unused*/)
+static PyObject* Geocoordinate_get_Altitude(py::wrapper::Windows::Devices::Geolocation::Geocoordinate* self, void* /*unused*/) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
-        auto return_value = self->obj.Altitude();
-        
-        py::pyobj_handle out_return_value{ py::convert(return_value) };
-        if (!out_return_value) 
-        { 
-            return nullptr;
-        }
-        return out_return_value.detach();
-    }, nullptr);
+        return py::convert(self->obj.Altitude());
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
-static PyObject* Geocoordinate_get_AltitudeAccuracy(py::wrapper::Windows::Devices::Geolocation::Geocoordinate* self, void* /*unused*/)
+static PyObject* Geocoordinate_get_AltitudeAccuracy(py::wrapper::Windows::Devices::Geolocation::Geocoordinate* self, void* /*unused*/) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
-        auto return_value = self->obj.AltitudeAccuracy();
-        
-        py::pyobj_handle out_return_value{ py::convert(return_value) };
-        if (!out_return_value) 
-        { 
-            return nullptr;
-        }
-        return out_return_value.detach();
-    }, nullptr);
+        return py::convert(self->obj.AltitudeAccuracy());
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
-static PyObject* Geocoordinate_get_Heading(py::wrapper::Windows::Devices::Geolocation::Geocoordinate* self, void* /*unused*/)
+static PyObject* Geocoordinate_get_Heading(py::wrapper::Windows::Devices::Geolocation::Geocoordinate* self, void* /*unused*/) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
-        auto return_value = self->obj.Heading();
-        
-        py::pyobj_handle out_return_value{ py::convert(return_value) };
-        if (!out_return_value) 
-        { 
-            return nullptr;
-        }
-        return out_return_value.detach();
-    }, nullptr);
+        return py::convert(self->obj.Heading());
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
-static PyObject* Geocoordinate_get_Latitude(py::wrapper::Windows::Devices::Geolocation::Geocoordinate* self, void* /*unused*/)
+static PyObject* Geocoordinate_get_Latitude(py::wrapper::Windows::Devices::Geolocation::Geocoordinate* self, void* /*unused*/) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
-        auto return_value = self->obj.Latitude();
-        
-        py::pyobj_handle out_return_value{ py::convert(return_value) };
-        if (!out_return_value) 
-        { 
-            return nullptr;
-        }
-        return out_return_value.detach();
-    }, nullptr);
+        return py::convert(self->obj.Latitude());
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
-static PyObject* Geocoordinate_get_Longitude(py::wrapper::Windows::Devices::Geolocation::Geocoordinate* self, void* /*unused*/)
+static PyObject* Geocoordinate_get_Longitude(py::wrapper::Windows::Devices::Geolocation::Geocoordinate* self, void* /*unused*/) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
-        auto return_value = self->obj.Longitude();
-        
-        py::pyobj_handle out_return_value{ py::convert(return_value) };
-        if (!out_return_value) 
-        { 
-            return nullptr;
-        }
-        return out_return_value.detach();
-    }, nullptr);
+        return py::convert(self->obj.Longitude());
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
-static PyObject* Geocoordinate_get_Speed(py::wrapper::Windows::Devices::Geolocation::Geocoordinate* self, void* /*unused*/)
+static PyObject* Geocoordinate_get_Speed(py::wrapper::Windows::Devices::Geolocation::Geocoordinate* self, void* /*unused*/) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
-        auto return_value = self->obj.Speed();
-        
-        py::pyobj_handle out_return_value{ py::convert(return_value) };
-        if (!out_return_value) 
-        { 
-            return nullptr;
-        }
-        return out_return_value.detach();
-    }, nullptr);
+        return py::convert(self->obj.Speed());
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
-static PyObject* Geocoordinate_get_Timestamp(py::wrapper::Windows::Devices::Geolocation::Geocoordinate* self, void* /*unused*/)
+static PyObject* Geocoordinate_get_Timestamp(py::wrapper::Windows::Devices::Geolocation::Geocoordinate* self, void* /*unused*/) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
-        auto return_value = self->obj.Timestamp();
-        
-        py::pyobj_handle out_return_value{ py::convert(return_value) };
-        if (!out_return_value) 
-        { 
-            return nullptr;
-        }
-        return out_return_value.detach();
-    }, nullptr);
+        return py::convert(self->obj.Timestamp());
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
-static PyObject* Geocoordinate_get_Point(py::wrapper::Windows::Devices::Geolocation::Geocoordinate* self, void* /*unused*/)
+static PyObject* Geocoordinate_get_Point(py::wrapper::Windows::Devices::Geolocation::Geocoordinate* self, void* /*unused*/) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
-        auto return_value = self->obj.Point();
-        
-        py::pyobj_handle out_return_value{ py::convert(return_value) };
-        if (!out_return_value) 
-        { 
-            return nullptr;
-        }
-        return out_return_value.detach();
-    }, nullptr);
+        return py::convert(self->obj.Point());
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
-static PyObject* Geocoordinate_get_PositionSource(py::wrapper::Windows::Devices::Geolocation::Geocoordinate* self, void* /*unused*/)
+static PyObject* Geocoordinate_get_PositionSource(py::wrapper::Windows::Devices::Geolocation::Geocoordinate* self, void* /*unused*/) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
-        auto return_value = self->obj.PositionSource();
-        
-        py::pyobj_handle out_return_value{ py::convert(return_value) };
-        if (!out_return_value) 
-        { 
-            return nullptr;
-        }
-        return out_return_value.detach();
-    }, nullptr);
+        return py::convert(self->obj.PositionSource());
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
-static PyObject* Geocoordinate_get_SatelliteData(py::wrapper::Windows::Devices::Geolocation::Geocoordinate* self, void* /*unused*/)
+static PyObject* Geocoordinate_get_SatelliteData(py::wrapper::Windows::Devices::Geolocation::Geocoordinate* self, void* /*unused*/) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
-        auto return_value = self->obj.SatelliteData();
-        
-        py::pyobj_handle out_return_value{ py::convert(return_value) };
-        if (!out_return_value) 
-        { 
-            return nullptr;
-        }
-        return out_return_value.detach();
-    }, nullptr);
+        return py::convert(self->obj.SatelliteData());
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
-static PyObject* Geocoordinate_get_PositionSourceTimestamp(py::wrapper::Windows::Devices::Geolocation::Geocoordinate* self, void* /*unused*/)
+static PyObject* Geocoordinate_get_PositionSourceTimestamp(py::wrapper::Windows::Devices::Geolocation::Geocoordinate* self, void* /*unused*/) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
-        auto return_value = self->obj.PositionSourceTimestamp();
-        
-        py::pyobj_handle out_return_value{ py::convert(return_value) };
-        if (!out_return_value) 
-        { 
-            return nullptr;
-        }
-        return out_return_value.detach();
-    }, nullptr);
+        return py::convert(self->obj.PositionSourceTimestamp());
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
-static PyObject* _from_Geocoordinate(PyObject* /*unused*/, PyObject* arg)
+static PyObject* _from_Geocoordinate(PyObject* /*unused*/, PyObject* arg) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
         auto return_value = py::convert_to<winrt::Windows::Foundation::IInspectable>(arg);
         return py::convert(return_value.as<winrt::Windows::Devices::Geolocation::Geocoordinate>());
-    }, nullptr);
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
 static PyMethodDef _methods_Geocoordinate[] = {
@@ -860,13 +840,11 @@ static PyType_Spec _type_spec_Geocoordinate =
 // ----- GeocoordinateSatelliteData class --------------------
 
 PyTypeObject* py::winrt_type<winrt::Windows::Devices::Geolocation::GeocoordinateSatelliteData>::python_type;
-static const char* _type_name_GeocoordinateSatelliteData = "GeocoordinateSatelliteData";
+constexpr const char* const _type_name_GeocoordinateSatelliteData = "GeocoordinateSatelliteData";
 
-static PyObject* _new_GeocoordinateSatelliteData(PyTypeObject* type, PyObject* args, PyObject* kwds)
+static PyObject* _new_GeocoordinateSatelliteData(PyTypeObject* type, PyObject* args, PyObject* kwds) noexcept
 {
-    std::string msg{ _type_name_GeocoordinateSatelliteData };
-    msg.append(" is not activatable");
-    PyErr_SetString(PyExc_TypeError, msg.c_str());
+    py::set_invalid_activation_error(_type_name_GeocoordinateSatelliteData);
     return nullptr;
 }
 
@@ -877,58 +855,57 @@ static void _dealloc_GeocoordinateSatelliteData(py::wrapper::Windows::Devices::G
     self->obj = nullptr;
 }
 
-static PyObject* GeocoordinateSatelliteData_get_HorizontalDilutionOfPrecision(py::wrapper::Windows::Devices::Geolocation::GeocoordinateSatelliteData* self, void* /*unused*/)
+static PyObject* GeocoordinateSatelliteData_get_HorizontalDilutionOfPrecision(py::wrapper::Windows::Devices::Geolocation::GeocoordinateSatelliteData* self, void* /*unused*/) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
-        auto return_value = self->obj.HorizontalDilutionOfPrecision();
-        
-        py::pyobj_handle out_return_value{ py::convert(return_value) };
-        if (!out_return_value) 
-        { 
-            return nullptr;
-        }
-        return out_return_value.detach();
-    }, nullptr);
+        return py::convert(self->obj.HorizontalDilutionOfPrecision());
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
-static PyObject* GeocoordinateSatelliteData_get_PositionDilutionOfPrecision(py::wrapper::Windows::Devices::Geolocation::GeocoordinateSatelliteData* self, void* /*unused*/)
+static PyObject* GeocoordinateSatelliteData_get_PositionDilutionOfPrecision(py::wrapper::Windows::Devices::Geolocation::GeocoordinateSatelliteData* self, void* /*unused*/) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
-        auto return_value = self->obj.PositionDilutionOfPrecision();
-        
-        py::pyobj_handle out_return_value{ py::convert(return_value) };
-        if (!out_return_value) 
-        { 
-            return nullptr;
-        }
-        return out_return_value.detach();
-    }, nullptr);
+        return py::convert(self->obj.PositionDilutionOfPrecision());
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
-static PyObject* GeocoordinateSatelliteData_get_VerticalDilutionOfPrecision(py::wrapper::Windows::Devices::Geolocation::GeocoordinateSatelliteData* self, void* /*unused*/)
+static PyObject* GeocoordinateSatelliteData_get_VerticalDilutionOfPrecision(py::wrapper::Windows::Devices::Geolocation::GeocoordinateSatelliteData* self, void* /*unused*/) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
-        auto return_value = self->obj.VerticalDilutionOfPrecision();
-        
-        py::pyobj_handle out_return_value{ py::convert(return_value) };
-        if (!out_return_value) 
-        { 
-            return nullptr;
-        }
-        return out_return_value.detach();
-    }, nullptr);
+        return py::convert(self->obj.VerticalDilutionOfPrecision());
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
-static PyObject* _from_GeocoordinateSatelliteData(PyObject* /*unused*/, PyObject* arg)
+static PyObject* _from_GeocoordinateSatelliteData(PyObject* /*unused*/, PyObject* arg) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
         auto return_value = py::convert_to<winrt::Windows::Foundation::IInspectable>(arg);
         return py::convert(return_value.as<winrt::Windows::Devices::Geolocation::GeocoordinateSatelliteData>());
-    }, nullptr);
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
 static PyMethodDef _methods_GeocoordinateSatelliteData[] = {
@@ -964,30 +941,35 @@ static PyType_Spec _type_spec_GeocoordinateSatelliteData =
 // ----- Geolocator class --------------------
 
 PyTypeObject* py::winrt_type<winrt::Windows::Devices::Geolocation::Geolocator>::python_type;
-static const char* _type_name_Geolocator = "Geolocator";
+constexpr const char* const _type_name_Geolocator = "Geolocator";
 
-static PyObject* _new_Geolocator(PyTypeObject* type, PyObject* args, PyObject* kwds)
+static PyObject* _new_Geolocator(PyTypeObject* type, PyObject* args, PyObject* kwds) noexcept
 {
     if (kwds != nullptr)
     {
-        PyErr_SetString(PyExc_TypeError, "keyword arguments not supported");
+        py::set_invalid_kwd_args_error();
         return nullptr;
     }
     
     Py_ssize_t arg_count = PyTuple_Size(args);
     if (arg_count == 0)
     {
-        return py::trycatch_invoker([=]() -> PyObject*
+        try
         {
             winrt::Windows::Devices::Geolocation::Geolocator instance{  };
             return py::wrap(instance, type);
-        }, nullptr);
+        }
+        catch (...)
+        {
+            py::to_PyErr();
+            return nullptr;
+        }
     }
-    else if (arg_count != -1)
+    else
     {
-        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+        py::set_invalid_arg_count_error(arg_count);
+        return nullptr;
     }
-    return nullptr;
 }
 
 static void _dealloc_Geolocator(py::wrapper::Windows::Devices::Geolocation::Geolocator* self)
@@ -997,363 +979,400 @@ static void _dealloc_Geolocator(py::wrapper::Windows::Devices::Geolocation::Geol
     self->obj = nullptr;
 }
 
-static PyObject* Geolocator_AllowFallbackToConsentlessPositions(py::wrapper::Windows::Devices::Geolocation::Geolocator* self, PyObject* args)
+static PyObject* Geolocator_AllowFallbackToConsentlessPositions(py::wrapper::Windows::Devices::Geolocation::Geolocator* self, PyObject* args) noexcept
 {
     Py_ssize_t arg_count = PyTuple_Size(args);
     
     if (arg_count == 0)
     {
-        return py::trycatch_invoker([=]() -> PyObject*
+        try
         {
             self->obj.AllowFallbackToConsentlessPositions();
-            
             Py_RETURN_NONE;
-        }, nullptr);
+        }
+        catch (...)
+        {
+            py::to_PyErr();
+            return nullptr;
+        }
     }
-    else if (arg_count != -1)
+    else
     {
-        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+        py::set_invalid_arg_count_error(arg_count);
+        return nullptr;
     }
-    return nullptr;
 }
 
-static PyObject* Geolocator_GetGeopositionAsync(py::wrapper::Windows::Devices::Geolocation::Geolocator* self, PyObject* args)
+static PyObject* Geolocator_GetGeopositionAsync(py::wrapper::Windows::Devices::Geolocation::Geolocator* self, PyObject* args) noexcept
 {
     Py_ssize_t arg_count = PyTuple_Size(args);
     
     if (arg_count == 0)
     {
-        return py::trycatch_invoker([=]() -> PyObject*
+        try
         {
-            auto return_value = self->obj.GetGeopositionAsync();
-            
-            py::pyobj_handle out_return_value{ py::convert(return_value) };
-            if (!out_return_value) 
-            { 
-                return nullptr;
-            }
-            return out_return_value.detach();
-        }, nullptr);
+            return py::convert(self->obj.GetGeopositionAsync());
+        }
+        catch (...)
+        {
+            py::to_PyErr();
+            return nullptr;
+        }
     }
     else if (arg_count == 2)
     {
-        return py::trycatch_invoker([=]() -> PyObject*
+        try
         {
             auto param0 = py::convert_to<winrt::Windows::Foundation::TimeSpan>(args, 0);
             auto param1 = py::convert_to<winrt::Windows::Foundation::TimeSpan>(args, 1);
             
-            auto return_value = self->obj.GetGeopositionAsync(param0, param1);
-            
-            py::pyobj_handle out_return_value{ py::convert(return_value) };
-            if (!out_return_value) 
-            { 
-                return nullptr;
-            }
-            return out_return_value.detach();
-        }, nullptr);
+            return py::convert(self->obj.GetGeopositionAsync(param0, param1));
+        }
+        catch (...)
+        {
+            py::to_PyErr();
+            return nullptr;
+        }
     }
-    else if (arg_count != -1)
+    else
     {
-        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+        py::set_invalid_arg_count_error(arg_count);
+        return nullptr;
     }
-    return nullptr;
 }
 
-static PyObject* Geolocator_GetGeopositionHistoryAsync(PyObject* /*unused*/, PyObject* args)
+static PyObject* Geolocator_GetGeopositionHistoryAsync(PyObject* /*unused*/, PyObject* args) noexcept
 {
     Py_ssize_t arg_count = PyTuple_Size(args);
     
     if (arg_count == 1)
     {
-        return py::trycatch_invoker([=]() -> PyObject*
+        try
         {
             auto param0 = py::convert_to<winrt::Windows::Foundation::DateTime>(args, 0);
             
-            auto return_value = winrt::Windows::Devices::Geolocation::Geolocator::GetGeopositionHistoryAsync(param0);
-            
-            py::pyobj_handle out_return_value{ py::convert(return_value) };
-            if (!out_return_value) 
-            { 
-                return nullptr;
-            }
-            return out_return_value.detach();
-        }, nullptr);
+            return py::convert(winrt::Windows::Devices::Geolocation::Geolocator::GetGeopositionHistoryAsync(param0));
+        }
+        catch (...)
+        {
+            py::to_PyErr();
+            return nullptr;
+        }
     }
     else if (arg_count == 2)
     {
-        return py::trycatch_invoker([=]() -> PyObject*
+        try
         {
             auto param0 = py::convert_to<winrt::Windows::Foundation::DateTime>(args, 0);
             auto param1 = py::convert_to<winrt::Windows::Foundation::TimeSpan>(args, 1);
             
-            auto return_value = winrt::Windows::Devices::Geolocation::Geolocator::GetGeopositionHistoryAsync(param0, param1);
-            
-            py::pyobj_handle out_return_value{ py::convert(return_value) };
-            if (!out_return_value) 
-            { 
-                return nullptr;
-            }
-            return out_return_value.detach();
-        }, nullptr);
+            return py::convert(winrt::Windows::Devices::Geolocation::Geolocator::GetGeopositionHistoryAsync(param0, param1));
+        }
+        catch (...)
+        {
+            py::to_PyErr();
+            return nullptr;
+        }
     }
-    else if (arg_count != -1)
+    else
     {
-        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+        py::set_invalid_arg_count_error(arg_count);
+        return nullptr;
     }
-    return nullptr;
 }
 
-static PyObject* Geolocator_RequestAccessAsync(PyObject* /*unused*/, PyObject* args)
+static PyObject* Geolocator_RequestAccessAsync(PyObject* /*unused*/, PyObject* args) noexcept
 {
     Py_ssize_t arg_count = PyTuple_Size(args);
     
     if (arg_count == 0)
     {
-        return py::trycatch_invoker([=]() -> PyObject*
+        try
         {
-            auto return_value = winrt::Windows::Devices::Geolocation::Geolocator::RequestAccessAsync();
-            
-            py::pyobj_handle out_return_value{ py::convert(return_value) };
-            if (!out_return_value) 
-            { 
-                return nullptr;
-            }
-            return out_return_value.detach();
-        }, nullptr);
-    }
-    else if (arg_count != -1)
-    {
-        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-    }
-    return nullptr;
-}
-
-static PyObject* Geolocator_get_ReportInterval(py::wrapper::Windows::Devices::Geolocation::Geolocator* self, void* /*unused*/)
-{
-    return py::trycatch_invoker([=]() -> PyObject*
-    {
-        auto return_value = self->obj.ReportInterval();
-        
-        py::pyobj_handle out_return_value{ py::convert(return_value) };
-        if (!out_return_value) 
-        { 
+            return py::convert(winrt::Windows::Devices::Geolocation::Geolocator::RequestAccessAsync());
+        }
+        catch (...)
+        {
+            py::to_PyErr();
             return nullptr;
         }
-        return out_return_value.detach();
-    }, nullptr);
+    }
+    else
+    {
+        py::set_invalid_arg_count_error(arg_count);
+        return nullptr;
+    }
 }
 
-static int Geolocator_put_ReportInterval(py::wrapper::Windows::Devices::Geolocation::Geolocator* self, PyObject* arg, void* /*unused*/)
+static PyObject* Geolocator_get_ReportInterval(py::wrapper::Windows::Devices::Geolocation::Geolocator* self, void* /*unused*/) noexcept
 {
-    return py::setter_trycatch_invoker(arg, [=]() -> int
+    try
+    {
+        return py::convert(self->obj.ReportInterval());
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
+}
+
+static int Geolocator_put_ReportInterval(py::wrapper::Windows::Devices::Geolocation::Geolocator* self, PyObject* arg, void* /*unused*/) noexcept
+{
+    if (arg == nullptr)
+    {
+        PyErr_SetString(PyExc_TypeError, "property delete not supported");
+        return -1;
+    }
+    
+    try
     {
         auto param0 = py::convert_to<uint32_t>(arg);
         
         self->obj.ReportInterval(param0);
         return 0;
-    });
-}
-
-static PyObject* Geolocator_get_MovementThreshold(py::wrapper::Windows::Devices::Geolocation::Geolocator* self, void* /*unused*/)
-{
-    return py::trycatch_invoker([=]() -> PyObject*
+    }
+    catch (...)
     {
-        auto return_value = self->obj.MovementThreshold();
-        
-        py::pyobj_handle out_return_value{ py::convert(return_value) };
-        if (!out_return_value) 
-        { 
-            return nullptr;
-        }
-        return out_return_value.detach();
-    }, nullptr);
+        py::to_PyErr();
+        return -1;
+    }
 }
 
-static int Geolocator_put_MovementThreshold(py::wrapper::Windows::Devices::Geolocation::Geolocator* self, PyObject* arg, void* /*unused*/)
+static PyObject* Geolocator_get_MovementThreshold(py::wrapper::Windows::Devices::Geolocation::Geolocator* self, void* /*unused*/) noexcept
 {
-    return py::setter_trycatch_invoker(arg, [=]() -> int
+    try
+    {
+        return py::convert(self->obj.MovementThreshold());
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
+}
+
+static int Geolocator_put_MovementThreshold(py::wrapper::Windows::Devices::Geolocation::Geolocator* self, PyObject* arg, void* /*unused*/) noexcept
+{
+    if (arg == nullptr)
+    {
+        PyErr_SetString(PyExc_TypeError, "property delete not supported");
+        return -1;
+    }
+    
+    try
     {
         auto param0 = py::convert_to<double>(arg);
         
         self->obj.MovementThreshold(param0);
         return 0;
-    });
-}
-
-static PyObject* Geolocator_get_DesiredAccuracy(py::wrapper::Windows::Devices::Geolocation::Geolocator* self, void* /*unused*/)
-{
-    return py::trycatch_invoker([=]() -> PyObject*
+    }
+    catch (...)
     {
-        auto return_value = self->obj.DesiredAccuracy();
-        
-        py::pyobj_handle out_return_value{ py::convert(return_value) };
-        if (!out_return_value) 
-        { 
-            return nullptr;
-        }
-        return out_return_value.detach();
-    }, nullptr);
+        py::to_PyErr();
+        return -1;
+    }
 }
 
-static int Geolocator_put_DesiredAccuracy(py::wrapper::Windows::Devices::Geolocation::Geolocator* self, PyObject* arg, void* /*unused*/)
+static PyObject* Geolocator_get_DesiredAccuracy(py::wrapper::Windows::Devices::Geolocation::Geolocator* self, void* /*unused*/) noexcept
 {
-    return py::setter_trycatch_invoker(arg, [=]() -> int
+    try
+    {
+        return py::convert(self->obj.DesiredAccuracy());
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
+}
+
+static int Geolocator_put_DesiredAccuracy(py::wrapper::Windows::Devices::Geolocation::Geolocator* self, PyObject* arg, void* /*unused*/) noexcept
+{
+    if (arg == nullptr)
+    {
+        PyErr_SetString(PyExc_TypeError, "property delete not supported");
+        return -1;
+    }
+    
+    try
     {
         auto param0 = py::convert_to<winrt::Windows::Devices::Geolocation::PositionAccuracy>(arg);
         
         self->obj.DesiredAccuracy(param0);
         return 0;
-    });
-}
-
-static PyObject* Geolocator_get_LocationStatus(py::wrapper::Windows::Devices::Geolocation::Geolocator* self, void* /*unused*/)
-{
-    return py::trycatch_invoker([=]() -> PyObject*
+    }
+    catch (...)
     {
-        auto return_value = self->obj.LocationStatus();
-        
-        py::pyobj_handle out_return_value{ py::convert(return_value) };
-        if (!out_return_value) 
-        { 
-            return nullptr;
-        }
-        return out_return_value.detach();
-    }, nullptr);
+        py::to_PyErr();
+        return -1;
+    }
 }
 
-static PyObject* Geolocator_get_DesiredAccuracyInMeters(py::wrapper::Windows::Devices::Geolocation::Geolocator* self, void* /*unused*/)
+static PyObject* Geolocator_get_LocationStatus(py::wrapper::Windows::Devices::Geolocation::Geolocator* self, void* /*unused*/) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
-        auto return_value = self->obj.DesiredAccuracyInMeters();
-        
-        py::pyobj_handle out_return_value{ py::convert(return_value) };
-        if (!out_return_value) 
-        { 
-            return nullptr;
-        }
-        return out_return_value.detach();
-    }, nullptr);
+        return py::convert(self->obj.LocationStatus());
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
-static int Geolocator_put_DesiredAccuracyInMeters(py::wrapper::Windows::Devices::Geolocation::Geolocator* self, PyObject* arg, void* /*unused*/)
+static PyObject* Geolocator_get_DesiredAccuracyInMeters(py::wrapper::Windows::Devices::Geolocation::Geolocator* self, void* /*unused*/) noexcept
 {
-    return py::setter_trycatch_invoker(arg, [=]() -> int
+    try
+    {
+        return py::convert(self->obj.DesiredAccuracyInMeters());
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
+}
+
+static int Geolocator_put_DesiredAccuracyInMeters(py::wrapper::Windows::Devices::Geolocation::Geolocator* self, PyObject* arg, void* /*unused*/) noexcept
+{
+    if (arg == nullptr)
+    {
+        PyErr_SetString(PyExc_TypeError, "property delete not supported");
+        return -1;
+    }
+    
+    try
     {
         auto param0 = py::convert_to<winrt::Windows::Foundation::IReference<uint32_t>>(arg);
         
         self->obj.DesiredAccuracyInMeters(param0);
         return 0;
-    });
-}
-
-static PyObject* Geolocator_get_DefaultGeoposition(PyObject* /*unused*/, void* /*unused*/)
-{
-    return py::trycatch_invoker([=]() -> PyObject*
+    }
+    catch (...)
     {
-        auto return_value = winrt::Windows::Devices::Geolocation::Geolocator::DefaultGeoposition();
-        
-        py::pyobj_handle out_return_value{ py::convert(return_value) };
-        if (!out_return_value) 
-        { 
-            return nullptr;
-        }
-        return out_return_value.detach();
-    }, nullptr);
+        py::to_PyErr();
+        return -1;
+    }
 }
 
-static PyObject* Geolocator_put_DefaultGeoposition(PyObject* /*unused*/, PyObject* arg, void* /*unused*/)
+static PyObject* Geolocator_get_DefaultGeoposition(PyObject* /*unused*/, void* /*unused*/) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
+    {
+        return py::convert(winrt::Windows::Devices::Geolocation::Geolocator::DefaultGeoposition());
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
+}
+
+static PyObject* Geolocator_put_DefaultGeoposition(PyObject* /*unused*/, PyObject* arg, void* /*unused*/) noexcept
+{
+    try
     {
         auto param0 = py::convert_to<winrt::Windows::Foundation::IReference<winrt::Windows::Devices::Geolocation::BasicGeoposition>>(arg);
         
         winrt::Windows::Devices::Geolocation::Geolocator::DefaultGeoposition(param0);
-        
         Py_RETURN_NONE;
-    }, nullptr);
-}
-
-static PyObject* Geolocator_get_IsDefaultGeopositionRecommended(PyObject* /*unused*/, void* /*unused*/)
-{
-    return py::trycatch_invoker([=]() -> PyObject*
+    }
+    catch (...)
     {
-        auto return_value = winrt::Windows::Devices::Geolocation::Geolocator::IsDefaultGeopositionRecommended();
-        
-        py::pyobj_handle out_return_value{ py::convert(return_value) };
-        if (!out_return_value) 
-        { 
-            return nullptr;
-        }
-        return out_return_value.detach();
-    }, nullptr);
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
-static PyObject* Geolocator_add_PositionChanged(py::wrapper::Windows::Devices::Geolocation::Geolocator* self, PyObject* arg)
+static PyObject* Geolocator_get_IsDefaultGeopositionRecommended(PyObject* /*unused*/, void* /*unused*/) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
+    {
+        return py::convert(winrt::Windows::Devices::Geolocation::Geolocator::IsDefaultGeopositionRecommended());
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
+}
+
+static PyObject* Geolocator_add_PositionChanged(py::wrapper::Windows::Devices::Geolocation::Geolocator* self, PyObject* arg) noexcept
+{
+    try
     {
         auto param0 = py::convert_to<winrt::Windows::Foundation::TypedEventHandler<winrt::Windows::Devices::Geolocation::Geolocator, winrt::Windows::Devices::Geolocation::PositionChangedEventArgs>>(arg);
         
-        auto return_value = self->obj.PositionChanged(param0);
-        
-        py::pyobj_handle out_return_value{ py::convert(return_value) };
-        if (!out_return_value) 
-        { 
-            return nullptr;
-        }
-        return out_return_value.detach();
-    }, nullptr);
+        return py::convert(self->obj.PositionChanged(param0));
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
-static PyObject* Geolocator_remove_PositionChanged(py::wrapper::Windows::Devices::Geolocation::Geolocator* self, PyObject* arg)
+static PyObject* Geolocator_remove_PositionChanged(py::wrapper::Windows::Devices::Geolocation::Geolocator* self, PyObject* arg) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
         auto param0 = py::convert_to<winrt::event_token>(arg);
         
         self->obj.PositionChanged(param0);
-        
         Py_RETURN_NONE;
-    }, nullptr);
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
-static PyObject* Geolocator_add_StatusChanged(py::wrapper::Windows::Devices::Geolocation::Geolocator* self, PyObject* arg)
+static PyObject* Geolocator_add_StatusChanged(py::wrapper::Windows::Devices::Geolocation::Geolocator* self, PyObject* arg) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
         auto param0 = py::convert_to<winrt::Windows::Foundation::TypedEventHandler<winrt::Windows::Devices::Geolocation::Geolocator, winrt::Windows::Devices::Geolocation::StatusChangedEventArgs>>(arg);
         
-        auto return_value = self->obj.StatusChanged(param0);
-        
-        py::pyobj_handle out_return_value{ py::convert(return_value) };
-        if (!out_return_value) 
-        { 
-            return nullptr;
-        }
-        return out_return_value.detach();
-    }, nullptr);
+        return py::convert(self->obj.StatusChanged(param0));
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
-static PyObject* Geolocator_remove_StatusChanged(py::wrapper::Windows::Devices::Geolocation::Geolocator* self, PyObject* arg)
+static PyObject* Geolocator_remove_StatusChanged(py::wrapper::Windows::Devices::Geolocation::Geolocator* self, PyObject* arg) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
         auto param0 = py::convert_to<winrt::event_token>(arg);
         
         self->obj.StatusChanged(param0);
-        
         Py_RETURN_NONE;
-    }, nullptr);
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
-static PyObject* _from_Geolocator(PyObject* /*unused*/, PyObject* arg)
+static PyObject* _from_Geolocator(PyObject* /*unused*/, PyObject* arg) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
         auto return_value = py::convert_to<winrt::Windows::Foundation::IInspectable>(arg);
         return py::convert(return_value.as<winrt::Windows::Devices::Geolocation::Geolocator>());
-    }, nullptr);
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
 static PyMethodDef _methods_Geolocator[] = {
@@ -1402,41 +1421,51 @@ static PyType_Spec _type_spec_Geolocator =
 // ----- Geopath class --------------------
 
 PyTypeObject* py::winrt_type<winrt::Windows::Devices::Geolocation::Geopath>::python_type;
-static const char* _type_name_Geopath = "Geopath";
+constexpr const char* const _type_name_Geopath = "Geopath";
 
-static PyObject* _new_Geopath(PyTypeObject* type, PyObject* args, PyObject* kwds)
+static PyObject* _new_Geopath(PyTypeObject* type, PyObject* args, PyObject* kwds) noexcept
 {
     if (kwds != nullptr)
     {
-        PyErr_SetString(PyExc_TypeError, "keyword arguments not supported");
+        py::set_invalid_kwd_args_error();
         return nullptr;
     }
     
     Py_ssize_t arg_count = PyTuple_Size(args);
     if (arg_count == 1)
     {
-        return py::trycatch_invoker([=]() -> PyObject*
+        try
         {
             auto param0 = py::convert_to<winrt::Windows::Foundation::Collections::IIterable<winrt::Windows::Devices::Geolocation::BasicGeoposition>>(args, 0);
             
             winrt::Windows::Devices::Geolocation::Geopath instance{ param0 };
             return py::wrap(instance, type);
-        }, nullptr);
+        }
+        catch (...)
+        {
+            py::to_PyErr();
+            return nullptr;
+        }
     }
     else if (arg_count == 2)
     {
-        return py::trycatch_invoker([=]() -> PyObject*
+        try
         {
             auto param0 = py::convert_to<winrt::Windows::Foundation::Collections::IIterable<winrt::Windows::Devices::Geolocation::BasicGeoposition>>(args, 0);
             auto param1 = py::convert_to<winrt::Windows::Devices::Geolocation::AltitudeReferenceSystem>(args, 1);
             
             winrt::Windows::Devices::Geolocation::Geopath instance{ param0, param1 };
             return py::wrap(instance, type);
-        }, nullptr);
+        }
+        catch (...)
+        {
+            py::to_PyErr();
+            return nullptr;
+        }
     }
     else if (arg_count == 3)
     {
-        return py::trycatch_invoker([=]() -> PyObject*
+        try
         {
             auto param0 = py::convert_to<winrt::Windows::Foundation::Collections::IIterable<winrt::Windows::Devices::Geolocation::BasicGeoposition>>(args, 0);
             auto param1 = py::convert_to<winrt::Windows::Devices::Geolocation::AltitudeReferenceSystem>(args, 1);
@@ -1444,13 +1473,18 @@ static PyObject* _new_Geopath(PyTypeObject* type, PyObject* args, PyObject* kwds
             
             winrt::Windows::Devices::Geolocation::Geopath instance{ param0, param1, param2 };
             return py::wrap(instance, type);
-        }, nullptr);
+        }
+        catch (...)
+        {
+            py::to_PyErr();
+            return nullptr;
+        }
     }
-    else if (arg_count != -1)
+    else
     {
-        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+        py::set_invalid_arg_count_error(arg_count);
+        return nullptr;
     }
-    return nullptr;
 }
 
 static void _dealloc_Geopath(py::wrapper::Windows::Devices::Geolocation::Geopath* self)
@@ -1460,73 +1494,70 @@ static void _dealloc_Geopath(py::wrapper::Windows::Devices::Geolocation::Geopath
     self->obj = nullptr;
 }
 
-static PyObject* Geopath_get_Positions(py::wrapper::Windows::Devices::Geolocation::Geopath* self, void* /*unused*/)
+static PyObject* Geopath_get_Positions(py::wrapper::Windows::Devices::Geolocation::Geopath* self, void* /*unused*/) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
-        auto return_value = self->obj.Positions();
-        
-        py::pyobj_handle out_return_value{ py::convert(return_value) };
-        if (!out_return_value) 
-        { 
-            return nullptr;
-        }
-        return out_return_value.detach();
-    }, nullptr);
+        return py::convert(self->obj.Positions());
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
-static PyObject* Geopath_get_AltitudeReferenceSystem(py::wrapper::Windows::Devices::Geolocation::Geopath* self, void* /*unused*/)
+static PyObject* Geopath_get_AltitudeReferenceSystem(py::wrapper::Windows::Devices::Geolocation::Geopath* self, void* /*unused*/) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
-        auto return_value = self->obj.AltitudeReferenceSystem();
-        
-        py::pyobj_handle out_return_value{ py::convert(return_value) };
-        if (!out_return_value) 
-        { 
-            return nullptr;
-        }
-        return out_return_value.detach();
-    }, nullptr);
+        return py::convert(self->obj.AltitudeReferenceSystem());
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
-static PyObject* Geopath_get_GeoshapeType(py::wrapper::Windows::Devices::Geolocation::Geopath* self, void* /*unused*/)
+static PyObject* Geopath_get_GeoshapeType(py::wrapper::Windows::Devices::Geolocation::Geopath* self, void* /*unused*/) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
-        auto return_value = self->obj.GeoshapeType();
-        
-        py::pyobj_handle out_return_value{ py::convert(return_value) };
-        if (!out_return_value) 
-        { 
-            return nullptr;
-        }
-        return out_return_value.detach();
-    }, nullptr);
+        return py::convert(self->obj.GeoshapeType());
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
-static PyObject* Geopath_get_SpatialReferenceId(py::wrapper::Windows::Devices::Geolocation::Geopath* self, void* /*unused*/)
+static PyObject* Geopath_get_SpatialReferenceId(py::wrapper::Windows::Devices::Geolocation::Geopath* self, void* /*unused*/) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
-        auto return_value = self->obj.SpatialReferenceId();
-        
-        py::pyobj_handle out_return_value{ py::convert(return_value) };
-        if (!out_return_value) 
-        { 
-            return nullptr;
-        }
-        return out_return_value.detach();
-    }, nullptr);
+        return py::convert(self->obj.SpatialReferenceId());
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
-static PyObject* _from_Geopath(PyObject* /*unused*/, PyObject* arg)
+static PyObject* _from_Geopath(PyObject* /*unused*/, PyObject* arg) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
         auto return_value = py::convert_to<winrt::Windows::Foundation::IInspectable>(arg);
         return py::convert(return_value.as<winrt::Windows::Devices::Geolocation::Geopath>());
-    }, nullptr);
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
 static PyMethodDef _methods_Geopath[] = {
@@ -1563,41 +1594,51 @@ static PyType_Spec _type_spec_Geopath =
 // ----- Geopoint class --------------------
 
 PyTypeObject* py::winrt_type<winrt::Windows::Devices::Geolocation::Geopoint>::python_type;
-static const char* _type_name_Geopoint = "Geopoint";
+constexpr const char* const _type_name_Geopoint = "Geopoint";
 
-static PyObject* _new_Geopoint(PyTypeObject* type, PyObject* args, PyObject* kwds)
+static PyObject* _new_Geopoint(PyTypeObject* type, PyObject* args, PyObject* kwds) noexcept
 {
     if (kwds != nullptr)
     {
-        PyErr_SetString(PyExc_TypeError, "keyword arguments not supported");
+        py::set_invalid_kwd_args_error();
         return nullptr;
     }
     
     Py_ssize_t arg_count = PyTuple_Size(args);
     if (arg_count == 1)
     {
-        return py::trycatch_invoker([=]() -> PyObject*
+        try
         {
             auto param0 = py::convert_to<winrt::Windows::Devices::Geolocation::BasicGeoposition>(args, 0);
             
             winrt::Windows::Devices::Geolocation::Geopoint instance{ param0 };
             return py::wrap(instance, type);
-        }, nullptr);
+        }
+        catch (...)
+        {
+            py::to_PyErr();
+            return nullptr;
+        }
     }
     else if (arg_count == 2)
     {
-        return py::trycatch_invoker([=]() -> PyObject*
+        try
         {
             auto param0 = py::convert_to<winrt::Windows::Devices::Geolocation::BasicGeoposition>(args, 0);
             auto param1 = py::convert_to<winrt::Windows::Devices::Geolocation::AltitudeReferenceSystem>(args, 1);
             
             winrt::Windows::Devices::Geolocation::Geopoint instance{ param0, param1 };
             return py::wrap(instance, type);
-        }, nullptr);
+        }
+        catch (...)
+        {
+            py::to_PyErr();
+            return nullptr;
+        }
     }
     else if (arg_count == 3)
     {
-        return py::trycatch_invoker([=]() -> PyObject*
+        try
         {
             auto param0 = py::convert_to<winrt::Windows::Devices::Geolocation::BasicGeoposition>(args, 0);
             auto param1 = py::convert_to<winrt::Windows::Devices::Geolocation::AltitudeReferenceSystem>(args, 1);
@@ -1605,13 +1646,18 @@ static PyObject* _new_Geopoint(PyTypeObject* type, PyObject* args, PyObject* kwd
             
             winrt::Windows::Devices::Geolocation::Geopoint instance{ param0, param1, param2 };
             return py::wrap(instance, type);
-        }, nullptr);
+        }
+        catch (...)
+        {
+            py::to_PyErr();
+            return nullptr;
+        }
     }
-    else if (arg_count != -1)
+    else
     {
-        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+        py::set_invalid_arg_count_error(arg_count);
+        return nullptr;
     }
-    return nullptr;
 }
 
 static void _dealloc_Geopoint(py::wrapper::Windows::Devices::Geolocation::Geopoint* self)
@@ -1621,73 +1667,70 @@ static void _dealloc_Geopoint(py::wrapper::Windows::Devices::Geolocation::Geopoi
     self->obj = nullptr;
 }
 
-static PyObject* Geopoint_get_Position(py::wrapper::Windows::Devices::Geolocation::Geopoint* self, void* /*unused*/)
+static PyObject* Geopoint_get_Position(py::wrapper::Windows::Devices::Geolocation::Geopoint* self, void* /*unused*/) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
-        auto return_value = self->obj.Position();
-        
-        py::pyobj_handle out_return_value{ py::convert(return_value) };
-        if (!out_return_value) 
-        { 
-            return nullptr;
-        }
-        return out_return_value.detach();
-    }, nullptr);
+        return py::convert(self->obj.Position());
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
-static PyObject* Geopoint_get_AltitudeReferenceSystem(py::wrapper::Windows::Devices::Geolocation::Geopoint* self, void* /*unused*/)
+static PyObject* Geopoint_get_AltitudeReferenceSystem(py::wrapper::Windows::Devices::Geolocation::Geopoint* self, void* /*unused*/) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
-        auto return_value = self->obj.AltitudeReferenceSystem();
-        
-        py::pyobj_handle out_return_value{ py::convert(return_value) };
-        if (!out_return_value) 
-        { 
-            return nullptr;
-        }
-        return out_return_value.detach();
-    }, nullptr);
+        return py::convert(self->obj.AltitudeReferenceSystem());
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
-static PyObject* Geopoint_get_GeoshapeType(py::wrapper::Windows::Devices::Geolocation::Geopoint* self, void* /*unused*/)
+static PyObject* Geopoint_get_GeoshapeType(py::wrapper::Windows::Devices::Geolocation::Geopoint* self, void* /*unused*/) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
-        auto return_value = self->obj.GeoshapeType();
-        
-        py::pyobj_handle out_return_value{ py::convert(return_value) };
-        if (!out_return_value) 
-        { 
-            return nullptr;
-        }
-        return out_return_value.detach();
-    }, nullptr);
+        return py::convert(self->obj.GeoshapeType());
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
-static PyObject* Geopoint_get_SpatialReferenceId(py::wrapper::Windows::Devices::Geolocation::Geopoint* self, void* /*unused*/)
+static PyObject* Geopoint_get_SpatialReferenceId(py::wrapper::Windows::Devices::Geolocation::Geopoint* self, void* /*unused*/) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
-        auto return_value = self->obj.SpatialReferenceId();
-        
-        py::pyobj_handle out_return_value{ py::convert(return_value) };
-        if (!out_return_value) 
-        { 
-            return nullptr;
-        }
-        return out_return_value.detach();
-    }, nullptr);
+        return py::convert(self->obj.SpatialReferenceId());
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
-static PyObject* _from_Geopoint(PyObject* /*unused*/, PyObject* arg)
+static PyObject* _from_Geopoint(PyObject* /*unused*/, PyObject* arg) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
         auto return_value = py::convert_to<winrt::Windows::Foundation::IInspectable>(arg);
         return py::convert(return_value.as<winrt::Windows::Devices::Geolocation::Geopoint>());
-    }, nullptr);
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
 static PyMethodDef _methods_Geopoint[] = {
@@ -1724,13 +1767,11 @@ static PyType_Spec _type_spec_Geopoint =
 // ----- Geoposition class --------------------
 
 PyTypeObject* py::winrt_type<winrt::Windows::Devices::Geolocation::Geoposition>::python_type;
-static const char* _type_name_Geoposition = "Geoposition";
+constexpr const char* const _type_name_Geoposition = "Geoposition";
 
-static PyObject* _new_Geoposition(PyTypeObject* type, PyObject* args, PyObject* kwds)
+static PyObject* _new_Geoposition(PyTypeObject* type, PyObject* args, PyObject* kwds) noexcept
 {
-    std::string msg{ _type_name_Geoposition };
-    msg.append(" is not activatable");
-    PyErr_SetString(PyExc_TypeError, msg.c_str());
+    py::set_invalid_activation_error(_type_name_Geoposition);
     return nullptr;
 }
 
@@ -1741,58 +1782,57 @@ static void _dealloc_Geoposition(py::wrapper::Windows::Devices::Geolocation::Geo
     self->obj = nullptr;
 }
 
-static PyObject* Geoposition_get_CivicAddress(py::wrapper::Windows::Devices::Geolocation::Geoposition* self, void* /*unused*/)
+static PyObject* Geoposition_get_CivicAddress(py::wrapper::Windows::Devices::Geolocation::Geoposition* self, void* /*unused*/) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
-        auto return_value = self->obj.CivicAddress();
-        
-        py::pyobj_handle out_return_value{ py::convert(return_value) };
-        if (!out_return_value) 
-        { 
-            return nullptr;
-        }
-        return out_return_value.detach();
-    }, nullptr);
+        return py::convert(self->obj.CivicAddress());
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
-static PyObject* Geoposition_get_Coordinate(py::wrapper::Windows::Devices::Geolocation::Geoposition* self, void* /*unused*/)
+static PyObject* Geoposition_get_Coordinate(py::wrapper::Windows::Devices::Geolocation::Geoposition* self, void* /*unused*/) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
-        auto return_value = self->obj.Coordinate();
-        
-        py::pyobj_handle out_return_value{ py::convert(return_value) };
-        if (!out_return_value) 
-        { 
-            return nullptr;
-        }
-        return out_return_value.detach();
-    }, nullptr);
+        return py::convert(self->obj.Coordinate());
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
-static PyObject* Geoposition_get_VenueData(py::wrapper::Windows::Devices::Geolocation::Geoposition* self, void* /*unused*/)
+static PyObject* Geoposition_get_VenueData(py::wrapper::Windows::Devices::Geolocation::Geoposition* self, void* /*unused*/) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
-        auto return_value = self->obj.VenueData();
-        
-        py::pyobj_handle out_return_value{ py::convert(return_value) };
-        if (!out_return_value) 
-        { 
-            return nullptr;
-        }
-        return out_return_value.detach();
-    }, nullptr);
+        return py::convert(self->obj.VenueData());
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
-static PyObject* _from_Geoposition(PyObject* /*unused*/, PyObject* arg)
+static PyObject* _from_Geoposition(PyObject* /*unused*/, PyObject* arg) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
         auto return_value = py::convert_to<winrt::Windows::Foundation::IInspectable>(arg);
         return py::convert(return_value.as<winrt::Windows::Devices::Geolocation::Geoposition>());
-    }, nullptr);
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
 static PyMethodDef _methods_Geoposition[] = {
@@ -1828,13 +1868,11 @@ static PyType_Spec _type_spec_Geoposition =
 // ----- Geovisit class --------------------
 
 PyTypeObject* py::winrt_type<winrt::Windows::Devices::Geolocation::Geovisit>::python_type;
-static const char* _type_name_Geovisit = "Geovisit";
+constexpr const char* const _type_name_Geovisit = "Geovisit";
 
-static PyObject* _new_Geovisit(PyTypeObject* type, PyObject* args, PyObject* kwds)
+static PyObject* _new_Geovisit(PyTypeObject* type, PyObject* args, PyObject* kwds) noexcept
 {
-    std::string msg{ _type_name_Geovisit };
-    msg.append(" is not activatable");
-    PyErr_SetString(PyExc_TypeError, msg.c_str());
+    py::set_invalid_activation_error(_type_name_Geovisit);
     return nullptr;
 }
 
@@ -1845,58 +1883,57 @@ static void _dealloc_Geovisit(py::wrapper::Windows::Devices::Geolocation::Geovis
     self->obj = nullptr;
 }
 
-static PyObject* Geovisit_get_Position(py::wrapper::Windows::Devices::Geolocation::Geovisit* self, void* /*unused*/)
+static PyObject* Geovisit_get_Position(py::wrapper::Windows::Devices::Geolocation::Geovisit* self, void* /*unused*/) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
-        auto return_value = self->obj.Position();
-        
-        py::pyobj_handle out_return_value{ py::convert(return_value) };
-        if (!out_return_value) 
-        { 
-            return nullptr;
-        }
-        return out_return_value.detach();
-    }, nullptr);
+        return py::convert(self->obj.Position());
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
-static PyObject* Geovisit_get_StateChange(py::wrapper::Windows::Devices::Geolocation::Geovisit* self, void* /*unused*/)
+static PyObject* Geovisit_get_StateChange(py::wrapper::Windows::Devices::Geolocation::Geovisit* self, void* /*unused*/) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
-        auto return_value = self->obj.StateChange();
-        
-        py::pyobj_handle out_return_value{ py::convert(return_value) };
-        if (!out_return_value) 
-        { 
-            return nullptr;
-        }
-        return out_return_value.detach();
-    }, nullptr);
+        return py::convert(self->obj.StateChange());
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
-static PyObject* Geovisit_get_Timestamp(py::wrapper::Windows::Devices::Geolocation::Geovisit* self, void* /*unused*/)
+static PyObject* Geovisit_get_Timestamp(py::wrapper::Windows::Devices::Geolocation::Geovisit* self, void* /*unused*/) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
-        auto return_value = self->obj.Timestamp();
-        
-        py::pyobj_handle out_return_value{ py::convert(return_value) };
-        if (!out_return_value) 
-        { 
-            return nullptr;
-        }
-        return out_return_value.detach();
-    }, nullptr);
+        return py::convert(self->obj.Timestamp());
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
-static PyObject* _from_Geovisit(PyObject* /*unused*/, PyObject* arg)
+static PyObject* _from_Geovisit(PyObject* /*unused*/, PyObject* arg) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
         auto return_value = py::convert_to<winrt::Windows::Foundation::IInspectable>(arg);
         return py::convert(return_value.as<winrt::Windows::Devices::Geolocation::Geovisit>());
-    }, nullptr);
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
 static PyMethodDef _methods_Geovisit[] = {
@@ -1932,30 +1969,35 @@ static PyType_Spec _type_spec_Geovisit =
 // ----- GeovisitMonitor class --------------------
 
 PyTypeObject* py::winrt_type<winrt::Windows::Devices::Geolocation::GeovisitMonitor>::python_type;
-static const char* _type_name_GeovisitMonitor = "GeovisitMonitor";
+constexpr const char* const _type_name_GeovisitMonitor = "GeovisitMonitor";
 
-static PyObject* _new_GeovisitMonitor(PyTypeObject* type, PyObject* args, PyObject* kwds)
+static PyObject* _new_GeovisitMonitor(PyTypeObject* type, PyObject* args, PyObject* kwds) noexcept
 {
     if (kwds != nullptr)
     {
-        PyErr_SetString(PyExc_TypeError, "keyword arguments not supported");
+        py::set_invalid_kwd_args_error();
         return nullptr;
     }
     
     Py_ssize_t arg_count = PyTuple_Size(args);
     if (arg_count == 0)
     {
-        return py::trycatch_invoker([=]() -> PyObject*
+        try
         {
             winrt::Windows::Devices::Geolocation::GeovisitMonitor instance{  };
             return py::wrap(instance, type);
-        }, nullptr);
+        }
+        catch (...)
+        {
+            py::to_PyErr();
+            return nullptr;
+        }
     }
-    else if (arg_count != -1)
+    else
     {
-        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+        py::set_invalid_arg_count_error(arg_count);
+        return nullptr;
     }
-    return nullptr;
 }
 
 static void _dealloc_GeovisitMonitor(py::wrapper::Windows::Devices::Geolocation::GeovisitMonitor* self)
@@ -1965,124 +2007,135 @@ static void _dealloc_GeovisitMonitor(py::wrapper::Windows::Devices::Geolocation:
     self->obj = nullptr;
 }
 
-static PyObject* GeovisitMonitor_GetLastReportAsync(PyObject* /*unused*/, PyObject* args)
+static PyObject* GeovisitMonitor_GetLastReportAsync(PyObject* /*unused*/, PyObject* args) noexcept
 {
     Py_ssize_t arg_count = PyTuple_Size(args);
     
     if (arg_count == 0)
     {
-        return py::trycatch_invoker([=]() -> PyObject*
+        try
         {
-            auto return_value = winrt::Windows::Devices::Geolocation::GeovisitMonitor::GetLastReportAsync();
-            
-            py::pyobj_handle out_return_value{ py::convert(return_value) };
-            if (!out_return_value) 
-            { 
-                return nullptr;
-            }
-            return out_return_value.detach();
-        }, nullptr);
+            return py::convert(winrt::Windows::Devices::Geolocation::GeovisitMonitor::GetLastReportAsync());
+        }
+        catch (...)
+        {
+            py::to_PyErr();
+            return nullptr;
+        }
     }
-    else if (arg_count != -1)
+    else
     {
-        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+        py::set_invalid_arg_count_error(arg_count);
+        return nullptr;
     }
-    return nullptr;
 }
 
-static PyObject* GeovisitMonitor_Start(py::wrapper::Windows::Devices::Geolocation::GeovisitMonitor* self, PyObject* args)
+static PyObject* GeovisitMonitor_Start(py::wrapper::Windows::Devices::Geolocation::GeovisitMonitor* self, PyObject* args) noexcept
 {
     Py_ssize_t arg_count = PyTuple_Size(args);
     
     if (arg_count == 1)
     {
-        return py::trycatch_invoker([=]() -> PyObject*
+        try
         {
             auto param0 = py::convert_to<winrt::Windows::Devices::Geolocation::VisitMonitoringScope>(args, 0);
             
             self->obj.Start(param0);
-            
             Py_RETURN_NONE;
-        }, nullptr);
+        }
+        catch (...)
+        {
+            py::to_PyErr();
+            return nullptr;
+        }
     }
-    else if (arg_count != -1)
+    else
     {
-        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+        py::set_invalid_arg_count_error(arg_count);
+        return nullptr;
     }
-    return nullptr;
 }
 
-static PyObject* GeovisitMonitor_Stop(py::wrapper::Windows::Devices::Geolocation::GeovisitMonitor* self, PyObject* args)
+static PyObject* GeovisitMonitor_Stop(py::wrapper::Windows::Devices::Geolocation::GeovisitMonitor* self, PyObject* args) noexcept
 {
     Py_ssize_t arg_count = PyTuple_Size(args);
     
     if (arg_count == 0)
     {
-        return py::trycatch_invoker([=]() -> PyObject*
+        try
         {
             self->obj.Stop();
-            
             Py_RETURN_NONE;
-        }, nullptr);
-    }
-    else if (arg_count != -1)
-    {
-        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
-    }
-    return nullptr;
-}
-
-static PyObject* GeovisitMonitor_get_MonitoringScope(py::wrapper::Windows::Devices::Geolocation::GeovisitMonitor* self, void* /*unused*/)
-{
-    return py::trycatch_invoker([=]() -> PyObject*
-    {
-        auto return_value = self->obj.MonitoringScope();
-        
-        py::pyobj_handle out_return_value{ py::convert(return_value) };
-        if (!out_return_value) 
-        { 
+        }
+        catch (...)
+        {
+            py::to_PyErr();
             return nullptr;
         }
-        return out_return_value.detach();
-    }, nullptr);
+    }
+    else
+    {
+        py::set_invalid_arg_count_error(arg_count);
+        return nullptr;
+    }
 }
 
-static PyObject* GeovisitMonitor_add_VisitStateChanged(py::wrapper::Windows::Devices::Geolocation::GeovisitMonitor* self, PyObject* arg)
+static PyObject* GeovisitMonitor_get_MonitoringScope(py::wrapper::Windows::Devices::Geolocation::GeovisitMonitor* self, void* /*unused*/) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
+    {
+        return py::convert(self->obj.MonitoringScope());
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
+}
+
+static PyObject* GeovisitMonitor_add_VisitStateChanged(py::wrapper::Windows::Devices::Geolocation::GeovisitMonitor* self, PyObject* arg) noexcept
+{
+    try
     {
         auto param0 = py::convert_to<winrt::Windows::Foundation::TypedEventHandler<winrt::Windows::Devices::Geolocation::GeovisitMonitor, winrt::Windows::Devices::Geolocation::GeovisitStateChangedEventArgs>>(arg);
         
-        auto return_value = self->obj.VisitStateChanged(param0);
-        
-        py::pyobj_handle out_return_value{ py::convert(return_value) };
-        if (!out_return_value) 
-        { 
-            return nullptr;
-        }
-        return out_return_value.detach();
-    }, nullptr);
+        return py::convert(self->obj.VisitStateChanged(param0));
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
-static PyObject* GeovisitMonitor_remove_VisitStateChanged(py::wrapper::Windows::Devices::Geolocation::GeovisitMonitor* self, PyObject* arg)
+static PyObject* GeovisitMonitor_remove_VisitStateChanged(py::wrapper::Windows::Devices::Geolocation::GeovisitMonitor* self, PyObject* arg) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
         auto param0 = py::convert_to<winrt::event_token>(arg);
         
         self->obj.VisitStateChanged(param0);
-        
         Py_RETURN_NONE;
-    }, nullptr);
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
-static PyObject* _from_GeovisitMonitor(PyObject* /*unused*/, PyObject* arg)
+static PyObject* _from_GeovisitMonitor(PyObject* /*unused*/, PyObject* arg) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
         auto return_value = py::convert_to<winrt::Windows::Foundation::IInspectable>(arg);
         return py::convert(return_value.as<winrt::Windows::Devices::Geolocation::GeovisitMonitor>());
-    }, nullptr);
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
 static PyMethodDef _methods_GeovisitMonitor[] = {
@@ -2121,13 +2174,11 @@ static PyType_Spec _type_spec_GeovisitMonitor =
 // ----- GeovisitStateChangedEventArgs class --------------------
 
 PyTypeObject* py::winrt_type<winrt::Windows::Devices::Geolocation::GeovisitStateChangedEventArgs>::python_type;
-static const char* _type_name_GeovisitStateChangedEventArgs = "GeovisitStateChangedEventArgs";
+constexpr const char* const _type_name_GeovisitStateChangedEventArgs = "GeovisitStateChangedEventArgs";
 
-static PyObject* _new_GeovisitStateChangedEventArgs(PyTypeObject* type, PyObject* args, PyObject* kwds)
+static PyObject* _new_GeovisitStateChangedEventArgs(PyTypeObject* type, PyObject* args, PyObject* kwds) noexcept
 {
-    std::string msg{ _type_name_GeovisitStateChangedEventArgs };
-    msg.append(" is not activatable");
-    PyErr_SetString(PyExc_TypeError, msg.c_str());
+    py::set_invalid_activation_error(_type_name_GeovisitStateChangedEventArgs);
     return nullptr;
 }
 
@@ -2138,28 +2189,31 @@ static void _dealloc_GeovisitStateChangedEventArgs(py::wrapper::Windows::Devices
     self->obj = nullptr;
 }
 
-static PyObject* GeovisitStateChangedEventArgs_get_Visit(py::wrapper::Windows::Devices::Geolocation::GeovisitStateChangedEventArgs* self, void* /*unused*/)
+static PyObject* GeovisitStateChangedEventArgs_get_Visit(py::wrapper::Windows::Devices::Geolocation::GeovisitStateChangedEventArgs* self, void* /*unused*/) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
-        auto return_value = self->obj.Visit();
-        
-        py::pyobj_handle out_return_value{ py::convert(return_value) };
-        if (!out_return_value) 
-        { 
-            return nullptr;
-        }
-        return out_return_value.detach();
-    }, nullptr);
+        return py::convert(self->obj.Visit());
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
-static PyObject* _from_GeovisitStateChangedEventArgs(PyObject* /*unused*/, PyObject* arg)
+static PyObject* _from_GeovisitStateChangedEventArgs(PyObject* /*unused*/, PyObject* arg) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
         auto return_value = py::convert_to<winrt::Windows::Foundation::IInspectable>(arg);
         return py::convert(return_value.as<winrt::Windows::Devices::Geolocation::GeovisitStateChangedEventArgs>());
-    }, nullptr);
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
 static PyMethodDef _methods_GeovisitStateChangedEventArgs[] = {
@@ -2193,13 +2247,11 @@ static PyType_Spec _type_spec_GeovisitStateChangedEventArgs =
 // ----- GeovisitTriggerDetails class --------------------
 
 PyTypeObject* py::winrt_type<winrt::Windows::Devices::Geolocation::GeovisitTriggerDetails>::python_type;
-static const char* _type_name_GeovisitTriggerDetails = "GeovisitTriggerDetails";
+constexpr const char* const _type_name_GeovisitTriggerDetails = "GeovisitTriggerDetails";
 
-static PyObject* _new_GeovisitTriggerDetails(PyTypeObject* type, PyObject* args, PyObject* kwds)
+static PyObject* _new_GeovisitTriggerDetails(PyTypeObject* type, PyObject* args, PyObject* kwds) noexcept
 {
-    std::string msg{ _type_name_GeovisitTriggerDetails };
-    msg.append(" is not activatable");
-    PyErr_SetString(PyExc_TypeError, msg.c_str());
+    py::set_invalid_activation_error(_type_name_GeovisitTriggerDetails);
     return nullptr;
 }
 
@@ -2210,38 +2262,41 @@ static void _dealloc_GeovisitTriggerDetails(py::wrapper::Windows::Devices::Geolo
     self->obj = nullptr;
 }
 
-static PyObject* GeovisitTriggerDetails_ReadReports(py::wrapper::Windows::Devices::Geolocation::GeovisitTriggerDetails* self, PyObject* args)
+static PyObject* GeovisitTriggerDetails_ReadReports(py::wrapper::Windows::Devices::Geolocation::GeovisitTriggerDetails* self, PyObject* args) noexcept
 {
     Py_ssize_t arg_count = PyTuple_Size(args);
     
     if (arg_count == 0)
     {
-        return py::trycatch_invoker([=]() -> PyObject*
+        try
         {
-            auto return_value = self->obj.ReadReports();
-            
-            py::pyobj_handle out_return_value{ py::convert(return_value) };
-            if (!out_return_value) 
-            { 
-                return nullptr;
-            }
-            return out_return_value.detach();
-        }, nullptr);
+            return py::convert(self->obj.ReadReports());
+        }
+        catch (...)
+        {
+            py::to_PyErr();
+            return nullptr;
+        }
     }
-    else if (arg_count != -1)
+    else
     {
-        PyErr_SetString(PyExc_TypeError, "Invalid parameter count");
+        py::set_invalid_arg_count_error(arg_count);
+        return nullptr;
     }
-    return nullptr;
 }
 
-static PyObject* _from_GeovisitTriggerDetails(PyObject* /*unused*/, PyObject* arg)
+static PyObject* _from_GeovisitTriggerDetails(PyObject* /*unused*/, PyObject* arg) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
         auto return_value = py::convert_to<winrt::Windows::Foundation::IInspectable>(arg);
         return py::convert(return_value.as<winrt::Windows::Devices::Geolocation::GeovisitTriggerDetails>());
-    }, nullptr);
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
 static PyMethodDef _methods_GeovisitTriggerDetails[] = {
@@ -2275,13 +2330,11 @@ static PyType_Spec _type_spec_GeovisitTriggerDetails =
 // ----- PositionChangedEventArgs class --------------------
 
 PyTypeObject* py::winrt_type<winrt::Windows::Devices::Geolocation::PositionChangedEventArgs>::python_type;
-static const char* _type_name_PositionChangedEventArgs = "PositionChangedEventArgs";
+constexpr const char* const _type_name_PositionChangedEventArgs = "PositionChangedEventArgs";
 
-static PyObject* _new_PositionChangedEventArgs(PyTypeObject* type, PyObject* args, PyObject* kwds)
+static PyObject* _new_PositionChangedEventArgs(PyTypeObject* type, PyObject* args, PyObject* kwds) noexcept
 {
-    std::string msg{ _type_name_PositionChangedEventArgs };
-    msg.append(" is not activatable");
-    PyErr_SetString(PyExc_TypeError, msg.c_str());
+    py::set_invalid_activation_error(_type_name_PositionChangedEventArgs);
     return nullptr;
 }
 
@@ -2292,28 +2345,31 @@ static void _dealloc_PositionChangedEventArgs(py::wrapper::Windows::Devices::Geo
     self->obj = nullptr;
 }
 
-static PyObject* PositionChangedEventArgs_get_Position(py::wrapper::Windows::Devices::Geolocation::PositionChangedEventArgs* self, void* /*unused*/)
+static PyObject* PositionChangedEventArgs_get_Position(py::wrapper::Windows::Devices::Geolocation::PositionChangedEventArgs* self, void* /*unused*/) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
-        auto return_value = self->obj.Position();
-        
-        py::pyobj_handle out_return_value{ py::convert(return_value) };
-        if (!out_return_value) 
-        { 
-            return nullptr;
-        }
-        return out_return_value.detach();
-    }, nullptr);
+        return py::convert(self->obj.Position());
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
-static PyObject* _from_PositionChangedEventArgs(PyObject* /*unused*/, PyObject* arg)
+static PyObject* _from_PositionChangedEventArgs(PyObject* /*unused*/, PyObject* arg) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
         auto return_value = py::convert_to<winrt::Windows::Foundation::IInspectable>(arg);
         return py::convert(return_value.as<winrt::Windows::Devices::Geolocation::PositionChangedEventArgs>());
-    }, nullptr);
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
 static PyMethodDef _methods_PositionChangedEventArgs[] = {
@@ -2347,13 +2403,11 @@ static PyType_Spec _type_spec_PositionChangedEventArgs =
 // ----- StatusChangedEventArgs class --------------------
 
 PyTypeObject* py::winrt_type<winrt::Windows::Devices::Geolocation::StatusChangedEventArgs>::python_type;
-static const char* _type_name_StatusChangedEventArgs = "StatusChangedEventArgs";
+constexpr const char* const _type_name_StatusChangedEventArgs = "StatusChangedEventArgs";
 
-static PyObject* _new_StatusChangedEventArgs(PyTypeObject* type, PyObject* args, PyObject* kwds)
+static PyObject* _new_StatusChangedEventArgs(PyTypeObject* type, PyObject* args, PyObject* kwds) noexcept
 {
-    std::string msg{ _type_name_StatusChangedEventArgs };
-    msg.append(" is not activatable");
-    PyErr_SetString(PyExc_TypeError, msg.c_str());
+    py::set_invalid_activation_error(_type_name_StatusChangedEventArgs);
     return nullptr;
 }
 
@@ -2364,28 +2418,31 @@ static void _dealloc_StatusChangedEventArgs(py::wrapper::Windows::Devices::Geolo
     self->obj = nullptr;
 }
 
-static PyObject* StatusChangedEventArgs_get_Status(py::wrapper::Windows::Devices::Geolocation::StatusChangedEventArgs* self, void* /*unused*/)
+static PyObject* StatusChangedEventArgs_get_Status(py::wrapper::Windows::Devices::Geolocation::StatusChangedEventArgs* self, void* /*unused*/) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
-        auto return_value = self->obj.Status();
-        
-        py::pyobj_handle out_return_value{ py::convert(return_value) };
-        if (!out_return_value) 
-        { 
-            return nullptr;
-        }
-        return out_return_value.detach();
-    }, nullptr);
+        return py::convert(self->obj.Status());
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
-static PyObject* _from_StatusChangedEventArgs(PyObject* /*unused*/, PyObject* arg)
+static PyObject* _from_StatusChangedEventArgs(PyObject* /*unused*/, PyObject* arg) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
         auto return_value = py::convert_to<winrt::Windows::Foundation::IInspectable>(arg);
         return py::convert(return_value.as<winrt::Windows::Devices::Geolocation::StatusChangedEventArgs>());
-    }, nullptr);
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
 static PyMethodDef _methods_StatusChangedEventArgs[] = {
@@ -2419,13 +2476,11 @@ static PyType_Spec _type_spec_StatusChangedEventArgs =
 // ----- VenueData class --------------------
 
 PyTypeObject* py::winrt_type<winrt::Windows::Devices::Geolocation::VenueData>::python_type;
-static const char* _type_name_VenueData = "VenueData";
+constexpr const char* const _type_name_VenueData = "VenueData";
 
-static PyObject* _new_VenueData(PyTypeObject* type, PyObject* args, PyObject* kwds)
+static PyObject* _new_VenueData(PyTypeObject* type, PyObject* args, PyObject* kwds) noexcept
 {
-    std::string msg{ _type_name_VenueData };
-    msg.append(" is not activatable");
-    PyErr_SetString(PyExc_TypeError, msg.c_str());
+    py::set_invalid_activation_error(_type_name_VenueData);
     return nullptr;
 }
 
@@ -2436,43 +2491,44 @@ static void _dealloc_VenueData(py::wrapper::Windows::Devices::Geolocation::Venue
     self->obj = nullptr;
 }
 
-static PyObject* VenueData_get_Id(py::wrapper::Windows::Devices::Geolocation::VenueData* self, void* /*unused*/)
+static PyObject* VenueData_get_Id(py::wrapper::Windows::Devices::Geolocation::VenueData* self, void* /*unused*/) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
-        auto return_value = self->obj.Id();
-        
-        py::pyobj_handle out_return_value{ py::convert(return_value) };
-        if (!out_return_value) 
-        { 
-            return nullptr;
-        }
-        return out_return_value.detach();
-    }, nullptr);
+        return py::convert(self->obj.Id());
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
-static PyObject* VenueData_get_Level(py::wrapper::Windows::Devices::Geolocation::VenueData* self, void* /*unused*/)
+static PyObject* VenueData_get_Level(py::wrapper::Windows::Devices::Geolocation::VenueData* self, void* /*unused*/) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
-        auto return_value = self->obj.Level();
-        
-        py::pyobj_handle out_return_value{ py::convert(return_value) };
-        if (!out_return_value) 
-        { 
-            return nullptr;
-        }
-        return out_return_value.detach();
-    }, nullptr);
+        return py::convert(self->obj.Level());
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
-static PyObject* _from_VenueData(PyObject* /*unused*/, PyObject* arg)
+static PyObject* _from_VenueData(PyObject* /*unused*/, PyObject* arg) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
         auto return_value = py::convert_to<winrt::Windows::Foundation::IInspectable>(arg);
         return py::convert(return_value.as<winrt::Windows::Devices::Geolocation::VenueData>());
-    }, nullptr);
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
 static PyMethodDef _methods_VenueData[] = {
@@ -2507,13 +2563,11 @@ static PyType_Spec _type_spec_VenueData =
 // ----- IGeoshape interface --------------------
 
 PyTypeObject* py::winrt_type<winrt::Windows::Devices::Geolocation::IGeoshape>::python_type;
-static const char* _type_name_IGeoshape = "IGeoshape";
+constexpr const char* const _type_name_IGeoshape = "IGeoshape";
 
 static PyObject* _new_IGeoshape(PyTypeObject* /* unused */, PyObject* /* unused */, PyObject* /* unused */)
 {
-    std::string msg{ _type_name_IGeoshape };
-    msg.append(" interface is not activatable");
-    PyErr_SetString(PyExc_TypeError, msg.c_str());
+    py::set_invalid_activation_error(_type_name_IGeoshape);
     return nullptr;
 }
 
@@ -2524,58 +2578,57 @@ static void _dealloc_IGeoshape(py::wrapper::Windows::Devices::Geolocation::IGeos
     self->obj = nullptr;
 }
 
-static PyObject* IGeoshape_get_AltitudeReferenceSystem(py::wrapper::Windows::Devices::Geolocation::IGeoshape* self, void* /*unused*/)
+static PyObject* IGeoshape_get_AltitudeReferenceSystem(py::wrapper::Windows::Devices::Geolocation::IGeoshape* self, void* /*unused*/) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
-        auto return_value = self->obj.AltitudeReferenceSystem();
-        
-        py::pyobj_handle out_return_value{ py::convert(return_value) };
-        if (!out_return_value) 
-        { 
-            return nullptr;
-        }
-        return out_return_value.detach();
-    }, nullptr);
+        return py::convert(self->obj.AltitudeReferenceSystem());
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
-static PyObject* IGeoshape_get_GeoshapeType(py::wrapper::Windows::Devices::Geolocation::IGeoshape* self, void* /*unused*/)
+static PyObject* IGeoshape_get_GeoshapeType(py::wrapper::Windows::Devices::Geolocation::IGeoshape* self, void* /*unused*/) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
-        auto return_value = self->obj.GeoshapeType();
-        
-        py::pyobj_handle out_return_value{ py::convert(return_value) };
-        if (!out_return_value) 
-        { 
-            return nullptr;
-        }
-        return out_return_value.detach();
-    }, nullptr);
+        return py::convert(self->obj.GeoshapeType());
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
-static PyObject* IGeoshape_get_SpatialReferenceId(py::wrapper::Windows::Devices::Geolocation::IGeoshape* self, void* /*unused*/)
+static PyObject* IGeoshape_get_SpatialReferenceId(py::wrapper::Windows::Devices::Geolocation::IGeoshape* self, void* /*unused*/) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
-        auto return_value = self->obj.SpatialReferenceId();
-        
-        py::pyobj_handle out_return_value{ py::convert(return_value) };
-        if (!out_return_value) 
-        { 
-            return nullptr;
-        }
-        return out_return_value.detach();
-    }, nullptr);
+        return py::convert(self->obj.SpatialReferenceId());
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
-static PyObject* _from_IGeoshape(PyObject* /*unused*/, PyObject* arg)
+static PyObject* _from_IGeoshape(PyObject* /*unused*/, PyObject* arg) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
         auto return_value = py::convert_to<winrt::Windows::Foundation::IInspectable>(arg);
         return py::convert(return_value.as<winrt::Windows::Devices::Geolocation::IGeoshape>());
-    }, nullptr);
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
 static PyMethodDef _methods_IGeoshape[] = {
@@ -2611,7 +2664,7 @@ static PyType_Spec _type_spec_IGeoshape =
 // ----- BasicGeoposition struct --------------------
 
 PyTypeObject* py::winrt_type<winrt::Windows::Devices::Geolocation::BasicGeoposition>::python_type;
-static const char* _type_name_BasicGeoposition = "BasicGeoposition";
+constexpr const char* const _type_name_BasicGeoposition = "BasicGeoposition";
 
 PyObject* py::converter<winrt::Windows::Devices::Geolocation::BasicGeoposition>::convert(winrt::Windows::Devices::Geolocation::BasicGeoposition instance) noexcept
 {
@@ -2655,11 +2708,16 @@ PyObject* _new_BasicGeoposition(PyTypeObject* type, PyObject* args, PyObject* kw
     
     if ((tuple_size == 0) && (kwds == nullptr))
     {
-        return py::trycatch_invoker([=]() -> PyObject*
+        try
         {
             winrt::Windows::Devices::Geolocation::BasicGeoposition return_value{};
             return py::convert(return_value);
-        }, nullptr);
+        }
+        catch (...)
+        {
+            py::to_PyErr();
+            return nullptr;
+        }
     }
     
     if ((tuple_size == 1) && (kwds == nullptr))
@@ -2667,11 +2725,16 @@ PyObject* _new_BasicGeoposition(PyTypeObject* type, PyObject* args, PyObject* kw
         auto arg = PyTuple_GetItem(args, 0);
         if (PyDict_Check(arg))
         {
-            return py::trycatch_invoker([=]() -> PyObject*
+            try
             {
                 auto return_value = py::convert_to<winrt::Windows::Devices::Geolocation::BasicGeoposition>(arg);
                 return py::convert(return_value);
-            }, nullptr);
+            }
+            catch (...)
+            {
+                py::to_PyErr();
+                return nullptr;
+            }
         }
     }
     
@@ -2685,66 +2748,119 @@ PyObject* _new_BasicGeoposition(PyTypeObject* type, PyObject* args, PyObject* kw
         return nullptr;
     }
     
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
         winrt::Windows::Devices::Geolocation::BasicGeoposition return_value{ _Latitude, _Longitude, _Altitude };
         return py::convert(return_value);
-    }, nullptr);
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
 static void _dealloc_BasicGeoposition(py::wrapper::Windows::Devices::Geolocation::BasicGeoposition* self)
 {
 }
 
-static PyObject* BasicGeoposition_get_Latitude(py::wrapper::Windows::Devices::Geolocation::BasicGeoposition* self, void* /*unused*/)
+static PyObject* BasicGeoposition_get_Latitude(py::wrapper::Windows::Devices::Geolocation::BasicGeoposition* self, void* /*unused*/) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
         return py::convert(self->obj.Latitude);
-    }, nullptr);
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
-static int BasicGeoposition_set_Latitude(py::wrapper::Windows::Devices::Geolocation::BasicGeoposition* self, PyObject* arg, void* /*unused*/)
+static int BasicGeoposition_set_Latitude(py::wrapper::Windows::Devices::Geolocation::BasicGeoposition* self, PyObject* arg, void* /*unused*/) noexcept
 {
-    return py::setter_trycatch_invoker(arg, [=]() -> int
+    if (arg == nullptr)
+    {
+        PyErr_SetString(PyExc_TypeError, "property delete not supported");
+        return -1;
+    }
+    
+    try
     {
         self->obj.Latitude = py::converter<double>::convert_to(arg);
         return 0;
-    });
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return -1;
+    }
 }
 
-static PyObject* BasicGeoposition_get_Longitude(py::wrapper::Windows::Devices::Geolocation::BasicGeoposition* self, void* /*unused*/)
+static PyObject* BasicGeoposition_get_Longitude(py::wrapper::Windows::Devices::Geolocation::BasicGeoposition* self, void* /*unused*/) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
         return py::convert(self->obj.Longitude);
-    }, nullptr);
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
-static int BasicGeoposition_set_Longitude(py::wrapper::Windows::Devices::Geolocation::BasicGeoposition* self, PyObject* arg, void* /*unused*/)
+static int BasicGeoposition_set_Longitude(py::wrapper::Windows::Devices::Geolocation::BasicGeoposition* self, PyObject* arg, void* /*unused*/) noexcept
 {
-    return py::setter_trycatch_invoker(arg, [=]() -> int
+    if (arg == nullptr)
+    {
+        PyErr_SetString(PyExc_TypeError, "property delete not supported");
+        return -1;
+    }
+    
+    try
     {
         self->obj.Longitude = py::converter<double>::convert_to(arg);
         return 0;
-    });
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return -1;
+    }
 }
 
-static PyObject* BasicGeoposition_get_Altitude(py::wrapper::Windows::Devices::Geolocation::BasicGeoposition* self, void* /*unused*/)
+static PyObject* BasicGeoposition_get_Altitude(py::wrapper::Windows::Devices::Geolocation::BasicGeoposition* self, void* /*unused*/) noexcept
 {
-    return py::trycatch_invoker([=]() -> PyObject*
+    try
     {
         return py::convert(self->obj.Altitude);
-    }, nullptr);
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return nullptr;
+    }
 }
 
-static int BasicGeoposition_set_Altitude(py::wrapper::Windows::Devices::Geolocation::BasicGeoposition* self, PyObject* arg, void* /*unused*/)
+static int BasicGeoposition_set_Altitude(py::wrapper::Windows::Devices::Geolocation::BasicGeoposition* self, PyObject* arg, void* /*unused*/) noexcept
 {
-    return py::setter_trycatch_invoker(arg, [=]() -> int
+    if (arg == nullptr)
+    {
+        PyErr_SetString(PyExc_TypeError, "property delete not supported");
+        return -1;
+    }
+    
+    try
     {
         self->obj.Altitude = py::converter<double>::convert_to(arg);
         return 0;
-    });
+    }
+    catch (...)
+    {
+        py::to_PyErr();
+        return -1;
+    }
 }
 
 static PyGetSetDef _getset_BasicGeoposition[] = {
@@ -2772,38 +2888,38 @@ static PyType_Spec _type_spec_BasicGeoposition =
 };
 
 // ----- Windows.Devices.Geolocation Initialization --------------------
-static int module_exec(PyObject* module)
+static int module_exec(PyObject* module) noexcept
 {
-    py::pyobj_handle bases { PyTuple_Pack(1, py::winrt_type<py::winrt_base>::python_type) };
-    
     try
     {
-        py::winrt_type<winrt::Windows::Devices::Geolocation::CivicAddress>::python_type = reinterpret_cast<PyTypeObject*>(py::register_python_type(module, _type_name_CivicAddress, &_type_spec_CivicAddress, bases.get()).detach());
-        py::winrt_type<winrt::Windows::Devices::Geolocation::GeoboundingBox>::python_type = reinterpret_cast<PyTypeObject*>(py::register_python_type(module, _type_name_GeoboundingBox, &_type_spec_GeoboundingBox, bases.get()).detach());
-        py::winrt_type<winrt::Windows::Devices::Geolocation::Geocircle>::python_type = reinterpret_cast<PyTypeObject*>(py::register_python_type(module, _type_name_Geocircle, &_type_spec_Geocircle, bases.get()).detach());
-        py::winrt_type<winrt::Windows::Devices::Geolocation::Geocoordinate>::python_type = reinterpret_cast<PyTypeObject*>(py::register_python_type(module, _type_name_Geocoordinate, &_type_spec_Geocoordinate, bases.get()).detach());
-        py::winrt_type<winrt::Windows::Devices::Geolocation::GeocoordinateSatelliteData>::python_type = reinterpret_cast<PyTypeObject*>(py::register_python_type(module, _type_name_GeocoordinateSatelliteData, &_type_spec_GeocoordinateSatelliteData, bases.get()).detach());
-        py::winrt_type<winrt::Windows::Devices::Geolocation::Geolocator>::python_type = reinterpret_cast<PyTypeObject*>(py::register_python_type(module, _type_name_Geolocator, &_type_spec_Geolocator, bases.get()).detach());
-        py::winrt_type<winrt::Windows::Devices::Geolocation::Geopath>::python_type = reinterpret_cast<PyTypeObject*>(py::register_python_type(module, _type_name_Geopath, &_type_spec_Geopath, bases.get()).detach());
-        py::winrt_type<winrt::Windows::Devices::Geolocation::Geopoint>::python_type = reinterpret_cast<PyTypeObject*>(py::register_python_type(module, _type_name_Geopoint, &_type_spec_Geopoint, bases.get()).detach());
-        py::winrt_type<winrt::Windows::Devices::Geolocation::Geoposition>::python_type = reinterpret_cast<PyTypeObject*>(py::register_python_type(module, _type_name_Geoposition, &_type_spec_Geoposition, bases.get()).detach());
-        py::winrt_type<winrt::Windows::Devices::Geolocation::Geovisit>::python_type = reinterpret_cast<PyTypeObject*>(py::register_python_type(module, _type_name_Geovisit, &_type_spec_Geovisit, bases.get()).detach());
-        py::winrt_type<winrt::Windows::Devices::Geolocation::GeovisitMonitor>::python_type = reinterpret_cast<PyTypeObject*>(py::register_python_type(module, _type_name_GeovisitMonitor, &_type_spec_GeovisitMonitor, bases.get()).detach());
-        py::winrt_type<winrt::Windows::Devices::Geolocation::GeovisitStateChangedEventArgs>::python_type = reinterpret_cast<PyTypeObject*>(py::register_python_type(module, _type_name_GeovisitStateChangedEventArgs, &_type_spec_GeovisitStateChangedEventArgs, bases.get()).detach());
-        py::winrt_type<winrt::Windows::Devices::Geolocation::GeovisitTriggerDetails>::python_type = reinterpret_cast<PyTypeObject*>(py::register_python_type(module, _type_name_GeovisitTriggerDetails, &_type_spec_GeovisitTriggerDetails, bases.get()).detach());
-        py::winrt_type<winrt::Windows::Devices::Geolocation::PositionChangedEventArgs>::python_type = reinterpret_cast<PyTypeObject*>(py::register_python_type(module, _type_name_PositionChangedEventArgs, &_type_spec_PositionChangedEventArgs, bases.get()).detach());
-        py::winrt_type<winrt::Windows::Devices::Geolocation::StatusChangedEventArgs>::python_type = reinterpret_cast<PyTypeObject*>(py::register_python_type(module, _type_name_StatusChangedEventArgs, &_type_spec_StatusChangedEventArgs, bases.get()).detach());
-        py::winrt_type<winrt::Windows::Devices::Geolocation::VenueData>::python_type = reinterpret_cast<PyTypeObject*>(py::register_python_type(module, _type_name_VenueData, &_type_spec_VenueData, bases.get()).detach());
-        py::winrt_type<winrt::Windows::Devices::Geolocation::IGeoshape>::python_type = reinterpret_cast<PyTypeObject*>(py::register_python_type(module, _type_name_IGeoshape, &_type_spec_IGeoshape, bases.get()).detach());
-        py::winrt_type<winrt::Windows::Devices::Geolocation::BasicGeoposition>::python_type = reinterpret_cast<PyTypeObject*>(py::register_python_type(module, _type_name_BasicGeoposition, &_type_spec_BasicGeoposition, bases.get()).detach());
+        py::pyobj_handle bases { PyTuple_Pack(1, py::winrt_type<py::winrt_base>::python_type) };
+        
+        py::winrt_type<winrt::Windows::Devices::Geolocation::CivicAddress>::python_type = py::register_python_type(module, _type_name_CivicAddress, &_type_spec_CivicAddress, bases.get());
+        py::winrt_type<winrt::Windows::Devices::Geolocation::GeoboundingBox>::python_type = py::register_python_type(module, _type_name_GeoboundingBox, &_type_spec_GeoboundingBox, bases.get());
+        py::winrt_type<winrt::Windows::Devices::Geolocation::Geocircle>::python_type = py::register_python_type(module, _type_name_Geocircle, &_type_spec_Geocircle, bases.get());
+        py::winrt_type<winrt::Windows::Devices::Geolocation::Geocoordinate>::python_type = py::register_python_type(module, _type_name_Geocoordinate, &_type_spec_Geocoordinate, bases.get());
+        py::winrt_type<winrt::Windows::Devices::Geolocation::GeocoordinateSatelliteData>::python_type = py::register_python_type(module, _type_name_GeocoordinateSatelliteData, &_type_spec_GeocoordinateSatelliteData, bases.get());
+        py::winrt_type<winrt::Windows::Devices::Geolocation::Geolocator>::python_type = py::register_python_type(module, _type_name_Geolocator, &_type_spec_Geolocator, bases.get());
+        py::winrt_type<winrt::Windows::Devices::Geolocation::Geopath>::python_type = py::register_python_type(module, _type_name_Geopath, &_type_spec_Geopath, bases.get());
+        py::winrt_type<winrt::Windows::Devices::Geolocation::Geopoint>::python_type = py::register_python_type(module, _type_name_Geopoint, &_type_spec_Geopoint, bases.get());
+        py::winrt_type<winrt::Windows::Devices::Geolocation::Geoposition>::python_type = py::register_python_type(module, _type_name_Geoposition, &_type_spec_Geoposition, bases.get());
+        py::winrt_type<winrt::Windows::Devices::Geolocation::Geovisit>::python_type = py::register_python_type(module, _type_name_Geovisit, &_type_spec_Geovisit, bases.get());
+        py::winrt_type<winrt::Windows::Devices::Geolocation::GeovisitMonitor>::python_type = py::register_python_type(module, _type_name_GeovisitMonitor, &_type_spec_GeovisitMonitor, bases.get());
+        py::winrt_type<winrt::Windows::Devices::Geolocation::GeovisitStateChangedEventArgs>::python_type = py::register_python_type(module, _type_name_GeovisitStateChangedEventArgs, &_type_spec_GeovisitStateChangedEventArgs, bases.get());
+        py::winrt_type<winrt::Windows::Devices::Geolocation::GeovisitTriggerDetails>::python_type = py::register_python_type(module, _type_name_GeovisitTriggerDetails, &_type_spec_GeovisitTriggerDetails, bases.get());
+        py::winrt_type<winrt::Windows::Devices::Geolocation::PositionChangedEventArgs>::python_type = py::register_python_type(module, _type_name_PositionChangedEventArgs, &_type_spec_PositionChangedEventArgs, bases.get());
+        py::winrt_type<winrt::Windows::Devices::Geolocation::StatusChangedEventArgs>::python_type = py::register_python_type(module, _type_name_StatusChangedEventArgs, &_type_spec_StatusChangedEventArgs, bases.get());
+        py::winrt_type<winrt::Windows::Devices::Geolocation::VenueData>::python_type = py::register_python_type(module, _type_name_VenueData, &_type_spec_VenueData, bases.get());
+        py::winrt_type<winrt::Windows::Devices::Geolocation::IGeoshape>::python_type = py::register_python_type(module, _type_name_IGeoshape, &_type_spec_IGeoshape, bases.get());
+        py::winrt_type<winrt::Windows::Devices::Geolocation::BasicGeoposition>::python_type = py::register_python_type(module, _type_name_BasicGeoposition, &_type_spec_BasicGeoposition, bases.get());
+        
+        return 0;
     }
-    catch(...)
+    catch (...)
     {
         py::to_PyErr();
         return -1;
     }
-    
-    return 0;
 }
 
 static PyModuleDef_Slot module_slots[] = {
@@ -2826,7 +2942,7 @@ static PyModuleDef module_def = {
 };
 
 PyMODINIT_FUNC
-PyInit__winrt_Windows_Devices_Geolocation (void)
+PyInit__winrt_Windows_Devices_Geolocation (void) noexcept
 {
     return PyModuleDef_Init(&module_def);
 }
